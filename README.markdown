@@ -1,9 +1,9 @@
-= Cedar
+# Cedar
 
 BDD-style testing using Objective-C
 
 
-== Usage
+## Usage
 
 * Build the Cedar framework.  Note that you must build for an Objective-C 
   runtime that supports blocks; this means Mac OS X 10.6, or a runtime from 
@@ -17,35 +17,35 @@ BDD-style testing using Objective-C
     - Add Cedar to the new build phase.
 * Add a main.m that looks like this:
 
-  #import "Cedar.h"
-  
-  int main (int argc, const char *argv[]) {
-    return runAllSpecs();
-  }
+    #import "Cedar.h"
+    
+    int main (int argc, const char *argv[]) {
+      return runAllSpecs();
+    }
 
 * Write your specs.  Cedar provides the SpecHelper.h file with some minimal
   macros to remove as much distraction as possible from your specs.  A spec
   file need not have a header file, and looks like this:
 
-  #import "SpecHelper.h"
-  
-  SPEC_BEGIN(FooSpec)
-  describe(@"Foo", ^{
-    beforeEach(^{
-      ...
-    });
-    
-    it(@"should do something", ^{
-      ...
-    });
-  });
-  SPEC_END
+        #import "SpecHelper.h"
+        
+        SPEC_BEGIN(FooSpec)
+        describe(@"Foo", ^{
+          beforeEach(^{
+            ...
+          });
+          
+          it(@"should do something", ^{
+            ...
+          });
+        });
+        SPEC_END
 
 * Build and run.  Note that, unlike OCUnit, you must run your executable in
   order to run your specs.
 
 
-== Matchers
+## Matchers
 
 Cedar does not provide matchers, but it works with the fine array of matchers 
 provided by the Hamcrest project (http://code.google.com/p/hamcrest/); you can
@@ -53,11 +53,11 @@ fetch the Objective-C port from the Hamcrest SVN repo.  Build and link the
 Hamcrest framework by following their instructions, and add the following at 
 the top of your spec files:
 
-  #define HC_SHORTHAND
-  #import <OCHamcrest/OCHamcrest.h>
+    #define HC_SHORTHAND
+    #import <OCHamcrest/OCHamcrest.h>
 
 
-== But I'm writing an iPhone app!
+## But I'm writing an iPhone app!
 
 Unfortunately, Apple has made Objective-C blocks, upon which Cedar depends,
 only available in the Mac OS X 10.6 runtime.  This means if you're not building
@@ -76,13 +76,13 @@ blocks will fail to compile.  There are a couple ways around this:
 * I'm open to suggestions.
 
 
-== Contributions
+## Contributions
 
 Welcomed!  Feel free to join and contribute to the public Tracker project here:
 http://www.pivotaltracker.com/projects/77775
 
 
-== License
+## License
 
 Copyright (c) 2010 Pivotal Labs (www.pivotallabs.com)
 Contact email: amilligan@pivotallabs.com
