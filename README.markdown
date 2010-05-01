@@ -17,11 +17,11 @@ BDD-style testing using Objective-C
     - Add Cedar to the new build phase.
 * Add a main.m that looks like this:
 
-    #import "Cedar.h"
-    
-    int main (int argc, const char *argv[]) {
-      return runAllSpecs();
-    }
+        #import "Cedar.h"
+        
+        int main (int argc, const char *argv[]) {
+          return runAllSpecs();
+        }
 
 * Write your specs.  Cedar provides the SpecHelper.h file with some minimal
   macros to remove as much distraction as possible from your specs.  A spec
