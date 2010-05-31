@@ -19,6 +19,7 @@ typedef void (^CDRSpecBlock)(void);
 - (id)initWithText:(NSString *)text;
 
 - (void)setUp;
+- (void)tearDown;
 - (void)runWithRunner:(id<CDRExampleRunner>)runner;
 
 @end

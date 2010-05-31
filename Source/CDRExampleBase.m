@@ -27,6 +27,9 @@
 - (void)setUp {
 }
 
+- (void)tearDown {
+}
+
 - (void)runWithRunner:(id<CDRExampleRunner>)runner {
 }
 

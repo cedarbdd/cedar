@@ -31,6 +31,7 @@
   } @catch (...) {
     [runner exampleThrewError:self];
   }
+  [parent_ tearDown];
 }
 
 @end

@@ -12,6 +12,7 @@ extern "C" {
 #endif
 void describe(NSString *text, CDRSpecBlock block);
 void beforeEach(CDRSpecBlock block);
+void afterEach(CDRSpecBlock block);
 void it(NSString *text, CDRSpecBlock block);
 void fail(NSString *reason);
 #ifdef __cplusplus

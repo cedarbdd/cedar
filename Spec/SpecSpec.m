@@ -1,4 +1,4 @@
-#import "SpecHelper.h"
+#import <Cedar/SpecHelper.h>
 
 #define HC_SHORTHAND
 #import <OCHamcrest/OCHamcrest.h>
@@ -21,9 +21,17 @@ describe(@"Spec", ^ {
 //    NSLog(@"=====================> I should run before all specs.");
   });
 
+  afterEach(^{
+//    NSLog(@"=====================> I should run after all specs.");
+  });
+
   describe(@"a nested spec", ^ {
     beforeEach(^ {
 //      NSLog(@"=====================> I should run only before the nested specs.");
+    });
+
+    afterEach(^ {
+//      NSLog(@"=====================> I should run only after the nested specs.");
     });
 
     it(@"should also run", ^ {

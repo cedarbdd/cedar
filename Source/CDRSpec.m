@@ -18,6 +18,10 @@ void beforeEach(CDRSpecBlock block) {
   [currentSpec.currentGroup addBefore:block];
 }
 
+void afterEach(CDRSpecBlock block) {
+  [currentSpec.currentGroup addAfter:block];
+}
+
 void it(NSString *text, CDRSpecBlock block) {
   CDRExample *example = [CDRExample exampleWithText:[NSString stringWithFormat:@"%@ %@", currentSpec.currentGroup.text, text] andBlock:block];
   [currentSpec.currentGroup add:example];
