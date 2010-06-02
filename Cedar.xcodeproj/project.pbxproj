@@ -29,7 +29,6 @@
 		AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AE603E15118CCE1F00D312FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603E14118CCE1F00D312FC /* main.m */; };
 		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy OCHamcrest */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
-		AE603ED7118CD73D00D312FC /* Cedar_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AE603ED6118CD73D00D312FC /* Cedar_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +60,7 @@
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE17ECE211B6F00B004C4DC0 /* MACROS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MACROS; sourceTree = "<group>"; };
 		AE4E524911B357F5001E36F3 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		AE603C79118CC85100D312FC /* CDRDefaultRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultRunner.m; sourceTree = "<group>"; };
 		AE603C7A118CC85100D312FC /* CDRExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExample.m; sourceTree = "<group>"; };
@@ -81,7 +81,6 @@
 		AE603D82118CCBBF00D312FC /* SpecSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec2.m; sourceTree = "<group>"; };
 		AE603DDB118CCD6400D312FC /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrest.framework; sourceTree = "<group>"; };
 		AE603E14118CCE1F00D312FC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AE603ED6118CD73D00D312FC /* Cedar_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cedar_Prefix.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +122,7 @@
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
 				034768DFFF38A50411DB9C8B /* Products */,
 				AE4E524911B357F5001E36F3 /* README.markdown */,
-				AE603ED6118CD73D00D312FC /* Cedar_Prefix.pch */,
+				AE17ECE211B6F00B004C4DC0 /* MACROS */,
 			);
 			name = Cedar;
 			sourceTree = "<group>";
@@ -200,7 +199,6 @@
 				AE603D76118CCB6000D312FC /* CDRExampleRunner.h in Headers */,
 				AE603D77118CCB6000D312FC /* CDRSpec.h in Headers */,
 				AE603D78118CCB6000D312FC /* SpecHelper.h in Headers */,
-				AE603ED7118CD73D00D312FC /* Cedar_Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +331,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Cedar_Prefix.pch;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				PRODUCT_NAME = Cedar;
@@ -351,7 +349,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Cedar_Prefix.pch;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				PRODUCT_NAME = Cedar;

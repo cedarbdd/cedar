@@ -1,6 +1,0 @@
-//
-// Prefix header for all source files of the 'Cedar' target in the 'Cedar' project.
-//
-
-#ifdef __OBJC__
-#endif

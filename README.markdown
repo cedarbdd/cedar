@@ -69,6 +69,25 @@ explicitly pass nil as the second parameter.  The parameter is necessary because
 C, and thus Objective-C, doesn't support function parameter overloading or
 default parameters.
 
+## Macros
+
+The project root contains a file named MACROS, which contains some useful Xcode
+macros for writing Cedar specs.  To load the macros copy the contents of the
+file into this file:
+
+        ~/Library/Application\ Support/Developer/Shared/Xcode/Specifications/ObjectiveC.xctxtmacro
+
+You may need to create that file.  If the file already exists, and contains pre-
+existing macros, be careful to insert the Cedar macros inside the existing
+parentheses properly.
+
+To use the macros, type the shortcut string, followed by Ctrl-. or Ctrl-,  As an
+example, typing 'cdesc' followed by Ctrl-. will expand to:
+
+        describe(@"<#!subject under test!#>", ^{
+            <#!content!#>
+        });
+
 
 ## But I'm writing an iPhone app!
 
