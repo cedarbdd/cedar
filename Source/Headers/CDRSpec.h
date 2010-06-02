@@ -7,6 +7,8 @@
 @protocol CDRSpec
 @end
 
+extern CDRSpecBlock PENDING;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

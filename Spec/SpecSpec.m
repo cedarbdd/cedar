@@ -10,7 +10,7 @@ void expectFailure(CDRSpecBlock block) {
   @catch (CDRSpecFailure *) {
     return;
   }
-  
+
   fail(@"equality expectation should have failed.");
 }
 
@@ -46,6 +46,9 @@ describe(@"Spec", ^ {
   it(@"should run", ^ {
 //    NSLog(@"=====================> Spec");
   });
+
+  it(@"should be pending", PENDING);
+  it(@"should also be pending", nil);
 });
 
 describe(@"The spec failure exception", ^{
@@ -58,37 +61,37 @@ describe(@"Hamcrest matchers", ^{
   describe(@"equality", ^{
     describe(@"with Objective-C types", ^{
       __block NSNumber *expectedNumber;
-      
+
       beforeEach(^{
         expectedNumber = [NSNumber numberWithInt:1];
       });
-      
+
       it(@"should succeed when the two objects are equal", ^{
         assertThat(expectedNumber, equalTo([NSNumber numberWithInt:1]));
       });
-      
+
       it(@"should fail when the two objects are not equal", ^{
         expectFailure(^{
           assertThat(expectedNumber, equalTo([NSNumber numberWithInt:2]));
         });
       });
     });
-    
+
     describe(@"with built-in types", ^{
       __block int expectedValue = 1;
-      
+
       beforeEach(^{
         expectedValue = 1;
       });
-      
+
       it(@"should succeed when the two objects are equal", ^{
         assertThatInt(expectedValue, is(equalToInt(1)));
       });
-      
+
       it(@"should succeed with different types that are comparable", ^{
         assertThatInt(expectedValue, is(equalToFloat(1.0)));
       });
-      
+
       it(@"should fail when the objects are not equal", ^{
         expectFailure(^{
           assertThatInt(expectedValue, is(equalToInt(2)));

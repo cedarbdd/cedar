@@ -4,12 +4,13 @@
 #import "CDRExampleRunner.h"
 
 static CDRSpec *currentSpec;
+extern CDRSpecBlock PENDING;
 
 void describe(NSString *text, CDRSpecBlock block) {
   CDRExampleGroup *parentGroup = currentSpec.currentGroup;
   currentSpec.currentGroup = [CDRExampleGroup groupWithText:[NSString stringWithFormat:@"%@ %@", parentGroup.text, text]];
   [parentGroup add:currentSpec.currentGroup];
-  
+
   block();
   currentSpec.currentGroup = parentGroup;
 }

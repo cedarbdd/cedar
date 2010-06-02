@@ -5,8 +5,8 @@ BDD-style testing using Objective-C
 
 ## Usage
 
-* Build the Cedar framework.  Note that you must build for an Objective-C 
-  runtime that supports blocks; this means Mac OS X 10.6, or a runtime from 
+* Build the Cedar framework.  Note that you must build for an Objective-C
+  runtime that supports blocks; this means Mac OS X 10.6, or a runtime from
   Plausible Labs (see below).
 * Create a command-line executable target for your tests in your project.  Name
   this target Specs, unless you have another name you'd prefer.
@@ -18,7 +18,7 @@ BDD-style testing using Objective-C
 * Add a main.m that looks like this:
 
         #import "Cedar.h"
-        
+
         int main (int argc, const char *argv[]) {
           return runAllSpecs();
         }
@@ -28,13 +28,13 @@ BDD-style testing using Objective-C
   file need not have a header file, and looks like this:
 
         #import "SpecHelper.h"
-        
+
         SPEC_BEGIN(FooSpec)
         describe(@"Foo", ^{
           beforeEach(^{
             ...
           });
-          
+
           it(@"should do something", ^{
             ...
           });
@@ -47,14 +47,27 @@ BDD-style testing using Objective-C
 
 ## Matchers
 
-Cedar does not provide matchers, but it works with the fine array of matchers 
+Cedar does not provide matchers, but it works with the fine array of matchers
 provided by the Hamcrest project (http://code.google.com/p/hamcrest/); you can
-fetch the Objective-C port from the Hamcrest SVN repo.  Build and link the 
-Hamcrest framework by following their instructions, and add the following at 
+fetch the Objective-C port from the Hamcrest SVN repo.  Build and link the
+Hamcrest framework by following their instructions, and add the following at
 the top of your spec files:
 
     #define HC_SHORTHAND
     #import <OCHamcrest/OCHamcrest.h>
+
+
+## Pending specs
+
+If you'd like to specify but not implement an example you can do so like this:
+
+          it(@"should do something eventually", PENDING);
+
+The spec runner will not try to run this example, but report it as pending.  The
+PENDING keyword simply references a nil block pointer; if you prefer you can
+explicitly pass nil as the second parameter.  The parameter is necessary because
+C, and thus Objective-C, doesn't support function parameter overloading or
+default parameters.
 
 
 ## But I'm writing an iPhone app!
@@ -65,10 +78,10 @@ on a Snow Leopard machine and targeting the desktop runtime then anything using
 blocks will fail to compile.  There are a couple ways around this:
 
 * Plausible Labs provides patched versions of the GCC compiler and runtime for
-  Leopard and iPhone OS (http://code.google.com/p/plblocks/).  I wrote most of 
+  Leopard and iPhone OS (http://code.google.com/p/plblocks/).  I wrote most of
   Cedar on a Leopard machine with the 10.5 PLBlocks runtime.
 
-* Split your project into OS-dependent and OS-independent targets.  Domain 
+* Split your project into OS-dependent and OS-independent targets.  Domain
   models and business logic shouldn't (theoretically) depend on the available
   UI frameworks.  Test everything that doesn't require UIKit/CoreGraphics/etc.
   using Cedar; test the UI using something else.

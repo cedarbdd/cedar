@@ -1,11 +1,16 @@
 #import "CDRDefaultRunner.h"
 #import "CDRExample.h"
 
+@interface CDRDefaultRunner (private)
+- (void)printMessages:(NSArray *)messages;
+@end
+
 @implementation CDRDefaultRunner
 
 #pragma mark Memory
 - (id)init {
   if (self = [super init]) {
+    pendingMessages_ = [[NSMutableArray alloc] init];
     failureMessages_ = [[NSMutableArray alloc] init];
   }
   return self;
@@ -13,6 +18,7 @@
 
 - (void)dealloc {
   [failureMessages_ release];
+  [pendingMessages_ release];
   [super dealloc];
 }
 
@@ -35,17 +41,32 @@
   [failureMessages_ addObject:[NSString stringWithFormat:@"%@ RAISED AN UNKNOWN ERROR\n", [example text]]];
 }
 
-- (int)result {
-  if ([failureMessages_ count]) {
-    printf("\n\n");
+- (void)examplePending:(CDRExample *)example {
+  printf("P");
+  [pendingMessages_ addObject:[NSString stringWithFormat:@"PENDING %@", [example text]]];
+}
 
-    for (NSString *message in failureMessages_) {
-      printf("%s\n", [message cStringUsingEncoding:NSUTF8StringEncoding]);
-    }
+- (int)result {
+  if ([pendingMessages_ count]) {
+    [self printMessages:pendingMessages_];
+  }
+
+  if ([failureMessages_ count]) {
+    [self printMessages:failureMessages_];
 
     return 1;
   } else {
     return 0;
+  }
+}
+
+#pragma mark private interface
+
+- (void)printMessages:(NSArray *)messages {
+  printf("\n\n");
+
+  for (NSString *message in messages) {
+    printf("%s\n", [message cStringUsingEncoding:NSUTF8StringEncoding]);
   }
 }
 

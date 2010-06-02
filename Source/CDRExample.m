@@ -1,6 +1,8 @@
 #import "CDRExample.h"
 #import "CDRExampleRunner.h"
 
+const CDRSpecBlock PENDING = nil;
+
 @implementation CDRExample
 
 + (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block {
@@ -20,18 +22,22 @@
 }
 
 - (void)runWithRunner:(id<CDRExampleRunner>)runner {
-  @try {
-    [parent_ setUp];
-    block_();
-    [runner exampleSucceeded:self];
-  } @catch (CDRSpecFailure *x) {
-    [runner example:self failedWithMessage:[x reason]];
-  } @catch (NSException *x) {
-    [runner example:self threwException:x];
-  } @catch (...) {
-    [runner exampleThrewError:self];
+  if (block_) {
+    @try {
+      [parent_ setUp];
+      block_();
+      [runner exampleSucceeded:self];
+    } @catch (CDRSpecFailure *x) {
+      [runner example:self failedWithMessage:[x reason]];
+    } @catch (NSException *x) {
+      [runner example:self threwException:x];
+    } @catch (...) {
+      [runner exampleThrewError:self];
+    }
+    [parent_ tearDown];
+  } else {
+    [runner examplePending:self];
   }
-  [parent_ tearDown];
 }
 
 @end
