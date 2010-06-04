@@ -23,7 +23,6 @@
 		AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AE603E15118CCE1F00D312FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603E14118CCE1F00D312FC /* main.m */; };
 		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy OCHamcrest */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
-		AED41F3011B86A3A006DBB00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED41F2F11B86A3A006DBB00 /* Foundation.framework */; };
 		AED41F3211B86A44006DBB00 /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
 		AED41F3311B86A44006DBB00 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
 		AED41F3411B86A44006DBB00 /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7B118CC85100D312FC /* CDRExampleBase.m */; };
@@ -93,7 +92,6 @@
 		AE603DDB118CCD6400D312FC /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrest.framework; sourceTree = "<group>"; };
 		AE603E14118CCE1F00D312FC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AED41F2C11B869D0006DBB00 /* libCedar-iPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-iPhone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AED41F2F11B86A3A006DBB00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AED41F3011B86A3A006DBB00 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +142,6 @@
 				034768DFFF38A50411DB9C8B /* Products */,
 				AE4E524911B357F5001E36F3 /* README.markdown */,
 				AE17ECE211B6F00B004C4DC0 /* MACROS */,
-				AED41F2F11B86A3A006DBB00 /* Foundation.framework */,
 			);
 			name = Cedar;
 			sourceTree = "<group>";
