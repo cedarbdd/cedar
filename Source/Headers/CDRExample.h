@@ -2,6 +2,7 @@
 
 @interface CDRExample : CDRExampleBase {
   CDRSpecBlock block_;
+  CDRExampleState state_;
 }
 
 + (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block;

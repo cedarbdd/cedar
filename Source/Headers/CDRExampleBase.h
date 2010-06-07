@@ -4,6 +4,15 @@
 
 typedef void (^CDRSpecBlock)(void);
 
+enum CDRExampleState {
+    CDRExampleStateIncomplete = 0,
+    CDRExampleStatePassed,
+    CDRExampleStateFailed,
+    CDRExampleStateError,
+    CDRExampleStatePending
+};
+typedef enum CDRExampleState CDRExampleState;
+
 @interface CDRSpecFailure : NSException
 + (id)specFailureWithReason:(NSString *)reason;
 @end
@@ -15,6 +24,7 @@ typedef void (^CDRSpecBlock)(void);
 
 @property (nonatomic, readonly) NSString *text;
 @property (nonatomic, assign) CDRExampleBase *parent;
+@property (nonatomic, readonly) CDRExampleState state;
 
 - (id)initWithText:(NSString *)text;
 

@@ -13,6 +13,7 @@
 		AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
 		AE16DD3211BC874F00270D0B /* CDRExampleRunnerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */; };
 		AE16DD6B11BC93F600270D0B /* CDRExampleRunnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */; };
+		AE2B9EE311BD5EE900DC1BF2 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */; };
 		AE603C7E118CC85100D312FC /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
 		AE603C7F118CC85100D312FC /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
 		AE603C80118CC85100D312FC /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7B118CC85100D312FC /* CDRExampleBase.m */; };
@@ -83,6 +84,7 @@
 		AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleRunnerViewController.h; sourceTree = "<group>"; };
 		AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleRunnerViewController.m; sourceTree = "<group>"; };
 		AE17ECE211B6F00B004C4DC0 /* MACROS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MACROS; sourceTree = "<group>"; };
+		AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleSpec.m; sourceTree = "<group>"; };
 		AE4E524911B357F5001E36F3 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		AE603C79118CC85100D312FC /* CDRDefaultRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultRunner.m; sourceTree = "<group>"; };
 		AE603C7A118CC85100D312FC /* CDRExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExample.m; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				AE603D82118CCBBF00D312FC /* SpecSpec2.m */,
 				AE603E14118CCE1F00D312FC /* main.m */,
 				AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */,
+				AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */,
 			);
 			path = Spec;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				AE603DCB118CCCC700D312FC /* SpecSpec2.m in Sources */,
 				AE603E15118CCE1F00D312FC /* main.m in Sources */,
 				AE16DC7B11BB514300270D0B /* CppSpecSpec.mm in Sources */,
+				AE2B9EE311BD5EE900DC1BF2 /* CDRExampleSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

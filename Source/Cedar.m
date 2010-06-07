@@ -60,14 +60,13 @@ int runSpecsWithCustomExampleRunner(NSArray *specClasses, id<CDRExampleRunner> r
 }
 
 int runAllSpecs() {
-  return runAllSpecsWithCustomExampleRunner([[[CDRDefaultRunner alloc] init] autorelease]);
+  id<CDRExampleRunner> runner = [[CDRDefaultRunner alloc] init];
+  int result = runAllSpecsWithCustomExampleRunner(runner);
+  [runner release];
+
+  return result;
 }
 
 int runAllSpecsWithCustomExampleRunner(id<CDRExampleRunner> runner) {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-  int result = runSpecsWithCustomExampleRunner(CDREnumerateSpecClasses(), runner);
-
-  [pool drain];
-  return result;
+  return runSpecsWithCustomExampleRunner(CDREnumerateSpecClasses(), runner);
 }
