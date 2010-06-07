@@ -4,7 +4,6 @@
 #import "CDRExampleRunner.h"
 
 static CDRSpec *currentSpec;
-extern CDRSpecBlock PENDING;
 
 void describe(NSString *text, CDRSpecBlock block) {
   CDRExampleGroup *parentGroup = currentSpec.currentGroup;
