@@ -107,6 +107,12 @@ blocks will fail to compile.  There are a couple ways around this:
 
 * I'm open to suggestions.
 
+The Cedar-iPhone target builds a static library specifically designed for specs
+on the iPhone device.
+
+I've created a sample iPhone application that runs Cedar specs both on and off
+the device.  You can check it out here: http://github.com/pivotal/StoryAccepter
+
 
 ## Contributions
 
