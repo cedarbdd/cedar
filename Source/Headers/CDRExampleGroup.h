@@ -4,6 +4,8 @@
   NSMutableArray *beforeBlocks_, *examples_, *afterBlocks_;
 }
 
+@property (nonatomic, readonly) NSArray *examples;
+
 + (id)groupWithText:(NSString *)text;
 
 - (void)add:(CDRExampleBase *)example;

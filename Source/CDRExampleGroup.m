@@ -2,6 +2,8 @@
 
 @implementation CDRExampleGroup
 
+@synthesize examples = examples_;
+
 #pragma mark Memory
 + (id)groupWithText:(NSString *)text {
   return [[[[self class] alloc] initWithText: text] autorelease];
@@ -53,6 +55,18 @@
     afterBlock();
   }
   [parent_ tearDown];
+}
+
+- (CDRExampleState)state {
+    if (0 == [examples_ count]) {
+        return CDRExampleStatePassed;
+    }
+
+    CDRExampleState aggregateState = CDRExampleStateIncomplete;
+    for (CDRExampleBase *example in examples_) {
+        aggregateState |= [example state];
+    }
+    return aggregateState;
 }
 
 - (void)runWithRunner:(id<CDRExampleRunner>)runner {

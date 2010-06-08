@@ -5,11 +5,11 @@
 typedef void (^CDRSpecBlock)(void);
 
 enum CDRExampleState {
-    CDRExampleStateIncomplete = 0,
-    CDRExampleStatePassed,
-    CDRExampleStateFailed,
-    CDRExampleStateError,
-    CDRExampleStatePending
+    CDRExampleStateIncomplete = 0x00,
+    CDRExampleStatePassed = 0x01,
+    CDRExampleStatePending = 0x01 << 1,
+    CDRExampleStateFailed = 0x01 << 2,
+    CDRExampleStateError = 0x01 << 3
 };
 typedef enum CDRExampleState CDRExampleState;
 
@@ -24,7 +24,6 @@ typedef enum CDRExampleState CDRExampleState;
 
 @property (nonatomic, readonly) NSString *text;
 @property (nonatomic, assign) CDRExampleBase *parent;
-@property (nonatomic, readonly) CDRExampleState state;
 
 - (id)initWithText:(NSString *)text;
 
@@ -32,4 +31,8 @@ typedef enum CDRExampleState CDRExampleState;
 - (void)tearDown;
 - (void)runWithRunner:(id<CDRExampleRunner>)runner;
 
+@end
+
+@interface CDRExampleBase (RunReporting)
+- (CDRExampleState)state;
 @end
