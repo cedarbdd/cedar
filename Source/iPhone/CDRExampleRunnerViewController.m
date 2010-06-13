@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    runAllSpecsWithCustomExampleRunner(stubRunner_);
+    runSpecsWithCustomExampleRunner(NULL, stubRunner_);
 }
 
 - (void)viewDidUnload {
