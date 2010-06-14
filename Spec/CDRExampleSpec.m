@@ -1,4 +1,5 @@
 #import <Cedar/SpecHelper.h>
+#import <OCMock/OCMock.h>
 #import "CDRExample.h"
 
 #define HC_SHORTHAND
@@ -79,6 +80,19 @@ describe(@"CDRExample", ^{
 
             it(@"should be CDRExceptionStatePending", ^{
                 assertThatInt([example state], equalToInt(CDRExampleStatePending));
+            });
+        });
+
+        describe(@"KVO", ^{
+            it(@"should report when the state changes", ^{
+                id mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
+                [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:example change:[OCMArg any] context:NULL];
+
+                [example addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
+                [example runWithRunner:nil];
+                [example removeObserver:mockObserver forKeyPath:@"state"];
+
+                [mockObserver verify];
             });
         });
     });

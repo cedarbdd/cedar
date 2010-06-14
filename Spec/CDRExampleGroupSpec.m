@@ -1,4 +1,5 @@
 #import <Cedar/SpecHelper.h>
+#import <OCMock/OCMock.h>
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
 
@@ -43,7 +44,17 @@ describe(@"CDRExampleGroup", ^{
 
         describe(@"for a group containing only complete examples", ^{
             describe(@"with only passing examples", ^{
-                it(@"should be CDRExampleStatePassed", PENDING);
+                beforeEach(^{
+                    CDRExample *passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+                    [group add:passingExample];
+                    [passingExample release];
+
+                    [passingExample runWithRunner:nil];
+                });
+
+                it(@"should be CDRExampleStatePassed", ^{
+                    assertThatInt([group state], equalToInt(CDRExampleStatePassed));
+                });
             });
 
             describe(@"with only failing examples", ^{
@@ -86,6 +97,61 @@ describe(@"CDRExampleGroup", ^{
                 describe(@"with all other examples passing", ^{
                     it(@"should be CDRExampleStatePending", PENDING);
                 });
+            });
+        });
+
+        describe(@"KVO", ^{
+            __block id mockObserver;
+
+            describe(@"when a child changes state, causing the group to change state", ^{
+                __block CDRExample *example;
+
+                beforeEach(^{
+                    example = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+                    [group add:example];
+                    [example release];
+
+                    mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
+                    [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
+                });
+
+                it(@"should report that the state has changed", ^{
+                    [group addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
+                    [example runWithRunner:nil];
+                    [group removeObserver:mockObserver forKeyPath:@"state"];
+
+                    [mockObserver verify];
+                });
+            });
+
+            describe(@"when a child's child changes state, causing the child to change state, causing the group to change state", ^{
+                __block CDRExampleGroup *subgroup;
+                __block CDRExample *example;
+
+                beforeEach(^{
+                    subgroup = [[CDRExampleGroup alloc] initWithText:@"subgroup"];
+                    [group add:subgroup];
+                    [subgroup release];
+
+                    example = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+                    [subgroup add:example];
+                    [example release];
+
+                    mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
+                    [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
+                });
+
+                it(@"should report that the state has changed", ^{
+                    [group addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
+                    [example runWithRunner:nil];
+                    [group removeObserver:mockObserver forKeyPath:@"state"];
+
+                    [mockObserver verify];
+                });
+            });
+
+            describe(@"when a child example changes state, but the group state does not change", ^{
+                it(@"should not report that the state has changed", PENDING);
             });
         });
     });

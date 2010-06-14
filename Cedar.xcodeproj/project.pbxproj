@@ -13,6 +13,8 @@
 		AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
 		AE16DD3211BC874F00270D0B /* CDRExampleRunnerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */; };
 		AE16DD6B11BC93F600270D0B /* CDRExampleRunnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */; };
+		AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
+		AE16DFC211C5F4AD00270D0B /* OCMock.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
 		AE2B9EE311BD5EE900DC1BF2 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */; };
 		AE2B9FE811BD76C700DC1BF2 /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */; };
 		AE603C7E118CC85100D312FC /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
@@ -29,7 +31,7 @@
 		AE603DCB118CCCC700D312FC /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603D82118CCBBF00D312FC /* SpecSpec2.m */; };
 		AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AE603E15118CCE1F00D312FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603E14118CCE1F00D312FC /* main.m */; };
-		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy OCHamcrest */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
+		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AEBAB0C211B9D2380085EC6E /* CedarApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */; };
 		AEBAB0C411B9D8120085EC6E /* CedarApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */; };
 		AED41F3211B86A44006DBB00 /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
@@ -61,15 +63,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AE603E35118CCEAD00D312FC /* Copy OCHamcrest */ = {
+		AE603E35118CCEAD00D312FC /* Copy frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy OCHamcrest */,
+				AE16DFC211C5F4AD00270D0B /* OCMock.framework in Copy frameworks */,
+				AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy frameworks */,
 			);
-			name = "Copy OCHamcrest";
+			name = "Copy frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -84,6 +87,7 @@
 		AE16DC9D11BB52B100270D0B /* ActualValue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActualValue.mm; sourceTree = "<group>"; };
 		AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleRunnerViewController.h; sourceTree = "<group>"; };
 		AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleRunnerViewController.m; sourceTree = "<group>"; };
+		AE16DF8211C5F45800270D0B /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = "/Users/pivotal/workspace/OCMock 1.55/OCMock.framework"; sourceTree = "<absolute>"; };
 		AE17ECE211B6F00B004C4DC0 /* MACROS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MACROS; sourceTree = "<group>"; };
 		AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleSpec.m; sourceTree = "<group>"; };
 		AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroupSpec.m; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */,
 				AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */,
 				AE603D43118CCA7D00D312FC /* Cedar.framework in Frameworks */,
 			);
@@ -169,6 +174,7 @@
 			children = (
 				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
 				AE603DDB118CCD6400D312FC /* OCHamcrest.framework */,
+				AE16DF8211C5F45800270D0B /* OCMock.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -316,7 +322,7 @@
 			buildPhases = (
 				AE603D3A118CCA7000D312FC /* Sources */,
 				AE603D3B118CCA7000D312FC /* Frameworks */,
-				AE603E35118CCEAD00D312FC /* Copy OCHamcrest */,
+				AE603E35118CCEAD00D312FC /* Copy frameworks */,
 			);
 			buildRules = (
 			);
@@ -514,6 +520,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../OCMock 1.55\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -540,6 +547,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../OCMock 1.55\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;

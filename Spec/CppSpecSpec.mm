@@ -11,7 +11,7 @@ describe(@"CppSpec", ^{
             __block int expectedValue;
 
             beforeEach(^ {
-                expectedValue = 1;
+//                expectedValue = 1;
             });
 
             it(@"should run", ^{

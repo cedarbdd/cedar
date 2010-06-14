@@ -35,4 +35,6 @@ typedef enum CDRExampleState CDRExampleState;
 
 @interface CDRExampleBase (RunReporting)
 - (CDRExampleState)state;
+
+- (void)stateDidChange;
 @end

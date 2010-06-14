@@ -3,6 +3,11 @@
 
 const CDRSpecBlock PENDING = nil;
 
+@interface CDRExample (private)
+- (void)setState:(CDRExampleState)state;
+@end
+
+
 @implementation CDRExample
 
 + (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block {
@@ -31,23 +36,33 @@ const CDRSpecBlock PENDING = nil;
         @try {
             [parent_ setUp];
             block_();
-            state_ = CDRExampleStatePassed;
+            self.state = CDRExampleStatePassed;
             [runner exampleSucceeded:self];
         } @catch (CDRSpecFailure *x) {
-            state_ = CDRExampleStateFailed;
+            self.state = CDRExampleStateFailed;
             [runner example:self failedWithMessage:[x reason]];
         } @catch (NSException *x) {
-            state_ = CDRExampleStateError;
+            self.state = CDRExampleStateError;
             [runner example:self threwException:x];
         } @catch (...) {
-            state_ = CDRExampleStateError;
+            self.state = CDRExampleStateError;
             [runner exampleThrewError:self];
         }
         [parent_ tearDown];
     } else {
-        state_ = CDRExampleStatePending;
+        self.state = CDRExampleStatePending;
         [runner examplePending:self];
     }
+}
+
+#pragma mark private interface
+
+- (void)setState:(CDRExampleState)state {
+    [self willChangeValueForKey:@"state"];
+    state_ = state;
+    [self didChangeValueForKey:@"state"];
+
+    [parent_ stateDidChange];
 }
 
 @end

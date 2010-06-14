@@ -69,6 +69,12 @@
     return aggregateState;
 }
 
+- (void)stateDidChange {
+    [self willChangeValueForKey:@"state"];
+    [self didChangeValueForKey:@"state"];
+    [parent_ stateDidChange];
+}
+
 - (void)runWithRunner:(id<CDRExampleRunner>)runner {
   for (CDRExampleBase *example in examples_) {
     [example runWithRunner:runner];
