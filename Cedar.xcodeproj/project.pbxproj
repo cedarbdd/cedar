@@ -410,7 +410,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project Cedar.xcodeproj -sdk iphonesimulator3.2 -target Cedar-StaticLib -configuration Release clean build\nxcodebuild -project Cedar.xcodeproj -sdk iphoneos3.2 -target Cedar-StaticLib -configuration Release clean build";
+			shellScript = "xcodebuild -project Cedar.xcodeproj -sdk iphonesimulator3.2 -target Cedar-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project Cedar.xcodeproj -sdk iphoneos3.2 -target Cedar-StaticLib -configuration ${CONFIGURATION} clean build";
 		};
 		AE0CDEC011C84D6D00EF2275 /* Build universal static lib */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -540,7 +540,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 			};
@@ -553,6 +553,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 			};
@@ -564,6 +565,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Cedar-iPhone";
 			};
 			name = Debug;
@@ -574,6 +576,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Cedar-iPhone";
 				ZERO_LINK = NO;
 			};
@@ -637,6 +640,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
 				SDKROOT = iphonesimulator3.2;
@@ -651,6 +655,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
 				SDKROOT = iphonesimulator3.2;
