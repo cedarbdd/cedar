@@ -6,12 +6,35 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		AE0CDEB911C84CBE00EF2275 /* Cedar-iPhone */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = AE0CDEBE11C84CE200EF2275 /* Build configuration list for PBXAggregateTarget "Cedar-iPhone" */;
+			buildPhases = (
+				AE0CDEBD11C84CC400EF2275 /* Build Multiple Static Libs */,
+				AE0CDEC011C84D6D00EF2275 /* Build universal static lib */,
+				AE0CDECD11C84E8A00EF2275 /* Copy headers to framework */,
+			);
+			dependencies = (
+			);
+			name = "Cedar-iPhone";
+			productName = "Cedar-iPhone";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
+		AE0CDED011C84F2400EF2275 /* Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D69118CCB6000D312FC /* Cedar.h */; };
+		AE0CDED111C84F2400EF2275 /* CDRDefaultRunner.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6A118CCB6000D312FC /* CDRDefaultRunner.h */; };
+		AE0CDED311C84F2400EF2275 /* CDRExampleBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6C118CCB6000D312FC /* CDRExampleBase.h */; };
+		AE0CDED611C84F2400EF2275 /* CDRSpec.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6F118CCB6000D312FC /* CDRSpec.h */; };
+		AE0CDED711C84F2400EF2275 /* SpecHelper.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D70118CCB6000D312FC /* SpecHelper.h */; };
+		AE0CDED811C84F2400EF2275 /* CedarApplicationDelegate.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */; };
+		AE0CDED911C84F2400EF2275 /* CDRExampleRunnerViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */; };
+		AE0CDEE711C84F7600EF2275 /* CDRExampleRunner.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6E118CCB6000D312FC /* CDRExampleRunner.h */; };
 		AE16DC7B11BB514300270D0B /* CppSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */; };
 		AE16DC9E11BB52B100270D0B /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DC9C11BB52B100270D0B /* ActualValue.h */; };
 		AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
-		AE16DD3211BC874F00270D0B /* CDRExampleRunnerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */; };
 		AE16DD6B11BC93F600270D0B /* CDRExampleRunnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */; };
 		AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
 		AE16DFC211C5F4AD00270D0B /* OCMock.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
@@ -32,7 +55,6 @@
 		AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AE603E15118CCE1F00D312FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603E14118CCE1F00D312FC /* main.m */; };
 		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
-		AEBAB0C211B9D2380085EC6E /* CedarApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */; };
 		AEBAB0C411B9D8120085EC6E /* CedarApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */; };
 		AED41F3211B86A44006DBB00 /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
 		AED41F3311B86A44006DBB00 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
@@ -40,14 +62,6 @@
 		AED41F3511B86A44006DBB00 /* CDRExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7C118CC85100D312FC /* CDRExampleGroup.m */; };
 		AED41F3611B86A44006DBB00 /* CDRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7D118CC85100D312FC /* CDRSpec.m */; };
 		AED41F3711B86A44006DBB00 /* Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603CA9118CC94100D312FC /* Cedar.m */; };
-		AED41F3811B86A53006DBB00 /* Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D69118CCB6000D312FC /* Cedar.h */; };
-		AED41F3911B86A53006DBB00 /* CDRDefaultRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6A118CCB6000D312FC /* CDRDefaultRunner.h */; };
-		AED41F3A11B86A53006DBB00 /* CDRExample.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6B118CCB6000D312FC /* CDRExample.h */; };
-		AED41F3B11B86A53006DBB00 /* CDRExampleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6C118CCB6000D312FC /* CDRExampleBase.h */; };
-		AED41F3C11B86A53006DBB00 /* CDRExampleGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6D118CCB6000D312FC /* CDRExampleGroup.h */; };
-		AED41F3D11B86A53006DBB00 /* CDRExampleRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6E118CCB6000D312FC /* CDRExampleRunner.h */; };
-		AED41F3E11B86A53006DBB00 /* CDRSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6F118CCB6000D312FC /* CDRSpec.h */; };
-		AED41F3F11B86A53006DBB00 /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D70118CCB6000D312FC /* SpecHelper.h */; };
 		AED41F9411B871BC006DBB00 /* CDRSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6F118CCB6000D312FC /* CDRSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AED41F9511B871C1006DBB00 /* CDRExampleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6C118CCB6000D312FC /* CDRExampleBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -63,6 +77,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		AE0CDECD11C84E8A00EF2275 /* Copy headers to framework */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iPhone-universal/${PRODUCT_NAME}.framework/Headers";
+			dstSubfolderSpec = 0;
+			files = (
+				AE0CDED011C84F2400EF2275 /* Cedar.h in Copy headers to framework */,
+				AE0CDED111C84F2400EF2275 /* CDRDefaultRunner.h in Copy headers to framework */,
+				AE0CDED311C84F2400EF2275 /* CDRExampleBase.h in Copy headers to framework */,
+				AE0CDED611C84F2400EF2275 /* CDRSpec.h in Copy headers to framework */,
+				AE0CDED711C84F2400EF2275 /* SpecHelper.h in Copy headers to framework */,
+				AE0CDED811C84F2400EF2275 /* CedarApplicationDelegate.h in Copy headers to framework */,
+				AE0CDED911C84F2400EF2275 /* CDRExampleRunnerViewController.h in Copy headers to framework */,
+				AE0CDEE711C84F7600EF2275 /* CDRExampleRunner.h in Copy headers to framework */,
+			);
+			name = "Copy headers to framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE603E35118CCEAD00D312FC /* Copy frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,7 +145,7 @@
 		AE603E14118CCE1F00D312FC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarApplicationDelegate.h; sourceTree = "<group>"; };
 		AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CedarApplicationDelegate.m; sourceTree = "<group>"; };
-		AED41F2C11B869D0006DBB00 /* libCedar-iPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-iPhone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib-iphonesimulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +182,7 @@
 			children = (
 				8DC2EF5B0486A6940098B216 /* Cedar.framework */,
 				AE603D65118CCB2100D312FC /* Test */,
-				AED41F2C11B869D0006DBB00 /* libCedar-iPhone.a */,
+				AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,23 +309,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AED41F2811B869D0006DBB00 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AED41F3811B86A53006DBB00 /* Cedar.h in Headers */,
-				AED41F3911B86A53006DBB00 /* CDRDefaultRunner.h in Headers */,
-				AED41F3A11B86A53006DBB00 /* CDRExample.h in Headers */,
-				AED41F3B11B86A53006DBB00 /* CDRExampleBase.h in Headers */,
-				AED41F3C11B86A53006DBB00 /* CDRExampleGroup.h in Headers */,
-				AED41F3D11B86A53006DBB00 /* CDRExampleRunner.h in Headers */,
-				AED41F3E11B86A53006DBB00 /* CDRSpec.h in Headers */,
-				AED41F3F11B86A53006DBB00 /* SpecHelper.h in Headers */,
-				AEBAB0C211B9D2380085EC6E /* CedarApplicationDelegate.h in Headers */,
-				AE16DD3211BC874F00270D0B /* CDRExampleRunnerViewController.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -334,11 +349,10 @@
 			productReference = AE603D65118CCB2100D312FC /* Test */;
 			productType = "com.apple.product-type.tool";
 		};
-		AED41F2B11B869D0006DBB00 /* Cedar-iPhone */ = {
+		AED41F2B11B869D0006DBB00 /* Cedar-StaticLib */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AED41F3111B86A3B006DBB00 /* Build configuration list for PBXNativeTarget "Cedar-iPhone" */;
+			buildConfigurationList = AED41F3111B86A3B006DBB00 /* Build configuration list for PBXNativeTarget "Cedar-StaticLib" */;
 			buildPhases = (
-				AED41F2811B869D0006DBB00 /* Headers */,
 				AED41F2911B869D0006DBB00 /* Sources */,
 				AED41F2A11B869D0006DBB00 /* Frameworks */,
 			);
@@ -346,9 +360,9 @@
 			);
 			dependencies = (
 			);
-			name = "Cedar-iPhone";
+			name = "Cedar-StaticLib";
 			productName = "Cedar-iPhone";
-			productReference = AED41F2C11B869D0006DBB00 /* libCedar-iPhone.a */;
+			productReference = AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -366,7 +380,8 @@
 			targets = (
 				8DC2EF4F0486A6940098B216 /* Cedar */,
 				AE603D3C118CCA7000D312FC /* Specs */,
-				AED41F2B11B869D0006DBB00 /* Cedar-iPhone */,
+				AED41F2B11B869D0006DBB00 /* Cedar-StaticLib */,
+				AE0CDEB911C84CBE00EF2275 /* Cedar-iPhone */,
 			);
 		};
 /* End PBXProject section */
@@ -381,6 +396,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AE0CDEBD11C84CC400EF2275 /* Build Multiple Static Libs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Multiple Static Libs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "xcodebuild -project Cedar.xcodeproj -sdk iphonesimulator3.2 -target Cedar-StaticLib -configuration Release clean build\nxcodebuild -project Cedar.xcodeproj -sdk iphoneos3.2 -target Cedar-StaticLib -configuration Release clean build";
+		};
+		AE0CDEC011C84D6D00EF2275 /* Build universal static lib */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build universal static lib";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-StaticLib-iphonesimulator.a\" &&\n\tDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-StaticLib-iphoneos.a\" &&\n\tUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iPhone-universal\" &&\n\tUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\n\tFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\n\trm -rf \"${FRAMEWORK}\" &&\n\tmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\n\tmkdir -p \"${FRAMEWORK}/Versions/A/Headers\" &&\n\tmkdir -p \"${FRAMEWORK}/Versions/A/Resources\" &&\n\n# Generate universal binary from desktop, device, and simulator builds.\n\tlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\n\tcp \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}/Versions/A\" &&\n\tln -s \"${FRAMEWORK}/Versions/A\" \"${FRAMEWORK}/Versions/Current\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/Headers\" \"${FRAMEWORK}/Headers\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/Resources\" \"${FRAMEWORK}/Resources\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\" \"${FRAMEWORK}/${PRODUCT_NAME}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DC2EF540486A6940098B216 /* Sources */ = {
@@ -512,6 +558,27 @@
 			};
 			name = Release;
 		};
+		AE0CDEBA11C84CBE00EF2275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Cedar-iPhone";
+			};
+			name = Debug;
+		};
+		AE0CDEBB11C84CBE00EF2275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Cedar-iPhone";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		AE603D3F118CCA7100D312FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -573,7 +640,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PREBINDING = NO;
-				PRODUCT_NAME = "Cedar-iPhone";
+				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
 				SDKROOT = iphonesimulator3.2;
 			};
 			name = Debug;
@@ -587,7 +654,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PREBINDING = NO;
-				PRODUCT_NAME = "Cedar-iPhone";
+				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
 				SDKROOT = iphonesimulator3.2;
 				ZERO_LINK = NO;
 			};
@@ -614,6 +681,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AE0CDEBE11C84CE200EF2275 /* Build configuration list for PBXAggregateTarget "Cedar-iPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE0CDEBA11C84CBE00EF2275 /* Debug */,
+				AE0CDEBB11C84CBE00EF2275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AE603D45118CCA9B00D312FC /* Build configuration list for PBXNativeTarget "Specs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -623,7 +699,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AED41F3111B86A3B006DBB00 /* Build configuration list for PBXNativeTarget "Cedar-iPhone" */ = {
+		AED41F3111B86A3B006DBB00 /* Build configuration list for PBXNativeTarget "Cedar-StaticLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AED41F2D11B869D1006DBB00 /* Debug */,

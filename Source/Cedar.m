@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
-#import <objc/objc-runtime.h>
+#import <objc/runtime.h>
+#import <objc/message.h>
 #import "Cedar.h"
 #import "CDRSpec.h"
 #import "CDRExampleRunner.h"
