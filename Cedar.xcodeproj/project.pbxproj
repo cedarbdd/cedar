@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = AE0CDEBE11C84CE200EF2275 /* Build configuration list for PBXAggregateTarget "Cedar-iPhone" */;
 			buildPhases = (
-				AE0CDEBD11C84CC400EF2275 /* Build Multiple Static Libs */,
+				AE0CDEBD11C84CC400EF2275 /* Build architecture-specific static libs */,
 				AE0CDEC011C84D6D00EF2275 /* Build universal static lib */,
 				AE0CDECD11C84E8A00EF2275 /* Copy headers to framework */,
 			);
@@ -398,19 +398,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AE0CDEBD11C84CC400EF2275 /* Build Multiple Static Libs */ = {
+		AE0CDEBD11C84CC400EF2275 /* Build architecture-specific static libs */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Build Multiple Static Libs";
+			name = "Build architecture-specific static libs";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project Cedar.xcodeproj -sdk iphonesimulator3.2 -target Cedar-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project Cedar.xcodeproj -sdk iphoneos3.2 -target Cedar-StaticLib -configuration ${CONFIGURATION} clean build";
+			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator3.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos3.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build";
 		};
 		AE0CDEC011C84D6D00EF2275 /* Build universal static lib */ = {
 			isa = PBXShellScriptBuildPhase;

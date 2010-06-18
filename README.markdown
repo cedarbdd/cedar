@@ -42,7 +42,8 @@ BDD-style testing using Objective-C
         SPEC_END
 
 * Build and run.  Note that, unlike OCUnit, you must run your executable in
-  order to run your specs.
+  order to run your specs.  Also unlike OCUnit this allows you to use the
+  debugger when running specs.
 
 
 ## Matchers
@@ -55,6 +56,18 @@ the top of your spec files:
 
     #define HC_SHORTHAND
     #import <OCHamcrest/OCHamcrest.h>
+
+Pivotal also has a fork of a GitHub import of the OCHamcrest codebase
+(http://github.com/pivotal/OCHamcrest).  This fork contains our iPhone-specific
+static framework target.
+
+
+## Mocks and stubs
+
+Cedar works fine with OCMock.  You can download and use the OCMock framework
+(http://www.mulle-kybernetik.com/software/OCMock/).  Pivotal also has a fork of
+a GitHub import of the OCMock codebase (http://github.com/pivotal/OCMock), which
+contains our iPhone-specific static framework target.
 
 
 ## Pending specs
@@ -107,17 +120,24 @@ blocks will fail to compile.  There are a couple ways around this:
 
 * I'm open to suggestions.
 
-The Cedar-iPhone target builds a static library specifically designed for specs
-on the iPhone device.
+The Cedar-iPhone target builds a framework specifically designed for specs on
+the iPhone device.  It includes a static library that includes builds targeting
+both the simulator and device runtimes.
 
 I've created a sample iPhone application that runs Cedar specs both on and off
 the device.  You can check it out here: http://github.com/pivotal/StoryAccepter
 
+See the Pivotal forks of OCHamcrest and OCMock on GitHub for iPhone-specific
+static framework targets.
 
-## Contributions
+
+## Contributions and feedback
 
 Welcomed!  Feel free to join and contribute to the public Tracker project here:
 http://www.pivotaltracker.com/projects/77775
+
+The public Google group for Cedar is cedar-discuss@googlegroups.com.  Or, you
+can follow the growth of Cedar on Twitter: @cedarbdd.
 
 
 ## License
