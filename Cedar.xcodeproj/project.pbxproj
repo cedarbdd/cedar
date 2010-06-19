@@ -394,6 +394,7 @@
 				AE603D3A118CCA7000D312FC /* Sources */,
 				AE603D3B118CCA7000D312FC /* Frameworks */,
 				AE603E35118CCEAD00D312FC /* Copy frameworks */,
+				8D616DF411CD1F7C0061DD21 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -497,6 +498,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8D616DF411CD1F7C0061DD21 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				$BUILT_PRODUCTS_DIR/$PRODUCT_NAME,
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "DYLD_FRAMEWORK_PATH=$BUILT_PRODUCTS_DIR $BUILT_PRODUCTS_DIR/$PRODUCT_NAME";
+			showEnvVarsInLog = 0;
+		};
 		AE0CDEBD11C84CC400EF2275 /* Build architecture-specific static libs */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
