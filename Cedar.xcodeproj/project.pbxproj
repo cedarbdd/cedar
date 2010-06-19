@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		8D616D2111CCF6040061DD21 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D616D1211CCF5B70061DD21 /* OCHamcrest.framework */; };
+		8D616D2411CCF6070061DD21 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D616D0911CCF5A00061DD21 /* OCMock.framework */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		AE0CDED011C84F2400EF2275 /* Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D69118CCB6000D312FC /* Cedar.h */; };
 		AE0CDED111C84F2400EF2275 /* CDRDefaultRunner.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6A118CCB6000D312FC /* CDRDefaultRunner.h */; };
@@ -36,8 +38,6 @@
 		AE16DC9E11BB52B100270D0B /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DC9C11BB52B100270D0B /* ActualValue.h */; };
 		AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
 		AE16DD6B11BC93F600270D0B /* CDRExampleRunnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */; };
-		AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
-		AE16DFC211C5F4AD00270D0B /* OCMock.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
 		AE2B9EE311BD5EE900DC1BF2 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */; };
 		AE2B9FE811BD76C700DC1BF2 /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */; };
 		AE603C7E118CC85100D312FC /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
@@ -52,9 +52,7 @@
 		AE603D78118CCB6000D312FC /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D70118CCB6000D312FC /* SpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE603DCA118CCCBE00D312FC /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603D81118CCBBF00D312FC /* SpecSpec.m */; };
 		AE603DCB118CCCC700D312FC /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603D82118CCBBF00D312FC /* SpecSpec2.m */; };
-		AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AE603E15118CCE1F00D312FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603E14118CCE1F00D312FC /* main.m */; };
-		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AEBAB0C411B9D8120085EC6E /* CedarApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */; };
 		AED41F3211B86A44006DBB00 /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
 		AED41F3311B86A44006DBB00 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
@@ -67,6 +65,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8D616D0811CCF5A00061DD21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OCMock.framework */;
+			remoteInfo = OCMock;
+		};
+		8D616D0A11CCF5A00061DD21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03BF2D3708F1C69500978C59 /* OCMockTests.octest */;
+			remoteInfo = OCMockTests;
+		};
+		8D616D1111CCF5B70061DD21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OCHamcrest.framework */;
+			remoteInfo = OCHamcrest;
+		};
+		8D616D1311CCF5B70061DD21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0F2A4B1F0D8B68B400051BCF /* UnitTests.octest */;
+			remoteInfo = UnitTests;
+		};
+		8D616D1711CCF5E50061DD21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OCHamcrest */;
+			remoteInfo = OCHamcrest;
+		};
+		8D616D1911CCF5E90061DD21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OCMock */;
+			remoteInfo = OCMock;
+		};
 		AE603D41118CCA7600D312FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
@@ -101,8 +141,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AE16DFC211C5F4AD00270D0B /* OCMock.framework in Copy frameworks */,
-				AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy frameworks */,
 			);
 			name = "Copy frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +150,8 @@
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = ../OCMock/Source/OCMock.xcodeproj; sourceTree = SOURCE_ROOT; };
+		8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCHamcrest.xcodeproj; path = ../OCHamcrest/Source/OCHamcrest.xcodeproj; sourceTree = SOURCE_ROOT; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CppSpecSpec.mm; sourceTree = "<group>"; };
@@ -119,7 +159,6 @@
 		AE16DC9D11BB52B100270D0B /* ActualValue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActualValue.mm; sourceTree = "<group>"; };
 		AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleRunnerViewController.h; sourceTree = "<group>"; };
 		AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleRunnerViewController.m; sourceTree = "<group>"; };
-		AE16DF8211C5F45800270D0B /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE17ECE211B6F00B004C4DC0 /* MACROS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MACROS; sourceTree = "<group>"; };
 		AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleSpec.m; sourceTree = "<group>"; };
 		AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroupSpec.m; sourceTree = "<group>"; };
@@ -141,11 +180,10 @@
 		AE603D70118CCB6000D312FC /* SpecHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecHelper.h; sourceTree = "<group>"; };
 		AE603D81118CCBBF00D312FC /* SpecSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec.m; sourceTree = "<group>"; };
 		AE603D82118CCBBF00D312FC /* SpecSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec2.m; sourceTree = "<group>"; };
-		AE603DDB118CCD6400D312FC /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE603E14118CCE1F00D312FC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarApplicationDelegate.h; sourceTree = "<group>"; };
 		AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CedarApplicationDelegate.m; sourceTree = "<group>"; };
-		AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib-iphonesimulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AED41F2C11B869D0006DBB00 /* libCedar-StaticLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +199,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */,
-				AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */,
+				8D616D2411CCF6070061DD21 /* OCMock.framework in Frameworks */,
+				8D616D2111CCF6040061DD21 /* OCHamcrest.framework in Frameworks */,
 				AE603D43118CCA7D00D312FC /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,7 +220,7 @@
 			children = (
 				8DC2EF5B0486A6940098B216 /* Cedar.framework */,
 				AE603D65118CCB2100D312FC /* Test */,
-				AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */,
+				AED41F2C11B869D0006DBB00 /* libCedar-StaticLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,9 +242,9 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */,
+				8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */,
 				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
-				AE603DDB118CCD6400D312FC /* OCHamcrest.framework */,
-				AE16DF8211C5F45800270D0B /* OCMock.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -218,6 +256,24 @@
 				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		8D616D0411CCF5A00061DD21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D616D0911CCF5A00061DD21 /* OCMock.framework */,
+				8D616D0B11CCF5A00061DD21 /* OCMockTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D616D0D11CCF5B70061DD21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D616D1211CCF5B70061DD21 /* OCHamcrest.framework */,
+				8D616D1411CCF5B70061DD21 /* UnitTests.octest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		AE16DC9911BB524000270D0B /* Matchers */ = {
@@ -343,6 +399,8 @@
 			);
 			dependencies = (
 				AE603D42118CCA7600D312FC /* PBXTargetDependency */,
+				8D616D1811CCF5E50061DD21 /* PBXTargetDependency */,
+				8D616D1A11CCF5E90061DD21 /* PBXTargetDependency */,
 			);
 			name = Specs;
 			productName = Test;
@@ -362,7 +420,7 @@
 			);
 			name = "Cedar-StaticLib";
 			productName = "Cedar-iPhone";
-			productReference = AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */;
+			productReference = AED41F2C11B869D0006DBB00 /* libCedar-StaticLib.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -376,6 +434,16 @@
 			mainGroup = 0867D691FE84028FC02AAC07 /* Cedar */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8D616D0D11CCF5B70061DD21 /* Products */;
+					ProjectRef = 8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */;
+				},
+				{
+					ProductGroup = 8D616D0411CCF5A00061DD21 /* Products */;
+					ProjectRef = 8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8DC2EF4F0486A6940098B216 /* Cedar */,
@@ -385,6 +453,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8D616D0911CCF5A00061DD21 /* OCMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMock.framework;
+			remoteRef = 8D616D0811CCF5A00061DD21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D616D0B11CCF5A00061DD21 /* OCMockTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCMockTests.octest;
+			remoteRef = 8D616D0A11CCF5A00061DD21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D616D1211CCF5B70061DD21 /* OCHamcrest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCHamcrest.framework;
+			remoteRef = 8D616D1111CCF5B70061DD21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D616D1411CCF5B70061DD21 /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = 8D616D1311CCF5B70061DD21 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8DC2EF520486A6940098B216 /* Resources */ = {
@@ -474,6 +573,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8D616D1811CCF5E50061DD21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OCHamcrest;
+			targetProxy = 8D616D1711CCF5E50061DD21 /* PBXContainerItemProxy */;
+		};
+		8D616D1A11CCF5E90061DD21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OCMock;
+			targetProxy = 8D616D1911CCF5E90061DD21 /* PBXContainerItemProxy */;
+		};
 		AE603D42118CCA7600D312FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DC2EF4F0486A6940098B216 /* Cedar */;
@@ -535,7 +644,7 @@
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
