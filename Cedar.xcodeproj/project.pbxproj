@@ -69,42 +69,42 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OCMock.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = OCMock;
 		};
 		8D616D0A11CCF5A00061DD21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 03BF2D3708F1C69500978C59 /* OCMockTests.octest */;
+			remoteGlobalIDString = 03BF2D3708F1C69500978C59;
 			remoteInfo = OCMockTests;
 		};
 		8D616D1111CCF5B70061DD21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OCHamcrest.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = OCHamcrest;
 		};
 		8D616D1311CCF5B70061DD21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 0F2A4B1F0D8B68B400051BCF /* UnitTests.octest */;
+			remoteGlobalIDString = 0F2A4B1F0D8B68B400051BCF;
 			remoteInfo = UnitTests;
 		};
 		8D616D1711CCF5E50061DD21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D616D0C11CCF5B70061DD21 /* OCHamcrest.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OCHamcrest */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = OCHamcrest;
 		};
 		8D616D1911CCF5E90061DD21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D616D0311CCF5A00061DD21 /* OCMock.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OCMock */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = OCMock;
 		};
 		AE603D41118CCA7600D312FC /* PBXContainerItemProxy */ = {
