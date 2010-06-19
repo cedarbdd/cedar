@@ -58,30 +58,96 @@ describe(@"CDRExampleGroup", ^{
             });
 
             describe(@"with only failing examples", ^{
-                it(@"should be CDRExampleStateFailed", PENDING);
+                it(@"should be CDRExampleStateFailed", ^{
+                    CDRExample *failedExample = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
+                    [group add:failedExample];
+                    [failedExample release];
+
+                    [failedExample runWithRunner:nil];
+
+                    assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                });
             });
 
             describe(@"with only pending examples", ^{
-                it(@"should be CDRExampleStatePending", PENDING);
+                it(@"should be CDRExampleStatePending", ^{
+                    CDRExample *pendingExample = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
+                    [group add:pendingExample];
+                    [pendingExample release];
+
+                    [pendingExample runWithRunner:nil];
+
+                    assertThatInt([group state], equalToInt(CDRExampleStatePending));
+                });
             });
 
             describe(@"with only error examples", ^{
-                it(@"should be CDRExampleStateError", PENDING);
+                it(@"should be CDRExampleStateError", ^{
+                    CDRExample *errorExample = [[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }];
+                    [group add:errorExample];
+                    [errorExample release];
+
+                    [errorExample runWithRunner:nil];
+
+                    assertThatInt([group state], equalToInt(CDRExampleStateError));
+                });
             });
 
             describe(@"with at least one failing example", ^{
+                beforeEach(^{
+                    CDRExample *failingExample = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
+                    [group add:failingExample];
+                    [failingExample release];
+                });
+
                 describe(@"with all other examples passing", ^{
-                    it(@"should be CDRExampleStateFailed", PENDING);
+                    beforeEach(^{
+                        CDRExample *passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+                        [group add:passingExample];
+                        [passingExample release];
+
+                        [group runWithRunner:nil];
+                    });
+
+                    it(@"should be CDRExampleStateFailed", ^{
+                        assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                    });
                 });
 
                 describe(@"with at least one pending example", ^{
-                    it(@"should be CDRExampleStateFailed", PENDING);
+                    beforeEach(^{
+                        CDRExample *pendingExample = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
+                        [group add:pendingExample];
+                        [pendingExample release];
+
+                        [group runWithRunner:nil];
+                    });
+
+                    it(@"should be CDRExampleStateFailed", ^{
+                        assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                    });
                 });
             });
 
             describe(@"with at least one error example", ^{
+                beforeEach(^{
+                    CDRExample *errorExample = [[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }];
+                    [group add:errorExample];
+                    [errorExample release];
+                });
+
                 describe(@"with all other examples passing", ^{
-                    it(@"should be CDRExampleStateError", PENDING);
+                    beforeEach(^{
+                        CDRExample *passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+                        [group add:passingExample];
+                        [passingExample release];
+
+                        [group runWithRunner:nil];
+                    });
+
+                    it(@"should be CDRExampleStateError", ^{
+                        assertThatInt([group state], equalToInt(CDRExampleStateError));
+                    });
                 });
 
                 describe(@"with at least one failing example", ^{
