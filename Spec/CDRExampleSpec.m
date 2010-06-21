@@ -96,6 +96,28 @@ describe(@"CDRExample", ^{
             });
         });
     });
+
+    describe(@"progress", ^{
+        describe(@"when the state is incomplete", ^{
+            beforeEach(^{
+                assertThatInt([example state], equalToInt(CDRExampleStateIncomplete));
+            });
+
+            it(@"should return 0", ^{
+                assertThatFloat([example progress], equalToFloat(0.0));
+            });
+        });
+        describe(@"when the state is passed", ^{
+            beforeEach(^{
+                [example runWithRunner:nil];
+                assertThatInt([example state], equalToInt(CDRExampleStatePassed));
+            });
+
+            it(@"should return 1", ^{
+                assertThatFloat([example progress], equalToFloat(1.0));
+            });
+        });
+    });
 });
 
 SPEC_END

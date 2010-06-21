@@ -248,7 +248,50 @@ describe(@"CDRExampleGroup", ^{
     });
 
     describe(@"progress", ^{
-        it(@"should exist", PENDING);
+        describe(@"when the group is empty", ^{
+            beforeEach(^{
+                assertThatInt([group.examples count], equalToInt(0));
+            });
+
+            it(@"should be equal to 1", ^{
+                assertThatFloat([group progress], equalToFloat(1.0));
+            });
+        });
+
+        describe(@"when the group contains all incomplete children", ^{
+            beforeEach(^{
+                [group add:incompleteExample];
+            });
+
+            it(@"should be equal to 0", ^{
+                assertThatFloat([group progress], equalToFloat(0.0));
+            });
+        });
+
+        describe(@"when the group contains all complete children", ^{
+            beforeEach(^{
+                [group add:passingExample];
+                [passingExample runWithRunner:nil];
+            });
+
+            it(@"should be equal to 1", ^{
+                assertThatFloat([group progress], equalToFloat(1.0));
+            });
+        });
+
+        describe(@"when the group contains a mix of incomplete and complete children", ^{
+            beforeEach(^{
+                [group add:incompleteExample];
+                [group add:passingExample];
+                [passingExample runWithRunner:nil];
+                [group add:failingExample];
+                [failingExample runWithRunner:nil];
+            });
+
+            it(@"should be the mean of the progress of each child", ^{
+                assertThatFloat([group progress], equalToFloat(2.0 / 3.0));
+            });
+        });
     });
 });
 

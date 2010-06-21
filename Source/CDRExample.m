@@ -31,6 +31,14 @@ const CDRSpecBlock PENDING = nil;
     return state_;
 }
 
+- (float)progress {
+    if (self.state == CDRExampleStateIncomplete) {
+        return 0.0;
+    } else {
+        return 1.0;
+    }
+}
+
 - (void)runWithRunner:(id<CDRExampleRunner>)runner {
     if (block_) {
         @try {

@@ -69,6 +69,18 @@
     return aggregateState;
 }
 
+- (float)progress {
+    if (0 == [examples_ count]) {
+        return 1.0;
+    }
+
+    float aggregateProgress = 0.0;
+    for (CDRExampleBase *example in examples_) {
+        aggregateProgress += [example progress];
+    }
+    return aggregateProgress / [examples_ count];
+}
+
 - (void)stateDidChange {
     [self willChangeValueForKey:@"state"];
     [self didChangeValueForKey:@"state"];
