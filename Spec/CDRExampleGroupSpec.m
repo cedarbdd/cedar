@@ -10,12 +10,23 @@ SPEC_BEGIN(CDRExampleGroupSpec)
 
 describe(@"CDRExampleGroup", ^{
     __block CDRExampleGroup *group;
+    __block CDRExample *incompleteExample, *pendingExample, *passingExample, *failingExample, *errorExample;
 
     beforeEach(^{
         group = [[CDRExampleGroup alloc] initWithText:@"a group"];
+        incompleteExample = [[CDRExample alloc] initWithText:@"incomplete" andBlock:^{}];
+        passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+        failingExample = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
+        pendingExample = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
+        errorExample = [[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }];
     });
 
     afterEach(^{
+        [errorExample release];
+        [pendingExample release];
+        [failingExample release];
+        [passingExample release];
+        [incompleteExample release];
         [group release];
     });
 
@@ -32,9 +43,7 @@ describe(@"CDRExampleGroup", ^{
 
         describe(@"for a group containing at least one incomplete example", ^{
             beforeEach(^{
-                CDRExample *incompleteExample = [[CDRExample alloc] initWithText:@"incomplete" andBlock:^{}];
                 [group add:incompleteExample];
-                [incompleteExample release];
             });
 
             it(@"should be CDRExampleStateIncomplete", ^{
@@ -45,11 +54,8 @@ describe(@"CDRExampleGroup", ^{
         describe(@"for a group containing only complete examples", ^{
             describe(@"with only passing examples", ^{
                 beforeEach(^{
-                    CDRExample *passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
                     [group add:passingExample];
-                    [passingExample release];
-
-                    [passingExample runWithRunner:nil];
+                    [group runWithRunner:nil];
                 });
 
                 it(@"should be CDRExampleStatePassed", ^{
@@ -58,54 +64,46 @@ describe(@"CDRExampleGroup", ^{
             });
 
             describe(@"with only failing examples", ^{
+                beforeEach(^{
+                    [group add:failingExample];
+                    [group runWithRunner:nil];
+                });
+
                 it(@"should be CDRExampleStateFailed", ^{
-                    CDRExample *failedExample = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
-                    [group add:failedExample];
-                    [failedExample release];
-
-                    [failedExample runWithRunner:nil];
-
                     assertThatInt([group state], equalToInt(CDRExampleStateFailed));
                 });
             });
 
             describe(@"with only pending examples", ^{
-                it(@"should be CDRExampleStatePending", ^{
-                    CDRExample *pendingExample = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
+                beforeEach(^{
                     [group add:pendingExample];
-                    [pendingExample release];
+                    [group runWithRunner:nil];
+                });
 
-                    [pendingExample runWithRunner:nil];
-
+                it(@"should be CDRExampleStatePending", ^{
                     assertThatInt([group state], equalToInt(CDRExampleStatePending));
                 });
             });
 
             describe(@"with only error examples", ^{
-                it(@"should be CDRExampleStateError", ^{
-                    CDRExample *errorExample = [[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }];
+                beforeEach(^{
                     [group add:errorExample];
-                    [errorExample release];
+                    [group runWithRunner:nil];
+                });
 
-                    [errorExample runWithRunner:nil];
-
+                it(@"should be CDRExampleStateError", ^{
                     assertThatInt([group state], equalToInt(CDRExampleStateError));
                 });
             });
 
             describe(@"with at least one failing example", ^{
                 beforeEach(^{
-                    CDRExample *failingExample = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
                     [group add:failingExample];
-                    [failingExample release];
                 });
 
                 describe(@"with all other examples passing", ^{
                     beforeEach(^{
-                        CDRExample *passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
                         [group add:passingExample];
-                        [passingExample release];
-
                         [group runWithRunner:nil];
                     });
 
@@ -116,10 +114,7 @@ describe(@"CDRExampleGroup", ^{
 
                 describe(@"with at least one pending example", ^{
                     beforeEach(^{
-                        CDRExample *pendingExample = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
                         [group add:pendingExample];
-                        [pendingExample release];
-
                         [group runWithRunner:nil];
                     });
 
@@ -131,17 +126,12 @@ describe(@"CDRExampleGroup", ^{
 
             describe(@"with at least one error example", ^{
                 beforeEach(^{
-                    CDRExample *errorExample = [[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }];
                     [group add:errorExample];
-                    [errorExample release];
                 });
 
                 describe(@"with all other examples passing", ^{
                     beforeEach(^{
-                        CDRExample *passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
                         [group add:passingExample];
-                        [passingExample release];
-
                         [group runWithRunner:nil];
                     });
 
@@ -151,17 +141,42 @@ describe(@"CDRExampleGroup", ^{
                 });
 
                 describe(@"with at least one failing example", ^{
-                    it(@"should be CDRExampleStateError", PENDING);
+                    beforeEach(^{
+                        [group add:failingExample];
+                        [group runWithRunner:nil];
+                    });
+
+                    it(@"should be CDRExampleStateError", ^{
+                        assertThatInt([group state], equalToInt(CDRExampleStateError));
+                    });
                 });
 
                 describe(@"with at least one pending example", ^{
-                    it(@"should be CDRExampleStateError", PENDING);
+                    beforeEach(^{
+                        [group add:pendingExample];
+                        [group runWithRunner:nil];
+                    });
+
+                    it(@"should be CDRExampleStateError", ^{
+                        assertThatInt([group state], equalToInt(CDRExampleStateError));
+                    });
                 });
             });
 
             describe(@"with at least one pending example", ^{
+                beforeEach(^{
+                    [group add:pendingExample];
+                });
+
                 describe(@"with all other examples passing", ^{
-                    it(@"should be CDRExampleStatePending", PENDING);
+                    beforeEach(^{
+                        [group add:passingExample];
+                        [group runWithRunner:nil];
+                    });
+
+                    it(@"should be CDRExampleStatePending", ^{
+                        assertThatInt([group state], equalToInt(CDRExampleStatePending));
+                    });
                 });
             });
         });
@@ -173,9 +188,7 @@ describe(@"CDRExampleGroup", ^{
                 __block CDRExample *example;
 
                 beforeEach(^{
-                    example = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
-                    [group add:example];
-                    [example release];
+                    [group add:passingExample];
 
                     mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
                     [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
@@ -183,14 +196,14 @@ describe(@"CDRExampleGroup", ^{
 
                 it(@"should report that the state has changed", ^{
                     [group addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
-                    [example runWithRunner:nil];
+                    [passingExample runWithRunner:nil];
                     [group removeObserver:mockObserver forKeyPath:@"state"];
 
                     [mockObserver verify];
                 });
             });
 
-            describe(@"when a child's child changes state, causing the child to change state, causing the group to change state", ^{
+            describe(@"when a child's child changes state, causing the child group to change state, causing the top-level group to change state", ^{
                 __block CDRExampleGroup *subgroup;
                 __block CDRExample *example;
 
@@ -199,9 +212,7 @@ describe(@"CDRExampleGroup", ^{
                     [group add:subgroup];
                     [subgroup release];
 
-                    example = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
-                    [subgroup add:example];
-                    [example release];
+                    [subgroup add:passingExample];
 
                     mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
                     [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
@@ -209,7 +220,7 @@ describe(@"CDRExampleGroup", ^{
 
                 it(@"should report that the state has changed", ^{
                     [group addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
-                    [example runWithRunner:nil];
+                    [passingExample runWithRunner:nil];
                     [group removeObserver:mockObserver forKeyPath:@"state"];
 
                     [mockObserver verify];
@@ -217,13 +228,27 @@ describe(@"CDRExampleGroup", ^{
             });
 
             describe(@"when a child example changes state, but the group state does not change", ^{
-                it(@"should not report that the state has changed", PENDING);
+                beforeEach(^{
+                    [group add:failingExample];
+                    [failingExample runWithRunner:nil];
+
+                    [group add:passingExample];
+                    assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+
+                    mockObserver = [OCMockObject mockForClass:[NSObject class]];
+                    [[[mockObserver stub] andThrow:[NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil]] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
+                });
+
+                it(@"should not report that the state has changed", ^{
+                    [passingExample runWithRunner:nil];
+                    assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                });
             });
         });
     });
 
     describe(@"progress", ^{
-        // !!!
+        it(@"should exist", PENDING);
     });
 });
 
