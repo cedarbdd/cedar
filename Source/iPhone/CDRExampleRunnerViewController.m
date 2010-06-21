@@ -1,5 +1,5 @@
 #import "CDRExampleRunnerViewController.h"
-#import "Cedar.h"
+#import "CDRFunctions.h"
 
 @implementation CDRExampleRunnerViewController
 

@@ -1,7 +1,13 @@
-#import <Cedar/SpecHelper.h>
-
 #define HC_SHORTHAND
+#if TARGET_OS_IPHONE
+#import <Cedar-iPhone/SpecHelper.h>
+#import <OCMock-iPhone/OCMock.h>
+#import <OCHamcrest-iPhone/OCHamcrest.h>
+#else
+#import <Cedar/SpecHelper.h>
+#import <OCMock/OCMock.h>
 #import <OCHamcrest/OCHamcrest.h>
+#endif
 
 void expectFailure(CDRSpecBlock block) {
   @try {

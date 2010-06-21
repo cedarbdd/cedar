@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
-#import "Cedar.h"
 #import "CDRSpec.h"
 #import "CDRExampleRunner.h"
 #import "CDRDefaultRunner.h"

@@ -17,7 +17,7 @@ BDD-style testing using Objective-C
     - Add Cedar to the new build phase.
 * Add a main.m that looks like this:
 
-        #import "Cedar.h"
+        #import <Cedar/Cedar.h>
 
         int main (int argc, const char *argv[]) {
           return runAllSpecs();
