@@ -38,7 +38,7 @@ void fail(NSString *reason) {
 #pragma mark Memory
 - (id)init {
   if (self = [super init]) {
-    rootGroup_ = [[CDRExampleGroup alloc] initWithText:@"Example:"];
+    rootGroup_ = [[CDRExampleGroup alloc] initWithText:[[self class] description]];
     self.currentGroup = rootGroup_;
   }
   return self;
