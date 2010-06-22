@@ -3,22 +3,10 @@
 
 @implementation CDRExampleRunnerViewController
 
-#pragma mark Initialization
-- (id)initWithStyle:(UITableViewStyle)style {
-    if ((self = [super initWithStyle:style])) {
-        stubRunner_ = [[CDRDefaultRunner alloc] init];
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [stubRunner_ release];
-    [super dealloc];
-}
-
+#pragma mark View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    runSpecsWithCustomExampleRunner(NULL, stubRunner_);
+    runSpecsWithCustomExampleRunner(NULL, self);
 }
 
 - (void)viewDidUnload {
@@ -29,63 +17,29 @@
     return YES;
 }
 
-#pragma mark Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // !!! Number of spec classes?
-    return 1;
+#pragma mark CDRExampleRunner
+- (void)runWillStartWithGroups:(NSArray *)groups {
+    // TODO populate table with top-level groups.
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // !!!
-    return 0;
+- (void)exampleSucceeded:(CDRExample *)example {
 }
 
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"CedarExampleCell";
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-
-    return cell;
+- (void)example:(CDRExample *)example failedWithMessage:(NSString *)message {
 }
 
-#pragma mark -
-#pragma mark Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+- (void)example:(CDRExample *)example threwException:(NSException *)exception {
 }
 
-//#pragma mark CDRExampleRunner
-//- (void)exampleSucceeded:(CDRExample *)example {
-//}
-//
-//- (void)example:(CDRExample *)example failedWithMessage:(NSString *)message {
-//}
-//
-//- (void)example:(CDRExample *)example threwException:(NSException *)exception {
-//}
-//
-//- (void)exampleThrewError:(CDRExample *)example {
-//}
-//
-//- (void)examplePending:(CDRExample *)example {
-//}
-//
-//- (int)result {
-//  return 0;
-//}
+- (void)exampleThrewError:(CDRExample *)example {
+}
+
+- (void)examplePending:(CDRExample *)example {
+}
+
+- (int)result {
+  return 0;
+}
 
 @end
 

@@ -1,6 +1,9 @@
 #define HC_SHORTHAND
 #if TARGET_OS_IPHONE
-#import <Cedar-iPhone/SpecHelper.h>
+// Normally you would include this file out of the framework.  However, we're
+// testing the framework here, so including the file from the framework will
+// conflict with the compiler attempting to include the file from the project.
+#import "SpecHelper.h"
 #import <OCMock-iPhone/OCMock.h>
 #import <OCHamcrest-iPhone/OCHamcrest.h>
 #else

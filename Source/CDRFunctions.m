@@ -44,6 +44,14 @@ NSArray *CDRCreateSpecsFromSpecClasses(NSArray *specClasses) {
     return specs;
 }
 
+NSArray *CDRCreateRootGroupListForSpecs(NSArray *specs) {
+    NSMutableArray *groups = [[NSMutableArray alloc] initWithCapacity:[specs count]];
+    for (CDRSpec *spec in specs) {
+        [groups addObject:spec.rootGroup];
+    }
+    return groups;
+}
+
 int runSpecsWithCustomExampleRunner(NSArray *specClasses, id<CDRExampleRunner> runner) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
@@ -51,9 +59,10 @@ int runSpecsWithCustomExampleRunner(NSArray *specClasses, id<CDRExampleRunner> r
         specClasses = CDREnumerateSpecClasses();
     }
     NSArray *specs = CDRCreateSpecsFromSpecClasses(specClasses);
+    NSArray *groups = CDRCreateRootGroupListForSpecs(specs);
 
-    if ([runner respondsToSelector:@selector(runWillStartWithSpecs:)]) {
-        [runner runWillStartWithSpecs:specs];
+    if ([runner respondsToSelector:@selector(runWillStartWithGroups:)]) {
+        [runner runWillStartWithGroups:groups];
     }
 
     for (CDRSpec *spec in specs) {
@@ -61,6 +70,7 @@ int runSpecsWithCustomExampleRunner(NSArray *specClasses, id<CDRExampleRunner> r
     }
     int result = [runner result];
 
+    [groups release];
     [specs release];
     [pool drain];
     return result;

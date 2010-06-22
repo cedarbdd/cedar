@@ -13,6 +13,6 @@
 - (int)result;
 
 @optional
-- (void)runWillStartWithSpecs:(NSArray *)specs;
+- (void)runWillStartWithGroups:(NSArray *)groups;
 
 @end
