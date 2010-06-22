@@ -1,22 +1,23 @@
 #import "CDRSpecStatusViewController.h"
+#import "CDRExampleGroup.h"
 
+@interface CDRSpecStatusViewController (Private)
+- (void)pushStatusViewForExamples:(NSArray *)examples;
+@end
 
 @implementation CDRSpecStatusViewController
 
-
 #pragma mark -
 #pragma mark Initialization
-
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if ((self = [super initWithStyle:style])) {
+- (id)initWithExamples:(NSArray *)examples {
+    if ((self = [super initWithStyle:UITableViewStylePlain])) {
+        examples_ = [examples retain];
     }
     return self;
 }
-*/
 
 - (void)dealloc {
+    [examples_ release];
     [super dealloc];
 }
 
@@ -38,13 +39,8 @@
 #pragma mark -
 #pragma mark Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // !!!
-    return 0;
+    return [examples_ count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -55,6 +51,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
+    cell.textLabel.text = [[examples_ objectAtIndex:indexPath.row] text];
+
     return cell;
 }
 
@@ -62,14 +60,19 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+    id selectedExample = [examples_ objectAtIndex:indexPath.row];
+    if ([selectedExample hasChildren]) {
+        [self pushStatusViewForExamples:[selectedExample examples]];
+    } else {
+        [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+    }
+}
+
+#pragma mark Private interface
+- (void)pushStatusViewForExamples:(NSArray *)examples {
+    UIViewController *subController = [[CDRSpecStatusViewController alloc] initWithExamples:examples];
+    [self.navigationController pushViewController:subController animated:YES];
+    [subController release];
 }
 
 @end

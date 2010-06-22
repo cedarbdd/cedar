@@ -28,22 +28,22 @@
 }
 - (void)example:(CDRExample *)example failedWithMessage:(NSString *)message {
   printf("F");
-  [failureMessages_ addObject:[NSString stringWithFormat:@"%@ FAILED:\n%@\n", [example text], message]];
+  [failureMessages_ addObject:[NSString stringWithFormat:@"%@ FAILED:\n%@\n", [example fullText], message]];
 }
 
 - (void)example:(CDRExample *)example threwException:(NSException *)exception {
   printf("E");
-  [failureMessages_ addObject:[NSString stringWithFormat:@"%@ THREW EXCEPTION:\n%@\n", [example text], exception]];
+  [failureMessages_ addObject:[NSString stringWithFormat:@"%@ THREW EXCEPTION:\n%@\n", [example fullText], exception]];
 }
 
 - (void)exampleThrewError:(CDRExample *)example {
   printf("E");
-  [failureMessages_ addObject:[NSString stringWithFormat:@"%@ RAISED AN UNKNOWN ERROR\n", [example text]]];
+  [failureMessages_ addObject:[NSString stringWithFormat:@"%@ RAISED AN UNKNOWN ERROR\n", [example fullText]]];
 }
 
 - (void)examplePending:(CDRExample *)example {
   printf("P");
-  [pendingMessages_ addObject:[NSString stringWithFormat:@"PENDING %@", [example text]]];
+  [pendingMessages_ addObject:[NSString stringWithFormat:@"PENDING %@", [example fullText]]];
 }
 
 - (int)result {

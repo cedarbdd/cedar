@@ -40,14 +40,37 @@ describe(@"CDRExampleGroup", ^{
         [group release];
     });
 
+    describe(@"hasChildren", ^{
+        beforeEach(^{
+            assertThatInt([[group examples] count], equalToInt(0));
+        });
+
+        describe(@"for an empty group", ^{
+            it(@"should return false", ^{
+                assertThatBool([group hasChildren], equalToBool(NO));
+            });
+        });
+
+        describe(@"for a non-empty group", ^{
+            beforeEach(^{
+                [group add:incompleteExample];
+                assertThatInt([[group examples] count], isNot(equalToInt(0)));
+            });
+
+            it(@"should return true", ^{
+                assertThatBool([group hasChildren], equalToBool(YES));
+            });
+        });
+    });
+
     describe(@"state", ^{
         describe(@"for a group containing no examples", ^{
             beforeEach(^{
                 assertThatInt([[group examples] count], equalToInt(0));
             });
 
-            it(@"should be CDRExampleStatePassed", ^{
-                assertThatInt([group state], equalToInt(CDRExampleStatePassed));
+            it(@"should be CDRExampleStatePending", ^{
+                assertThatInt([group state], equalToInt(CDRExampleStatePending));
             });
         });
 

@@ -13,18 +13,26 @@
 #endif
 
 #import "CDRExample.h"
+#import "CDRExampleGroup.h"
 
 SPEC_BEGIN(CDRExampleSpec)
 
 describe(@"CDRExample", ^{
     __block CDRExample *example;
+    NSString *exampleText = @"Example!";
 
     beforeEach(^{
-        example = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+        example = [[CDRExample alloc] initWithText:exampleText andBlock:^{}];
     });
 
     afterEach(^{
         [example release];
+    });
+
+    describe(@"hasChildren", ^{
+        it(@"should return false", ^{
+            assertThatBool([example hasChildren], equalToBool(NO));
+        });
     });
 
     describe(@"state", ^{
@@ -124,6 +132,55 @@ describe(@"CDRExample", ^{
 
             it(@"should return 1", ^{
                 assertThatFloat([example progress], equalToFloat(1.0));
+            });
+        });
+    });
+
+    describe(@"fullText", ^{
+        describe(@"with no parent", ^{
+            beforeEach(^{
+                assertThat([example parent], nilValue());
+            });
+
+            it(@"should return just its own text", ^{
+                assertThat([example fullText], equalTo(exampleText));
+            });
+        });
+
+        describe(@"with a parent", ^{
+            __block CDRExampleGroup *group;
+            NSString *groupText = @"Parent!";
+
+            beforeEach(^{
+                group = [[CDRExampleGroup alloc] initWithText:groupText];
+                [group add:example];
+                assertThat([example parent], isNot(nilValue()));
+            });
+
+            afterEach(^{
+                [group release];
+            });
+
+            it(@"should return its parent's text pre-pended with its own text", ^{
+                assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@", groupText, exampleText]));
+            });
+
+            describe(@"when the parent also has a parent", ^{
+                __block CDRExampleGroup *rootGroup;
+                NSString *rootGroupText = @"Root!";
+
+                beforeEach(^{
+                    rootGroup = [[CDRExampleGroup alloc] initWithText:rootGroupText];
+                    [rootGroup add:group];
+                });
+
+                afterEach(^{
+                    [rootGroup release];
+                });
+
+                it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
+                    assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
+                });
             });
         });
     });

@@ -2,7 +2,9 @@
 
 
 @interface CDRSpecStatusViewController : UITableViewController {
-
+    NSArray *examples_;
 }
+
+- (id)initWithExamples:(NSArray *)examples;
 
 @end

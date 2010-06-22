@@ -30,7 +30,8 @@ typedef enum CDRExampleState CDRExampleState;
 - (void)setUp;
 - (void)tearDown;
 - (void)runWithRunner:(id<CDRExampleRunner>)runner;
-
+- (BOOL)hasChildren;
+- (NSString *)fullText;
 @end
 
 @interface CDRExampleBase (RunReporting)

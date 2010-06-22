@@ -1,12 +1,13 @@
 #import "CDRExampleRunnerViewController.h"
 #import "CDRFunctions.h"
+#import "CDRSpecStatusViewController.h"
 
 @implementation CDRExampleRunnerViewController
 
 #pragma mark View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    runSpecsWithCustomExampleRunner(NULL, self);
+    [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
 }
 
 - (void)viewDidUnload {
@@ -17,9 +18,20 @@
     return YES;
 }
 
+- (void)startSpecs {
+    runSpecsWithCustomExampleRunner(NULL, self);
+}
+
+- (void)pushRootSpecStatusController:(NSArray *)groups {
+    UIViewController *rootController = [[CDRSpecStatusViewController alloc] initWithExamples:groups];
+    [self pushViewController:rootController animated:NO];
+    [rootController release];
+}
+
 #pragma mark CDRExampleRunner
 - (void)runWillStartWithGroups:(NSArray *)groups {
-    // TODO populate table with top-level groups.
+    // Background thread.
+    [self performSelectorOnMainThread:@selector(pushRootSpecStatusController:) withObject:groups waitUntilDone:NO];
 }
 
 - (void)exampleSucceeded:(CDRExample *)example {

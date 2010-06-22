@@ -59,7 +59,7 @@
 		AE603C82118CC85100D312FC /* CDRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7D118CC85100D312FC /* CDRSpec.m */; };
 		AE603CAB118CC94100D312FC /* CDRFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603CA9118CC94100D312FC /* CDRFunctions.m */; };
 		AE603D32118CC9F800D312FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867D69BFE84028FC02AAC07 /* Foundation.framework */; };
-		AE603D43118CCA7D00D312FC /* Cedar in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Cedar */; };
+		AE603D43118CCA7D00D312FC /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Cedar.framework */; };
 		AE603D71118CCB6000D312FC /* CDRFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D69118CCB6000D312FC /* CDRFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE603D78118CCB6000D312FC /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D70118CCB6000D312FC /* SpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE603DCA118CCCBE00D312FC /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603D81118CCBBF00D312FC /* SpecSpec.m */; };
@@ -133,7 +133,7 @@
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DC2EF5B0486A6940098B216 /* Cedar */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.framework; path = Cedar; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DC2EF5B0486A6940098B216 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE12B63211D0191000C236FF /* iPhoneSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE12B63411D0191000C236FF /* iPhoneSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPhoneSpecs-Info.plist"; sourceTree = "<group>"; };
 		AE12B6D411D01A7B00C236FF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		AE603C7C118CC85100D312FC /* CDRExampleGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroup.m; sourceTree = "<group>"; };
 		AE603C7D118CC85100D312FC /* CDRSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpec.m; sourceTree = "<group>"; };
 		AE603CA9118CC94100D312FC /* CDRFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRFunctions.m; sourceTree = "<group>"; };
-		AE603D65118CCB2100D312FC /* Test */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE603D65118CCB2100D312FC /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE603D69118CCB6000D312FC /* CDRFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRFunctions.h; sourceTree = "<group>"; };
 		AE603D6A118CCB6000D312FC /* CDRDefaultRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRDefaultRunner.h; sourceTree = "<group>"; };
 		AE603D6B118CCB6000D312FC /* CDRExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExample.h; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 			files = (
 				AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */,
 				AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */,
-				AE603D43118CCA7D00D312FC /* Cedar in Frameworks */,
+				AE603D43118CCA7D00D312FC /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +220,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DC2EF5B0486A6940098B216 /* Cedar */,
+				8DC2EF5B0486A6940098B216 /* Cedar.framework */,
 				AE603D65118CCB2100D312FC /* Test */,
 				AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */,
 				AE12B63211D0191000C236FF /* iPhoneSpecs.app */,
@@ -386,7 +386,7 @@
 			name = Cedar;
 			productInstallPath = "$(HOME)/Library/Frameworks";
 			productName = Cedar;
-			productReference = 8DC2EF5B0486A6940098B216 /* Cedar */;
+			productReference = 8DC2EF5B0486A6940098B216 /* Cedar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		AE12B63111D0191000C236FF /* iPhoneSpecs */ = {

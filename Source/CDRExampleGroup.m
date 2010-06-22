@@ -59,7 +59,7 @@
 
 - (CDRExampleState)state {
     if (0 == [examples_ count]) {
-        return CDRExampleStatePassed;
+        return CDRExampleStatePending;
     }
 
     CDRExampleState aggregateState = CDRExampleStateIncomplete;
@@ -95,6 +95,10 @@
 
 - (NSString *)description {
   return [NSString stringWithFormat:@"Example Group: %@", self.text];
+}
+
+- (BOOL)hasChildren {
+    return [examples_ count] > 0;
 }
 
 @end

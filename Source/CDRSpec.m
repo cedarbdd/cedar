@@ -7,7 +7,7 @@ static CDRSpec *currentSpec;
 
 void describe(NSString *text, CDRSpecBlock block) {
   CDRExampleGroup *parentGroup = currentSpec.currentGroup;
-  currentSpec.currentGroup = [CDRExampleGroup groupWithText:[NSString stringWithFormat:@"%@ %@", parentGroup.text, text]];
+  currentSpec.currentGroup = [CDRExampleGroup groupWithText:text];
   [parentGroup add:currentSpec.currentGroup];
 
   block();
@@ -23,7 +23,7 @@ void afterEach(CDRSpecBlock block) {
 }
 
 void it(NSString *text, CDRSpecBlock block) {
-  CDRExample *example = [CDRExample exampleWithText:[NSString stringWithFormat:@"%@ %@", currentSpec.currentGroup.text, text] andBlock:block];
+  CDRExample *example = [CDRExample exampleWithText:text andBlock:block];
   [currentSpec.currentGroup add:example];
 }
 
