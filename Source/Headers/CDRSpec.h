@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "CDRExampleBase.h"
 
-@protocol CDRExampleRunner;
+@protocol CDRExampleReporter;
 @class CDRExampleGroup;
 
 @protocol CDRSpec
@@ -30,6 +30,5 @@ void fail(NSString *reason);
 
 - (void)declareBehaviors;
 - (void)defineBehaviors;
-- (void)runWithRunner:(id<CDRExampleRunner>)runner;
 
 @end

@@ -2,8 +2,8 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "CDRSpec.h"
-#import "CDRExampleRunner.h"
-#import "CDRDefaultRunner.h"
+#import "CDRExampleReporter.h"
+#import "CDRDefaultReporter.h"
 
 BOOL CDRIsASpecClass(Class class) {
     if (strcmp("CDRSpec", class_getName(class))) {
@@ -33,53 +33,40 @@ NSArray *CDREnumerateSpecClasses() {
     return specClasses;
 }
 
-NSArray *CDRCreateSpecsFromSpecClasses(NSArray *specClasses) {
-    NSMutableArray *specs = [[NSMutableArray alloc] initWithCapacity:[specClasses count]];
+NSArray *CDRCreateRootGroupsFromSpecClasses(NSArray *specClasses) {
+    NSMutableArray *rootGroups = [[NSMutableArray alloc] initWithCapacity:[specClasses count]];
     for (Class class in specClasses) {
         CDRSpec *spec = [[class alloc] init];
         [spec defineBehaviors];
-        [specs addObject:spec];
+        [rootGroups addObject:spec.rootGroup];
         [spec release];
     }
-    return specs;
+    return rootGroups;
 }
 
-NSArray *CDRCreateRootGroupListForSpecs(NSArray *specs) {
-    NSMutableArray *groups = [[NSMutableArray alloc] initWithCapacity:[specs count]];
-    for (CDRSpec *spec in specs) {
-        [groups addObject:spec.rootGroup];
-    }
-    return groups;
-}
-
-int runSpecsWithCustomExampleRunner(NSArray *specClasses, id<CDRExampleRunner> runner) {
+int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> reporter) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     if (!specClasses) {
         specClasses = CDREnumerateSpecClasses();
     }
-    NSArray *specs = CDRCreateSpecsFromSpecClasses(specClasses);
-    NSArray *groups = CDRCreateRootGroupListForSpecs(specs);
+    NSArray *groups = CDRCreateRootGroupsFromSpecClasses(specClasses);
 
-    if ([runner respondsToSelector:@selector(runWillStartWithGroups:)]) {
-        [runner runWillStartWithGroups:groups];
-    }
+    [reporter runWillStartWithGroups:groups];
+    [groups makeObjectsPerformSelector:@selector(run)];
+    [reporter runDidComplete];
 
-    for (CDRSpec *spec in specs) {
-        [spec runWithRunner:runner];
-    }
-    int result = [runner result];
+    int result = [reporter result];
 
     [groups release];
-    [specs release];
     [pool drain];
     return result;
 }
 
 int runAllSpecs() {
-    id<CDRExampleRunner> runner = [[CDRDefaultRunner alloc] init];
-    int result = runSpecsWithCustomExampleRunner(NULL, runner);
-    [runner release];
+    id<CDRExampleReporter> reporter = [[CDRDefaultReporter alloc] init];
+    int result = runSpecsWithCustomExampleReporter(NULL, reporter);
+    [reporter release];
 
     return result;
 }

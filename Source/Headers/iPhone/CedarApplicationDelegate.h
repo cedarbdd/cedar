@@ -1,10 +1,10 @@
 #import <UIKit/UIKit.h>
 
-@class CDRExampleRunnerViewController;
+@class CDRExampleReporterViewController;
 
 @interface CedarApplicationDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window_;
-    CDRExampleRunnerViewController *viewController_;
+    CDRExampleReporterViewController *viewController_;
 }
 
 @end

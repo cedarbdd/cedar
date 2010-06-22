@@ -1,7 +1,6 @@
 #import "CDRSpec.h"
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
-#import "CDRExampleRunner.h"
 
 static CDRSpec *currentSpec;
 
@@ -58,10 +57,6 @@ void fail(NSString *reason) {
   currentSpec = self;
   [self declareBehaviors];
   currentSpec = nil;
-}
-
-- (void)runWithRunner:(id<CDRExampleRunner>)runner {
-  [self.rootGroup runWithRunner:runner];
 }
 
 - (void)failWithException:(NSException *)exception {

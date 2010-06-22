@@ -5,7 +5,7 @@
 // the specs.  Is your head spinning?  It should be.
 #import "CDRFunctions.h"
 #import "CedarApplicationDelegate.h"
-#import "CDRExampleRunnerViewController.h"
+#import "CDRExampleReporterViewController.h"
 
 int main(int argc, char *argv[]) {
     @try {

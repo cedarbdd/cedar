@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
-@protocol CDRExampleRunner;
+@protocol CDRExampleReporter;
 
-int runSpecsWithCustomExampleRunner(NSArray *specClasses, id<CDRExampleRunner> runner);
+int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> runner);
 int runAllSpecs();
-int runAllSpecsWithCustomExampleRunner(id<CDRExampleRunner> runner);
+int runAllSpecsWithCustomExampleReporter(id<CDRExampleReporter> runner);

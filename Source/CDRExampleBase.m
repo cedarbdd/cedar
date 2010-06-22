@@ -30,7 +30,7 @@
 - (void)tearDown {
 }
 
-- (void)runWithRunner:(id<CDRExampleRunner>)runner {
+- (void)run {
 }
 
 - (BOOL)hasChildren {
@@ -43,6 +43,10 @@
     } else {
         return self.text;
     }
+}
+
+- (NSString *)message {
+    return @"";
 }
 
 @end

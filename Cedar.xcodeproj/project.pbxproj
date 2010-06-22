@@ -25,13 +25,13 @@
 /* Begin PBXBuildFile section */
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		AE0CDED011C84F2400EF2275 /* CDRFunctions.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D69118CCB6000D312FC /* CDRFunctions.h */; };
-		AE0CDED111C84F2400EF2275 /* CDRDefaultRunner.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6A118CCB6000D312FC /* CDRDefaultRunner.h */; };
+		AE0CDED111C84F2400EF2275 /* CDRDefaultReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6A118CCB6000D312FC /* CDRDefaultReporter.h */; };
 		AE0CDED311C84F2400EF2275 /* CDRExampleBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6C118CCB6000D312FC /* CDRExampleBase.h */; };
 		AE0CDED611C84F2400EF2275 /* CDRSpec.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6F118CCB6000D312FC /* CDRSpec.h */; };
 		AE0CDED711C84F2400EF2275 /* SpecHelper.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D70118CCB6000D312FC /* SpecHelper.h */; };
 		AE0CDED811C84F2400EF2275 /* CedarApplicationDelegate.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */; };
-		AE0CDED911C84F2400EF2275 /* CDRExampleRunnerViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */; };
-		AE0CDEE711C84F7600EF2275 /* CDRExampleRunner.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6E118CCB6000D312FC /* CDRExampleRunner.h */; };
+		AE0CDED911C84F2400EF2275 /* CDRExampleReporterViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE16DD3111BC874F00270D0B /* CDRExampleReporterViewController.h */; };
+		AE0CDEE711C84F7600EF2275 /* CDRExampleReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6E118CCB6000D312FC /* CDRExampleReporter.h */; };
 		AE12B6D011D01A3E00C236FF /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */; };
 		AE12B6D111D01A4400C236FF /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */; };
 		AE12B6D211D01A5000C236FF /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603D81118CCBBF00D312FC /* SpecSpec.m */; };
@@ -45,7 +45,7 @@
 		AE16DC7B11BB514300270D0B /* CppSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */; };
 		AE16DC9E11BB52B100270D0B /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DC9C11BB52B100270D0B /* ActualValue.h */; };
 		AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
-		AE16DD6B11BC93F600270D0B /* CDRExampleRunnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */; };
+		AE16DD6B11BC93F600270D0B /* CDRExampleReporterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE16DD6A11BC93F600270D0B /* CDRExampleReporterViewController.m */; };
 		AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
 		AE16DFC211C5F4AD00270D0B /* OCMock.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
 		AE2B9EE311BD5EE900DC1BF2 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */; };
@@ -54,7 +54,7 @@
 		AE2ECBAA11D03F6000580726 /* CDRSpecStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2ECBA911D03F6000580726 /* CDRSpecStatusViewController.m */; };
 		AE2ECEB711D13BA800580726 /* SpecStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2ECEB611D13BA800580726 /* SpecStatusCell.m */; };
 		AE2ECF2711D1438500580726 /* SlowSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2ECF2611D1438500580726 /* SlowSpec.m */; };
-		AE603C7E118CC85100D312FC /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
+		AE603C7E118CC85100D312FC /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultReporter.m */; };
 		AE603C7F118CC85100D312FC /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
 		AE603C80118CC85100D312FC /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7B118CC85100D312FC /* CDRExampleBase.m */; };
 		AE603C81118CC85100D312FC /* CDRExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7C118CC85100D312FC /* CDRExampleGroup.m */; };
@@ -70,7 +70,7 @@
 		AE603E15118CCE1F00D312FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603E14118CCE1F00D312FC /* main.m */; };
 		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AEBAB0C411B9D8120085EC6E /* CedarApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */; };
-		AED41F3211B86A44006DBB00 /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
+		AED41F3211B86A44006DBB00 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultReporter.m */; };
 		AED41F3311B86A44006DBB00 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
 		AED41F3411B86A44006DBB00 /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7B118CC85100D312FC /* CDRExampleBase.m */; };
 		AED41F3511B86A44006DBB00 /* CDRExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7C118CC85100D312FC /* CDRExampleGroup.m */; };
@@ -105,13 +105,13 @@
 			dstSubfolderSpec = 0;
 			files = (
 				AE0CDED011C84F2400EF2275 /* CDRFunctions.h in Copy headers to framework */,
-				AE0CDED111C84F2400EF2275 /* CDRDefaultRunner.h in Copy headers to framework */,
+				AE0CDED111C84F2400EF2275 /* CDRDefaultReporter.h in Copy headers to framework */,
 				AE0CDED311C84F2400EF2275 /* CDRExampleBase.h in Copy headers to framework */,
 				AE0CDED611C84F2400EF2275 /* CDRSpec.h in Copy headers to framework */,
 				AE0CDED711C84F2400EF2275 /* SpecHelper.h in Copy headers to framework */,
 				AE0CDED811C84F2400EF2275 /* CedarApplicationDelegate.h in Copy headers to framework */,
-				AE0CDED911C84F2400EF2275 /* CDRExampleRunnerViewController.h in Copy headers to framework */,
-				AE0CDEE711C84F7600EF2275 /* CDRExampleRunner.h in Copy headers to framework */,
+				AE0CDED911C84F2400EF2275 /* CDRExampleReporterViewController.h in Copy headers to framework */,
+				AE0CDEE711C84F7600EF2275 /* CDRExampleReporter.h in Copy headers to framework */,
 				AE12B74E11D01E3D00C236FF /* Cedar.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
@@ -146,8 +146,8 @@
 		AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CppSpecSpec.mm; sourceTree = "<group>"; };
 		AE16DC9C11BB52B100270D0B /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
 		AE16DC9D11BB52B100270D0B /* ActualValue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActualValue.mm; sourceTree = "<group>"; };
-		AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleRunnerViewController.h; sourceTree = "<group>"; };
-		AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleRunnerViewController.m; sourceTree = "<group>"; };
+		AE16DD3111BC874F00270D0B /* CDRExampleReporterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleReporterViewController.h; sourceTree = "<group>"; };
+		AE16DD6A11BC93F600270D0B /* CDRExampleReporterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleReporterViewController.m; sourceTree = "<group>"; };
 		AE16DF8211C5F45800270D0B /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../OCMock/Source/build/Release/OCMock.framework; sourceTree = "<group>"; };
 		AE17ECE211B6F00B004C4DC0 /* MACROS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MACROS; sourceTree = "<group>"; };
 		AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleSpec.m; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		AE2ECEB611D13BA800580726 /* SpecStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecStatusCell.m; sourceTree = "<group>"; };
 		AE2ECF2611D1438500580726 /* SlowSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowSpec.m; sourceTree = "<group>"; };
 		AE4E524911B357F5001E36F3 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		AE603C79118CC85100D312FC /* CDRDefaultRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultRunner.m; sourceTree = "<group>"; };
+		AE603C79118CC85100D312FC /* CDRDefaultReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultReporter.m; sourceTree = "<group>"; };
 		AE603C7A118CC85100D312FC /* CDRExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExample.m; sourceTree = "<group>"; };
 		AE603C7B118CC85100D312FC /* CDRExampleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleBase.m; sourceTree = "<group>"; };
 		AE603C7C118CC85100D312FC /* CDRExampleGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroup.m; sourceTree = "<group>"; };
@@ -166,11 +166,11 @@
 		AE603CA9118CC94100D312FC /* CDRFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRFunctions.m; sourceTree = "<group>"; };
 		AE603D65118CCB2100D312FC /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE603D69118CCB6000D312FC /* CDRFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRFunctions.h; sourceTree = "<group>"; };
-		AE603D6A118CCB6000D312FC /* CDRDefaultRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRDefaultRunner.h; sourceTree = "<group>"; };
+		AE603D6A118CCB6000D312FC /* CDRDefaultReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRDefaultReporter.h; sourceTree = "<group>"; };
 		AE603D6B118CCB6000D312FC /* CDRExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExample.h; sourceTree = "<group>"; };
 		AE603D6C118CCB6000D312FC /* CDRExampleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleBase.h; sourceTree = "<group>"; };
 		AE603D6D118CCB6000D312FC /* CDRExampleGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleGroup.h; sourceTree = "<group>"; };
-		AE603D6E118CCB6000D312FC /* CDRExampleRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleRunner.h; sourceTree = "<group>"; };
+		AE603D6E118CCB6000D312FC /* CDRExampleReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleReporter.h; sourceTree = "<group>"; };
 		AE603D6F118CCB6000D312FC /* CDRSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpec.h; sourceTree = "<group>"; };
 		AE603D70118CCB6000D312FC /* SpecHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecHelper.h; sourceTree = "<group>"; };
 		AE603D81118CCBBF00D312FC /* SpecSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec.m; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */,
-				AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */,
+				AE16DD6A11BC93F600270D0B /* CDRExampleReporterViewController.m */,
 				AE2ECBA911D03F6000580726 /* CDRSpecStatusViewController.m */,
 				AE2ECEB611D13BA800580726 /* SpecStatusCell.m */,
 			);
@@ -306,7 +306,7 @@
 				AE2ECEB511D13BA800580726 /* SpecStatusCell.h */,
 				AE2ECBAB11D03F8D00580726 /* CDRSpecStatusViewController.h */,
 				AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */,
-				AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */,
+				AE16DD3111BC874F00270D0B /* CDRExampleReporterViewController.h */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -317,7 +317,7 @@
 				AE16DD2011BC868900270D0B /* iPhone */,
 				AE16DC9911BB524000270D0B /* Matchers */,
 				AE603C78118CC81D00D312FC /* Headers */,
-				AE603C79118CC85100D312FC /* CDRDefaultRunner.m */,
+				AE603C79118CC85100D312FC /* CDRDefaultReporter.m */,
 				AE603C7A118CC85100D312FC /* CDRExample.m */,
 				AE603C7B118CC85100D312FC /* CDRExampleBase.m */,
 				AE603C7C118CC85100D312FC /* CDRExampleGroup.m */,
@@ -333,11 +333,11 @@
 			children = (
 				AE16DD2111BC868E00270D0B /* iPhone */,
 				AE603D69118CCB6000D312FC /* CDRFunctions.h */,
-				AE603D6A118CCB6000D312FC /* CDRDefaultRunner.h */,
+				AE603D6A118CCB6000D312FC /* CDRDefaultReporter.h */,
 				AE603D6B118CCB6000D312FC /* CDRExample.h */,
 				AE603D6C118CCB6000D312FC /* CDRExampleBase.h */,
 				AE603D6D118CCB6000D312FC /* CDRExampleGroup.h */,
-				AE603D6E118CCB6000D312FC /* CDRExampleRunner.h */,
+				AE603D6E118CCB6000D312FC /* CDRExampleReporter.h */,
 				AE603D6F118CCB6000D312FC /* CDRSpec.h */,
 				AE603D70118CCB6000D312FC /* SpecHelper.h */,
 				AE12B74C11D01E3D00C236FF /* Cedar.h */,
@@ -525,7 +525,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE603C7E118CC85100D312FC /* CDRDefaultRunner.m in Sources */,
+				AE603C7E118CC85100D312FC /* CDRDefaultReporter.m in Sources */,
 				AE603C7F118CC85100D312FC /* CDRExample.m in Sources */,
 				AE603C80118CC85100D312FC /* CDRExampleBase.m in Sources */,
 				AE603C81118CC85100D312FC /* CDRExampleGroup.m in Sources */,
@@ -565,14 +565,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AED41F3211B86A44006DBB00 /* CDRDefaultRunner.m in Sources */,
+				AED41F3211B86A44006DBB00 /* CDRDefaultReporter.m in Sources */,
 				AED41F3311B86A44006DBB00 /* CDRExample.m in Sources */,
 				AED41F3411B86A44006DBB00 /* CDRExampleBase.m in Sources */,
 				AED41F3511B86A44006DBB00 /* CDRExampleGroup.m in Sources */,
 				AED41F3611B86A44006DBB00 /* CDRSpec.m in Sources */,
 				AED41F3711B86A44006DBB00 /* CDRFunctions.m in Sources */,
 				AEBAB0C411B9D8120085EC6E /* CedarApplicationDelegate.m in Sources */,
-				AE16DD6B11BC93F600270D0B /* CDRExampleRunnerViewController.m in Sources */,
+				AE16DD6B11BC93F600270D0B /* CDRExampleReporterViewController.m in Sources */,
 				AE2ECBAA11D03F6000580726 /* CDRSpecStatusViewController.m in Sources */,
 				AE2ECEB711D13BA800580726 /* SpecStatusCell.m in Sources */,
 			);

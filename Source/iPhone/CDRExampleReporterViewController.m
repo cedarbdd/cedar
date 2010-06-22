@@ -1,8 +1,8 @@
-#import "CDRExampleRunnerViewController.h"
+#import "CDRExampleReporterViewController.h"
 #import "CDRFunctions.h"
 #import "CDRSpecStatusViewController.h"
 
-@implementation CDRExampleRunnerViewController
+@implementation CDRExampleReporterViewController
 
 #pragma mark View lifecycle
 - (void)viewDidLoad {
@@ -19,7 +19,7 @@
 }
 
 - (void)startSpecs {
-    runSpecsWithCustomExampleRunner(NULL, self);
+    runSpecsWithCustomExampleReporter(NULL, self);
 }
 
 - (void)pushRootSpecStatusController:(NSArray *)groups {
@@ -28,7 +28,7 @@
     [rootController release];
 }
 
-#pragma mark CDRExampleRunner
+#pragma mark CDRExampleReporter
 - (void)runWillStartWithGroups:(NSArray *)groups {
     // The specs run on a background thread, so callbacks from the runner will
     // arrive on that thread.  We need to push the event to the main thread in
@@ -36,19 +36,7 @@
     [self performSelectorOnMainThread:@selector(pushRootSpecStatusController:) withObject:groups waitUntilDone:NO];
 }
 
-- (void)exampleSucceeded:(CDRExample *)example {
-}
-
-- (void)example:(CDRExample *)example failedWithMessage:(NSString *)message {
-}
-
-- (void)example:(CDRExample *)example threwException:(NSException *)exception {
-}
-
-- (void)exampleThrewError:(CDRExample *)example {
-}
-
-- (void)examplePending:(CDRExample *)example {
+- (void)runDidComplete {
 }
 
 - (int)result {

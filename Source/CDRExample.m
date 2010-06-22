@@ -1,5 +1,5 @@
 #import "CDRExample.h"
-#import "CDRExampleRunner.h"
+#import "CDRExampleReporter.h"
 
 const CDRSpecBlock PENDING = nil;
 
@@ -7,8 +7,9 @@ const CDRSpecBlock PENDING = nil;
 - (void)setState:(CDRExampleState)state;
 @end
 
-
 @implementation CDRExample
+
+@synthesize message = message_;
 
 + (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block {
     return [[[[self class] alloc] initWithText:text andBlock:block] autorelease];
@@ -31,6 +32,14 @@ const CDRSpecBlock PENDING = nil;
     return state_;
 }
 
+- (NSString *)message {
+    if (message_) {
+        return message_;
+    } else {
+        return [super message];
+    }
+}
+
 - (float)progress {
     if (self.state == CDRExampleStateIncomplete) {
         return 0.0;
@@ -39,37 +48,29 @@ const CDRSpecBlock PENDING = nil;
     }
 }
 
-- (void)runWithRunner:(id<CDRExampleRunner>)runner {
+- (void)run {
     if (block_) {
         @try {
             [parent_ setUp];
             block_();
             self.state = CDRExampleStatePassed;
-            [runner exampleSucceeded:self];
         } @catch (CDRSpecFailure *x) {
+            self.message = [x reason];
             self.state = CDRExampleStateFailed;
-            [runner example:self failedWithMessage:[x reason]];
-        } @catch (NSException *x) {
+        } @catch (NSObject *x) {
+            self.message = [x description];
             self.state = CDRExampleStateError;
-            [runner example:self threwException:x];
-        } @catch (...) {
-            self.state = CDRExampleStateError;
-            [runner exampleThrewError:self];
         }
         [parent_ tearDown];
     } else {
         self.state = CDRExampleStatePending;
-        [runner examplePending:self];
     }
 }
 
 #pragma mark private interface
 
 - (void)setState:(CDRExampleState)state {
-    [self willChangeValueForKey:@"state"];
     state_ = state;
-    [self didChangeValueForKey:@"state"];
-
     [parent_ stateDidChange];
 }
 

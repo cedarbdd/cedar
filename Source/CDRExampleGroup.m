@@ -87,10 +87,8 @@
     [parent_ stateDidChange];
 }
 
-- (void)runWithRunner:(id<CDRExampleRunner>)runner {
-  for (CDRExampleBase *example in examples_) {
-    [example runWithRunner:runner];
-  }
+- (void)run {
+    [examples_ makeObjectsPerformSelector:@selector(run)];
 }
 
 - (NSString *)description {

@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@protocol CDRExampleRunner;
+@protocol CDRExampleReporter;
 
 typedef void (^CDRSpecBlock)(void);
 
@@ -29,9 +29,10 @@ typedef enum CDRExampleState CDRExampleState;
 
 - (void)setUp;
 - (void)tearDown;
-- (void)runWithRunner:(id<CDRExampleRunner>)runner;
+- (void)run;
 - (BOOL)hasChildren;
 - (NSString *)fullText;
+- (NSString *)message;
 @end
 
 @interface CDRExampleBase (RunReporting)
