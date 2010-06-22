@@ -52,6 +52,8 @@
 		AE2B9FE811BD76C700DC1BF2 /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */; };
 		AE2ECB6711D03A7A00580726 /* libCedar-StaticLib-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */; };
 		AE2ECBAA11D03F6000580726 /* CDRSpecStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2ECBA911D03F6000580726 /* CDRSpecStatusViewController.m */; };
+		AE2ECEB711D13BA800580726 /* SpecStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2ECEB611D13BA800580726 /* SpecStatusCell.m */; };
+		AE2ECF2711D1438500580726 /* SlowSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2ECF2611D1438500580726 /* SlowSpec.m */; };
 		AE603C7E118CC85100D312FC /* CDRDefaultRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultRunner.m */; };
 		AE603C7F118CC85100D312FC /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
 		AE603C80118CC85100D312FC /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7B118CC85100D312FC /* CDRExampleBase.m */; };
@@ -152,6 +154,9 @@
 		AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroupSpec.m; sourceTree = "<group>"; };
 		AE2ECBA911D03F6000580726 /* CDRSpecStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecStatusViewController.m; sourceTree = "<group>"; };
 		AE2ECBAB11D03F8D00580726 /* CDRSpecStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecStatusViewController.h; sourceTree = "<group>"; };
+		AE2ECEB511D13BA800580726 /* SpecStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecStatusCell.h; sourceTree = "<group>"; };
+		AE2ECEB611D13BA800580726 /* SpecStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecStatusCell.m; sourceTree = "<group>"; };
+		AE2ECF2611D1438500580726 /* SlowSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowSpec.m; sourceTree = "<group>"; };
 		AE4E524911B357F5001E36F3 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		AE603C79118CC85100D312FC /* CDRDefaultRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultRunner.m; sourceTree = "<group>"; };
 		AE603C7A118CC85100D312FC /* CDRExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExample.m; sourceTree = "<group>"; };
@@ -269,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				AE12B6D411D01A7B00C236FF /* main.m */,
+				AE2ECF2611D1438500580726 /* SlowSpec.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -289,6 +295,7 @@
 				AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */,
 				AE16DD6A11BC93F600270D0B /* CDRExampleRunnerViewController.m */,
 				AE2ECBA911D03F6000580726 /* CDRSpecStatusViewController.m */,
+				AE2ECEB611D13BA800580726 /* SpecStatusCell.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -296,6 +303,7 @@
 		AE16DD2111BC868E00270D0B /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				AE2ECEB511D13BA800580726 /* SpecStatusCell.h */,
 				AE2ECBAB11D03F8D00580726 /* CDRSpecStatusViewController.h */,
 				AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */,
 				AE16DD3111BC874F00270D0B /* CDRExampleRunnerViewController.h */,
@@ -536,6 +544,7 @@
 				AE12B6D211D01A5000C236FF /* SpecSpec.m in Sources */,
 				AE12B6D311D01A5500C236FF /* SpecSpec2.m in Sources */,
 				AE12B6D511D01A7B00C236FF /* main.m in Sources */,
+				AE2ECF2711D1438500580726 /* SlowSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,6 +574,7 @@
 				AEBAB0C411B9D8120085EC6E /* CedarApplicationDelegate.m in Sources */,
 				AE16DD6B11BC93F600270D0B /* CDRExampleRunnerViewController.m in Sources */,
 				AE2ECBAA11D03F6000580726 /* CDRSpecStatusViewController.m in Sources */,
+				AE2ECEB711D13BA800580726 /* SpecStatusCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

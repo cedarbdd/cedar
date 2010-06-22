@@ -30,7 +30,9 @@
 
 #pragma mark CDRExampleRunner
 - (void)runWillStartWithGroups:(NSArray *)groups {
-    // Background thread.
+    // The specs run on a background thread, so callbacks from the runner will
+    // arrive on that thread.  We need to push the event to the main thread in
+    // order to update the UI.
     [self performSelectorOnMainThread:@selector(pushRootSpecStatusController:) withObject:groups waitUntilDone:NO];
 }
 

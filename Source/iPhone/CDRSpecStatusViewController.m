@@ -1,5 +1,6 @@
 #import "CDRSpecStatusViewController.h"
 #import "CDRExampleGroup.h"
+#import "SpecStatusCell.h"
 
 @interface CDRSpecStatusViewController (Private)
 - (void)pushStatusViewForExamples:(NSArray *)examples;
@@ -46,12 +47,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CedarExampleCell";
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    id cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[SpecStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 
-    cell.textLabel.text = [[examples_ objectAtIndex:indexPath.row] text];
+    [cell setExample:[examples_ objectAtIndex:indexPath.row]];
 
     return cell;
 }
