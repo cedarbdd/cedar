@@ -4,8 +4,8 @@
 
 @interface CDRDefaultReporter (private)
 - (void)printMessages:(NSArray *)messages;
-- (void)observeExamples:(NSArray *)examples;
-- (void)unobserveExamples:(NSArray *)examples;
+- (void)startObservingExamples:(NSArray *)examples;
+- (void)stopObservingExamples:(NSArray *)examples;
 - (void)reportOnExample:(CDRExample *)example;
 @end
 
@@ -30,11 +30,11 @@
 #pragma mark Public interface
 - (void)runWillStartWithGroups:(NSArray *)groups {
     rootGroups_ = [groups retain];
-    [self observeExamples:rootGroups_];
+    [self startObservingExamples:rootGroups_];
 }
 
 - (void)runDidComplete {
-    [self unobserveExamples:rootGroups_];
+    [self stopObservingExamples:rootGroups_];
 
     if ([pendingMessages_ count]) {
         [self printMessages:pendingMessages_];
@@ -63,22 +63,22 @@
     }
 }
 
-- (void)observeExamples:(NSArray *)examples {
+- (void)startObservingExamples:(NSArray *)examples {
     for (id example in examples) {
         if (![example hasChildren]) {
-            [example addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+            [example addObserver:self forKeyPath:@"state" options:0 context:NULL];
         } else {
-            [self observeExamples:[example examples]];
+            [self startObservingExamples:[example examples]];
         }
     }
 }
 
-- (void)unobserveExamples:(NSArray *)examples {
+- (void)stopObservingExamples:(NSArray *)examples {
     for (id example in examples) {
         if (![example hasChildren]) {
             [example removeObserver:self forKeyPath:@"state"];
         } else {
-            [self unobserveExamples:[example examples]];
+            [self stopObservingExamples:[example examples]];
         }
     }
 }

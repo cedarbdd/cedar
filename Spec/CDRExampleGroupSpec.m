@@ -229,7 +229,7 @@ describe(@"CDRExampleGroup", ^{
 
                 it(@"should report that the state has changed", ^{
                     [group addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
-                    [passingExample run];
+                    [group run];
                     [group removeObserver:mockObserver forKeyPath:@"state"];
 
                     [mockObserver verify];
@@ -253,7 +253,7 @@ describe(@"CDRExampleGroup", ^{
 
                 it(@"should report that the state has changed", ^{
                     [group addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
-                    [passingExample run];
+                    [group run];
                     [group removeObserver:mockObserver forKeyPath:@"state"];
 
                     [mockObserver verify];
@@ -273,7 +273,7 @@ describe(@"CDRExampleGroup", ^{
                 });
 
                 it(@"should not report that the state has changed", ^{
-                    [passingExample run];
+                    [group run];
                     assertThatInt([group state], equalToInt(CDRExampleStateFailed));
                 });
             });

@@ -3,7 +3,7 @@
 
 const CDRSpecBlock PENDING = nil;
 
-@interface CDRExample (private)
+@interface CDRExample (Private)
 - (void)setState:(CDRExampleState)state;
 @end
 
@@ -67,11 +67,10 @@ const CDRSpecBlock PENDING = nil;
     }
 }
 
-#pragma mark private interface
+#pragma mark Private interface
 
 - (void)setState:(CDRExampleState)state {
     state_ = state;
-    [parent_ stateDidChange];
 }
 
 @end
