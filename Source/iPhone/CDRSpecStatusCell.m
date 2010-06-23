@@ -1,11 +1,11 @@
-#import "SpecStatusCell.h"
+#import "CDRSpecStatusCell.h"
 #import "CDRExampleBase.h"
 
-@interface SpecStatusCell (Private)
+@interface CDRSpecStatusCell (Private)
 - (void)setUpDisplayForExample:(CDRExampleBase *)example;
 @end
 
-@implementation SpecStatusCell
+@implementation CDRSpecStatusCell
 
 @synthesize example = example_;
 

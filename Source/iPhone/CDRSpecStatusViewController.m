@@ -1,6 +1,6 @@
 #import "CDRSpecStatusViewController.h"
 #import "CDRExampleGroup.h"
-#import "SpecStatusCell.h"
+#import "CDRSpecStatusCell.h"
 
 @interface CDRSpecStatusViewController (Private)
 - (void)pushStatusViewForExamples:(NSArray *)examples;
@@ -49,7 +49,7 @@
 
     id cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[[SpecStatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[CDRSpecStatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 
     [cell setExample:[examples_ objectAtIndex:indexPath.row]];

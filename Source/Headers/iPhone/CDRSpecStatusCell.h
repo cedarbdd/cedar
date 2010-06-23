@@ -2,7 +2,7 @@
 
 @class CDRExampleBase;
 
-@interface SpecStatusCell : UITableViewCell {
+@interface CDRSpecStatusCell : UITableViewCell {
     CDRExampleBase *example_;
 }
 
