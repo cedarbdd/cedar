@@ -5,17 +5,19 @@ BDD-style testing using Objective-C
 
 ## Usage
 
+### Non-iPhone testing
+
 * Build the Cedar framework.  Note that you must build for an Objective-C
   runtime that supports blocks; this means Mac OS X 10.6, or a runtime from
   Plausible Labs (see below).
 * Create a command-line executable target for your tests in your project.  Name
   this target Specs, unless you have another name you'd prefer.
-* Add the Cedar framework to your project, and link your Specs target to it.
+* Add the Cedar framework to your project, and link your Specs target with it.
 * Do the Copy Framework Dance:
     - Add a Copy Files build phase to your Specs target.
     - Select the Frameworks destination for the build phase.
     - Add Cedar to the new build phase.
-* Add a main.m that looks like this:
+* Add a main.m to your Specs target that looks like this:
 
         #import <Cedar/Cedar.h>
 
@@ -27,7 +29,7 @@ BDD-style testing using Objective-C
   macros to remove as much distraction as possible from your specs.  A spec
   file need not have a header file, and looks like this:
 
-        #import "SpecHelper.h"
+        #import <Cedar/SpecHelper.h>
 
         SPEC_BEGIN(FooSpec)
         describe(@"Foo", ^{
@@ -44,6 +46,50 @@ BDD-style testing using Objective-C
 * Build and run.  Note that, unlike OCUnit, you must run your executable in
   order to run your specs.  Also unlike OCUnit this allows you to use the
   debugger when running specs.
+
+### iPhone testing
+
+* Build the Cedar-iPhone static framework.  This framework contains a univeral
+  binary that will work both on the simulator and the device.
+* Create a Cocoa Touch executable target for your tests in your project.  Name
+  this target UISpecs, or something similar.
+* Add the Cedar-iPhone static framework to your project, and link your UISpecs
+  target with it.
+* Add -ObjC and -all_load to the Other Linker Flags build setting for the
+  UISpecs target.  This is necessary for the linker to correctly load symbols
+  for Objective-C classes from static libraries.
+* Add a main.m to your UISpecs target that looks like this:
+
+        #import <UIKit/UIKit.h>
+        #import <Cedar-iPhone/Cedar.h>
+
+        int main(int argc, char *argv[]) {
+            NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+            int retVal = UIApplicationMain(argc, argv, nil, @"CedarApplicationDelegate");
+            [pool release];
+            return retVal;
+        }
+
+* Build and run.  The simulator (or device) should start and display the status
+  of each of your spec classes in a table view.  You can navigate the hierarchy
+  of your examples by clicking on the table cells.
+* If you would like to use OCHamcrest or OCMock in your UI specs, Pivotal has
+  created static frameworks which will work on the iPhone for both (see below).
+* If you would like to run specs both in your UI spec target and your non-UI
+  spec target, you'll need to conditionally include the appropriate Cedar
+  headers in your spec files depending on the target SDK.  For example:
+
+        #define HC_SHORTHAND
+        #if TARGET_OS_IPHONE
+        #import <Cedar-iPhone/SpecHelper.h>
+        #import <OCMock-iPhone/OCMock.h>
+        #import <OCHamcrest-iPhone/OCHamcrest.h>
+        #else
+        #import <Cedar/SpecHelper.h>
+        #import <OCMock/OCMock.h>
+        #import <OCHamcrest/OCHamcrest.h>
+        #endif
 
 
 ## Matchers
@@ -118,13 +164,13 @@ blocks will fail to compile.  There are a couple ways around this:
   UI frameworks.  Test everything that doesn't require UIKit/CoreGraphics/etc.
   using Cedar; test the UI using something else.
 
-* I'm open to suggestions.
+* We're open to suggestions.
 
 The Cedar-iPhone target builds a framework specifically designed for specs on
 the iPhone device.  It includes a static library that includes builds targeting
 both the simulator and device runtimes.
 
-I've created a sample iPhone application that runs Cedar specs both on and off
+We've created a sample iPhone application that runs Cedar specs both on and off
 the device.  You can check it out here: http://github.com/pivotal/StoryAccepter
 
 See the Pivotal forks of OCHamcrest and OCMock on GitHub for iPhone-specific
