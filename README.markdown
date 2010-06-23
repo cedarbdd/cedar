@@ -75,7 +75,8 @@ BDD-style testing using Objective-C
   of each of your spec classes in a table view.  You can navigate the hierarchy
   of your examples by clicking on the table cells.
 * If you would like to use OCHamcrest or OCMock in your UI specs, Pivotal has
-  created static frameworks which will work on the iPhone for both (see below).
+  created static frameworks which will work on the iPhone for both.  See the
+  sections below on Matchers and Mocks for links to the relevant projects.
 * If you would like to run specs both in your UI spec target and your non-UI
   spec target, you'll need to conditionally include the appropriate Cedar
   headers in your spec files depending on the target SDK.  For example:
@@ -95,7 +96,7 @@ BDD-style testing using Objective-C
 ## Matchers
 
 Cedar does not provide matchers, but it works with the fine array of matchers
-provided by the Hamcrest project (http://code.google.com/p/hamcrest/); you can
+provided by the [Hamcrest project](http://code.google.com/p/hamcrest/); you can
 fetch the Objective-C port from the Hamcrest SVN repo.  Build and link the
 Hamcrest framework by following their instructions, and add the following at
 the top of your spec files:
@@ -103,17 +104,15 @@ the top of your spec files:
     #define HC_SHORTHAND
     #import <OCHamcrest/OCHamcrest.h>
 
-Pivotal also has a fork of a GitHub import of the OCHamcrest codebase
-(http://github.com/pivotal/OCHamcrest).  This fork contains our iPhone-specific
-static framework target.
+Pivotal also has a fork of a [GitHub import of the OCHamcrest codebase](http://github.com/pivotal/OCHamcrest).
+This fork contains our iPhone-specific static framework target.
 
 
 ## Mocks and stubs
 
-Cedar works fine with OCMock.  You can download and use the OCMock framework
-(http://www.mulle-kybernetik.com/software/OCMock/).  Pivotal also has a fork of
-a GitHub import of the OCMock codebase (http://github.com/pivotal/OCMock), which
-contains our iPhone-specific static framework target.
+Cedar works fine with OCMock.  You can download and use the [OCMock framework](http://www.mulle-kybernetik.com/software/OCMock/).
+Pivotal also has a fork of a [GitHub import of the OCMock codebase](http://github.com/pivotal/OCMock),
+which contains our iPhone-specific static framework target.
 
 
 ## Pending specs
@@ -171,7 +170,7 @@ the iPhone device.  It includes a static library that includes builds targeting
 both the simulator and device runtimes.
 
 We've created a sample iPhone application that runs Cedar specs both on and off
-the device.  You can check it out here: http://github.com/pivotal/StoryAccepter
+the device.  You can check it out [here](http://github.com/pivotal/StoryAccepter).
 
 See the Pivotal forks of OCHamcrest and OCMock on GitHub for iPhone-specific
 static framework targets.
@@ -179,11 +178,10 @@ static framework targets.
 
 ## Contributions and feedback
 
-Welcomed!  Feel free to join and contribute to the public Tracker project here:
-http://www.pivotaltracker.com/projects/77775
+Welcomed!  Feel free to join and contribute to the public Tracker project [here](http://www.pivotaltracker.com/projects/77775).
 
-The public Google group for Cedar is cedar-discuss@googlegroups.com.  Or, you
-can follow the growth of Cedar on Twitter: @cedarbdd.
+The [public Google group](http://groups.google.com/group/cedar-discuss) for Cedar is cedar-discuss@googlegroups.com.
+Or, you can follow the growth of Cedar on Twitter: [@cedarbdd](http://twitter.com/cedarbdd).
 
 
 ## License
