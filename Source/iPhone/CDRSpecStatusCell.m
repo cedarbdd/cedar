@@ -1,5 +1,6 @@
 #import "CDRSpecStatusCell.h"
 #import "CDRExampleBase.h"
+#import "CDRExampleStateMap.h"
 
 @interface CDRSpecStatusCell (Private)
 - (void)setUpDisplayForExample:(CDRExampleBase *)example;
@@ -46,13 +47,14 @@
 
 #pragma mark KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    self.detailTextLabel.text = self.example.message;
+    self.detailTextLabel.text = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
     [self performSelectorOnMainThread:@selector(redrawCell) withObject:NULL waitUntilDone:NO];
 }
 
 #pragma mark Private interface
 - (void)setUpDisplayForExample:(CDRExampleBase *)example {
     self.textLabel.text = example.text;
+    self.detailTextLabel.text = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
     if ([example_ hasChildren]) {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
