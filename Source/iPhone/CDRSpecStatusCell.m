@@ -47,7 +47,6 @@
 
 #pragma mark KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    self.detailTextLabel.text = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
     [self performSelectorOnMainThread:@selector(redrawCell) withObject:NULL waitUntilDone:NO];
 }
 
@@ -61,6 +60,7 @@
 }
 
 - (void)redrawCell {
+    self.detailTextLabel.text = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
     [self setNeedsLayout];
     [self setNeedsDisplay];
 }
