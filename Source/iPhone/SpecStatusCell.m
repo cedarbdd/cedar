@@ -30,6 +30,7 @@
     }
     [self.contentView setBackgroundColor:backgroundColor];
     [self setBackgroundColor:backgroundColor];
+
     [super drawRect:rect];
 }
 
@@ -45,7 +46,8 @@
 
 #pragma mark KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:NULL waitUntilDone:NO];
+    self.detailTextLabel.text = self.example.message;
+    [self performSelectorOnMainThread:@selector(redrawCell) withObject:NULL waitUntilDone:NO];
 }
 
 #pragma mark Private interface
@@ -54,6 +56,11 @@
     if ([example_ hasChildren]) {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+}
+
+- (void)redrawCell {
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
 }
 
 @end
