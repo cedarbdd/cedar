@@ -15,8 +15,8 @@ describe(@"CDRExampleStateMap", ^{
 
     describe(@"descriptionForState", ^{
         describe(@"for an incomplete state", ^{
-            it(@"should return INCOMPLETE", ^{
-                assertThat([map descriptionForState:CDRExampleStateIncomplete], equalTo(@"INCOMPLETE"));
+            it(@"should return RUNNING", ^{
+                assertThat([map descriptionForState:CDRExampleStateIncomplete], equalTo(@"RUNNING"));
             });
         });
         describe(@"for a passed state", ^{

@@ -3,7 +3,7 @@
 static CDRExampleStateMap *sharedInstance__;
 
 const CDRExampleState exampleStateKeys[] = {CDRExampleStateIncomplete, CDRExampleStatePassed, CDRExampleStatePending, CDRExampleStateFailed, CDRExampleStateError};
-const NSString *exampleStateDescriptions[] = {@"INCOMPLETE", @"PASSED", @"PENDING", @"FAILED", @"ERROR"};
+const NSString *exampleStateDescriptions[] = {@"RUNNING", @"PASSED", @"PENDING", @"FAILED", @"ERROR"};
 
 @implementation CDRExampleStateMap
 
