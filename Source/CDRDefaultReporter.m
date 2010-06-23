@@ -94,11 +94,11 @@
             break;
         case CDRExampleStateFailed:
             printf("F");
-            [failureMessages_ addObject:[NSString stringWithFormat:@"%@ FAILED:\n%@\n", [example fullText], [example message]]];
+            [failureMessages_ addObject:[NSString stringWithFormat:@"FAILURE %@\n%@\n", [example fullText], [example message]]];
             break;
         case CDRExampleStateError:
             printf("E");
-            [failureMessages_ addObject:[NSString stringWithFormat:@"%@ THREW EXCEPTION:\n%@\n", [example fullText], [example message]]];
+            [failureMessages_ addObject:[NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], [example message]]];
             break;
         default:
             break;
