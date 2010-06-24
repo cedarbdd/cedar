@@ -37,14 +37,6 @@
     return NO;
 }
 
-- (NSString *)fullText {
-    if (self.parent) {
-        return [NSString stringWithFormat:@"%@ %@", [self.parent fullText], self.text];
-    } else {
-        return self.text;
-    }
-}
-
 - (NSString *)message {
     return @"";
 }

@@ -14,10 +14,15 @@
 }
 
 - (id)initWithText:(NSString *)text {
+    return [self initWithText:text isRoot:NO];
+}
+
+- (id)initWithText:(NSString *)text isRoot:(BOOL)isRoot {
     if (self = [super initWithText:text]) {
         beforeBlocks_ = [[NSMutableArray alloc] init];
         examples_ = [[NSMutableArray alloc] init];
         afterBlocks_ = [[NSMutableArray alloc] init];
+        isRoot_ = isRoot;
     }
     return self;
 }
@@ -30,6 +35,10 @@
 }
 
 #pragma mark Public interface
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Example Group: %@", self.text];
+}
+
 - (void)add:(CDRExampleBase *)example {
     example.parent = self;
     [examples_ addObject:example];
@@ -47,20 +56,7 @@
     [blockCopy release];
 }
 
-- (void)setUp {
-    [parent_ setUp];
-    for (CDRSpecBlock beforeBlock in beforeBlocks_) {
-        beforeBlock();
-    }
-}
-
-- (void)tearDown {
-    for (CDRSpecBlock afterBlock in afterBlocks_) {
-        afterBlock();
-    }
-    [parent_ tearDown];
-}
-
+#pragma mark CDRExampleBase
 - (CDRExampleState)state {
     if (0 == [examples_ count]) {
         return CDRExampleStatePending;
@@ -91,12 +87,35 @@
     [self stopObservingExamples];
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"Example Group: %@", self.text];
-}
-
 - (BOOL)hasChildren {
     return [examples_ count] > 0;
+}
+
+#pragma mark CDRExampleParent
+- (void)setUp {
+    [parent_ setUp];
+    for (CDRSpecBlock beforeBlock in beforeBlocks_) {
+        beforeBlock();
+    }
+}
+
+- (void)tearDown {
+    for (CDRSpecBlock afterBlock in afterBlocks_) {
+        afterBlock();
+    }
+    [parent_ tearDown];
+}
+
+- (BOOL)hasFullText {
+    return !isRoot_;
+}
+
+- (NSString *)fullText {
+    if (self.parent) {
+        return [NSString stringWithFormat:@"%@ %@", [self.parent fullText], self.text];
+    } else {
+        return self.text;
+    }
 }
 
 #pragma mark KVO

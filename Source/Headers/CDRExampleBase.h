@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "CDRExampleParent.h"
 
 @protocol CDRExampleReporter;
 
@@ -19,19 +20,16 @@ typedef enum CDRExampleState CDRExampleState;
 
 @interface CDRExampleBase : NSObject {
   NSString *text_;
-  CDRExampleBase *parent_;
+  id<CDRExampleParent> parent_;
 }
 
 @property (nonatomic, readonly) NSString *text;
-@property (nonatomic, assign) CDRExampleBase *parent;
+@property (nonatomic, assign) id<CDRExampleParent> parent;
 
 - (id)initWithText:(NSString *)text;
 
-- (void)setUp;
-- (void)tearDown;
 - (void)run;
 - (BOOL)hasChildren;
-- (NSString *)fullText;
 - (NSString *)message;
 @end
 

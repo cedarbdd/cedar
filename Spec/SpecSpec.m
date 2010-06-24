@@ -61,9 +61,13 @@ describe(@"Spec", ^ {
 });
 
 describe(@"The spec failure exception", ^{
-//  it(@"should generate a spec failure", ^ {
-//    [[SpecFailure specFailureWithReason:@"'cuz"] raise];
-//  });
+//    it(@"should generate a spec failure", ^ {
+//        [[CDRSpecFailure specFailureWithReason:@"'cuz"] raise];
+//    });
+//
+//    it(@"should throw exception", ^{
+//        [[NSException exceptionWithName:@"exception name" reason:@"exception reason" userInfo:nil] raise];
+//    });
 });
 
 describe(@"Hamcrest matchers", ^{

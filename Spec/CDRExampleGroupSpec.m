@@ -21,9 +21,10 @@ SPEC_BEGIN(CDRExampleGroupSpec)
 describe(@"CDRExampleGroup", ^{
     __block CDRExampleGroup *group;
     __block CDRExample *incompleteExample, *pendingExample, *passingExample, *failingExample, *errorExample;
+    NSString *groupText = @"Group!";
 
     beforeEach(^{
-        group = [[CDRExampleGroup alloc] initWithText:@"a group"];
+        group = [[CDRExampleGroup alloc] initWithText:groupText];
         incompleteExample = [[CDRExample alloc] initWithText:@"incomplete" andBlock:^{}];
         passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
         failingExample = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
@@ -330,6 +331,77 @@ describe(@"CDRExampleGroup", ^{
     describe(@"message", ^{
         it(@"should return an empty string", ^{
             assertThat([group message], equalTo(@""));
+        });
+    });
+
+    describe(@"hasFullText", ^{
+        it(@"should return true", ^{
+            assertThatBool([group hasFullText], equalToBool(true));
+        });
+        describe(@"when initialized normally", ^{
+            it(@"should return true", ^{
+                assertThatBool([group hasFullText], equalToBool(true));
+            });
+        });
+
+        describe(@"when initialized as a root group", ^{
+            beforeEach(^{
+                [group release];
+                group = [[CDRExampleGroup alloc] initWithText:@"I am a root group" isRoot:YES];
+            });
+
+            it(@"should return false", ^{
+                assertThatBool([group hasFullText], equalToBool(false));
+            });
+        });
+    });
+
+    describe(@"fullText", ^{
+        describe(@"with no parent", ^{
+            beforeEach(^{
+                assertThat([group parent], nilValue());
+            });
+
+            it(@"should return just its own text", ^{
+                assertThat([group fullText], equalTo(groupText));
+            });
+        });
+
+        describe(@"with a parent", ^{
+            __block CDRExampleGroup *parentGroup;
+            NSString *parentGroupText = @"Parent!";
+
+            beforeEach(^{
+                parentGroup = [[CDRExampleGroup alloc] initWithText:parentGroupText];
+                [parentGroup add:group];
+                assertThat([group parent], isNot(nilValue()));
+            });
+
+            afterEach(^{
+                [parentGroup release];
+            });
+
+            it(@"should return its parent's text pre-pended with its own text", ^{
+                assertThat([group fullText], equalTo([NSString stringWithFormat:@"%@ %@", parentGroupText, groupText]));
+            });
+
+            describe(@"when the parent also has a parent", ^{
+                __block CDRExampleGroup *anotherGroup;
+                NSString *anotherGroupText = @"Another Group!";
+
+                beforeEach(^{
+                    anotherGroup = [[CDRExampleGroup alloc] initWithText:anotherGroupText];
+                    [anotherGroup add:parentGroup];
+                });
+
+                afterEach(^{
+                    [anotherGroup release];
+                });
+
+                it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
+                    assertThat([group fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", anotherGroupText, parentGroupText, groupText]));
+                });
+            });
         });
     });
 });

@@ -28,6 +28,15 @@ const CDRSpecBlock PENDING = nil;
     [super dealloc];
 }
 
+- (NSString *)fullText {
+    if (self.parent) {
+        return [NSString stringWithFormat:@"%@ %@", [self.parent fullText], self.text];
+    } else {
+        return self.text;
+    }
+}
+
+#pragma mark CDRExampleBase
 - (CDRExampleState)state {
     return state_;
 }
