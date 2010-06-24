@@ -1,6 +1,7 @@
 #import "CDRSpecStatusViewController.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecStatusCell.h"
+#import "CDRExampleDetailsViewController.h"
 
 @interface CDRSpecStatusViewController (Private)
 - (void)pushStatusViewForExamples:(NSArray *)examples;
@@ -29,8 +30,7 @@
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -65,7 +65,10 @@
     if ([selectedExample hasChildren]) {
         [self pushStatusViewForExamples:[selectedExample examples]];
     } else {
-        [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+        CDRExampleDetailsViewController * exampleDetailsController = [[CDRExampleDetailsViewController alloc] initWithExample:selectedExample];
+        exampleDetailsController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:exampleDetailsController animated:YES];
+        [exampleDetailsController release];
     }
 }
 

@@ -71,6 +71,7 @@
 		AE603E30118CCE8600D312FC /* OCHamcrest.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE603DDB118CCD6400D312FC /* OCHamcrest.framework */; };
 		AE6B43AB11D281B0003E2B08 /* CDRExampleStateMap.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6B43AA11D281B0003E2B08 /* CDRExampleStateMap.m */; };
 		AE6B43C711D285BE003E2B08 /* CDRExampleStateMapSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6B43C611D285BE003E2B08 /* CDRExampleStateMapSpec.m */; };
+		AEB2651C11D291AC00416BF1 /* CDRExampleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB2651A11D291AC00416BF1 /* CDRExampleDetailsViewController.m */; };
 		AEBAB0C411B9D8120085EC6E /* CedarApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */; };
 		AED41F3211B86A44006DBB00 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C79118CC85100D312FC /* CDRDefaultReporter.m */; };
 		AED41F3311B86A44006DBB00 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7A118CC85100D312FC /* CDRExample.m */; };
@@ -182,6 +183,8 @@
 		AE6B43A311D280B0003E2B08 /* CDRExampleStateMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleStateMap.h; sourceTree = "<group>"; };
 		AE6B43AA11D281B0003E2B08 /* CDRExampleStateMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleStateMap.m; sourceTree = "<group>"; };
 		AE6B43C611D285BE003E2B08 /* CDRExampleStateMapSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleStateMapSpec.m; sourceTree = "<group>"; };
+		AEB2651911D291AC00416BF1 /* CDRExampleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleDetailsViewController.h; sourceTree = "<group>"; };
+		AEB2651A11D291AC00416BF1 /* CDRExampleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleDetailsViewController.m; sourceTree = "<group>"; };
 		AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarApplicationDelegate.h; sourceTree = "<group>"; };
 		AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CedarApplicationDelegate.m; sourceTree = "<group>"; };
 		AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib-iphonesimulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,7 +252,6 @@
 				AE4E524911B357F5001E36F3 /* README.markdown */,
 				AE17ECE211B6F00B004C4DC0 /* MACROS */,
 				AE12B63411D0191000C236FF /* iPhoneSpecs-Info.plist */,
-				AE12B79811D0216700C236FF /* PLBlocks.framework */,
 			);
 			name = Cedar;
 			sourceTree = "<group>";
@@ -257,6 +259,7 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				AE12B79811D0216700C236FF /* PLBlocks.framework */,
 				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
 				AE603DDB118CCD6400D312FC /* OCHamcrest.framework */,
 				AE16DF8211C5F45800270D0B /* OCMock.framework */,
@@ -303,6 +306,7 @@
 				AE2ECBA911D03F6000580726 /* CDRSpecStatusViewController.m */,
 				AE2ECEB611D13BA800580726 /* CDRSpecStatusCell.m */,
 				AE6B43AA11D281B0003E2B08 /* CDRExampleStateMap.m */,
+				AEB2651A11D291AC00416BF1 /* CDRExampleDetailsViewController.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -310,6 +314,7 @@
 		AE16DD2111BC868E00270D0B /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				AEB2651911D291AC00416BF1 /* CDRExampleDetailsViewController.h */,
 				AE2ECEB511D13BA800580726 /* CDRSpecStatusCell.h */,
 				AE2ECBAB11D03F8D00580726 /* CDRSpecStatusViewController.h */,
 				AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */,
@@ -585,6 +590,7 @@
 				AE2ECBAA11D03F6000580726 /* CDRSpecStatusViewController.m in Sources */,
 				AE2ECEB711D13BA800580726 /* CDRSpecStatusCell.m in Sources */,
 				AE6B43AB11D281B0003E2B08 /* CDRExampleStateMap.m in Sources */,
+				AEB2651C11D291AC00416BF1 /* CDRExampleDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
