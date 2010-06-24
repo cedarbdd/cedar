@@ -42,6 +42,11 @@ static const float TEXT_LABEL_MARGIN = 20.0;
     [super viewDidUnload];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    navigationBar_.frame = [self navigationBarFrame];
+    [self positionAndSizeLabels];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
