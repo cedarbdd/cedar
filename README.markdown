@@ -55,7 +55,7 @@ BDD-style testing using Objective-C
   this target UISpecs, or something similar.
 * Add the Cedar-iPhone static framework to your project, and link your UISpecs
   target with it.
-* Add -ObjC and -all_load to the Other Linker Flags build setting for the
+* Add -ObjC, -lstdc++ and -all_load to the Other Linker Flags build setting for the
   UISpecs target.  This is necessary for the linker to correctly load symbols
   for Objective-C classes from static libraries.
 * Add a main.m to your UISpecs target that looks like this:
@@ -75,7 +75,8 @@ BDD-style testing using Objective-C
   of each of your spec classes in a table view.  You can navigate the hierarchy
   of your examples by clicking on the table cells.
 * If you would like to use OCHamcrest or OCMock in your UI specs, Pivotal has
-  created static frameworks which will work on the iPhone for both.  See the
+  created static frameworks which will work on the iPhone for both.  These must
+  be built so you can add them as available frameworks in your specs.  See the
   sections below on Matchers and Mocks for links to the relevant projects.
 * If you would like to run specs both in your UI spec target and your non-UI
   spec target, you'll need to conditionally include the appropriate Cedar
@@ -150,12 +151,14 @@ example, typing 'cdesc' followed by Ctrl-. will expand to:
 ## But I'm writing an iPhone app!
 
 Unfortunately, Apple has made Objective-C blocks, upon which Cedar depends,
-only available in the Mac OS X 10.6 runtime.  This means if you're not building
-on a Snow Leopard machine and targeting the desktop runtime then anything using
+only available in the Mac OS X 10.6 and iOS 4 runtime.  This means if you're not building
+on a Snow Leopard machine and targeting the desktop runtime or targeting a
+device or simulator that is running less than iOS 4 then anything using
 blocks will fail to compile.  There are a couple ways around this:
 
-* Plausible Labs provides patched versions of the GCC compiler and runtime for
-  Leopard and iPhone OS (http://code.google.com/p/plblocks/).  I wrote most of
+* Plausible Labs provides patched versions of the [GCC compiler and runtime for
+  Leopard and iPhone OS](http://code.google.com/p/plblocks/).  This link
+  has instructions for installing this compiler and framework.  I wrote most of
   Cedar on a Leopard machine with the 10.5 PLBlocks runtime.
 
 * Split your project into OS-dependent and OS-independent targets.  Domain
