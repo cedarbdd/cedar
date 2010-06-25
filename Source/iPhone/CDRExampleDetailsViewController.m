@@ -33,8 +33,8 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 
     self.view.backgroundColor = [UIColor whiteColor];
     navigationBar_ = [self addNavigationBar];
-    fullTextLabel_ = [self addLabelWithText:example_.fullText];
-    messageLabel_ = [self addLabelWithText:example_.message];
+    fullTextLabel_ = [self addLabelWithText:[(id)example_ fullText]];
+    messageLabel_ = [self addLabelWithText:[example_ message]];
     [self positionAndSizeLabels];
 }
 
