@@ -18,6 +18,10 @@ static unsigned int globalValue__ = 0;
 - (void)beforeEach {
     globalValue__ = 1;
 }
+
+- (void)afterEach {
+    //NSLog(@"=====================> AFTER EACH");
+}
 @end
 
 SPEC_BEGIN(SpecHelperSpec)
@@ -32,6 +36,12 @@ describe(@"SpecHelper", ^{
     describe(@"global beforeEach", ^{
         it(@"should run before all specs", ^{
             assertThatInt(globalValue__, equalToInt(1));
+        });
+    });
+
+    describe(@"global afterEach", ^{
+        it(@"should run after all specs", ^{
+            // See above, and check console output.
         });
     });
 });
