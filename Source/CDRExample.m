@@ -29,7 +29,7 @@ const CDRSpecBlock PENDING = nil;
 }
 
 - (NSString *)fullText {
-    if (self.parent) {
+    if (self.parent && [self.parent hasFullText]) {
         return [NSString stringWithFormat:@"%@ %@", [self.parent fullText], self.text];
     } else {
         return self.text;

@@ -403,6 +403,22 @@ describe(@"CDRExampleGroup", ^{
                 });
             });
         });
+
+        describe(@"with a root group as a parent", ^{
+            __block CDRExampleGroup *rootGroup;
+
+            beforeEach(^{
+                rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
+                [rootGroup add:group];
+                assertThat([group parent], isNot(nilValue()));
+                assertThatBool([[group parent] hasFullText], equalToBool(NO));
+            });
+
+            it(@"should not include its parent's text", ^{
+                assertThat([group fullText], equalTo([group text]));
+            });
+        });
+
     });
 });
 

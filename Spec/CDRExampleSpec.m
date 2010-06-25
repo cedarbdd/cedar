@@ -183,6 +183,21 @@ describe(@"CDRExample", ^{
                 });
             });
         });
+
+        describe(@"with a root group as a parent", ^{
+            __block CDRExampleGroup *rootGroup;
+
+            beforeEach(^{
+                rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
+                [rootGroup add:example];
+                assertThat([example parent], isNot(nilValue()));
+                assertThatBool([[example parent] hasFullText], equalToBool(NO));
+            });
+
+            it(@"should not include its parent's text", ^{
+                assertThat([example fullText], equalTo([example text]));
+            });
+        });
     });
 
     describe(@"message", ^{
