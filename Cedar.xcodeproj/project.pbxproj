@@ -24,6 +24,12 @@
 
 /* Begin PBXBuildFile section */
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
+		AE0C338511D427CC006419EA /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C337111D425B0006419EA /* SpecHelper.m */; };
+		AE0C338611D427D1006419EA /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C337111D425B0006419EA /* SpecHelper.m */; };
+		AE0C339611D428A8006419EA /* SpecHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C336811D410C7006419EA /* SpecHelperSpec.m */; };
+		AE0C339711D428A9006419EA /* SpecHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C336811D410C7006419EA /* SpecHelperSpec.m */; };
+		AE0C349711D43588006419EA /* CDRExampleParent.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0C322311D3E0E5006419EA /* CDRExampleParent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE0C349811D435AA006419EA /* CDRExampleParent.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0C322311D3E0E5006419EA /* CDRExampleParent.h */; };
 		AE0CDED011C84F2400EF2275 /* CDRFunctions.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D69118CCB6000D312FC /* CDRFunctions.h */; };
 		AE0CDED111C84F2400EF2275 /* CDRDefaultReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6A118CCB6000D312FC /* CDRDefaultReporter.h */; };
 		AE0CDED311C84F2400EF2275 /* CDRExampleBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE603D6C118CCB6000D312FC /* CDRExampleBase.h */; };
@@ -61,7 +67,7 @@
 		AE603C82118CC85100D312FC /* CDRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603C7D118CC85100D312FC /* CDRSpec.m */; };
 		AE603CAB118CC94100D312FC /* CDRFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603CA9118CC94100D312FC /* CDRFunctions.m */; };
 		AE603D32118CC9F800D312FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867D69BFE84028FC02AAC07 /* Foundation.framework */; };
-		AE603D43118CCA7D00D312FC /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Cedar.framework */; };
+		AE603D43118CCA7D00D312FC /* Cedar in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Cedar */; };
 		AE603D71118CCB6000D312FC /* CDRFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D69118CCB6000D312FC /* CDRFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE603D78118CCB6000D312FC /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D70118CCB6000D312FC /* SpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE603DCA118CCCBE00D312FC /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603D81118CCBBF00D312FC /* SpecSpec.m */; };
@@ -107,6 +113,7 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AE0C349811D435AA006419EA /* CDRExampleParent.h in Copy headers to framework */,
 				AE0CDED011C84F2400EF2275 /* CDRFunctions.h in Copy headers to framework */,
 				AE0CDED111C84F2400EF2275 /* CDRDefaultReporter.h in Copy headers to framework */,
 				AE0CDED311C84F2400EF2275 /* CDRExampleBase.h in Copy headers to framework */,
@@ -138,8 +145,10 @@
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DC2EF5B0486A6940098B216 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DC2EF5B0486A6940098B216 /* Cedar */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.framework; path = Cedar; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0C322311D3E0E5006419EA /* CDRExampleParent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleParent.h; sourceTree = "<group>"; };
+		AE0C336811D410C7006419EA /* SpecHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecHelperSpec.m; sourceTree = "<group>"; };
+		AE0C337111D425B0006419EA /* SpecHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecHelper.m; sourceTree = "<group>"; };
 		AE12B63211D0191000C236FF /* iPhoneSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE12B63411D0191000C236FF /* iPhoneSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPhoneSpecs-Info.plist"; sourceTree = "<group>"; };
 		AE12B6D411D01A7B00C236FF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -168,7 +177,7 @@
 		AE603C7C118CC85100D312FC /* CDRExampleGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroup.m; sourceTree = "<group>"; };
 		AE603C7D118CC85100D312FC /* CDRSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpec.m; sourceTree = "<group>"; };
 		AE603CA9118CC94100D312FC /* CDRFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRFunctions.m; sourceTree = "<group>"; };
-		AE603D65118CCB2100D312FC /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE603D65118CCB2100D312FC /* Test */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE603D69118CCB6000D312FC /* CDRFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRFunctions.h; sourceTree = "<group>"; };
 		AE603D6A118CCB6000D312FC /* CDRDefaultReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRDefaultReporter.h; sourceTree = "<group>"; };
 		AE603D6B118CCB6000D312FC /* CDRExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExample.h; sourceTree = "<group>"; };
@@ -217,7 +226,7 @@
 			files = (
 				AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */,
 				AE603E0A118CCD7000D312FC /* OCHamcrest.framework in Frameworks */,
-				AE603D43118CCA7D00D312FC /* Cedar.framework in Frameworks */,
+				AE603D43118CCA7D00D312FC /* Cedar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +243,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DC2EF5B0486A6940098B216 /* Cedar.framework */,
+				8DC2EF5B0486A6940098B216 /* Cedar */,
 				AE603D65118CCB2100D312FC /* Test */,
 				AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */,
 				AE12B63211D0191000C236FF /* iPhoneSpecs.app */,
@@ -337,6 +346,7 @@
 				AE603C7C118CC85100D312FC /* CDRExampleGroup.m */,
 				AE603C7D118CC85100D312FC /* CDRSpec.m */,
 				AE603CA9118CC94100D312FC /* CDRFunctions.m */,
+				AE0C337111D425B0006419EA /* SpecHelper.m */,
 			);
 			name = Source;
 			path = ../cedar/Source;
@@ -370,6 +380,7 @@
 				AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */,
 				AE2B9EE211BD5EE900DC1BF2 /* CDRExampleSpec.m */,
 				AE2B9FE711BD76C700DC1BF2 /* CDRExampleGroupSpec.m */,
+				AE0C336811D410C7006419EA /* SpecHelperSpec.m */,
 			);
 			path = Spec;
 			sourceTree = "<group>";
@@ -381,6 +392,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0C349711D43588006419EA /* CDRExampleParent.h in Headers */,
 				AE603D71118CCB6000D312FC /* CDRFunctions.h in Headers */,
 				AE603D78118CCB6000D312FC /* SpecHelper.h in Headers */,
 				AED41F9411B871BC006DBB00 /* CDRSpec.h in Headers */,
@@ -409,7 +421,7 @@
 			name = Cedar;
 			productInstallPath = "$(HOME)/Library/Frameworks";
 			productName = Cedar;
-			productReference = 8DC2EF5B0486A6940098B216 /* Cedar.framework */;
+			productReference = 8DC2EF5B0486A6940098B216 /* Cedar */;
 			productType = "com.apple.product-type.framework";
 		};
 		AE12B63111D0191000C236FF /* iPhoneSpecs */ = {
@@ -547,6 +559,7 @@
 				AE603C82118CC85100D312FC /* CDRSpec.m in Sources */,
 				AE603CAB118CC94100D312FC /* CDRFunctions.m in Sources */,
 				AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */,
+				AE0C338511D427CC006419EA /* SpecHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +574,7 @@
 				AE12B6D511D01A7B00C236FF /* main.m in Sources */,
 				AE2ECF2711D1438500580726 /* SlowSpec.m in Sources */,
 				AE6B43C711D285BE003E2B08 /* CDRExampleStateMapSpec.m in Sources */,
+				AE0C339711D428A9006419EA /* SpecHelperSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +588,7 @@
 				AE16DC7B11BB514300270D0B /* CppSpecSpec.mm in Sources */,
 				AE2B9EE311BD5EE900DC1BF2 /* CDRExampleSpec.m in Sources */,
 				AE2B9FE811BD76C700DC1BF2 /* CDRExampleGroupSpec.m in Sources */,
+				AE0C339611D428A8006419EA /* SpecHelperSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +608,7 @@
 				AE2ECEB711D13BA800580726 /* CDRSpecStatusCell.m in Sources */,
 				AE6B43AB11D281B0003E2B08 /* CDRExampleStateMap.m in Sources */,
 				AEB2651C11D291AC00416BF1 /* CDRExampleDetailsViewController.m in Sources */,
+				AE0C338611D427D1006419EA /* SpecHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

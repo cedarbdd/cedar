@@ -4,6 +4,7 @@
 #import "CDRSpec.h"
 #import "CDRExampleReporter.h"
 #import "CDRDefaultReporter.h"
+#import "SpecHelper.h"
 
 BOOL CDRIsASpecClass(Class class) {
     if (strcmp("CDRSpec", class_getName(class))) {
@@ -36,7 +37,7 @@ NSArray *CDREnumerateSpecClasses() {
 NSArray *CDRCreateRootGroupsFromSpecClasses(NSArray *specClasses) {
     NSMutableArray *rootGroups = [[NSMutableArray alloc] initWithCapacity:[specClasses count]];
     for (Class class in specClasses) {
-        CDRSpec *spec = [[class alloc] init];
+        CDRSpec *spec = [[class alloc] initWithSpecHelper:specHelper];
         [spec defineBehaviors];
         [rootGroups addObject:spec.rootGroup];
         [spec release];
@@ -46,6 +47,8 @@ NSArray *CDRCreateRootGroupsFromSpecClasses(NSArray *specClasses) {
 
 int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> reporter) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    specHelper = [[SpecHelper alloc] init];
 
     if (!specClasses) {
         specClasses = CDREnumerateSpecClasses();
@@ -59,6 +62,7 @@ int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporte
     int result = [reporter result];
 
     [groups release];
+    [specHelper release];
     [pool drain];
     return result;
 }

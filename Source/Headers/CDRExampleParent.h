@@ -4,6 +4,8 @@
 
 - (void)setUp;
 - (void)tearDown;
+
+@optional
 - (BOOL)hasFullText;
 - (NSString *)fullText;
 

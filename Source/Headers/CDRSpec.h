@@ -2,7 +2,7 @@
 #import "CDRExampleBase.h"
 
 @protocol CDRExampleReporter;
-@class CDRExampleGroup;
+@class CDRExampleGroup, SpecHelper;
 
 @protocol CDRSpec
 @end
@@ -28,7 +28,19 @@ void fail(NSString *reason);
 
 @property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
 
+- (id)initWithSpecHelper:(SpecHelper *)specHelper;
+
 - (void)declareBehaviors;
 - (void)defineBehaviors;
 
+@end
+
+#define SPEC_BEGIN(name)             \
+@interface name : CDRSpec            \
+@end                                 \
+@implementation name                 \
+- (void)declareBehaviors {
+
+#define SPEC_END                     \
+}                                    \
 @end

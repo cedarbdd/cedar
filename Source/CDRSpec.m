@@ -1,6 +1,7 @@
 #import "CDRSpec.h"
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
+#import "SpecHelper.h"
 
 static CDRSpec *currentSpec;
 
@@ -35,9 +36,10 @@ void fail(NSString *reason) {
 @synthesize currentGroup = currentGroup_, rootGroup = rootGroup_;
 
 #pragma mark Memory
-- (id)init {
+- (id)initWithSpecHelper:(SpecHelper *)specHelper {
     if (self = [super init]) {
         rootGroup_ = [[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES];
+        rootGroup_.parent = specHelper;
         self.currentGroup = rootGroup_;
     }
     return self;

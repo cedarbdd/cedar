@@ -1,11 +1,11 @@
 #import "CDRSpec.h"
+#import "CDRExampleParent.h"
 
-#define SPEC_BEGIN(name)             \
-@interface name : CDRSpec            \
-@end                                 \
-@implementation name                 \
-- (void)declareBehaviors {
+@interface SpecHelper : NSObject <CDRExampleParent>
 
-#define SPEC_END                     \
-}                                    \
+- (void)beforeEach;
+- (void)afterEach;
+
 @end
+
+extern SpecHelper *specHelper;
