@@ -29,7 +29,7 @@ SPEC_BEGIN(SpecHelperSpec)
 describe(@"SpecHelper", ^{
     describe(@"specs", ^{
         it(@"should have an instance of SpecHelper", ^{
-            assertThat(specHelper, notNilValue());
+            assertThat([SpecHelper specHelper], notNilValue());
         });
     });
 

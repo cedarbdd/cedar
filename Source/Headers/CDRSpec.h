@@ -28,8 +28,6 @@ void fail(NSString *reason);
 
 @property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
 
-- (id)initWithSpecHelper:(SpecHelper *)specHelper;
-
 - (void)declareBehaviors;
 - (void)defineBehaviors;
 

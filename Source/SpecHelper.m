@@ -4,6 +4,14 @@ SpecHelper *specHelper;
 
 @implementation SpecHelper
 
++ (void)initialize {
+    specHelper = [[SpecHelper alloc] init];
+}
+
++ (id)specHelper {
+    return specHelper;
+}
+
 - (void)beforeEach {
 }
 

@@ -36,10 +36,10 @@ void fail(NSString *reason) {
 @synthesize currentGroup = currentGroup_, rootGroup = rootGroup_;
 
 #pragma mark Memory
-- (id)initWithSpecHelper:(SpecHelper *)specHelper {
+- (id)init {
     if (self = [super init]) {
         rootGroup_ = [[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES];
-        rootGroup_.parent = specHelper;
+        rootGroup_.parent = [SpecHelper specHelper];
         self.currentGroup = rootGroup_;
     }
     return self;

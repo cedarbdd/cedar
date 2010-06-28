@@ -3,9 +3,9 @@
 
 @interface SpecHelper : NSObject <CDRExampleParent>
 
++ (id)specHelper;
+
 - (void)beforeEach;
 - (void)afterEach;
 
 @end
-
-extern SpecHelper *specHelper;
