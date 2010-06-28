@@ -110,14 +110,6 @@
     return !isRoot_;
 }
 
-- (NSString *)fullText {
-    if (self.parent && [self.parent hasFullText]) {
-        return [NSString stringWithFormat:@"%@ %@", [self.parent fullText], self.text];
-    } else {
-        return self.text;
-    }
-}
-
 #pragma mark KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [self willChangeValueForKey:@"state"];

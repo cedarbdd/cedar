@@ -31,6 +31,7 @@ typedef enum CDRExampleState CDRExampleState;
 - (void)run;
 - (BOOL)hasChildren;
 - (NSString *)message;
+- (NSString *)fullText;
 @end
 
 @interface CDRExampleBase (RunReporting)
