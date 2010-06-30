@@ -347,8 +347,7 @@
 				AE603CA9118CC94100D312FC /* CDRFunctions.m */,
 				AE0C337111D425B0006419EA /* SpecHelper.m */,
 			);
-			name = Source;
-			path = ../cedar/Source;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		AE603C78118CC81D00D312FC /* Headers */ = {
