@@ -219,8 +219,6 @@ describe(@"CDRExampleGroup", ^{
             __block id mockObserver;
 
             describe(@"when a child changes state, causing the group to change state", ^{
-                __block CDRExample *example;
-
                 beforeEach(^{
                     [group add:passingExample];
 
@@ -239,7 +237,6 @@ describe(@"CDRExampleGroup", ^{
 
             describe(@"when a child's child changes state, causing the child group to change state, causing the top-level group to change state", ^{
                 __block CDRExampleGroup *subgroup;
-                __block CDRExample *example;
 
                 beforeEach(^{
                     subgroup = [[CDRExampleGroup alloc] initWithText:@"subgroup"];

@@ -47,7 +47,6 @@
 		AE12B72611D01C1E00C236FF /* OCMock-iPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE12B6F411D01C1600C236FF /* OCMock-iPhone.framework */; };
 		AE12B74D11D01E3D00C236FF /* Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AE12B74C11D01E3D00C236FF /* Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE12B74E11D01E3D00C236FF /* Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE12B74C11D01E3D00C236FF /* Cedar.h */; };
-		AE12B79911D0216700C236FF /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE12B79811D0216700C236FF /* PLBlocks.framework */; };
 		AE16DC7B11BB514300270D0B /* CppSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */; };
 		AE16DC9E11BB52B100270D0B /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DC9C11BB52B100270D0B /* ActualValue.h */; };
 		AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
@@ -87,6 +86,7 @@
 		AED41F3711B86A44006DBB00 /* CDRFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE603CA9118CC94100D312FC /* CDRFunctions.m */; };
 		AED41F9411B871BC006DBB00 /* CDRSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6F118CCB6000D312FC /* CDRSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AED41F9511B871C1006DBB00 /* CDRExampleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6C118CCB6000D312FC /* CDRExampleBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEEE1DDD11DBE82500029872 /* Rakefile in Resources */ = {isa = PBXBuildFile; fileRef = AEEE1DDC11DBE82500029872 /* Rakefile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,7 +155,6 @@
 		AE12B6F211D01C0800C236FF /* OCHamcrest-iPhone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "OCHamcrest-iPhone.framework"; path = "/Users/pivotal/workspace/OCHamcrest/Source/build/Release-iphoneuniversal/OCHamcrest-iPhone.framework"; sourceTree = "<absolute>"; };
 		AE12B6F411D01C1600C236FF /* OCMock-iPhone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "OCMock-iPhone.framework"; path = "/Users/pivotal/workspace/OCMock/Source/build/Release-iphoneuniversal/OCMock-iPhone.framework"; sourceTree = "<absolute>"; };
 		AE12B74C11D01E3D00C236FF /* Cedar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cedar.h; sourceTree = "<group>"; };
-		AE12B79811D0216700C236FF /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PLBlocks.framework; path = ../StoryAccepter/PLBlocks.framework; sourceTree = "<group>"; };
 		AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CppSpecSpec.mm; sourceTree = "<group>"; };
 		AE16DC9C11BB52B100270D0B /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
 		AE16DC9D11BB52B100270D0B /* ActualValue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActualValue.mm; sourceTree = "<group>"; };
@@ -177,7 +176,7 @@
 		AE603C7C118CC85100D312FC /* CDRExampleGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroup.m; sourceTree = "<group>"; };
 		AE603C7D118CC85100D312FC /* CDRSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpec.m; sourceTree = "<group>"; };
 		AE603CA9118CC94100D312FC /* CDRFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRFunctions.m; sourceTree = "<group>"; };
-		AE603D65118CCB2100D312FC /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE603D65118CCB2100D312FC /* Specs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Specs; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE603D69118CCB6000D312FC /* CDRFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRFunctions.h; sourceTree = "<group>"; };
 		AE603D6A118CCB6000D312FC /* CDRDefaultReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRDefaultReporter.h; sourceTree = "<group>"; };
 		AE603D6B118CCB6000D312FC /* CDRExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExample.h; sourceTree = "<group>"; };
@@ -198,6 +197,7 @@
 		AEBAB0C111B9D2380085EC6E /* CedarApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarApplicationDelegate.h; sourceTree = "<group>"; };
 		AEBAB0C311B9D8120085EC6E /* CedarApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CedarApplicationDelegate.m; sourceTree = "<group>"; };
 		AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib-iphonesimulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEEE1DDC11DBE82500029872 /* Rakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,7 +215,6 @@
 			files = (
 				AE12B72511D01C1E00C236FF /* OCHamcrest-iPhone.framework in Frameworks */,
 				AE12B72611D01C1E00C236FF /* OCMock-iPhone.framework in Frameworks */,
-				AE12B79911D0216700C236FF /* PLBlocks.framework in Frameworks */,
 				AE2ECB6711D03A7A00580726 /* libCedar-StaticLib-iphonesimulator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,7 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC2EF5B0486A6940098B216 /* Cedar.framework */,
-				AE603D65118CCB2100D312FC /* Test */,
+				AE603D65118CCB2100D312FC /* Specs */,
 				AED41F2C11B869D0006DBB00 /* libCedar-StaticLib-iphonesimulator.a */,
 				AE12B63211D0191000C236FF /* iPhoneSpecs.app */,
 			);
@@ -262,6 +261,7 @@
 				AE4E524911B357F5001E36F3 /* README.markdown */,
 				AE17ECE211B6F00B004C4DC0 /* MACROS */,
 				AE12B63411D0191000C236FF /* iPhoneSpecs-Info.plist */,
+				AEEE1DDC11DBE82500029872 /* Rakefile */,
 			);
 			name = Cedar;
 			sourceTree = "<group>";
@@ -269,7 +269,6 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				AE12B79811D0216700C236FF /* PLBlocks.framework */,
 				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
 				AE603DDB118CCD6400D312FC /* OCHamcrest.framework */,
 				AE16DF8211C5F45800270D0B /* OCMock.framework */,
@@ -457,7 +456,7 @@
 			);
 			name = Specs;
 			productName = Test;
-			productReference = AE603D65118CCB2100D312FC /* Test */;
+			productReference = AE603D65118CCB2100D312FC /* Specs */;
 			productType = "com.apple.product-type.tool";
 		};
 		AED41F2B11B869D0006DBB00 /* Cedar-StaticLib */ = {
@@ -511,6 +510,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEEE1DDD11DBE82500029872 /* Rakefile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +529,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator3.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos3.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build";
+			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator4.0 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos4.0 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build";
 		};
 		AE0CDEC011C84D6D00EF2275 /* Build universal static lib */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -711,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -723,6 +724,7 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Cedar-iPhone";
@@ -747,7 +749,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iPhoneSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				ONLY_ACTIVE_ARCH = YES;
@@ -762,7 +764,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = iPhoneSpecs;
-				SDKROOT = iphonesimulator3.1.3;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
 		};
@@ -783,7 +785,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iPhoneSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				ONLY_ACTIVE_ARCH = YES;
@@ -798,7 +800,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = iPhoneSpecs;
-				SDKROOT = iphonesimulator3.1.3;
+				SDKROOT = iphonesimulator4.0;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -826,7 +828,7 @@
 					Foundation,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = Test;
+				PRODUCT_NAME = Specs;
 			};
 			name = Debug;
 		};
@@ -852,7 +854,7 @@
 					Foundation,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = Test;
+				PRODUCT_NAME = Specs;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -868,7 +870,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
-				SDKROOT = iphonesimulator3.2;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
 		};
@@ -883,7 +885,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
-				SDKROOT = iphonesimulator3.2;
+				SDKROOT = iphonesimulator4.0;
 				ZERO_LINK = NO;
 			};
 			name = Release;
