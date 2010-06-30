@@ -48,8 +48,6 @@
 		AE12B74D11D01E3D00C236FF /* Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AE12B74C11D01E3D00C236FF /* Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE12B74E11D01E3D00C236FF /* Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE12B74C11D01E3D00C236FF /* Cedar.h */; };
 		AE16DC7B11BB514300270D0B /* CppSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC7A11BB514300270D0B /* CppSpecSpec.mm */; };
-		AE16DC9E11BB52B100270D0B /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE16DC9C11BB52B100270D0B /* ActualValue.h */; };
-		AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
 		AE16DD6B11BC93F600270D0B /* CDRExampleReporterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE16DD6A11BC93F600270D0B /* CDRExampleReporterViewController.m */; };
 		AE16DF8311C5F45800270D0B /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
 		AE16DFC211C5F4AD00270D0B /* OCMock.framework in Copy frameworks */ = {isa = PBXBuildFile; fileRef = AE16DF8211C5F45800270D0B /* OCMock.framework */; };
@@ -87,6 +85,7 @@
 		AED41F9411B871BC006DBB00 /* CDRSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6F118CCB6000D312FC /* CDRSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AED41F9511B871C1006DBB00 /* CDRExampleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE603D6C118CCB6000D312FC /* CDRExampleBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE1DDD11DBE82500029872 /* Rakefile in Resources */ = {isa = PBXBuildFile; fileRef = AEEE1DDC11DBE82500029872 /* Rakefile */; };
+		AEEE1E1711DBF92F00029872 /* ActualValue.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE16DC9D11BB52B100270D0B /* ActualValue.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -303,8 +302,7 @@
 				AE16DC9C11BB52B100270D0B /* ActualValue.h */,
 				AE16DC9D11BB52B100270D0B /* ActualValue.mm */,
 			);
-			name = Matchers;
-			path = ../../cedar/Source/Matchers;
+			path = Matchers;
 			sourceTree = "<group>";
 		};
 		AE16DD2011BC868900270D0B /* iPhone */ = {
@@ -395,7 +393,6 @@
 				AE603D78118CCB6000D312FC /* SpecHelper.h in Headers */,
 				AED41F9411B871BC006DBB00 /* CDRSpec.h in Headers */,
 				AED41F9511B871C1006DBB00 /* CDRExampleBase.h in Headers */,
-				AE16DC9E11BB52B100270D0B /* ActualValue.h in Headers */,
 				AE12B74D11D01E3D00C236FF /* Cedar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,8 +554,8 @@
 				AE603C81118CC85100D312FC /* CDRExampleGroup.m in Sources */,
 				AE603C82118CC85100D312FC /* CDRSpec.m in Sources */,
 				AE603CAB118CC94100D312FC /* CDRFunctions.m in Sources */,
-				AE16DC9F11BB52B100270D0B /* ActualValue.mm in Sources */,
 				AE0C338511D427CC006419EA /* SpecHelper.m in Sources */,
+				AEEE1E1711DBF92F00029872 /* ActualValue.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
