@@ -12,11 +12,11 @@ extern CDRSpecBlock PENDING;
 #ifdef __cplusplus
 extern "C" {
 #endif
-void describe(NSString *text, CDRSpecBlock block);
-void beforeEach(CDRSpecBlock block);
-void afterEach(CDRSpecBlock block);
-void it(NSString *text, CDRSpecBlock block);
-void fail(NSString *reason);
+void describe(NSString *, CDRSpecBlock);
+void beforeEach(CDRSpecBlock);
+void afterEach(CDRSpecBlock);
+void it(NSString *, CDRSpecBlock);
+void fail(NSString *);
 #ifdef __cplusplus
 }
 #endif
@@ -27,10 +27,11 @@ void fail(NSString *reason);
 }
 
 @property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
-
-- (void)declareBehaviors;
 - (void)defineBehaviors;
+@end
 
+@interface CDRSpec (SpecDeclaration)
+- (void)declareBehaviors;
 @end
 
 #define SPEC_BEGIN(name)             \

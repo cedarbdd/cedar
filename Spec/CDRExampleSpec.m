@@ -17,6 +17,80 @@
 
 SPEC_BEGIN(CDRExampleSpec)
 
+typedef void (^CDRSharedExampleBlock)(NSDictionary *context);
+
+CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
+    __block CDRExample *example;
+    __block NSString *exampleText;
+
+    beforeEach(^{
+        example = [context valueForKey:@"example"];
+        exampleText = [context valueForKey:@"exampleText"];
+    });
+
+    describe(@"with no parent", ^{
+        beforeEach(^{
+            assertThat([example parent], nilValue());
+        });
+
+        it(@"should return just its own text", ^{
+            assertThat([example fullText], equalTo(exampleText));
+        });
+    });
+
+    describe(@"with a parent", ^{
+        __block CDRExampleGroup *group;
+        NSString *groupText = @"Parent!";
+
+        beforeEach(^{
+            group = [[CDRExampleGroup alloc] initWithText:groupText];
+            [group add:example];
+            assertThat([example parent], isNot(nilValue()));
+        });
+
+        afterEach(^{
+            [group release];
+        });
+
+        it(@"should return its parent's text pre-pended with its own text", ^{
+            assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@", groupText, exampleText]));
+        });
+
+        describe(@"when the parent also has a parent", ^{
+            __block CDRExampleGroup *rootGroup;
+            NSString *rootGroupText = @"Root!";
+
+            beforeEach(^{
+                rootGroup = [[CDRExampleGroup alloc] initWithText:rootGroupText];
+                [rootGroup add:group];
+            });
+
+            afterEach(^{
+                [rootGroup release];
+            });
+
+            it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
+                assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
+            });
+        });
+    });
+
+    describe(@"with a root group as a parent", ^{
+        __block CDRExampleGroup *rootGroup;
+
+        beforeEach(^{
+            rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
+            [rootGroup add:example];
+            assertThat([example parent], isNot(nilValue()));
+            assertThatBool([[example parent] hasFullText], equalToBool(NO));
+        });
+
+        it(@"should not include its parent's text", ^{
+            assertThat([example fullText], equalTo([example text]));
+        });
+    });
+} copy];
+
 describe(@"CDRExample", ^{
     __block CDRExample *example;
     NSString *exampleText = @"Example!";
@@ -137,67 +211,14 @@ describe(@"CDRExample", ^{
     });
 
     describe(@"fullText", ^{
-        describe(@"with no parent", ^{
-            beforeEach(^{
-                assertThat([example parent], nilValue());
-            });
+        __block NSMutableDictionary *sharedExampleContext = [[NSMutableDictionary alloc] init];
 
-            it(@"should return just its own text", ^{
-                assertThat([example fullText], equalTo(exampleText));
-            });
+        beforeEach(^{
+            [sharedExampleContext setObject:example forKey:@"example"];
+            [sharedExampleContext setObject:exampleText forKey:@"exampleText"];
         });
 
-        describe(@"with a parent", ^{
-            __block CDRExampleGroup *group;
-            NSString *groupText = @"Parent!";
-
-            beforeEach(^{
-                group = [[CDRExampleGroup alloc] initWithText:groupText];
-                [group add:example];
-                assertThat([example parent], isNot(nilValue()));
-            });
-
-            afterEach(^{
-                [group release];
-            });
-
-            it(@"should return its parent's text pre-pended with its own text", ^{
-                assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@", groupText, exampleText]));
-            });
-
-            describe(@"when the parent also has a parent", ^{
-                __block CDRExampleGroup *rootGroup;
-                NSString *rootGroupText = @"Root!";
-
-                beforeEach(^{
-                    rootGroup = [[CDRExampleGroup alloc] initWithText:rootGroupText];
-                    [rootGroup add:group];
-                });
-
-                afterEach(^{
-                    [rootGroup release];
-                });
-
-                it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
-                    assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
-                });
-            });
-        });
-
-        describe(@"with a root group as a parent", ^{
-            __block CDRExampleGroup *rootGroup;
-
-            beforeEach(^{
-                rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
-                [rootGroup add:example];
-                assertThat([example parent], isNot(nilValue()));
-                assertThatBool([[example parent] hasFullText], equalToBool(NO));
-            });
-
-            it(@"should not include its parent's text", ^{
-                assertThat([example fullText], equalTo([example text]));
-            });
-        });
+        sharedExampleMethod(sharedExampleContext);
     });
 
     describe(@"message", ^{

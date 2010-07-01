@@ -13,51 +13,53 @@
 #endif
 
 void expectFailure(CDRSpecBlock block) {
-  @try {
-    block();
-  }
-  @catch (CDRSpecFailure *) {
-    return;
-  }
+    @try {
+        block();
+    }
+    @catch (CDRSpecFailure *) {
+        return;
+    }
 
-  fail(@"equality expectation should have failed.");
+    fail(@"equality expectation should have failed.");
 }
+
+static NSString *globalValue__;
 
 SPEC_BEGIN(SpecSpec)
 
 describe(@"Spec", ^ {
-  beforeEach(^ {
-//    NSLog(@"=====================> I should run before all specs.");
-  });
-
-  afterEach(^{
-//    NSLog(@"=====================> I should run after all specs.");
-  });
-
-  describe(@"a nested spec", ^ {
     beforeEach(^ {
-//      NSLog(@"=====================> I should run only before the nested specs.");
+        //    NSLog(@"=====================> I should run before all specs.");
     });
 
-    afterEach(^ {
-//      NSLog(@"=====================> I should run only after the nested specs.");
+    afterEach(^{
+        //    NSLog(@"=====================> I should run after all specs.");
     });
 
-    it(@"should also run", ^ {
-//      NSLog(@"=====================> Nested spec");
+    describe(@"a nested spec", ^ {
+        beforeEach(^ {
+            //      NSLog(@"=====================> I should run only before the nested specs.");
+        });
+
+        afterEach(^ {
+            //      NSLog(@"=====================> I should run only after the nested specs.");
+        });
+
+        it(@"should also run", ^ {
+            //      NSLog(@"=====================> Nested spec");
+        });
+
+        it(@"should also also run", ^ {
+            //      NSLog(@"=====================> Another nested spec");
+        });
     });
 
-    it(@"should also also run", ^ {
-//      NSLog(@"=====================> Another nested spec");
+    it(@"should run", ^ {
+        //    NSLog(@"=====================> Spec");
     });
-  });
 
-  it(@"should run", ^ {
-//    NSLog(@"=====================> Spec");
-  });
-
-  it(@"should be pending", PENDING);
-  it(@"should also be pending", nil);
+    it(@"should be pending", PENDING);
+    it(@"should also be pending", nil);
 });
 
 describe(@"The spec failure exception", ^{
@@ -71,47 +73,72 @@ describe(@"The spec failure exception", ^{
 });
 
 describe(@"Hamcrest matchers", ^{
-  describe(@"equality", ^{
-    describe(@"with Objective-C types", ^{
-      __block NSNumber *expectedNumber;
+    describe(@"equality", ^{
+        describe(@"with Objective-C types", ^{
+            __block NSNumber *expectedNumber;
 
-      beforeEach(^{
-        expectedNumber = [NSNumber numberWithInt:1];
-      });
+            beforeEach(^{
+                expectedNumber = [NSNumber numberWithInt:1];
+            });
 
-      it(@"should succeed when the two objects are equal", ^{
-        assertThat(expectedNumber, equalTo([NSNumber numberWithInt:1]));
-      });
+            it(@"should succeed when the two objects are equal", ^{
+                assertThat(expectedNumber, equalTo([NSNumber numberWithInt:1]));
+            });
 
-      it(@"should fail when the two objects are not equal", ^{
-        expectFailure(^{
-          assertThat(expectedNumber, equalTo([NSNumber numberWithInt:2]));
+            it(@"should fail when the two objects are not equal", ^{
+                expectFailure(^{
+                    assertThat(expectedNumber, equalTo([NSNumber numberWithInt:2]));
+                });
+            });
         });
-      });
+
+        describe(@"with built-in types", ^{
+            __block int expectedValue = 1;
+
+            beforeEach(^{
+                expectedValue = 1;
+            });
+
+            it(@"should succeed when the two objects are equal", ^{
+                assertThatInt(expectedValue, is(equalToInt(1)));
+            });
+
+            it(@"should succeed with different types that are comparable", ^{
+                assertThatInt(expectedValue, is(equalToFloat(1.0)));
+            });
+
+            it(@"should fail when the objects are not equal", ^{
+                expectFailure(^{
+                    assertThatInt(expectedValue, is(equalToInt(2)));
+                });
+            });
+        });
+    });
+});
+
+describe(@"a describe block", ^{
+    beforeEach(^{
+        globalValue__ = nil;
     });
 
-    describe(@"with built-in types", ^{
-      __block int expectedValue = 1;
+    describe(@"that contains a beforeEach in a shared example group", ^{
+        itShouldBehaveLike(@"a describe context that contains a beforeEach in a shared example group", [NSDictionary dictionary]);
 
-      beforeEach(^{
-        expectedValue = 1;
-      });
-
-      it(@"should succeed when the two objects are equal", ^{
-        assertThatInt(expectedValue, is(equalToInt(1)));
-      });
-
-      it(@"should succeed with different types that are comparable", ^{
-        assertThatInt(expectedValue, is(equalToFloat(1.0)));
-      });
-
-      it(@"should fail when the objects are not equal", ^{
-        expectFailure(^{
-          assertThatInt(expectedValue, is(equalToInt(2)));
+        it(@"should run the shared beforeEach before the spec", ^{
+            assertThat(globalValue__, notNilValue());
         });
-      });
     });
-  });
 });
 
 SPEC_END
+
+
+SHARED_EXAMPLE_GROUPS_BEGIN(Specs)
+
+sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^(NSDictionary *context) {
+    beforeEach(^{
+        globalValue__ = [NSString string];
+    });
+});
+
+SHARED_EXAMPLE_GROUPS_END

@@ -10,9 +10,20 @@ def system_or_exit(cmd)
   system(cmd) or raise "******** Build failed ********"
 end
 
+task :default => :specs
+
 task :cruise do
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean build > #{File.join(ENV['CC_BUILD_ARTIFACTS'], "build.output")}])
 #  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -sdk macosx10.6 -target #{TARGET_NAME} -configuration #{CONFIGURATION} clean build])
+  ENV["DYLD_FRAMEWORK_PATH"] = BUILD_DIR
+  system_or_exit(%Q[#{File.join(BUILD_DIR, TARGET_NAME)}])
+end
+
+task :build do
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean build])
+end
+
+task :specs => :build do
   ENV["DYLD_FRAMEWORK_PATH"] = BUILD_DIR
   system_or_exit(%Q[#{File.join(BUILD_DIR, TARGET_NAME)}])
 end

@@ -6,10 +6,10 @@
 #import "CDRDefaultReporter.h"
 #import "SpecHelper.h"
 
-BOOL CDRIsASpecClass(Class class) {
-    if (strcmp("CDRSpec", class_getName(class))) {
+BOOL CDRClassIsOfType(Class class, const char * const className) {
+    if (strcmp(className, class_getName(class))) {
         while (class) {
-            if (class_conformsToProtocol(class, NSProtocolFromString(@"CDRSpec"))) {
+            if (class_conformsToProtocol(class, NSProtocolFromString([NSString stringWithCString:className encoding:NSUTF8StringEncoding]))) {
                 return YES;
             }
             class = class_getSuperclass(class);
@@ -19,19 +19,20 @@ BOOL CDRIsASpecClass(Class class) {
     return NO;
 }
 
-NSArray *CDREnumerateSpecClasses() {
+NSArray *CDRSelectClasses(BOOL (^classSelectionPredicate)(Class class)) {
     unsigned int numberOfClasses = objc_getClassList(NULL, 0);
     Class classes[numberOfClasses];
     numberOfClasses = objc_getClassList(classes, numberOfClasses);
 
-    NSMutableArray *specClasses = [NSMutableArray array];
+    NSMutableArray *selectedClasses = [NSMutableArray array];
     for (unsigned int i = 0; i < numberOfClasses; ++i) {
         Class class = classes[i];
-        if (CDRIsASpecClass(class)) {
-            [specClasses addObject:class];
+
+        if (classSelectionPredicate(class)) {
+            [selectedClasses addObject:class];
         }
     }
-    return specClasses;
+    return selectedClasses;
 }
 
 NSArray *CDRCreateRootGroupsFromSpecClasses(NSArray *specClasses) {
@@ -45,12 +46,23 @@ NSArray *CDRCreateRootGroupsFromSpecClasses(NSArray *specClasses) {
     return rootGroups;
 }
 
+void CDRDefineSharedExampleGroups() {
+    NSArray *sharedExampleGroupPoolClasses = CDRSelectClasses(^(Class class) { return CDRClassIsOfType(class, "CDRSharedExampleGroupPool"); });
+    for (Class class in sharedExampleGroupPoolClasses) {
+        CDRSharedExampleGroupPool *sharedExampleGroupPool = [[class alloc] init];
+        [sharedExampleGroupPool declareSharedExampleGroups];
+        [sharedExampleGroupPool release];
+    }
+}
+
 int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> reporter) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     if (!specClasses) {
-        specClasses = CDREnumerateSpecClasses();
+        specClasses = CDRSelectClasses(^(Class class) { return CDRClassIsOfType(class, "CDRSpec"); });
     }
+
+    CDRDefineSharedExampleGroups();
     NSArray *groups = CDRCreateRootGroupsFromSpecClasses(specClasses);
 
     [reporter runWillStartWithGroups:groups];

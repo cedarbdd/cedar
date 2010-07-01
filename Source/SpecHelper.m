@@ -12,6 +12,18 @@ SpecHelper *specHelper;
     return specHelper;
 }
 
+- (id)init {
+    if (self = [super init]) {
+        sharedExampleGroups_ = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [sharedExampleGroups_ release];
+    [super dealloc];
+}
+
 - (void)beforeEach {
 }
 

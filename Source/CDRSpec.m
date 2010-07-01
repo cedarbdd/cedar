@@ -52,9 +52,6 @@ void fail(NSString *reason) {
     [super dealloc];
 }
 
-- (void)declareBehaviors {
-}
-
 - (void)defineBehaviors {
     currentSpec = self;
     [self declareBehaviors];
