@@ -31,12 +31,12 @@
 		AEEE1FF811DC27B800029872 /* CDRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC911DC27B800029872 /* CDRSpec.m */; };
 		AEEE1FF911DC27B800029872 /* CDRDefaultReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCB11DC27B800029872 /* CDRDefaultReporter.h */; };
 		AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
-		AEEE1FFB11DC27B800029872 /* CDRExampleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */; };
+		AEEE1FFB11DC27B800029872 /* CDRExampleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
-		AEEE1FFD11DC27B800029872 /* CDRExampleParent.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */; };
-		AEEE1FFE11DC27B800029872 /* CDRExampleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD011DC27B800029872 /* CDRExampleReporter.h */; };
+		AEEE1FFD11DC27B800029872 /* CDRExampleParent.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEEE1FFE11DC27B800029872 /* CDRExampleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD011DC27B800029872 /* CDRExampleReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE1FFF11DC27B800029872 /* CDRFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD111DC27B800029872 /* CDRFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AEEE200011DC27B800029872 /* CDRSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD211DC27B800029872 /* CDRSpec.h */; };
+		AEEE200011DC27B800029872 /* CDRSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD211DC27B800029872 /* CDRSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE200111DC27B800029872 /* Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD311DC27B800029872 /* Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE200811DC27B800029872 /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FDB11DC27B800029872 /* SpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE201111DC27B800029872 /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE611DC27B800029872 /* SpecHelper.m */; };
@@ -82,6 +82,13 @@
 		AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEE11DC27B800029872 /* SlowSpec.m */; };
 		AEEE22D511DC337F00029872 /* OCHamcrest-iPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE22D311DC337F00029872 /* OCHamcrest-iPhone.framework */; };
 		AEEE22D611DC337F00029872 /* OCMock-iPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE22D411DC337F00029872 /* OCMock-iPhone.framework */; };
+		AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD511DC27B800029872 /* CDRExampleDetailsViewController.h */; };
+		AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD611DC27B800029872 /* CDRExampleReporterViewController.h */; };
+		AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */; };
+		AEFD166111DCFEC900F4448A /* CDRExampleReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD011DC27B800029872 /* CDRExampleReporter.h */; };
+		AEFD167A11DCFF1700F4448A /* CDRSpec.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD211DC27B800029872 /* CDRSpec.h */; };
+		AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */; };
+		AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,7 +127,14 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */,
+				AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */,
+				AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */,
 				AEEE226011DC2C8300029872 /* CDRFunctions.h in Copy headers to framework */,
+				AEFD166111DCFEC900F4448A /* CDRExampleReporter.h in Copy headers to framework */,
+				AEFD167A11DCFF1700F4448A /* CDRSpec.h in Copy headers to framework */,
+				AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */,
+				AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */,
 				AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */,
 				AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */,
 			);
@@ -255,6 +269,9 @@
 		AEEE1FC311DC27B800029872 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				AEEE1FCA11DC27B800029872 /* Headers */,
+				AEEE1FDC11DC27B800029872 /* iPhone */,
+				AEEE1FE311DC27B800029872 /* Matchers */,
 				AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */,
 				AEEE1FC511DC27B800029872 /* CDRExample.m */,
 				AEEE1FC611DC27B800029872 /* CDRExampleBase.m */,
@@ -262,9 +279,6 @@
 				AEEE1FC811DC27B800029872 /* CDRFunctions.m */,
 				AEEE1FC911DC27B800029872 /* CDRSpec.m */,
 				AEEE1FE611DC27B800029872 /* SpecHelper.m */,
-				AEEE1FCA11DC27B800029872 /* Headers */,
-				AEEE1FDC11DC27B800029872 /* iPhone */,
-				AEEE1FE311DC27B800029872 /* Matchers */,
 			);
 			path = Source;
 			sourceTree = "<group>";
