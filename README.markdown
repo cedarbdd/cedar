@@ -109,6 +109,71 @@ Pivotal also has a fork of a [GitHub import of the OCHamcrest codebase](http://g
 This fork contains our iPhone-specific static framework target.
 
 
+## Shared example groups
+
+Cedar supports shared example groups; you can declare them in one of two ways:
+either inline with your spec declarations, or separately.
+
+Declaring shared examples inline with your specs is the simplest:
+
+    SPEC_BEGIN(FooSpecs)
+
+    sharedExamplesFor(@"a similarly-behaving thing", ^(NSDictionary *context) {
+        it(@"should do something common", ^{
+            ...
+        });
+    });
+
+    NSDictionary *context = [NSDictionary dictionary];
+
+    describe(@"Something that shares behavior", ^{
+        itShouldBehaveLike(@"a similarly-behaving thing", context);
+    });
+
+    describe(@"Something else that shares behavior", ^{
+        itShouldBehaveLike(@"a similarly-behaving thing", context);
+    });
+
+    SPEC_END
+
+Sometimes you'll want to put shared examples in a separate file so you can use
+them in several specs across different files.  You can do this using macros
+specifically for declaring shared example groups:
+
+    SHARED_EXAMPLE_GROUPS_BEGIN(GloballyCommon)
+
+    sharedExamplesFor(@"a thing with globally common behavior", ^(NSDictionary *context) {
+        it(@"should do something really common", ^{
+            ...
+        });
+    });
+
+    SHARED_EXAMPLE_GROUPS_END
+
+The context dictionary allows you to pass example-specific state into the shared
+example group.  It is important that you define the dictionary object you pass
+in at spec definition time, rather than spec run time.  To put it another way,
+instantiate your context dictionary in a describe block, not in a beforeEach
+block.
+
+### Long-winded explanation:
+The reason for defining your context dictionary at example definition time has
+to do with the way the example blocks capture state.  If the context dictionary
+is nil at the point that this function executes:
+
+    itShouldBehaveLike(@"a similarly-behaving thing", context);
+
+the framework will pass that nil to the shared example group block, and all of
+the example blocks inside the shared example group will capture that nil value.
+Since the closure captures the parameter, not the original context variable,
+changing the context variable at spec run time will not affect the captured
+value.  However, as long as the context dictionary is defined at the time you
+call the itShouldBehaveLike() function, the contained blocks will capture the
+pointer value of the dictionary parameter.  You can then add values to the
+dictionary at spec run time, and the shared examples will have access to those
+values via the valid dictionary pointer.
+
+
 ## Mocks and stubs
 
 Cedar works fine with OCMock.  You can download and use the [OCMock framework](http://www.mulle-kybernetik.com/software/OCMock/).
@@ -148,13 +213,13 @@ example, typing 'cdesc' followed by Ctrl-. will expand to:
         });
 
 
-## But I'm writing an iPhone app!
+## But I'm writing a pre-4.0 iPhone app!
 
 Unfortunately, Apple has made Objective-C blocks, upon which Cedar depends,
-only available in the Mac OS X 10.6 and iOS 4 runtime.  This means if you're not building
-on a Snow Leopard machine and targeting the desktop runtime or targeting a
-device or simulator that is running less than iOS 4 then anything using
-blocks will fail to compile.  There are a couple ways around this:
+only available in the Mac OS X 10.6 and iOS 4 runtime.  This means if you're not
+building on a Snow Leopard machine and targeting the desktop runtime or
+targeting a device or simulator that is running less than iOS 4 then anything
+using blocks will fail to compile.  There are a couple ways around this:
 
 * Plausible Labs provides patched versions of the [GCC compiler and runtime for
   Leopard and iPhone OS](http://code.google.com/p/plblocks/).  This link
