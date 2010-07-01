@@ -28,6 +28,8 @@
         case CDRExampleStateError:
             backgroundColor = [UIColor redColor];
             break;
+        case CDRExampleStateIncomplete:
+            break;
     }
     [self.contentView setBackgroundColor:backgroundColor];
     [self setBackgroundColor:backgroundColor];
