@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; };
 		AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */; };
 		AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC511DC27B800029872 /* CDRExample.m */; };
 		AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC611DC27B800029872 /* CDRExampleBase.m */; };
@@ -137,6 +139,7 @@
 				AEFD167A11DCFF1700F4448A /* CDRSpec.h in Copy headers to framework */,
 				AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */,
 				AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */,
+				AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */,
 				AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */,
 				AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */,
 			);
@@ -395,6 +398,7 @@
 				AEEE200011DC27B800029872 /* CDRSpec.h in Headers */,
 				AEEE200111DC27B800029872 /* Cedar.h in Headers */,
 				AEEE200811DC27B800029872 /* SpecHelper.h in Headers */,
+				AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
