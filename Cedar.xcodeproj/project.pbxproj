@@ -23,6 +23,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
+		AE135D4111DEA6F400A922D4 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D2111DEA69A00A922D4 /* OCHamcrest.framework */; };
+		AE135D7711DEA81C00A922D4 /* OCMock.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
+		AE135D7811DEA81C00A922D4 /* OCHamcrest.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D2111DEA69A00A922D4 /* OCHamcrest.framework */; };
+		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
+		AE135E7111DEB46F00A922D4 /* libOCHamcrest-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D2311DEA69A00A922D4 /* libOCHamcrest-StaticLib.a */; };
 		AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; };
 		AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */; };
@@ -42,19 +48,12 @@
 		AEEE200111DC27B800029872 /* Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD311DC27B800029872 /* Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE200811DC27B800029872 /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FDB11DC27B800029872 /* SpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE201111DC27B800029872 /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE611DC27B800029872 /* SpecHelper.m */; };
-		AEEE217811DC28A000029872 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE217711DC28A000029872 /* OCHamcrest.framework */; };
-		AEEE217A11DC28A000029872 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE217911DC28A000029872 /* OCMock.framework */; };
-		AEEE21BC11DC28FB00029872 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE217711DC28A000029872 /* OCHamcrest.framework */; };
-		AEEE21BD11DC28FB00029872 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE217911DC28A000029872 /* OCMock.framework */; };
 		AEEE21BE11DC290400029872 /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.m */; };
 		AEEE21BF11DC290400029872 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.m */; };
-		AEEE21C011DC290400029872 /* CppSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEA11DC27B800029872 /* CppSpecSpec.mm */; };
 		AEEE21C111DC290400029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEF11DC27B800029872 /* main.m */; };
 		AEEE21C211DC290400029872 /* SpecHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* SpecHelperSpec.m */; };
 		AEEE21C311DC290400029872 /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.m */; };
 		AEEE21C411DC290400029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
-		AEEE21E611DC298E00029872 /* OCHamcrest.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE217711DC28A000029872 /* OCHamcrest.framework */; };
-		AEEE21E711DC298E00029872 /* OCMock.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE217911DC28A000029872 /* OCMock.framework */; };
 		AEEE220311DC29AC00029872 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE1FB611DC271300029872 /* Cedar.framework */; };
 		AEEE223111DC2B6500029872 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */; };
 		AEEE223211DC2B6500029872 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC511DC27B800029872 /* CDRExample.m */; };
@@ -72,18 +71,15 @@
 		AEEE226011DC2C8300029872 /* CDRFunctions.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD111DC27B800029872 /* CDRFunctions.h */; };
 		AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD311DC27B800029872 /* Cedar.h */; };
 		AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDB11DC27B800029872 /* SpecHelper.h */; };
-		AEEE227E11DC2D3A00029872 /* libCedar-StaticLib-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib-iphonesimulator.a */; };
+		AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */; };
 		AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.m */; };
 		AEEE228011DC2D5200029872 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.m */; };
-		AEEE228111DC2D5200029872 /* CppSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEA11DC27B800029872 /* CppSpecSpec.mm */; };
 		AEEE228311DC2D5200029872 /* SpecHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* SpecHelperSpec.m */; };
 		AEEE228411DC2D5200029872 /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.m */; };
 		AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
 		AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.m */; };
 		AEEE228711DC2D5800029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FED11DC27B800029872 /* main.m */; };
 		AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEE11DC27B800029872 /* SlowSpec.m */; };
-		AEEE22D511DC337F00029872 /* OCHamcrest-iPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE22D311DC337F00029872 /* OCHamcrest-iPhone.framework */; };
-		AEEE22D611DC337F00029872 /* OCMock-iPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE22D411DC337F00029872 /* OCMock-iPhone.framework */; };
 		AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD511DC27B800029872 /* CDRExampleDetailsViewController.h */; };
 		AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD611DC27B800029872 /* CDRExampleReporterViewController.h */; };
 		AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */; };
@@ -96,6 +92,76 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AE135D2011DEA69A00A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = OCHamcrest;
+		};
+		AE135D2211DEA69A00A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 50066DAD1191DDE700A7A86D;
+			remoteInfo = "OCHamcrest-StaticLib";
+		};
+		AE135D2411DEA69A00A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0F2A4B1F0D8B68B400051BCF;
+			remoteInfo = UnitTests;
+		};
+		AE135D3011DEA6A900A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = OCMock;
+		};
+		AE135D3211DEA6A900A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03BF2D3708F1C69500978C59;
+			remoteInfo = OCMockTests;
+		};
+		AE135D3411DEA6A900A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 508C285F119042C300E392B9;
+			remoteInfo = "OCMock-StaticLib";
+		};
+		AE135D3B11DEA6D700A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = OCMock;
+		};
+		AE135D3D11DEA6DA00A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = OCHamcrest;
+		};
+		AE135E6C11DEB45F00A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 508C285E119042C300E392B9;
+			remoteInfo = "OCMock-StaticLib";
+		};
+		AE135E6E11DEB46400A922D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 50066DAC1191DDE600A7A86D;
+			remoteInfo = "OCHamcrest-StaticLib";
+		};
 		AEEE218A11DC28E700029872 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
@@ -119,8 +185,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AEEE21E611DC298E00029872 /* OCHamcrest.framework in Copy Frameworks */,
-				AEEE21E711DC298E00029872 /* OCMock.framework in Copy Frameworks */,
+				AE135D7711DEA81C00A922D4 /* OCMock.framework in Copy Frameworks */,
+				AE135D7811DEA81C00A922D4 /* OCHamcrest.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +215,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCHamcrest.xcodeproj; path = OCHamcrest/Source/OCHamcrest.xcodeproj; sourceTree = "<group>"; };
+		AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
+		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AEEE1FB611DC271300029872 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE1FB811DC271300029872 /* Cedar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cedar-Info.plist"; sourceTree = "<group>"; };
 		AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultReporter.m; sourceTree = "<group>"; };
@@ -192,17 +261,13 @@
 		AEEE1FF011DC27B800029872 /* SpecHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecHelperSpec.m; sourceTree = "<group>"; };
 		AEEE1FF111DC27B800029872 /* SpecSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec.m; sourceTree = "<group>"; };
 		AEEE1FF211DC27B800029872 /* SpecSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec2.m; sourceTree = "<group>"; };
-		AEEE217711DC28A000029872 /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrest.framework; sourceTree = "<group>"; };
-		AEEE217911DC28A000029872 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		AEEE218611DC28E200029872 /* Specs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Specs; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE222111DC2A1400029872 /* MACROS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MACROS; sourceTree = "<group>"; };
 		AEEE222211DC2A1400029872 /* Rakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
 		AEEE222311DC2A1400029872 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		AEEE222911DC2B0600029872 /* libCedar-StaticLib-iphonesimulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib-iphonesimulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227611DC2CF900029872 /* iPhoneSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPhoneSpecs-Info.plist"; sourceTree = "<group>"; };
-		AEEE22D311DC337F00029872 /* OCHamcrest-iPhone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "OCHamcrest-iPhone.framework"; sourceTree = "<group>"; };
-		AEEE22D411DC337F00029872 /* OCMock-iPhone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "OCMock-iPhone.framework"; sourceTree = "<group>"; };
 		AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSharedExampleGroupPool.m; sourceTree = "<group>"; };
 		AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSharedExampleGroupPool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,8 +277,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEEE217811DC28A000029872 /* OCHamcrest.framework in Frameworks */,
-				AEEE217A11DC28A000029872 /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,8 +284,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEEE21BC11DC28FB00029872 /* OCHamcrest.framework in Frameworks */,
-				AEEE21BD11DC28FB00029872 /* OCMock.framework in Frameworks */,
+				AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */,
+				AE135D4111DEA6F400A922D4 /* OCHamcrest.framework in Frameworks */,
 				AEEE220311DC29AC00029872 /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,27 +301,58 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEEE227E11DC2D3A00029872 /* libCedar-StaticLib-iphonesimulator.a in Frameworks */,
-				AEEE22D511DC337F00029872 /* OCHamcrest-iPhone.framework in Frameworks */,
-				AEEE22D611DC337F00029872 /* OCMock-iPhone.framework in Frameworks */,
+				AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */,
+				AE135E7111DEB46F00A922D4 /* libOCHamcrest-StaticLib.a in Frameworks */,
+				AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE135C9411DEA65500A922D4 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */,
+				AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		AE135D1711DEA69A00A922D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE135D2111DEA69A00A922D4 /* OCHamcrest.framework */,
+				AE135D2311DEA69A00A922D4 /* libOCHamcrest-StaticLib.a */,
+				AE135D2511DEA69A00A922D4 /* UnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE135D2711DEA6A900A922D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE135D3111DEA6A900A922D4 /* OCMock.framework */,
+				AE135D3311DEA6A900A922D4 /* OCMockTests.octest */,
+				AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AEEE1FA411DC26EA00029872 = {
 			isa = PBXGroup;
 			children = (
 				AEEE1FC311DC27B800029872 /* Source */,
 				AEEE1FE711DC27B800029872 /* Spec */,
 				AEEE202611DC286500029872 /* Frameworks */,
+				AE135C9411DEA65500A922D4 /* Externals */,
 				AEEE1FB711DC271300029872 /* Products */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
 				AEEE222111DC2A1400029872 /* MACROS */,
 				AEEE222211DC2A1400029872 /* Rakefile */,
 				AEEE222311DC2A1400029872 /* README.markdown */,
 				AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */,
+				AE135E8311DEB4E400A922D4 /* Foundation.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,7 +361,7 @@
 			children = (
 				AEEE1FB611DC271300029872 /* Cedar.framework */,
 				AEEE218611DC28E200029872 /* Specs */,
-				AEEE222911DC2B0600029872 /* libCedar-StaticLib-iphonesimulator.a */,
+				AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */,
 				AEEE227611DC2CF900029872 /* iPhoneSpecs.app */,
 			);
 			name = Products;
@@ -373,10 +467,6 @@
 		AEEE202611DC286500029872 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AEEE217711DC28A000029872 /* OCHamcrest.framework */,
-				AEEE217911DC28A000029872 /* OCMock.framework */,
-				AEEE22D311DC337F00029872 /* OCHamcrest-iPhone.framework */,
-				AEEE22D411DC337F00029872 /* OCMock-iPhone.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -434,14 +524,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEEE21CA11DC292600029872 /* Build configuration list for PBXNativeTarget "Specs" */;
 			buildPhases = (
+				AEEE221F11DC29CF00029872 /* Copy Frameworks */,
 				AEEE218311DC28E200029872 /* Sources */,
 				AEEE218411DC28E200029872 /* Frameworks */,
-				AEEE221F11DC29CF00029872 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				AEEE218B11DC28E700029872 /* PBXTargetDependency */,
+				AE135D3E11DEA6DA00A922D4 /* PBXTargetDependency */,
+				AE135D3C11DEA6D700A922D4 /* PBXTargetDependency */,
 			);
 			name = Specs;
 			productName = Specs;
@@ -462,7 +554,7 @@
 			);
 			name = "Cedar-StaticLib";
 			productName = "Cedar-StaticLib";
-			productReference = AEEE222911DC2B0600029872 /* libCedar-StaticLib-iphonesimulator.a */;
+			productReference = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		AEEE227511DC2CF900029872 /* iPhoneSpecs */ = {
@@ -477,6 +569,8 @@
 			);
 			dependencies = (
 				AEEE227D11DC2D3400029872 /* PBXTargetDependency */,
+				AE135E6D11DEB45F00A922D4 /* PBXTargetDependency */,
+				AE135E6F11DEB46400A922D4 /* PBXTargetDependency */,
 			);
 			name = iPhoneSpecs;
 			productName = iPhoneSpecs;
@@ -494,6 +588,16 @@
 			mainGroup = AEEE1FA411DC26EA00029872;
 			productRefGroup = AEEE1FB711DC271300029872 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AE135D1711DEA69A00A922D4 /* Products */;
+					ProjectRef = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
+				},
+				{
+					ProductGroup = AE135D2711DEA6A900A922D4 /* Products */;
+					ProjectRef = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				AEEE1FB511DC271300029872 /* Cedar */,
@@ -504,6 +608,51 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AE135D2111DEA69A00A922D4 /* OCHamcrest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCHamcrest.framework;
+			remoteRef = AE135D2011DEA69A00A922D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AE135D2311DEA69A00A922D4 /* libOCHamcrest-StaticLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libOCHamcrest-StaticLib.a";
+			remoteRef = AE135D2211DEA69A00A922D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AE135D2511DEA69A00A922D4 /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = AE135D2411DEA69A00A922D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AE135D3111DEA6A900A922D4 /* OCMock.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCMock.framework;
+			remoteRef = AE135D3011DEA6A900A922D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AE135D3311DEA6A900A922D4 /* OCMockTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OCMockTests.octest;
+			remoteRef = AE135D3211DEA6A900A922D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libOCMock-StaticLib.a";
+			remoteRef = AE135D3411DEA6A900A922D4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AEEE1FB211DC271300029872 /* Resources */ = {
@@ -549,7 +698,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-StaticLib-iphonesimulator.a\" &&\n\tDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-StaticLib-iphoneos.a\" &&\n\tUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\n\tUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\n\tFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\n\trm -rf \"${FRAMEWORK}\" &&\n\tmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\n\tmkdir -p \"${FRAMEWORK}/Versions/A/Headers\" &&\n\tmkdir -p \"${FRAMEWORK}/Versions/A/Resources\" &&\n\n# Generate universal binary from desktop, device, and simulator builds.\n\tlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\n\tcp \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}/Versions/A\" &&\n\tln -s \"${FRAMEWORK}/Versions/A\" \"${FRAMEWORK}/Versions/Current\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/Headers\" \"${FRAMEWORK}/Headers\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/Resources\" \"${FRAMEWORK}/Resources\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\" \"${FRAMEWORK}/${PRODUCT_NAME}\"\n";
+			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-StaticLib.a\" &&\n\tDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-StaticLib.a\" &&\n\tUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\n\tUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\n\tFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\n\trm -rf \"${FRAMEWORK}\" &&\n\tmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\n\tmkdir -p \"${FRAMEWORK}/Versions/A/Headers\" &&\n\tmkdir -p \"${FRAMEWORK}/Versions/A/Resources\" &&\n\n# Generate universal binary from desktop, device, and simulator builds.\n\tlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\n\tcp \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}/Versions/A\" &&\n\tln -s \"${FRAMEWORK}/Versions/A\" \"${FRAMEWORK}/Versions/Current\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/Headers\" \"${FRAMEWORK}/Headers\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/Resources\" \"${FRAMEWORK}/Resources\" &&\n\tln -s \"${FRAMEWORK}/Versions/Current/${PRODUCT_NAME}\" \"${FRAMEWORK}/${PRODUCT_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -575,7 +724,6 @@
 			files = (
 				AEEE21BE11DC290400029872 /* CDRExampleGroupSpec.m in Sources */,
 				AEEE21BF11DC290400029872 /* CDRExampleSpec.m in Sources */,
-				AEEE21C011DC290400029872 /* CppSpecSpec.mm in Sources */,
 				AEEE21C111DC290400029872 /* main.m in Sources */,
 				AEEE21C211DC290400029872 /* SpecHelperSpec.m in Sources */,
 				AEEE21C311DC290400029872 /* SpecSpec.m in Sources */,
@@ -609,7 +757,6 @@
 			files = (
 				AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.m in Sources */,
 				AEEE228011DC2D5200029872 /* CDRExampleSpec.m in Sources */,
-				AEEE228111DC2D5200029872 /* CppSpecSpec.mm in Sources */,
 				AEEE228311DC2D5200029872 /* SpecHelperSpec.m in Sources */,
 				AEEE228411DC2D5200029872 /* SpecSpec.m in Sources */,
 				AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */,
@@ -623,6 +770,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AE135D3C11DEA6D700A922D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OCMock;
+			targetProxy = AE135D3B11DEA6D700A922D4 /* PBXContainerItemProxy */;
+		};
+		AE135D3E11DEA6DA00A922D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OCHamcrest;
+			targetProxy = AE135D3D11DEA6DA00A922D4 /* PBXContainerItemProxy */;
+		};
+		AE135E6D11DEB45F00A922D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "OCMock-StaticLib";
+			targetProxy = AE135E6C11DEB45F00A922D4 /* PBXContainerItemProxy */;
+		};
+		AE135E6F11DEB46400A922D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "OCHamcrest-StaticLib";
+			targetProxy = AE135E6E11DEB46400A922D4 /* PBXContainerItemProxy */;
+		};
 		AEEE218B11DC28E700029872 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AEEE1FB511DC271300029872 /* Cedar */;
@@ -766,11 +933,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PREBINDING = NO;
-				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
+				PRODUCT_NAME = "Cedar-StaticLib";
 				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
@@ -779,11 +947,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PREBINDING = NO;
-				PRODUCT_NAME = "Cedar-StaticLib${EFFECTIVE_PLATFORM_NAME}";
+				PRODUCT_NAME = "Cedar-StaticLib";
 				SDKROOT = iphonesimulator4.0;
 				ZERO_LINK = NO;
 			};
@@ -824,6 +993,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"/Externals/OCMock/Source/**",
+					"\"$(SRCROOT)\"/Externals/OCHamcrest/Source/**",
+				);
 				INFOPLIST_FILE = "iPhoneSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -855,6 +1028,10 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"/Externals/OCMock/Source/**",
+					"\"$(SRCROOT)\"/Externals/OCHamcrest/Source/**",
+				);
 				INFOPLIST_FILE = "iPhoneSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (

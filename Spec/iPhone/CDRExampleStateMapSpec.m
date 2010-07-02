@@ -1,7 +1,7 @@
 #define HC_SHORTHAND
 #import "SpecHelper.h"
-#import <OCMock-iPhone/OCMock.h>
-#import <OCHamcrest-iPhone/OCHamcrest.h>
+#import "OCMock.h"
+#import "OCHamcrest.h"
 #import "CDRExampleStateMap.h"
 
 SPEC_BEGIN(CDRExampleStateMapSpec)
