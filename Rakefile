@@ -1,29 +1,39 @@
 PROJECT_NAME = "Cedar"
-TARGET_NAME = "Specs"
 CONFIGURATION = "Release"
-BUILD_SUBDIR = CONFIGURATION
+SPECS_TARGET_NAME = "Specs"
+UI_SPECS_TARGET_NAME = "iPhoneSpecs"
+SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk"
 
-BUILD_DIR = File.join(File.dirname(__FILE__), "build", BUILD_SUBDIR)
+def build_dir(effective_platform_name)
+  File.join(File.dirname(__FILE__), "build", CONFIGURATION + effective_platform_name)
+end
 
-def system_or_exit(cmd)
+def system_or_exit(cmd, stdout = nil)
   puts "Executing #{cmd}"
+  cmd += " >#{stdout}" if stdout
   system(cmd) or raise "******** Build failed ********"
 end
 
-task :default => :specs
-
-task :cruise do
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean build > #{File.join(ENV['CC_BUILD_ARTIFACTS'], "build.output")}])
-#  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -sdk macosx10.6 -target #{TARGET_NAME} -configuration #{CONFIGURATION} clean build])
-  ENV["DYLD_FRAMEWORK_PATH"] = BUILD_DIR
-  system_or_exit(%Q[#{File.join(BUILD_DIR, TARGET_NAME)}])
-end
+task :default => [:specs, :uispecs]
+task :cruise => :default
 
 task :build do
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean build])
+  stdout = File.join(ENV['CC_BUILD_ARTIFACTS'], "build.output") if (ENV['IS_CI_BOX'])
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean build], stdout)
 end
 
 task :specs => :build do
-  ENV["DYLD_FRAMEWORK_PATH"] = BUILD_DIR
-  system_or_exit(%Q[#{File.join(BUILD_DIR, TARGET_NAME)}])
+  build_dir = build_dir("")
+  ENV["DYLD_FRAMEWORK_PATH"] = build_dir
+  system_or_exit(File.join(build_dir, SPECS_TARGET_NAME))
+end
+
+require 'tmpdir'
+task :uispecs => :build do
+  ENV["DYLD_ROOT_PATH"] = SDK_DIR
+  ENV["IPHONE_SIMULATOR_ROOT"] = SDK_DIR
+  ENV["CFFIXED_USER_HOME"] = Dir.tmpdir
+  ENV["CEDAR_HEADLESS_SPECS"] = "1"
+
+  system_or_exit(%Q[#{File.join(build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents]);
 end

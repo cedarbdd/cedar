@@ -1,13 +1,21 @@
 #import "CDRExampleReporterViewController.h"
 #import "CDRFunctions.h"
 #import "CDRSpecStatusViewController.h"
+#import "CDRDefaultReporter.h"
 
 @implementation CDRExampleReporterViewController
 
 #pragma mark View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
+
+    if (getenv("CEDAR_HEADLESS_SPECS")) {
+        id<CDRExampleReporter> reporter = [[[CDRDefaultReporter alloc] init] autorelease];
+        runSpecsWithCustomExampleReporter(NULL, reporter);
+        exit([reporter result]);
+    } else {
+        [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
+    }
 }
 
 - (void)viewDidUnload {
