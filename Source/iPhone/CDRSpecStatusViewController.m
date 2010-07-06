@@ -72,6 +72,14 @@
     }
 }
 
+// This method sets the background color explicitly, because in the render cycle
+// for cells this is where the cell controls its background color (as opposed to
+// the table controlling the background color, as when the selection color
+// changes).  See http://stackoverflow.com/questions/281515
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [(id)cell setBackgroundColorToStatusColor];
+}
+
 #pragma mark Private interface
 - (void)pushStatusViewForExamples:(NSArray *)examples {
     UIViewController *subController = [[CDRSpecStatusViewController alloc] initWithExamples:examples];

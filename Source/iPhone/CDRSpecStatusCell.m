@@ -4,6 +4,7 @@
 
 @interface CDRSpecStatusCell (Private)
 - (void)setUpDisplayForExample:(CDRExampleBase *)example;
+- (UIColor *)colorForStatus;
 @end
 
 @implementation CDRSpecStatusCell
@@ -15,28 +16,6 @@
     [super dealloc];
 }
 
-- (void)drawRect:(CGRect)rect {
-    UIColor *backgroundColor = [UIColor whiteColor];
-    switch ([self.example state]) {
-        case CDRExampleStatePassed:
-            backgroundColor = [UIColor greenColor];
-            break;
-        case CDRExampleStatePending:
-            backgroundColor = [UIColor yellowColor];
-            break;
-        case CDRExampleStateFailed:
-        case CDRExampleStateError:
-            backgroundColor = [UIColor redColor];
-            break;
-        case CDRExampleStateIncomplete:
-            break;
-    }
-    [self.contentView setBackgroundColor:backgroundColor];
-    [self setBackgroundColor:backgroundColor];
-
-    [super drawRect:rect];
-}
-
 - (void)setExample:(CDRExampleBase *)example {
     if (example_ != example) {
         [example_ release];
@@ -45,6 +24,10 @@
         [self setUpDisplayForExample:example];
         [example_ addObserver:self forKeyPath:@"state" options:0 context:NULL];
     }
+}
+
+- (void)setBackgroundColorToStatusColor {
+    self.backgroundColor = [self colorForStatus];
 }
 
 #pragma mark KVO
@@ -62,9 +45,24 @@
 }
 
 - (void)redrawCell {
+    self.backgroundColor = [self colorForStatus];
     self.detailTextLabel.text = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
     [self setNeedsLayout];
     [self setNeedsDisplay];
+}
+
+- (UIColor *)colorForStatus {
+    switch ([self.example state]) {
+        case CDRExampleStatePassed:
+            return [UIColor greenColor];
+        case CDRExampleStatePending:
+            return [UIColor yellowColor];
+        case CDRExampleStateFailed:
+        case CDRExampleStateError:
+            return [UIColor redColor];
+        default:
+            return [UIColor whiteColor];
+    }
 }
 
 @end

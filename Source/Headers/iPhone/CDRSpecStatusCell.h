@@ -8,4 +8,5 @@
 
 @property (nonatomic, retain) CDRExampleBase *example;
 
+- (void)setBackgroundColorToStatusColor;
 @end
