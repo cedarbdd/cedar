@@ -252,7 +252,7 @@ The [public Google group](http://groups.google.com/group/cedar-discuss) for Ceda
 Or, you can follow the growth of Cedar on Twitter: [@cedarbdd](http://twitter.com/cedarbdd).
 
 
-## License
+## MIT License
 
 Copyright (c) 2010 Pivotal Labs (www.pivotallabs.com)
 Contact email: amilligan@pivotallabs.com
