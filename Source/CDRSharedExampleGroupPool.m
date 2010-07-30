@@ -13,7 +13,7 @@
 
 
 void sharedExamplesFor(NSString *groupName, CDRSharedExampleGroupBlock block) {
-    [[[SpecHelper specHelper] sharedExampleGroups] setObject:[block copy] forKey:groupName];
+    [[[SpecHelper specHelper] sharedExampleGroups] setObject:[[block copy] autorelease] forKey:groupName];
 }
 
 void itShouldBehaveLike(NSString *groupName, NSDictionary *context) {
