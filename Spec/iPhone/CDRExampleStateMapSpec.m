@@ -4,9 +4,7 @@
 #import "OCHamcrest.h"
 #import "CDRExampleStateMap.h"
 
-SPEC_BEGIN(CDRExampleStateMapSpec)
-
-describe(@"CDRExampleStateMap", ^{
+DESCRIBE(CDRExampleStateMap) {
     __block CDRExampleStateMap *map;
 
     beforeEach(^{
@@ -40,6 +38,6 @@ describe(@"CDRExampleStateMap", ^{
             });
         });
     });
-});
+}
+DESCRIBE_END
 
-SPEC_END
