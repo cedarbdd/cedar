@@ -1,15 +1,14 @@
 #import "SpecHelper.h"
 
-SpecHelper *specHelper;
+static SpecHelper *specHelper__;
 
 @implementation SpecHelper
 
-+ (void)initialize {
-    specHelper = [[SpecHelper alloc] init];
-}
-
 + (id)specHelper {
-    return specHelper;
+    if (!specHelper__) {
+        specHelper__ = [[SpecHelper alloc] init];
+    }
+    return specHelper__;
 }
 
 - (id)init {
