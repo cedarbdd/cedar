@@ -36,6 +36,7 @@
 - (void)runDidComplete {
     [self stopObservingExamples:rootGroups_];
 
+    printf("\n");
     if ([pendingMessages_ count]) {
         [self printMessages:pendingMessages_];
     }
@@ -56,7 +57,7 @@
 #pragma mark private interface
 
 - (void)printMessages:(NSArray *)messages {
-    printf("\n\n");
+    printf("\n");
 
     for (NSString *message in messages) {
         printf("%s\n", [message cStringUsingEncoding:NSUTF8StringEncoding]);
