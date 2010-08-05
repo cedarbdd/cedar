@@ -124,8 +124,8 @@ describe(@"a describe block", ^{
     describe(@"that contains a beforeEach in a shared example group", ^{
         itShouldBehaveLike(@"a describe context that contains a beforeEach in a shared example group", [NSDictionary dictionary]);
 
-        it(@"should run the shared beforeEach before the spec", ^{
-            assertThat(globalValue__, notNilValue());
+        it(@"should not run the shared beforeEach before specs outside the shared example group", ^{
+            assertThat(globalValue__, nilValue());
         });
     });
 });
@@ -138,6 +138,10 @@ SHARED_EXAMPLE_GROUPS_BEGIN(Specs)
 sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^(NSDictionary *context) {
     beforeEach(^{
         globalValue__ = [NSString string];
+    });
+
+    it(@"should run the shared beforeEach before specs inside the shared example group", ^{
+        assertThat(globalValue__, notNilValue());
     });
 });
 

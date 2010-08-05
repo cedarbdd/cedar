@@ -3,7 +3,7 @@
 #import "CDRExampleGroup.h"
 #import "SpecHelper.h"
 
-static CDRSpec *currentSpec;
+CDRSpec *currentSpec;
 
 void describe(NSString *text, CDRSpecBlock block) {
     CDRExampleGroup *parentGroup = currentSpec.currentGroup;
