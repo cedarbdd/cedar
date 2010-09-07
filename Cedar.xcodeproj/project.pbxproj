@@ -31,6 +31,7 @@
 		AE135E7111DEB46F00A922D4 /* libOCHamcrest-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D2311DEA69A00A922D4 /* libOCHamcrest-StaticLib.a */; };
 		AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; };
+		AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
 		AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */; };
 		AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC511DC27B800029872 /* CDRExample.m */; };
 		AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC611DC27B800029872 /* CDRExampleBase.m */; };
@@ -87,7 +88,6 @@
 		AEFD167A11DCFF1700F4448A /* CDRSpec.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD211DC27B800029872 /* CDRSpec.h */; };
 		AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */; };
 		AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */; };
-		AEFD17B211DD1E7200F4448A /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
 		AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
 /* End PBXBuildFile section */
 
@@ -748,6 +748,7 @@
 				AEEE223B11DC2B6D00029872 /* CDRSpecStatusCell.m in Sources */,
 				AEEE223C11DC2B6D00029872 /* CDRSpecStatusViewController.m in Sources */,
 				AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */,
+				AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,7 +764,6 @@
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */,
 				AEEE228711DC2D5800029872 /* main.m in Sources */,
 				AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */,
-				AEFD17B211DD1E7200F4448A /* CDRSharedExampleGroupPool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
