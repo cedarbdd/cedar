@@ -1,7 +1,13 @@
-#import <Cedar/SpecHelper.h>
-
 #define HC_SHORTHAND
+#if TARGET_OS_IPHONE
+#import <Cedar/SpecHelper.h>
+#import "OCMock.h"
 #import "OCHamcrest.h"
+#else
+#import <Cedar/SpecHelper.h>
+#import <OCMock/OCMock.h>
+#import <OCHamcrest/OCHamcrest.h>
+#endif
 
 SPEC_BEGIN(CppSpecSpec)
 
