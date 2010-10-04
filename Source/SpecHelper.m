@@ -1,8 +1,14 @@
 #import "SpecHelper.h"
 
+@interface SpecHelper ()
+@property (nonatomic, retain, readwrite) NSMutableDictionary *sharedExampleGroups, *sharedExampleContext;
+@end
+
 static SpecHelper *specHelper__;
 
 @implementation SpecHelper
+
+@synthesize sharedExampleGroups = sharedExampleGroups_, sharedExampleContext = sharedExampleContext_;
 
 + (id)specHelper {
     if (!specHelper__) {
@@ -13,13 +19,15 @@ static SpecHelper *specHelper__;
 
 - (id)init {
     if (self = [super init]) {
-        sharedExampleGroups_ = [[NSMutableDictionary alloc] init];
+        self.sharedExampleGroups = [NSMutableDictionary dictionary];
+        self.sharedExampleContext = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 - (void)dealloc {
-    [sharedExampleGroups_ release];
+    self.sharedExampleGroups = nil;
+    self.sharedExampleContext = nil;
     [super dealloc];
 }
 
@@ -31,6 +39,7 @@ static SpecHelper *specHelper__;
 
 #pragma mark CDRExampleParent
 - (void)setUp {
+    [self.sharedExampleContext removeAllObjects];
     [self beforeEach];
 }
 

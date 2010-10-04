@@ -124,14 +124,12 @@ Declaring shared examples inline with your specs is the simplest:
         });
     });
 
-    NSDictionary *context = [NSDictionary dictionary];
-
     describe(@"Something that shares behavior", ^{
-        itShouldBehaveLike(@"a similarly-behaving thing", context);
+        itShouldBehaveLike(@"a similarly-behaving thing");
     });
 
     describe(@"Something else that shares behavior", ^{
-        itShouldBehaveLike(@"a similarly-behaving thing", context);
+        itShouldBehaveLike(@"a similarly-behaving thing");
     });
 
     SPEC_END
@@ -151,27 +149,34 @@ specifically for declaring shared example groups:
     SHARED_EXAMPLE_GROUPS_END
 
 The context dictionary allows you to pass example-specific state into the shared
-example group.  It is important that you define the dictionary object you pass
-in at spec definition time, rather than spec run time.  To put it another way,
-instantiate your context dictionary in a describe block, not in a beforeEach
-block.
+example group.  You can populate the context dictionary available on the SpecHelper
+object, and each shared example group will receive it:
 
-### Long-winded explanation:
-The reason for defining your context dictionary at example definition time has
-to do with the way the example blocks capture state.  If the context dictionary
-is nil at the point that this function executes:
+    sharedExamplesFor(@"a red thing", ^(NSDictionary *context) {
+        it(@"should be red", ^{
+            Thing *thing = [context objectForKey:@"thing"];
+            assertThat(thing.color, equalTo(red));
+        });
+    });
 
-    itShouldBehaveLike(@"a similarly-behaving thing", context);
+    describe(@"A fire truck", ^{
+        beforeEach(^{
+            [[SpecHelper specHelper].sharedExampleContext setObject:[FireTruck fireTruck] forKey:@"thing"];
+        });
+        itShouldBehaveLike(@"a red thing");
+    });
 
-the framework will pass that nil to the shared example group block, and all of
-the example blocks inside the shared example group will capture that nil value.
-Since the closure captures the parameter, not the original context variable,
-changing the context variable at spec run time will not affect the captured
-value.  However, as long as the context dictionary is defined at the time you
-call the itShouldBehaveLike() function, the contained blocks will capture the
-pointer value of the dictionary parameter.  You can then add values to the
-dictionary at spec run time, and the shared examples will have access to those
-values via the valid dictionary pointer.
+    describe(@"An apple", ^{
+        beforeEach(^{
+            [[SpecHelper specHelper].sharedExampleContext setObject:[Apple apple] forKey:@"thing"];
+        });
+        itShouldBehaveLike(@"a red thing");
+    });
+
+Previously, you needed to instantiate and pass in your own dictionary, but this
+led to confusion and unavoidable memory leaks.  You should change any code that
+uses a local context dictionary to use the global shared example context
+dictionary.
 
 
 ## Mocks and stubs

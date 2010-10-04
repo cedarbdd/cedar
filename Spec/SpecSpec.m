@@ -122,10 +122,17 @@ describe(@"a describe block", ^{
     });
 
     describe(@"that contains a beforeEach in a shared example group", ^{
-        itShouldBehaveLike(@"a describe context that contains a beforeEach in a shared example group", [NSDictionary dictionary]);
+        itShouldBehaveLike(@"a describe context that contains a beforeEach in a shared example group");
 
         it(@"should not run the shared beforeEach before specs outside the shared example group", ^{
             assertThat(globalValue__, nilValue());
+        });
+    });
+
+    describe(@"that sets a value in the global shared example context", ^{
+        beforeEach(^{
+            globalValue__ = @"something";
+            [[SpecHelper specHelper].sharedExampleContext setObject:globalValue__ forKey:@"value"];
         });
     });
 });
@@ -137,11 +144,18 @@ SHARED_EXAMPLE_GROUPS_BEGIN(Specs)
 
 sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^(NSDictionary *context) {
     beforeEach(^{
+        assertThatInt([[SpecHelper specHelper].sharedExampleContext count], equalToInt(0));
         globalValue__ = [NSString string];
     });
 
     it(@"should run the shared beforeEach before specs inside the shared example group", ^{
         assertThat(globalValue__, notNilValue());
+    });
+});
+
+sharedExamplesFor(@"a shared example group that receives a value in the context", ^(NSDictionary *context) {
+    it(@"should receive the values set in the global shared example context", ^{
+        assertThat([context objectForKey:@"value"], equalTo(globalValue__));
     });
 });
 
