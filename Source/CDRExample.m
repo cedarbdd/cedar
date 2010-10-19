@@ -51,6 +51,7 @@ const CDRSpecBlock PENDING = nil;
 
 - (void)run {
     if (block_) {
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         @try {
             [parent_ setUp];
             block_();
@@ -63,6 +64,7 @@ const CDRSpecBlock PENDING = nil;
             self.state = CDRExampleStateError;
         }
         [parent_ tearDown];
+        [pool drain];
     } else {
         self.state = CDRExampleStatePending;
     }
