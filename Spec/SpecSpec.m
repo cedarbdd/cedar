@@ -54,12 +54,33 @@ describe(@"Spec", ^ {
         });
     });
 
+    context(@"a nested spec (context)", ^ {
+        beforeEach(^ {
+          //      NSLog(@"=====================> I should run only before the nested specs.");
+        });
+
+        afterEach(^ {
+          //      NSLog(@"=====================> I should run only after the nested specs.");
+        });
+
+        it(@"should also run", ^ {
+          //      NSLog(@"=====================> Nested spec");
+        });
+
+        it(@"should also also run", ^ {
+          //      NSLog(@"=====================> Another nested spec");
+        });
+    });
+
     it(@"should run", ^ {
         //    NSLog(@"=====================> Spec");
     });
 
     it(@"should be pending", PENDING);
     it(@"should also be pending", nil);
+    xit(@"should also be pending (xit)", ^{});
+    xcontext(@"xcontexted specs should be pending", ^{});
+    xdescribe(@"xdescribed specs should be pending", ^{});
 });
 
 describe(@"The spec failure exception", ^{

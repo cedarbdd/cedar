@@ -17,6 +17,10 @@ void beforeEach(CDRSpecBlock);
 void afterEach(CDRSpecBlock);
 void it(NSString *, CDRSpecBlock);
 void fail(NSString *);
+void context(NSString *, CDRSpecBlock);
+void xcontext(NSString *, CDRSpecBlock);
+void xdescribe(NSString *, CDRSpecBlock);
+void xit(NSString *, CDRSpecBlock);
 #ifdef __cplusplus
 }
 #endif
