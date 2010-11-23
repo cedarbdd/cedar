@@ -5,6 +5,8 @@
 
     NSMutableArray *pendingMessages_;
     NSMutableArray *failureMessages_;
+
+    BOOL colorOutput_;
 }
 
 @end

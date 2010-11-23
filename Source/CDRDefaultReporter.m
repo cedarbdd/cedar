@@ -2,6 +2,11 @@
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 
+static const char* ANSI_NORMAL = "\033[0m";
+static const char* ANSI_GREEN = "\033[0;40;32m";
+static const char* ANSI_RED = "\033[0;40;31m";
+static const char* ANSI_YELLOW = "\033[0;40;33m";
+
 @interface CDRDefaultReporter (private)
 - (void)printMessages:(NSArray *)messages;
 - (void)startObservingExamples:(NSArray *)examples;
@@ -16,6 +21,12 @@
     if (self = [super init]) {
         pendingMessages_ = [[NSMutableArray alloc] init];
         failureMessages_ = [[NSMutableArray alloc] init];
+
+        colorOutput_ = NO;
+        char * ansiColorEnvSetting = getenv("CEDAR_ANSI_COLOR");
+        if (ansiColorEnvSetting != NULL && strcmp(ansiColorEnvSetting, "0") != 0) {
+            colorOutput_ = YES;
+        }
     }
     return self;
 }
@@ -85,24 +96,44 @@
 }
 
 - (void)reportOnExample:(CDRExample *)example {
+    NSString *message;
     switch (example.state) {
         case CDRExampleStatePassed:
+            if (colorOutput_) { printf("%s", ANSI_GREEN); }
             printf(".");
             break;
         case CDRExampleStatePending:
+            message = [NSString stringWithFormat:@"PENDING %@", [example fullText]];
+            if (colorOutput_) {
+                printf("%s", ANSI_YELLOW);
+                message = [NSString stringWithFormat:@"%s%@%s", ANSI_YELLOW, message, ANSI_NORMAL];
+            }
             printf("P");
-            [pendingMessages_ addObject:[NSString stringWithFormat:@"PENDING %@", [example fullText]]];
+            [pendingMessages_ addObject:message];
             break;
         case CDRExampleStateFailed:
+            message = [NSString stringWithFormat:@"FAILURE %@\n%@\n", [example fullText], [example message]];
+            if (colorOutput_) {
+                printf("%s", ANSI_RED);
+                message = [NSString stringWithFormat:@"%s%@%s", ANSI_RED, message, ANSI_NORMAL];
+            }
             printf("F");
-            [failureMessages_ addObject:[NSString stringWithFormat:@"FAILURE %@\n%@\n", [example fullText], [example message]]];
+            [failureMessages_ addObject:message];
             break;
         case CDRExampleStateError:
+            message = [NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], [example message]];
+            if (colorOutput_) {
+                printf("%s", ANSI_RED);
+                message = [NSString stringWithFormat:@"%s%@%s", ANSI_RED, message, ANSI_NORMAL];
+            }
             printf("E");
-            [failureMessages_ addObject:[NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], [example message]]];
+            [failureMessages_ addObject:message];
             break;
         default:
             break;
+    }
+    if (colorOutput_) {
+      printf("%s", ANSI_NORMAL);
     }
 }
 
