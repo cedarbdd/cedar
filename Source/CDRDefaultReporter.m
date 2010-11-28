@@ -7,6 +7,7 @@
 - (void)startObservingExamples:(NSArray *)examples;
 - (void)stopObservingExamples:(NSArray *)examples;
 - (void)reportOnExample:(CDRExample *)example;
+- (void)printStats;
 @end
 
 @implementation CDRDefaultReporter
@@ -22,6 +23,7 @@
 
 - (void)dealloc {
     [rootGroups_ release];
+    [startTime_ release];
     [failureMessages_ release];
     [pendingMessages_ release];
     [super dealloc];
@@ -31,6 +33,7 @@
 - (void)runWillStartWithGroups:(NSArray *)groups {
     rootGroups_ = [groups retain];
     [self startObservingExamples:rootGroups_];
+    startTime_ = [[NSDate alloc] init];
 }
 
 - (void)runDidComplete {
@@ -44,6 +47,8 @@
     if ([failureMessages_ count]) {
         [self printMessages:failureMessages_];
     }
+
+    [self printStats];
 }
 
 - (int)result {
@@ -68,6 +73,7 @@
     for (id example in examples) {
         if (![example hasChildren]) {
             [example addObserver:self forKeyPath:@"state" options:0 context:NULL];
+            ++exampleCount_;
         } else {
             [self startObservingExamples:[example examples]];
         }
@@ -103,6 +109,14 @@
             break;
         default:
             break;
+    }
+}
+
+- (void)printStats {
+    printf("\nFinished in %.4f seconds\n\n", [[NSDate date] timeIntervalSinceDate:startTime_]);
+    printf("%u examples, %u failures", exampleCount_, (unsigned int)failureMessages_.count);
+    if (pendingMessages_.count) {
+        printf(", %u pending", (unsigned int)pendingMessages_.count);
     }
 }
 

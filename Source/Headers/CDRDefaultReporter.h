@@ -5,6 +5,9 @@
 
     NSMutableArray *pendingMessages_;
     NSMutableArray *failureMessages_;
+
+    NSDate *startTime_;
+    unsigned int exampleCount_;
 }
 
 @end
