@@ -2,7 +2,7 @@ PROJECT_NAME = "Cedar"
 CONFIGURATION = "Release"
 SPECS_TARGET_NAME = "Specs"
 UI_SPECS_TARGET_NAME = "iPhoneSpecs"
-SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk"
+SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk"
 
 def build_dir(effective_platform_name)
   File.join(File.dirname(__FILE__), "build", CONFIGURATION + effective_platform_name)
