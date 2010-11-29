@@ -118,6 +118,7 @@
     if (pendingMessages_.count) {
         printf(", %u pending", (unsigned int)pendingMessages_.count);
     }
+    printf("\n");
 }
 
 #pragma mark KVO

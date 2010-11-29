@@ -15,7 +15,14 @@ def system_or_exit(cmd, stdout = nil)
 end
 
 def output_file(target)
-  output_dir = ENV['IS_CI_BOX'] ? ENV['CC_BUILD_ARTIFACTS'] : File.join(File.dirname(__FILE__), "build")
+  output_dir = if ENV['IS_CI_BOX']
+    ENV['CC_BUILD_ARTIFACTS']
+  else
+    build_dir = File.join(File.dirname(__FILE__), "build")
+    Dir.mkdir(build_dir) unless File.exists?(build_dir)
+    build_dir
+  end
+
   output_file = File.join(output_dir, "#{target}.output")
   puts "Output: #{output_file}"
   output_file
@@ -39,7 +46,7 @@ end
 
 task :build_uispecs do
   `osascript -e 'tell application "iPhone Simulator" to quit'`
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build], output_file("uispecs"))
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} ARCHS=i386 build], output_file("uispecs"))
 end
 
 task :build_all do

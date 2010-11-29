@@ -693,7 +693,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator4.1 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos4.1 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build";
+			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator4.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos4.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build";
 		};
 		AEEE225A11DC2C0200029872 /* Build universal static lib */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -817,18 +817,20 @@
 		AEEE1FA711DC26EA00029872 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 			};
 			name = Debug;
 		};
 		AEEE1FA811DC26EA00029872 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 			};
 			name = Release;
 		};
@@ -836,7 +838,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -866,7 +867,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -952,7 +952,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
-				SDKROOT = iphonesimulator4.1;
+				SDKROOT = iphonesimulator4.2;
 			};
 			name = Debug;
 		};
@@ -966,7 +966,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
-				SDKROOT = iphonesimulator4.1;
+				SDKROOT = iphonesimulator4.2;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1024,7 +1024,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = iPhoneSpecs;
-				SDKROOT = iphonesimulator4.0;
+				SDKROOT = iphonesimulator4.2;
 			};
 			name = Debug;
 		};
@@ -1060,7 +1060,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = iPhoneSpecs;
-				SDKROOT = iphonesimulator4.0;
+				SDKROOT = iphonesimulator4.2;
 				ZERO_LINK = NO;
 			};
 			name = Release;
