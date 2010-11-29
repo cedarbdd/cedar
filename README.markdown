@@ -5,6 +5,13 @@ BDD-style testing using Objective-C
 
 ## Usage
 
+### Clone from GitHub
+
+* Don't forget to initialize submodules:
+
+        $ git submodule update --init
+
+
 ### Non-iPhone testing
 
 * Build the Cedar framework.  Note that you must build for an Objective-C
@@ -49,10 +56,16 @@ BDD-style testing using Objective-C
 
 ### iPhone testing
 
-* Build the Cedar-iPhone static framework.  This framework contains a univeral
+* Build the Cedar-iPhone static framework.  This framework contains a universal
   binary that will work both on the simulator and the device.
+  NOTE: due to a bug in the build process the script that builds the framework
+  will sometimes not copy all of the header files appropriately.  If after you
+  build the Headers directory under the built framework is empty, try deleting
+  the built framework and building again.
 * Create a Cocoa Touch executable target for your tests in your project.  Name
   this target UISpecs, or something similar.
+* Open the Info.plist file for your project and remove the "Main nib file base
+  name" entry.  The project template will likely have set this to "MainWindow."
 * Add the Cedar-iPhone static framework to your project, and link your UISpecs
   target with it.
 * Add -ObjC, -lstdc++ and -all_load to the Other Linker Flags build setting for the
