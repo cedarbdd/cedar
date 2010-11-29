@@ -46,7 +46,7 @@ end
 
 task :build_uispecs do
   `osascript -e 'tell application "iPhone Simulator" to quit'`
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} ARCHS=i386 build], output_file("uispecs"))
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build], output_file("uispecs"))
 end
 
 task :build_all do
