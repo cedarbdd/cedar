@@ -20,7 +20,7 @@ void expectFailure(CDRSpecBlock block) {
         return;
     }
 
-    fail(@"equality expectation should have failed.");
+    fail(@"Expectation should have failed.");
 }
 
 static NSString *globalValue__;
@@ -135,6 +135,8 @@ describe(@"a describe block", ^{
             [[SpecHelper specHelper].sharedExampleContext setObject:globalValue__ forKey:@"value"];
         });
     });
+
+    itShouldBehaveLike(@"a shared example group that contains a failing spec");
 });
 
 SPEC_END
@@ -156,6 +158,14 @@ sharedExamplesFor(@"a describe context that contains a beforeEach in a shared ex
 sharedExamplesFor(@"a shared example group that receives a value in the context", ^(NSDictionary *context) {
     it(@"should receive the values set in the global shared example context", ^{
         assertThat([context objectForKey:@"value"], equalTo(globalValue__));
+    });
+});
+
+sharedExamplesFor(@"a shared example group that contains a failing spec", ^(NSDictionary *context) {
+    it(@"should fail in the expected fashion", ^{
+        expectFailure(^{
+            assertThat(@"wibble", equalTo(@"wobble"));
+        });
     });
 });
 

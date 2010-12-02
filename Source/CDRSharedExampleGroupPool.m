@@ -25,4 +25,9 @@ void itShouldBehaveLike(NSString *groupName) {
 }
 
 @implementation CDRSharedExampleGroupPool
+
+- (void)failWithException:(NSException *)exception {
+    [[CDRSpecFailure specFailureWithReason:[exception reason]] raise];
+}
+
 @end
