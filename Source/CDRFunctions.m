@@ -77,9 +77,21 @@ int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporte
 }
 
 int runAllSpecs() {
-    id<CDRExampleReporter> reporter = [[CDRDefaultReporter alloc] init];
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    char *reporterClassName = getenv("CEDAR_REPORTER_CLASS");
+    if (!reporterClassName) {
+        reporterClassName = "CDRDefaultReporter";
+    }
+    Class reporterClass = NSClassFromString([NSString stringWithCString:reporterClassName encoding:NSUTF8StringEncoding]);
+    if (!reporterClass) {
+        printf("***** The specified reporter class \"%s\" does not exist. *****\n", reporterClassName);
+        return -999;
+    }
+
+    id<CDRExampleReporter> reporter = [[[reporterClass alloc] init] autorelease];
     int result = runSpecsWithCustomExampleReporter(NULL, reporter);
-    [reporter release];
+    [pool drain];
 
     return result;
 }

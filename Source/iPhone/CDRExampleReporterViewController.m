@@ -10,16 +10,21 @@
     [super viewDidLoad];
 
     if (getenv("CEDAR_HEADLESS_SPECS")) {
-        id<CDRExampleReporter> reporter = [[[CDRDefaultReporter alloc] init] autorelease];
-        runSpecsWithCustomExampleReporter(NULL, reporter);
-        exit([reporter result]);
+        int exitStatus = runAllSpecs();
+
+        UIApplication *application = [UIApplication sharedApplication];
+        if ([application respondsToSelector:@selector(_terminateWithStatus:)]) {
+            [application performSelector:@selector(_terminateWithStatus:)
+                              withObject:(id)exitStatus];
+        } else {
+            exit(exitStatus);
+        }
     } else {
         [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
     }
 }
 
 - (void)viewDidUnload {
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -59,8 +59,36 @@
     }
 }
 
-#pragma mark private interface
+#pragma mark Protected interface
+- (NSString *)successToken {
+    return @".";
+}
 
+- (NSString *)pendingToken {
+    return @"P";
+}
+
+- (NSString *)pendingMessageForExample:(CDRExample *)example {
+    return [NSString stringWithFormat:@"PENDING %@", [example fullText]];
+}
+
+- (NSString *)failureToken {
+    return @"F";
+}
+
+- (NSString *)failureMessageForExample:(CDRExample *)example {
+    return [NSString stringWithFormat:@"FAILURE %@\n%@\n", [example fullText], [example message]];
+}
+
+- (NSString *)errorToken {
+    return @"E";
+}
+
+- (NSString *)errorMessageForExample:(CDRExample *)example {
+    return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], [example message]];
+}
+
+#pragma mark Private interface
 - (void)printMessages:(NSArray *)messages {
     printf("\n");
 
@@ -93,19 +121,19 @@
 - (void)reportOnExample:(CDRExample *)example {
     switch (example.state) {
         case CDRExampleStatePassed:
-            printf(".");
+            printf("%s", [[self successToken] cStringUsingEncoding:NSUTF8StringEncoding]);
             break;
         case CDRExampleStatePending:
-            printf("P");
-            [pendingMessages_ addObject:[NSString stringWithFormat:@"PENDING %@", [example fullText]]];
+            printf("%s", [[self pendingToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            [pendingMessages_ addObject:[self pendingMessageForExample:example]];
             break;
         case CDRExampleStateFailed:
-            printf("F");
-            [failureMessages_ addObject:[NSString stringWithFormat:@"FAILURE %@\n%@\n", [example fullText], [example message]]];
+            printf("%s", [[self failureToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            [failureMessages_ addObject:[self failureMessageForExample:example]];
             break;
         case CDRExampleStateError:
-            printf("E");
-            [failureMessages_ addObject:[NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], [example message]]];
+            printf("%s", [[self errorToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            [failureMessages_ addObject:[self errorMessageForExample:example]];
             break;
         default:
             break;
@@ -125,6 +153,5 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     [self reportOnExample:object];
 }
-
 
 @end
