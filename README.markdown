@@ -174,14 +174,14 @@ object, and each shared example group will receive it:
 
     describe(@"A fire truck", ^{
         beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[FireTruck fireTruck] forKey:@"thing"];
+            [[self sharedExampleContext] setObject:[FireTruck fireTruck] forKey:@"thing"];
         });
         itShouldBehaveLike(@"a red thing");
     });
 
     describe(@"An apple", ^{
         beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[Apple apple] forKey:@"thing"];
+            [[self sharedExampleContext] setObject:[Apple apple] forKey:@"thing"];
         });
         itShouldBehaveLike(@"a red thing");
     });
