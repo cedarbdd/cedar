@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "CDRSpec.h"
+#import <Cedar/CDRSpec.h>
 
 typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *);
 

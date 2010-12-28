@@ -1,10 +1,11 @@
 #import <UIKit/UIKit.h>
+#import <Cedar/CDRExampleReporter.h>
 
-@class CDRExampleReporterViewController;
-
-@interface CedarApplicationDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window_;
-    CDRExampleReporterViewController *viewController_;
+@interface CedarApplicationDelegate : NSObject <UIApplicationDelegate, CDRExampleReporter>
+{
+@private
+    UIWindow               *_window;
+    UINavigationController *_viewController;
 }
 
 @end

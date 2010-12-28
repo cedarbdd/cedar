@@ -1,4 +1,4 @@
-#import "CDRExampleBase.h"
+#import <Cedar/CDRExampleBase.h>
 
 @interface CDRExample : CDRExampleBase {
     CDRSpecBlock block_;

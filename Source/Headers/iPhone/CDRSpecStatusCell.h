@@ -1,11 +1,3 @@
-//
-//  CDRSpecStatusCell.h
-//  Cedar
-//
-//  Created by Remy Demarest on 24/12/2010.
-//  Copyright 2010 NuLayer Inc. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 @class CDRSpecStatusIndicator;

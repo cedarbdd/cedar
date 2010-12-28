@@ -61,7 +61,6 @@
 		AEEE223511DC2B6500029872 /* CDRFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC811DC27B800029872 /* CDRFunctions.m */; };
 		AEEE223611DC2B6500029872 /* CDRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC911DC27B800029872 /* CDRSpec.m */; };
 		AEEE223811DC2B6D00029872 /* CDRExampleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FDD11DC27B800029872 /* CDRExampleDetailsViewController.m */; };
-		AEEE223911DC2B6D00029872 /* CDRExampleReporterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FDE11DC27B800029872 /* CDRExampleReporterViewController.m */; };
 		AEEE223A11DC2B6D00029872 /* CDRExampleStateMap.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FDF11DC27B800029872 /* CDRExampleStateMap.m */; };
 		AEEE223C11DC2B6D00029872 /* CDRSpecStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE111DC27B800029872 /* CDRSpecStatusViewController.m */; };
 		AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE211DC27B800029872 /* CedarApplicationDelegate.m */; };
@@ -75,7 +74,6 @@
 		AEEE228711DC2D5800029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FED11DC27B800029872 /* main.m */; };
 		AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEE11DC27B800029872 /* SlowSpec.m */; };
 		AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD511DC27B800029872 /* CDRExampleDetailsViewController.h */; };
-		AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD611DC27B800029872 /* CDRExampleReporterViewController.h */; };
 		AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */; };
 		AEFD166111DCFEC900F4448A /* CDRExampleReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD011DC27B800029872 /* CDRExampleReporter.h */; };
 		AEFD167A11DCFF1700F4448A /* CDRSpec.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD211DC27B800029872 /* CDRSpec.h */; };
@@ -201,7 +199,6 @@
 			dstSubfolderSpec = 0;
 			files = (
 				AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */,
-				AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */,
 				AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */,
 				AEEE226011DC2C8300029872 /* CDRFunctions.h in Copy headers to framework */,
 				AEFD166111DCFEC900F4448A /* CDRExampleReporter.h in Copy headers to framework */,
@@ -236,12 +233,10 @@
 		AEEE1FD211DC27B800029872 /* CDRSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpec.h; sourceTree = "<group>"; };
 		AEEE1FD311DC27B800029872 /* Cedar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cedar.h; sourceTree = "<group>"; };
 		AEEE1FD511DC27B800029872 /* CDRExampleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleDetailsViewController.h; sourceTree = "<group>"; };
-		AEEE1FD611DC27B800029872 /* CDRExampleReporterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleReporterViewController.h; sourceTree = "<group>"; };
 		AEEE1FD711DC27B800029872 /* CDRExampleStateMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleStateMap.h; sourceTree = "<group>"; };
 		AEEE1FD911DC27B800029872 /* CDRSpecStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecStatusViewController.h; sourceTree = "<group>"; };
 		AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarApplicationDelegate.h; sourceTree = "<group>"; };
 		AEEE1FDD11DC27B800029872 /* CDRExampleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleDetailsViewController.m; sourceTree = "<group>"; };
-		AEEE1FDE11DC27B800029872 /* CDRExampleReporterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleReporterViewController.m; sourceTree = "<group>"; };
 		AEEE1FDF11DC27B800029872 /* CDRExampleStateMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleStateMap.m; sourceTree = "<group>"; };
 		AEEE1FE111DC27B800029872 /* CDRSpecStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecStatusViewController.m; sourceTree = "<group>"; };
 		AEEE1FE211DC27B800029872 /* CedarApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CedarApplicationDelegate.m; sourceTree = "<group>"; };
@@ -417,7 +412,6 @@
 			isa = PBXGroup;
 			children = (
 				AEEE1FD511DC27B800029872 /* CDRExampleDetailsViewController.h */,
-				AEEE1FD611DC27B800029872 /* CDRExampleReporterViewController.h */,
 				AEEE1FD711DC27B800029872 /* CDRExampleStateMap.h */,
 				C647272012C96A3700ABD031 /* CDRSpecStatusBubble.h */,
 				C6D3A35112C4E3A70060A2FE /* CDRSpecStatusCell.h */,
@@ -432,7 +426,6 @@
 			isa = PBXGroup;
 			children = (
 				AEEE1FDD11DC27B800029872 /* CDRExampleDetailsViewController.m */,
-				AEEE1FDE11DC27B800029872 /* CDRExampleReporterViewController.m */,
 				AEEE1FDF11DC27B800029872 /* CDRExampleStateMap.m */,
 				C6D3A35212C4E3A70060A2FE /* CDRSpecStatusCell.m */,
 				C647272112C96A3700ABD031 /* CDRSpecStatusBubble.m */,
@@ -762,7 +755,6 @@
 				AEEE223511DC2B6500029872 /* CDRFunctions.m in Sources */,
 				AEEE223611DC2B6500029872 /* CDRSpec.m in Sources */,
 				AEEE223811DC2B6D00029872 /* CDRExampleDetailsViewController.m in Sources */,
-				AEEE223911DC2B6D00029872 /* CDRExampleReporterViewController.m in Sources */,
 				AEEE223A11DC2B6D00029872 /* CDRExampleStateMap.m in Sources */,
 				AEEE223C11DC2B6D00029872 /* CDRSpecStatusViewController.m in Sources */,
 				AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */,
@@ -987,7 +979,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = "Cedar-iPhone";
+				PRODUCT_NAME = Cedar;
 			};
 			name = Debug;
 		};
@@ -997,7 +989,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = "Cedar-iPhone";
+				PRODUCT_NAME = Cedar;
 				ZERO_LINK = NO;
 			};
 			name = Release;

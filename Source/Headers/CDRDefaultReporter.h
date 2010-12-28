@@ -1,4 +1,4 @@
-#import "CDRExampleReporter.h"
+#import <Cedar/CDRExampleReporter.h>
 
 @interface CDRDefaultReporter : NSObject <CDRExampleReporter> {
     NSArray *rootGroups_;

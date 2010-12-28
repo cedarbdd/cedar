@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "CDRExampleBase.h"
+#import <Cedar/CDRExampleBase.h>
 
 @interface CDRExampleStateMap : NSObject {
     CFDictionaryRef stateMap_;

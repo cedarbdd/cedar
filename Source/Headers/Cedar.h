@@ -1,7 +1,6 @@
+#import <Cedar/CDRFunctions.h>
+
 #if TARGET_OS_IPHONE
-#import "CDRFunctions.h"
-#import "CedarApplicationDelegate.h"
-#import "CDRExampleReporterViewController.h"
-#else
-#import "CDRFunctions.h"
+#import <Cedar/CDRFunctions.h>
+#import <Cedar/CedarApplicationDelegate.h>
 #endif
