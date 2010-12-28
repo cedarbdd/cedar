@@ -81,13 +81,11 @@
 		AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
 		C62840DF12C7A46700EB4F26 /* CDRSpecStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D3A35212C4E3A70060A2FE /* CDRSpecStatusCell.m */; };
 		C62840E012C7A46900EB4F26 /* CDRSpecStatusIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D3A35612C4E3EA0060A2FE /* CDRSpecStatusIndicator.m */; };
-		C62840E812C7A48C00EB4F26 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62840E712C7A48C00EB4F26 /* Foundation.framework */; };
-		C62840EC12C7A49500EB4F26 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62840EB12C7A49500EB4F26 /* UIKit.framework */; };
-		C62840EF12C7A49B00EB4F26 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62840EE12C7A49B00EB4F26 /* QuartzCore.framework */; };
-		C62840F512C7A4D000EB4F26 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C62840F412C7A4D000EB4F26 /* CoreGraphics.framework */; };
 		C631570C12C7A2FA0036054B /* libCedar-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */; };
 		C647272212C96A3700ABD031 /* CDRSpecStatusBubble.h in Headers */ = {isa = PBXBuildFile; fileRef = C647272012C96A3700ABD031 /* CDRSpecStatusBubble.h */; };
 		C647272312C96A3700ABD031 /* CDRSpecStatusBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = C647272112C96A3700ABD031 /* CDRSpecStatusBubble.m */; };
+		C6B1DB1012CA745300DD9830 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B1DB0F12CA745300DD9830 /* QuartzCore.framework */; };
+		C6B1DB3712CA748000DD9830 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B1DB3612CA748000DD9830 /* CoreGraphics.framework */; };
 		C6D3A35312C4E3A70060A2FE /* CDRSpecStatusCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D3A35112C4E3A70060A2FE /* CDRSpecStatusCell.h */; };
 		C6D3A35712C4E3EA0060A2FE /* CDRSpecStatusIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D3A35512C4E3EA0060A2FE /* CDRSpecStatusIndicator.h */; };
 /* End PBXBuildFile section */
@@ -261,11 +259,11 @@
 		AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSharedExampleGroupPool.m; sourceTree = "<group>"; };
 		AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSharedExampleGroupPool.h; sourceTree = "<group>"; };
 		C62840E712C7A48C00EB4F26 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		C62840EB12C7A49500EB4F26 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		C62840EE12C7A49B00EB4F26 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C62840F412C7A4D000EB4F26 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C647272012C96A3700ABD031 /* CDRSpecStatusBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecStatusBubble.h; sourceTree = "<group>"; };
 		C647272112C96A3700ABD031 /* CDRSpecStatusBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecStatusBubble.m; sourceTree = "<group>"; };
+		C6B1DB0F12CA745300DD9830 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C6B1DB3112CA746F00DD9830 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C6B1DB3612CA748000DD9830 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C6D3A35112C4E3A70060A2FE /* CDRSpecStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecStatusCell.h; sourceTree = "<group>"; };
 		C6D3A35212C4E3A70060A2FE /* CDRSpecStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecStatusCell.m; sourceTree = "<group>"; };
 		C6D3A35512C4E3EA0060A2FE /* CDRSpecStatusIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecStatusIndicator.h; sourceTree = "<group>"; };
@@ -304,10 +302,8 @@
 				AE135E7111DEB46F00A922D4 /* libOCHamcrest-StaticLib.a in Frameworks */,
 				AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */,
 				C631570C12C7A2FA0036054B /* libCedar-StaticLib.a in Frameworks */,
-				C62840E812C7A48C00EB4F26 /* Foundation.framework in Frameworks */,
-				C62840EC12C7A49500EB4F26 /* UIKit.framework in Frameworks */,
-				C62840EF12C7A49B00EB4F26 /* QuartzCore.framework in Frameworks */,
-				C62840F512C7A4D000EB4F26 /* CoreGraphics.framework in Frameworks */,
+				C6B1DB1012CA745300DD9830 /* QuartzCore.framework in Frameworks */,
+				C6B1DB3712CA748000DD9830 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,9 +353,9 @@
 				AEEE222311DC2A1400029872 /* README.markdown */,
 				AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */,
 				C62840E712C7A48C00EB4F26 /* Foundation.framework */,
-				C62840EB12C7A49500EB4F26 /* UIKit.framework */,
-				C62840EE12C7A49B00EB4F26 /* QuartzCore.framework */,
-				C62840F412C7A4D000EB4F26 /* CoreGraphics.framework */,
+				C6B1DB0F12CA745300DD9830 /* QuartzCore.framework */,
+				C6B1DB3112CA746F00DD9830 /* UIKit.framework */,
+				C6B1DB3612CA748000DD9830 /* CoreGraphics.framework */,
 			);
 			sourceTree = "<group>";
 		};
