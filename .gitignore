@@ -1,4 +1,7 @@
-Cedar.xcodeproj/*.mode1v3
-Cedar.xcodeproj/*.pbxuser
+*.mode1v3
+*.pbxuser
+*.perspectivev3
+*.xcuserdatad*
+*.xcodeproj/project.xcworkspace*
 build
 .DS_Store
