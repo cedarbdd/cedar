@@ -3,5 +3,5 @@
 @protocol CDRExampleReporter;
 
 int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> runner);
-int runAllSpecs();
+int runAllSpecs(void);
 int runAllSpecsWithCustomExampleReporter(id<CDRExampleReporter> runner);

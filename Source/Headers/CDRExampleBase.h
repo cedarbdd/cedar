@@ -5,26 +5,29 @@
 
 typedef void (^CDRSpecBlock)(void);
 
-enum CDRExampleState {
+enum _CDRExampleState {
     CDRExampleStateIncomplete = 0x00,
-    CDRExampleStatePassed = 0x01,
-    CDRExampleStatePending = 0x03,
-    CDRExampleStateFailed = 0x07,
-    CDRExampleStateError = 0x0F
+    CDRExampleStatePassed     = 0x01,
+    CDRExampleStatePending    = 0x03,
+    CDRExampleStateFailed     = 0x07,
+    CDRExampleStateError      = 0x0F
 };
-typedef enum CDRExampleState CDRExampleState;
+typedef NSUInteger CDRExampleState;
 
 @interface CDRSpecFailure : NSException
 + (id)specFailureWithReason:(NSString *)reason;
 @end
 
-@interface CDRExampleBase : NSObject {
-  NSString *text_;
-  id<CDRExampleParent> parent_;
+@class CDRExampleGroup;
+
+@interface CDRExampleBase : NSObject
+{
+    NSString        *text_;
+    CDRExampleGroup *parent_;
 }
 
-@property (nonatomic, readonly) NSString *text;
-@property (nonatomic, assign) id<CDRExampleParent> parent;
+@property(nonatomic, readonly) NSString        *text;
+@property(nonatomic, assign)   CDRExampleGroup *parent;
 
 - (id)initWithText:(NSString *)text;
 
@@ -35,6 +38,13 @@ typedef enum CDRExampleState CDRExampleState;
 @end
 
 @interface CDRExampleBase (RunReporting)
-- (CDRExampleState)state;
-- (float)progress;
+
+@property(nonatomic, readonly) NSUInteger      numberOfErrors;
+@property(nonatomic, readonly) NSUInteger      numberOfFailures;
+@property(nonatomic, readonly) NSUInteger      numberOfPendingExamples;
+@property(nonatomic, readonly) NSUInteger      numberOfSuccesses;
+@property(nonatomic, readonly) NSUInteger      numberOfExamples;
+@property(nonatomic, readonly) CDRExampleState state;
+@property(nonatomic, readonly) float           progress;
+
 @end

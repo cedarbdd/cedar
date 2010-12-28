@@ -1,20 +1,27 @@
 #import <Foundation/Foundation.h>
-
-@protocol CDRSharedExampleGroupPool
-@end
+#import "CDRSpec.h"
 
 typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *);
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void sharedExamplesFor(NSString *, CDRSharedExampleGroupBlock);
-void itShouldBehaveLike(NSString *);
-#ifdef __cplusplus
+@interface CDRSharedExampleGroupPool : NSObject
+{
+    NSMutableDictionary *_groups;
+    CDRSpec             *_currentSpec;
+@protected
+    void (^sharedExamplesFor)(NSString *, CDRSharedExampleGroupBlock);
+    void (^describe)(NSString *, CDRSpecBlock);
+    
+    void (^beforeEach)(CDRSpecBlock);
+    void (^afterEach)(CDRSpecBlock);
+    
+    void (^it)(NSString *, CDRSpecBlock);
+    void (^itShouldBehaveLike)(NSString *);
+    
+    void (^fail)(NSString *);
 }
-#endif
 
-@interface CDRSharedExampleGroupPool : NSObject <CDRSharedExampleGroupPool>
+- (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec;
+
 @end
 
 @interface CDRSharedExampleGroupPool (SharedExampleGroupDeclaration)

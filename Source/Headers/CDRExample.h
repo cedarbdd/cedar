@@ -6,7 +6,7 @@
     NSString *message_;
 }
 
-@property (nonatomic, copy) NSString *message;
+@property(nonatomic, copy) NSString *message;
 
 + (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block;
 - (id)initWithText:(NSString *)text andBlock:(CDRSpecBlock)block;

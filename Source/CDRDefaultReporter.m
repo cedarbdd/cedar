@@ -14,7 +14,8 @@
 
 #pragma mark Memory
 - (id)init {
-    if (self = [super init]) {
+    if((self = [super init]))
+    {
         pendingMessages_ = [[NSMutableArray alloc] init];
         failureMessages_ = [[NSMutableArray alloc] init];
     }

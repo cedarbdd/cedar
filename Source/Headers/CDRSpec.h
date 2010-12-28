@@ -4,29 +4,26 @@
 @protocol CDRExampleReporter;
 @class CDRExampleGroup, SpecHelper;
 
-@protocol CDRSpec
-@end
-
 extern CDRSpecBlock PENDING;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void describe(NSString *, CDRSpecBlock);
-void beforeEach(CDRSpecBlock);
-void afterEach(CDRSpecBlock);
-void it(NSString *, CDRSpecBlock);
-void fail(NSString *);
-#ifdef __cplusplus
+@interface CDRSpec : NSObject
+{
+@private
+    CDRExampleGroup *rootGroup_;
+    CDRExampleGroup *currentGroup_;
+@protected
+    void (^describe)(NSString *, CDRSpecBlock);
+    
+    void (^beforeEach)(CDRSpecBlock);
+    void (^afterEach)(CDRSpecBlock);
+    
+    void (^it)(NSString *, CDRSpecBlock);
+    void (^itShouldBehaveLike)(NSString *);
+    
+    void (^fail)(NSString *);
 }
-#endif
 
-@interface CDRSpec : NSObject <CDRSpec> {
-  CDRExampleGroup *rootGroup_;
-  CDRExampleGroup *currentGroup_;
-}
-
-@property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
+@property(nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
 - (void)defineBehaviors;
 @end
 

@@ -8,7 +8,7 @@
 #import <OCMock/OCMock.h>
 #import <OCHamcrest/OCHamcrest.h>
 #endif
-
+/*
 SPEC_BEGIN(CppSpecSpec)
 
 describe(@"CppSpec", ^{
@@ -28,3 +28,4 @@ describe(@"CppSpec", ^{
 });
 
 SPEC_END
+*/

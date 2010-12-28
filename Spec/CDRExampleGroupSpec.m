@@ -26,10 +26,10 @@ describe(@"CDRExampleGroup", ^{
     beforeEach(^{
         group = [[CDRExampleGroup alloc] initWithText:groupText];
         incompleteExample = [[CDRExample alloc] initWithText:@"incomplete" andBlock:^{}];
-        passingExample = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
-        failingExample = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
-        pendingExample = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
-        errorExample = [[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }];
+        passingExample    = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+        failingExample    = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}];
+        pendingExample    = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
+        errorExample      = [[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }];
     });
 
     afterEach(^{
@@ -77,6 +77,8 @@ describe(@"CDRExampleGroup", ^{
 
         describe(@"for a group containing at least one incomplete example", ^{
             beforeEach(^{
+                [group add:passingExample];
+                [group run];
                 [group add:incompleteExample];
             });
 
@@ -230,7 +232,7 @@ describe(@"CDRExampleGroup", ^{
                     [group addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
                     [group run];
                     [group removeObserver:mockObserver forKeyPath:@"state"];
-
+                    
                     [mockObserver verify];
                 });
             });
@@ -257,12 +259,15 @@ describe(@"CDRExampleGroup", ^{
                     [mockObserver verify];
                 });
             });
-
+            
+            // FIXME: This test is wrong because a group with at least one incomplete example should be considered incomplete not failed.
+            // FIXME: Moreover this test is useless since it's testing Apple's API
+            /*
             describe(@"when a child example changes state, but the group state does not change", ^{
                 beforeEach(^{
                     [group add:failingExample];
-                    [failingExample run];
-
+                    [group run];
+                    
                     [group add:passingExample];
                     assertThatInt([group state], equalToInt(CDRExampleStateFailed));
 
@@ -275,6 +280,7 @@ describe(@"CDRExampleGroup", ^{
                     assertThatInt([group state], equalToInt(CDRExampleStateFailed));
                 });
             });
+             */
         });
     });
 
@@ -330,29 +336,7 @@ describe(@"CDRExampleGroup", ^{
             assertThat([group message], equalTo(@""));
         });
     });
-
-    describe(@"hasFullText", ^{
-        it(@"should return true", ^{
-            assertThatBool([group hasFullText], equalToBool(true));
-        });
-        describe(@"when initialized normally", ^{
-            it(@"should return true", ^{
-                assertThatBool([group hasFullText], equalToBool(true));
-            });
-        });
-
-        describe(@"when initialized as a root group", ^{
-            beforeEach(^{
-                [group release];
-                group = [[CDRExampleGroup alloc] initWithText:@"I am a root group" isRoot:YES];
-            });
-
-            it(@"should return false", ^{
-                assertThatBool([group hasFullText], equalToBool(false));
-            });
-        });
-    });
-
+    
     describe(@"fullText", ^{
         describe(@"with no parent", ^{
             beforeEach(^{
@@ -365,16 +349,20 @@ describe(@"CDRExampleGroup", ^{
         });
 
         describe(@"with a parent", ^{
+            __block CDRExampleGroup *rootGroup;
             __block CDRExampleGroup *parentGroup;
             NSString *parentGroupText = @"Parent!";
 
             beforeEach(^{
+                rootGroup   = [[CDRExampleGroup alloc] initWithText:@"wibble wobble"];
                 parentGroup = [[CDRExampleGroup alloc] initWithText:parentGroupText];
                 [parentGroup add:group];
+                [rootGroup add:parentGroup];
                 assertThat([group parent], isNot(nilValue()));
             });
 
             afterEach(^{
+                [rootGroup release];
                 [parentGroup release];
             });
 
@@ -389,6 +377,7 @@ describe(@"CDRExampleGroup", ^{
                 beforeEach(^{
                     anotherGroup = [[CDRExampleGroup alloc] initWithText:anotherGroupText];
                     [anotherGroup add:parentGroup];
+                    [rootGroup add:anotherGroup];
                 });
 
                 afterEach(^{
@@ -400,22 +389,6 @@ describe(@"CDRExampleGroup", ^{
                 });
             });
         });
-
-        describe(@"with a root group as a parent", ^{
-            __block CDRExampleGroup *rootGroup;
-
-            beforeEach(^{
-                rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
-                [rootGroup add:group];
-                assertThat([group parent], isNot(nilValue()));
-                assertThatBool([[group parent] hasFullText], equalToBool(NO));
-            });
-
-            it(@"should not include its parent's text", ^{
-                assertThat([group fullText], equalTo([group text]));
-            });
-        });
-
     });
 });
 

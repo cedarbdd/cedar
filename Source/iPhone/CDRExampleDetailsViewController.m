@@ -15,7 +15,8 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 @implementation CDRExampleDetailsViewController
 
 - (id)initWithExample:(CDRExampleBase *)example {
-    if (self = [super init]) {
+    if((self = [super init]))
+    {
         example_ = [example retain];
     }
     return self;

@@ -29,10 +29,18 @@ SPEC_BEGIN(SpecHelperSpec)
 describe(@"SpecHelper", ^{
     describe(@"specs", ^{
         it(@"should have an instance of SpecHelper", ^{
+            [[[SpecHelper specHelper] sharedExampleContext] setObject:@"blah" forKey:@"blah"];
+            
             assertThat([SpecHelper specHelper], notNilValue());
         });
     });
-
+    
+    describe(@"sharedExampleContext", ^{
+        it(@"should be empty", ^{
+            assertThatInt([[[SpecHelper specHelper] sharedExampleContext] count], equalToInt(0));
+        });
+    });
+    
     describe(@"global beforeEach", ^{
         it(@"should run before all specs", ^{
             assertThatInt(globalValue__, equalToInt(1));

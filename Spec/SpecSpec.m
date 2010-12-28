@@ -12,20 +12,22 @@
 #import <OCHamcrest/OCHamcrest.h>
 #endif
 
-void expectFailure(CDRSpecBlock block) {
-    @try {
-        block();
-    }
-    @catch (CDRSpecFailure *) {
-        return;
-    }
-
-    fail(@"Expectation should have failed.");
-}
-
 static NSString *globalValue__;
 
 SPEC_BEGIN(SpecSpec)
+
+void (^expectFailure)(CDRSpecBlock block) =
+[[^(CDRSpecBlock block)
+  {
+      @try {
+          block();
+      }
+      @catch (CDRSpecFailure *) {
+          return;
+      }
+      
+      fail(@"Expectation should have failed.");
+  } copy] autorelease];
 
 describe(@"Spec", ^ {
     beforeEach(^ {
@@ -143,6 +145,19 @@ SPEC_END
 
 
 SHARED_EXAMPLE_GROUPS_BEGIN(Specs)
+
+void (^expectFailure)(CDRSpecBlock block) =
+[[^(CDRSpecBlock block)
+  {
+      @try {
+          block();
+      }
+      @catch (CDRSpecFailure *) {
+          return;
+      }
+      
+      fail(@"Expectation should have failed.");
+  } copy] autorelease];
 
 sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^(NSDictionary *context) {
     beforeEach(^{

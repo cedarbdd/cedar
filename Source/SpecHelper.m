@@ -18,7 +18,8 @@ static SpecHelper *specHelper__;
 }
 
 - (id)init {
-    if (self = [super init]) {
+    if((self = [super init]))
+    {
         self.sharedExampleGroups = [NSMutableDictionary dictionary];
         self.sharedExampleContext = [NSMutableDictionary dictionary];
     }

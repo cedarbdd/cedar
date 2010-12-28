@@ -39,17 +39,21 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
     });
 
     describe(@"with a parent", ^{
+        __block CDRExampleGroup *root;
         __block CDRExampleGroup *group;
         NSString *groupText = @"Parent!";
 
         beforeEach(^{
+            root  = [[CDRExampleGroup alloc] initWithText:@"wibble wobble"];
             group = [[CDRExampleGroup alloc] initWithText:groupText];
             [group add:example];
+            [root add:group];
             assertThat([example parent], isNot(nilValue()));
         });
 
         afterEach(^{
             [group release];
+            [root release];
         });
 
         it(@"should return its parent's text pre-pended with its own text", ^{
@@ -63,6 +67,8 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
             beforeEach(^{
                 rootGroup = [[CDRExampleGroup alloc] initWithText:rootGroupText];
                 [rootGroup add:group];
+                
+                [root add:rootGroup];
             });
 
             afterEach(^{
@@ -79,10 +85,9 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         __block CDRExampleGroup *rootGroup;
 
         beforeEach(^{
-            rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
+            rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble"];
             [rootGroup add:example];
             assertThat([example parent], isNot(nilValue()));
-            assertThatBool([[example parent] hasFullText], equalToBool(NO));
         });
 
         it(@"should not include its parent's text", ^{

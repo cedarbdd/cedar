@@ -32,6 +32,7 @@
 
 - (void)pushRootSpecStatusController:(NSArray *)groups {
     UIViewController *rootController = [[CDRSpecStatusViewController alloc] initWithExamples:groups];
+    [rootController setTitle:@"Test Results"];
     [self pushViewController:rootController animated:NO];
     [rootController release];
 }

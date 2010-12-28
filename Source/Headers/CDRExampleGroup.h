@@ -1,17 +1,25 @@
 #import "CDRExampleBase.h"
 
-@interface CDRExampleGroup : CDRExampleBase <CDRExampleParent> {
+@interface CDRExampleGroup : CDRExampleBase
+{
     NSMutableArray *beforeBlocks_, *examples_, *afterBlocks_;
-    BOOL isRoot_;
+    NSUInteger _errorExamples;
+    NSUInteger _failedExamples;
+    NSUInteger _pendingExamples;
+    NSUInteger _successfulExamples;
+    NSUInteger _totalExamples;
+    
+    BOOL       _totalNeedsUpdate;
 }
 
-@property (nonatomic, readonly) NSArray *examples;
+@property(nonatomic, readonly) NSArray *examples;
 
 + (id)groupWithText:(NSString *)text;
 
-- (id)initWithText:(NSString *)text isRoot:(BOOL)isRoot;
 - (void)add:(CDRExampleBase *)example;
 - (void)addBefore:(CDRSpecBlock)block;
 - (void)addAfter:(CDRSpecBlock)block;
+
+- (BOOL)isRoot;
 
 @end

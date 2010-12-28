@@ -15,7 +15,8 @@ const NSString *exampleStateDescriptions[] = {@"RUNNING", @"PASSED", @"PENDING",
 }
 
 - (id)init {
-    if (self = [super init]) {
+    if((self = [super init]))
+    {
         const size_t keyCount = sizeof(exampleStateKeys)/sizeof(exampleStateKeys[0]);
         const size_t valueCount = sizeof(exampleStateDescriptions)/sizeof(exampleStateDescriptions[0]);
         assert(keyCount == valueCount);

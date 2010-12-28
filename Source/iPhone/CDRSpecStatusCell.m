@@ -1,67 +1,195 @@
-#import "CDRSpecStatusCell.h"
-#import "CDRExampleBase.h"
-#import "CDRExampleStateMap.h"
+//
+//  CDRSpecStatusCell.m
+//  Cedar
+//
+//  Created by Remy Demarest on 24/12/2010.
+//  Copyright 2010 NuLayer Inc. All rights reserved.
+//
 
-@interface CDRSpecStatusCell (Private)
-- (void)setUpDisplayForExample:(CDRExampleBase *)example;
-- (UIColor *)colorForStatus;
+#import "CDRSpecStatusCell.h"
+#import "CDRSpecStatusIndicator.h"
+
+@interface CDRSpecStatusCell ()
+- (void)CDR_commonSpecStatusCellInit;
+- (NSString *)CDR_summaryConstrainedToWidth:(CGFloat)width;
+- (void)CDR_refreshIndicatorView;
+- (void)CDR_refreshContent;
+- (void)CDR_refreshSummary;
 @end
+
 
 @implementation CDRSpecStatusCell
 
-@synthesize example = example_;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if(self != nil)
+    {
+        [self CDR_commonSpecStatusCellInit];
+    }
+    return self;
+}
 
-- (void)dealloc {
-    self.example = nil;
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if((self = [super initWithCoder:aDecoder]))
+    {
+        [self CDR_commonSpecStatusCellInit];
+    }
+    return self;
+}
+
+- (void)CDR_commonSpecStatusCellInit;
+{
+    _indicatorView  = [[CDRSpecStatusIndicator alloc] init];
+    
+    _testTitleLabel = [[UILabel alloc] init];
+    _summaryLabel   = [[UILabel alloc] init];
+    
+    [_testTitleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+    [_testTitleLabel setTextColor:[UIColor blackColor]];
+    [_testTitleLabel setHighlightedTextColor:[UIColor whiteColor]];
+    
+    [_summaryLabel   setFont:[UIFont systemFontOfSize:14.0]];
+    [_summaryLabel   setTextColor:[UIColor grayColor]];
+    [_summaryLabel   setHighlightedTextColor:[UIColor whiteColor]];
+    
+    UIView *contentView = [self contentView];
+    
+    [contentView addSubview:_indicatorView];
+    [contentView addSubview:_testTitleLabel];
+    [contentView addSubview:_summaryLabel];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    
+    //[super setSelected:selected animated:animated];
+    
+    // Configure the view for the selected state.
+}
+
+
+- (void)dealloc
+{
+    [_indicatorView  release];
+    [_testTitleLabel release];
+    [_summaryLabel   release];
+    
     [super dealloc];
 }
 
-- (void)setExample:(CDRExampleBase *)example {
-    if (example_ != example) {
-        [example_ release];
-        example_ = [example retain];
+#pragma mark -
+#pragma mark Content refresh
 
-        [self setUpDisplayForExample:example];
-        [example_ addObserver:self forKeyPath:@"state" options:0 context:NULL];
+- (void)CDR_refreshContent;
+{
+    [self CDR_refreshSummary];
+    [self CDR_refreshIndicatorView];
+}
+
+- (NSString *)CDR_summaryConstrainedToWidth:(CGFloat)width
+{
+    NSString *ret = [NSString stringWithFormat:@"Errors: %u, Failures: %u, Pending: %u, Success: %u, Total: %u", _errorCount, _failureCount, _pendingCount, _successCount, _totalCount];
+    
+    if([ret sizeWithFont:[_summaryLabel font]].width > width)
+        ret = [NSString stringWithFormat:@"E: %u, F: %u, P: %u, S: %u, T: %u", _errorCount, _failureCount, _pendingCount, _successCount, _totalCount];
+    
+    return ret;
+}
+
+- (void)CDR_refreshSummary;
+{
+    [_summaryLabel setText:[self CDR_summaryConstrainedToWidth:CGRectGetWidth([_summaryLabel frame])]];
+}
+
+- (void)CDR_refreshIndicatorView;
+{
+    [_indicatorView setErrorValue:  _errorCount   / (CGFloat)_totalCount];
+    [_indicatorView setFailureValue:_failureCount / (CGFloat)_totalCount];
+    [_indicatorView setPendingValue:_pendingCount / (CGFloat)_totalCount];
+    [_indicatorView setSuccessValue:_successCount / (CGFloat)_totalCount];
+}
+
+#pragma mark -
+#pragma mark Layout
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGRect bounds = CGRectInset([[self contentView] bounds], 10.0, 2.0);
+    
+    CGRect testTitleFrame = bounds, summaryFrame = bounds, indicatorFrame = bounds;
+    
+    testTitleFrame.size.height = [_testTitleLabel sizeThatFits:bounds.size].height;
+    
+    summaryFrame.origin.y    = CGRectGetMaxY(testTitleFrame) + 2.0;
+    summaryFrame.size.height = [_summaryLabel sizeThatFits:bounds.size].height;
+    
+    indicatorFrame.origin.y    = CGRectGetMaxY(summaryFrame) + 4.0;
+    indicatorFrame.size.height = CGRectGetMaxY(bounds) - CGRectGetMinY(indicatorFrame) - 2.0;
+    
+    [_testTitleLabel setFrame:testTitleFrame];
+    [_summaryLabel   setFrame:summaryFrame];
+    [_indicatorView  setFrame:indicatorFrame];
+    
+    [self CDR_refreshSummary];
+}
+
+#pragma mark -
+#pragma mark Accessors;
+
+- (NSString *)testTitle                { return [_testTitleLabel text]; }
+- (void)setTestTitle:(NSString *)value { [_testTitleLabel setText:value]; }
+
+- (NSUInteger)errorCount { return _errorCount; }
+- (void)setErrorCount:(NSUInteger)value
+{
+    if(_errorCount != value)
+    {
+        _errorCount = value;
+        [self CDR_refreshContent];
     }
 }
 
-- (void)setBackgroundColorToStatusColor {
-    self.backgroundColor = [self colorForStatus];
-}
-
-#pragma mark KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self performSelectorOnMainThread:@selector(redrawCell) withObject:NULL waitUntilDone:NO];
-}
-
-#pragma mark Private interface
-- (void)setUpDisplayForExample:(CDRExampleBase *)example {
-    self.textLabel.text = example.text;
-    self.detailTextLabel.text = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
-    if ([example_ hasChildren]) {
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+- (NSUInteger)failureCount { return _failureCount; }
+- (void)setFailureCount:(NSUInteger)value
+{
+    if(_failureCount != value)
+    {
+        _failureCount = value;
+        [self CDR_refreshContent];
     }
 }
 
-- (void)redrawCell {
-    self.backgroundColor = [self colorForStatus];
-    self.detailTextLabel.text = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
+- (NSUInteger)pendingCount { return _pendingCount; }
+- (void)setPendingCount:(NSUInteger)value
+{
+    if(_pendingCount != value)
+    {
+        _pendingCount = value;
+        [self CDR_refreshContent];
+    }
 }
 
-- (UIColor *)colorForStatus {
-    switch ([self.example state]) {
-        case CDRExampleStatePassed:
-            return [UIColor greenColor];
-        case CDRExampleStatePending:
-            return [UIColor yellowColor];
-        case CDRExampleStateFailed:
-        case CDRExampleStateError:
-            return [UIColor redColor];
-        default:
-            return [UIColor whiteColor];
+- (NSUInteger)successCount { return _successCount; }
+- (void)setSuccessCount:(NSUInteger)value
+{
+    if(_successCount != value)
+    {
+        _successCount = value;
+        [self CDR_refreshContent];
+    }
+}
+
+- (NSUInteger)totalCount { return _totalCount; }
+- (void)setTotalCount:(NSUInteger)value
+{
+    if(_totalCount != value)
+    {
+        _totalCount = value;
+        [self CDR_refreshContent];
     }
 }
 

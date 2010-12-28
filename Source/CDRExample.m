@@ -3,77 +3,70 @@
 
 const CDRSpecBlock PENDING = nil;
 
-@interface CDRExample (Private)
-- (void)setState:(CDRExampleState)state;
+@interface CDRExample ()
+@property(nonatomic, readwrite) CDRExampleState state;
 @end
 
 @implementation CDRExample
 
-@synthesize message = message_;
+@synthesize message = message_, state = state_;
 
-+ (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block {
++ (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block
+{
     return [[[[self class] alloc] initWithText:text andBlock:block] autorelease];
 }
 
-- (id)initWithText:(NSString *)text andBlock:(CDRSpecBlock)block {
-    if (self = [super initWithText:text]) {
+- (id)initWithText:(NSString *)text andBlock:(CDRSpecBlock)block
+{
+    if((self = [super initWithText:text]))
+    {
         block_ = [block copy];
-        state_ = CDRExampleStateIncomplete;
+        state_ = (block_ != nil ? CDRExampleStateIncomplete : CDRExampleStatePending);
     }
     return self;
 }
 
-- (void)dealloc {
-    [block_ release];
-    [super dealloc];
+- (void)dealloc
+{
+    [block_   release];
+    [message_ release];
+    [super    dealloc];
 }
 
 #pragma mark CDRExampleBase
-- (CDRExampleState)state {
-    return state_;
+
+- (NSString *)message
+{
+    return (message_ ? : [super message]);
 }
 
-- (NSString *)message {
-    if (message_) {
-        return message_;
-    } else {
-        return [super message];
-    }
-}
-
-- (float)progress {
-    if (self.state == CDRExampleStateIncomplete) {
-        return 0.0;
-    } else {
-        return 1.0;
-    }
-}
-
-- (void)run {
-    if (block_) {
+- (void)run
+{
+    if(block_ != nil)
+    {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        @try {
+        @try
+        {
             [parent_ setUp];
             block_();
             self.state = CDRExampleStatePassed;
-        } @catch (CDRSpecFailure *x) {
+        }
+        @catch(CDRSpecFailure *x)
+        {
             self.message = [x reason];
             self.state = CDRExampleStateFailed;
-        } @catch (NSObject *x) {
+        }
+        @catch(id x)
+        {
             self.message = [x description];
             self.state = CDRExampleStateError;
         }
-        [parent_ tearDown];
-        [pool drain];
-    } else {
-        self.state = CDRExampleStatePending;
+        @finally
+        {
+            [parent_ tearDown];
+            [pool drain];
+        }
     }
-}
-
-#pragma mark Private interface
-
-- (void)setState:(CDRExampleState)state {
-    state_ = state;
 }
 
 @end
