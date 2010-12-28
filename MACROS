@@ -5,7 +5,7 @@
   IsMenuItem = NO;
   Name = "Cedar describe";
   TextString = "describe(@\"<#!subject under test!#>\", ^{\n\t<#!content!#>\n});";
-  CompletionPrefix = "cdesc";
+  CompletionPrefix = "describe";
   IncludeContexts = ("xcode.lang.objc");
 },{
   Identifier = pivotal.cedar.beforeEach;
@@ -14,7 +14,7 @@
   IsMenuItem = NO;
   Name = "Cedar beforeEach";
   TextString = "beforeEach(^{\n\t<#!content!#>\n});";
-  CompletionPrefix = "cbef";
+  CompletionPrefix = "beforeEach";
   IncludeContexts = ("xcode.lang.objc");
 },{
   Identifier = pivotal.cedar.it;
@@ -23,7 +23,7 @@
   IsMenuItem = NO;
   Name = "Cedar it";
   TextString = "it(@\"should <#!expected behavior!#>\", ^{\n\t<#!content!#>\n});";
-  CompletionPrefix = "cit";
+  CompletionPrefix = "it";
   IncludeContexts = ("xcode.lang.objc");
 },{
   Identifier = pivotal.cedar.afterEach;
@@ -32,7 +32,7 @@
   IsMenuItem = NO;
   Name = "Cedar afterEach";
   TextString = "afterEach(^{\n\t<#!content!#>\n});";
-  CompletionPrefix = "caft";
+  CompletionPrefix = "afterEach";
   IncludeContexts = ("xcode.lang.objc");
 },{
   Identifier = pivotal.cedar.pending;
@@ -41,7 +41,7 @@
   IsMenuItem = NO;
   Name = "Cedar pending example";
   TextString = "it(@\"should <#!expected behavior!#>\", PENDING);";
-  CompletionPrefix = "cpend";
+  CompletionPrefix = "pending";
   IncludeContexts = ("xcode.lang.objc");
 },{
   Identifier = pivotal.cedar.expandPending;
@@ -59,6 +59,6 @@
   IsMenuItem = NO;
   Name = "Cedar shared example group";
   TextString = "sharedExamplesFor(@\"<#!shared description!#>\", ^(NSDictionary *context) {\n\t<#!content!#>\n});";
-  CompletionPrefix = "cshare";
+  CompletionPrefix = "sharedExampleGroup";
   IncludeContexts = ("xcode.lang.objc");
 })
