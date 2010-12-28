@@ -1,31 +1,36 @@
 #define HC_SHORTHAND
 #if TARGET_OS_IPHONE
-#import <Cedar/SpecHelper.h>
+#import "CDRSpec.h"
 #import "OCMock.h"
 #import "OCHamcrest.h"
 #else
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpec.h>
 #import <OCMock/OCMock.h>
 #import <OCHamcrest/OCHamcrest.h>
 #endif
-/*
-SPEC_BEGIN(CppSpecSpec)
 
-describe(@"CppSpec", ^{
-    describe(@"Expectations", ^{
-        describe(@"with built-in types", ^{
-            __block int expectedValue;
+@interface CppSpecSpec : CDRSpec
+@end
 
-            beforeEach(^ {
-//                expectedValue = 1;
-            });
-
-            it(@"should run", ^{
-//                assertThatInt(1, equalToInt(expectedValue));
-            });
+@implementation CppSpecSpec
+- (void)declareBehaviors
+{
+    id desc = ^{
+        __block int expectedValue;
+        
+        beforeEach(^{
+            expectedValue = 1;
+        });
+        
+        it(@"should run", ^{
+            assertThatInt(1, equalToInt(expectedValue));
+        });
+    };
+    
+    describe(@"CppSpec", ^{
+        describe(@"Expectations", ^{
+            describe(@"with built-in types", desc);
         });
     });
-});
-
-SPEC_END
-*/
+}
+@end

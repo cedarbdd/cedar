@@ -1,4 +1,5 @@
-#import "SpecHelper.h"
+#import "CDRSpec.h"
+#import "CDRSharedExampleGroupPool.h"
 
 SPEC_BEGIN(SpecSpec2)
 

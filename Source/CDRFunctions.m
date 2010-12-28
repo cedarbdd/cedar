@@ -2,9 +2,9 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "CDRSpec.h"
+#import "CDRSharedExampleGroupPool.h"
 #import "CDRExampleReporter.h"
 #import "CDRDefaultReporter.h"
-#import "SpecHelper.h"
 
 BOOL CDRClassIsSubclassOfClass(Class cls, Class superclass)
 {

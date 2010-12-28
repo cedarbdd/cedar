@@ -22,4 +22,7 @@
 
 - (BOOL)isRoot;
 
+- (void)setUp;
+- (void)tearDown;
+
 @end

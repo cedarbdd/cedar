@@ -1,101 +1,171 @@
 #import "CDRSharedExampleGroupPool.h"
-#import "SpecHelper.h"
 #import "CDRSpec.h"
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
 
-@interface SpecHelper (CDRSharedExampleGroupPoolFriend)
-@property (nonatomic, retain, readonly) NSMutableDictionary *sharedExampleGroups;
+
+@interface CDRSharedExampleGroupPool ()
+
++ (NSMutableDictionary *)registeredSharedExampleGroups;
+
++ (Class)registeredClassForGroupName:(NSString *)groupName;
++ (void)registerClass:(Class)aClass forGroupName:(NSString *)groupName;
+
 @end
 
 
 @implementation CDRSharedExampleGroupPool
 
++ (NSMutableDictionary *)registeredSharedExampleGroups;
+{
+    static NSMutableDictionary *_registeredSharedExampleGroups = nil;
+    
+    if(_registeredSharedExampleGroups != nil) return _registeredSharedExampleGroups;
+    
+    @synchronized([CDRSharedExampleGroupPool class])
+    {
+        if(_registeredSharedExampleGroups == nil)
+            _registeredSharedExampleGroups = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _registeredSharedExampleGroups;
+}
+
++ (Class)registeredClassForGroupName:(NSString *)groupName;
+{
+    Class ret = Nil;
+    
+    @synchronized([CDRSharedExampleGroupPool class])
+    {
+        ret = [[self registeredSharedExampleGroups] objectForKey:groupName];
+    }
+    
+    return ret;
+}
+
++ (void)registerClass:(Class)aClass forGroupName:(NSString *)groupName;
+{
+    NSAssert([aClass isSubclassOfClass:[CDRSharedExampleGroupPool class]], @"The class %@ cannot be registered for shared example groups.");
+    
+    @synchronized([CDRSharedExampleGroupPool class])
+    {
+        [[self registeredSharedExampleGroups] setObject:aClass forKey:groupName];
+    }
+}
+
++ (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec;
+{
+    CDRExampleGroup *parentGroup = [spec currentGroup];
+    [spec setCurrentGroup:[CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]]];
+    [parentGroup add:[spec currentGroup]];
+    
+    CDRSharedExampleGroupPool *testingPool = [[[self registeredClassForGroupName:groupName] alloc] initWithSpec:spec forGroupWithName:groupName];
+    [testingPool declareSharedExampleGroups];
+    
+    NSAssert(testingPool->_targetBlock != NULL, @"No group defined for name \"%@\".", groupName);
+    
+    [testingPool run];
+    [testingPool release];
+    
+    [spec setCurrentGroup:parentGroup];
+}
+
 - (id)init
+{
+    // Creates a CDRSharedExampleGroupPool object that will only register the shared groups the class supports
+    // When a group is selected for testing, a new instance of the class is created and run using the spec and the specified group name
+    return [self initWithSpec:nil forGroupWithName:nil];
+}
+
+- (id)initWithSpec:(CDRSpec *)spec forGroupWithName:(NSString *)usedGroupName;
 {
     if((self = [super init]))
     {
-        _groups = [[NSMutableDictionary alloc] init];
+        _currentSpec = [spec retain];
         
         sharedExamplesFor =
-        [[^(NSString *groupName, CDRSharedExampleGroupBlock block)
-          {
-              [_groups setObject:[[block copy] autorelease] forKey:groupName];
-              [[[SpecHelper specHelper] sharedExampleGroups] setObject:self forKey:groupName];
-          } copy] autorelease];
+        [^(NSString *groupName, CDRSharedExampleGroupBlock block)
+         {
+             /* You can call this cheating.
+              * When the framework first runs, it registers all group names defined by custom subclasses defined by the developer.
+              * It associates the custom subclass to a group name: one class can be registered for multiple groups.
+              * When a group is used, the class of the group is instantiated, the group is passed in with the spec object running the test.
+              * The group specs are reran, this time test blocks are constructed and when sharedExamplesFor block is called
+              * it only sets the block associated to the group name.
+              */
+             if(_currentSpec != nil && [groupName isEqualToString:usedGroupName]) _targetBlock = [block copy];
+             
+             // The shared example group pool is only added to the global pool when no specs are ran for it yet
+             if(_currentSpec == nil) [[self class] registerClass:[self class] forGroupName:groupName];
+             
+         } copy];
         
-        describe =
-        [[^(NSString *text, CDRSpecBlock block)
-          {
-              CDRExampleGroup *parentGroup = [_currentSpec currentGroup];
-              
-              [_currentSpec setCurrentGroup:[CDRExampleGroup groupWithText:text]];
-              [parentGroup add:[_currentSpec currentGroup]];
-              
-              block();
-              [_currentSpec setCurrentGroup:parentGroup];
-          } copy] autorelease];
-        
-        beforeEach =
-        [[^(CDRSpecBlock block)
-          {
-              [[_currentSpec currentGroup] addBefore:block];
-          } copy] autorelease];
-        
-        afterEach = 
-        [[^(CDRSpecBlock block)
-          {
-              [[_currentSpec currentGroup] addAfter:block];
-          } copy] autorelease];
-        
-        it =
-        [[^(NSString *text, CDRSpecBlock block)
-          {
-              [[_currentSpec currentGroup] add:[CDRExample exampleWithText:text andBlock:block]];
-          } copy] autorelease];
-        
-        fail =
-        [[^(NSString *reason)
-          {
-              [[CDRSpecFailure specFailureWithReason:[NSString stringWithFormat:@"Failure: %@", reason]] raise];
-          } copy] autorelease];
-        
-        itShouldBehaveLike =
-        [[^(NSString *groupName)
-          {
-              CDRSharedExampleGroupPool *pool = [[[SpecHelper specHelper] sharedExampleGroups] objectForKey:groupName];
-              
-              [pool runGroupForName:groupName withExample:_currentSpec];
-          } copy] autorelease];
+        if(_currentSpec != nil)
+        {
+            describe =
+            [^(NSString *text, CDRSpecBlock block)
+             {
+                 CDRExampleGroup *parentGroup = [_currentSpec currentGroup];
+                 
+                 [_currentSpec setCurrentGroup:[CDRExampleGroup groupWithText:text]];
+                 [parentGroup add:[_currentSpec currentGroup]];
+                 
+                 block();
+                 [_currentSpec setCurrentGroup:parentGroup];
+             } copy];
+            
+            beforeEach =
+            [^(CDRSpecBlock block)
+             {
+                 [[_currentSpec currentGroup] addBefore:block];
+             } copy];
+            
+            afterEach =
+            [^(CDRSpecBlock block)
+             {
+                 [[_currentSpec currentGroup] addAfter:block];
+             } copy];
+            
+            it =
+            [^(NSString *text, CDRSpecBlock block)
+             {
+                 [[_currentSpec currentGroup] add:[CDRExample exampleWithText:text andBlock:block]];
+             } copy];
+            
+            itShouldBehaveLike =
+            [^(NSString *groupName)
+             {
+                 [CDRSharedExampleGroupPool runGroupForName:groupName withExample:_currentSpec];
+             } copy];
+        }
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_groups release];
-    [super dealloc];
+    [_targetBlock          release];
+    
+    [sharedExamplesFor     release];
+    [describe              release];
+    [beforeEach            release];
+    [afterEach             release];
+    [it                    release];
+    [itShouldBehaveLike    release];
+    
+    [super                 dealloc];
 }
 
-
-- (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec
+- (NSMutableDictionary *)sharedExampleContext
 {
-    CDRSpec *previousSpec = _currentSpec;
+    return [_currentSpec sharedExampleContext];
+}
+
+- (void)run;
+{
+    NSAssert(_targetBlock != NULL, @"No group defined for name.");
     
-    _currentSpec = spec;
-    
-    CDRSharedExampleGroupBlock sharedExampleGroupBlock = [_groups objectForKey:groupName];
-    
-    NSAssert(sharedExampleGroupBlock != NULL, @"No group defined for name \"%@\"", groupName);
-    
-    CDRExampleGroup *parentGroup = [_currentSpec currentGroup];
-    [_currentSpec setCurrentGroup:[CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]]];
-    [parentGroup add:[_currentSpec currentGroup]];
-    
-    sharedExampleGroupBlock([[SpecHelper specHelper] sharedExampleContext]);
-    [_currentSpec setCurrentGroup:parentGroup];
-    
-    _currentSpec = previousSpec;
+    _targetBlock([self sharedExampleContext]);
 }
 
 - (void)failWithException:(NSException *)exception {

@@ -5,8 +5,9 @@ typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *);
 
 @interface CDRSharedExampleGroupPool : NSObject
 {
-    NSMutableDictionary *_groups;
-    CDRSpec             *_currentSpec;
+@private
+    CDRSharedExampleGroupBlock  _targetBlock;
+    CDRSpec                    *_currentSpec;
 @protected
     void (^sharedExamplesFor)(NSString *, CDRSharedExampleGroupBlock);
     void (^describe)(NSString *, CDRSpecBlock);
@@ -16,11 +17,15 @@ typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *);
     
     void (^it)(NSString *, CDRSpecBlock);
     void (^itShouldBehaveLike)(NSString *);
-    
-    void (^fail)(NSString *);
 }
 
-- (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec;
++ (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec;
+
+@property(nonatomic, retain, readonly) NSMutableDictionary *sharedExampleContext;
+
+- (id)initWithSpec:(CDRSpec *)spec forGroupWithName:(NSString *)groupName;
+
+- (void)run;
 
 @end
 

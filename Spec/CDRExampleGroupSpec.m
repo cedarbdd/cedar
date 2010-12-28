@@ -3,11 +3,13 @@
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
-#import "SpecHelper.h"
+#import "CDRSpec.h"
+#import "CDRSharedExampleGroupPool.h"
 #import "OCMock.h"
 #import "OCHamcrest.h"
 #else
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpec.h>
+#import <Cedar/CDRSharedExampleGroupPool.h>
 #import <OCMock/OCMock.h>
 #import <OCHamcrest/OCHamcrest.h>
 #endif

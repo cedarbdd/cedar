@@ -28,12 +28,6 @@
     [super dealloc];
 }
 
-- (void)setUp {
-}
-
-- (void)tearDown {
-}
-
 - (void)run {
 }
 

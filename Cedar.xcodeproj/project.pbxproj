@@ -48,12 +48,9 @@
 		AEEE1FFF11DC27B800029872 /* CDRFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD111DC27B800029872 /* CDRFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE200011DC27B800029872 /* CDRSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD211DC27B800029872 /* CDRSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE200111DC27B800029872 /* Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD311DC27B800029872 /* Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AEEE200811DC27B800029872 /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FDB11DC27B800029872 /* SpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AEEE201111DC27B800029872 /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE611DC27B800029872 /* SpecHelper.m */; };
 		AEEE21BE11DC290400029872 /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.m */; };
 		AEEE21BF11DC290400029872 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.m */; };
 		AEEE21C111DC290400029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEF11DC27B800029872 /* main.m */; };
-		AEEE21C211DC290400029872 /* SpecHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* SpecHelperSpec.m */; };
 		AEEE21C311DC290400029872 /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.m */; };
 		AEEE21C411DC290400029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
 		AEEE220311DC29AC00029872 /* Cedar in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE1FB611DC271300029872 /* Cedar */; };
@@ -63,7 +60,6 @@
 		AEEE223411DC2B6500029872 /* CDRExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC711DC27B800029872 /* CDRExampleGroup.m */; };
 		AEEE223511DC2B6500029872 /* CDRFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC811DC27B800029872 /* CDRFunctions.m */; };
 		AEEE223611DC2B6500029872 /* CDRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC911DC27B800029872 /* CDRSpec.m */; };
-		AEEE223711DC2B6500029872 /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE611DC27B800029872 /* SpecHelper.m */; };
 		AEEE223811DC2B6D00029872 /* CDRExampleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FDD11DC27B800029872 /* CDRExampleDetailsViewController.m */; };
 		AEEE223911DC2B6D00029872 /* CDRExampleReporterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FDE11DC27B800029872 /* CDRExampleReporterViewController.m */; };
 		AEEE223A11DC2B6D00029872 /* CDRExampleStateMap.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FDF11DC27B800029872 /* CDRExampleStateMap.m */; };
@@ -71,10 +67,8 @@
 		AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE211DC27B800029872 /* CedarApplicationDelegate.m */; };
 		AEEE226011DC2C8300029872 /* CDRFunctions.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD111DC27B800029872 /* CDRFunctions.h */; };
 		AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD311DC27B800029872 /* Cedar.h */; };
-		AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDB11DC27B800029872 /* SpecHelper.h */; };
 		AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.m */; };
 		AEEE228011DC2D5200029872 /* CDRExampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.m */; };
-		AEEE228311DC2D5200029872 /* SpecHelperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* SpecHelperSpec.m */; };
 		AEEE228411DC2D5200029872 /* SpecSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.m */; };
 		AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
 		AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.m */; };
@@ -215,7 +209,6 @@
 				AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */,
 				AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */,
 				AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */,
-				AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,7 +240,6 @@
 		AEEE1FD711DC27B800029872 /* CDRExampleStateMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRExampleStateMap.h; sourceTree = "<group>"; };
 		AEEE1FD911DC27B800029872 /* CDRSpecStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecStatusViewController.h; sourceTree = "<group>"; };
 		AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarApplicationDelegate.h; sourceTree = "<group>"; };
-		AEEE1FDB11DC27B800029872 /* SpecHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecHelper.h; sourceTree = "<group>"; };
 		AEEE1FDD11DC27B800029872 /* CDRExampleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleDetailsViewController.m; sourceTree = "<group>"; };
 		AEEE1FDE11DC27B800029872 /* CDRExampleReporterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleReporterViewController.m; sourceTree = "<group>"; };
 		AEEE1FDF11DC27B800029872 /* CDRExampleStateMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleStateMap.m; sourceTree = "<group>"; };
@@ -255,7 +247,6 @@
 		AEEE1FE211DC27B800029872 /* CedarApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CedarApplicationDelegate.m; sourceTree = "<group>"; };
 		AEEE1FE411DC27B800029872 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
 		AEEE1FE511DC27B800029872 /* ActualValue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActualValue.mm; sourceTree = "<group>"; };
-		AEEE1FE611DC27B800029872 /* SpecHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecHelper.m; sourceTree = "<group>"; };
 		AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleGroupSpec.m; sourceTree = "<group>"; };
 		AEEE1FE911DC27B800029872 /* CDRExampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleSpec.m; sourceTree = "<group>"; };
 		AEEE1FEA11DC27B800029872 /* CppSpecSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CppSpecSpec.mm; sourceTree = "<group>"; };
@@ -263,7 +254,6 @@
 		AEEE1FED11DC27B800029872 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AEEE1FEE11DC27B800029872 /* SlowSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowSpec.m; sourceTree = "<group>"; };
 		AEEE1FEF11DC27B800029872 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AEEE1FF011DC27B800029872 /* SpecHelperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecHelperSpec.m; sourceTree = "<group>"; };
 		AEEE1FF111DC27B800029872 /* SpecSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec.m; sourceTree = "<group>"; };
 		AEEE1FF211DC27B800029872 /* SpecSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec2.m; sourceTree = "<group>"; };
 		AEEE218611DC28E200029872 /* Specs */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = Specs; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,7 +391,6 @@
 				AEEE1FC711DC27B800029872 /* CDRExampleGroup.m */,
 				AEEE1FC811DC27B800029872 /* CDRFunctions.m */,
 				AEEE1FC911DC27B800029872 /* CDRSpec.m */,
-				AEEE1FE611DC27B800029872 /* SpecHelper.m */,
 				AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */,
 			);
 			path = Source;
@@ -419,7 +408,6 @@
 				AEEE1FD111DC27B800029872 /* CDRFunctions.h */,
 				AEEE1FD211DC27B800029872 /* CDRSpec.h */,
 				AEEE1FD311DC27B800029872 /* Cedar.h */,
-				AEEE1FDB11DC27B800029872 /* SpecHelper.h */,
 				AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */,
 			);
 			path = Headers;
@@ -472,7 +460,6 @@
 				AEEE1FE911DC27B800029872 /* CDRExampleSpec.m */,
 				AEEE1FEA11DC27B800029872 /* CppSpecSpec.mm */,
 				AEEE1FEF11DC27B800029872 /* main.m */,
-				AEEE1FF011DC27B800029872 /* SpecHelperSpec.m */,
 				AEEE1FF111DC27B800029872 /* SpecSpec.m */,
 				AEEE1FF211DC27B800029872 /* SpecSpec2.m */,
 			);
@@ -512,7 +499,6 @@
 				AEEE1FFF11DC27B800029872 /* CDRFunctions.h in Headers */,
 				AEEE200011DC27B800029872 /* CDRSpec.h in Headers */,
 				AEEE200111DC27B800029872 /* Cedar.h in Headers */,
-				AEEE200811DC27B800029872 /* SpecHelper.h in Headers */,
 				AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -748,7 +734,6 @@
 				AEEE1FF611DC27B800029872 /* CDRExampleGroup.m in Sources */,
 				AEEE1FF711DC27B800029872 /* CDRFunctions.m in Sources */,
 				AEEE1FF811DC27B800029872 /* CDRSpec.m in Sources */,
-				AEEE201111DC27B800029872 /* SpecHelper.m in Sources */,
 				AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -760,7 +745,6 @@
 				AEEE21BE11DC290400029872 /* CDRExampleGroupSpec.m in Sources */,
 				AEEE21BF11DC290400029872 /* CDRExampleSpec.m in Sources */,
 				AEEE21C111DC290400029872 /* main.m in Sources */,
-				AEEE21C211DC290400029872 /* SpecHelperSpec.m in Sources */,
 				AEEE21C311DC290400029872 /* SpecSpec.m in Sources */,
 				AEEE21C411DC290400029872 /* SpecSpec2.m in Sources */,
 				66E33E53123CA82A00D326CC /* CppSpecSpec.mm in Sources */,
@@ -777,7 +761,6 @@
 				AEEE223411DC2B6500029872 /* CDRExampleGroup.m in Sources */,
 				AEEE223511DC2B6500029872 /* CDRFunctions.m in Sources */,
 				AEEE223611DC2B6500029872 /* CDRSpec.m in Sources */,
-				AEEE223711DC2B6500029872 /* SpecHelper.m in Sources */,
 				AEEE223811DC2B6D00029872 /* CDRExampleDetailsViewController.m in Sources */,
 				AEEE223911DC2B6D00029872 /* CDRExampleReporterViewController.m in Sources */,
 				AEEE223A11DC2B6D00029872 /* CDRExampleStateMap.m in Sources */,
@@ -796,7 +779,6 @@
 			files = (
 				AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.m in Sources */,
 				AEEE228011DC2D5200029872 /* CDRExampleSpec.m in Sources */,
-				AEEE228311DC2D5200029872 /* SpecHelperSpec.m in Sources */,
 				AEEE228411DC2D5200029872 /* SpecSpec.m in Sources */,
 				AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */,
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */,

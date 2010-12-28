@@ -6,11 +6,20 @@
 
 extern CDRSpecBlock PENDING;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+    void fail(NSString *);
+#ifdef __cplusplus
+}
+#endif
+
 @interface CDRSpec : NSObject
 {
 @private
-    CDRExampleGroup *rootGroup_;
-    CDRExampleGroup *currentGroup_;
+    CDRExampleGroup     *rootGroup_;
+    CDRExampleGroup     *currentGroup_;
+    NSMutableDictionary *_sharedExampleContext;
 @protected
     void (^describe)(NSString *, CDRSpecBlock);
     
@@ -19,12 +28,13 @@ extern CDRSpecBlock PENDING;
     
     void (^it)(NSString *, CDRSpecBlock);
     void (^itShouldBehaveLike)(NSString *);
-    
-    void (^fail)(NSString *);
 }
 
+@property(nonatomic, retain, readonly) NSMutableDictionary *sharedExampleContext;
 @property(nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
+
 - (void)defineBehaviors;
+
 @end
 
 @interface CDRSpec (SpecDeclaration)

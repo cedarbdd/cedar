@@ -1,5 +1,6 @@
 #define HC_SHORTHAND
-#import "SpecHelper.h"
+#import "CDRSpec.h"
+#import "CDRSharedExampleGroupPool.h"
 #import "OCMock.h"
 #import "OCHamcrest.h"
 #import "CDRExampleStateMap.h"

@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "CDRExampleParent.h"
 
 @protocol CDRExampleReporter;
 
@@ -35,6 +34,7 @@ typedef NSUInteger CDRExampleState;
 - (BOOL)hasChildren;
 - (NSString *)message;
 - (NSString *)fullText;
+
 @end
 
 @interface CDRExampleBase (RunReporting)

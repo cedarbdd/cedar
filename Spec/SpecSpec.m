@@ -3,31 +3,33 @@
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
-#import "SpecHelper.h"
+#import "CDRSpec.h"
+#import "CDRSharedExampleGroupPool.h"
 #import "OCMock.h"
 #import "OCHamcrest.h"
 #else
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpec.h>
+#import <Cedar/CDRSharedExampleGroupPool.h>
 #import <OCMock/OCMock.h>
 #import <OCHamcrest/OCHamcrest.h>
 #endif
 
 static NSString *globalValue__;
 
-SPEC_BEGIN(SpecSpec)
+static void expectFailure(CDRSpecBlock block)
+{
+    @try {
+        block();
+    }
+    @catch (CDRSpecFailure *) {
+        return;
+    }
+    
+    fail(@"Expectation should have failed.");
+}
 
-void (^expectFailure)(CDRSpecBlock block) =
-[[^(CDRSpecBlock block)
-  {
-      @try {
-          block();
-      }
-      @catch (CDRSpecFailure *) {
-          return;
-      }
-      
-      fail(@"Expectation should have failed.");
-  } copy] autorelease];
+
+SPEC_BEGIN(SpecSpec)
 
 describe(@"Spec", ^ {
     beforeEach(^ {
@@ -134,7 +136,7 @@ describe(@"a describe block", ^{
     describe(@"that sets a value in the global shared example context", ^{
         beforeEach(^{
             globalValue__ = @"something";
-            [[SpecHelper specHelper].sharedExampleContext setObject:globalValue__ forKey:@"value"];
+            [self.sharedExampleContext setObject:globalValue__ forKey:@"value"];
         });
     });
 
@@ -146,22 +148,9 @@ SPEC_END
 
 SHARED_EXAMPLE_GROUPS_BEGIN(Specs)
 
-void (^expectFailure)(CDRSpecBlock block) =
-[[^(CDRSpecBlock block)
-  {
-      @try {
-          block();
-      }
-      @catch (CDRSpecFailure *) {
-          return;
-      }
-      
-      fail(@"Expectation should have failed.");
-  } copy] autorelease];
-
 sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^(NSDictionary *context) {
     beforeEach(^{
-        assertThatInt([[SpecHelper specHelper].sharedExampleContext count], equalToInt(0));
+        assertThatInt([self.sharedExampleContext count], equalToInt(0));
         globalValue__ = [NSString string];
     });
 
