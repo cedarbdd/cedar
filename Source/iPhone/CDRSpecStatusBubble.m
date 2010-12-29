@@ -1,11 +1,3 @@
-//
-//  CDRSpecStatusBubble.m
-//  Cedar
-//
-//  Created by Remy Demarest on 28/12/2010.
-//  Copyright 2010 NuLayer Inc. All rights reserved.
-//
-
 #import "CDRSpecStatusBubble.h"
 #import <QuartzCore/QuartzCore.h>
 
