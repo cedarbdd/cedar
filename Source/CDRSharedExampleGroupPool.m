@@ -165,7 +165,7 @@
 {
     NSAssert(_targetBlock != NULL, @"No group defined for name.");
     
-    _targetBlock([self sharedExampleContext]);
+    _targetBlock();
 }
 
 - (void)failWithException:(NSException *)exception {

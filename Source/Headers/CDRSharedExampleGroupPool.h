@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <Cedar/CDRSpec.h>
 
-typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *);
+typedef void (^CDRSharedExampleGroupBlock)(void);
 
 @interface CDRSharedExampleGroupPool : NSObject
 {
