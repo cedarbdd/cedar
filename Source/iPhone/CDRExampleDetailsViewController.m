@@ -2,7 +2,7 @@
 #import "CDRExampleBase.h"
 #import "CDRExampleStateMap.h"
 
-@interface CDRExampleDetailsViewController (Private)
+@interface CDRExampleDetailsViewController ()
 - (UINavigationBar *)addNavigationBar;
 - (CGRect)navigationBarFrame;
 - (UILabel *)addLabelWithText:(NSString *)text;
