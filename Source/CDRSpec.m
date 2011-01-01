@@ -81,11 +81,12 @@ void fail(NSString *reason)
 
 - (void)defineBehaviors
 {
-    [rootGroup_ addBefore:^{ _sharedExampleContext = [[NSMutableDictionary alloc] init]; }];
+    _sharedExampleContext = [[NSMutableDictionary alloc] init];
+    [rootGroup_ addBefore:^{  }];
     
     [self declareBehaviors];
     
-    [rootGroup_ addAfter:^{ [_sharedExampleContext release], _sharedExampleContext = nil; }];
+    [rootGroup_ addAfter:^{ [_sharedExampleContext removeAllObjects]; }];
 }
 
 - (void)failWithException:(NSException *)exception {
