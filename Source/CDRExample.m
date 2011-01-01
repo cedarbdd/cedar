@@ -22,7 +22,7 @@ const CDRSpecBlock PENDING = nil;
     if((self = [super initWithText:text]))
     {
         block_ = [block copy];
-        state_ = (block_ != nil ? CDRExampleStateIncomplete : CDRExampleStatePending);
+        state_ = CDRExampleStateIncomplete;
     }
     return self;
 }
@@ -68,6 +68,7 @@ const CDRSpecBlock PENDING = nil;
             [pool drain];
         }
     }
+    else [self setState:CDRExampleStatePending];
 }
 
 @end
