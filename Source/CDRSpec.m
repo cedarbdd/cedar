@@ -52,9 +52,15 @@ void fail(NSString *reason)
         
         itShouldBehaveLike =
         [^(NSString *groupName)
-          {
-              [CDRSharedExampleGroupPool runGroupForName:groupName withExample:self];
-          } copy];
+         {
+             itShouldBehaveLikeWithContext(nil, groupName, ^ NSDictionary * { return [self sharedExampleContext]; });
+         } copy];
+        
+        itShouldBehaveLikeWithContext =
+        [^(NSString *subject, NSString *groupName, NSDictionary *(^context)(void))
+         {
+             [CDRSharedExampleGroupPool runGroupForName:groupName withExample:self subject:subject context:context];
+         } copy];
     }
     return self;
 }
@@ -64,12 +70,13 @@ void fail(NSString *reason)
     self.rootGroup = nil;
     self.currentGroup = nil;
     
-    [_sharedExampleContext release];
-    [describe              release];
-    [beforeEach            release];
-    [afterEach             release];
-    [it                    release];
-    [itShouldBehaveLike    release];
+    [_sharedExampleContext         release];
+    [describe                      release];
+    [beforeEach                    release];
+    [afterEach                     release];
+    [it                            release];
+    [itShouldBehaveLike            release];
+    [itShouldBehaveLikeWithContext release];
     
     [super dealloc];
 }

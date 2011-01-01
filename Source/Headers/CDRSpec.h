@@ -14,6 +14,11 @@ extern "C" {
 }
 #endif
 
+// Simplifies context creation for itShouldBehaveLikeWithContext()
+#ifndef MAKE_CONTEXT
+#define MAKE_CONTEXT(context) ^ NSDictionary * { return context; }
+#endif
+
 @interface CDRSpec : NSObject
 {
 @private
@@ -28,6 +33,7 @@ extern "C" {
     
     void (^it)(NSString *, CDRSpecBlock);
     void (^itShouldBehaveLike)(NSString *);
+    void (^itShouldBehaveLikeWithContext)(NSString *subject, NSString *groupName, NSDictionary *(^context)(void));
 }
 
 @property(nonatomic, retain, readonly) NSMutableDictionary *sharedExampleContext;

@@ -148,9 +148,9 @@ SPEC_END
 
 SHARED_EXAMPLE_GROUPS_BEGIN(Specs)
 
-sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^{
+sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^(NSDictionary *(^context)(void)) {
     beforeEach(^{
-        assertThatInt([[self sharedExampleContext] count], equalToInt(0));
+        assertThatInt([context() count], equalToInt(0));
         globalValue__ = [NSString string];
     });
 
@@ -159,13 +159,13 @@ sharedExamplesFor(@"a describe context that contains a beforeEach in a shared ex
     });
 });
 
-sharedExamplesFor(@"a shared example group that receives a value in the context", ^{
+sharedExamplesFor(@"a shared example group that receives a value in the context", ^(NSDictionary *(^context)(void)) {
     it(@"should receive the values set in the global shared example context", ^{
-        assertThat([[self sharedExampleContext] objectForKey:@"value"], equalTo(globalValue__));
+        assertThat([context() objectForKey:@"value"], equalTo(globalValue__));
     });
 });
 
-sharedExamplesFor(@"a shared example group that contains a failing spec", ^{
+sharedExamplesFor(@"a shared example group that contains a failing spec", ^(NSDictionary *(^context)(void)) {
     it(@"should fail in the expected fashion", ^{
         expectFailure(^{
             assertThat(@"wibble", equalTo(@"wobble"));

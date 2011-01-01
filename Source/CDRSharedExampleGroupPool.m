@@ -53,10 +53,15 @@
     }
 }
 
-+ (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec;
++ (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec subject:(NSString *)subject context:(NSDictionary *(^)(void))context;
 {
     CDRExampleGroup *parentGroup = [spec currentGroup];
-    [spec setCurrentGroup:[CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]]];
+    
+    NSString *prepend = @"";
+    
+    if([subject length] > 0) prepend = [subject stringByAppendingString:@" "];
+    
+    [spec setCurrentGroup:[CDRExampleGroup groupWithText:[NSString stringWithFormat:@"%@(as %@)", prepend, groupName]]];
     [parentGroup add:[spec currentGroup]];
     
     CDRSharedExampleGroupPool *testingPool = [[[self registeredClassForGroupName:groupName] alloc] initWithSpec:spec forGroupWithName:groupName];
@@ -64,7 +69,7 @@
     
     NSAssert(testingPool->_targetBlock != NULL, @"No group defined for name \"%@\".", groupName);
     
-    [testingPool run];
+    [testingPool runWithContext:context];
     [testingPool release];
     
     [spec setCurrentGroup:parentGroup];
@@ -135,7 +140,13 @@
             itShouldBehaveLike =
             [^(NSString *groupName)
              {
-                 [CDRSharedExampleGroupPool runGroupForName:groupName withExample:_currentSpec];
+                 itShouldBehaveLikeWithContext(nil, groupName, ^ NSDictionary * { return [self sharedExampleContext]; });
+             } copy];
+            
+            itShouldBehaveLikeWithContext =
+            [^(NSString *subject, NSString *groupName, NSDictionary *(^context)(void))
+             {
+                 [CDRSharedExampleGroupPool runGroupForName:groupName withExample:_currentSpec subject:subject context:context];
              } copy];
         }
     }
@@ -144,14 +155,15 @@
 
 - (void)dealloc
 {
-    [_targetBlock          release];
+    [_targetBlock                  release];
     
-    [sharedExamplesFor     release];
-    [describe              release];
-    [beforeEach            release];
-    [afterEach             release];
-    [it                    release];
-    [itShouldBehaveLike    release];
+    [sharedExamplesFor             release];
+    [describe                      release];
+    [beforeEach                    release];
+    [afterEach                     release];
+    [it                            release];
+    [itShouldBehaveLike            release];
+    [itShouldBehaveLikeWithContext release];
     
     [super                 dealloc];
 }
@@ -161,11 +173,11 @@
     return [_currentSpec sharedExampleContext];
 }
 
-- (void)run;
+- (void)runWithContext:(NSDictionary *(^)(void))context;
 {
     NSAssert(_targetBlock != NULL, @"No group defined for name.");
     
-    _targetBlock();
+    _targetBlock(context);
 }
 
 - (void)failWithException:(NSException *)exception {

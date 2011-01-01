@@ -26,6 +26,15 @@
   CompletionPrefix = "It";
   IncludeContexts = ("xcode.lang.objc");
 },{
+  Identifier = pivotal.cedar.itShouldBehaveLikeWithContext;
+  BasedOn = objc;
+  OnlyAtBOL = YES;
+  IsMenuItem = NO;
+  Name = "Cedar it";
+  TextString = "itShouldBehaveLikeWithContext(<#NSString *subject#>, <#NSString *groupName#>, MAKE_CONTEXT(<#NSDictionary *context#>));";
+  CompletionPrefix = "ItShouldBehaveLikeWithContext";
+  IncludeContexts = ("xcode.lang.objc");
+},{
   Identifier = pivotal.cedar.afterEach;
   BasedOn = objc;
   OnlyAtBOL = YES;
@@ -58,7 +67,7 @@
   OnlyAtBOL = YES;
   IsMenuItem = NO;
   Name = "Cedar shared example group";
-  TextString = "SharedExamplesFor(@\"<#!shared description!#>\", ^{\n\t<#!content!#>\n});";
+  TextString = "SharedExamplesFor(@\"<#!shared description!#>\", ^(NSDictionary *(^context)(void)) {\n\t<#!content!#>\n});";
   CompletionPrefix = "sharedExampleGroup";
   IncludeContexts = ("xcode.lang.objc");
 })

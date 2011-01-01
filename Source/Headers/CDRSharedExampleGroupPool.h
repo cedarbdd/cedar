@@ -1,7 +1,12 @@
 #import <Foundation/Foundation.h>
 #import <Cedar/CDRSpec.h>
 
-typedef void (^CDRSharedExampleGroupBlock)(void);
+typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *(^)(void));
+
+// Simplifies context creation for itShouldBehaveLikeWithContext()
+#ifndef MAKE_CONTEXT
+#define MAKE_CONTEXT(context) ^ NSDictionary * { return context; }
+#endif
 
 @interface CDRSharedExampleGroupPool : NSObject
 {
@@ -17,15 +22,16 @@ typedef void (^CDRSharedExampleGroupBlock)(void);
     
     void (^it)(NSString *, CDRSpecBlock);
     void (^itShouldBehaveLike)(NSString *);
+    void (^itShouldBehaveLikeWithContext)(NSString *subject, NSString *groupName, NSDictionary *(^context)(void));
 }
 
-+ (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec;
++ (void)runGroupForName:(NSString *)groupName withExample:(CDRSpec *)spec subject:(NSString *)subject context:(NSDictionary *(^)(void))context;
 
 @property(nonatomic, retain, readonly) NSMutableDictionary *sharedExampleContext;
 
 - (id)initWithSpec:(CDRSpec *)spec forGroupWithName:(NSString *)groupName;
 
-- (void)run;
+- (void)runWithContext:(NSDictionary *(^)(void))context;
 
 @end
 

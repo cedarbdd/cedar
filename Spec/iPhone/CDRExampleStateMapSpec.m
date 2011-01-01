@@ -1,9 +1,11 @@
 #define HC_SHORTHAND
+
 #import "CDRSpec.h"
 #import "CDRSharedExampleGroupPool.h"
 #import "OCMock.h"
 #import "OCHamcrest.h"
 #import "CDRExampleStateMap.h"
+
 
 DESCRIBE(CDRExampleStateMap) {
     __block CDRExampleStateMap *map;
