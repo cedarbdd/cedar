@@ -1,5 +1,5 @@
-Cedar.xcodeproj/pivotal.mode1v3
-Cedar.xcodeproj/pivotal.pbxuser
+Cedar.xcodeproj/*.mode1v3
+Cedar.xcodeproj/*.pbxuser
 OCHamcrest.framework
 build
 .DS_Store
