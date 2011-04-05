@@ -526,6 +526,7 @@
 			buildPhases = (
 				AEEE218311DC28E200029872 /* Sources */,
 				AEEE218411DC28E200029872 /* Frameworks */,
+				8DD11227134B008D006D0DBF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -677,6 +678,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8DD11227134B008D006D0DBF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "DYLD_FRAMEWORK_PATH=$BUILT_PRODUCTS_DIR $BUILT_PRODUCTS_DIR/$PRODUCT_NAME";
+			showEnvVarsInLog = 0;
+		};
 		AEEE225511DC2BD700029872 /* Build architecture-specific static libs */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
