@@ -1,11 +1,16 @@
 #import "CDRSpec.h"
+#import "CDRSharedExampleGroupPool.h"
+#import "CDRExampleParent.h"
 
-#define SPEC_BEGIN(name)             \
-@interface name : CDRSpec            \
-@end                                 \
-@implementation name                 \
-- (void)declareBehaviors {
+@interface SpecHelper : NSObject <CDRExampleParent> {
+    NSMutableDictionary *sharedExampleGroups_, *sharedExampleContext_;
+}
 
-#define SPEC_END                     \
-}                                    \
+@property (nonatomic, retain, readonly) NSMutableDictionary *sharedExampleContext;
+
++ (SpecHelper *)specHelper;
+
+- (void)beforeEach;
+- (void)afterEach;
+
 @end

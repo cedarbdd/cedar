@@ -52,4 +52,13 @@
   TextString = "^{\n\t<#!content!#>\n}";
   CompletionPrefix = "PENDING";
   IncludeContexts = ("xcode.lang.objc");
+},{
+  Identifier = pivotal.cedar.sharedExampleGroup;
+  BasedOn = objc;
+  OnlyAtBOL = YES;
+  IsMenuItem = NO;
+  Name = "Cedar shared example group";
+  TextString = "sharedExamplesFor(@\"<#!shared description!#>\", ^(NSDictionary *context) {\n\t<#!content!#>\n});";
+  CompletionPrefix = "cshare";
+  IncludeContexts = ("xcode.lang.objc");
 })

@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "CDRExampleBase.h"
 
-@protocol CDRExampleRunner;
-@class CDRExampleGroup;
+@protocol CDRExampleReporter;
+@class CDRExampleGroup, SpecHelper;
 
 @protocol CDRSpec
 @end
@@ -12,11 +12,11 @@ extern CDRSpecBlock PENDING;
 #ifdef __cplusplus
 extern "C" {
 #endif
-void describe(NSString *text, CDRSpecBlock block);
-void beforeEach(CDRSpecBlock block);
-void afterEach(CDRSpecBlock block);
-void it(NSString *text, CDRSpecBlock block);
-void fail(NSString *reason);
+void describe(NSString *, CDRSpecBlock);
+void beforeEach(CDRSpecBlock);
+void afterEach(CDRSpecBlock);
+void it(NSString *, CDRSpecBlock);
+void fail(NSString *);
 #ifdef __cplusplus
 }
 #endif
@@ -27,9 +27,28 @@ void fail(NSString *reason);
 }
 
 @property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
-
-- (void)declareBehaviors;
 - (void)defineBehaviors;
-- (void)runWithRunner:(id<CDRExampleRunner>)runner;
+@end
 
+@interface CDRSpec (SpecDeclaration)
+- (void)declareBehaviors;
+@end
+
+#define SPEC_BEGIN(name)             \
+@interface name : CDRSpec            \
+@end                                 \
+@implementation name                 \
+- (void)declareBehaviors {
+
+#define SPEC_END                     \
+}                                    \
+@end
+
+#define DESCRIBE(name)               \
+@interface name##Spec : CDRSpec      \
+@end                                 \
+@implementation name##Spec           \
+- (void)declareBehaviors
+
+#define DESCRIBE_END                 \
 @end

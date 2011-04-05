@@ -1,12 +1,7 @@
-#import <Foundation/Foundation.h>
-
-@protocol CDRExampleRunner;
-
-int runSpecsWithCustomExampleRunner(NSArray *specClasses, id<CDRExampleRunner> runner);
-int runAllSpecs();
-int runAllSpecsWithCustomExampleRunner(id<CDRExampleRunner> runner);
-
 #if TARGET_OS_IPHONE
-#import <Cedar/CedarApplicationDelegate.h>
-#import <Cedar/CDRExampleRunnerViewController.h>
+#import "CDRFunctions.h"
+#import "CedarApplicationDelegate.h"
+#import "CDRExampleReporterViewController.h"
+#else
+#import "CDRFunctions.h"
 #endif

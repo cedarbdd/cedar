@@ -30,7 +30,23 @@
 - (void)tearDown {
 }
 
-- (void)runWithRunner:(id<CDRExampleRunner>)runner {
+- (void)run {
+}
+
+- (BOOL)hasChildren {
+    return NO;
+}
+
+- (NSString *)message {
+    return @"";
+}
+
+- (NSString *)fullText {
+    if (self.parent && [self.parent hasFullText]) {
+        return [NSString stringWithFormat:@"%@ %@", [self.parent fullText], self.text];
+    } else {
+        return self.text;
+    }
 }
 
 @end
