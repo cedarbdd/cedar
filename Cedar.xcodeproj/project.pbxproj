@@ -705,7 +705,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator4.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos4.2 -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build";
+			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build";
 		};
 		AEEE225A11DC2C0200029872 /* Build universal static lib */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -834,7 +834,10 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				WARNING_CFLAGS = "-Wno-idiomatic-parentheses";
 			};
 			name = Debug;
 		};
@@ -844,7 +847,10 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				WARNING_CFLAGS = "-Wno-idiomatic-parentheses";
 			};
 			name = Release;
 		};
@@ -966,7 +972,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
-				SDKROOT = iphonesimulator4.2;
+				SDKROOT = iphonesimulator;
 			};
 			name = Debug;
 		};
@@ -980,7 +986,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
-				SDKROOT = iphonesimulator4.2;
+				SDKROOT = iphonesimulator;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1039,7 +1045,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = iPhoneSpecs;
-				SDKROOT = iphonesimulator4.2;
+				SDKROOT = iphonesimulator;
 			};
 			name = Debug;
 		};
@@ -1047,6 +1053,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1075,7 +1082,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = iPhoneSpecs;
-				SDKROOT = iphonesimulator4.2;
+				SDKROOT = iphonesimulator;
 				ZERO_LINK = NO;
 			};
 			name = Release;

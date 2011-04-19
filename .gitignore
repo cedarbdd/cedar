@@ -1,4 +1,6 @@
-Cedar.xcodeproj/*.mode1v3
-Cedar.xcodeproj/*.pbxuser
+*.mode1v3
+*.pbxuser
+*.xcworkspace
+xcuserdata
 build
 .DS_Store
