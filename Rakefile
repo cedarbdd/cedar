@@ -2,10 +2,11 @@ PROJECT_NAME = "Cedar"
 CONFIGURATION = "Release"
 SPECS_TARGET_NAME = "Specs"
 UI_SPECS_TARGET_NAME = "iPhoneSpecs"
-SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk"
+SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk"
+BUILD_DIR = File.join(File.dirname(__FILE__), "build")
 
 def build_dir(effective_platform_name)
-  File.join(File.dirname(__FILE__), "build", CONFIGURATION + effective_platform_name)
+  File.join(BUILD_DIR, CONFIGURATION + effective_platform_name)
 end
 
 def system_or_exit(cmd, stdout = nil)
@@ -18,9 +19,8 @@ def output_file(target)
   output_dir = if ENV['IS_CI_BOX']
     ENV['CC_BUILD_ARTIFACTS']
   else
-    build_dir = File.join(File.dirname(__FILE__), "build")
-    Dir.mkdir(build_dir) unless File.exists?(build_dir)
-    build_dir
+    Dir.mkdir(BUILD_DIR) unless File.exists?(BUILD_DIR)
+    BUILD_DIR
   end
 
   output_file = File.join(output_dir, "#{target}.output")
@@ -37,11 +37,12 @@ task :cruise do
 end
 
 task :clean do
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean], output_file("clean"))
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean SYMROOT=#{BUILD_DIR}], output_file("clean"))
 end
 
 task :build_specs do
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build], output_file("specs"))
+puts "SYMROOT: #{ENV['SYMROOT']}"
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}], output_file("specs"))
 end
 
 task :build_uispecs do
@@ -50,7 +51,7 @@ task :build_uispecs do
 end
 
 task :build_all do
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} build], output_file("build_all"))
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}], output_file("build_all"))
 end
 
 task :specs => :build_specs do
