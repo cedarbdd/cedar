@@ -272,7 +272,6 @@
 		AEEE1FF111DC27B800029872 /* SpecSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec.m; sourceTree = "<group>"; };
 		AEEE1FF211DC27B800029872 /* SpecSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec2.m; sourceTree = "<group>"; };
 		AEEE218611DC28E200029872 /* Specs */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = Specs; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEEE222111DC2A1400029872 /* MACROS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MACROS; sourceTree = "<group>"; };
 		AEEE222211DC2A1400029872 /* Rakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
 		AEEE222311DC2A1400029872 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,7 +357,6 @@
 				AE135C9411DEA65500A922D4 /* Externals */,
 				AEEE1FB711DC271300029872 /* Products */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
-				AEEE222111DC2A1400029872 /* MACROS */,
 				AEEE222211DC2A1400029872 /* Rakefile */,
 				AEEE222311DC2A1400029872 /* README.markdown */,
 				AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */,

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "Creating code snippets directory if necessary..."
+mkdir -p ~/Library/Developer/XCode/UserData/CodeSnippets
+
+echo "Unarchiving and installing Cedar code snippets..."
+tar -xzf CodeSnippets.tar.gz
+mv CodeSnippets/* ~/Library/Developer/XCode/UserData/CodeSnippets
+
+echo "Removing archive remnants..."
+rm -rf CodeSnippets
+
+echo "*** Restart Xcode to load the new code snippets ***"

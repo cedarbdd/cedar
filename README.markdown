@@ -123,7 +123,8 @@ the top of your spec files:
     #import <OCHamcrest/OCHamcrest.h>
 
 Pivotal also has a fork of a [GitHub import of the OCHamcrest codebase](http://github.com/pivotal/OCHamcrest).
-This fork contains our iPhone-specific static framework target.
+This fork contains our iPhone-specific static framework target.  Cedar also references
+this fork of OCHamcrest as a submodule.
 
 
 ## Shared example groups
@@ -200,7 +201,8 @@ dictionary.
 
 Cedar works fine with OCMock.  You can download and use the [OCMock framework](http://www.mulle-kybernetik.com/software/OCMock/).
 Pivotal also has a fork of a [GitHub import of the OCMock codebase](http://github.com/pivotal/OCMock),
-which contains our iPhone-specific static framework target.
+which contains our iPhone-specific static framework target.  Cedar also references
+the Pivotal fork of OCMock as a submodule.
 
 
 ## Pending specs
@@ -215,55 +217,18 @@ explicitly pass nil as the second parameter.  The parameter is necessary because
 C, and thus Objective-C, doesn't support function parameter overloading or
 default parameters.
 
-## Macros
+## Code Snippets
 
-The project root contains a file named MACROS, which contains some useful Xcode
-macros for writing Cedar specs.  To load the macros copy the contents of the
-file into this file:
+Xcode 4 has replaced text macros with code snippets.  If you're still using Xcode 3,
+checkout the xcode3 branch from git and read the section on MACROS.
 
-        ~/Library/Application\ Support/Developer/Shared/Xcode/Specifications/ObjectiveC.xctxtmacro
+The project root contains an archive file named CodeSnippets.tar.gz.  You can unpack
+the file yourself and place the codesnippet files into this location (you may need
+to create the directory):
 
-You may need to create that file.  If the file already exists, and contains pre-
-existing macros, be careful to insert the Cedar macros inside the existing
-parentheses properly.
+        ~/Library/Developer/XCode/UserData/CodeSnippets
 
-To use the macros, type the shortcut string, followed by Ctrl-. or Ctrl-,  As an
-example, typing 'cdesc' followed by Ctrl-. will expand to:
-
-        describe(@"<#!subject under test!#>", ^{
-            <#!content!#>
-        });
-
-
-## But I'm writing a pre-4.0 iPhone app!
-
-Unfortunately, Apple has made Objective-C blocks, upon which Cedar depends,
-only available in the Mac OS X 10.6 and iOS 4 runtime.  This means if you're not
-building on a Snow Leopard machine and targeting the desktop runtime or
-targeting a device or simulator that is running less than iOS 4 then anything
-using blocks will fail to compile.  There are a couple ways around this:
-
-* Plausible Labs provides patched versions of the [GCC compiler and runtime for
-  Leopard and iPhone OS](http://code.google.com/p/plblocks/).  This link
-  has instructions for installing this compiler and framework.  I wrote most of
-  Cedar on a Leopard machine with the 10.5 PLBlocks runtime.
-
-* Split your project into OS-dependent and OS-independent targets.  Domain
-  models and business logic shouldn't (theoretically) depend on the available
-  UI frameworks.  Test everything that doesn't require UIKit/CoreGraphics/etc.
-  using Cedar; test the UI using something else.
-
-* We're open to suggestions.
-
-The Cedar-iPhone target builds a framework specifically designed for specs on
-the iPhone device.  It includes a static library that includes builds targeting
-both the simulator and device runtimes.
-
-We've created a sample iPhone application that runs Cedar specs both on and off
-the device.  You can check it out [here](http://github.com/pivotal/StoryAccepter).
-
-See the Pivotal forks of OCHamcrest and OCMock on GitHub for iPhone-specific
-static framework targets.
+Alternately, you can run the installCodeSnippets script, which will do it for you. 
 
 
 ## Contributions and feedback
@@ -273,4 +238,4 @@ Welcomed!  Feel free to join and contribute to the public Tracker project [here]
 The [public Google group](http://groups.google.com/group/cedar-discuss) for Cedar is cedar-discuss@googlegroups.com.
 Or, you can follow the growth of Cedar on Twitter: [@cedarbdd](http://twitter.com/cedarbdd).
 
-Copyright (c) 2010 Pivotal Labs. This software is licensed under the MIT License.
+Copyright (c) 2011 Pivotal Labs. This software is licensed under the MIT License.
