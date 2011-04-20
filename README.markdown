@@ -62,6 +62,10 @@ BDD-style testing using Objective-C
   will sometimes not copy all of the header files appropriately.  If after you
   build the Headers directory under the built framework is empty, try deleting
   the built framework and building again.
+  NOTE #2: Xcode 4 has changed the location of build products, except for command
+  line builds.  Since the static framework build includes scripts that depend on
+  command line builds, it will fail when using the default Xcode 4 build settings.
+  See [this post](http://pivotallabs.com/users/amilligan/blog/articles/1651) for solutions.
 * Create a Cocoa Touch executable target for your tests in your project.  Name
   this target UISpecs, or something similar.
 * Open the Info.plist file for your project and remove the "Main nib file base
