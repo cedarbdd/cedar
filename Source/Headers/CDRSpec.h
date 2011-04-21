@@ -19,6 +19,9 @@ void it(NSString *, CDRSpecBlock);
 void fail(NSString *);
 #ifdef __cplusplus
 }
+
+#import "ActualValue.h"
+
 #endif
 
 @interface CDRSpec : NSObject <CDRSpec> {
@@ -42,13 +45,4 @@ void fail(NSString *);
 
 #define SPEC_END                     \
 }                                    \
-@end
-
-#define DESCRIBE(name)               \
-@interface name##Spec : CDRSpec      \
-@end                                 \
-@implementation name##Spec           \
-- (void)declareBehaviors
-
-#define DESCRIBE_END                 \
 @end

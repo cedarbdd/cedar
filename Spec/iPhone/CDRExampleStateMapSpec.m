@@ -4,40 +4,41 @@
 #import "OCHamcrest.h"
 #import "CDRExampleStateMap.h"
 
-DESCRIBE(CDRExampleStateMap) {
-    __block CDRExampleStateMap *map;
+SPEC_BEGIN(CDRExampleStateMapSpec)
 
-    beforeEach(^{
-        map = [CDRExampleStateMap stateMap];
-    });
+__block CDRExampleStateMap *map;
 
-    describe(@"descriptionForState", ^{
-        describe(@"for an incomplete state", ^{
-            it(@"should return RUNNING", ^{
-                assertThat([map descriptionForState:CDRExampleStateIncomplete], equalTo(@"RUNNING"));
-            });
-        });
-        describe(@"for a passed state", ^{
-            it(@"should return PASSED", ^{
-                assertThat([map descriptionForState:CDRExampleStatePassed], equalTo(@"PASSED"));
-            });
-        });
-        describe(@"for a pending state", ^{
-            it(@"should return PENDING", ^{
-                assertThat([map descriptionForState:CDRExampleStatePending], equalTo(@"PENDING"));
-            });
-        });
-        describe(@"for a failed state", ^{
-            it(@"should return FAILED", ^{
-                assertThat([map descriptionForState:CDRExampleStateFailed], equalTo(@"FAILED"));
-            });
-        });
-        describe(@"for a error state", ^{
-            it(@"should return ERROR", ^{
-                assertThat([map descriptionForState:CDRExampleStateError], equalTo(@"ERROR"));
-            });
+beforeEach(^{
+    map = [CDRExampleStateMap stateMap];
+});
+
+describe(@"descriptionForState", ^{
+    describe(@"for an incomplete state", ^{
+        it(@"should return RUNNING", ^{
+            assertThat([map descriptionForState:CDRExampleStateIncomplete], equalTo(@"RUNNING"));
         });
     });
-}
-DESCRIBE_END
+    describe(@"for a passed state", ^{
+        it(@"should return PASSED", ^{
+            assertThat([map descriptionForState:CDRExampleStatePassed], equalTo(@"PASSED"));
+        });
+    });
+    describe(@"for a pending state", ^{
+        it(@"should return PENDING", ^{
+            assertThat([map descriptionForState:CDRExampleStatePending], equalTo(@"PENDING"));
+        });
+    });
+    describe(@"for a failed state", ^{
+        it(@"should return FAILED", ^{
+            assertThat([map descriptionForState:CDRExampleStateFailed], equalTo(@"FAILED"));
+        });
+    });
+    describe(@"for a error state", ^{
+        it(@"should return ERROR", ^{
+            assertThat([map descriptionForState:CDRExampleStateError], equalTo(@"ERROR"));
+        });
+    });
+});
+
+SPEC_END
 

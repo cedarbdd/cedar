@@ -9,6 +9,8 @@
 #import <OCHamcrest/OCHamcrest.h>
 #endif
 
+using namespace Cedar::Matchers;
+
 SPEC_BEGIN(CppSpecSpec)
 
 describe(@"CppSpec", ^{
@@ -17,11 +19,25 @@ describe(@"CppSpec", ^{
             __block int expectedValue;
 
             beforeEach(^ {
-//                expectedValue = 1;
+                expectedValue = 1;
             });
 
             it(@"should run", ^{
-//                assertThatInt(1, equalToInt(expectedValue));
+                expect(1).toEqual(expectedValue);
+            });
+        });
+
+        describe(@"with NSObject-based types", ^{
+            __block NSObject *expectedValue;
+            int someInteger = 7;
+
+            beforeEach(^ {
+                expectedValue = [NSString stringWithFormat:@"Value: %d", someInteger];
+            });
+
+            it(@"should run", ^{
+                NSObject *actualValue = [NSString stringWithFormat:@"Value: %d", someInteger];
+                expect(actualValue).toEqual(expectedValue);
             });
         });
     });
