@@ -28,12 +28,16 @@ def output_file(target)
   output_file
 end
 
-task :default => [:specs, :uispecs]
+task :default => [:trim_whitespace, :specs, :uispecs]
 task :cruise do
   Rake::Task[:clean].invoke
   Rake::Task[:build_all].invoke
   Rake::Task[:specs].invoke
   Rake::Task[:uispecs].invoke
+end
+
+task :trim_whitespace do
+  system_or_exit(%Q[git status --short | awk '{if ($1 != "D" && $1 != "R") print $2}' | grep -e '.*\.[mh]$' | xargs sed -i '' -e 's/	/    /g;s/ *$//g;'])
 end
 
 task :clean do
