@@ -21,6 +21,7 @@ void fail(NSString *);
 }
 
 #import "ActualValue.h"
+#import "AllMatchers.h"
 
 #endif
 

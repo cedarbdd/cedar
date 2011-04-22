@@ -19,38 +19,33 @@ namespace Cedar { namespace Matchers {
     public:
         ActualValue(const T &);
 
-        template<typename U>
-        void toEqual(const U &) const;
+        template<typename Matcher> void to(const Matcher &) const;
+        template<typename Matcher> void to_not(const Matcher &) const;
 
     private:
         const T value_;
     };
 
-
-    template<typename T>
-    const ActualValue<T> expect(const T & value) {
-        return ActualValue<T>(value);
-    }
-
     template<typename T>
     ActualValue<T>::ActualValue(const T & value) : value_(value) {
     }
 
-#pragma mark toEqual
-    // Generic method must be defined here, not in the implementation file.
-    template<typename T> template<typename U>
-    void ActualValue<T>::toEqual(const U & expectedValue) const {
-        if (expectedValue != value_) {
-            std::stringstream message;
-            message << "Expected <" << value_ << "> to equal <" << expectedValue << ">";
+    template<typename T>
+    const ActualValue<T> expect(const T & actualValue) {
+        return ActualValue<T>(actualValue);
+    }
 
-            [[CDRSpecFailure specFailureWithReason:[NSString stringWithCString:message.str().c_str() encoding:NSUTF8StringEncoding]] raise];
+    template<typename T> template<typename Matcher>
+    void ActualValue<T>::to(const Matcher & matcher) const {
+        if (!matcher.matches(value_)) {
+            [[CDRSpecFailure specFailureWithReason:matcher.failure_message()] raise];
         }
     }
 
-    // Specialized methods must be declared here, but defined in the implementation file.
-    // If not declared here, OS X build will fail to pick up the specialization.  If defined
-    // here, iOS builds will fail with duplicate symbol link errors.
-    template<> template<>
-    void ActualValue<NSObject *>::toEqual(NSObject * const & expectedValue) const;
+    template<typename T> template<typename Matcher>
+    void ActualValue<T>::to_not(const Matcher & matcher) const {
+        if (matcher.matches(value_)) {
+            [[CDRSpecFailure specFailureWithReason:matcher.negative_failure_message()] raise];
+        }
+    }
 }}
