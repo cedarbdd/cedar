@@ -7,7 +7,7 @@
 
 namespace Cedar { namespace Matchers {
     template<typename T>
-    class Equal : private Base {
+    class Equal : public Base {
     private:
         Equal<T> & operator=(const Equal<T> &);
 
@@ -16,14 +16,13 @@ namespace Cedar { namespace Matchers {
         ~Equal();
         // Allow default copy ctor.
 
+        virtual NSString * failure_message_end() const;
+
         template<typename U>
         bool matches(const U &) const;
         bool matches(const id &) const;
         bool matches(NSObject * const &) const;
         bool matches(NSString * const &) const;
-
-        NSString * failure_message() const;
-        NSString * negative_failure_message() const;
 
     private:
         const T & expectedValue_;
@@ -43,21 +42,16 @@ namespace Cedar { namespace Matchers {
     Equal<T>::~Equal() {
     }
 
+    template<typename T>
+    /*virtual*/ NSString * Equal<T>::failure_message_end() const {
+        return [NSString stringWithFormat:@"equal <%@>", this->string_for(expectedValue_)];
+    }
+
 #pragma mark Generic
     template<typename T> template<typename U>
     bool Equal<T>::matches(const U & actualValue) const {
         this->build_failure_message_start(actualValue);
         return expectedValue_ == actualValue;
-    }
-
-    template<typename T>
-    NSString * Equal<T>::failure_message() const {
-        return [NSString stringWithFormat:@"%@ equal <%@>", this->failure_message_start(), this->string_for(expectedValue_)];
-    }
-
-    template<typename T>
-    NSString * Equal<T>::negative_failure_message() const {
-        return [NSString stringWithFormat:@"%@ not equal <%@>", this->failure_message_start(), this->string_for(expectedValue_)];
     }
 
 #pragma mark id

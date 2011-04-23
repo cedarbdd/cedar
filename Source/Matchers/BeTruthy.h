@@ -6,7 +6,7 @@
 #include <sstream>
 
 namespace Cedar { namespace Matchers {
-    class BeTruthy : Base {
+    class BeTruthy : public Base {
     private:
         BeTruthy & operator=(const BeTruthy &);
 
@@ -15,11 +15,10 @@ namespace Cedar { namespace Matchers {
         ~BeTruthy();
         // Allow default copy ctor.
 
+        virtual NSString * failure_message_end() const;
+
         template<typename U>
         bool matches(const U &) const;
-
-        NSString * failure_message() const;
-        NSString * negative_failure_message() const;
     };
 
     BeTruthy be_truthy();

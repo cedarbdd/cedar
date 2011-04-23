@@ -29,8 +29,12 @@ namespace Cedar { namespace Matchers {
         return this->string_for(static_cast<const id &>(value));
     }
 
-    NSString * Base::failure_message_start() const {
-        return [NSString stringWithFormat:@"Expected <%@> to", valueString_];
+    NSString * Base::failure_message() const {
+        return [NSString stringWithFormat:@"Expected <%@> to %@", valueString_, this->failure_message_end()];
+    }
+
+    NSString * Base::negative_failure_message() const {
+        return [NSString stringWithFormat:@"Expected <%@> to not %@", valueString_, this->failure_message_end()];
     }
 
 }}

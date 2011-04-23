@@ -16,6 +16,10 @@ namespace Cedar { namespace Matchers {
         virtual ~Base() = 0;
         // Allow default copy ctor.
 
+        NSString * failure_message() const;
+        NSString * negative_failure_message() const;
+
+    protected:
         template<typename U>
         NSString * string_for(const U &) const;
         NSString * string_for(const char value) const;
@@ -26,7 +30,8 @@ namespace Cedar { namespace Matchers {
 
         template<typename U>
         void build_failure_message_start(const U &) const;
-        NSString * failure_message_start() const;
+
+        virtual NSString * failure_message_end() const = 0;
 
     private:
         mutable NSString *valueString_;
