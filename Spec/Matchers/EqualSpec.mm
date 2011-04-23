@@ -6,25 +6,15 @@
 #import <OCMock/OCMock.h>
 #endif
 
-using namespace Cedar::Matchers;
-
-void expectFailureWithMessage(NSString *message, CDRSpecBlock block) {
-    @try {
-        block();
-    }
-    @catch (CDRSpecFailure *x) {
-        if (![message isEqualToString:x.reason]) {
-            fail([NSString stringWithFormat:@"Expected failure message: <%@> but received failure message <%@>", message, x.reason]);
-        }
-        return;
-    }
-
-    fail(@"Expectation should have failed.");
+extern "C" {
+#import "ExpectFailureWithMessage.h"
 }
+
+using namespace Cedar::Matchers;
 
 SPEC_BEGIN(EqualSpec)
 
-describe(@"Equal matcher", ^{
+describe(@"equal matcher", ^{
     describe(@"when the actual value is a built-in type", ^{
         int actualValue = 1;
 
@@ -136,6 +126,17 @@ describe(@"Equal matcher", ^{
                 expectFailureWithMessage(@"Attempt to compare NSString * to incomparable type", ^{
                     expect(actualValue).to(equal(expectedValue));
                 });
+            });
+        });
+    });
+
+    describe(@"when the actual value is a char type", ^{
+        char actualValue = 1;
+
+        it(@"should properly display any failure message", ^{
+            expectFailureWithMessage(@"Expected <1> to equal <63>", ^{
+                char expectedValue = 63;
+                expect(actualValue).to(equal(expectedValue));
             });
         });
     });
