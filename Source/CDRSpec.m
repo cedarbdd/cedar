@@ -1,6 +1,7 @@
 #import "CDRSpec.h"
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
+#import "CDRSpecFailure.h"
 #import "SpecHelper.h"
 
 CDRSpec *currentSpec;

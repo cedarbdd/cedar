@@ -12,6 +12,8 @@
 #import <OCHamcrest/OCHamcrest.h>
 #endif
 
+#import "CDRSpecFailure.h"
+
 void expectFailure(CDRSpecBlock block) {
     @try {
         block();

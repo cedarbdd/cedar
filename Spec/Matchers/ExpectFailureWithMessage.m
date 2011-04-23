@@ -1,5 +1,6 @@
 #import "ExpectFailureWithMessage.h"
 #import "CDRSpec.h"
+#import "CDRSpecFailure.h"
 
 void expectFailureWithMessage(NSString *message, CDRSpecBlock block) {
     @try {

@@ -1,9 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "CDRExampleBase.h"
 #import "Base.h"
-
-#include <iostream>
-#include <sstream>
 
 namespace Cedar { namespace Matchers {
     class BeTruthy : public Base {

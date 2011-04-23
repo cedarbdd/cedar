@@ -45,6 +45,14 @@
 		AE8C87BA13625239006C9305 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87B713625239006C9305 /* Base.h */; };
 		AE8C87BB13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
 		AE8C87BC13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
+		AE8C87E3136265C4006C9305 /* BeNil.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87E1136265C4006C9305 /* BeNil.h */; };
+		AE8C87E4136265C4006C9305 /* BeNil.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E2136265C4006C9305 /* BeNil.mm */; };
+		AE8C87E7136266D8006C9305 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E6136266D8006C9305 /* BeNilSpec.mm */; };
+		AE8C87E8136266D8006C9305 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E6136266D8006C9305 /* BeNilSpec.mm */; };
+		AE8C880D13626D2F006C9305 /* BeNil.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E2136265C4006C9305 /* BeNil.mm */; };
+		AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
+		AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
+		AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
 		AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; };
 		AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
@@ -238,6 +246,11 @@
 		AE8C87B213624BD4006C9305 /* BeTruthy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeTruthy.mm; sourceTree = "<group>"; };
 		AE8C87B713625239006C9305 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
 		AE8C87B813625239006C9305 /* Base.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Base.mm; sourceTree = "<group>"; };
+		AE8C87E1136265C4006C9305 /* BeNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeNil.h; sourceTree = "<group>"; };
+		AE8C87E2136265C4006C9305 /* BeNil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeNil.mm; sourceTree = "<group>"; };
+		AE8C87E6136266D8006C9305 /* BeNilSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeNilSpec.mm; sourceTree = "<group>"; };
+		AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecFailure.h; sourceTree = "<group>"; };
+		AE8C881113626FE6006C9305 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
 		AEC9DEEB12C2CC7E0039512D /* CDRColorizedReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRColorizedReporter.m; sourceTree = "<group>"; };
 		AEEE1FB611DC271300029872 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,10 +374,11 @@
 		AE8C879F1362068A006C9305 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
-				AE8C87A01362071E006C9305 /* EqualSpec.mm */,
-				AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
+				AE8C87A01362071E006C9305 /* EqualSpec.mm */,
+				AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */,
+				AE8C87E6136266D8006C9305 /* BeNilSpec.mm */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -402,6 +416,7 @@
 				AEEE1FDC11DC27B800029872 /* iPhone */,
 				AEEE1FE311DC27B800029872 /* Matchers */,
 				AEEE1FC511DC27B800029872 /* CDRExample.m */,
+				AE8C881113626FE6006C9305 /* CDRSpecFailure.m */,
 				AEEE1FC611DC27B800029872 /* CDRExampleBase.m */,
 				AEEE1FC711DC27B800029872 /* CDRExampleGroup.m */,
 				AEEE1FC811DC27B800029872 /* CDRFunctions.m */,
@@ -419,6 +434,7 @@
 			children = (
 				AEEE1FD411DC27B800029872 /* iPhone */,
 				AEEE1FCC11DC27B800029872 /* CDRExample.h */,
+				AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */,
 				AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */,
 				AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */,
 				AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */,
@@ -465,11 +481,13 @@
 			children = (
 				AEEE1FE411DC27B800029872 /* ActualValue.h */,
 				AE8C87531360CF02006C9305 /* AllMatchers.h */,
+				AE8C87B713625239006C9305 /* Base.h */,
+				AE8C87B813625239006C9305 /* Base.mm */,
 				AE8C874D135FD1DB006C9305 /* Equal.h */,
 				AE8C87B013624928006C9305 /* BeTruthy.h */,
 				AE8C87B213624BD4006C9305 /* BeTruthy.mm */,
-				AE8C87B713625239006C9305 /* Base.h */,
-				AE8C87B813625239006C9305 /* Base.mm */,
+				AE8C87E1136265C4006C9305 /* BeNil.h */,
+				AE8C87E2136265C4006C9305 /* BeNil.mm */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -532,6 +550,8 @@
 				AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */,
 				AE8C87B113624928006C9305 /* BeTruthy.h in Headers */,
 				AE8C87B913625239006C9305 /* Base.h in Headers */,
+				AE8C87E3136265C4006C9305 /* BeNil.h in Headers */,
+				AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +790,8 @@
 				AEC9DEEE12C2CC7E0039512D /* CDRColorizedReporter.m in Sources */,
 				AE8C87B313624BD4006C9305 /* BeTruthy.mm in Sources */,
 				AE8C87BB13625239006C9305 /* Base.mm in Sources */,
+				AE8C87E4136265C4006C9305 /* BeNil.mm in Sources */,
+				AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,6 +808,7 @@
 				AE8C87A11362071E006C9305 /* EqualSpec.mm in Sources */,
 				AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */,
 				AE8C87B513624D73006C9305 /* BeTruthySpec.mm in Sources */,
+				AE8C87E7136266D8006C9305 /* BeNilSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +833,8 @@
 				AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */,
 				AE8C87B413624BD4006C9305 /* BeTruthy.mm in Sources */,
 				AE8C87BC13625239006C9305 /* Base.mm in Sources */,
+				AE8C880D13626D2F006C9305 /* BeNil.mm in Sources */,
+				AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,6 +853,7 @@
 				AE8C87A21362071E006C9305 /* EqualSpec.mm in Sources */,
 				AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */,
 				AE8C87B613624D75006C9305 /* BeTruthySpec.mm in Sources */,
+				AE8C87E8136266D8006C9305 /* BeNilSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

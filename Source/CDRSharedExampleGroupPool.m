@@ -2,6 +2,7 @@
 #import "SpecHelper.h"
 #import "CDRSpec.h"
 #import "CDRExampleGroup.h"
+#import "CDRSpecFailure.h"
 
 extern CDRSpec *currentSpec;
 

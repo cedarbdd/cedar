@@ -14,10 +14,6 @@ enum CDRExampleState {
 };
 typedef enum CDRExampleState CDRExampleState;
 
-@interface CDRSpecFailure : NSException
-+ (id)specFailureWithReason:(NSString *)reason;
-@end
-
 @interface CDRExampleBase : NSObject {
   NSString *text_;
   id<CDRExampleParent> parent_;

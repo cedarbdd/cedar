@@ -14,6 +14,7 @@
 
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
+#import "CDRSpecFailure.h"
 
 SPEC_BEGIN(CDRExampleSpec)
 

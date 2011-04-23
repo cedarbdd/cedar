@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "CDRExampleBase.h"
+#import "CDRSpecFailure.h"
 
 #include <iostream>
 #include <sstream>
