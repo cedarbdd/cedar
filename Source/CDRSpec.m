@@ -32,6 +32,22 @@ void fail(NSString *reason) {
     [[CDRSpecFailure specFailureWithReason:[NSString stringWithFormat:@"Failure: %@", reason]] raise];
 }
 
+void context(NSString *text, CDRSpecBlock block) {
+    describe(text, block);
+}
+
+void xcontext(NSString *text, CDRSpecBlock block) {
+    it(text, PENDING);
+}
+
+void xdescribe(NSString *text, CDRSpecBlock block) {
+    it(text, PENDING);
+}
+
+void xit(NSString *text, CDRSpecBlock block) {
+    it(text, PENDING);
+}
+
 @implementation CDRSpec
 
 @synthesize currentGroup = currentGroup_, rootGroup = rootGroup_;
