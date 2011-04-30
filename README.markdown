@@ -66,7 +66,7 @@ BDD-style testing using Objective-C
   line builds.  Since the static framework build includes scripts that depend on
   command line builds, it will fail when using the default Xcode 4 build settings.
   See [this post](http://pivotallabs.com/users/amilligan/blog/articles/1651) for solutions.
-* Create a Cocoa Touch executable target for your tests in your project.  Name
+* Create a Cocoa Touch "Application" target for your tests in your project.  Name
   this target UISpecs, or something similar.
 * Open the Info.plist file for your project and remove the "Main nib file base
   name" entry.  The project template will likely have set this to "MainWindow."
