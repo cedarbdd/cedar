@@ -27,6 +27,12 @@
 #pragma mark View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    // Set the text of the label in the middle of the navigation bar to the test target's bundle
+    // display name, which Xcode defaults to ${PRODUCT_NAME}, i.e., whatever you enter for "Product
+    // Name," e.g., "Spec," when creating a new target. You can later change the "Product Name" from
+    // the target's Build Settings.
+    self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
 }
 
 - (void)viewDidUnload {
