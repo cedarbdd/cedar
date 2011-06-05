@@ -31,7 +31,7 @@
 }
 
 - (NSString *)failureMessageForExample:(CDRExample *)example{
-    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='%@']", 
+    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@']", 
             [self escapeText:example.fullText],
             [self escapeText:example.message]];
 }
@@ -56,6 +56,20 @@
         default:
             break;
     }
+}
+
+- (void)stopObservingExamples:(NSArray *)examples {
+    for (id example in examples) {
+        if (![example hasChildren]) {
+            [example removeObserver:self forKeyPath:@"state"];
+        } else {
+            [self stopObservingExamples:[example examples]];
+        }
+    }
+}
+
+- (void)runDidComplete {
+    [self stopObservingExamples:rootGroups_];
 }
 
 @end

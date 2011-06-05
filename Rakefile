@@ -61,7 +61,7 @@ end
 task :specs => :build_specs do
   build_dir = build_dir("")
   ENV["DYLD_FRAMEWORK_PATH"] = build_dir
-  ENV["CEDAR_REPORTER_CLASS"] = "CDRColorizedReporter"
+  ENV["CEDAR_REPORTER_CLASS"] = "CDRDefaultReporter"
   system_or_exit(File.join(build_dir, SPECS_TARGET_NAME))
 end
 
@@ -81,6 +81,6 @@ namespace "teamcity" do
     build_dir = build_dir("")
     ENV["DYLD_FRAMEWORK_PATH"] = build_dir
     ENV["CEDAR_REPORTER_CLASS"] = "CDRTeamCityReporter"
-    system(File.join(build_dir, SPECS_TARGET_NAME))
+    system_or_exit(File.join(build_dir, SPECS_TARGET_NAME))
   end
 end
