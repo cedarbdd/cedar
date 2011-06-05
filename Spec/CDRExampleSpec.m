@@ -71,7 +71,7 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
             });
 
             it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
-                assertThat([example fullText], isNot(equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText])));
+                assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
             });
         });
     });
@@ -82,7 +82,7 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         beforeEach(^{
             rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
             [rootGroup add:example];
-            assertThat([example parent], isNot(nilValue()));
+            assertThat([example parent], is(nilValue()));
             assertThatBool([[example parent] hasFullText], equalToBool(NO));
         });
 
