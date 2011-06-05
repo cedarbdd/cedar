@@ -31,7 +31,7 @@
 }
 
 - (NSString *)failureMessageForExample:(CDRExample *)example{
-    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@']", 
+    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='%@']", 
             [self escapeText:example.fullText],
             [self escapeText:example.message]];
 }
