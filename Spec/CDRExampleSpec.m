@@ -46,7 +46,7 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         beforeEach(^{
             group = [[CDRExampleGroup alloc] initWithText:groupText];
             [group add:example];
-            assertThat([example parent], is(nilValue()));
+            assertThat([example parent], isNot(nilValue()));
         });
 
         afterEach(^{
@@ -71,7 +71,7 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
             });
 
             it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
-                assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
+                assertThat([example fullText], isNot(equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText])));
             });
         });
     });
