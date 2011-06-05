@@ -61,7 +61,7 @@ end
 task :specs => :build_specs do
   build_dir = build_dir("")
   ENV["DYLD_FRAMEWORK_PATH"] = build_dir
-  ENV["CEDAR_REPORTER_CLASS"] = "CDRTeamCityReporter"
+  ENV["CEDAR_REPORTER_CLASS"] = "CDRColorizedReporter"
   system_or_exit(File.join(build_dir, SPECS_TARGET_NAME))
 end
 
