@@ -38,7 +38,6 @@
         case CDRExampleStatePending:
             printf("%s\n", [[self pendingMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);
             break;
-        case CDRExampleStateError:
         case CDRExampleStateFailed:
             printf("%s\n%s\n%s\n", 
                    [[self startedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding],
