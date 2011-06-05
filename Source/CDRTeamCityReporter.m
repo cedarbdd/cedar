@@ -15,6 +15,7 @@
     tmp = [tmp stringByReplacingOccurrencesOfString:@"[" withString:@"|["];
     tmp = [tmp stringByReplacingOccurrencesOfString:@"]" withString:@"|]"];
 
+    return tmp;
 }
 
 - (NSString *)startedMessageForExample:(CDRExample *)example{
@@ -30,7 +31,7 @@
 }
 
 - (NSString *)failureMessageForExample:(CDRExample *)example{
-    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='']", 
+    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='%@']", 
             [self escapeText:example.fullText],
             [self escapeText:example.message]];
 }
