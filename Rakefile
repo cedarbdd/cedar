@@ -61,7 +61,7 @@ end
 task :specs => :build_specs do
   build_dir = build_dir("")
   ENV["DYLD_FRAMEWORK_PATH"] = build_dir
-  ENV["CEDAR_REPORTER_CLASS"] = "CDRDefaultReporter"
+  ENV["CEDAR_REPORTER_CLASS"] = "CDRTeamCityReporter"
   system_or_exit(File.join(build_dir, SPECS_TARGET_NAME))
 end
 
@@ -74,13 +74,4 @@ task :uispecs => :build_uispecs do
   ENV["CEDAR_REPORTER_CLASS"] = "CDRColorizedReporter"
 
   system_or_exit(%Q[#{File.join(build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents]);
-end
-
-namespace "teamcity" do
-  task :specs => :build_specs do 
-    build_dir = build_dir("")
-    ENV["DYLD_FRAMEWORK_PATH"] = build_dir
-    ENV["CEDAR_REPORTER_CLASS"] = "CDRTeamCityReporter"
-    system_or_exit(File.join(build_dir, SPECS_TARGET_NAME))
-  end
 end

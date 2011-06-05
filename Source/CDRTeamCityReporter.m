@@ -45,6 +45,7 @@
             break;
         case CDRExampleStatePending:
             printf("%s\n", [[self pendingMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);
+            [pendingMessages_ addObject:[super pendingMessageForExample:example]];
             break;
         case CDRExampleStateError:
         case CDRExampleStateFailed:
@@ -52,24 +53,11 @@
                    [[self startedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding],
                    [[self failureMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding],
                    [[self finishedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);
+            [failureMessages_ addObject:[super failureMessageForExample:example]];
             break;
         default:
             break;
     }
-}
-
-- (void)stopObservingExamples:(NSArray *)examples {
-    for (id example in examples) {
-        if (![example hasChildren]) {
-            [example removeObserver:self forKeyPath:@"state"];
-        } else {
-            [self stopObservingExamples:[example examples]];
-        }
-    }
-}
-
-- (void)runDidComplete {
-    [self stopObservingExamples:rootGroups_];
 }
 
 @end
