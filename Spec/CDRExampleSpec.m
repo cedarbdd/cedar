@@ -46,7 +46,7 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         beforeEach(^{
             group = [[CDRExampleGroup alloc] initWithText:groupText];
             [group add:example];
-            assertThat([example parent], is(nilValue()));
+            assertThat([example parent], isNot(nilValue()));
         });
 
         afterEach(^{
