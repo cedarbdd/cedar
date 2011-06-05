@@ -19,11 +19,11 @@
 }
 
 - (NSString *)pendingMessageForExample:(CDRExample *)example{
-    return [NSString stringWithFormat:@"##teamcity[testIgnored name'%@']", [self escapeText:example.fullText]];
+    return [NSString stringWithFormat:@"##teamcity[testIgnored name='%@']", [self escapeText:example.fullText]];
 }
 
 - (NSString *)failureMessageForExample:(CDRExample *)example{
-    return [NSString stringWithFormat:@"##teamcity[testFailed name'%@' message='%@']", 
+    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='%@']", 
             [self escapeText:example.fullText],
             [self escapeText:example.message]];
 }
