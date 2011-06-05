@@ -46,7 +46,7 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         beforeEach(^{
             group = [[CDRExampleGroup alloc] initWithText:groupText];
             [group add:example];
-            assertThat([example parent], isNot(nilValue()));
+            assertThat([example parent], is(nilValue()));
         });
 
         afterEach(^{
@@ -82,7 +82,7 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         beforeEach(^{
             rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
             [rootGroup add:example];
-            assertThat([example parent], is(nilValue()));
+            assertThat([example parent], isNot(nilValue()));
             assertThatBool([[example parent] hasFullText], equalToBool(NO));
         });
 
