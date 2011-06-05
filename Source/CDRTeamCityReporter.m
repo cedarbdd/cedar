@@ -7,7 +7,14 @@
 @implementation CDRTeamCityReporter
 
 - (NSString *)escapeText:(NSString *)text{
-    return [text stringByReplacingOccurrencesOfString:@"'" withString:@"|'"];
+    NSString *tmp = text;
+    tmp = [text stringByReplacingOccurrencesOfString:@"|" withString:@"||"];
+    tmp = [tmp stringByReplacingOccurrencesOfString:@"'" withString:@"|'"];
+    tmp = [tmp stringByReplacingOccurrencesOfString:@"\n" withString:@"|n"];
+    tmp = [tmp stringByReplacingOccurrencesOfString:@"\r" withString:@"|r"];
+    tmp = [tmp stringByReplacingOccurrencesOfString:@"[" withString:@"|["];
+    tmp = [tmp stringByReplacingOccurrencesOfString:@"]" withString:@"|]"];
+
 }
 
 - (NSString *)startedMessageForExample:(CDRExample *)example{
@@ -38,6 +45,7 @@
         case CDRExampleStatePending:
             printf("%s\n", [[self pendingMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);
             break;
+        case CDRExampleStateError:
         case CDRExampleStateFailed:
             printf("%s\n%s\n%s\n", 
                    [[self startedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding],
