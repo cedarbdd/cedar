@@ -16,6 +16,8 @@
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
 
+using namespace Cedar::Matchers;
+
 SPEC_BEGIN(CDRExampleGroupSpec)
 
 describe(@"CDRExampleGroup", ^{
@@ -42,24 +44,28 @@ describe(@"CDRExampleGroup", ^{
     });
 
     describe(@"hasChildren", ^{
-        beforeEach(^{
-            assertThatInt([[group examples] count], equalToInt(0));
-        });
-
         describe(@"for an empty group", ^{
+            beforeEach(^{
+                NSUInteger count = group.examples.count;
+                expect(count).to(equal(0));
+            });
+            
             it(@"should return false", ^{
-                assertThatBool([group hasChildren], equalToBool(NO));
+                BOOL hasChildren = group.hasChildren;
+                expect(hasChildren).to_not(be_truthy());
             });
         });
 
         describe(@"for a non-empty group", ^{
             beforeEach(^{
                 [group add:incompleteExample];
-                assertThatInt([[group examples] count], isNot(equalToInt(0)));
+                NSUInteger count = group.examples.count;
+                expect(count).to_not(equal(0));
             });
 
             it(@"should return true", ^{
-                assertThatBool([group hasChildren], equalToBool(YES));
+                BOOL hasChildren = group.hasChildren;
+                expect(hasChildren).to(be_truthy());
             });
         });
     });
@@ -67,11 +73,13 @@ describe(@"CDRExampleGroup", ^{
     describe(@"state", ^{
         describe(@"for a group containing no examples", ^{
             beforeEach(^{
-                assertThatInt([[group examples] count], equalToInt(0));
+                NSUInteger count = group.examples.count;
+                expect(count).to(equal(0));
             });
 
             it(@"should be CDRExampleStatePending", ^{
-                assertThatInt([group state], equalToInt(CDRExampleStatePending));
+                CDRExampleState state = group.state;
+                expect(state).to(equal(CDRExampleStatePending));
             });
         });
 
@@ -81,7 +89,8 @@ describe(@"CDRExampleGroup", ^{
             });
 
             it(@"should be CDRExampleStateIncomplete", ^{
-                assertThatInt([group state], equalToInt(CDRExampleStateIncomplete));
+                CDRExampleState state = group.state;
+                expect(state).to(equal(CDRExampleStateIncomplete));
             });
         });
 
@@ -93,7 +102,8 @@ describe(@"CDRExampleGroup", ^{
                 });
 
                 it(@"should be CDRExampleStatePassed", ^{
-                    assertThatInt([group state], equalToInt(CDRExampleStatePassed));
+                    CDRExampleState state = group.state;
+                    expect(state).to(equal(CDRExampleStatePassed));
                 });
             });
 
@@ -104,7 +114,8 @@ describe(@"CDRExampleGroup", ^{
                 });
 
                 it(@"should be CDRExampleStateFailed", ^{
-                    assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                    CDRExampleState state = group.state;
+                    expect(state).to(equal(CDRExampleStateFailed));
                 });
             });
 
@@ -115,7 +126,8 @@ describe(@"CDRExampleGroup", ^{
                 });
 
                 it(@"should be CDRExampleStatePending", ^{
-                    assertThatInt([group state], equalToInt(CDRExampleStatePending));
+                    CDRExampleState state = group.state;
+                    expect(state).to(equal(CDRExampleStatePending));
                 });
             });
 
@@ -126,7 +138,8 @@ describe(@"CDRExampleGroup", ^{
                 });
 
                 it(@"should be CDRExampleStateError", ^{
-                    assertThatInt([group state], equalToInt(CDRExampleStateError));
+                    CDRExampleState state = group.state;
+                    expect(state).to(equal(CDRExampleStateError));
                 });
             });
 
@@ -142,7 +155,8 @@ describe(@"CDRExampleGroup", ^{
                     });
 
                     it(@"should be CDRExampleStateFailed", ^{
-                        assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                        CDRExampleState state = group.state;
+                        expect(state).to(equal(CDRExampleStateFailed));
                     });
                 });
 
@@ -153,7 +167,8 @@ describe(@"CDRExampleGroup", ^{
                     });
 
                     it(@"should be CDRExampleStateFailed", ^{
-                        assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                        CDRExampleState state = group.state;
+                        expect(state).to(equal(CDRExampleStateFailed));
                     });
                 });
             });
@@ -170,7 +185,8 @@ describe(@"CDRExampleGroup", ^{
                     });
 
                     it(@"should be CDRExampleStateError", ^{
-                        assertThatInt([group state], equalToInt(CDRExampleStateError));
+                        CDRExampleState state = group.state;
+                        expect(state).to(equal(CDRExampleStateError));
                     });
                 });
 
@@ -181,7 +197,8 @@ describe(@"CDRExampleGroup", ^{
                     });
 
                     it(@"should be CDRExampleStateError", ^{
-                        assertThatInt([group state], equalToInt(CDRExampleStateError));
+                        CDRExampleState state = group.state;
+                        expect(state).to(equal(CDRExampleStateError));
                     });
                 });
 
@@ -192,7 +209,8 @@ describe(@"CDRExampleGroup", ^{
                     });
 
                     it(@"should be CDRExampleStateError", ^{
-                        assertThatInt([group state], equalToInt(CDRExampleStateError));
+                        CDRExampleState state = group.state;
+                        expect(state).to(equal(CDRExampleStateError));
                     });
                 });
             });
@@ -209,7 +227,8 @@ describe(@"CDRExampleGroup", ^{
                     });
 
                     it(@"should be CDRExampleStatePending", ^{
-                        assertThatInt([group state], equalToInt(CDRExampleStatePending));
+                        CDRExampleState state = group.state;
+                        expect(state).to(equal(CDRExampleStatePending));
                     });
                 });
             });
@@ -264,7 +283,8 @@ describe(@"CDRExampleGroup", ^{
                     [failingExample run];
 
                     [group add:passingExample];
-                    assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                    CDRExampleState state = group.state;
+                    expect(state).to(equal(CDRExampleStateFailed));
 
                     mockObserver = [OCMockObject mockForClass:[NSObject class]];
                     [[[mockObserver stub] andThrow:[NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil]] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
@@ -272,7 +292,8 @@ describe(@"CDRExampleGroup", ^{
 
                 it(@"should not report that the state has changed", ^{
                     [group run];
-                    assertThatInt([group state], equalToInt(CDRExampleStateFailed));
+                    CDRExampleState state = group.state;
+                    expect(state).to(equal(CDRExampleStateFailed));
                 });
             });
         });
@@ -281,11 +302,13 @@ describe(@"CDRExampleGroup", ^{
     describe(@"progress", ^{
         describe(@"when the group is empty", ^{
             beforeEach(^{
-                assertThatInt([group.examples count], equalToInt(0));
+                NSUInteger count = group.examples.count;
+                expect(count).to(equal(0));
             });
 
             it(@"should be equal to 1", ^{
-                assertThatFloat([group progress], equalToFloat(1.0));
+                float progress = group.progress;
+                expect(progress).to(equal(1));
             });
         });
 
@@ -295,7 +318,8 @@ describe(@"CDRExampleGroup", ^{
             });
 
             it(@"should be equal to 0", ^{
-                assertThatFloat([group progress], equalToFloat(0.0));
+                float progress = group.progress;
+                expect(progress).to(equal(0));
             });
         });
 
@@ -306,7 +330,8 @@ describe(@"CDRExampleGroup", ^{
             });
 
             it(@"should be equal to 1", ^{
-                assertThatFloat([group progress], equalToFloat(1.0));
+                float progress = group.progress;
+                expect(progress).to(equal(1));
             });
         });
 
@@ -320,24 +345,29 @@ describe(@"CDRExampleGroup", ^{
             });
 
             it(@"should be the mean of the progress of each child", ^{
-                assertThatFloat([group progress], equalToFloat(2.0 / 3.0));
+                float progress = group.progress;
+                expect(progress).to(be_close_to(2.0 / 3.0));
             });
         });
     });
 
     describe(@"message", ^{
         it(@"should return an empty string", ^{
-            assertThat([group message], equalTo(@""));
+            NSString *message = group.message;
+            expect(message).to(equal(@""));
         });
     });
 
     describe(@"hasFullText", ^{
         it(@"should return true", ^{
-            assertThatBool([group hasFullText], equalToBool(true));
+            BOOL hasFullText = group.hasFullText;
+            expect(hasFullText).to(equal(YES));
         });
+
         describe(@"when initialized normally", ^{
             it(@"should return true", ^{
-                assertThatBool([group hasFullText], equalToBool(true));
+                BOOL hasFullText = group.hasFullText;
+                expect(hasFullText).to(equal(YES));
             });
         });
 
@@ -348,7 +378,8 @@ describe(@"CDRExampleGroup", ^{
             });
 
             it(@"should return false", ^{
-                assertThatBool([group hasFullText], equalToBool(false));
+                BOOL hasFullText = group.hasFullText;
+                expect(hasFullText).to(equal(NO));
             });
         });
     });

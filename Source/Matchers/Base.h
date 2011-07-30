@@ -27,6 +27,7 @@ namespace Cedar { namespace Matchers {
         NSString * string_for(const id value) const;
         NSString * string_for(NSObject * const) const;
         NSString * string_for(NSString * const) const;
+        NSString * string_for(NSNumber * const) const;
 
         template<typename U>
         void build_failure_message_start(const U &) const;

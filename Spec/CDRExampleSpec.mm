@@ -1,20 +1,19 @@
-#define HC_SHORTHAND
 #if TARGET_OS_IPHONE
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
 #import "SpecHelper.h"
 #import "OCMock.h"
-#import "OCHamcrest.h"
 #else
 #import <Cedar/SpecHelper.h>
 #import <OCMock/OCMock.h>
-#import <OCHamcrest/OCHamcrest.h>
 #endif
 
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
+
+using namespace Cedar::Matchers;
 
 SPEC_BEGIN(CDRExampleSpec)
 
@@ -31,11 +30,13 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
 
     describe(@"with no parent", ^{
         beforeEach(^{
-            assertThat([example parent], nilValue());
+            id parent = example.parent;
+            expect(parent).to(be_nil());
         });
 
         it(@"should return just its own text", ^{
-            assertThat([example fullText], equalTo(exampleText));
+            NSString *fullText = example.fullText;
+            expect(fullText).to(equal(exampleText));
         });
     });
 
@@ -46,15 +47,16 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         beforeEach(^{
             group = [[CDRExampleGroup alloc] initWithText:groupText];
             [group add:example];
-            assertThat([example parent], isNot(nilValue()));
+            expect(example.parent).to_not(be_nil());
         });
 
         afterEach(^{
             [group release];
         });
 
-        it(@"should return its parent's text pre-pended with its own text", ^{
-            assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@", groupText, exampleText]));
+        it(@"should return its parent's text prepended with its own text", ^{
+            NSString *fullText = example.fullText;
+            expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@", groupText, exampleText]));
         });
 
         describe(@"when the parent also has a parent", ^{
@@ -70,8 +72,9 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
                 [rootGroup release];
             });
 
-            it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
-                assertThat([example fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
+            it(@"should include the text from all parents, pre-pended in the appropriate order", ^{
+                NSString *fullText = example.fullText;
+                expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
             });
         });
     });
@@ -82,12 +85,14 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
         beforeEach(^{
             rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
             [rootGroup add:example];
-            assertThat([example parent], isNot(nilValue()));
-            assertThatBool([[example parent] hasFullText], equalToBool(NO));
+            
+            expect(example.parent).to_not(be_nil());
+            BOOL hasFullText = example.parent.hasFullText;
+            expect(hasFullText).to_not(be_truthy());
         });
 
         it(@"should not include its parent's text", ^{
-            assertThat([example fullText], equalTo([example text]));
+            expect(example.fullText).to(equal(example.text));
         });
     });
 } copy];
@@ -106,24 +111,27 @@ describe(@"CDRExample", ^{
 
     describe(@"hasChildren", ^{
         it(@"should return false", ^{
-            assertThatBool([example hasChildren], equalToBool(NO));
+            BOOL hasChildren = example.hasChildren;
+            expect(hasChildren).to_not(be_truthy());
         });
     });
 
     describe(@"state", ^{
-        describe(@"for a newly created example", ^{
+        context(@"for a newly created example", ^{
             it(@"should be CDRExampleStateIncomplete", ^{
-                assertThatInt([example state], equalToInt(CDRExampleStateIncomplete));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStateIncomplete));
             });
         });
 
-        describe(@"for an example that has run and succeeded", ^{
+        context(@"for an example that has run and succeeded", ^{
             beforeEach(^{
                 [example run];
             });
 
             it(@"should be CDRExampleStatePassed", ^{
-                assertThatInt([example state], equalToInt(CDRExampleStatePassed));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStatePassed));
             });
         });
 
@@ -135,7 +143,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should be CDRExampleStateFailed", ^{
-                assertThatInt([example state], equalToInt(CDRExampleStateFailed));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStateFailed));
             });
         });
 
@@ -147,7 +156,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should be CDRExceptionStateError", ^{
-                assertThatInt([example state], equalToInt(CDRExampleStateError));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStateError));
             });
         });
 
@@ -159,7 +169,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should be CDRExceptionStateError", ^{
-                assertThatInt([example state], equalToInt(CDRExampleStateError));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStateError));
             });
         });
 
@@ -171,7 +182,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should be CDRExceptionStatePending", ^{
-                assertThatInt([example state], equalToInt(CDRExampleStatePending));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStatePending));
             });
         });
 
@@ -192,21 +204,25 @@ describe(@"CDRExample", ^{
     describe(@"progress", ^{
         describe(@"when the state is incomplete", ^{
             beforeEach(^{
-                assertThatInt([example state], equalToInt(CDRExampleStateIncomplete));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStateIncomplete));
             });
 
             it(@"should return 0", ^{
-                assertThatFloat([example progress], equalToFloat(0.0));
+                float progress = example.progress;
+                expect(progress).to(equal(0.0));
             });
         });
         describe(@"when the state is passed", ^{
             beforeEach(^{
                 [example run];
-                assertThatInt([example state], equalToInt(CDRExampleStatePassed));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStatePassed));
             });
 
             it(@"should return 1", ^{
-                assertThatFloat([example progress], equalToFloat(1.0));
+                float progress = example.progress;
+                expect(progress).to(equal(1.0));
             });
         });
     });
@@ -225,11 +241,13 @@ describe(@"CDRExample", ^{
     describe(@"message", ^{
         describe(@"for an incomplete example", ^{
             beforeEach(^{
-                assertThatInt([example state], equalToInt(CDRExampleStateIncomplete));
+                CDRExampleState state = example.state;
+                expect(state).to(equal(CDRExampleStateIncomplete));
             });
 
             it(@"should return an empty string", ^{
-                assertThat([example message], equalTo(@""));
+                NSString *message = example.message;
+                expect(message).to(equal(@""));
             });
         });
 
@@ -241,7 +259,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should return an empty string", ^{
-                assertThat([example message], equalTo(@""));
+                NSString *message = example.message;
+                expect(message).to(equal(@""));
             });
         });
 
@@ -253,7 +272,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should return an empty string", ^{
-                assertThat([example message], equalTo(@""));
+                NSString *message = example.message;
+                expect(message).to(equal(@""));
             });
         });
 
@@ -267,7 +287,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should return the failure message", ^{
-                assertThat([example message], equalTo(failureMessage));
+                NSString *message = example.message;
+                expect(message).to(equal(failureMessage));
             });
         });
 
@@ -283,7 +304,7 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should return the description of the exception", ^{
-                assertThat([example message], equalTo([exception description]));
+                expect(example.message).to(equal(exception.description));
             });
         });
 
@@ -297,7 +318,8 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should return the description of whatever was thrown", ^{
-                assertThat([example message], equalTo(failureMessage));
+                NSString *message = example.message;
+                expect(message).to(equal(failureMessage));
             });
         });
     });

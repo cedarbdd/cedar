@@ -12,13 +12,14 @@ namespace Cedar { namespace Matchers {
         ~Equal();
         // Allow default copy ctor.
 
-        virtual NSString * failure_message_end() const;
-
         template<typename U>
         bool matches(const U &) const;
         bool matches(const id &) const;
         bool matches(NSObject * const &) const;
         bool matches(NSString * const &) const;
+
+    protected:
+        virtual NSString * failure_message_end() const;
 
     private:
         const T & expectedValue_;

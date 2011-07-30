@@ -1,18 +1,17 @@
-#define HC_SHORTHAND
 #if TARGET_OS_IPHONE
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
 #import "SpecHelper.h"
 #import "OCMock.h"
-#import "OCHamcrest.h"
 #else
 #import <Cedar/SpecHelper.h>
 #import <OCMock/OCMock.h>
-#import <OCHamcrest/OCHamcrest.h>
 #endif
 
 #import "CDRSpecFailure.h"
+
+using namespace Cedar::Matchers;
 
 void expectFailure(CDRSpecBlock block) {
     @try {
@@ -105,12 +104,12 @@ describe(@"Hamcrest matchers", ^{
             });
 
             it(@"should succeed when the two objects are equal", ^{
-                assertThat(expectedNumber, equalTo([NSNumber numberWithInt:1]));
+                expect(expectedNumber).to(equal([NSNumber numberWithInt:1]));
             });
 
             it(@"should fail when the two objects are not equal", ^{
                 expectFailure(^{
-                    assertThat(expectedNumber, equalTo([NSNumber numberWithInt:2]));
+                    expect(expectedNumber).to(equal([NSNumber numberWithInt:2]));
                 });
             });
         });
@@ -123,16 +122,16 @@ describe(@"Hamcrest matchers", ^{
             });
 
             it(@"should succeed when the two objects are equal", ^{
-                assertThatInt(expectedValue, is(equalToInt(1)));
+                expect(expectedValue).to(equal(1));
             });
 
             it(@"should succeed with different types that are comparable", ^{
-                assertThatInt(expectedValue, is(equalToFloat(1.0)));
+                expect(expectedValue).to(equal(1.0));
             });
 
             it(@"should fail when the objects are not equal", ^{
                 expectFailure(^{
-                    assertThatInt(expectedValue, is(equalToInt(2)));
+                    expect(expectedValue).to(equal(2));
                 });
             });
         });
@@ -148,7 +147,7 @@ describe(@"a describe block", ^{
         itShouldBehaveLike(@"a describe context that contains a beforeEach in a shared example group");
 
         it(@"should not run the shared beforeEach before specs outside the shared example group", ^{
-            assertThat(globalValue__, nilValue());
+            expect(globalValue__).to(be_nil());
         });
     });
 
@@ -169,25 +168,25 @@ SHARED_EXAMPLE_GROUPS_BEGIN(Specs)
 
 sharedExamplesFor(@"a describe context that contains a beforeEach in a shared example group", ^(NSDictionary *context) {
     beforeEach(^{
-        assertThatInt([[SpecHelper specHelper].sharedExampleContext count], equalToInt(0));
+        expect([[SpecHelper specHelper].sharedExampleContext count]).to(equal(0));
         globalValue__ = [NSString string];
     });
 
     it(@"should run the shared beforeEach before specs inside the shared example group", ^{
-        assertThat(globalValue__, notNilValue());
+        expect(globalValue__).to_not(be_nil());
     });
 });
 
 sharedExamplesFor(@"a shared example group that receives a value in the context", ^(NSDictionary *context) {
     it(@"should receive the values set in the global shared example context", ^{
-        assertThat([context objectForKey:@"value"], equalTo(globalValue__));
+        expect([context objectForKey:@"value"]).to(equal(globalValue__));
     });
 });
 
 sharedExamplesFor(@"a shared example group that contains a failing spec", ^(NSDictionary *context) {
     it(@"should fail in the expected fashion", ^{
         expectFailure(^{
-            assertThat(@"wibble", equalTo(@"wobble"));
+            expect(@"wibble").to(equal(@"wobble"));
         });
     });
 });
