@@ -32,9 +32,7 @@
 		AE0D689E13E36EDD0048039A /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */; };
 		AE0D689F13E36EDD0048039A /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */; };
 		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
-		AE135D4111DEA6F400A922D4 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D2111DEA69A00A922D4 /* OCHamcrest.framework */; };
 		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
-		AE135E7111DEB46F00A922D4 /* libOCHamcrest-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D2311DEA69A00A922D4 /* libOCHamcrest-StaticLib.a */; };
 		AE8C867D135FAE76006C9305 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FE411DC27B800029872 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE8C8680135FB4F7006C9305 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FE411DC27B800029872 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE8C87541360CF02006C9305 /* AllMatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87531360CF02006C9305 /* AllMatchers.h */; settings = {ATTRIBUTES = (); }; };
@@ -115,7 +113,7 @@
 		AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */; };
 		AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; };
 		AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
-		AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.m */; };
+		AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.mm */; };
 		AEEE228711DC2D5800029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FED11DC27B800029872 /* main.m */; };
 		AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEE11DC27B800029872 /* SlowSpec.m */; };
 		AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD511DC27B800029872 /* CDRExampleDetailsViewController.h */; };
@@ -129,27 +127,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AE135D2011DEA69A00A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = OCHamcrest;
-		};
-		AE135D2211DEA69A00A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 50066DAD1191DDE700A7A86D;
-			remoteInfo = "OCHamcrest-StaticLib";
-		};
-		AE135D2411DEA69A00A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0F2A4B1F0D8B68B400051BCF;
-			remoteInfo = UnitTests;
-		};
 		AE135D3011DEA6A900A922D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
@@ -178,26 +155,12 @@
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = OCMock;
 		};
-		AE135D3D11DEA6DA00A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = OCHamcrest;
-		};
 		AE135E6C11DEB45F00A922D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 508C285E119042C300E392B9;
 			remoteInfo = "OCMock-StaticLib";
-		};
-		AE135E6E11DEB46400A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 50066DAC1191DDE600A7A86D;
-			remoteInfo = "OCHamcrest-StaticLib";
 		};
 		AEEE218A11DC28E700029872 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -245,7 +208,6 @@
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
 		AE0D689713E36C540048039A /* BeCloseTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeCloseTo.h; sourceTree = "<group>"; };
 		AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeCloseToSpec.mm; sourceTree = "<group>"; };
-		AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCHamcrest.xcodeproj; path = OCHamcrest/Source/OCHamcrest.xcodeproj; sourceTree = "<group>"; };
 		AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Foundation.framework; sourceTree = SDKROOT; };
 		AE8C874D135FD1DB006C9305 /* Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equal.h; sourceTree = "<group>"; };
@@ -299,7 +261,7 @@
 		AEEE1FE611DC27B800029872 /* SpecHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecHelper.m; sourceTree = "<group>"; };
 		AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRExampleGroupSpec.mm; sourceTree = "<group>"; };
 		AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRExampleSpec.mm; sourceTree = "<group>"; };
-		AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRExampleStateMapSpec.m; sourceTree = "<group>"; };
+		AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRExampleStateMapSpec.mm; sourceTree = "<group>"; };
 		AEEE1FED11DC27B800029872 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AEEE1FEE11DC27B800029872 /* SlowSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowSpec.m; sourceTree = "<group>"; };
 		AEEE1FEF11DC27B800029872 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -329,7 +291,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */,
-				AE135D4111DEA6F400A922D4 /* OCHamcrest.framework in Frameworks */,
 				AEEE220311DC29AC00029872 /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +307,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */,
-				AE135E7111DEB46F00A922D4 /* libOCHamcrest-StaticLib.a in Frameworks */,
 				AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,19 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */,
-				AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */,
 			);
 			path = Externals;
-			sourceTree = "<group>";
-		};
-		AE135D1711DEA69A00A922D4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AE135D2111DEA69A00A922D4 /* OCHamcrest.framework */,
-				AE135D2311DEA69A00A922D4 /* libOCHamcrest-StaticLib.a */,
-				AE135D2511DEA69A00A922D4 /* UnitTests.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		AE135D2711DEA6A900A922D4 /* Products */ = {
@@ -526,7 +475,7 @@
 		AEEE1FEB11DC27B800029872 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.m */,
+				AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.mm */,
 				AEEE1FED11DC27B800029872 /* main.m */,
 				AEEE1FEE11DC27B800029872 /* SlowSpec.m */,
 			);
@@ -617,7 +566,6 @@
 			);
 			dependencies = (
 				AEEE218B11DC28E700029872 /* PBXTargetDependency */,
-				AE135D3E11DEA6DA00A922D4 /* PBXTargetDependency */,
 				AE135D3C11DEA6D700A922D4 /* PBXTargetDependency */,
 			);
 			name = Specs;
@@ -655,7 +603,6 @@
 			dependencies = (
 				AEEE227D11DC2D3400029872 /* PBXTargetDependency */,
 				AE135E6D11DEB45F00A922D4 /* PBXTargetDependency */,
-				AE135E6F11DEB46400A922D4 /* PBXTargetDependency */,
 			);
 			name = iPhoneSpecs;
 			productName = iPhoneSpecs;
@@ -682,10 +629,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = AE135D1711DEA69A00A922D4 /* Products */;
-					ProjectRef = AE135D1611DEA69A00A922D4 /* OCHamcrest.xcodeproj */;
-				},
-				{
 					ProductGroup = AE135D2711DEA6A900A922D4 /* Products */;
 					ProjectRef = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
 				},
@@ -702,27 +645,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AE135D2111DEA69A00A922D4 /* OCHamcrest.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCHamcrest.framework;
-			remoteRef = AE135D2011DEA69A00A922D4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AE135D2311DEA69A00A922D4 /* libOCHamcrest-StaticLib.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libOCHamcrest-StaticLib.a";
-			remoteRef = AE135D2211DEA69A00A922D4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AE135D2511DEA69A00A922D4 /* UnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.octest;
-			remoteRef = AE135D2411DEA69A00A922D4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		AE135D3111DEA6A900A922D4 /* OCMock.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -870,7 +792,7 @@
 				AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */,
 				AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */,
 				AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */,
-				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */,
+				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */,
 				AEEE228711DC2D5800029872 /* main.m in Sources */,
 				AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */,
 				AE8C87A21362071E006C9305 /* EqualSpec.mm in Sources */,
@@ -889,20 +811,10 @@
 			name = OCMock;
 			targetProxy = AE135D3B11DEA6D700A922D4 /* PBXContainerItemProxy */;
 		};
-		AE135D3E11DEA6DA00A922D4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OCHamcrest;
-			targetProxy = AE135D3D11DEA6DA00A922D4 /* PBXContainerItemProxy */;
-		};
 		AE135E6D11DEB45F00A922D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "OCMock-StaticLib";
 			targetProxy = AE135E6C11DEB45F00A922D4 /* PBXContainerItemProxy */;
-		};
-		AE135E6F11DEB46400A922D4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "OCHamcrest-StaticLib";
-			targetProxy = AE135E6E11DEB46400A922D4 /* PBXContainerItemProxy */;
 		};
 		AEEE218B11DC28E700029872 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

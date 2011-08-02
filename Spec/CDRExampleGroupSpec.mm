@@ -1,15 +1,12 @@
-#define HC_SHORTHAND
 #if TARGET_OS_IPHONE
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
 #import "SpecHelper.h"
 #import "OCMock.h"
-#import "OCHamcrest.h"
 #else
 #import <Cedar/SpecHelper.h>
 #import <OCMock/OCMock.h>
-#import <OCHamcrest/OCHamcrest.h>
 #endif
 
 #import "CDRExampleBase.h"
@@ -49,7 +46,7 @@ describe(@"CDRExampleGroup", ^{
                 NSUInteger count = group.examples.count;
                 expect(count).to(equal(0));
             });
-            
+
             it(@"should return false", ^{
                 BOOL hasChildren = group.hasChildren;
                 expect(hasChildren).to_not(be_truthy());
@@ -387,11 +384,13 @@ describe(@"CDRExampleGroup", ^{
     describe(@"fullText", ^{
         describe(@"with no parent", ^{
             beforeEach(^{
-                assertThat([group parent], nilValue());
+                id<CDRExampleParent> parent = group.parent;
+                expect(parent).to(be_nil());
             });
 
             it(@"should return just its own text", ^{
-                assertThat([group fullText], equalTo(groupText));
+                NSString *fullText = group.fullText;
+                expect(fullText).to(equal(groupText));
             });
         });
 
@@ -400,17 +399,16 @@ describe(@"CDRExampleGroup", ^{
             NSString *parentGroupText = @"Parent!";
 
             beforeEach(^{
-                parentGroup = [[CDRExampleGroup alloc] initWithText:parentGroupText];
+                parentGroup = [[[CDRExampleGroup alloc] initWithText:parentGroupText] autorelease];
                 [parentGroup add:group];
-                assertThat([group parent], isNot(nilValue()));
-            });
 
-            afterEach(^{
-                [parentGroup release];
+                id<CDRExampleParent> parent = group.parent;
+                expect(parent).to_not(be_nil());
             });
 
             it(@"should return its parent's text pre-pended with its own text", ^{
-                assertThat([group fullText], equalTo([NSString stringWithFormat:@"%@ %@", parentGroupText, groupText]));
+                NSString *fullText = group.fullText;
+                expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@", parentGroupText, groupText]));
             });
 
             describe(@"when the parent also has a parent", ^{
@@ -418,16 +416,13 @@ describe(@"CDRExampleGroup", ^{
                 NSString *anotherGroupText = @"Another Group!";
 
                 beforeEach(^{
-                    anotherGroup = [[CDRExampleGroup alloc] initWithText:anotherGroupText];
+                    anotherGroup = [[[CDRExampleGroup alloc] initWithText:anotherGroupText] autorelease];
                     [anotherGroup add:parentGroup];
                 });
 
-                afterEach(^{
-                    [anotherGroup release];
-                });
-
                 it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
-                    assertThat([group fullText], equalTo([NSString stringWithFormat:@"%@ %@ %@", anotherGroupText, parentGroupText, groupText]));
+                    NSString *fullText = group.fullText;
+                    expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@ %@", anotherGroupText, parentGroupText, groupText]));
                 });
             });
         });
@@ -438,12 +433,18 @@ describe(@"CDRExampleGroup", ^{
             beforeEach(^{
                 rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
                 [rootGroup add:group];
-                assertThat([group parent], isNot(nilValue()));
-                assertThatBool([[group parent] hasFullText], equalToBool(NO));
+
+                id<CDRExampleParent> parent = group.parent;
+                expect(parent).to_not(be_nil());
+
+                BOOL hasFullText = group.parent.hasFullText;
+                expect(hasFullText).to_not(be_truthy());
             });
 
             it(@"should not include its parent's text", ^{
-                assertThat([group fullText], equalTo([group text]));
+                NSString *fullText = group.fullText;
+                NSString *text = group.text;
+                expect(fullText).to(equal(text));
             });
         });
 
