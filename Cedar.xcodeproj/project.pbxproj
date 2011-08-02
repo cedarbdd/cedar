@@ -31,6 +31,7 @@
 		AE0D689A13E36C540048039A /* BeCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0D689713E36C540048039A /* BeCloseTo.h */; };
 		AE0D689E13E36EDD0048039A /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */; };
 		AE0D689F13E36EDD0048039A /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */; };
+		AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
 		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
 		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
 		AE8C867D135FAE76006C9305 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FE411DC27B800029872 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -56,7 +57,7 @@
 		AE8C87E7136266D8006C9305 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E6136266D8006C9305 /* BeNilSpec.mm */; };
 		AE8C87E8136266D8006C9305 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E6136266D8006C9305 /* BeNilSpec.mm */; };
 		AE8C880D13626D2F006C9305 /* BeNil.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E2136265C4006C9305 /* BeNil.mm */; };
-		AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
+		AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
 		AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
 		AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -185,6 +186,7 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */,
 				AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */,
 				AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */,
 				AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */,
