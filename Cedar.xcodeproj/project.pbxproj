@@ -89,7 +89,7 @@
 		AEEE21BE11DC290400029872 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AEEE21BF11DC290400029872 /* CDRExampleSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */; };
 		AEEE21C111DC290400029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEF11DC27B800029872 /* main.m */; };
-		AEEE21C211DC290400029872 /* SpecHelperSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* SpecHelperSpec.mm */; };
+		AEEE21C211DC290400029872 /* GlobalBeforeEachSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */; };
 		AEEE21C311DC290400029872 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; };
 		AEEE21C411DC290400029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
 		AEEE220311DC29AC00029872 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE1FB611DC271300029872 /* Cedar.framework */; };
@@ -112,7 +112,7 @@
 		AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */; };
 		AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AEEE228011DC2D5200029872 /* CDRExampleSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */; };
-		AEEE228311DC2D5200029872 /* SpecHelperSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* SpecHelperSpec.mm */; };
+		AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */; };
 		AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; };
 		AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
 		AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.m */; };
@@ -303,7 +303,7 @@
 		AEEE1FED11DC27B800029872 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AEEE1FEE11DC27B800029872 /* SlowSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowSpec.m; sourceTree = "<group>"; };
 		AEEE1FEF11DC27B800029872 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AEEE1FF011DC27B800029872 /* SpecHelperSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SpecHelperSpec.mm; sourceTree = "<group>"; };
+		AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GlobalBeforeEachSpec.mm; sourceTree = "<group>"; };
 		AEEE1FF111DC27B800029872 /* SpecSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SpecSpec.mm; sourceTree = "<group>"; };
 		AEEE1FF211DC27B800029872 /* SpecSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecSpec2.m; sourceTree = "<group>"; };
 		AEEE218611DC28E200029872 /* Specs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Specs; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -516,7 +516,7 @@
 				AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */,
 				AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */,
 				AEEE1FEF11DC27B800029872 /* main.m */,
-				AEEE1FF011DC27B800029872 /* SpecHelperSpec.mm */,
+				AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */,
 				AEEE1FF111DC27B800029872 /* SpecSpec.mm */,
 				AEEE1FF211DC27B800029872 /* SpecSpec2.m */,
 			);
@@ -823,7 +823,7 @@
 				AEEE21BE11DC290400029872 /* CDRExampleGroupSpec.mm in Sources */,
 				AEEE21BF11DC290400029872 /* CDRExampleSpec.mm in Sources */,
 				AEEE21C111DC290400029872 /* main.m in Sources */,
-				AEEE21C211DC290400029872 /* SpecHelperSpec.mm in Sources */,
+				AEEE21C211DC290400029872 /* GlobalBeforeEachSpec.mm in Sources */,
 				AEEE21C311DC290400029872 /* SpecSpec.mm in Sources */,
 				AEEE21C411DC290400029872 /* SpecSpec2.m in Sources */,
 				AE8C87A11362071E006C9305 /* EqualSpec.mm in Sources */,
@@ -867,7 +867,7 @@
 			files = (
 				AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.mm in Sources */,
 				AEEE228011DC2D5200029872 /* CDRExampleSpec.mm in Sources */,
-				AEEE228311DC2D5200029872 /* SpecHelperSpec.mm in Sources */,
+				AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */,
 				AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */,
 				AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */,
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.m in Sources */,

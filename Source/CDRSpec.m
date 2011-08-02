@@ -55,9 +55,9 @@ void xit(NSString *text, CDRSpecBlock block) {
 #pragma mark Memory
 - (id)init {
     if (self = [super init]) {
-        rootGroup_ = [[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES];
-        rootGroup_.parent = [SpecHelper specHelper];
-        self.currentGroup = rootGroup_;
+        self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
+        self.rootGroup.parent = [SpecHelper specHelper];
+        self.currentGroup = self.rootGroup;
     }
     return self;
 }

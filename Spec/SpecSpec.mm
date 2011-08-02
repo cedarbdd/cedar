@@ -151,11 +151,13 @@ describe(@"a describe block", ^{
         });
     });
 
-    describe(@"that sets a value in the global shared example context", ^{
+    describe(@"that passes a value to the shared example context", ^{
         beforeEach(^{
             globalValue__ = @"something";
             [[SpecHelper specHelper].sharedExampleContext setObject:globalValue__ forKey:@"value"];
         });
+
+        itShouldBehaveLike(@"a shared example group that receives a value in the context");
     });
 
     itShouldBehaveLike(@"a shared example group that contains a failing spec");

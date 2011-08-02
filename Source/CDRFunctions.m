@@ -55,6 +55,11 @@ void CDRDefineSharedExampleGroups() {
     }
 }
 
+void CDRDefineGlobalBeforeAndAfterEachBlocks() {
+    [SpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) { return !!class_getClassMethod(class, @selector(beforeEach)); });
+    [SpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) { return !!class_getClassMethod(class, @selector(afterEach)); });
+}
+
 int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> reporter) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
@@ -63,6 +68,7 @@ int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporte
     }
 
     CDRDefineSharedExampleGroups();
+    CDRDefineGlobalBeforeAndAfterEachBlocks();
     NSArray *groups = CDRCreateRootGroupsFromSpecClasses(specClasses);
 
     [reporter runWillStartWithGroups:groups];

@@ -9,6 +9,7 @@ static SpecHelper *specHelper__;
 @implementation SpecHelper
 
 @synthesize sharedExampleGroups = sharedExampleGroups_, sharedExampleContext = sharedExampleContext_;
+@synthesize globalBeforeEachClasses = globalBeforeEachClasses_, globalAfterEachClasses = globalAfterEachClasses_;
 
 + (id)specHelper {
     if (!specHelper__) {
@@ -26,8 +27,11 @@ static SpecHelper *specHelper__;
 }
 
 - (void)dealloc {
-    self.sharedExampleGroups = nil;
-    self.sharedExampleContext = nil;
+    [sharedExampleGroups_ release];
+    [sharedExampleContext_ release];
+    [globalBeforeEachClasses_ release];
+    [globalAfterEachClasses_ release];
+
     [super dealloc];
 }
 
@@ -40,11 +44,11 @@ static SpecHelper *specHelper__;
 #pragma mark CDRExampleParent
 - (void)setUp {
     [self.sharedExampleContext removeAllObjects];
-    [self beforeEach];
+    [self.globalBeforeEachClasses makeObjectsPerformSelector:@selector(beforeEach)];
 }
 
 - (void)tearDown {
-    [self afterEach];
+    [self.globalAfterEachClasses makeObjectsPerformSelector:@selector(afterEach)];
 }
 
 @end
