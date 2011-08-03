@@ -36,6 +36,7 @@
 		AE0D691B13E8C7560048039A /* BeTruthy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C87B013624928006C9305 /* BeTruthy.h */; };
 		AE0D691C13E8C7560048039A /* BeNil.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C87E1136265C4006C9305 /* BeNil.h */; };
 		AE0D691D13E8C7560048039A /* BeCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0D689713E36C540048039A /* BeCloseTo.h */; };
+		AE0D695613E8C93F0048039A /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C87B713625239006C9305 /* Base.h */; };
 		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
 		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
 		AE8C867D135FAE76006C9305 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FE411DC27B800029872 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,8 +53,7 @@
 		AE8C87B413624BD4006C9305 /* BeTruthy.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B213624BD4006C9305 /* BeTruthy.mm */; };
 		AE8C87B513624D73006C9305 /* BeTruthySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */; };
 		AE8C87B613624D75006C9305 /* BeTruthySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */; };
-		AE8C87B913625239006C9305 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87B713625239006C9305 /* Base.h */; };
-		AE8C87BA13625239006C9305 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87B713625239006C9305 /* Base.h */; };
+		AE8C87B913625239006C9305 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87B713625239006C9305 /* Base.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE8C87BB13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
 		AE8C87BC13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
 		AE8C87E3136265C4006C9305 /* BeNil.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87E1136265C4006C9305 /* BeNil.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -190,6 +190,7 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AE0D695613E8C93F0048039A /* Base.h in Copy headers to framework */,
 				AE0D691913E8C7560048039A /* AllMatchers.h in Copy headers to framework */,
 				AE0D691A13E8C7560048039A /* Equal.h in Copy headers to framework */,
 				AE0D691B13E8C7560048039A /* BeTruthy.h in Copy headers to framework */,
@@ -539,7 +540,6 @@
 			files = (
 				AEC9DEEF12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
 				AE8C8680135FB4F7006C9305 /* ActualValue.h in Headers */,
-				AE8C87BA13625239006C9305 /* Base.h in Headers */,
 				42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
