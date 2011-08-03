@@ -17,7 +17,7 @@ namespace Cedar { namespace Matchers {
         ActualValue & operator=(const ActualValue<U> &);
 
     public:
-        ActualValue(const T &);
+        explicit ActualValue(const T &);
 
         template<typename Matcher> void to(const Matcher &) const;
         template<typename Matcher> void to_not(const Matcher &) const;

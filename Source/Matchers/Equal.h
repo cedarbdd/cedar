@@ -8,7 +8,7 @@ namespace Cedar { namespace Matchers {
         Equal<T> & operator=(const Equal<T> &);
 
     public:
-        Equal(const T & expectedValue);
+        explicit Equal(const T & expectedValue);
         ~Equal();
         // Allow default copy ctor.
 

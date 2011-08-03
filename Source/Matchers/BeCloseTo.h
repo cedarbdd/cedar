@@ -8,7 +8,7 @@ namespace Cedar { namespace Matchers {
         BeCloseTo<T> & operator=(const BeCloseTo<T> &);
 
     public:
-        BeCloseTo(const T & expectedValue);
+        explicit BeCloseTo(const T & expectedValue);
         ~BeCloseTo();
         // Allow default copy ctor.
 

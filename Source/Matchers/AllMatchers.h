@@ -2,3 +2,4 @@
 #import "BeTruthy.h"
 #import "BeNil.h"
 #import "BeCloseTo.h"
+#import "BeSameInstanceAs.h"

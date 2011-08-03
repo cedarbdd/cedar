@@ -37,6 +37,10 @@
 		AE0D691C13E8C7560048039A /* BeNil.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C87E1136265C4006C9305 /* BeNil.h */; };
 		AE0D691D13E8C7560048039A /* BeCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0D689713E36C540048039A /* BeCloseTo.h */; };
 		AE0D695613E8C93F0048039A /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C87B713625239006C9305 /* Base.h */; };
+		AE0D699713E8CCFB0048039A /* BeSameInstanceAs.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0D699513E8CCFA0048039A /* BeSameInstanceAs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE0D699B13E8CF4A0048039A /* BeSameInstanceAs.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0D699513E8CCFA0048039A /* BeSameInstanceAs.h */; };
+		AE0D699E13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */; };
+		AE0D699F13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */; };
 		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
 		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
 		AE8C867D135FAE76006C9305 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FE411DC27B800029872 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -190,6 +194,7 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AE0D699B13E8CF4A0048039A /* BeSameInstanceAs.h in Copy headers to framework */,
 				AE0D695613E8C93F0048039A /* Base.h in Copy headers to framework */,
 				AE0D691913E8C7560048039A /* AllMatchers.h in Copy headers to framework */,
 				AE0D691A13E8C7560048039A /* Equal.h in Copy headers to framework */,
@@ -220,6 +225,8 @@
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
 		AE0D689713E36C540048039A /* BeCloseTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeCloseTo.h; sourceTree = "<group>"; };
 		AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeCloseToSpec.mm; sourceTree = "<group>"; };
+		AE0D699513E8CCFA0048039A /* BeSameInstanceAs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeSameInstanceAs.h; sourceTree = "<group>"; };
+		AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeSameInstanceAsSpec.mm; sourceTree = "<group>"; };
 		AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Foundation.framework; sourceTree = SDKROOT; };
 		AE8C874D135FD1DB006C9305 /* Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equal.h; sourceTree = "<group>"; };
@@ -350,6 +357,7 @@
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
 				AE8C87A01362071E006C9305 /* EqualSpec.mm */,
+				AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */,
 				AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */,
 				AE8C87E6136266D8006C9305 /* BeNilSpec.mm */,
 				AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */,
@@ -465,6 +473,7 @@
 				AE8C87E1136265C4006C9305 /* BeNil.h */,
 				AE8C87E2136265C4006C9305 /* BeNil.mm */,
 				AE0D689713E36C540048039A /* BeCloseTo.h */,
+				AE0D699513E8CCFA0048039A /* BeSameInstanceAs.h */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -531,6 +540,7 @@
 				AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */,
 				42064466139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */,
 				AE0D689913E36C540048039A /* BeCloseTo.h in Headers */,
+				AE0D699713E8CCFB0048039A /* BeSameInstanceAs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +773,7 @@
 				AE8C87B513624D73006C9305 /* BeTruthySpec.mm in Sources */,
 				AE8C87E7136266D8006C9305 /* BeNilSpec.mm in Sources */,
 				AE0D689E13E36EDD0048039A /* BeCloseToSpec.mm in Sources */,
+				AE0D699E13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +821,7 @@
 				AE8C87B613624D75006C9305 /* BeTruthySpec.mm in Sources */,
 				AE8C87E8136266D8006C9305 /* BeNilSpec.mm in Sources */,
 				AE0D689F13E36EDD0048039A /* BeCloseToSpec.mm in Sources */,
+				AE0D699F13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
