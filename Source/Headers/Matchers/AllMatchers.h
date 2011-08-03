@@ -3,3 +3,4 @@
 #import "BeNil.h"
 #import "BeCloseTo.h"
 #import "BeSameInstanceAs.h"
+#import "BeInstanceOf.h"
