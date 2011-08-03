@@ -3,8 +3,24 @@
 
 namespace Cedar { namespace Matchers {
 
+    namespace StringConversions {
+        template<typename U>
+        NSString * string_for(const U & value) {
+            std::stringstream temp;
+            temp << value;
+            return [NSString stringWithCString:temp.str().c_str() encoding:NSUTF8StringEncoding];
+        }
+
+        NSString * string_for(const char value);
+        NSString * string_for(const BOOL value);
+        NSString * string_for(const id value);
+        NSString * string_for(NSObject * const);
+        NSString * string_for(NSString * const);
+        NSString * string_for(NSNumber * const);
+    }
+
     /**
-     * Basic functionality for all matchers.  Meant to be mixed into concrete
+     * Basic functionality for all matchers.  Meant to be used as a convenience base class for
      * matcher classes.
      */
     class Base {
@@ -21,33 +37,18 @@ namespace Cedar { namespace Matchers {
 
     protected:
         template<typename U>
-        NSString * string_for(const U &) const;
-        NSString * string_for(const char value) const;
-        NSString * string_for(const BOOL value) const;
-        NSString * string_for(const id value) const;
-        NSString * string_for(NSObject * const) const;
-        NSString * string_for(NSString * const) const;
-        NSString * string_for(NSNumber * const) const;
-
-        template<typename U>
         void build_failure_message_start(const U &) const;
 
         virtual NSString * failure_message_end() const = 0;
 
     private:
-        mutable NSString *valueString_;
+        mutable NSString *failureMessageStart_;
     };
 
     template<typename U>
-    NSString * Base::string_for(const U & value) const {
-        std::stringstream temp;
-        temp << value;
-        return [NSString stringWithCString:temp.str().c_str() encoding:NSUTF8StringEncoding];
-    }
-
-    template<typename U>
     void Base::build_failure_message_start(const U & value) const {
-        valueString_ = [this->string_for(value) retain];
+        [failureMessageStart_ autorelease];
+        failureMessageStart_ = [StringConversions::string_for(value) retain];
     }
 
 }}

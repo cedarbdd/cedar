@@ -2,6 +2,8 @@
 #import "Base.h"
 
 namespace Cedar { namespace Matchers {
+    using StringConversions::string_for;
+
     template<typename T>
     class BeCloseTo : public Base {
     private:
@@ -52,7 +54,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     /*virtual*/ NSString * BeCloseTo<T>::failure_message_end() const {
-        return [NSString stringWithFormat:@"be close to <%@> (within %@)", this->string_for(expectedValue_), this->string_for(threshold_)];
+        return [NSString stringWithFormat:@"be close to <%@> (within %@)", string_for(expectedValue_), string_for(threshold_)];
     }
 
     template<typename T> template<typename U, typename V>
