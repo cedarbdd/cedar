@@ -105,29 +105,6 @@ describe(@"equal matcher", ^{
                 });
             });
         });
-
-        describe(@"and the expected value is an incomparable type", ^{
-            it(@"should display an appropriate error for NSObject *", ^{
-                NSObject *expectedValue = @"I am not an integer";
-                expectFailureWithMessage(@"Attempt to compare NSObject * to incomparable type", ^{
-                    expect(actualValue).to(equal(expectedValue));
-                });
-            });
-
-            it(@"should display an appropriate error for id", ^{
-                id expectedValue = @"I am not an integer";
-                expectFailureWithMessage(@"Attempt to compare id to incomparable type", ^{
-                    expect(actualValue).to(equal(expectedValue));
-                });
-            });
-
-            it(@"should display an appropriate error for NSString *", ^{
-                NSString *expectedValue = @"I am not an integer";
-                expectFailureWithMessage(@"Attempt to compare NSString * to incomparable type", ^{
-                    expect(actualValue).to(equal(expectedValue));
-                });
-            });
-        });
     });
 
     describe(@"when the actual value is a char type", ^{
@@ -143,14 +120,14 @@ describe(@"equal matcher", ^{
 
     describe(@"when the actual value is declared as an id", ^{
         int someInteger = 7;
-        id actualValue = [[NSString alloc] initWithFormat:@"%d", someInteger];
+        id actualValue = [[[NSString alloc] initWithFormat:@"%d", someInteger] autorelease];
 
         describe(@"and the expected value is declared as an NSObject *", ^{
             __block NSObject *expectedValue;
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -194,7 +171,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -238,7 +215,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -287,7 +264,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -331,7 +308,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -375,7 +352,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -424,7 +401,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -468,7 +445,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
@@ -512,7 +489,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger];
+                    expectedValue = [[actualValue mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{

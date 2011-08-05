@@ -25,9 +25,16 @@ void xit(NSString *, CDRSpecBlock);
 }
 
 #import "ActualValue.h"
-#import "AllMatchers.h"
-
+#import "CedarComparators.h"
+#ifdef CEDAR_CUSTOM_COMPARATORS
+#import CEDAR_CUSTOM_COMPARATORS
 #endif
+#import "CedarMatchers.h"
+#ifdef CEDAR_CUSTOM_MATCHERS
+#import CEDAR_CUSTOM_MATCHERS
+#endif
+
+#endif // __cplusplus
 
 @interface CDRSpec : NSObject <CDRSpec> {
   CDRExampleGroup *rootGroup_;
