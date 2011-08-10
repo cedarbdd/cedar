@@ -30,6 +30,10 @@
     return [NSString stringWithFormat:@"##teamcity[testIgnored name='%@']", [self escapeText:example.fullText]];
 }
 
+- (NSString *)skippedMessageForExample:(CDRExample *)example{
+    return [NSString stringWithFormat:@"##teamcity[testIgnored name='%@']", [self escapeText:example.fullText]];
+}
+
 - (NSString *)failureMessageForExample:(CDRExample *)example{
     return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='%@']", 
             [self escapeText:example.fullText],
@@ -46,6 +50,10 @@
         case CDRExampleStatePending:
             printf("%s\n", [[self pendingMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);
             [pendingMessages_ addObject:[super pendingMessageForExample:example]];
+            break;
+        case CDRExampleStateSkipped:
+            printf("%s\n", [[self skippedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);
+            [skippedMessages_ addObject:[super skippedMessageForExample:example]];
             break;
         case CDRExampleStateError:
         case CDRExampleStateFailed:

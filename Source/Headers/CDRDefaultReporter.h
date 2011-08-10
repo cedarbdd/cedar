@@ -6,6 +6,7 @@
     NSArray *rootGroups_;
 
     NSMutableArray *pendingMessages_;
+    NSMutableArray *skippedMessages_;
     NSMutableArray *failureMessages_;
 
     NSDate *startTime_;
@@ -17,6 +18,8 @@
 - (NSString *)successToken;
 - (NSString *)pendingToken;
 - (NSString *)pendingMessageForExample:(CDRExample *)example;
+- (NSString *)skippedToken;
+- (NSString *)skippedMessageForExample:(CDRExample *)example;
 - (NSString *)failureToken;
 - (NSString *)failureMessageForExample:(CDRExample *)example;
 - (NSString *)errorToken;

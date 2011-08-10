@@ -1,6 +1,7 @@
 #import "CDRExample.h"
 #import "CDRExampleReporter.h"
 #import "CDRSpecFailure.h"
+#import "SpecHelper.h"
 
 const CDRSpecBlock PENDING = nil;
 
@@ -51,7 +52,9 @@ const CDRSpecBlock PENDING = nil;
 }
 
 - (void)run {
-    if (block_) {
+    if (!self.shouldRun) {
+        self.state = CDRExampleStateSkipped;
+    } else if (block_) {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         @try {
             [parent_ setUp];

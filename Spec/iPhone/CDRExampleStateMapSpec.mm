@@ -34,6 +34,13 @@ describe(@"descriptionForState", ^{
         });
     });
 
+    describe(@"for a skipped state", ^{
+        it(@"should return SKIPPED", ^{
+            NSString *descriptionForState = [map descriptionForState:CDRExampleStateSkipped];
+            expect(descriptionForState).to(equal(@"SKIPPED"));
+        });
+    });
+
     describe(@"for a failed state", ^{
         it(@"should return FAILED", ^{
             NSString *descriptionForState = [map descriptionForState:CDRExampleStateFailed];
