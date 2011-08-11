@@ -1,8 +1,10 @@
-#import "Base/Equal.h"
-#import "Base/BeTruthy.h"
-#import "Base/BeNil.h"
-#import "Base/BeCloseTo.h"
-#import "Base/BeSameInstanceAs.h"
-#import "Base/BeInstanceOf.h"
+// Base
+#import "Equal.h"
+#import "BeTruthy.h"
+#import "BeNil.h"
+#import "BeCloseTo.h"
+#import "BeSameInstanceAs.h"
+#import "BeInstanceOf.h"
 
-#import "Container/BeEmpty.h"
+// Container
+#import "BeEmpty.h"
