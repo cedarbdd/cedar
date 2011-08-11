@@ -8,10 +8,8 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         NSString * comma_and_newline_delimited_list(const Container & container) {
             NSMutableString *result = [NSMutableString string];
             bool first = true;
-            for (typename Container::const_iterator it = container.begin(); it != container.end(); ++it) {
-                if (first) {
-                    first = false;
-                } else {
+            for (typename Container::const_iterator it = container.begin(); it != container.end(); ++it, first = false) {
+                if (!first) {
                     [result appendString:@","];
                 }
                 [result appendString:[NSString stringWithFormat:@"\n    %@", string_for(*it)]];

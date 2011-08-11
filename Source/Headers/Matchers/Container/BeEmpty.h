@@ -6,7 +6,7 @@ namespace Cedar { namespace Matchers {
         BeEmpty & operator=(const BeEmpty &);
 
     public:
-        explicit BeEmpty();
+        BeEmpty();
         ~BeEmpty();
         // Allow default copy ctor.
 
