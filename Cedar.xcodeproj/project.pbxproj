@@ -28,50 +28,43 @@
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		AE0AF56513E9C0E300029396 /* CedarMatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE0AF56613E9C0E300029396 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF55F13E9C0E300029396 /* Base.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE0AF56713E9C0E300029396 /* BeCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF56013E9C0E300029396 /* BeCloseTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE0AF56813E9C0E300029396 /* BeNil.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF56113E9C0E300029396 /* BeNil.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE0AF56913E9C0E300029396 /* BeSameInstanceAs.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF56213E9C0E300029396 /* BeSameInstanceAs.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE0AF56A13E9C0E300029396 /* BeTruthy.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF56313E9C0E300029396 /* BeTruthy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE0AF56B13E9C0E300029396 /* Equal.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF56413E9C0E300029396 /* Equal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; };
-		AE0AF56D13E9C0FB00029396 /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF55F13E9C0E300029396 /* Base.h */; };
-		AE0AF56E13E9C0FB00029396 /* BeCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF56013E9C0E300029396 /* BeCloseTo.h */; };
-		AE0AF56F13E9C0FB00029396 /* BeNil.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF56113E9C0E300029396 /* BeNil.h */; };
-		AE0AF57013E9C0FB00029396 /* BeSameInstanceAs.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF56213E9C0E300029396 /* BeSameInstanceAs.h */; };
-		AE0AF57113E9C0FB00029396 /* BeTruthy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF56313E9C0E300029396 /* BeTruthy.h */; };
-		AE0AF57213E9C0FB00029396 /* Equal.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF56413E9C0E300029396 /* Equal.h */; };
-		AE0AF57413E9C13200029396 /* BeInstanceOf.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF57313E9C13200029396 /* BeInstanceOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE0AF57713E9C15E00029396 /* BeInstanceOf.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF57313E9C13200029396 /* BeInstanceOf.h */; };
 		AE0AF57D13E9C5B200029396 /* BeInstanceOf.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */; };
 		AE0AF57E13E9C5B200029396 /* BeInstanceOf.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */; };
-		AE0AF58213E9C61400029396 /* BeInstanceOfSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF58113E9C61400029396 /* BeInstanceOfSpec.mm */; };
-		AE0AF58313E9C61400029396 /* BeInstanceOfSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF58113E9C61400029396 /* BeInstanceOfSpec.mm */; };
 		AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; };
-		AE0AF58A13E9EB1300029396 /* MutableEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF58913E9EB1200029396 /* MutableEqualSpec.mm */; };
-		AE0AF58B13E9EB1300029396 /* MutableEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF58913E9EB1200029396 /* MutableEqualSpec.mm */; };
-		AE0D689E13E36EDD0048039A /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */; };
-		AE0D689F13E36EDD0048039A /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */; };
 		AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
-		AE0D699E13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */; };
-		AE0D699F13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */; };
 		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
 		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
-		AE8C87A11362071E006C9305 /* EqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87A01362071E006C9305 /* EqualSpec.mm */; };
-		AE8C87A21362071E006C9305 /* EqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87A01362071E006C9305 /* EqualSpec.mm */; };
+		AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
+		AE18A7B913F450A700C8872C /* BeCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFC13ECC21E00786282 /* BeCloseTo.h */; };
+		AE18A7BA13F450A700C8872C /* BeInstanceOf.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFD13ECC21E00786282 /* BeInstanceOf.h */; };
+		AE18A7BB13F450A700C8872C /* BeNil.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFE13ECC21E00786282 /* BeNil.h */; };
+		AE18A7BC13F450A700C8872C /* BeSameInstanceAs.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFF13ECC21E00786282 /* BeSameInstanceAs.h */; };
+		AE18A7BD13F450A700C8872C /* BeTruthy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF7300013ECC21E00786282 /* BeTruthy.h */; };
+		AE18A7BE13F450A700C8872C /* Equal.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF7300113ECC21E00786282 /* Equal.h */; };
+		AE18A7BF13F450BD00C8872C /* BeEmpty.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF7301013ECC25000786282 /* BeEmpty.h */; };
+		AE18A7C013F450BD00C8872C /* StringifiersBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF7303813ECCB7B00786282 /* StringifiersBase.h */; };
+		AE18A7C113F450BD00C8872C /* StringifiersContainer.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF7303913ECCB7B00786282 /* StringifiersContainer.h */; };
+		AE18A7CA13F453CC00C8872C /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
+		AE18A7CB13F453CC00C8872C /* BeCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72FFC13ECC21E00786282 /* BeCloseTo.h */; };
+		AE18A7CC13F453CC00C8872C /* BeInstanceOf.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72FFD13ECC21E00786282 /* BeInstanceOf.h */; };
+		AE18A7CD13F453CC00C8872C /* BeNil.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72FFE13ECC21E00786282 /* BeNil.h */; };
+		AE18A7CE13F453CC00C8872C /* BeSameInstanceAs.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72FFF13ECC21E00786282 /* BeSameInstanceAs.h */; };
+		AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7300013ECC21E00786282 /* BeTruthy.h */; };
+		AE18A7D013F453CC00C8872C /* Equal.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7300113ECC21E00786282 /* Equal.h */; };
+		AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE18A7D213F45BE500C8872C /* ComparatorsBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE18A7D413F45BE500C8872C /* ComparatorsBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE18A7D213F45BE500C8872C /* ComparatorsBase.h */; };
+		AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE18A7D713F45BFC00C8872C /* ComparatorsContainer.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */; };
 		AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
 		AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
 		AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
 		AE8C87B313624BD4006C9305 /* BeTruthy.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B213624BD4006C9305 /* BeTruthy.mm */; };
 		AE8C87B413624BD4006C9305 /* BeTruthy.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B213624BD4006C9305 /* BeTruthy.mm */; };
-		AE8C87B513624D73006C9305 /* BeTruthySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */; };
-		AE8C87B613624D75006C9305 /* BeTruthySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */; };
 		AE8C87BB13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
 		AE8C87BC13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
 		AE8C87E4136265C4006C9305 /* BeNil.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E2136265C4006C9305 /* BeNil.mm */; };
-		AE8C87E7136266D8006C9305 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E6136266D8006C9305 /* BeNilSpec.mm */; };
-		AE8C87E8136266D8006C9305 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E6136266D8006C9305 /* BeNilSpec.mm */; };
 		AE8C880D13626D2F006C9305 /* BeNil.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E2136265C4006C9305 /* BeNil.mm */; };
 		AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
@@ -137,6 +130,25 @@
 		AEF72F7913EC732000786282 /* CedarComparators.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; };
 		AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7A13EC734000786282 /* CedarStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF72F7C13EC735400786282 /* CedarStringifiers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72F7A13EC734000786282 /* CedarStringifiers.h */; };
+		AEF7301113ECC25000786282 /* BeEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7301013ECC25000786282 /* BeEmpty.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF7301B13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301413ECC4AE00786282 /* BeCloseToSpec.mm */; };
+		AEF7301C13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301413ECC4AE00786282 /* BeCloseToSpec.mm */; };
+		AEF7301D13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301513ECC4AE00786282 /* BeInstanceOfSpec.mm */; };
+		AEF7301E13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301513ECC4AE00786282 /* BeInstanceOfSpec.mm */; };
+		AEF7301F13ECC4AE00786282 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301613ECC4AE00786282 /* BeNilSpec.mm */; };
+		AEF7302013ECC4AE00786282 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301613ECC4AE00786282 /* BeNilSpec.mm */; };
+		AEF7302113ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301713ECC4AE00786282 /* BeSameInstanceAsSpec.mm */; };
+		AEF7302213ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301713ECC4AE00786282 /* BeSameInstanceAsSpec.mm */; };
+		AEF7302313ECC4AE00786282 /* BeTruthySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301813ECC4AE00786282 /* BeTruthySpec.mm */; };
+		AEF7302413ECC4AE00786282 /* BeTruthySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301813ECC4AE00786282 /* BeTruthySpec.mm */; };
+		AEF7302513ECC4AE00786282 /* EqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301913ECC4AE00786282 /* EqualSpec.mm */; };
+		AEF7302613ECC4AE00786282 /* EqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301913ECC4AE00786282 /* EqualSpec.mm */; };
+		AEF7302713ECC4AE00786282 /* MutableEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */; };
+		AEF7302813ECC4AE00786282 /* MutableEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */; };
+		AEF7302C13ECC4E700786282 /* BeEmptySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */; };
+		AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */; };
+		AEF7303A13ECCB7B00786282 /* StringifiersBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7303813ECCB7B00786282 /* StringifiersBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF7303B13ECCB7B00786282 /* StringifiersContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7303913ECCB7B00786282 /* StringifiersContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD511DC27B800029872 /* CDRExampleDetailsViewController.h */; };
 		AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD611DC27B800029872 /* CDRExampleReporterViewController.h */; };
 		AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */; };
@@ -206,17 +218,13 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				AE18A7BF13F450BD00C8872C /* BeEmpty.h in Copy headers to framework */,
+				AE18A7C013F450BD00C8872C /* StringifiersBase.h in Copy headers to framework */,
+				AE18A7C113F450BD00C8872C /* StringifiersContainer.h in Copy headers to framework */,
 				AEF72F7C13EC735400786282 /* CedarStringifiers.h in Copy headers to framework */,
 				AEF72F7913EC732000786282 /* CedarComparators.h in Copy headers to framework */,
 				AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */,
-				AE0AF57713E9C15E00029396 /* BeInstanceOf.h in Copy headers to framework */,
 				AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */,
-				AE0AF56D13E9C0FB00029396 /* Base.h in Copy headers to framework */,
-				AE0AF56E13E9C0FB00029396 /* BeCloseTo.h in Copy headers to framework */,
-				AE0AF56F13E9C0FB00029396 /* BeNil.h in Copy headers to framework */,
-				AE0AF57013E9C0FB00029396 /* BeSameInstanceAs.h in Copy headers to framework */,
-				AE0AF57113E9C0FB00029396 /* BeTruthy.h in Copy headers to framework */,
-				AE0AF57213E9C0FB00029396 /* Equal.h in Copy headers to framework */,
 				AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */,
 				AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */,
 				AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */,
@@ -230,6 +238,15 @@
 				AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */,
 				AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */,
 				AEC9DEF112C2CC7E0039512D /* CDRColorizedReporter.h in Copy headers to framework */,
+				AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */,
+				AE18A7B913F450A700C8872C /* BeCloseTo.h in Copy headers to framework */,
+				AE18A7BA13F450A700C8872C /* BeInstanceOf.h in Copy headers to framework */,
+				AE18A7BB13F450A700C8872C /* BeNil.h in Copy headers to framework */,
+				AE18A7BC13F450A700C8872C /* BeSameInstanceAs.h in Copy headers to framework */,
+				AE18A7BD13F450A700C8872C /* BeTruthy.h in Copy headers to framework */,
+				AE18A7BE13F450A700C8872C /* Equal.h in Copy headers to framework */,
+				AE18A7D413F45BE500C8872C /* ComparatorsBase.h in Copy headers to framework */,
+				AE18A7D713F45BFC00C8872C /* ComparatorsContainer.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,30 +257,18 @@
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
 		AE0AF55E13E9C0E300029396 /* CedarMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarMatchers.h; sourceTree = "<group>"; };
-		AE0AF55F13E9C0E300029396 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
-		AE0AF56013E9C0E300029396 /* BeCloseTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeCloseTo.h; sourceTree = "<group>"; };
-		AE0AF56113E9C0E300029396 /* BeNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeNil.h; sourceTree = "<group>"; };
-		AE0AF56213E9C0E300029396 /* BeSameInstanceAs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeSameInstanceAs.h; sourceTree = "<group>"; };
-		AE0AF56313E9C0E300029396 /* BeTruthy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeTruthy.h; sourceTree = "<group>"; };
-		AE0AF56413E9C0E300029396 /* Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equal.h; sourceTree = "<group>"; };
-		AE0AF57313E9C13200029396 /* BeInstanceOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeInstanceOf.h; sourceTree = "<group>"; };
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeInstanceOf.mm; sourceTree = "<group>"; };
-		AE0AF58113E9C61400029396 /* BeInstanceOfSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeInstanceOfSpec.mm; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
-		AE0AF58913E9EB1200029396 /* MutableEqualSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MutableEqualSpec.mm; sourceTree = "<group>"; };
-		AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeCloseToSpec.mm; sourceTree = "<group>"; };
-		AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeSameInstanceAsSpec.mm; sourceTree = "<group>"; };
 		AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Foundation.framework; sourceTree = SDKROOT; };
-		AE8C87A01362071E006C9305 /* EqualSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EqualSpec.mm; sourceTree = "<group>"; };
-		AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeTruthySpec.mm; sourceTree = "<group>"; };
+		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
+		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
 		AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectFailureWithMessage.h; sourceTree = "<group>"; };
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpectFailureWithMessage.m; sourceTree = "<group>"; };
 		AE8C87B213624BD4006C9305 /* BeTruthy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeTruthy.mm; sourceTree = "<group>"; };
 		AE8C87B813625239006C9305 /* Base.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Base.mm; sourceTree = "<group>"; };
 		AE8C87E2136265C4006C9305 /* BeNil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeNil.mm; sourceTree = "<group>"; };
-		AE8C87E6136266D8006C9305 /* BeNilSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeNilSpec.mm; sourceTree = "<group>"; };
 		AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecFailure.h; sourceTree = "<group>"; };
 		AE8C881113626FE6006C9305 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
@@ -316,6 +321,24 @@
 		AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPhoneSpecs-Info.plist"; sourceTree = "<group>"; };
 		AEF72F7713EC730700786282 /* CedarComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarComparators.h; sourceTree = "<group>"; };
 		AEF72F7A13EC734000786282 /* CedarStringifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarStringifiers.h; sourceTree = "<group>"; };
+		AEF72FFB13ECC21E00786282 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
+		AEF72FFC13ECC21E00786282 /* BeCloseTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeCloseTo.h; sourceTree = "<group>"; };
+		AEF72FFD13ECC21E00786282 /* BeInstanceOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeInstanceOf.h; sourceTree = "<group>"; };
+		AEF72FFE13ECC21E00786282 /* BeNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeNil.h; sourceTree = "<group>"; };
+		AEF72FFF13ECC21E00786282 /* BeSameInstanceAs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeSameInstanceAs.h; sourceTree = "<group>"; };
+		AEF7300013ECC21E00786282 /* BeTruthy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeTruthy.h; sourceTree = "<group>"; };
+		AEF7300113ECC21E00786282 /* Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equal.h; sourceTree = "<group>"; };
+		AEF7301013ECC25000786282 /* BeEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeEmpty.h; sourceTree = "<group>"; };
+		AEF7301413ECC4AE00786282 /* BeCloseToSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeCloseToSpec.mm; sourceTree = "<group>"; };
+		AEF7301513ECC4AE00786282 /* BeInstanceOfSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeInstanceOfSpec.mm; sourceTree = "<group>"; };
+		AEF7301613ECC4AE00786282 /* BeNilSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeNilSpec.mm; sourceTree = "<group>"; };
+		AEF7301713ECC4AE00786282 /* BeSameInstanceAsSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeSameInstanceAsSpec.mm; sourceTree = "<group>"; };
+		AEF7301813ECC4AE00786282 /* BeTruthySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeTruthySpec.mm; sourceTree = "<group>"; };
+		AEF7301913ECC4AE00786282 /* EqualSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EqualSpec.mm; sourceTree = "<group>"; };
+		AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MutableEqualSpec.mm; sourceTree = "<group>"; };
+		AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeEmptySpec.mm; sourceTree = "<group>"; };
+		AEF7303813ECCB7B00786282 /* StringifiersBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringifiersBase.h; sourceTree = "<group>"; };
+		AEF7303913ECCB7B00786282 /* StringifiersContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringifiersContainer.h; sourceTree = "<group>"; };
 		AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSharedExampleGroupPool.m; sourceTree = "<group>"; };
 		AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSharedExampleGroupPool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -359,17 +382,14 @@
 		AE0AF55D13E9C06900029396 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
+				AEF72FFA13ECC19200786282 /* Base */,
+				AEF72FF913ECC16400786282 /* Container */,
+				AEF7302E13ECC6EE00786282 /* Stringifiers */,
+				AE18A7D113F45BBE00C8872C /* Comparators */,
 				AE0AF58413E9E87E00029396 /* ActualValue.h */,
 				AE0AF55E13E9C0E300029396 /* CedarMatchers.h */,
 				AEF72F7713EC730700786282 /* CedarComparators.h */,
 				AEF72F7A13EC734000786282 /* CedarStringifiers.h */,
-				AE0AF55F13E9C0E300029396 /* Base.h */,
-				AE0AF56013E9C0E300029396 /* BeCloseTo.h */,
-				AE0AF56113E9C0E300029396 /* BeNil.h */,
-				AE0AF56213E9C0E300029396 /* BeSameInstanceAs.h */,
-				AE0AF56313E9C0E300029396 /* BeTruthy.h */,
-				AE0AF56413E9C0E300029396 /* Equal.h */,
-				AE0AF57313E9C13200029396 /* BeInstanceOf.h */,
 				AE0AF57913E9C16D00029396 /* MatcherTemplate.h */,
 			);
 			path = Matchers;
@@ -393,18 +413,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AE18A7D113F45BBE00C8872C /* Comparators */ = {
+			isa = PBXGroup;
+			children = (
+				AE18A7D213F45BE500C8872C /* ComparatorsBase.h */,
+				AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */,
+			);
+			path = Comparators;
+			sourceTree = "<group>";
+		};
 		AE8C879F1362068A006C9305 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
+				AEF7301313ECC4AE00786282 /* Base */,
+				AEF7302913ECC4C100786282 /* Container */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
-				AE8C87A01362071E006C9305 /* EqualSpec.mm */,
-				AE0D699D13E8CF8B0048039A /* BeSameInstanceAsSpec.mm */,
-				AE8C87A7136244D6006C9305 /* BeTruthySpec.mm */,
-				AE8C87E6136266D8006C9305 /* BeNilSpec.mm */,
-				AE0D689D13E36EDD0048039A /* BeCloseToSpec.mm */,
-				AE0AF58113E9C61400029396 /* BeInstanceOfSpec.mm */,
-				AE0AF58913E9EB1200029396 /* MutableEqualSpec.mm */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -549,6 +573,59 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AEF72FF913ECC16400786282 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				AEF7301013ECC25000786282 /* BeEmpty.h */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		AEF72FFA13ECC19200786282 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AEF72FFB13ECC21E00786282 /* Base.h */,
+				AEF72FFC13ECC21E00786282 /* BeCloseTo.h */,
+				AEF72FFD13ECC21E00786282 /* BeInstanceOf.h */,
+				AEF72FFE13ECC21E00786282 /* BeNil.h */,
+				AEF72FFF13ECC21E00786282 /* BeSameInstanceAs.h */,
+				AEF7300013ECC21E00786282 /* BeTruthy.h */,
+				AEF7300113ECC21E00786282 /* Equal.h */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		AEF7301313ECC4AE00786282 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AEF7301413ECC4AE00786282 /* BeCloseToSpec.mm */,
+				AEF7301513ECC4AE00786282 /* BeInstanceOfSpec.mm */,
+				AEF7301613ECC4AE00786282 /* BeNilSpec.mm */,
+				AEF7301713ECC4AE00786282 /* BeSameInstanceAsSpec.mm */,
+				AEF7301813ECC4AE00786282 /* BeTruthySpec.mm */,
+				AEF7301913ECC4AE00786282 /* EqualSpec.mm */,
+				AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		AEF7302913ECC4C100786282 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		AEF7302E13ECC6EE00786282 /* Stringifiers */ = {
+			isa = PBXGroup;
+			children = (
+				AEF7303813ECCB7B00786282 /* StringifiersBase.h */,
+				AEF7303913ECCB7B00786282 /* StringifiersContainer.h */,
+			);
+			path = Stringifiers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -572,16 +649,21 @@
 				AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */,
 				42064466139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */,
 				AE0AF56513E9C0E300029396 /* CedarMatchers.h in Headers */,
-				AE0AF56613E9C0E300029396 /* Base.h in Headers */,
-				AE0AF56713E9C0E300029396 /* BeCloseTo.h in Headers */,
-				AE0AF56813E9C0E300029396 /* BeNil.h in Headers */,
-				AE0AF56913E9C0E300029396 /* BeSameInstanceAs.h in Headers */,
-				AE0AF56A13E9C0E300029396 /* BeTruthy.h in Headers */,
-				AE0AF56B13E9C0E300029396 /* Equal.h in Headers */,
-				AE0AF57413E9C13200029396 /* BeInstanceOf.h in Headers */,
 				AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */,
 				AEF72F7813EC730700786282 /* CedarComparators.h in Headers */,
 				AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */,
+				AEF7301113ECC25000786282 /* BeEmpty.h in Headers */,
+				AEF7303A13ECCB7B00786282 /* StringifiersBase.h in Headers */,
+				AEF7303B13ECCB7B00786282 /* StringifiersContainer.h in Headers */,
+				AE18A7CA13F453CC00C8872C /* Base.h in Headers */,
+				AE18A7CB13F453CC00C8872C /* BeCloseTo.h in Headers */,
+				AE18A7CC13F453CC00C8872C /* BeInstanceOf.h in Headers */,
+				AE18A7CD13F453CC00C8872C /* BeNil.h in Headers */,
+				AE18A7CE13F453CC00C8872C /* BeSameInstanceAs.h in Headers */,
+				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
+				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
+				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
+				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,14 +891,15 @@
 				AEEE21C211DC290400029872 /* GlobalBeforeEachSpec.mm in Sources */,
 				AEEE21C311DC290400029872 /* SpecSpec.mm in Sources */,
 				AEEE21C411DC290400029872 /* SpecSpec2.m in Sources */,
-				AE8C87A11362071E006C9305 /* EqualSpec.mm in Sources */,
 				AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */,
-				AE8C87B513624D73006C9305 /* BeTruthySpec.mm in Sources */,
-				AE8C87E7136266D8006C9305 /* BeNilSpec.mm in Sources */,
-				AE0D689E13E36EDD0048039A /* BeCloseToSpec.mm in Sources */,
-				AE0D699E13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */,
-				AE0AF58213E9C61400029396 /* BeInstanceOfSpec.mm in Sources */,
-				AE0AF58A13E9EB1300029396 /* MutableEqualSpec.mm in Sources */,
+				AEF7301B13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */,
+				AEF7301D13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */,
+				AEF7301F13ECC4AE00786282 /* BeNilSpec.mm in Sources */,
+				AEF7302113ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */,
+				AEF7302313ECC4AE00786282 /* BeTruthySpec.mm in Sources */,
+				AEF7302513ECC4AE00786282 /* EqualSpec.mm in Sources */,
+				AEF7302713ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
+				AEF7302C13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,14 +943,15 @@
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */,
 				AEEE228711DC2D5800029872 /* main.m in Sources */,
 				AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */,
-				AE8C87A21362071E006C9305 /* EqualSpec.mm in Sources */,
 				AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */,
-				AE8C87B613624D75006C9305 /* BeTruthySpec.mm in Sources */,
-				AE8C87E8136266D8006C9305 /* BeNilSpec.mm in Sources */,
-				AE0D689F13E36EDD0048039A /* BeCloseToSpec.mm in Sources */,
-				AE0D699F13E8CF8B0048039A /* BeSameInstanceAsSpec.mm in Sources */,
-				AE0AF58313E9C61400029396 /* BeInstanceOfSpec.mm in Sources */,
-				AE0AF58B13E9EB1300029396 /* MutableEqualSpec.mm in Sources */,
+				AEF7301C13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */,
+				AEF7301E13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */,
+				AEF7302013ECC4AE00786282 /* BeNilSpec.mm in Sources */,
+				AEF7302213ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */,
+				AEF7302413ECC4AE00786282 /* BeTruthySpec.mm in Sources */,
+				AEF7302613ECC4AE00786282 /* EqualSpec.mm in Sources */,
+				AEF7302813ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
+				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
