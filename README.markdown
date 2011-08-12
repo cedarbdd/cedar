@@ -62,17 +62,13 @@ BDD-style testing using Objective-C
   will sometimes not copy all of the header files appropriately.  If after you
   build the Headers directory under the built framework is empty, try deleting
   the built framework and building again.
-  NOTE #2: Xcode 4 has changed the location of build products, except for command
-  line builds.  Since the static framework build includes scripts that depend on
-  command line builds, it will fail when using the default Xcode 4 build settings.
-  See [this post](http://pivotallabs.com/users/amilligan/blog/articles/1651) for solutions.
 * Create a Cocoa Touch "Application" target for your tests in your project.  Name
   this target UISpecs, or something similar.
 * Open the Info.plist file for your project and remove the "Main nib file base
   name" entry.  The project template will likely have set this to "MainWindow."
 * Add the Cedar-iPhone static framework to your project, and link your UISpecs
   target with it.
-* Add -ObjC, -lstdc++ and -all_load to the Other Linker Flags build setting for the
+* Add -ObjC and -all_load to the Other Linker Flags build setting for the
   UISpecs target.  This is necessary for the linker to correctly load symbols
   for Objective-C classes from static libraries.
 * Add a main.m to your UISpecs target that looks like this:
@@ -99,32 +95,47 @@ BDD-style testing using Objective-C
   spec target, you'll need to conditionally include the appropriate Cedar
   headers in your spec files depending on the target SDK.  For example:
 
-        #define HC_SHORTHAND
         #if TARGET_OS_IPHONE
         #import <Cedar-iPhone/SpecHelper.h>
-        #import <OCMock-iPhone/OCMock.h>
-        #import <OCHamcrest-iPhone/OCHamcrest.h>
         #else
         #import <Cedar/SpecHelper.h>
-        #import <OCMock/OCMock.h>
-        #import <OCHamcrest/OCHamcrest.h>
         #endif
 
 
 ## Matchers
 
-Cedar does not provide matchers, but it works with the fine array of matchers
-provided by the [Hamcrest project](http://code.google.com/p/hamcrest/); you can
-fetch the Objective-C port from the Hamcrest SVN repo.  Build and link the
-Hamcrest framework by following their instructions, and add the following at
+Cedar has a new set of matchers that use C++ templates to circumvent type issues that plague other
+matcher libraries.  For example, rather than this (OCHamcrest):
+
+    assertThat(aString, equalTo(@"something"));
+    assertThatInt(anInteger, equalToInt(7));
+    assertThatBool(aBoolean, equalTo(YES));
+
+you can write the following:
+
+    expect(aString).to(equal(@"something"));
+    expect(anInteger).to(equal(7));
+    expect(aBoolean).to(equal(YES));
+
+although you would more likely write the last line as:
+
+    expect(aBoolean).to(be_truthy());
+
+It's also theoretically very easy to add your own matchers without modifying the Cedar library
+(more on this later).
+
+This matcher library is new, and not hardly battle-hardened.  It also breaks Apple's GCC compiler,
+and versions 2.0 and older of the LLVM compiler (this translates to any compiler shipped with a
+version of Xcode before 4.1).  Fortunately, LLVM 2.1 fixes the issues.  If you'd prefer a more 
+stable matcher library, you can still easily use [OCHamcrest](http://code.google.com/p/hamcrest/).
+Build and link the Hamcrest framework by following their instructions, and add the following at
 the top of your spec files:
 
     #define HC_SHORTHAND
     #import <OCHamcrest/OCHamcrest.h>
 
 Pivotal also has a fork of a [GitHub import of the OCHamcrest codebase](http://github.com/pivotal/OCHamcrest).
-This fork contains our iPhone-specific static framework target.  Cedar also references
-this fork of OCHamcrest as a submodule.
+This fork contains our iPhone-specific static framework target.
 
 
 ## Shared example groups
@@ -173,7 +184,7 @@ object, and each shared example group will receive it:
     sharedExamplesFor(@"a red thing", ^(NSDictionary *context) {
         it(@"should be red", ^{
             Thing *thing = [context objectForKey:@"thing"];
-            assertThat(thing.color, equalTo(red));
+            expect(thing.color).to(equal(red));
         });
     });
 
@@ -191,10 +202,18 @@ object, and each shared example group will receive it:
         itShouldBehaveLike(@"a red thing");
     });
 
-Previously, you needed to instantiate and pass in your own dictionary, but this
-led to confusion and unavoidable memory leaks.  You should change any code that
-uses a local context dictionary to use the global shared example context
-dictionary.
+
+## Global beforeEach and afterEach
+
+In many cases you have some housekeeping you'd like to take care of before every spec in your entire
+suite.  For example, loading fixtures or resetting a global variable.  Cedar will look for the
++beforeEach and +afterEach class methods on every class it loads; you can add this class method
+onto any class you compile into your specs and Cedar will run it.  This allows spec libraries to 
+provide global +beforeEach and +afterEach methods specific to their own functionality, and they 
+will run automatically.
+
+If you want to run your own code before or after every spec, simply declare a class and implement 
+the +beforeEach and/or +afterEach methods.
 
 
 ## Mocks and stubs
@@ -220,7 +239,7 @@ default parameters.
 ## Code Snippets
 
 Xcode 4 has replaced text macros with code snippets.  If you're still using Xcode 3,
-checkout the xcode3 branch from git and read the section on MACROS.
+check out the xcode3 branch from git and read the section on MACROS.
 
 The project root contains an archive file named CodeSnippets.tar.gz.  You can unpack
 the file yourself and place the codesnippet files into this location (you may need
