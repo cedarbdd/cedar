@@ -16,6 +16,10 @@ void sharedExamplesFor(NSString *groupName, CDRSharedExampleGroupBlock block) {
 
 void itShouldBehaveLike(NSString *groupName) {
     CDRSharedExampleGroupBlock sharedExampleGroupBlock = [[[SpecHelper specHelper] sharedExampleGroups] objectForKey:groupName];
+    if (!sharedExampleGroupBlock) {
+        NSString *message = [NSString stringWithFormat:@"Unknown shared example group with description: '%@'", groupName];
+        [[NSException exceptionWithName:NSInternalInconsistencyException reason:message userInfo:nil] raise];
+    }
 
     CDRExampleGroup *parentGroup = currentSpec.currentGroup;
     currentSpec.currentGroup = [CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]];

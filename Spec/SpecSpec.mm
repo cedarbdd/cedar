@@ -163,6 +163,15 @@ describe(@"a describe block", ^{
     itShouldBehaveLike(@"a shared example group that contains a failing spec");
 });
 
+describe(@"a describe block that tries to include a shared example group that doesn't exist", ^{
+    @try {
+        itShouldBehaveLike(@"a unicorn");
+    } @catch (NSException *) {
+        return;
+    }
+    [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Should have thrown an exception" userInfo:nil];
+});
+
 SPEC_END
 
 
