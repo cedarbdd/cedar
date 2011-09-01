@@ -279,6 +279,82 @@ describe(@"contain matcher", ^{
             });
         });
     });
+
+    describe(@"when the container is an NSString", ^{
+        describe(@"which contains the substring", ^{
+            NSString *container = @"A string that contains element";
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(container).to(contain(element));
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
+                        expect(container).to_not(contain(element));
+                    });
+                });
+            });
+        });
+
+        describe(@"which does not contain the substring", ^{
+            NSString *container = @"I contain nothing!";
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    expect(container).to_not(contain(element));
+                });
+            });
+        });
+    });
+
+    describe(@"when the container is an NSMutableString", ^{
+        describe(@"which contains the substring", ^{
+            NSMutableString *container = [[@"A string that contains element" mutableCopy] autorelease];
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(container).to(contain(element));
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
+                        expect(container).to_not(contain(element));
+                    });
+                });
+            });
+        });
+
+        describe(@"which does not contain the substring", ^{
+            NSString *container = @"I contain nothing!";
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    expect(container).to_not(contain(element));
+                });
+            });
+        });
+    });
 });
 
 SPEC_END

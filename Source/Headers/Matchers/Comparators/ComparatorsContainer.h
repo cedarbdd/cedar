@@ -33,6 +33,17 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     }
 
     template<typename U>
+    bool compare_contains(NSString * const container, const U & element) {
+        NSRange range = [container rangeOfString:element];
+        return range.location != NSNotFound;
+    }
+
+    template<typename U>
+    bool compare_contains(NSMutableString * const container, const U & element) {
+        return compare_contains(static_cast<NSString * const>(container), element);
+    }
+
+    template<typename U>
     bool compare_contains(NSDictionary * const container, const U & element) {
         [[NSException exceptionWithName:NSInternalInconsistencyException reason:@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value" userInfo:nil] raise];
         return false;
