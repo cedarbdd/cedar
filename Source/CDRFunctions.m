@@ -55,9 +55,16 @@ void CDRDefineSharedExampleGroups() {
     }
 }
 
+BOOL CDRClassHasClassMethod(Class class, SEL selector) {
+    if (strcmp("UIAccessibilitySafeCategory__NSObject", class_getName(class))) {
+        return !!class_getClassMethod(class, selector);
+    }
+    return NO;
+}
+
 void CDRDefineGlobalBeforeAndAfterEachBlocks() {
-    [SpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) { return !!class_getClassMethod(class, @selector(beforeEach)); });
-    [SpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) { return !!class_getClassMethod(class, @selector(afterEach)); });
+    [SpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) { return CDRClassHasClassMethod(class, @selector(beforeEach)); });
+    [SpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) { return CDRClassHasClassMethod(class, @selector(afterEach)); });
 }
 
 int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> reporter) {
