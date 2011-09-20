@@ -37,8 +37,6 @@ static SpecHelper *specHelper__;
 
 #pragma mark CDRExampleParent
 - (void)setUp {
-    [self.sharedExampleContext removeAllObjects];
-
     if ([self respondsToSelector:@selector(beforeEach)]) {
         NSLog(@"********************************************************************************");
         NSLog(@"Cedar no longer runs beforeEach blocks defined on the SpecHelper class.\n");
@@ -62,6 +60,7 @@ static SpecHelper *specHelper__;
     }
 
     [self.globalAfterEachClasses makeObjectsPerformSelector:@selector(afterEach)];
+    [self.sharedExampleContext removeAllObjects];
 }
 
 @end
