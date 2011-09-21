@@ -5,6 +5,7 @@
 #import "CDRExampleReporter.h"
 #import "CDRDefaultReporter.h"
 #import "SpecHelper.h"
+#import "CDRFunctions.h"
 
 BOOL CDRClassIsOfType(Class class, const char * const className) {
     if (strcmp(className, class_getName(class))) {
@@ -103,8 +104,24 @@ int runAllSpecs() {
     }
 
     id<CDRExampleReporter> reporter = [[[reporterClass alloc] init] autorelease];
-    int result = runSpecsWithCustomExampleReporter(NULL, reporter);
+    int result = runSpecsWithCustomExampleReporter(specClassesToRun(), reporter);
     [pool drain];
 
     return result;
+}
+
+NSArray *specClassesToRun() {
+    char *envSpecClassNames = getenv("CEDAR_SPECS");
+    NSMutableArray *specClassesToRun = nil;
+    if (envSpecClassNames) {
+        NSArray *specClassNames = [[NSString stringWithCString:envSpecClassNames encoding:NSUTF8StringEncoding] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        specClassesToRun = [NSMutableArray arrayWithCapacity:[specClassNames count]];
+        for(NSString *className in specClassNames) {
+            Class specClass = NSClassFromString(className);
+            if (specClass) {
+                [specClassesToRun addObject:specClass];
+            }
+        }
+    }
+    return [[specClassesToRun copy] autorelease];
 }
