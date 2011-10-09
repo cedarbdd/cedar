@@ -39,8 +39,13 @@ NSBundle *mainBundle(id self, SEL _cmd) {
 @implementation CDROTestIPhoneRunner
 
 void runTests(id self, SEL _cmd, id ignored) {
-    if ([UIApplication sharedApplication]) { // most likely loaded from the bundle
-        runSpecsWithinUIApplication();
+    if ([UIApplication sharedApplication]) {
+        BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
+        BOOL isCedarDelegate = [[[UIApplication sharedApplication] delegate] isKindOfClass:[CedarApplicationDelegate class]];
+
+        if (!isCedarApp && !isCedarDelegate) {
+            runSpecsWithinUIApplication();
+        }
     } else {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
