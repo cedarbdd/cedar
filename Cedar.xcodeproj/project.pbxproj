@@ -558,6 +558,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9668DCDE144A92BA007C7294 /* OCUnit Support */ = {
+			isa = PBXGroup;
+			children = (
+				96B5F9FD144A81A7000A6A5D /* OCUnitApp */,
+				96B5FA17144A81A8000A6A5D /* OCUnitAppTests */,
+				96158A8D144A915E005895CE /* OCUnitAppLogicTests */,
+			);
+			name = "OCUnit Support";
+			sourceTree = "<group>";
+		};
 		96A07F0D13F27ED70021974D /* Focused */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,9 +681,7 @@
 			children = (
 				AEEE1FC311DC27B800029872 /* Source */,
 				AEEE1FE711DC27B800029872 /* Spec */,
-				96B5F9FD144A81A7000A6A5D /* OCUnitApp */,
-				96B5FA17144A81A8000A6A5D /* OCUnitAppTests */,
-				96158A8D144A915E005895CE /* OCUnitAppLogicTests */,
+				9668DCDE144A92BA007C7294 /* OCUnit Support */,
 				AEEE202611DC286500029872 /* Frameworks */,
 				AE135C9411DEA65500A922D4 /* Externals */,
 				AEEE1FB711DC271300029872 /* Products */,
@@ -2007,6 +2015,7 @@
 				96158A9A144A915E005895CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96A07F0513F276640021974D /* Build configuration list for PBXNativeTarget "FocusedSpecs" */ = {
 			isa = XCConfigurationList;

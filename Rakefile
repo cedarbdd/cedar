@@ -2,11 +2,11 @@ PROJECT_NAME = "Cedar"
 APP_NAME = "OCUnitApp"
 CONFIGURATION = "Debug"
 
-OCUNIT_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
-OCUNIT_UI_SPECS_TARGET_NAME = "OCUnitAppTests"
-
 SPECS_TARGET_NAME = "Specs"
 UI_SPECS_TARGET_NAME = "iPhoneSpecs"
+
+OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
+OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
 
 SDK_VERSION = "4.3"
 SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
@@ -56,8 +56,8 @@ def kill_simulator
   system %Q[killall -m -KILL "iPhone Simulator"]
 end
 
-task :default => [:trim_whitespace, :ocunit_specs, :ocunit_uispecs, :specs, :focused_specs, :uispecs]
-task :cruise => [:clean, :build_all, :ocunit_specs, :ocunit_uispecs, :specs, :focused_specs, :uispecs]
+task :default => [:trim_whitespace, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs]
+task :cruise => [:clean, :build_all, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs]
 
 task :trim_whitespace do
   system_or_exit %Q[git status --short | awk '{if ($1 != "D" && $1 != "R") print $2}' | grep -e '.*\.[cmh]$' | xargs sed -i '' -e 's/	/    /g;s/ *$//g;']
@@ -89,12 +89,6 @@ task :specs => :build_specs do
   end
 end
 
-task :ocunit_specs do
-  with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-    system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build SYMROOT=#{BUILD_DIR}"
-  end
-end
-
 task :focused_specs do
   # This target was made just for testing focused specs mode
   # and should not be created in applications that want to use Cedar.
@@ -123,25 +117,38 @@ task :uispecs => :build_uispecs do
   end
 end
 
-task :ocunit_uispecs do
-  kill_simulator
 
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{APP_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("app")
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("ocunit_uispecs")
+desc "Build and run OCUnit Logic and Application specs"
+task :ocunit => ["ocunit:logic", "ocunit:application"]
 
-  env_vars = {
-    "DYLD_ROOT_PATH" => SDK_DIR,
-    "DYLD_INSERT_LIBRARIES" => "/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-    "DYLD_FALLBACK_LIBRARY_PATH" => SDK_DIR,
-    "XCInjectBundle" => "#{File.join(build_dir("-iphonesimulator"), "#{OCUNIT_UI_SPECS_TARGET_NAME}.octest")}",
-    "XCInjectBundleInto" => "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")}",
-    "IPHONE_SIMULATOR_ROOT" => SDK_DIR,
-    "CFFIXED_USER_HOME" => Dir.tmpdir,
-    "CEDAR_HEADLESS_SPECS" => "1",
-    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-  }
+namespace :ocunit do
+  desc "Build and run OCUnit Logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
+  task :logic do
+    with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+      system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build SYMROOT=#{BUILD_DIR}"
+    end
+  end
 
-  with_env_vars(env_vars) do
-    system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")} -RegisterForSystemEvents -SenTest All";
+  desc "Build and run OCUnit Application specs (#{OCUNIT_APPLICATION_SPECS_TARGET_NAME})"
+  task :application do
+    kill_simulator
+
+    system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("ocunit_application_specs")
+
+    env_vars = {
+      "DYLD_ROOT_PATH" => SDK_DIR,
+      "DYLD_INSERT_LIBRARIES" => "/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
+      "DYLD_FALLBACK_LIBRARY_PATH" => SDK_DIR,
+      "XCInjectBundle" => "#{File.join(build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")}",
+      "XCInjectBundleInto" => "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")}",
+      "IPHONE_SIMULATOR_ROOT" => SDK_DIR,
+      "CFFIXED_USER_HOME" => Dir.tmpdir,
+      "CEDAR_HEADLESS_SPECS" => "1",
+      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+    }
+
+    with_env_vars(env_vars) do
+      system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")} -RegisterForSystemEvents -SenTest All";
+    end
   end
 end
