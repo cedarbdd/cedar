@@ -552,7 +552,8 @@ describe(@"CDRExampleGroup", ^{
 
             it(@"should return its parent's text pre-pended with its own text in pieces", ^{
                 NSArray *fullTextPieces = group.fullTextInPieces;
-                expect([fullTextPieces isEqual:[NSArray arrayWithObjects:parentGroupText, groupText, nil]]).to(be_truthy());
+                NSArray *expectedPieces = [NSArray arrayWithObjects:parentGroupText, groupText, nil];
+                expect([fullTextPieces isEqual:expectedPieces]).to(be_truthy());
             });
 
             describe(@"when the parent also has a parent", ^{
@@ -571,7 +572,8 @@ describe(@"CDRExampleGroup", ^{
 
                 it(@"should include the text from all parents, pre-pended in the appopriate order in pieces", ^{
                     NSArray *fullTextPieces = group.fullTextInPieces;
-                    expect([fullTextPieces isEqual:[NSArray arrayWithObjects:anotherGroupText, parentGroupText, groupText, nil]]).to(be_truthy());
+                    NSArray *expectedPieces = [NSArray arrayWithObjects:anotherGroupText, parentGroupText, groupText, nil];
+                    expect([fullTextPieces isEqual:expectedPieces]).to(be_truthy());
                 });
             });
         });

@@ -1,9 +1,9 @@
 PROJECT_NAME = "Cedar"
-APP_NAME = "OCUnitApplicationTests"
+APP_NAME = "OCUnitApp"
 CONFIGURATION = "Debug"
 
 OCUNIT_SPECS_TARGET_NAME = "OCUnitSpecs"
-OCUNIT_UI_SPECS_TARGET_NAME = "OCUnitApplicationTestsTests"
+OCUNIT_UI_SPECS_TARGET_NAME = "OCUnitAppTests"
 
 SPECS_TARGET_NAME = "Specs"
 UI_SPECS_TARGET_NAME = "iPhoneSpecs"
