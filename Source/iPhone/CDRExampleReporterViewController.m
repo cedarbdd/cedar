@@ -1,7 +1,9 @@
 #import "CDRExampleReporterViewController.h"
 #import "CDRFunctions.h"
+#import "CedarApplicationDelegate.h"
 #import "CDRSpecStatusViewController.h"
 #import "CDRDefaultReporter.h"
+#import <objc/runtime.h>
 
 @implementation CDRExampleReporterViewController
 
@@ -10,15 +12,7 @@
     [super viewDidLoad];
 
     if (getenv("CEDAR_HEADLESS_SPECS")) {
-        int exitStatus = runAllSpecs();
-
-        UIApplication *application = [UIApplication sharedApplication];
-        if ([application respondsToSelector:@selector(_terminateWithStatus:)]) {
-            [application performSelector:@selector(_terminateWithStatus:)
-                              withObject:(id)exitStatus];
-        } else {
-            exit(exitStatus);
-        }
+        runSpecsWithinUIApplication();
     } else {
         [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
     }
