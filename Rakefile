@@ -28,6 +28,7 @@ def output_file(target)
   output_file
 end
 
+desc "Run the specs and uispecs"
 task :default => [:trim_whitespace, :specs, :uispecs]
 task :cruise do
   Rake::Task[:clean].invoke
@@ -36,28 +37,34 @@ task :cruise do
   Rake::Task[:uispecs].invoke
 end
 
+desc "Trim Whitespace"
 task :trim_whitespace do
   system_or_exit(%Q[git status --short | awk '{if ($1 != "D" && $1 != "R") print $2}' | grep -e '.*\.[mh]$' | xargs sed -i '' -e 's/	/    /g;s/ *$//g;'])
 end
 
+desc "Clean all Targets"
 task :clean do
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean SYMROOT=#{BUILD_DIR}], output_file("clean"))
 end
 
+desc "Build Specs"
 task :build_specs do
 puts "SYMROOT: #{ENV['SYMROOT']}"
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}], output_file("specs"))
 end
 
+desc "Build UI Specs"
 task :build_uispecs do
   `osascript -e 'tell application "iPhone Simulator" to quit'`
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build], output_file("uispecs"))
 end
 
+desc "Build All Targets"
 task :build_all do
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}], output_file("build_all"))
 end
 
+desc "Run Specs"
 task :specs => :build_specs do
   build_dir = build_dir("")
   ENV["DYLD_FRAMEWORK_PATH"] = build_dir
@@ -66,6 +73,8 @@ task :specs => :build_specs do
 end
 
 require 'tmpdir'
+
+desc "Run UI Specs"
 task :uispecs => :build_uispecs do
   ENV["DYLD_ROOT_PATH"] = SDK_DIR
   ENV["IPHONE_SIMULATOR_ROOT"] = SDK_DIR
