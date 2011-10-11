@@ -129,29 +129,63 @@
     }
 }
 
+- (void)printNestedFullTextForExample:(CDRExample *)example stateToken:(NSString *)token {
+    static NSMutableArray *previousBranch = nil;
+    int previousBranchLength = previousBranch.count;
+
+    NSMutableArray *exampleBranch = [example fullTextInPieces];
+    int exampleBranchLength = exampleBranch.count;
+
+    BOOL onPreviousBranch = YES;
+
+    for (int i=0; i<exampleBranchLength; i++) {
+        onPreviousBranch &= (previousBranchLength > i && [[exampleBranch objectAtIndex:i] isEqualToString:[previousBranch objectAtIndex:i]]);
+
+        if (!onPreviousBranch) {
+            const char *indicator = (exampleBranchLength - i) == 1 ? [token UTF8String] : " ";
+            printf("%s  %*s%s\n", indicator, 2*i, "", [[exampleBranch objectAtIndex:i] UTF8String]);
+        }
+    }
+
+    [previousBranch release];
+    previousBranch = exampleBranch;
+
+    [[previousBranch retain] removeLastObject];
+}
+
 - (void)reportOnExample:(CDRExample *)example {
+    NSString *stateToken = nil;
+
     switch (example.state) {
         case CDRExampleStatePassed:
-            printf("%s", [[self successToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            stateToken = [self successToken];
             break;
         case CDRExampleStatePending:
-            printf("%s", [[self pendingToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            stateToken = [self pendingToken];
             [pendingMessages_ addObject:[self pendingMessageForExample:example]];
             break;
         case CDRExampleStateSkipped:
-            printf("%s", [[self skippedToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            stateToken = [self skippedToken];
             [skippedMessages_ addObject:[self skippedMessageForExample:example]];
             break;
         case CDRExampleStateFailed:
-            printf("%s", [[self failureToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            stateToken = [self failureToken];
             [failureMessages_ addObject:[self failureMessageForExample:example]];
             break;
         case CDRExampleStateError:
-            printf("%s", [[self errorToken] cStringUsingEncoding:NSUTF8StringEncoding]);
+            stateToken = [self errorToken];
             [failureMessages_ addObject:[self errorMessageForExample:example]];
             break;
         default:
             break;
+    }
+
+    const char *reporterOpts = getenv("CEDAR_REPORTER_OPTS");
+
+    if (reporterOpts && strcmp(reporterOpts, "nested") == 0) {
+        [self printNestedFullTextForExample:example stateToken:stateToken];
+    } else {
+        printf("%s", [stateToken cStringUsingEncoding:NSUTF8StringEncoding]);
     }
 }
 

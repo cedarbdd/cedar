@@ -35,6 +35,7 @@ typedef enum CDRExampleState CDRExampleState;
 
 - (NSString *)message;
 - (NSString *)fullText;
+- (NSMutableArray *)fullTextInPieces;
 @end
 
 @interface CDRExampleBase (RunReporting)
