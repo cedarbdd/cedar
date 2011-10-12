@@ -25,7 +25,8 @@ describe(@"be_same_instance_as matcher", ^{
     });
 
     describe(@"when the actual value is a pointer", ^{
-        int *actualValue;
+        int i = 17;
+        int *actualValue = &i;
 
         describe(@"and the values point to the same address space", ^{
             int *expectedValue = actualValue;

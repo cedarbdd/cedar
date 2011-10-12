@@ -528,6 +528,54 @@ describe(@"equal matcher", ^{
             });
         });
     });
+
+    describe(@"when the actual value is declared as an NSNumber *", ^{
+        NSNumber *actualValue = [NSNumber numberWithInt:587];
+
+        describe(@"and the expected value is declared as an NSNumber *", ^{
+            __block NSNumber *expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = [NSNumber numberWithInt:[actualValue intValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <587> to not equal <587>", ^(void) {
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedValue = [NSNumber numberWithInt:[actualValue intValue] + 1];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <587> to equal <588>", ^(void) {
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(equal(expectedValue));
+                    });
+                });
+            });
+        });
+    });
 });
 
 SPEC_END

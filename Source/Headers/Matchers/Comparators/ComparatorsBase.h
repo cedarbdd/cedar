@@ -29,4 +29,10 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     bool compare_equal(NSMutableString * const actualValue, const U & expectedValue) {
         return compare_equal(static_cast<NSString * const>(actualValue), expectedValue);
     }
+
+#pragma mark NSNumber
+    template<typename U>
+    bool compare_equal(NSNumber * const actualValue, const U & expectedValue) {
+        return [actualValue isEqualToNumber:expectedValue];
+    }
 }}}
