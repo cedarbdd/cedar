@@ -236,14 +236,34 @@ explicitly pass nil as the second parameter.  The parameter is necessary because
 C, and thus Objective-C, doesn't support function parameter overloading or
 default parameters.
 
+
+## Focused specs
+
+Sometimes when debugging or developing a new feature it is useful to run only a
+subset of your tests.  That can be achieved by marking any number/combination of
+examples with an 'f'. You can use `fit`, `fdescribe` and `fcontext` like this:
+
+          fit(@"should do something eventually", ^{
+              // ...
+          });
+
+If your test suite has at least one focused example, all focused examples will
+run and non-focused examples will be skipped and reported as such (shown as '>'
+in default reporter output).
+
+It might not be immediately obvious why the test runner always returns a
+non-zero exit code when a test suite contains at least one focused example. That
+was done to make CI fail if someone accidently forgets to unfocus focused
+examples before commiting and pushing.
+
+
 ## Code Snippets
 
 Xcode 4 has replaced text macros with code snippets.  If you're still using Xcode 3,
 check out the xcode3 branch from git and read the section on MACROS.
 
-The project root contains an archive file named CodeSnippets.tar.gz.  You can unpack
-the file yourself and place the codesnippet files into this location (you may need
-to create the directory):
+You can place the codesnippet files contained in CodeSnippets directory into this location
+(you may need to create the directory):
 
         ~/Library/Developer/XCode/UserData/CodeSnippets
 
