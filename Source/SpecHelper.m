@@ -1,15 +1,19 @@
 #import "SpecHelper.h"
 
+static SpecHelper *specHelper__;
+
 @interface SpecHelper ()
 @property (nonatomic, retain, readwrite) NSMutableDictionary *sharedExampleGroups, *sharedExampleContext;
 @end
 
-static SpecHelper *specHelper__;
-
 @implementation SpecHelper
 
-@synthesize sharedExampleGroups = sharedExampleGroups_, sharedExampleContext = sharedExampleContext_;
-@synthesize globalBeforeEachClasses = globalBeforeEachClasses_, globalAfterEachClasses = globalAfterEachClasses_;
+@synthesize
+    sharedExampleGroups = sharedExampleGroups_,
+    sharedExampleContext = sharedExampleContext_,
+    globalBeforeEachClasses = globalBeforeEachClasses_,
+    globalAfterEachClasses = globalAfterEachClasses_,
+    shouldOnlyRunFocused = shouldOnlyRunFocused_;
 
 + (id)specHelper {
     if (!specHelper__) {
@@ -22,6 +26,7 @@ static SpecHelper *specHelper__;
     if (self = [super init]) {
         self.sharedExampleGroups = [NSMutableDictionary dictionary];
         self.sharedExampleContext = [NSMutableDictionary dictionary];
+        self.shouldOnlyRunFocused = NO;
     }
     return self;
 }
@@ -36,6 +41,10 @@ static SpecHelper *specHelper__;
 }
 
 #pragma mark CDRExampleParent
+- (BOOL)shouldRun {
+    return NO;
+}
+
 - (void)setUp {
     if ([self respondsToSelector:@selector(beforeEach)]) {
         NSLog(@"********************************************************************************");

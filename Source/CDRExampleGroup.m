@@ -87,6 +87,18 @@
     [self stopObservingExamples];
 }
 
+- (BOOL)hasFocusedExamples {
+    if (self.isFocused) {
+        return YES;
+    }
+    for (CDRExampleBase *example in examples_) {
+        if ([example hasFocusedExamples]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (BOOL)hasChildren {
     return [examples_ count] > 0;
 }

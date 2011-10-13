@@ -2,6 +2,8 @@
 
 @protocol CDRExampleParent
 
+- (BOOL)shouldRun;
+
 - (void)setUp;
 - (void)tearDown;
 

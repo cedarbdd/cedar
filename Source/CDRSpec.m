@@ -6,15 +6,6 @@
 
 CDRSpec *currentSpec;
 
-void describe(NSString *text, CDRSpecBlock block) {
-    CDRExampleGroup *parentGroup = currentSpec.currentGroup;
-    currentSpec.currentGroup = [CDRExampleGroup groupWithText:text];
-    [parentGroup add:currentSpec.currentGroup];
-
-    block();
-    currentSpec.currentGroup = parentGroup;
-}
-
 void beforeEach(CDRSpecBlock block) {
     [currentSpec.currentGroup addBefore:block];
 }
@@ -23,29 +14,59 @@ void afterEach(CDRSpecBlock block) {
     [currentSpec.currentGroup addAfter:block];
 }
 
-void it(NSString *text, CDRSpecBlock block) {
+CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
+    CDRExampleGroup *parentGroup = currentSpec.currentGroup;
+
+    CDRExampleGroup *group = [CDRExampleGroup groupWithText:text];
+    [parentGroup add:group];
+
+    currentSpec.currentGroup = group;
+    block();
+    currentSpec.currentGroup = parentGroup;
+
+    return group;
+}
+
+CDRExampleGroup * context(NSString *text, CDRSpecBlock block) {
+    return describe(text, block);
+}
+
+CDRExample * it(NSString *text, CDRSpecBlock block) {
     CDRExample *example = [CDRExample exampleWithText:text andBlock:block];
     [currentSpec.currentGroup add:example];
+    return example;
+}
+
+CDRExampleGroup * xdescribe(NSString *text, CDRSpecBlock block) {
+    return describe(text, ^{});
+}
+
+CDRExampleGroup * xcontext(NSString *text, CDRSpecBlock block) {
+    return xdescribe(text, block);
+}
+
+CDRExample * xit(NSString *text, CDRSpecBlock block) {
+    return it(text, PENDING);
+}
+
+CDRExampleGroup * fdescribe(NSString *text, CDRSpecBlock block) {
+    CDRExampleGroup *group = describe(text, block);
+    group.focused = YES;
+    return group;
+}
+
+CDRExampleGroup * fcontext(NSString *text, CDRSpecBlock block) {
+    return fdescribe(text, block);
+}
+
+CDRExample * fit(NSString *text, CDRSpecBlock block) {
+    CDRExample *example = it(text, block);
+    example.focused = YES;
+    return example;
 }
 
 void fail(NSString *reason) {
     [[CDRSpecFailure specFailureWithReason:[NSString stringWithFormat:@"Failure: %@", reason]] raise];
-}
-
-void context(NSString *text, CDRSpecBlock block) {
-    describe(text, block);
-}
-
-void xcontext(NSString *text, CDRSpecBlock block) {
-    it(text, PENDING);
-}
-
-void xdescribe(NSString *text, CDRSpecBlock block) {
-    it(text, PENDING);
-}
-
-void xit(NSString *text, CDRSpecBlock block) {
-    it(text, PENDING);
 }
 
 @implementation CDRSpec
