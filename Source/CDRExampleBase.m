@@ -45,10 +45,16 @@
 }
 
 - (NSString *)fullText {
+    return [[self fullTextInPieces] componentsJoinedByString:@" "];
+}
+
+- (NSMutableArray *)fullTextInPieces {
     if (self.parent && [self.parent hasFullText]) {
-        return [NSString stringWithFormat:@"%@ %@", [self.parent fullText], self.text];
+        NSMutableArray *array = [self.parent fullTextInPieces];
+        [array addObject:self.text];
+        return array;
     } else {
-        return self.text;
+        return [NSMutableArray arrayWithObject:self.text];
     }
 }
 

@@ -48,6 +48,11 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
             NSString *fullText = example.fullText;
             expect(fullText).to(equal(exampleText));
         });
+
+        it(@"should return just its own text in one piece", ^{
+            NSArray *fullTextPieces = example.fullTextInPieces;
+            expect([fullTextPieces isEqual:[NSArray arrayWithObject:exampleText]]).to(be_truthy());
+        });
     });
 
     describe(@"with a parent", ^{
@@ -69,6 +74,11 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
             expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@", groupText, exampleText]));
         });
 
+        it(@"should return its parent's text pre-pended with its own text in pieces", ^{
+            NSArray *fullTextPieces = example.fullTextInPieces;
+            expect([fullTextPieces isEqual:[NSArray arrayWithObjects:groupText, exampleText, nil]]).to(be_truthy());
+        });
+
         describe(@"when the parent also has a parent", ^{
             __block CDRExampleGroup *rootGroup;
             NSString *rootGroupText = @"Root!";
@@ -85,6 +95,11 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
             it(@"should include the text from all parents, pre-pended in the appropriate order", ^{
                 NSString *fullText = example.fullText;
                 expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@ %@", rootGroupText, groupText, exampleText]));
+            });
+
+            it(@"should include the text from all parents, pre-pended in the appopriate order in pieces", ^{
+                NSArray *fullTextPieces = example.fullTextInPieces;
+                expect([fullTextPieces isEqual:[NSArray arrayWithObjects:rootGroupText, groupText, exampleText, nil]]).to(be_truthy());
             });
         });
     });
@@ -103,6 +118,12 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
 
         it(@"should not include its parent's text", ^{
             expect(example.fullText).to(equal(example.text));
+        });
+
+        it(@"should not include its parent's text in pieces", ^{
+            NSArray *fullTextPieces = example.fullTextInPieces;
+            NSString *text = example.text;
+            expect([fullTextPieces isEqual:[NSArray arrayWithObject:text]]).to(be_truthy());
         });
     });
 } copy];
@@ -330,7 +351,7 @@ describe(@"CDRExample", ^{
         });
     });
 
-    describe(@"fullText", ^{
+    describe(@"fullText/fullTextInPieces", ^{
         __block NSMutableDictionary *sharedExampleContext = [[NSMutableDictionary alloc] init];
 
         beforeEach(^{
