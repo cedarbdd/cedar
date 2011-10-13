@@ -10,5 +10,6 @@
 @optional
 - (BOOL)hasFullText;
 - (NSString *)fullText;
+- (NSMutableArray *)fullTextInPieces;
 
 @end

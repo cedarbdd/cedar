@@ -515,7 +515,7 @@ describe(@"CDRExampleGroup", ^{
         });
     });
 
-    describe(@"fullText", ^{
+    describe(@"fullText/fullTextInPieces", ^{
         describe(@"with no parent", ^{
             beforeEach(^{
                 id<CDRExampleParent> parent = group.parent;
@@ -525,6 +525,11 @@ describe(@"CDRExampleGroup", ^{
             it(@"should return just its own text", ^{
                 NSString *fullText = group.fullText;
                 expect(fullText).to(equal(groupText));
+            });
+
+            it(@"should return just its own text in one piece", ^{
+                NSArray *fullTextPieces = group.fullTextInPieces;
+                expect([fullTextPieces isEqual:[NSArray arrayWithObject:groupText]]).to(be_truthy());
             });
         });
 
@@ -545,6 +550,11 @@ describe(@"CDRExampleGroup", ^{
                 expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@", parentGroupText, groupText]));
             });
 
+            it(@"should return its parent's text pre-pended with its own text in pieces", ^{
+                NSArray *fullTextPieces = group.fullTextInPieces;
+                expect([fullTextPieces isEqual:[NSArray arrayWithObjects:parentGroupText, groupText, nil]]).to(be_truthy());
+            });
+
             describe(@"when the parent also has a parent", ^{
                 __block CDRExampleGroup *anotherGroup;
                 NSString *anotherGroupText = @"Another Group!";
@@ -557,6 +567,11 @@ describe(@"CDRExampleGroup", ^{
                 it(@"should include the text from all parents, pre-pended in the appopriate order", ^{
                     NSString *fullText = group.fullText;
                     expect(fullText).to(equal([NSString stringWithFormat:@"%@ %@ %@", anotherGroupText, parentGroupText, groupText]));
+                });
+
+                it(@"should include the text from all parents, pre-pended in the appopriate order in pieces", ^{
+                    NSArray *fullTextPieces = group.fullTextInPieces;
+                    expect([fullTextPieces isEqual:[NSArray arrayWithObjects:anotherGroupText, parentGroupText, groupText, nil]]).to(be_truthy());
                 });
             });
         });
@@ -579,6 +594,12 @@ describe(@"CDRExampleGroup", ^{
                 NSString *fullText = group.fullText;
                 NSString *text = group.text;
                 expect(fullText).to(equal(text));
+            });
+
+            it(@"should not include its parent's text in pieces", ^{
+                NSArray *fullTextPieces = group.fullTextInPieces;
+                NSString *text = group.text;
+                expect([fullTextPieces isEqual:[NSArray arrayWithObject:text]]).to(be_truthy());
             });
         });
     });
