@@ -2,25 +2,32 @@
 #import "CDRExampleBase.h"
 
 @protocol CDRExampleReporter;
-@class CDRExampleGroup, SpecHelper;
+@class CDRExampleGroup, CDRExample, SpecHelper;
 
 @protocol CDRSpec
 @end
 
-extern CDRSpecBlock PENDING;
+extern const CDRSpecBlock PENDING;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-void describe(NSString *, CDRSpecBlock);
 void beforeEach(CDRSpecBlock);
 void afterEach(CDRSpecBlock);
-void it(NSString *, CDRSpecBlock);
+
+CDRExampleGroup * describe(NSString *, CDRSpecBlock);
+CDRExampleGroup * context(NSString *, CDRSpecBlock);
+CDRExample * it(NSString *, CDRSpecBlock);
+
+CDRExampleGroup * xcontext(NSString *, CDRSpecBlock);
+CDRExampleGroup * xdescribe(NSString *, CDRSpecBlock);
+CDRExample * xit(NSString *, CDRSpecBlock);
+
+CDRExampleGroup * fdescribe(NSString *, CDRSpecBlock);
+CDRExampleGroup * fcontext(NSString *, CDRSpecBlock);
+CDRExample * fit(NSString *, CDRSpecBlock);
+
 void fail(NSString *);
-void context(NSString *, CDRSpecBlock);
-void xcontext(NSString *, CDRSpecBlock);
-void xdescribe(NSString *, CDRSpecBlock);
-void xit(NSString *, CDRSpecBlock);
 #ifdef __cplusplus
 }
 

@@ -7,25 +7,32 @@ typedef void (^CDRSpecBlock)(void);
 
 enum CDRExampleState {
     CDRExampleStateIncomplete = 0x00,
-    CDRExampleStatePassed = 0x01,
-    CDRExampleStatePending = 0x03,
-    CDRExampleStateFailed = 0x07,
-    CDRExampleStateError = 0x0F
+    CDRExampleStateSkipped = 0x01,
+    CDRExampleStatePassed = 0x03,
+    CDRExampleStatePending = 0x07,
+    CDRExampleStateFailed = 0x0F,
+    CDRExampleStateError = 0x1F
 };
 typedef enum CDRExampleState CDRExampleState;
 
 @interface CDRExampleBase : NSObject {
   NSString *text_;
   id<CDRExampleParent> parent_;
+  BOOL focused_;
 }
 
 @property (nonatomic, readonly) NSString *text;
 @property (nonatomic, assign) id<CDRExampleParent> parent;
+@property (nonatomic, assign, getter=isFocused) BOOL focused;
 
 - (id)initWithText:(NSString *)text;
 
 - (void)run;
+- (BOOL)shouldRun;
+
 - (BOOL)hasChildren;
+- (BOOL)hasFocusedExamples;
+
 - (NSString *)message;
 - (NSString *)fullText;
 @end

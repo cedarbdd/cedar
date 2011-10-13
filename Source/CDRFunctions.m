@@ -78,6 +78,10 @@ int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporte
     CDRDefineGlobalBeforeAndAfterEachBlocks();
     NSArray *groups = CDRCreateRootGroupsFromSpecClasses(specClasses);
 
+    for (CDRExampleGroup *group in groups) {
+        [SpecHelper specHelper].shouldOnlyRunFocused |= [group hasFocusedExamples];
+    }
+
     [reporter runWillStartWithGroups:groups];
     [groups makeObjectsPerformSelector:@selector(run)];
     [reporter runDidComplete];

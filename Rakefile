@@ -28,11 +28,12 @@ def output_file(target)
   output_file
 end
 
-task :default => [:trim_whitespace, :specs, :uispecs]
+task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs]
 task :cruise do
   Rake::Task[:clean].invoke
   Rake::Task[:build_all].invoke
   Rake::Task[:specs].invoke
+  Rake::Task[:focused_specs].invoke
   Rake::Task[:uispecs].invoke
 end
 
@@ -45,7 +46,7 @@ task :clean do
 end
 
 task :build_specs do
-puts "SYMROOT: #{ENV['SYMROOT']}"
+  puts "SYMROOT: #{ENV['SYMROOT']}"
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}], output_file("specs"))
 end
 
@@ -63,6 +64,19 @@ task :specs => :build_specs do
   ENV["DYLD_FRAMEWORK_PATH"] = build_dir
   ENV["CEDAR_REPORTER_CLASS"] = "CDRColorizedReporter"
   system_or_exit(File.join(build_dir, SPECS_TARGET_NAME))
+end
+
+task :focused_specs do
+  # This target was made just for testing focused specs mode
+  # and should not be created in applications that want to use Cedar.
+
+  focused_specs_target_name = "FocusedSpecs"
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{focused_specs_target_name} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("focused_specs")
+
+  build_dir = build_dir("")
+  ENV["DYLD_FRAMEWORK_PATH"] = build_dir
+  ENV["CEDAR_REPORTER_CLASS"] = "CDRColorizedReporter"
+  system_or_exit File.join(build_dir, focused_specs_target_name)
 end
 
 require 'tmpdir'
