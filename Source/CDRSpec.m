@@ -20,10 +20,11 @@ CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
     CDRExampleGroup *group = [CDRExampleGroup groupWithText:text];
     [parentGroup add:group];
 
-    currentSpec.currentGroup = group;
-    block();
-    currentSpec.currentGroup = parentGroup;
-
+    if (block) {
+        currentSpec.currentGroup = group;
+        block();
+        currentSpec.currentGroup = parentGroup;
+    }
     return group;
 }
 
