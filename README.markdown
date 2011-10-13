@@ -257,6 +257,49 @@ was done to make CI fail if someone accidently forgets to unfocus focused
 examples before commiting and pushing.
 
 
+## Reporters
+
+When running in headless mode by default Cedar uses `CDRDefaultReporter` to
+output test results.  Here is how it looks:
+
+    .P..P..
+
+    PENDING CDRExample hasChildren should return false by default
+    PENDING CDRExample hasFocusedExamples should return false by default
+
+    Finished in 0.0166 seconds
+    7 examples, 0 failures, 2 pending
+
+Most of the time above output is exactly what you want to see; however, in some
+cases you might actually want to see full names of running examples.  You can get
+more detailed output by setting `CEDAR_REPORTER_OPTS` env variable to `nested`.
+Here is how it looks after that:
+
+       CDRExample
+         hasChildren
+    .      should return false
+         isFocused
+    P      should return false by default
+    .      should return false when example is not focused
+    .      should return true when example is focused
+         hasFocusedExamples
+    P      should return false by default
+    .      should return false when example is not focused
+    .      should return true when example is focused
+
+    PENDING CDRExample hasChildren should return false by default
+    PENDING CDRExample hasFocusedExamples should return false by default
+
+    Finished in 0.0173 seconds
+    7 examples, 0 failures, 2 pending
+
+If the default reporter for some reason does not fit your needs you can always
+write a custom reporter.  `CDRTeamCityReporter` is one such example.  It was
+written to output test results in a way that TeamCity CI server can understand. 
+You can tell Cedar which reporter to use by setting `CEDAR_REPORTER_CLASS` env
+variable to your custom reporter class name.
+
+
 ## Code Snippets
 
 Xcode 4 has replaced text macros with code snippets.  If you're still using Xcode 3,
