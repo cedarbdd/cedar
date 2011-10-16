@@ -26,6 +26,7 @@
 - (void)dealloc {
     [rootGroups_ release];
     [startTime_ release];
+    [endTime_ release];
     [failureMessages_ release];
     [skippedMessages_ release];
     [pendingMessages_ release];
@@ -40,6 +41,7 @@
 }
 
 - (void)runDidComplete {
+    endTime_ = [[NSDate alloc] init];
     [self stopObservingExamples:rootGroups_];
 
     printf("\n");
@@ -88,7 +90,7 @@
 }
 
 - (NSString *)failureMessageForExample:(CDRExample *)example {
-    return [NSString stringWithFormat:@"FAILURE %@\n%@\n", [example fullText], [example message]];
+    return [NSString stringWithFormat:@"FAILURE %@\n%@\n",[example fullText], example.failure];
 }
 
 - (NSString *)errorToken {
@@ -96,7 +98,7 @@
 }
 
 - (NSString *)errorMessageForExample:(CDRExample *)example {
-    return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], [example message]];
+    return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], example.failure];
 }
 
 #pragma mark Private interface
@@ -190,7 +192,7 @@
 }
 
 - (void)printStats {
-    printf("\nFinished in %.4f seconds\n\n", [[NSDate date] timeIntervalSinceDate:startTime_]);
+    printf("\nFinished in %.4f seconds\n\n", [endTime_ timeIntervalSinceDate:startTime_]);
     printf("%u examples, %u failures", exampleCount_, (unsigned int)failureMessages_.count);
 
     if (pendingMessages_.count) {

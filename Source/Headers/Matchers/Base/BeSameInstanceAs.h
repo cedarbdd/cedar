@@ -48,6 +48,7 @@ namespace Cedar { namespace Matchers {
     template<typename T> template<typename U>
     bool BeSameInstanceAs<T>::matches(const U & actualValue) const {
         [[CDRSpecFailure specFailureWithReason:@"Attempt to compare non-pointer type for sameness."] raise];
+        return NO;
     }
 
     template<typename T> template<typename U>

@@ -27,6 +27,7 @@ namespace Cedar { namespace Matchers {
     template<typename U>
     bool BeNil::matches(const U & actualValue) const {
         [[CDRSpecFailure specFailureWithReason:@"Attempt to compare non-pointer type to nil"] raise];
+        return NO;
     }
 
     template<typename U>
