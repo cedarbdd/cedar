@@ -11,7 +11,7 @@ const CDRSpecBlock PENDING = nil;
 
 @implementation CDRExample
 
-@synthesize message = message_;
+@synthesize failure = failure_;
 
 + (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block {
     return [[[[self class] alloc] initWithText:text andBlock:block] autorelease];
@@ -36,11 +36,10 @@ const CDRSpecBlock PENDING = nil;
 }
 
 - (NSString *)message {
-    if (message_) {
-        return message_;
-    } else {
-        return [super message];
+    if (self.failure.reason) {
+        return self.failure.reason;
     }
+    return [super message];
 }
 
 - (float)progress {
@@ -61,10 +60,10 @@ const CDRSpecBlock PENDING = nil;
             block_();
             self.state = CDRExampleStatePassed;
         } @catch (CDRSpecFailure *x) {
-            self.message = [x reason];
+            self.failure = x;
             self.state = CDRExampleStateFailed;
         } @catch (NSObject *x) {
-            self.message = [x description];
+            self.failure = [CDRSpecFailure specFailureWithRaisedObject:x];
             self.state = CDRExampleStateError;
         }
         [parent_ tearDown];
@@ -75,7 +74,6 @@ const CDRSpecBlock PENDING = nil;
 }
 
 #pragma mark Private interface
-
 - (void)setState:(CDRExampleState)state {
     state_ = state;
 }

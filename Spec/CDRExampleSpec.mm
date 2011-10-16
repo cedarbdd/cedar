@@ -76,7 +76,8 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
 
         it(@"should return its parent's text pre-pended with its own text in pieces", ^{
             NSArray *fullTextPieces = example.fullTextInPieces;
-            expect([fullTextPieces isEqual:[NSArray arrayWithObjects:groupText, exampleText, nil]]).to(be_truthy());
+            NSArray *expectedPieces = [NSArray arrayWithObjects:groupText, exampleText, nil];
+            expect([fullTextPieces isEqual:expectedPieces]).to(be_truthy());
         });
 
         describe(@"when the parent also has a parent", ^{
@@ -99,7 +100,8 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
 
             it(@"should include the text from all parents, pre-pended in the appopriate order in pieces", ^{
                 NSArray *fullTextPieces = example.fullTextInPieces;
-                expect([fullTextPieces isEqual:[NSArray arrayWithObjects:rootGroupText, groupText, exampleText, nil]]).to(be_truthy());
+                NSArray *expectedPieces = [NSArray arrayWithObjects:rootGroupText, groupText, exampleText, nil];
+                expect([fullTextPieces isEqual:expectedPieces]).to(be_truthy());
             });
         });
     });

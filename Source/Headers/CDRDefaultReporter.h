@@ -10,6 +10,7 @@
     NSMutableArray *failureMessages_;
 
     NSDate *startTime_;
+    NSDate *endTime_;
     unsigned int exampleCount_;
 }
 @end
@@ -24,4 +25,7 @@
 - (NSString *)failureMessageForExample:(CDRExample *)example;
 - (NSString *)errorToken;
 - (NSString *)errorMessageForExample:(CDRExample *)example;
+
+- (void)reportOnExample:(CDRExample *)example;
+- (void)printStats;
 @end
