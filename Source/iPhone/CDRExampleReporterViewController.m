@@ -32,7 +32,9 @@
 }
 
 - (void)startSpecs {
-    runSpecsWithCustomExampleReporter(NULL, self);
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    runSpecsWithCustomExampleReporter(specClassesToRun(), self);
+    [pool drain];
 }
 
 - (void)pushRootSpecStatusController:(NSArray *)groups {
