@@ -16,7 +16,7 @@ SPEC_BEGIN(FocusedSpec)
 
 calledInFocusedSpec__ = [[NSMutableArray alloc] init];
 expectedCallsInFocusedSpec__ =
-    [[NSArray alloc] initWithObjects:
+    [[NSMutableArray alloc] initWithObjects:
         @"fit",
         @"describe-fit",
         @"describe-describe-fit",

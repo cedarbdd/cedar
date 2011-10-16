@@ -15,7 +15,7 @@ NSMutableArray *expectedCallsInFocusedSpec2__ = nil;
 SPEC_BEGIN(FocusedSpec2)
 
 calledInFocusedSpec2__ = [[NSMutableArray alloc] init];
-expectedCallsInFocusedSpec2__ = [[NSArray alloc] initWithObjects:@"fit", nil];
+expectedCallsInFocusedSpec2__ = [[NSMutableArray alloc] initWithObjects:@"fit", nil];
 
 it(@"should not run non-focused example", ^{
     [calledInFocusedSpec2__ addObject:@"it"];
