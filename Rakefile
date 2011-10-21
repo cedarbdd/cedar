@@ -1,6 +1,6 @@
 PROJECT_NAME = "Cedar"
 APP_NAME = "OCUnitApp"
-CONFIGURATION = "Debug"
+CONFIGURATION = "Release"
 
 SPECS_TARGET_NAME = "Specs"
 UI_SPECS_TARGET_NAME = "iPhoneSpecs"
