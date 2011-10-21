@@ -121,8 +121,23 @@ although you would more likely write the last line as:
 
     expect(aBoolean).to(be_truthy());
 
-It's also theoretically very easy to add your own matchers without modifying the Cedar library
-(more on this later).
+Here is a list of built-in matchers you can use:
+
+    expect(...).to(equal(10));
+    expect(...).to(be_nil());
+    expect(...).to(be_close_to(5)); // default within(.01)
+    expect(...).to(be_close_to(5).within(.02));
+    expect(...).to(be_instance_of([NSObject class]));
+    expect(...).to(be_same_instance_as(object));
+    expect(...).to(be_truthy());
+    expect(...).to_not(be_truthy());
+    expect(...).to(contain(@"something"));
+    expect(...).to(be_empty());
+
+It's also theoretically very easy to add your own matchers without modifying the
+Cedar library (more on this later).  To start using these matchers in your spec
+file place `using namespace Cedar::Matchers;` before SPEC_BEGIN declaration
+and change that spec file's extension from .m to .mm.
 
 This matcher library is new, and not hardly battle-hardened.  It also breaks Apple's GCC compiler,
 and versions 2.0 and older of the LLVM compiler (this translates to any compiler shipped with a
@@ -136,6 +151,12 @@ the top of your spec files:
 
 Pivotal also has a fork of a [GitHub import of the OCHamcrest codebase](http://github.com/pivotal/OCHamcrest).
 This fork contains our iPhone-specific static framework target.
+
+Note: If you decide to use another matcher library that uses `expect(...)` to
+build its expectations (e.g. [Expecta](http://github.com/petejkim/expecta)) you
+will need to add `#define CEDAR_MATCHERS_COMPATIBILITY_MODE` before importing
+SpecHelper.h.  That will prevent Cedar from defining a macro that overrides that
+library's expect function.
 
 
 ## Shared example groups
