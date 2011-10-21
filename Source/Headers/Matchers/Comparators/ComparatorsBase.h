@@ -31,8 +31,35 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     }
 
 #pragma mark NSNumber
+    bool compare_equal(NSNumber * const actualValue, NSNumber * const expectedValue);
+    bool compare_equal(NSNumber * const actualValue, NSObject * const expectedValue);
+    bool compare_equal(NSNumber * const actualValue, NSValue * const expectedValue);
+    bool compare_equal(NSNumber * const actualValue, const id expectedValue);
+
     template<typename U>
     bool compare_equal(NSNumber * const actualValue, const U & expectedValue) {
+        return [actualValue floatValue] == expectedValue;
+    }
+
+    template<typename T>
+    bool compare_equal(const T & actualValue, NSNumber * const expectedValue) {
+        return compare_equal(expectedValue, actualValue);
+    }
+
+    inline bool compare_equal(NSNumber * const actualValue, NSNumber * const expectedValue) {
         return [actualValue isEqualToNumber:expectedValue];
     }
+
+    inline bool compare_equal(NSNumber * const actualValue, NSObject * const expectedValue) {
+        return compare_equal(actualValue, static_cast<const id>(expectedValue));
+    }
+
+    inline bool compare_equal(NSNumber * const actualValue, NSValue * const expectedValue) {
+        return compare_equal(actualValue, static_cast<const id>(expectedValue));
+    }
+
+    inline bool compare_equal(NSNumber * const actualValue, const id expectedValue) {
+        return [expectedValue isEqual:actualValue];
+    }
+
 }}}
