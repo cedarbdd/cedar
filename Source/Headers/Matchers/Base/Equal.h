@@ -47,4 +47,17 @@ namespace Cedar { namespace Matchers {
         this->build_failure_message_start(actualValue);
         return Comparators::compare_equal(actualValue, expectedValue_);
     }
+
+#pragma mark equality operators
+    template<typename T, typename U>
+    bool operator==(const ActualValue<T> & actualValue, const U & expectedValue) {
+        actualValue.to(equal(expectedValue));
+        return true;
+    }
+
+    template<typename T, typename U>
+    bool operator!=(const ActualValue<T> & actualValue, const U & expectedValue) {
+        actualValue.to_not(equal(expectedValue));
+        return true;
+    }
 }}

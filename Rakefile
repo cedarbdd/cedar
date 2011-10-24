@@ -56,7 +56,7 @@ def kill_simulator
   system %Q[killall -m -KILL "iPhone Simulator"]
 end
 
-task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs]
+task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application"]
 task :cruise => [:clean, :build_all, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs]
 
 task :trim_whitespace do
