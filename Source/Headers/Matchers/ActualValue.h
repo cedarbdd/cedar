@@ -8,6 +8,48 @@ namespace Cedar { namespace Matchers {
 
     void fail(const NSString * failureMessage);
 
+    template<typename T> class ActualValue;
+
+#pragma mark class ActualValueMatchProxy
+    template<typename T>
+    class ActualValueMatchProxy {
+    private:
+        template<typename U>
+        ActualValueMatchProxy(const ActualValueMatchProxy<U> &);
+        template<typename U>
+        ActualValueMatchProxy & operator=(const ActualValueMatchProxy<U> &);
+
+    public:
+        explicit ActualValueMatchProxy(const ActualValue<T> &, bool negate = false);
+        ActualValueMatchProxy();
+
+        template<typename Matcher> void operator()(const Matcher &) const;
+        ActualValueMatchProxy<T> negate() const;
+
+    private:
+        const ActualValue<T> & actualValue_;
+        bool negate_;
+    };
+
+    template<typename T>
+    ActualValueMatchProxy<T>::ActualValueMatchProxy(const ActualValue<T> & actualValue, bool negate /*= false */) : actualValue_(actualValue), negate_(negate) {
+    }
+
+    template<typename T> template<typename Matcher>
+    void ActualValueMatchProxy<T>::operator()(const Matcher & matcher) const {
+        if (negate_) {
+            actualValue_.execute_negative_match(matcher);
+        } else {
+            actualValue_.execute_positive_match(matcher);
+        }
+    }
+
+    template<typename T>
+    ActualValueMatchProxy<T> ActualValueMatchProxy<T>::negate() const {
+        return ActualValueMatchProxy<T>(actualValue_, !negate_);
+    }
+
+#pragma mark class ActualValue
     template<typename T>
     class ActualValue {
     private:
@@ -20,8 +62,11 @@ namespace Cedar { namespace Matchers {
         explicit ActualValue(const char *, int, const T &);
         ~ActualValue();
 
-        template<typename Matcher> void to(const Matcher &) const;
-        template<typename Matcher> void to_not(const Matcher &) const;
+        template<typename Matcher> void execute_positive_match(const Matcher &) const;
+        template<typename Matcher> void execute_negative_match(const Matcher &) const;
+
+        ActualValueMatchProxy<T> to;
+        ActualValueMatchProxy<T> to_not;
 
     private:
         const T value_;
@@ -30,7 +75,7 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    ActualValue<T>::ActualValue(const char *fileName, int lineNumber, const T & value) : lineNumber_(lineNumber), value_(value) {
+    ActualValue<T>::ActualValue(const char *fileName, int lineNumber, const T & value) : lineNumber_(lineNumber), value_(value), to(*this), to_not(*this, true) {
         fileName_ = [[NSString alloc] initWithUTF8String:fileName];
     }
 
@@ -50,16 +95,17 @@ namespace Cedar { namespace Matchers {
     #endif
 
     template<typename T> template<typename Matcher>
-    void ActualValue<T>::to(const Matcher & matcher) const {
+    void ActualValue<T>::execute_positive_match(const Matcher & matcher) const {
         if (!matcher.matches(value_)) {
             [[CDRSpecFailure specFailureWithReason:matcher.failure_message() fileName:fileName_ lineNumber:lineNumber_] raise];
         }
     }
 
     template<typename T> template<typename Matcher>
-    void ActualValue<T>::to_not(const Matcher & matcher) const {
+    void ActualValue<T>::execute_negative_match(const Matcher & matcher) const {
         if (matcher.matches(value_)) {
             [[CDRSpecFailure specFailureWithReason:matcher.negative_failure_message() fileName:fileName_ lineNumber:lineNumber_] raise];
         }
     }
+
 }}

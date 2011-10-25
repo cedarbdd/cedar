@@ -51,13 +51,25 @@ namespace Cedar { namespace Matchers {
 #pragma mark equality operators
     template<typename T, typename U>
     bool operator==(const ActualValue<T> & actualValue, const U & expectedValue) {
-        actualValue.to(equal(expectedValue));
+        actualValue.execute_positive_match(equal(expectedValue));
+        return true;
+    }
+
+    template<typename T, typename U>
+    bool operator==(const ActualValueMatchProxy<T> & actualValueMatchProxy, const U & expectedValue) {
+        actualValueMatchProxy(equal(expectedValue));
         return true;
     }
 
     template<typename T, typename U>
     bool operator!=(const ActualValue<T> & actualValue, const U & expectedValue) {
-        actualValue.to_not(equal(expectedValue));
+        actualValue.execute_negative_match(equal(expectedValue));
+        return true;
+    }
+
+    template<typename T, typename U>
+    bool operator!=(const ActualValueMatchProxy<T> & actualValueMatchProxy, const U & expectedValue) {
+        actualValueMatchProxy.negate()(equal(expectedValue));
         return true;
     }
 }}

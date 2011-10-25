@@ -841,6 +841,27 @@ describe(@"equality operator matcher", ^{
             });
         });
     });
+
+    describe(@"with and without 'to'", ^{
+        int actualValue = 7, expectedValue = 7;
+
+        describe(@"positive match", ^{
+            it(@"should pass", ^{
+                expect(actualValue) == expectedValue;
+                expect(actualValue).to == expectedValue;
+            });
+        });
+
+        describe(@"negative match", ^{
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
+                    expect(actualValue) != expectedValue;
+                    expect(actualValue).to != expectedValue;
+                    expect(actualValue).to_not == expectedValue;
+                });
+            });
+        });
+    });
 });
 
 SPEC_END
