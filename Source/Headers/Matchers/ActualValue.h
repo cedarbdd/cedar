@@ -62,11 +62,13 @@ namespace Cedar { namespace Matchers {
         explicit ActualValue(const char *, int, const T &);
         ~ActualValue();
 
-        template<typename Matcher> void execute_positive_match(const Matcher &) const;
-        template<typename Matcher> void execute_negative_match(const Matcher &) const;
-
         ActualValueMatchProxy<T> to;
         ActualValueMatchProxy<T> to_not;
+
+    private:
+        template<typename Matcher> void execute_positive_match(const Matcher &) const;
+        template<typename Matcher> void execute_negative_match(const Matcher &) const;
+        friend class ActualValueMatchProxy<T>;
 
     private:
         const T value_;
@@ -90,10 +92,6 @@ namespace Cedar { namespace Matchers {
         return ActualValue<T>(fileName, lineNumber, actualValue);
     }
 
-    #ifndef CEDAR_MATCHERS_COMPATIBILITY_MODE
-        #define expect(x) CDR_expect(__FILE__, __LINE__, x)
-    #endif
-
     template<typename T> template<typename Matcher>
     void ActualValue<T>::execute_positive_match(const Matcher & matcher) const {
         if (!matcher.matches(value_)) {
@@ -109,3 +107,7 @@ namespace Cedar { namespace Matchers {
     }
 
 }}
+
+#ifndef CEDAR_MATCHERS_COMPATIBILITY_MODE
+    #define expect(x) CDR_expect(__FILE__, __LINE__, x)
+#endif
