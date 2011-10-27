@@ -106,7 +106,7 @@ describe(@"equal matcher", ^{
             });
         });
 
-        describe(@"and the expected value is an NSNumber", ^{
+        describe(@"and the expected value is declared as an NSNumber", ^{
             __block NSNumber *expectedValue;
 
             describe(@"and the values are equal", ^{
@@ -164,14 +164,14 @@ describe(@"equal matcher", ^{
 
     describe(@"when the actual value is declared as an id", ^{
         int someInteger = 7;
-        id actualValue = [[[NSString alloc] initWithFormat:@"%d", someInteger] autorelease];
+        id actualValue = [NSNumber numberWithInt:someInteger];
 
         describe(@"and the expected value is declared as an NSObject *", ^{
             __block NSObject *expectedValue;
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [[actualValue mutableCopy] autorelease];
+                    expectedValue = [NSNumber numberWithInt:someInteger];
                 });
 
                 describe(@"positive match", ^{
@@ -191,7 +191,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are not equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger + 1];
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
                 describe(@"positive match", ^{
@@ -215,7 +215,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [[actualValue mutableCopy] autorelease];
+                    expectedValue = [NSNumber numberWithInt:someInteger];
                 });
 
                 describe(@"positive match", ^{
@@ -235,7 +235,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are not equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger + 1];
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
                 describe(@"positive match", ^{
@@ -254,12 +254,12 @@ describe(@"equal matcher", ^{
             });
         });
 
-        describe(@"and the expected value is declared as an NSString *", ^{
-            __block NSString *expectedValue;
+        describe(@"and the expected value is declared as an NSNumber *", ^{
+            __block NSNumber *expectedValue;
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [[actualValue mutableCopy] autorelease];
+                    expectedValue = [NSNumber numberWithInt:someInteger];
                 });
 
                 describe(@"positive match", ^{
@@ -278,8 +278,8 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger + 1];
+                beforeEach(^ {
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
                 describe(@"positive match", ^{
@@ -297,18 +297,19 @@ describe(@"equal matcher", ^{
                 });
             });
         });
+
     });
 
     describe(@"when the actual value is declared as an NSObject *", ^{
         int someInteger = 7;
-        NSObject *actualValue = [[NSString alloc] initWithFormat:@"%d", someInteger];
+        NSObject *actualValue = [NSNumber numberWithInt:someInteger];
 
         describe(@"and the expected value is also declared as an NSObject *", ^{
             __block NSObject *expectedValue;
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [[actualValue mutableCopy] autorelease];
+                    expectedValue = [NSNumber numberWithInt:someInteger];
                 });
 
                 describe(@"positive match", ^{
@@ -328,7 +329,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are not equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger + 1];
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
                 describe(@"positive match", ^{
@@ -352,7 +353,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [[actualValue mutableCopy] autorelease];
+                    expectedValue = [NSNumber numberWithInt:someInteger];
                 });
 
                 describe(@"positive match", ^{
@@ -372,7 +373,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are not equal", ^{
                 beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger + 1];
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
                 describe(@"positive match", ^{
@@ -391,12 +392,12 @@ describe(@"equal matcher", ^{
             });
         });
 
-        describe(@"and the expected value is declared as an NSString *", ^{
-            __block NSString *expectedValue;
+        describe(@"and the expected value is declared as an NSNumber *", ^{
+            __block NSNumber *expectedValue;
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{
-                    expectedValue = [[actualValue mutableCopy] autorelease];
+                    expectedValue = [NSNumber numberWithInt:someInteger];
                 });
 
                 describe(@"positive match", ^{
@@ -415,8 +416,8 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^{
-                    expectedValue = [NSString stringWithFormat:@"%d", someInteger + 1];
+                beforeEach(^ {
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
                 describe(@"positive match", ^{
@@ -573,8 +574,146 @@ describe(@"equal matcher", ^{
         });
     });
 
+    describe(@"when the actual value is declared as an NSValue *", ^{
+        int someInteger = 7;
+        NSValue *actualValue = [NSNumber numberWithInt:someInteger];
+
+        describe(@"and the expected value is declared as an NSObject *", ^{
+            __block NSObject *expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = [NSNumber numberWithInt:someInteger];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(equal(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is also declared as an id", ^{
+            __block id expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = [NSNumber numberWithInt:someInteger];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(equal(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSNumber *", ^{
+            __block NSNumber *expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = [NSNumber numberWithInt:someInteger];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the values are not equal", ^{
+                beforeEach(^ {
+                    expectedValue = [NSNumber numberWithInt:someInteger + 1];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(equal(expectedValue));
+                    });
+                });
+            });
+        });
+    });
+
     describe(@"when the actual value is declared as an NSNumber *", ^{
-        NSNumber *actualValue = [NSNumber numberWithInt:587];
+        int someInteger = 7;
+        NSNumber *actualValue = [NSNumber numberWithInt:someInteger];
 
         describe(@"and the expected value is declared as an NSNumber *", ^{
             __block NSNumber *expectedValue;
@@ -592,7 +731,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to not equal <587>", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -606,7 +745,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to equal <588>", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -636,7 +775,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to not equal <587>", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -650,7 +789,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to equal <588>", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -680,7 +819,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to not equal <587>", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -694,7 +833,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to equal <588>", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -724,7 +863,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to not equal <587>", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -738,7 +877,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to equal <588>", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -768,7 +907,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to not equal <587>", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -782,7 +921,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to equal <588>", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8>", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -812,7 +951,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to not equal <587>", ^{
+                        expectFailureWithMessage(@"Expected <7> to not equal <7>", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -826,7 +965,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <587> to equal <588.7>", ^{
+                        expectFailureWithMessage(@"Expected <7> to equal <8.7>", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
