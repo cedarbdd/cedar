@@ -68,10 +68,10 @@ namespace Cedar { namespace Matchers {
     }
 
 #pragma mark NSNumber
-//    template<typename T>
-//    bool BeCloseTo<T>::matches(NSNumber * const & actualValue) const {
-//        return this->matches([actualValue floatValue]);
-//    }
+    template<typename T>
+    bool BeCloseTo<T>::matches(NSNumber * const & actualValue) const {
+        return this->matches([actualValue floatValue]);
+    }
 
     template<> template<typename U>
     bool BeCloseTo<NSNumber *>::matches(const U & actualValue) const {
