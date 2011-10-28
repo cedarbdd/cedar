@@ -32,8 +32,8 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    ActualValueMatchProxy<T>::ActualValueMatchProxy(const ActualValue<T> & actualValue, bool negate /*= false */) : actualValue_(actualValue), negate_(negate) {
-    }
+    ActualValueMatchProxy<T>::ActualValueMatchProxy(const ActualValue<T> & actualValue, bool negate /*= false */)
+    : actualValue_(actualValue), negate_(negate) {}
 
     template<typename T> template<typename Matcher>
     void ActualValueMatchProxy<T>::operator()(const Matcher & matcher) const {

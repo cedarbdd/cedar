@@ -34,6 +34,8 @@
 		96158A9F144A91C4005895CE /* OCUnitAppLogicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96158A9E144A91C4005895CE /* OCUnitAppLogicTests.mm */; };
 		96158AA2144A91DC005895CE /* DummyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96158AA1144A91DC005895CE /* DummyModel.m */; };
 		96158AA3144A9210005895CE /* DummyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96158AA1144A91DC005895CE /* DummyModel.m */; };
+		966E74ED145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; };
+		966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; };
 		968BA92F143485F800EA40B3 /* CDROTestIPhoneRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 968BA92E143485F800EA40B3 /* CDROTestIPhoneRunner.h */; };
 		96A07F0313F276640021974D /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
 		96A07F0413F276640021974D /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE1FB611DC271300029872 /* Cedar.framework */; };
@@ -96,6 +98,8 @@
 		AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
 		AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
+		AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE84F0DC145B70DD00769F85 /* ShouldSyntax.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; };
 		AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
 		AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
 		AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
@@ -346,6 +350,7 @@
 				AEF3300D145B4F75002F93BB /* BeGTE.h in Copy headers to framework */,
 				AEF33018145B6222002F93BB /* BeLessThan.h in Copy headers to framework */,
 				AEF33022145B69DE002F93BB /* BeLTE.h in Copy headers to framework */,
+				AE84F0DC145B70DD00769F85 /* ShouldSyntax.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +372,7 @@
 		96158A9E144A91C4005895CE /* OCUnitAppLogicTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OCUnitAppLogicTests.mm; sourceTree = "<group>"; };
 		96158AA0144A91DC005895CE /* DummyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyModel.h; sourceTree = "<group>"; };
 		96158AA1144A91DC005895CE /* DummyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyModel.m; sourceTree = "<group>"; };
+		966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShouldSyntaxSpec.mm; path = ../ShouldSyntaxSpec.mm; sourceTree = "<group>"; };
 		968BA92E143485F800EA40B3 /* CDROTestIPhoneRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDROTestIPhoneRunner.h; sourceTree = "<group>"; };
 		96A07F0813F276640021974D /* FocusedSpecs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FocusedSpecs; sourceTree = BUILT_PRODUCTS_DIR; };
 		96A07F0A13F276B10021974D /* FocusedSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FocusedSpec.m; path = Focused/FocusedSpec.m; sourceTree = "<group>"; };
@@ -404,6 +410,7 @@
 		AE18A7FA13F4601400C8872C /* Contain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contain.h; sourceTree = "<group>"; };
 		AE18A80913F4640600C8872C /* ContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainSpec.mm; sourceTree = "<group>"; };
 		AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGreaterThanSpec.mm; sourceTree = "<group>"; };
+		AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouldSyntax.h; sourceTree = "<group>"; };
 		AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectFailureWithMessage.h; sourceTree = "<group>"; };
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpectFailureWithMessage.m; sourceTree = "<group>"; };
 		AE8C87B213624BD4006C9305 /* BeTruthy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeTruthy.mm; sourceTree = "<group>"; };
@@ -670,6 +677,7 @@
 				AEF72F7713EC730700786282 /* CedarComparators.h */,
 				AEF72F7A13EC734000786282 /* CedarStringifiers.h */,
 				AE0AF57913E9C16D00029396 /* MatcherTemplate.h */,
+				AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -708,6 +716,7 @@
 			children = (
 				AEF7301313ECC4AE00786282 /* Base */,
 				AEF7302913ECC4C100786282 /* Container */,
+				966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
 			);
@@ -982,6 +991,7 @@
 				AEF3300C145B4F75002F93BB /* BeGTE.h in Headers */,
 				AEF33017145B6222002F93BB /* BeLessThan.h in Headers */,
 				AEF33021145B69DE002F93BB /* BeLTE.h in Headers */,
+				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,6 +1406,7 @@
 				AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				AEF3301C145B62E9002F93BB /* BeLessThanSpec.mm in Sources */,
 				AEF3301E145B68D7002F93BB /* BeLTESpec.mm in Sources */,
+				966E74ED145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1456,6 +1467,7 @@
 				AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				AEF33015145B6188002F93BB /* BeLessThanSpec.mm in Sources */,
 				AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */,
+				966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
