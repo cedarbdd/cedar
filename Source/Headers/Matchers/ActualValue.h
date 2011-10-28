@@ -32,8 +32,8 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    ActualValueMatchProxy<T>::ActualValueMatchProxy(const ActualValue<T> & actualValue, bool negate /*= false */) : actualValue_(actualValue), negate_(negate) {
-    }
+    ActualValueMatchProxy<T>::ActualValueMatchProxy(const ActualValue<T> & actualValue, bool negate /*= false */)
+    : actualValue_(actualValue), negate_(negate) {}
 
     template<typename T> template<typename Matcher>
     void ActualValueMatchProxy<T>::operator()(const Matcher & matcher) const {
@@ -106,8 +106,33 @@ namespace Cedar { namespace Matchers {
         }
     }
 
+#pragma mark class ActualValueMarker
+    struct ActualValueMarker {
+        const char *fileName;
+        int lineNumber;
+    };
+
+    template<typename T>
+    const ActualValue<T> operator,(const T & actualValue, const ActualValueMarker & marker) {
+        return ActualValue<T>(marker.fileName, marker.lineNumber, actualValue);
+    }
+
+    template<typename T>
+    const ActualValueMatchProxy<T> operator,(const ActualValue<T> & actualValue, BOOL negate) {
+        return negate ? actualValue.to_not : actualValue.to;
+    }
+
+    template<typename T, typename Matcher>
+    void operator,(const ActualValueMatchProxy<T> & matchProxy, const Matcher & matcher) {
+        matchProxy(matcher);
+    }
 }}
 
 #ifndef CEDAR_MATCHERS_COMPATIBILITY_MODE
     #define expect(x) CDR_expect(__FILE__, __LINE__, x)
+#endif
+
+#ifdef CEDAR_MATCHERS_ALLOW_SHOULD
+    #define should ,(ActualValueMarker){__FILE__, __LINE__},false,
+    #define should_not ,(ActualValueMarker){__FILE__, __LINE__},true,
 #endif
