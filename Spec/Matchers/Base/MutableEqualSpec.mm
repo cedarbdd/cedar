@@ -22,7 +22,7 @@ describe(@"equal matcher", ^{
             __block NSMutableString *expectedValue;
 
             describe(@"and the values are equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSMutableString stringWithString:actualValue];
                 });
 
@@ -42,7 +42,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSMutableString stringWithString:@"wobble"];
                 });
 
@@ -70,7 +70,7 @@ describe(@"equal matcher", ^{
             __block NSString *expectedValue;
 
             describe(@"and the values are equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSString stringWithString:actualValue];
                 });
 
@@ -90,7 +90,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSMutableString stringWithString:@"wobble"];
                 });
 

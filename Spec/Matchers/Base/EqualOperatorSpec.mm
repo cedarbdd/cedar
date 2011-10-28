@@ -23,7 +23,7 @@ describe(@"equality operator matcher", ^{
             __block int expectedValue;
 
             describe(@"and the values are equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 1;
                 });
 
@@ -43,7 +43,7 @@ describe(@"equality operator matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 147;
                 });
 
@@ -67,7 +67,7 @@ describe(@"equality operator matcher", ^{
             __block float expectedValue;
 
             describe(@"and the values are equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 1.0;
                 });
 
@@ -87,7 +87,7 @@ describe(@"equality operator matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 0.87;
                 });
 
@@ -131,7 +131,7 @@ describe(@"equality operator matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSNumber numberWithFloat:1.1];
                 });
 

@@ -96,6 +96,8 @@
 		AE18A7FC13F4601400C8872C /* Contain.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE18A7FA13F4601400C8872C /* Contain.h */; };
 		AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
+		AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
+		AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
 		AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
 		AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
 		AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
@@ -165,6 +167,12 @@
 		AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEC11DC27B800029872 /* CDRExampleStateMapSpec.mm */; };
 		AEEE228711DC2D5800029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FED11DC27B800029872 /* main.m */; };
 		AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FEE11DC27B800029872 /* SlowSpec.m */; };
+		AEF32FF2145A2D79002F93BB /* BeGreaterThan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF32FF4145A2E91002F93BB /* CompareEqual.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF3145A2E91002F93BB /* CompareEqual.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF32FF5145A2EAC002F93BB /* BeGreaterThan.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */; };
+		AEF32FF6145A2ECA002F93BB /* CompareEqual.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF3145A2E91002F93BB /* CompareEqual.h */; };
+		AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF32FF9145A2EDF002F93BB /* CompareGreaterThan.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */; };
 		AEF72F7813EC730700786282 /* CedarComparators.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF72F7913EC732000786282 /* CedarComparators.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; };
 		AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7A13EC734000786282 /* CedarStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -322,6 +330,9 @@
 				AE18A7D413F45BE500C8872C /* ComparatorsBase.h in Copy headers to framework */,
 				AE18A7D713F45BFC00C8872C /* ComparatorsContainer.h in Copy headers to framework */,
 				AE18A7FC13F4601400C8872C /* Contain.h in Copy headers to framework */,
+				AEF32FF5145A2EAC002F93BB /* BeGreaterThan.h in Copy headers to framework */,
+				AEF32FF6145A2ECA002F93BB /* CompareEqual.h in Copy headers to framework */,
+				AEF32FF9145A2EDF002F93BB /* CompareGreaterThan.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,6 +391,7 @@
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
 		AE18A7FA13F4601400C8872C /* Contain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contain.h; sourceTree = "<group>"; };
 		AE18A80913F4640600C8872C /* ContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainSpec.mm; sourceTree = "<group>"; };
+		AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGreaterThanSpec.mm; sourceTree = "<group>"; };
 		AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectFailureWithMessage.h; sourceTree = "<group>"; };
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpectFailureWithMessage.m; sourceTree = "<group>"; };
 		AE8C87B213624BD4006C9305 /* BeTruthy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeTruthy.mm; sourceTree = "<group>"; };
@@ -435,6 +447,9 @@
 		AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227611DC2CF900029872 /* iPhoneSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPhoneSpecs-Info.plist"; sourceTree = "<group>"; };
+		AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGreaterThan.h; sourceTree = "<group>"; };
+		AEF32FF3145A2E91002F93BB /* CompareEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareEqual.h; sourceTree = "<group>"; };
+		AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareGreaterThan.h; sourceTree = "<group>"; };
 		AEF72F7713EC730700786282 /* CedarComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarComparators.h; sourceTree = "<group>"; };
 		AEF72F7A13EC734000786282 /* CedarStringifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarStringifiers.h; sourceTree = "<group>"; };
 		AEF72FFB13ECC21E00786282 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
@@ -664,6 +679,8 @@
 			children = (
 				AE18A7D213F45BE500C8872C /* ComparatorsBase.h */,
 				AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */,
+				AEF32FF3145A2E91002F93BB /* CompareEqual.h */,
+				AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */,
 			);
 			path = Comparators;
 			sourceTree = "<group>";
@@ -856,6 +873,7 @@
 				AEF72FFF13ECC21E00786282 /* BeSameInstanceAs.h */,
 				AEF7300013ECC21E00786282 /* BeTruthy.h */,
 				AEF7300113ECC21E00786282 /* Equal.h */,
+				AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -871,6 +889,7 @@
 				AEF7301913ECC4AE00786282 /* EqualSpec.mm */,
 				AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */,
 				AE05D73F1455DA250044D97B /* EqualOperatorSpec.mm */,
+				AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -934,6 +953,9 @@
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
 				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
 				AE18A7FB13F4601400C8872C /* Contain.h in Headers */,
+				AEF32FF2145A2D79002F93BB /* BeGreaterThan.h in Headers */,
+				AEF32FF4145A2E91002F93BB /* CompareEqual.h in Headers */,
+				AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1345,6 +1367,7 @@
 				AEF7302C13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE05D7401455DA250044D97B /* EqualOperatorSpec.mm in Sources */,
+				AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1402,6 +1425,7 @@
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE05D7421455DA250044D97B /* EqualOperatorSpec.mm in Sources */,
+				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

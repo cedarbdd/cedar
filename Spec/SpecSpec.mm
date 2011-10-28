@@ -29,7 +29,7 @@ static NSString *globalValue__;
 SPEC_BEGIN(SpecSpec)
 
 describe(@"Spec", ^ {
-    beforeEach(^ {
+    beforeEach(^{
         //    NSLog(@"=====================> I should run before all specs.");
     });
 
@@ -38,7 +38,7 @@ describe(@"Spec", ^ {
     });
 
     describe(@"a nested spec", ^ {
-        beforeEach(^ {
+        beforeEach(^{
             //      NSLog(@"=====================> I should run only before the nested specs.");
         });
 
@@ -56,7 +56,7 @@ describe(@"Spec", ^ {
     });
 
     context(@"a nested spec (context)", ^ {
-        beforeEach(^ {
+        beforeEach(^{
           //      NSLog(@"=====================> I should run only before the nested specs.");
         });
 

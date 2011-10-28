@@ -5,6 +5,7 @@
 #import "BeCloseTo.h"
 #import "BeSameInstanceAs.h"
 #import "BeInstanceOf.h"
+#import "BeGreaterThan.h"
 
 // Container
 #import "BeEmpty.h"

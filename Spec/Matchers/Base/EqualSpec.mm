@@ -22,7 +22,7 @@ describe(@"equal matcher", ^{
             __block int expectedValue;
 
             describe(@"and the values are equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 1;
                 });
 
@@ -42,7 +42,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 147;
                 });
 
@@ -66,7 +66,7 @@ describe(@"equal matcher", ^{
             __block float expectedValue;
 
             describe(@"and the values are equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 1.0;
                 });
 
@@ -86,7 +86,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = 0.87;
                 });
 
@@ -130,7 +130,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSNumber numberWithFloat:1.1];
                 });
 
@@ -278,7 +278,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
@@ -297,7 +297,6 @@ describe(@"equal matcher", ^{
                 });
             });
         });
-
     });
 
     describe(@"when the actual value is declared as an NSObject *", ^{
@@ -416,7 +415,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
@@ -690,7 +689,7 @@ describe(@"equal matcher", ^{
             });
 
             describe(@"and the values are not equal", ^{
-                beforeEach(^ {
+                beforeEach(^{
                     expectedValue = [NSNumber numberWithInt:someInteger + 1];
                 });
 
