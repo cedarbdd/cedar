@@ -60,8 +60,6 @@
 		96EA1CB0142C6449001A78E0 /* CDROTestRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */; };
 		96EA1CBA142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
 		96EA1CBB142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
-		AE05D7401455DA250044D97B /* EqualOperatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE05D73F1455DA250044D97B /* EqualOperatorSpec.mm */; };
-		AE05D7421455DA250044D97B /* EqualOperatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE05D73F1455DA250044D97B /* EqualOperatorSpec.mm */; };
 		AE0AF56513E9C0E300029396 /* CedarMatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; };
 		AE0AF57D13E9C5B200029396 /* BeInstanceOf.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */; };
@@ -173,8 +171,6 @@
 		AEF32FF6145A2ECA002F93BB /* CompareEqual.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF3145A2E91002F93BB /* CompareEqual.h */; };
 		AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF32FF9145A2EDF002F93BB /* CompareGreaterThan.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */; };
-		AEF33003145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */; };
-		AEF33004145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */; };
 		AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33008145B4E3B002F93BB /* BeGTESpec.mm */; };
 		AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33008145B4E3B002F93BB /* BeGTESpec.mm */; };
 		AEF3300C145B4F75002F93BB /* BeGTE.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF3300B145B4F75002F93BB /* BeGTE.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -387,7 +383,6 @@
 		96EA1CAC142C6449001A78E0 /* CDROTestReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDROTestReporter.h; sourceTree = "<group>"; };
 		96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDROTestRunner.h; sourceTree = "<group>"; };
 		96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpecFailureSpec.mm; sourceTree = "<group>"; };
-		AE05D73F1455DA250044D97B /* EqualOperatorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EqualOperatorSpec.mm; sourceTree = "<group>"; };
 		AE0AF55E13E9C0E300029396 /* CedarMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarMatchers.h; sourceTree = "<group>"; };
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeInstanceOf.mm; sourceTree = "<group>"; };
@@ -457,7 +452,6 @@
 		AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGreaterThan.h; sourceTree = "<group>"; };
 		AEF32FF3145A2E91002F93BB /* CompareEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareEqual.h; sourceTree = "<group>"; };
 		AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareGreaterThan.h; sourceTree = "<group>"; };
-		AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGreaterThanOperatorSpec.mm; sourceTree = "<group>"; };
 		AEF33008145B4E3B002F93BB /* BeGTESpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGTESpec.mm; sourceTree = "<group>"; };
 		AEF3300B145B4F75002F93BB /* BeGTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGTE.h; sourceTree = "<group>"; };
 		AEF72F7713EC730700786282 /* CedarComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarComparators.h; sourceTree = "<group>"; };
@@ -899,9 +893,7 @@
 				AEF7301813ECC4AE00786282 /* BeTruthySpec.mm */,
 				AEF7301913ECC4AE00786282 /* EqualSpec.mm */,
 				AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */,
-				AE05D73F1455DA250044D97B /* EqualOperatorSpec.mm */,
 				AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */,
-				AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */,
 				AEF33008145B4E3B002F93BB /* BeGTESpec.mm */,
 			);
 			path = Base;
@@ -1380,9 +1372,7 @@
 				AEF7302713ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
 				AEF7302C13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */,
-				AE05D7401455DA250044D97B /* EqualOperatorSpec.mm in Sources */,
 				AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
-				AEF33003145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */,
 				AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1440,9 +1430,7 @@
 				AEF7302813ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
-				AE05D7421455DA250044D97B /* EqualOperatorSpec.mm in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
-				AEF33004145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */,
 				AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

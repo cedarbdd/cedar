@@ -53,4 +53,15 @@ namespace Cedar { namespace Matchers {
         return Comparators::compare_greater_than(actualValue, expectedValue_) || Comparators::compare_equal(actualValue, expectedValue_);
     }
 
+#pragma mark operators
+    template<typename T, typename U>
+    bool operator>=(const ActualValue<T> & actualValue, const U & expectedValue) {
+        return actualValue.to >= expectedValue;
+    }
+
+    template<typename T, typename U>
+    bool operator>=(const ActualValueMatchProxy<T> & actualValueMatchProxy, const U & expectedValue) {
+        actualValueMatchProxy(be_gte(expectedValue));
+        return true;
+    }
 }}

@@ -980,4 +980,74 @@ describe(@"equal matcher", ^{
     });
 });
 
+describe(@"== operator matcher", ^{
+    describe(@"when the actual value is equal to the expected value", ^{
+        it(@"should pass", ^{
+            expect(1) == 1;
+        });
+    });
+
+    describe(@"when the actual value is not equal to the expected value", ^{
+        it(@"should fail with a sensible failure message", ^{
+            expectFailureWithMessage(@"Expected <1> to equal <10>", ^{
+                expect(1) == 10;
+            });
+        });
+    });
+
+    describe(@"with and without 'to'", ^{
+        int actualValue = 1, expectedValue = 1;
+
+        describe(@"positive match", ^{
+            it(@"should pass", ^{
+                expect(actualValue) == expectedValue;
+                expect(actualValue).to == expectedValue;
+            });
+        });
+
+        describe(@"negative match", ^{
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage(@"Expected <1> to not equal <1>", ^{
+                    expect(actualValue).to_not == expectedValue;
+                });
+            });
+        });
+    });
+});
+
+describe(@"!= operator matcher", ^{
+    describe(@"when the actual value is equal to the expected value", ^{
+        it(@"should fail with a sensible failure message", ^{
+            expectFailureWithMessage(@"Expected <1> to not equal <1>", ^{
+                expect(1) != 1;
+            });
+        });
+    });
+
+    describe(@"when the actual value is not equal to the expected value", ^{
+        it(@"should pass", ^{
+            expect(1) != 10;
+        });
+    });
+
+    describe(@"with and without 'to'", ^{
+        int actualValue = 1, expectedValue = 10;
+
+        describe(@"positive match", ^{
+            it(@"should pass", ^{
+                expect(actualValue) != expectedValue;
+                expect(actualValue).to != expectedValue;
+            });
+        });
+
+        describe(@"negative match", ^{
+            it(@"should fail with a sensible failure message (despite the double negative)", ^{
+                expectFailureWithMessage(@"Expected <1> to equal <10>", ^{
+                    expect(actualValue).to_not != expectedValue;
+                });
+            });
+        });
+    });
+});
+
 SPEC_END
