@@ -7,6 +7,7 @@
 #import "BeInstanceOf.h"
 #import "BeGreaterThan.h"
 #import "BeGTE.h"
+#import "BeLessThan.h"
 
 // Container
 #import "BeEmpty.h"
