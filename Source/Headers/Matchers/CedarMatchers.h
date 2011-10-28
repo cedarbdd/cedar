@@ -6,6 +6,7 @@
 #import "BeSameInstanceAs.h"
 #import "BeInstanceOf.h"
 #import "BeGreaterThan.h"
+#import "BeGTE.h"
 
 // Container
 #import "BeEmpty.h"

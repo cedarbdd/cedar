@@ -175,6 +175,10 @@
 		AEF32FF9145A2EDF002F93BB /* CompareGreaterThan.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */; };
 		AEF33003145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */; };
 		AEF33004145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */; };
+		AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33008145B4E3B002F93BB /* BeGTESpec.mm */; };
+		AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33008145B4E3B002F93BB /* BeGTESpec.mm */; };
+		AEF3300C145B4F75002F93BB /* BeGTE.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF3300B145B4F75002F93BB /* BeGTE.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF3300D145B4F75002F93BB /* BeGTE.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF3300B145B4F75002F93BB /* BeGTE.h */; };
 		AEF72F7813EC730700786282 /* CedarComparators.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF72F7913EC732000786282 /* CedarComparators.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; };
 		AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7A13EC734000786282 /* CedarStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -335,6 +339,7 @@
 				AEF32FF5145A2EAC002F93BB /* BeGreaterThan.h in Copy headers to framework */,
 				AEF32FF6145A2ECA002F93BB /* CompareEqual.h in Copy headers to framework */,
 				AEF32FF9145A2EDF002F93BB /* CompareGreaterThan.h in Copy headers to framework */,
+				AEF3300D145B4F75002F93BB /* BeGTE.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +458,8 @@
 		AEF32FF3145A2E91002F93BB /* CompareEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareEqual.h; sourceTree = "<group>"; };
 		AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareGreaterThan.h; sourceTree = "<group>"; };
 		AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGreaterThanOperatorSpec.mm; sourceTree = "<group>"; };
+		AEF33008145B4E3B002F93BB /* BeGTESpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGTESpec.mm; sourceTree = "<group>"; };
+		AEF3300B145B4F75002F93BB /* BeGTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGTE.h; sourceTree = "<group>"; };
 		AEF72F7713EC730700786282 /* CedarComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarComparators.h; sourceTree = "<group>"; };
 		AEF72F7A13EC734000786282 /* CedarStringifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarStringifiers.h; sourceTree = "<group>"; };
 		AEF72FFB13ECC21E00786282 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
@@ -877,6 +884,7 @@
 				AEF7300013ECC21E00786282 /* BeTruthy.h */,
 				AEF7300113ECC21E00786282 /* Equal.h */,
 				AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */,
+				AEF3300B145B4F75002F93BB /* BeGTE.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -894,6 +902,7 @@
 				AE05D73F1455DA250044D97B /* EqualOperatorSpec.mm */,
 				AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */,
 				AEF33002145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm */,
+				AEF33008145B4E3B002F93BB /* BeGTESpec.mm */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -960,6 +969,7 @@
 				AEF32FF2145A2D79002F93BB /* BeGreaterThan.h in Headers */,
 				AEF32FF4145A2E91002F93BB /* CompareEqual.h in Headers */,
 				AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */,
+				AEF3300C145B4F75002F93BB /* BeGTE.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,6 +1383,7 @@
 				AE05D7401455DA250044D97B /* EqualOperatorSpec.mm in Sources */,
 				AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AEF33003145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */,
+				AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1432,6 +1443,7 @@
 				AE05D7421455DA250044D97B /* EqualOperatorSpec.mm in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AEF33004145B37C9002F93BB /* BeGreaterThanOperatorSpec.mm in Sources */,
+				AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
