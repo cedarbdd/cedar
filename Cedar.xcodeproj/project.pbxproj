@@ -179,6 +179,10 @@
 		AEF33017145B6222002F93BB /* BeLessThan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF33016145B6222002F93BB /* BeLessThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF33018145B6222002F93BB /* BeLessThan.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF33016145B6222002F93BB /* BeLessThan.h */; };
 		AEF3301C145B62E9002F93BB /* BeLessThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33012145B6188002F93BB /* BeLessThanSpec.mm */; };
+		AEF3301E145B68D7002F93BB /* BeLTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF3301D145B68D7002F93BB /* BeLTESpec.mm */; };
+		AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF3301D145B68D7002F93BB /* BeLTESpec.mm */; };
+		AEF33021145B69DE002F93BB /* BeLTE.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF33020145B69DE002F93BB /* BeLTE.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF33022145B69DE002F93BB /* BeLTE.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF33020145B69DE002F93BB /* BeLTE.h */; };
 		AEF72F7813EC730700786282 /* CedarComparators.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF72F7913EC732000786282 /* CedarComparators.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; };
 		AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7A13EC734000786282 /* CedarStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -341,6 +345,7 @@
 				AEF32FF9145A2EDF002F93BB /* CompareGreaterThan.h in Copy headers to framework */,
 				AEF3300D145B4F75002F93BB /* BeGTE.h in Copy headers to framework */,
 				AEF33018145B6222002F93BB /* BeLessThan.h in Copy headers to framework */,
+				AEF33022145B69DE002F93BB /* BeLTE.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +466,8 @@
 		AEF3300B145B4F75002F93BB /* BeGTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGTE.h; sourceTree = "<group>"; };
 		AEF33012145B6188002F93BB /* BeLessThanSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeLessThanSpec.mm; sourceTree = "<group>"; };
 		AEF33016145B6222002F93BB /* BeLessThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeLessThan.h; sourceTree = "<group>"; };
+		AEF3301D145B68D7002F93BB /* BeLTESpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeLTESpec.mm; sourceTree = "<group>"; };
+		AEF33020145B69DE002F93BB /* BeLTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeLTE.h; sourceTree = "<group>"; };
 		AEF72F7713EC730700786282 /* CedarComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarComparators.h; sourceTree = "<group>"; };
 		AEF72F7A13EC734000786282 /* CedarStringifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarStringifiers.h; sourceTree = "<group>"; };
 		AEF72FFB13ECC21E00786282 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
@@ -887,6 +894,7 @@
 				AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */,
 				AEF3300B145B4F75002F93BB /* BeGTE.h */,
 				AEF33016145B6222002F93BB /* BeLessThan.h */,
+				AEF33020145B69DE002F93BB /* BeLTE.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -904,6 +912,7 @@
 				AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */,
 				AEF33008145B4E3B002F93BB /* BeGTESpec.mm */,
 				AEF33012145B6188002F93BB /* BeLessThanSpec.mm */,
+				AEF3301D145B68D7002F93BB /* BeLTESpec.mm */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -972,6 +981,7 @@
 				AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */,
 				AEF3300C145B4F75002F93BB /* BeGTE.h in Headers */,
 				AEF33017145B6222002F93BB /* BeLessThan.h in Headers */,
+				AEF33021145B69DE002F93BB /* BeLTE.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1385,6 +1395,7 @@
 				AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				AEF3301C145B62E9002F93BB /* BeLessThanSpec.mm in Sources */,
+				AEF3301E145B68D7002F93BB /* BeLTESpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1444,6 +1455,7 @@
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				AEF33015145B6188002F93BB /* BeLessThanSpec.mm in Sources */,
+				AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 #import "BeGreaterThan.h"
 #import "BeGTE.h"
 #import "BeLessThan.h"
+#import "BeLTE.h"
 
 // Container
 #import "BeEmpty.h"
