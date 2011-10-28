@@ -321,6 +321,90 @@ You can tell Cedar which reporter to use by setting `CEDAR_REPORTER_CLASS` env
 variable to your custom reporter class name.
 
 
+## OCUnit Support (new, not battle tested)
+
+We encourage you to use Cedar without OCUnit as described in the 'Usage' section
+above to avoid several OCUnit imposed limitations; however, if for some reason
+you choose to use OCUnit, Cedar does support it.  You can find example
+application that uses Cedar with OCUnit in OCUnitApp, OCUnitAppTests and
+OCUnitAppLogicTests directories.  Also Rakefile contains two useful rake tasks
+`ocunit:logic` and `ocunit:application` that let you run OCUnit tests from the
+command line.
+
+
+### OCUnit Logic Tests
+
+* Create new "Cocoa Touch Unit Testing Bundle" target in your project.
+  Name it LogicSpecs.
+* Build the Cedar framework.
+* Add the Cedar framework to your project, and link your LogicSpecs
+  target with it.
+* Add `-ObjC`, `-all_load` and `-lstdc++` to the Other Linker Flags build setting for the
+  LogicSpecs target.
+* Write your specs and include them in LogicSpecs target.  A spec file need not have
+  a header file, and looks like this:
+
+        #import <Cedar/SpecHelper.h>
+
+        SPEC_BEGIN(FooSpec)
+        describe(@"Foo", ^{
+          beforeEach(^{
+            ...
+          });
+
+          it(@"should do something", ^{
+            ...
+          });
+        });
+        SPEC_END
+
+* Build LogicSpecs and run them in test mode (click and hold Run and select
+  Test).  You should see specs result output in the console window.
+
+In addition to running logic tests in Xcode you can also run them from the
+command line.  To do so first copy Rakefile to your project and update
+`PROJECT_NAME`, `APP_NAME` and `OCUNIT_LOGIC_SPECS_TARGET_NAME` constants in it.
+ Run your tests with `rake ocunit:logic`.
+
+
+### OCUnit Application Tests
+
+* If you are creating new project just check "Include Unit Tests" option.  If
+  you want to add application tests to an existing application here is a [good
+  tutorial](http://twobitlabs.com/2011/06/adding-ocunit-to-an-existing-ios-project-with-xcode-4/).
+  Name your target ApplicationSpecs (or if you used "Include Unit Tests"
+  option Xcode will create target for you named [AppName]Tests.)
+* Build the Cedar-iPhone static framework.
+* Add the Cedar-iPhone static framework to your project, and link
+  ApplicationSpecs target with it.
+* Add `-ObjC`, `-all_load` and `-lstdc++` to the Other Linker Flags build setting for the
+  ApplicationSpecs target.
+* Write your specs and include them in ApplicationSpecs target.  A spec file
+  need not have a header file, and looks like this:
+
+        #import <Cedar/SpecHelper.h>
+
+        SPEC_BEGIN(FooSpec)
+        describe(@"Foo", ^{
+          beforeEach(^{
+            ...
+          });
+
+          it(@"should do something", ^{
+            ...
+          });
+        });
+        SPEC_END
+
+* Build ApplicationSpecs and run them in test mode (click and hold Run and
+  select Test).  You should see specs result output in the console window.
+
+In addition to running application tests in Xcode you can also run them from the
+command line.  To do so first copy Rakefile to your project and update
+`PROJECT_NAME`, `APP_NAME` and `OCUNIT_APPLICATION_SPECS_TARGET_NAME` constants
+in it.  Run your tests with `rake ocunit:application`.
+
+
 ## Code Snippets
 
 Xcode 4 has replaced text macros with code snippets.  If you're still using Xcode 3,
