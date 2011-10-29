@@ -29,7 +29,7 @@ BDD-style testing using Objective-C
         #import <Cedar/Cedar.h>
 
         int main (int argc, const char *argv[]) {
-          return runAllSpecs();
+          return runSpecs();
         }
 
 * Write your specs.  Cedar provides the SpecHelper.h file with some minimal
@@ -134,23 +134,21 @@ Here is a list of built-in matchers you can use:
     expect(...).to(contain(@"something"));
     expect(...).to(be_empty());
 
+These matchers use C++ templates for type deduction.  You'll need to do two things to use them:
+
+* Change the file extension for each of your spec files from .m to .mm (this will tell the
+compiler that the file contains C++ code).
+
+* Add the following line to the top of your spec files, after the file includes:
+
+    using namespace Cedar::Matchers;
+
 It's also theoretically very easy to add your own matchers without modifying the
-Cedar library (more on this later).  To start using these matchers in your spec
-file place `using namespace Cedar::Matchers;` before SPEC_BEGIN declaration
-and change that spec file's extension from .m to .mm.
+Cedar library (more on this later).
 
-This matcher library is new, and not hardly battle-hardened.  It also breaks Apple's GCC compiler,
-and versions 2.0 and older of the LLVM compiler (this translates to any compiler shipped with a
-version of Xcode before 4.1).  Fortunately, LLVM 2.1 fixes the issues.  If you'd prefer a more 
-stable matcher library, you can still easily use [OCHamcrest](http://code.google.com/p/hamcrest/).
-Build and link the Hamcrest framework by following their instructions, and add the following at
-the top of your spec files:
-
-    #define HC_SHORTHAND
-    #import <OCHamcrest/OCHamcrest.h>
-
-Pivotal also has a fork of a [GitHub import of the OCHamcrest codebase](http://github.com/pivotal/OCHamcrest).
-This fork contains our iPhone-specific static framework target.
+These matchers will break Apple's GCC compiler, and versions 2.0 and older of the LLVM compiler
+(this translates to any compiler shipped with a version of Xcode before 4.1).  Fortunately, 
+LLVM 2.1 fixes the issues.
 
 Note: If you decide to use another matcher library that uses `expect(...)` to
 build its expectations (e.g. [Expecta](http://github.com/petejkim/expecta)) you

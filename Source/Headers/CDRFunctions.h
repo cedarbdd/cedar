@@ -4,6 +4,7 @@
 
 Class CDRReporterClassFromEnv(const char *defaultReporterClassName);
 
-int runAllSpecs();
-int runAllSpecsWithCustomExampleReporter(id<CDRExampleReporter> runner);
-int runSpecsWithCustomExampleReporter(NSArray *specClasses, id<CDRExampleReporter> runner);
+int runSpecs();
+int runAllSpecs() __attribute__((deprecated));
+int runSpecsWithCustomExampleReporter(id<CDRExampleReporter> runner);
+NSArray *specClassesToRun();

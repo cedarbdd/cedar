@@ -16,7 +16,7 @@ void runTests(id self, SEL _cmd, id ignored) {
     }
 
     id<CDRExampleReporter> reporter = [[[reporterClass alloc] init] autorelease];
-    int result = runSpecsWithCustomExampleReporter(NULL, reporter);
+    int result = runSpecsWithCustomExampleReporter(reporter);
 
     // otest always returns 0 as its exit code even if any test fails;
     // we need to forcibly exit with correct exit code to make CI happy.

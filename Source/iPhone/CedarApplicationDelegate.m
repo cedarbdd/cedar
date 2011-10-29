@@ -13,7 +13,7 @@ void runSpecsWithinUIApplication() {
         exitStatus = -999;
     } else {
         id<CDRExampleReporter> reporter = [[[reporterClass alloc] init] autorelease];
-        exitStatus = runSpecsWithCustomExampleReporter(NULL, reporter);
+        exitStatus = runSpecsWithCustomExampleReporter(reporter);
     }
 
     UIApplication *application = [UIApplication sharedApplication];
