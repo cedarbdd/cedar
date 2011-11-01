@@ -30,6 +30,18 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return compare_equal(static_cast<NSString * const>(actualValue), expectedValue);
     }
 
+#pragma mark NSArray
+    template<typename U>
+    bool compare_equal(NSArray * const actualValue, const U & expectedValue) {
+        return compare_equal(static_cast<const id &>(actualValue), expectedValue);
+    }    
+
+#pragma mark NSMutableArray
+    template<typename U>
+    bool compare_equal(NSMutableArray * const actualValue, const U & expectedValue) {
+        return compare_equal(static_cast<const id &>(actualValue), expectedValue);
+    }
+
 #pragma mark NSNumber
     inline bool compare_equal(NSNumber * const actualValue, NSNumber * const expectedValue) {
         return [actualValue isEqualToNumber:expectedValue];

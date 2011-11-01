@@ -978,6 +978,187 @@ describe(@"equal matcher", ^{
             });
         });
     });
+
+    describe(@"when the actual value is declared as an NSArray *", ^{
+        NSString *arrayContents = @"Hello";
+        NSArray *actualArray = [NSArray arrayWithObject:arrayContents];
+        
+        describe(@"and the expected value is declared as an NSObject *", ^{
+            __block NSObject *expectedArray;
+            
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedArray = [[actualArray mutableCopy] autorelease];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to(equal(expectedArray));
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to not equal <(\n    Hello\n)>", ^{
+                            expect(actualArray).to_not(equal(expectedArray));
+                        });
+                    });
+                });
+            });
+            
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedArray = [NSArray arrayWithObject:@"goodbye"];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to equal <(\n    goodbye\n)>", ^{
+                            expect(actualArray).to(equal(expectedArray));
+                        });
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to_not(equal(expectedArray));
+                    });
+                });
+            });
+        });
+        
+        describe(@"and the expected value is declared as an id", ^{
+            __block id expectedArray;
+            
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedArray = [[actualArray mutableCopy] autorelease];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to(equal(expectedArray));
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to not equal <(\n    Hello\n)>", ^{
+                            expect(actualArray).to_not(equal(expectedArray));
+                        });
+                    });
+                });
+            });
+            
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedArray = [NSArray arrayWithObject:@"goodbye"];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to equal <(\n    goodbye\n)>", ^{
+                            expect(actualArray).to(equal(expectedArray));
+                        });
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to_not(equal(expectedArray));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSArray *", ^{
+            __block NSArray *expectedArray;
+            
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedArray = [[actualArray mutableCopy] autorelease];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to(equal(expectedArray));
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to not equal <(\n    Hello\n)>", ^{
+                            expect(actualArray).to_not(equal(expectedArray));
+                        });
+                    });
+                });
+            });
+            
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedArray = [NSArray arrayWithObject:@"goodbye"];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to equal <(\n    goodbye\n)>", ^{
+                            expect(actualArray).to(equal(expectedArray));
+                        });
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to_not(equal(expectedArray));
+                    });
+                });
+            });
+        });
+        
+        describe(@"and the expected value is declared as an NSMutableArray *", ^{
+            __block NSMutableArray *expectedArray;
+            
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedArray = [[actualArray mutableCopy] autorelease];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to(equal(expectedArray));
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to not equal <(\n    Hello\n)>", ^{
+                            expect(actualArray).to_not(equal(expectedArray));
+                        });
+                    });
+                });
+            });
+            
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedArray = [NSArray arrayWithObject:@"goodbye"];
+                });
+                
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(\n    Hello\n)> to equal <(\n    goodbye\n)>", ^{
+                            expect(actualArray).to(equal(expectedArray));
+                        });
+                    });
+                });
+                
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualArray).to_not(equal(expectedArray));
+                    });
+                });
+            });
+        });
+    });
 });
 
 describe(@"== operator matcher", ^{
