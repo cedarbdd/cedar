@@ -137,11 +137,10 @@ Here is a list of built-in matchers you can use:
 These matchers use C++ templates for type deduction.  You'll need to do two things to use them:
 
 * Change the file extension for each of your spec files from .m to .mm (this will tell the
-compiler that the file contains C++ code).
-
+  compiler that the file contains C++ code).
 * Add the following line to the top of your spec files, after the file includes:
 
-    using namespace Cedar::Matchers;
+        using namespace Cedar::Matchers;
 
 It's also theoretically very easy to add your own matchers without modifying the
 Cedar library (more on this later).
@@ -155,6 +154,11 @@ build its expectations (e.g. [Expecta](http://github.com/petejkim/expecta)) you
 will need to add `#define CEDAR_MATCHERS_COMPATIBILITY_MODE` before importing
 SpecHelper.h.  That will prevent Cedar from defining a macro that overrides that
 library's expect function.
+
+Note: If you prefer RSpec's `should` syntax you can write your expectations as follows:
+
+        1 + 2 should equal(3);
+        glass should_not be_empty();
 
 
 ## Shared example groups
