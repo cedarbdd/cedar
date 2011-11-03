@@ -72,6 +72,7 @@
         [self pushStatusViewForExamples:[selectedExample examples]];
     } else {
         CDRExampleDetailsViewController * exampleDetailsController = [[CDRExampleDetailsViewController alloc] initWithExample:selectedExample];
+        exampleDetailsController.completion = ^{ [self dismissModalViewControllerAnimated:YES]; };
         exampleDetailsController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:exampleDetailsController animated:YES];
         [exampleDetailsController release];

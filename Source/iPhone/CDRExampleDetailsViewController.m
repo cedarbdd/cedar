@@ -14,6 +14,8 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 
 @implementation CDRExampleDetailsViewController
 
+@synthesize completion = _completion;
+
 - (id)initWithExample:(CDRExampleBase *)example {
     if (self = [super init]) {
         example_ = [example retain];
@@ -22,6 +24,7 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 }
 
 - (void)dealloc {
+    [completion_ release];
     [example_ release];
     [self viewDidUnload];
     [super dealloc];
@@ -57,8 +60,10 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 }
 
 #pragma mark Target actions
-- (void)closeWindow {
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
+- (void)complete {
+    if (self.completion)
+        self.completion();
+    self.completion = nil;
 }
 
 #pragma mark Private interface
@@ -72,7 +77,7 @@ static const float TEXT_LABEL_MARGIN = 20.0;
     [navigationBar pushNavigationItem:navigationItem animated:NO];
     [navigationItem release];
 
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeWindow)];
+    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(complete)];
     navigationItem.rightBarButtonItem = closeButton;
     [closeButton release];
 
