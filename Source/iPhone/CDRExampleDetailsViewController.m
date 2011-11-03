@@ -2,7 +2,10 @@
 #import "CDRExampleBase.h"
 #import "CDRExampleStateMap.h"
 
-@interface CDRExampleDetailsViewController (Private)
+@interface CDRExampleDetailsViewController ()
+
+@property (nonatomic, retain) CDRExampleBase *example;
+
 - (UINavigationBar *)addNavigationBar;
 - (CGRect)navigationBarFrame;
 - (UILabel *)addLabelWithText:(NSString *)text;
@@ -14,16 +17,22 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 
 @implementation CDRExampleDetailsViewController
 
+@synthesize navigationBar = navigationBar_, fullTextLabel = fullTextLabel_, messageLabel = messageLabel_, example = example_;
+
 - (id)initWithExample:(CDRExampleBase *)example {
-    if (self = [super init]) {
-        example_ = [example retain];
+    if ((self = [super init])) {
+        self.example = example;
     }
     return self;
 }
 
+- (id)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (void)dealloc {
     [example_ release];
-    [self viewDidUnload];
     [super dealloc];
 }
 
@@ -32,18 +41,14 @@ static const float TEXT_LABEL_MARGIN = 20.0;
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
-    navigationBar_ = [self addNavigationBar];
-    fullTextLabel_ = [self addLabelWithText:[(id)example_ fullText]];
-    messageLabel_ = [self addLabelWithText:[example_ message]];
+    self.navigationBar = [self addNavigationBar];
+    self.fullTextLabel = [self addLabelWithText:[(id)self.example fullText]];
+    self.messageLabel = [self addLabelWithText:[self.example message]];
     [self positionAndSizeLabels];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
-    navigationBar_.frame = [self navigationBarFrame];
+    self.navigationBar.frame = [self navigationBarFrame];
     [self positionAndSizeLabels];
 }
 
@@ -52,29 +57,26 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    navigationBar_.frame = [self navigationBarFrame];
+    self.navigationBar.frame = [self navigationBarFrame];
     [self positionAndSizeLabels];
 }
 
 #pragma mark Target actions
 - (void)closeWindow {
-    [self.parentViewController dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark Private interface
 - (UINavigationBar *)addNavigationBar {
-    UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:[self navigationBarFrame]];
+    UINavigationBar *navigationBar = [[[UINavigationBar alloc] initWithFrame:[self navigationBarFrame]] autorelease];
     [self.view addSubview:navigationBar];
-    [navigationBar release];
 
-    NSString *stateName = [[CDRExampleStateMap stateMap] descriptionForState:example_.state];
-    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:stateName];
+    NSString *stateName = [[CDRExampleStateMap stateMap] descriptionForState:self.example.state];
+    UINavigationItem *navigationItem = [[[UINavigationItem alloc] initWithTitle:stateName] autorelease];
     [navigationBar pushNavigationItem:navigationItem animated:NO];
-    [navigationItem release];
 
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeWindow)];
+    UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeWindow)] autorelease];
     navigationItem.rightBarButtonItem = closeButton;
-    [closeButton release];
 
     return navigationBar;
 }
@@ -84,18 +86,17 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 }
 
 - (UILabel *)addLabelWithText:(NSString *)text {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
     label.numberOfLines = 0;
     label.text = text;
     [self.view addSubview:label];
-    [label release];
 
     return label;
 }
 
 - (void)positionAndSizeLabels {
-    [self minimizeFrameRectForLabel:fullTextLabel_ withTop:navigationBar_.bounds.size.height andBottom:self.view.bounds.size.height / 2];
-    [self minimizeFrameRectForLabel:messageLabel_ withTop:fullTextLabel_.frame.origin.y + fullTextLabel_.frame.size.height andBottom:self.view.bounds.size.height];
+    [self minimizeFrameRectForLabel:self.fullTextLabel withTop:self.navigationBar.bounds.size.height andBottom:self.view.bounds.size.height / 2];
+    [self minimizeFrameRectForLabel:self.messageLabel withTop:self.fullTextLabel.frame.origin.y + self.fullTextLabel.frame.size.height andBottom:self.view.bounds.size.height];
 }
 
 - (void)minimizeFrameRectForLabel:(UILabel *)label withTop:(float)top andBottom:(float)bottom {

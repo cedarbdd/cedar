@@ -2,11 +2,10 @@
 
 @class CDRExampleBase;
 
-@interface CDRExampleDetailsViewController : UIViewController {
-    CDRExampleBase *example_;
-    UINavigationBar *navigationBar_;
-    UILabel *fullTextLabel_, *messageLabel_;
-}
+@interface CDRExampleDetailsViewController : UIViewController
+
+@property (nonatomic, assign) UINavigationBar *navigationBar;
+@property (nonatomic, assign) UILabel *fullTextLabel, *messageLabel;
 
 - (id)initWithExample:(CDRExampleBase *)example;
 
