@@ -17,8 +17,8 @@ namespace Cedar { namespace Matchers {
         return negate ? actualValue.to_not : actualValue.to;
     }
 
-    template<typename T, typename Matcher>
-    void operator,(const ActualValueMatchProxy<T> & matchProxy, const Matcher & matcher) {
+    template<typename T, typename MatcherType>
+    void operator,(const ActualValueMatchProxy<T> & matchProxy, const MatcherType & matcher) {
         matchProxy(matcher);
     }
 
