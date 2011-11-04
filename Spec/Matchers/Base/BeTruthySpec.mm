@@ -104,4 +104,22 @@ describe(@"be_truthy matcher", ^{
     });
 });
 
+describe(@"be_truthy shorthand syntax (no parenthesis)", ^{
+    BOOL value = YES;
+
+    describe(@"positive match", ^{
+        it(@"should should pass", ^{
+            expect(value).to(be_truthy);
+        });
+    });
+
+    describe(@"negative match", ^{
+        it(@"should fail with a sensible failure message", ^{
+            expectFailureWithMessage(@"Expected <YES> to not evaluate to true", ^{
+                expect(value).to_not(be_truthy);
+            });
+        });
+    });
+});
+
 SPEC_END

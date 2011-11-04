@@ -364,4 +364,22 @@ describe(@"be_empty matcher", ^{
     });
 });
 
+describe(@"be_empty shorthand syntax (no parenthesis)", ^{
+    NSArray *container = [NSArray array];
+
+    describe(@"positive match", ^{
+        it(@"should should pass", ^{
+            expect(container).to(be_empty);
+        });
+    });
+
+    describe(@"negative match", ^{
+        it(@"should fail with a sensible failure message", ^{
+            expectFailureWithMessage(@"Expected <(\n)> to not be empty", ^{
+                expect(container).to_not(be_empty);
+            });
+        });
+    });
+});
+
 SPEC_END

@@ -12,12 +12,13 @@ namespace Cedar { namespace Matchers {
         // Allow default copy ctor.
 
         virtual NSString * failure_message_end() const;
+        const BeTruthy & operator()() const;
 
         template<typename U>
         bool matches(const U &) const;
     };
 
-    BeTruthy be_truthy();
+    static const BeTruthy be_truthy = BeTruthy();
 
 #pragma mark Generic
     template<typename U>
