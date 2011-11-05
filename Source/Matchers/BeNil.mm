@@ -2,8 +2,9 @@
 
 namespace Cedar { namespace Matchers {
 
-    BeNil be_nil() {
-        return BeNil();
+    // For backwards compatible parenthesis syntax
+    const BeNil & BeNil::operator()() const {
+        return *this;
     }
 
     BeNil::BeNil() : Base() {

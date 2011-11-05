@@ -116,4 +116,22 @@ describe(@"be_nil matcher", ^{
     });
 });
 
+describe(@"be_nil shorthand syntax (no parenthesis)", ^{
+    void *value = NULL;
+
+    describe(@"positive match", ^{
+        it(@"should should pass", ^{
+            expect(value).to(be_nil);
+        });
+    });
+
+    describe(@"negative match", ^{
+        it(@"should fail with a sensible failure message", ^{
+            expectFailureWithMessage(@"Expected <0> to not be nil", ^{
+                expect(value).to_not(be_nil);
+            });
+        });
+    });
+});
+
 SPEC_END

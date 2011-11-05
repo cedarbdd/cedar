@@ -13,6 +13,7 @@ namespace Cedar { namespace Matchers {
         // Allow default copy ctor.
 
         virtual NSString * failure_message_end() const;
+        const BeNil & operator()() const;
 
         template<typename U>
         bool matches(const U &) const;
@@ -21,7 +22,7 @@ namespace Cedar { namespace Matchers {
         bool matches(U * const &) const;
     };
 
-    BeNil be_nil();
+    static const BeNil be_nil = BeNil();
 
 #pragma mark Generic
     template<typename U>
