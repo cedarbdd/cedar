@@ -8,7 +8,8 @@ void expectFailureWithMessage(NSString *message, CDRSpecBlock block) {
     }
     @catch (CDRSpecFailure *x) {
         if (![message isEqualToString:x.reason]) {
-            fail([NSString stringWithFormat:@"Expected failure message: <%@> but received failure message <%@>", message, x.reason]);
+            NSString *reason = [NSString stringWithFormat:@"Expected failure message: <%@> but received failure message <%@>", message, x.reason];
+            [[CDRSpecFailure specFailureWithReason:reason fileName:x.fileName lineNumber:x.lineNumber] raise];
         }
         return;
     }
