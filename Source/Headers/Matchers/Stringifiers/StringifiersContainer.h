@@ -38,31 +38,4 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     NSString * string_for(const typename std::set<T> & container) {
         return [NSString stringWithFormat:@"{(%@\n)}", comma_and_newline_delimited_list(container)];
     }
-
-#pragma mark NSArray
-    inline NSString * string_for(NSArray * const container) {
-        return [container description];
-    }
-
-    inline NSString * string_for(NSMutableArray * const container) {
-        return string_for(static_cast<NSArray * const>(container));
-    }
-
-#pragma mark NSDictionary
-    inline NSString * string_for(NSDictionary * const container) {
-        return [container description];
-    }
-
-    inline NSString * string_for(NSMutableDictionary * const container) {
-        return string_for(static_cast<NSDictionary * const>(container));
-    }
-
-#pragma mark NSSet
-    inline NSString * string_for(NSSet * const container) {
-        return [container description];
-    }
-
-    inline NSString * string_for(NSMutableSet * const container) {
-        return string_for(static_cast<NSSet * const>(container));
-    }
 }}}

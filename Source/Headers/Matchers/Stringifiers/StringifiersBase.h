@@ -14,6 +14,10 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         return string_for(static_cast<const int>(value));
     }
 
+    inline NSString * string_for(const Class & value) {
+        return NSStringFromClass(value);
+    }
+
     inline NSString * string_for(const BOOL value) {
         return value ? @"YES" : @"NO";
     }
