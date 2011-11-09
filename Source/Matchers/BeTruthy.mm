@@ -2,8 +2,9 @@
 
 namespace Cedar { namespace Matchers {
 
-    BeTruthy be_truthy() {
-        return BeTruthy();
+    // For backwards compatible parenthesis syntax
+    const BeTruthy & BeTruthy::operator()() const {
+        return *this;
     }
 
     BeTruthy::BeTruthy() : Base() {
