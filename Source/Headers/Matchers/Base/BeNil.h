@@ -8,18 +8,20 @@ namespace Cedar { namespace Matchers {
         BeNil & operator=(const BeNil &);
 
     public:
-        BeNil();
-        ~BeNil();
+        inline BeNil() : Base() {}
+        inline ~BeNil() {}
         // Allow default copy ctor.
 
-        virtual NSString * failure_message_end() const;
-        const BeNil & operator()() const;
+        inline const BeNil & operator()() const { return *this; }
 
         template<typename U>
         bool matches(const U &) const;
 
         template<typename U>
         bool matches(U * const &) const;
+
+    protected:
+        inline /*virtual*/ NSString * failure_message_end() const { return @"be nil"; }
     };
 
     static const BeNil be_nil = BeNil();

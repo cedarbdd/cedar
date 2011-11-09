@@ -103,12 +103,8 @@
 		AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
 		AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
 		AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
-		AE8C87B313624BD4006C9305 /* BeTruthy.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B213624BD4006C9305 /* BeTruthy.mm */; };
-		AE8C87B413624BD4006C9305 /* BeTruthy.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B213624BD4006C9305 /* BeTruthy.mm */; };
 		AE8C87BB13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
 		AE8C87BC13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
-		AE8C87E4136265C4006C9305 /* BeNil.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E2136265C4006C9305 /* BeNil.mm */; };
-		AE8C880D13626D2F006C9305 /* BeNil.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87E2136265C4006C9305 /* BeNil.mm */; };
 		AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
 		AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
@@ -413,9 +409,7 @@
 		AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouldSyntax.h; sourceTree = "<group>"; };
 		AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectFailureWithMessage.h; sourceTree = "<group>"; };
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpectFailureWithMessage.m; sourceTree = "<group>"; };
-		AE8C87B213624BD4006C9305 /* BeTruthy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeTruthy.mm; sourceTree = "<group>"; };
 		AE8C87B813625239006C9305 /* Base.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Base.mm; sourceTree = "<group>"; };
-		AE8C87E2136265C4006C9305 /* BeNil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeNil.mm; sourceTree = "<group>"; };
 		AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecFailure.h; sourceTree = "<group>"; };
 		AE8C881113626FE6006C9305 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
@@ -834,8 +828,6 @@
 			isa = PBXGroup;
 			children = (
 				AE8C87B813625239006C9305 /* Base.mm */,
-				AE8C87B213624BD4006C9305 /* BeTruthy.mm */,
-				AE8C87E2136265C4006C9305 /* BeNil.mm */,
 				AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */,
 			);
 			path = Matchers;
@@ -1373,9 +1365,7 @@
 				AEEE201111DC27B800029872 /* SpecHelper.m in Sources */,
 				AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */,
 				AEC9DEEE12C2CC7E0039512D /* CDRColorizedReporter.m in Sources */,
-				AE8C87B313624BD4006C9305 /* BeTruthy.mm in Sources */,
 				AE8C87BB13625239006C9305 /* Base.mm in Sources */,
-				AE8C87E4136265C4006C9305 /* BeNil.mm in Sources */,
 				AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 				4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
 				AE0AF57D13E9C5B200029396 /* BeInstanceOf.mm in Sources */,
@@ -1432,9 +1422,7 @@
 				AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */,
 				AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */,
 				AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */,
-				AE8C87B413624BD4006C9305 /* BeTruthy.mm in Sources */,
 				AE8C87BC13625239006C9305 /* Base.mm in Sources */,
-				AE8C880D13626D2F006C9305 /* BeNil.mm in Sources */,
 				AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 				4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
 				AE0AF57E13E9C5B200029396 /* BeInstanceOf.mm in Sources */,

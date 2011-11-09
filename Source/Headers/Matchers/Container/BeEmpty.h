@@ -6,35 +6,20 @@ namespace Cedar { namespace Matchers {
         BeEmpty & operator=(const BeEmpty &);
 
     public:
-        BeEmpty();
-        ~BeEmpty();
+        inline BeEmpty() : Base() {}
+        inline ~BeEmpty() {}
         // Allow default copy ctor.
 
-        const BeEmpty & operator()() const;
+        inline const BeEmpty & operator()() const { return *this; }
 
         template<typename U>
         bool matches(const U &) const;
 
     protected:
-        virtual NSString * failure_message_end() const;
+        inline /*virtual*/ NSString * failure_message_end() const { return @"be empty"; }
     };
 
     static const BeEmpty be_empty = BeEmpty();
-
-    // For backwards compatible parenthesis syntax
-    inline const BeEmpty & BeEmpty::operator()() const {
-        return *this;
-    }
-
-    inline BeEmpty::BeEmpty() : Base() {
-    }
-
-    inline BeEmpty::~BeEmpty() {
-    }
-
-    inline /*virtual*/ NSString * BeEmpty::failure_message_end() const {
-        return @"be empty";
-    }
 
 #pragma mark Generic
     template<typename U>

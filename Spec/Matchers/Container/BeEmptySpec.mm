@@ -364,7 +364,7 @@ describe(@"be_empty matcher", ^{
     });
 });
 
-describe(@"be_empty shorthand syntax (no parenthesis)", ^{
+describe(@"be_empty shorthand syntax (no parentheses)", ^{
     NSArray *container = [NSArray array];
 
     describe(@"positive match", ^{

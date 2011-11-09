@@ -104,7 +104,7 @@ describe(@"be_truthy matcher", ^{
     });
 });
 
-describe(@"be_truthy shorthand syntax (no parenthesis)", ^{
+describe(@"be_truthy shorthand syntax (no parentheses)", ^{
     BOOL value = YES;
 
     describe(@"positive match", ^{

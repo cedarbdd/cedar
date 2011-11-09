@@ -116,7 +116,7 @@ describe(@"be_nil matcher", ^{
     });
 });
 
-describe(@"be_nil shorthand syntax (no parenthesis)", ^{
+describe(@"be_nil shorthand syntax (no parentheses)", ^{
     void *value = NULL;
 
     describe(@"positive match", ^{

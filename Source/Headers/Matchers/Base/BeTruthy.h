@@ -7,15 +7,17 @@ namespace Cedar { namespace Matchers {
         BeTruthy & operator=(const BeTruthy &);
 
     public:
-        BeTruthy();
-        ~BeTruthy();
+        inline BeTruthy() : Base() {}
+        inline ~BeTruthy() {}
         // Allow default copy ctor.
 
-        virtual NSString * failure_message_end() const;
-        const BeTruthy & operator()() const;
+        inline const BeTruthy & operator()() const { return *this; }
 
         template<typename U>
         bool matches(const U &) const;
+        
+    protected:
+        inline /*virtual*/ NSString * failure_message_end() const { return @"evaluate to true"; }
     };
 
     static const BeTruthy be_truthy = BeTruthy();
