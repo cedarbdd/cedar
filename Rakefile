@@ -59,29 +59,35 @@ end
 task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application"]
 task :cruise => [:clean, :build_all, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs]
 
+desc "Trim whitespace"
 task :trim_whitespace do
   system_or_exit %Q[git status --short | awk '{if ($1 != "D" && $1 != "R") print $2}' | grep -e '.*\.[cmh]$' | xargs sed -i '' -e 's/	/    /g;s/ *$//g;']
 end
 
+desc "Clean all targets"
 task :clean do
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean SYMROOT=#{BUILD_DIR}", output_file("clean")
 end
 
+desc "Build specs"
 task :build_specs do
   puts "SYMROOT: #{ENV['SYMROOT']}"
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}], output_file("specs"))
 end
 
+desc "Build UI specs"
 task :build_uispecs do
   kill_simulator
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build", output_file("uispecs")
 end
 
+desc "Build all targets"
 task :build_all do
   kill_simulator
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("build_all")
 end
 
+desc "Run specs"
 task :specs => :build_specs do
   build_dir = build_dir("")
   with_env_vars("DYLD_FRAMEWORK_PATH" => build_dir, "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
@@ -89,6 +95,7 @@ task :specs => :build_specs do
   end
 end
 
+desc "Run focused specs"
 task :focused_specs do
   # This target was made just for testing focused specs mode
   # and should not be created in applications that want to use Cedar.
@@ -103,6 +110,8 @@ task :focused_specs do
 end
 
 require 'tmpdir'
+
+desc "Run UI specs"
 task :uispecs => :build_uispecs do
   env_vars = {
     "DYLD_ROOT_PATH" => SDK_DIR,
@@ -118,18 +127,18 @@ task :uispecs => :build_uispecs do
 end
 
 
-desc "Build and run OCUnit Logic and Application specs"
+desc "Build and run OCUnit logic and application specs"
 task :ocunit => ["ocunit:logic", "ocunit:application"]
 
 namespace :ocunit do
-  desc "Build and run OCUnit Logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
+  desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
   task :logic do
     with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
       system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build SYMROOT=#{BUILD_DIR}"
     end
   end
 
-  desc "Build and run OCUnit Application specs (#{OCUNIT_APPLICATION_SPECS_TARGET_NAME})"
+  desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_TARGET_NAME})"
   task :application do
     kill_simulator
 
