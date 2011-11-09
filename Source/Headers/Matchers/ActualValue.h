@@ -6,7 +6,7 @@
 
 namespace Cedar { namespace Matchers {
 
-    void fail(const NSString * failureMessage);
+    void CDR_fail(const char *fileName, int lineNumber, NSString * reason);
 
     template<typename T> class ActualValue;
 
@@ -84,32 +84,34 @@ namespace Cedar { namespace Matchers {
     ActualValue<T>::~ActualValue() {
     }
 
-    template<typename T>
-    const ActualValue<T> CDR_expect(const char *fileName, int lineNumber, const T & actualValue) {
-        return ActualValue<T>(fileName, lineNumber, actualValue);
-    }
-
     template<typename T> template<typename MatcherType>
     void ActualValue<T>::execute_positive_match(const MatcherType & matcher) const {
         if (!matcher.matches(value_)) {
-            [[CDRSpecFailure specFailureWithReason:matcher.failure_message()
-                                          fileName:[NSString stringWithUTF8String:fileName_.c_str()]
-                                        lineNumber:lineNumber_]
-             raise];
+            CDR_fail(fileName_.c_str(), lineNumber_, matcher.failure_message());
         }
     }
 
     template<typename T> template<typename MatcherType>
     void ActualValue<T>::execute_negative_match(const MatcherType & matcher) const {
         if (matcher.matches(value_)) {
-            [[CDRSpecFailure specFailureWithReason:matcher.negative_failure_message()
-                                          fileName:[NSString stringWithUTF8String:fileName_.c_str()]
-                                        lineNumber:lineNumber_] raise];
+            CDR_fail(fileName_.c_str(), lineNumber_, matcher.negative_failure_message());
         }
+    }
+
+    template<typename T>
+    const ActualValue<T> CDR_expect(const char *fileName, int lineNumber, const T & actualValue) {
+        return ActualValue<T>(fileName, lineNumber, actualValue);
+    }
+
+    inline void CDR_fail(const char *fileName, int lineNumber, NSString * reason) {
+        [[CDRSpecFailure specFailureWithReason:reason
+                                      fileName:[NSString stringWithUTF8String:fileName]
+                                    lineNumber:lineNumber] raise];
     }
 
 }}
 
 #ifndef CEDAR_MATCHERS_COMPATIBILITY_MODE
-    #define expect(x) CDR_expect(__FILE__, __LINE__, x)
+    #define expect(x) CDR_expect(__FILE__, __LINE__, (x))
+    #define fail(x) CDR_fail(__FILE__, __LINE__, (x))
 #endif
