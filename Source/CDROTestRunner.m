@@ -10,13 +10,12 @@ void runTests(id self, SEL _cmd, id ignored) {
     // Since we want to have integration with XCode when running tests from inside the IDE
     // CDROTestReporter needs to be default reporter; however, we can use any other reporter
     // when running from the command line (e.g. CDRColorizedReporter).
-    Class reporterClass = CDRReporterClassFromEnv("CDROTestReporter");
-    if (!reporterClass) {
+    NSArray *reporters = CDRReportersFromEnv("CDROTestReporter");
+    if (![reporters count]) {
         exit(-999);
     }
 
-    id<CDRExampleReporter> reporter = [[[reporterClass alloc] init] autorelease];
-    int result = runSpecsWithCustomExampleReporter(reporter);
+    int result = runSpecsWithCustomExampleReporters(reporters);
 
     // otest always returns 0 as its exit code even if any test fails;
     // we need to forcibly exit with correct exit code to make CI happy.
