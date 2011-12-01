@@ -108,6 +108,18 @@ describe(@"contain matcher", ^{
     });
 
     describe(@"when the container is an NSArray", ^{
+        describe(@"which is nil", ^{
+            NSArray *container = nil;
+
+            describe(@"positive match", ^{
+                it(@"should should fail", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+        });
+
         describe(@"which contains the element", ^{
             NSArray *container = [NSArray arrayWithObject:elementCopy];
 
@@ -146,6 +158,19 @@ describe(@"contain matcher", ^{
     });
 
     describe(@"when the container is an NSMutableArray", ^{
+        describe(@"which is nil", ^{
+            NSMutableArray *container = nil;
+
+            describe(@"positive match", ^{
+                it(@"should should fail", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+        });
+
+
         describe(@"which contains the element", ^{
             NSMutableArray *container = [NSMutableArray arrayWithObject:elementCopy];
 
@@ -205,6 +230,19 @@ describe(@"contain matcher", ^{
     });
 
     describe(@"when the container is an NSSet", ^{
+        describe(@"which is nil", ^{
+            NSSet *container = nil;
+
+            describe(@"positive match", ^{
+                it(@"should should fail", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+        });
+
+
         describe(@"which contains the element", ^{
             NSSet *container = [NSSet setWithObject:elementCopy];
 
@@ -243,6 +281,19 @@ describe(@"contain matcher", ^{
     });
 
     describe(@"when the container is an NSMutableSet", ^{
+        describe(@"which is nil", ^{
+            NSMutableSet *container = nil;
+
+            describe(@"positive match", ^{
+                it(@"should should fail", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+        });
+
+
         describe(@"which contains the element", ^{
             NSMutableSet *container = [NSMutableSet setWithObject:elementCopy];
 
@@ -281,6 +332,19 @@ describe(@"contain matcher", ^{
     });
 
     describe(@"when the container is an NSString", ^{
+        describe(@"which is nil", ^{
+            NSString *container = nil;
+
+            describe(@"positive match", ^{
+                it(@"should should fail", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+        });
+
+
         describe(@"which contains the substring", ^{
             NSString *container = @"A string that contains element";
 
@@ -319,6 +383,19 @@ describe(@"contain matcher", ^{
     });
 
     describe(@"when the container is an NSMutableString", ^{
+        describe(@"which is nil", ^{
+            NSMutableString *container = nil;
+
+            describe(@"positive match", ^{
+                it(@"should should fail", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+        });
+
+
         describe(@"which contains the substring", ^{
             NSMutableString *container = [[@"A string that contains element" mutableCopy] autorelease];
 

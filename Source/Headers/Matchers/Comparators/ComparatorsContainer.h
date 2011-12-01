@@ -35,7 +35,7 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     template<typename U>
     bool compare_contains(NSString * const container, const U & element) {
         NSRange range = [container rangeOfString:element];
-        return range.location != NSNotFound;
+        return container && range.location != NSNotFound;
     }
 
     template<typename U>
