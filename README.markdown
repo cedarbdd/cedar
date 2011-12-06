@@ -322,6 +322,17 @@ written to output test results in a way that TeamCity CI server can understand.
 You can tell Cedar which reporter to use by setting `CEDAR_REPORTER_CLASS` env
 variable to your custom reporter class name.
 
+### JUnit XML Reporting
+
+The `CDRJUnitXMLReporter` can be used to generate (simple) JUnit compatible
+XML that can be read by build servers such as Jenkins. To use this reporter,
+you can take advantage of the ability to specify multiple reporters like so:
+
+    CEDAR_REPORTER_CLASS=CDRColorizedReporter,CDRJUnitXMLReporter
+
+By default, the XML file will be written to `build/TEST-Cedar.xml` but this
+path can be overridden with the `CEDAR_JUNIT_XML_FILE` env variable.
+
 
 ## OCUnit Support (new, not battle tested)
 
