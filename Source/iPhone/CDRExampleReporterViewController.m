@@ -12,7 +12,8 @@
     [super viewDidLoad];
 
     if (getenv("CEDAR_HEADLESS_SPECS")) {
-        runSpecsWithinUIApplication();
+        int exitStatus = runSpecsWithinUIApplication();
+        exitWithStatusFromUIApplication(exitStatus);
     } else {
         [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
     }

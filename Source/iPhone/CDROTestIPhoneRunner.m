@@ -38,22 +38,37 @@ NSBundle *mainBundle(id self, SEL _cmd) {
 
 @implementation CDROTestIPhoneRunner
 
+int runOCUnitTests(id self, SEL _cmd, id ignored) {
+    BOOL hasFailed  = NO;
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    [[NSBundle allFrameworks] makeObjectsPerformSelector:@selector(principalClass)];
+    // [SenTestObserver class];
+    hasFailed = !(BOOL)[[[self performSelector:@selector(specifiedTestSuite)] performSelector:@selector(run)] performSelector:@selector(hasSucceeded)];
+    [pool release];
+
+    return (int)hasFailed;
+}
+
 void runTests(id self, SEL _cmd, id ignored) {
+    int exitStatus = runOCUnitTests(self, _cmd, ignored);
+
     if ([UIApplication sharedApplication]) {
         BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
         BOOL isCedarDelegate = [[[UIApplication sharedApplication] delegate] isKindOfClass:[CedarApplicationDelegate class]];
 
         if (!isCedarApp && !isCedarDelegate) {
-            runSpecsWithinUIApplication();
+            exitStatus |= runSpecsWithinUIApplication();
+            exitWithStatusFromUIApplication(exitStatus);
         }
     } else {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
         const char* argv[] = { "executable", "-RegisterForSystemEvents" };
-        int result = UIApplicationMain(2, (char **)argv, @"CedarApplication", nil);
+        exitStatus |= UIApplicationMain(2, (char **)argv, @"CedarApplication", nil);
 
         [pool release];
-        exit(result);
+        exit(exitStatus);
     }
 }
 

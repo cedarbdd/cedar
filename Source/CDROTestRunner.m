@@ -4,7 +4,21 @@
 
 @implementation CDROTestRunner
 
+int runOCUnitTests(id self, SEL _cmd, id ignored) {
+    BOOL hasFailed  = NO;
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    [[NSBundle allFrameworks] makeObjectsPerformSelector:@selector(principalClass)];
+    // [SenTestObserver class];
+    hasFailed = !(BOOL)[[[self performSelector:@selector(specifiedTestSuite)] performSelector:@selector(run)] performSelector:@selector(hasSucceeded)];
+    [pool release];
+
+    return (int)hasFailed;
+}
+
 void runTests(id self, SEL _cmd, id ignored) {
+    int exitStatus = runOCUnitTests(self, _cmd, ignored);
+
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
     // Since we want to have integration with XCode when running tests from inside the IDE
@@ -16,12 +30,13 @@ void runTests(id self, SEL _cmd, id ignored) {
     }
 
     id<CDRExampleReporter> reporter = [[[reporterClass alloc] init] autorelease];
-    int result = runSpecsWithCustomExampleReporter(reporter);
+    exitStatus |= runSpecsWithCustomExampleReporter(reporter);
 
     // otest always returns 0 as its exit code even if any test fails;
     // we need to forcibly exit with correct exit code to make CI happy.
     [pool drain];
-    exit(result);
+
+    exit(exitStatus);
 }
 
 // Hijack SenTestProble runTests: class method and run our specs instead.

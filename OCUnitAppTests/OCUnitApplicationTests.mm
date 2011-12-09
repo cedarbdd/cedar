@@ -1,5 +1,5 @@
 #import "SpecHelper.h"
-#import "OCUnitAppAppDelegate.h" // should not be included in OCUnitAppTests target
+#import "OCUnitAppAppDelegate.h" // should NOT be included in OCUnitAppTests target
 
 using namespace Cedar::Matchers;
 
@@ -7,7 +7,7 @@ SPEC_BEGIN(OCUnitApplicationTests)
 
 describe(@"A spec file testing UI", ^ {
     it(@"should run", ^{
-        UILabel *label = [[UILabel alloc] init];
+        UILabel *label = [[[UILabel alloc] init] autorelease];
         expect([label class]).to(equal([UILabel class]));
     });
 

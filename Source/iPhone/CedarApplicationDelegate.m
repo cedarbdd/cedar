@@ -3,7 +3,7 @@
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
 
-void runSpecsWithinUIApplication() {
+int runSpecsWithinUIApplication() {
     int exitStatus;
 
     char *defaultReporterClassName = objc_getClass("SenTestProbe") ? "CDROTestReporter" : "CDRDefaultReporter";
@@ -16,11 +16,15 @@ void runSpecsWithinUIApplication() {
         exitStatus = runSpecsWithCustomExampleReporter(reporter);
     }
 
+    return exitStatus;
+}
+
+void exitWithStatusFromUIApplication(int status) {
     UIApplication *application = [UIApplication sharedApplication];
     if ([application respondsToSelector:@selector(_terminateWithStatus:)]) {
-        [application performSelector:@selector(_terminateWithStatus:) withObject:(id)exitStatus];
+        [application performSelector:@selector(_terminateWithStatus:) withObject:(id)status];
     } else {
-        exit(exitStatus);
+        exit(status);
     }
 }
 
