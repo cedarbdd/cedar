@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "CDROTestIPhoneRunner.h"
+#import "CDROTestHelper.h"
 #import "CedarApplicationDelegate.h"
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
@@ -10,7 +11,7 @@ extern char ***_NSGetArgv(void);
 @implementation NSBundle (MainBundleHijack)
 static NSBundle *mainBundle__ = nil;
 
-NSBundle *mainBundle(id self, SEL _cmd) {
+NSBundle *CDRMainBundle(id self, SEL _cmd) {
     return mainBundle__;
 }
 
@@ -27,7 +28,7 @@ NSBundle *mainBundle(id self, SEL _cmd) {
             if ([[bundle bundlePath] hasSuffix:@".octest"]) {
                 mainBundle__ = [bundle retain];
                 Class nsBundleMetaClass = objc_getMetaClass("NSBundle");
-                class_replaceMethod(nsBundleMetaClass, @selector(mainBundle), (IMP)mainBundle, "v@:");
+                class_replaceMethod(nsBundleMetaClass, @selector(mainBundle), (IMP)CDRMainBundle, "v@:");
             }
         }
         [pool drain];
@@ -38,20 +39,8 @@ NSBundle *mainBundle(id self, SEL _cmd) {
 
 @implementation CDROTestIPhoneRunner
 
-int runOCUnitTests(id self, SEL _cmd, id ignored) {
-    BOOL hasFailed  = NO;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-    [[NSBundle allFrameworks] makeObjectsPerformSelector:@selector(principalClass)];
-    // [SenTestObserver class];
-    hasFailed = !(BOOL)[[[self performSelector:@selector(specifiedTestSuite)] performSelector:@selector(run)] performSelector:@selector(hasSucceeded)];
-    [pool release];
-
-    return (int)hasFailed;
-}
-
-void runTests(id self, SEL _cmd, id ignored) {
-    int exitStatus = runOCUnitTests(self, _cmd, ignored);
+void CDRRunTests(id self, SEL _cmd, id ignored) {
+    int exitStatus = CDRRunOCUnitTests(self, _cmd, ignored);
 
     if ([UIApplication sharedApplication]) {
         BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
@@ -73,11 +62,7 @@ void runTests(id self, SEL _cmd, id ignored) {
 }
 
 + (void)load {
-    Class senTestProbeClass = objc_getClass("SenTestProbe");
-    if (senTestProbeClass) {
-        Class senTestProbeMetaClass = objc_getMetaClass("SenTestProbe");
-        class_replaceMethod(senTestProbeMetaClass, @selector(runTests:), (IMP)runTests, "v@:@");
-    }
+    CDRHijackOCUnitRun((IMP)CDRRunTests);
 }
 
 @end

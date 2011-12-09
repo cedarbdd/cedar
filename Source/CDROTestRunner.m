@@ -1,23 +1,11 @@
 #import "CDROTestRunner.h"
+#import "CDROTestHelper.h"
 #import "CDRFunctions.h"
-#import <objc/runtime.h>
 
 @implementation CDROTestRunner
 
-int runOCUnitTests(id self, SEL _cmd, id ignored) {
-    BOOL hasFailed  = NO;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-    [[NSBundle allFrameworks] makeObjectsPerformSelector:@selector(principalClass)];
-    // [SenTestObserver class];
-    hasFailed = !(BOOL)[[[self performSelector:@selector(specifiedTestSuite)] performSelector:@selector(run)] performSelector:@selector(hasSucceeded)];
-    [pool release];
-
-    return (int)hasFailed;
-}
-
-void runTests(id self, SEL _cmd, id ignored) {
-    int exitStatus = runOCUnitTests(self, _cmd, ignored);
+void CDRRunTests(id self, SEL _cmd, id ignored) {
+    int exitStatus = CDRRunOCUnitTests(self, _cmd, ignored);
 
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
@@ -39,14 +27,8 @@ void runTests(id self, SEL _cmd, id ignored) {
     exit(exitStatus);
 }
 
-// Hijack SenTestProble runTests: class method and run our specs instead.
-// See https://github.com/jy/SenTestingKit for more information.
 + (void)load {
-    Class senTestProbeClass = objc_getClass("SenTestProbe");
-    if (senTestProbeClass) {
-        Class senTestProbeMetaClass = objc_getMetaClass("SenTestProbe");
-        class_replaceMethod(senTestProbeMetaClass, @selector(runTests:), (IMP)runTests, "v@:@");
-    }
+    CDRHijackOCUnitRun((IMP)CDRRunTests);
 }
 
 @end

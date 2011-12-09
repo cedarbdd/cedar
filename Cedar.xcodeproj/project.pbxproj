@@ -34,6 +34,10 @@
 		96158A9F144A91C4005895CE /* OCUnitAppLogicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96158A9E144A91C4005895CE /* OCUnitAppLogicTests.mm */; };
 		96158AA2144A91DC005895CE /* DummyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96158AA1144A91DC005895CE /* DummyModel.m */; };
 		96158AA3144A9210005895CE /* DummyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96158AA1144A91DC005895CE /* DummyModel.m */; };
+		9637852B1491D6D40059C9F6 /* CDROTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9637852A1491D6D30059C9F6 /* CDROTestHelper.m */; };
+		9637852C1491D6D40059C9F6 /* CDROTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9637852A1491D6D30059C9F6 /* CDROTestHelper.m */; };
+		9637852E1491D84F0059C9F6 /* CDROTestHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9637852D1491D84F0059C9F6 /* CDROTestHelper.h */; };
+		9637852F1491D84F0059C9F6 /* CDROTestHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9637852D1491D84F0059C9F6 /* CDROTestHelper.h */; };
 		966E74ED145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; };
 		966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; };
 		968BA92F143485F800EA40B3 /* CDROTestIPhoneRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 968BA92E143485F800EA40B3 /* CDROTestIPhoneRunner.h */; };
@@ -370,6 +374,8 @@
 		96158A9E144A91C4005895CE /* OCUnitAppLogicTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OCUnitAppLogicTests.mm; sourceTree = "<group>"; };
 		96158AA0144A91DC005895CE /* DummyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyModel.h; sourceTree = "<group>"; };
 		96158AA1144A91DC005895CE /* DummyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyModel.m; sourceTree = "<group>"; };
+		9637852A1491D6D30059C9F6 /* CDROTestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDROTestHelper.m; sourceTree = "<group>"; };
+		9637852D1491D84F0059C9F6 /* CDROTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDROTestHelper.h; sourceTree = "<group>"; };
 		966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShouldSyntaxSpec.mm; path = ../ShouldSyntaxSpec.mm; sourceTree = "<group>"; };
 		968BA92E143485F800EA40B3 /* CDROTestIPhoneRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDROTestIPhoneRunner.h; sourceTree = "<group>"; };
 		96A07F0813F276640021974D /* FocusedSpecs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FocusedSpecs; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -773,6 +779,7 @@
 				42064469139B44F600C85605 /* CDRTeamCityReporter.m */,
 				96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */,
 				96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */,
+				9637852A1491D6D30059C9F6 /* CDROTestHelper.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -798,6 +805,7 @@
 				42064465139B44EC00C85605 /* CDRTeamCityReporter.h */,
 				96EA1CAC142C6449001A78E0 /* CDROTestReporter.h */,
 				96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */,
+				9637852D1491D84F0059C9F6 /* CDROTestHelper.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -990,6 +998,7 @@
 				AEF33017145B6222002F93BB /* BeLessThan.h in Headers */,
 				AEF33021145B69DE002F93BB /* BeLTE.h in Headers */,
 				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
+				9637852E1491D84F0059C9F6 /* CDROTestHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1010,7 @@
 				42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */,
 				96EA1CAF142C6449001A78E0 /* CDROTestReporter.h in Headers */,
 				968BA92F143485F800EA40B3 /* CDROTestIPhoneRunner.h in Headers */,
+				9637852F1491D84F0059C9F6 /* CDROTestHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1379,6 +1389,7 @@
 				AE0AF57D13E9C5B200029396 /* BeInstanceOf.mm in Sources */,
 				96EA1CA8142C6425001A78E0 /* CDROTestReporter.m in Sources */,
 				96EA1CAA142C6425001A78E0 /* CDROTestRunner.m in Sources */,
+				9637852B1491D6D40059C9F6 /* CDROTestHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1436,6 +1447,7 @@
 				AE0AF57E13E9C5B200029396 /* BeInstanceOf.mm in Sources */,
 				96EA1CA9142C6425001A78E0 /* CDROTestReporter.m in Sources */,
 				960118BC1434867E00825FFF /* CDROTestIPhoneRunner.m in Sources */,
+				9637852C1491D6D40059C9F6 /* CDROTestHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
