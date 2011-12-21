@@ -27,7 +27,7 @@
 }
 
 - (void)startSpecs {
-    runSpecsWithCustomExampleReporter(self);
+    runSpecsWithCustomExampleReporters([NSArray arrayWithObject:self]);
 }
 
 - (void)pushRootSpecStatusController:(NSArray *)groups {

@@ -7,13 +7,12 @@ int runSpecsWithinUIApplication() {
     int exitStatus;
 
     char *defaultReporterClassName = objc_getClass("SenTestProbe") ? "CDROTestReporter" : "CDRDefaultReporter";
-    Class reporterClass = CDRReporterClassFromEnv(defaultReporterClassName);
+    NSArray *reporters = CDRReportersFromEnv(defaultReporterClassName);
 
-    if (!reporterClass) {
+    if (![reporters count]) {
         exitStatus = -999;
     } else {
-        id<CDRExampleReporter> reporter = [[[reporterClass alloc] init] autorelease];
-        exitStatus = runSpecsWithCustomExampleReporter(reporter);
+        exitStatus = runSpecsWithCustomExampleReporters(reporters);
     }
 
     return exitStatus;
