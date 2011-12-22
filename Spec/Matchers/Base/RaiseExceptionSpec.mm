@@ -21,9 +21,9 @@ extern "C" {
 
 using namespace Cedar::Matchers;
 
-SPEC_BEGIN(RaiseSpec)
+SPEC_BEGIN(RaiseExceptionSpec)
 
-describe(@"raise matcher", ^{
+describe(@"raise_exception matcher", ^{
     __block void (^block)();
     __block NSException *exception;
 
@@ -40,14 +40,14 @@ describe(@"raise matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    block should raise(expectedExceptionClass);
+                    block should raise_exception(expectedExceptionClass);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to not raise an exception of type <%@>", NSStringFromClass(expectedExceptionClass)], ^{
-                        block should_not raise(expectedExceptionClass);
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to not raise an exception of class <%@>", NSStringFromClass(expectedExceptionClass)], ^{
+                        block should_not raise_exception(expectedExceptionClass);
                     });
                 });
             });
@@ -63,32 +63,32 @@ describe(@"raise matcher", ^{
 
             context(@"when subclass exceptions are expected", ^{
                 describe(@"positive match", ^{
-                    it(@"should should pass", PENDING); //^{
-//                        block should raise(expectedExceptionClass).or_subclass();
-//                    });
+                    it(@"should pass", ^{
+                        block should raise_exception(expectedExceptionClass).or_subclass();
+                    });
                 });
 
                 describe(@"negative match", ^{
-                    it(@"should fail with a sensible failure message", PENDING); //^{
-//                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to not raise an exception of type, or subclass of type, <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
-//                            block should_not raise(expectedExceptionClass).or_subclass();
-//                        });
-//                    });
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to not raise an exception of class, or subclass of class, <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
+                            block should_not raise_exception(expectedExceptionClass).or_subclass();
+                        });
+                    });
                 });
             });
 
             context(@"when subclass exceptions are not expected", ^{
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to raise an exception of type <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
-                            block should raise(expectedExceptionClass);
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to raise an exception of class <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
+                            block should raise_exception(expectedExceptionClass);
                         });
                     });
                 });
 
                 describe(@"negative match", ^{
                     it(@"should should pass", ^{
-                        block should_not raise(expectedExceptionClass);
+                        block should_not raise_exception(expectedExceptionClass);
                     });
                 });
             });
@@ -104,15 +104,15 @@ describe(@"raise matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to raise an exception of type <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
-                        block should raise(expectedExceptionClass);
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to raise an exception of class <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
+                        block should raise_exception(expectedExceptionClass);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should should pass", ^{
-                    block should_not raise(expectedExceptionClass);
+                    block should_not raise_exception(expectedExceptionClass);
                 });
             });
         });
@@ -124,15 +124,15 @@ describe(@"raise matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to raise an exception of type <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
-                        block should raise(expectedExceptionClass);
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <specified block> to raise an exception of class <%@>", NSStringFromClass([expectedExceptionClass class])], ^{
+                        block should raise_exception(expectedExceptionClass);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should should pass", ^{
-                    block should_not raise(expectedExceptionClass);
+                    block should_not raise_exception(expectedExceptionClass);
                 });
             });
         });
@@ -150,14 +150,14 @@ describe(@"raise matcher", ^{
             context(@"when called with parentheses", ^{
                 describe(@"positive match", ^{
                     it(@"should should pass", ^{
-                        block should raise();
+                        block should raise_exception();
                     });
                 });
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
                         expectFailureWithMessage(@"Expected <specified block> to not raise an exception", ^{
-                            block should_not raise();
+                            block should_not raise_exception();
                         });
                     });
                 });
@@ -165,17 +165,17 @@ describe(@"raise matcher", ^{
 
             context(@"when called without parentheses", ^{
                 describe(@"positive match", ^{
-                    it(@"should should pass", PENDING); //^{
-//                        block should raise;
-//                    });
+                    it(@"should should pass", ^{
+                        block should raise_exception;
+                    });
                 });
 
                 describe(@"negative match", ^{
-                    it(@"should fail with a sensible failure message", PENDING); //^{
-//                        expectFailureWithMessage(@"Expected <specified block> to not raise an exception", ^{
-//                            block should_not raise;
-//                        });
-//                    });
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <specified block> to not raise an exception", ^{
+                            block should_not raise_exception;
+                        });
+                    });
                 });
             });
         });
@@ -189,31 +189,31 @@ describe(@"raise matcher", ^{
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
                         expectFailureWithMessage(@"Expected <specified block> to raise an exception", ^{
-                            block should raise();
+                            block should raise_exception();
                         });
                     });
                 });
 
                 describe(@"negative match", ^{
                     it(@"should should pass", ^{
-                        block should_not raise();
+                        block should_not raise_exception();
                     });
                 });
             });
 
             context(@"when called without parentheses", ^{
                 describe(@"positive match", ^{
-                    it(@"should fail with a sensible failure message", PENDING); //^{
-//                        expectFailureWithMessage(@"Expected <specified block> to raise an exception", ^{
-//                            block should raise;
-//                        });
-//                    });
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <specified block> to raise an exception", ^{
+                            block should raise_exception;
+                        });
+                    });
                 });
 
                 describe(@"negative match", ^{
-                    it(@"should should pass", PENDING); //^{
-//                        block should_not raise;
-//                    });
+                    it(@"should should pass", ^{
+                        block should_not raise_exception;
+                    });
                 });
             });
         });
