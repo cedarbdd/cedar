@@ -2,7 +2,7 @@
 
 namespace Cedar { namespace Matchers {
     template<typename T>
-    class Contain : public Base {
+    class Contain : public Base<> {
     private:
         Contain & operator=(const Contain &);
 
@@ -28,7 +28,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     inline Contain<T>::Contain(const T & element)
-    : Base(), element_(element) {
+    : Base<>(), element_(element) {
     }
 
     template<typename T>
@@ -43,7 +43,6 @@ namespace Cedar { namespace Matchers {
 #pragma mark Generic
     template <typename T> template<typename U>
     bool Contain<T>::matches(const U & actualValue) const {
-        this->build_failure_message_start(actualValue);
         return Comparators::compare_contains(actualValue, element_);
     }
 }}

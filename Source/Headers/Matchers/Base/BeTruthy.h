@@ -2,12 +2,12 @@
 #import "Base.h"
 
 namespace Cedar { namespace Matchers {
-    class BeTruthy : public Base {
+    class BeTruthy : public Base<> {
     private:
         BeTruthy & operator=(const BeTruthy &);
 
     public:
-        inline BeTruthy() : Base() {}
+        inline BeTruthy() : Base<>() {}
         inline ~BeTruthy() {}
         // Allow default copy ctor.
 
@@ -15,7 +15,7 @@ namespace Cedar { namespace Matchers {
 
         template<typename U>
         bool matches(const U &) const;
-        
+
     protected:
         inline /*virtual*/ NSString * failure_message_end() const { return @"evaluate to true"; }
     };
@@ -25,7 +25,6 @@ namespace Cedar { namespace Matchers {
 #pragma mark Generic
     template<typename U>
     bool BeTruthy::matches(const U & actualValue) const {
-        this->build_failure_message_start(actualValue);
         return !!actualValue;
     }
 

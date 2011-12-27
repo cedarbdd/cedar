@@ -1,7 +1,14 @@
 #import "Base.h"
 
 namespace Cedar { namespace Matchers {
-    class BeInstanceOf : public Base {
+    struct BeInstanceOfMessageBuilder {
+        template<typename U>
+        static NSString * string_for_actual_value(const U & value) {
+            return [NSString stringWithFormat:@"%@ (%@)", value, [value class]];
+        }
+    };
+
+    class BeInstanceOf : public Base<BeInstanceOfMessageBuilder> {
     private:
         BeInstanceOf & operator=(const BeInstanceOf &);
 
@@ -23,13 +30,31 @@ namespace Cedar { namespace Matchers {
         bool includeSubclasses_;
     };
 
-    BeInstanceOf be_instance_of(const Class);
+    inline BeInstanceOf be_instance_of(const Class expectedValue) {
+        return BeInstanceOf(expectedValue);
+    }
+
+    inline BeInstanceOf::BeInstanceOf(const Class expectedClass)
+    : Base<BeInstanceOfMessageBuilder>(), expectedClass_(expectedClass), includeSubclasses_(false) {}
+
+    inline BeInstanceOf::~BeInstanceOf() {}
+
+    inline BeInstanceOf & BeInstanceOf::or_any_subclass() {
+        includeSubclasses_ = true;
+        return *this;
+    }
+
+    inline /*virtual*/ NSString * BeInstanceOf::failure_message_end() const {
+        NSMutableString *messageEnd = [NSMutableString stringWithFormat:@"be an instance of class <%@>", expectedClass_];
+        if (includeSubclasses_) {
+            [messageEnd appendString:@", or any of its subclasses"];
+        }
+        return messageEnd;
+    }
 
 #pragma mark Generic
     template<typename U>
     bool BeInstanceOf::matches(const U & actualValue) const {
-        this->build_failure_message_start([NSString stringWithFormat:@"%@ (%@)", actualValue, [actualValue class]]);
-
         if (includeSubclasses_) {
             return [actualValue isKindOfClass:expectedClass_];
         } else {

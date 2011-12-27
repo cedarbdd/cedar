@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
-#import "CDRSpecFailure.h"
+#import <iostream>
 
-#include <iostream>
-#include <sstream>
+#import "StringifiersBase.h"
+#import "CDRSpecFailure.h"
 
 namespace Cedar { namespace Matchers {
 
@@ -87,14 +87,14 @@ namespace Cedar { namespace Matchers {
     template<typename T> template<typename MatcherType>
     void ActualValue<T>::execute_positive_match(const MatcherType & matcher) const {
         if (!matcher.matches(value_)) {
-            CDR_fail(fileName_.c_str(), lineNumber_, matcher.failure_message());
+            CDR_fail(fileName_.c_str(), lineNumber_, matcher.failure_message_for(value_));
         }
     }
 
     template<typename T> template<typename MatcherType>
     void ActualValue<T>::execute_negative_match(const MatcherType & matcher) const {
         if (matcher.matches(value_)) {
-            CDR_fail(fileName_.c_str(), lineNumber_, matcher.negative_failure_message());
+            CDR_fail(fileName_.c_str(), lineNumber_, matcher.negative_failure_message_for(value_));
         }
     }
 

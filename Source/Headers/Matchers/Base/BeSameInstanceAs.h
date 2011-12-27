@@ -3,7 +3,7 @@
 
 namespace Cedar { namespace Matchers {
     template<typename T>
-    class BeSameInstanceAs : public Base {
+    class BeSameInstanceAs : public Base<> {
     private:
         BeSameInstanceAs & operator=(const BeSameInstanceAs &);
 
@@ -32,7 +32,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     BeSameInstanceAs<T>::BeSameInstanceAs(T * const expectedValue)
-    : Base(), expectedValue_(expectedValue) {
+    : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>
@@ -53,7 +53,6 @@ namespace Cedar { namespace Matchers {
 
     template<typename T> template<typename U>
     bool BeSameInstanceAs<T>::matches(U * const & actualValue) const {
-        this->build_failure_message_start([NSString stringWithFormat:@"%p", actualValue]);
         return actualValue == expectedValue_;
     }
 

@@ -4,7 +4,7 @@
 namespace Cedar { namespace Matchers {
 
     template<typename T>
-    class Equal : public Base {
+    class Equal : public Base<> {
     private:
         Equal<T> & operator=(const Equal<T> &);
 
@@ -30,7 +30,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     Equal<T>::Equal(const T & expectedValue)
-    : Base(), expectedValue_(expectedValue) {
+    : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>
@@ -44,7 +44,6 @@ namespace Cedar { namespace Matchers {
 
     template<typename T> template<typename U>
     bool Equal<T>::matches(const U & actualValue) const {
-        this->build_failure_message_start(actualValue);
         return Comparators::compare_equal(actualValue, expectedValue_);
     }
 

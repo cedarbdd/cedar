@@ -2,13 +2,27 @@
 #import "Base.h"
 #import "CDRSpecFailure.h"
 
+#include <stdexcept>
+
 namespace Cedar { namespace Matchers {
-    class BeNil : public Base {
+    struct BeNilMessageBuilder {
+        template<typename U>
+        static NSString * string_for_actual_value(const U & value) {
+            throw std::logic_error("Should never generate a failure message for a nil comparison to non-pointer type.");
+        }
+
+        template<typename U>
+        static NSString * string_for_actual_value(U * const & value) {
+            return value ? [NSString stringWithFormat:@"%p", value] : @"nil";
+        }
+    };
+
+    class BeNil : public Base<BeNilMessageBuilder> {
     private:
         BeNil & operator=(const BeNil &);
 
     public:
-        inline BeNil() : Base() {}
+        inline BeNil() : Base<BeNilMessageBuilder>() {}
         inline ~BeNil() {}
         // Allow default copy ctor.
 
@@ -34,8 +48,7 @@ namespace Cedar { namespace Matchers {
     }
 
     template<typename U>
-    bool BeNil::matches(U * const &actualValue) const {
-        this->build_failure_message_start([NSString stringWithFormat:@"%x", actualValue]);
+    bool BeNil::matches(U * const & actualValue) const {
         return !actualValue;
     }
 

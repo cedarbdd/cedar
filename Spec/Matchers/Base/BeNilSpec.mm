@@ -31,7 +31,7 @@ describe(@"be_nil matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <0> to not be nil", ^{
+                    expectFailureWithMessage(@"Expected <nil> to not be nil", ^{
                         expect(value).to_not(be_nil());
                     });
                 });
@@ -47,7 +47,7 @@ describe(@"be_nil matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%x> to be nil", value], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%p> to be nil", value], ^{
                         expect(value).to(be_nil());
                     });
                 });
@@ -77,7 +77,7 @@ describe(@"be_nil matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <0> to not be nil", ^{
+                    expectFailureWithMessage(@"Expected <nil> to not be nil", ^{
                         expect(value).to_not(be_nil());
                     });
                 });
@@ -91,7 +91,7 @@ describe(@"be_nil matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%x> to be nil", value], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%p> to be nil", value], ^{
                         expect(value).to(be_nil());
                     });
                 });
@@ -127,7 +127,7 @@ describe(@"be_nil shorthand syntax (no parentheses)", ^{
 
     describe(@"negative match", ^{
         it(@"should fail with a sensible failure message", ^{
-            expectFailureWithMessage(@"Expected <0> to not be nil", ^{
+            expectFailureWithMessage(@"Expected <nil> to not be nil", ^{
                 expect(value).to_not(be_nil);
             });
         });

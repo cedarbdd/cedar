@@ -2,7 +2,7 @@
 
 namespace Cedar { namespace Matchers {
     template<typename T>
-    class <#MatcherClassName#> : public Base {
+    class <#MatcherClassName#> : public Base<> {
     private:
         <#MatcherClassName#> & operator=(const <#MatcherClassName#> &);
 
@@ -35,7 +35,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     <#MatcherClassName#><T>::<#MatcherClassName#>(const T & expectedValue)
-    : Base(), expectedValue_(expectedValue) {
+    : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>

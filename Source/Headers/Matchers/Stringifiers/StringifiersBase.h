@@ -1,7 +1,10 @@
+#import <Foundation/Foundation.h>
+#include <sstream>
+
 namespace Cedar { namespace Matchers { namespace Stringifiers {
     template<typename U>
     NSString * string_for(const U & value) {
-        if (strcmp(@encode(U), "@") == 0) {
+        if (0 == strncmp(@encode(U), "@", 1)) {
             return [reinterpret_cast<const id &>(value) description];
         } else {
             std::stringstream temp;

@@ -4,7 +4,7 @@
 namespace Cedar { namespace Matchers {
 
     template<typename T>
-    class BeGreaterThan : public Base {
+    class BeGreaterThan : public Base<> {
     private:
         BeGreaterThan<T> & operator=(const BeGreaterThan<T> &);
 
@@ -30,7 +30,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     BeGreaterThan<T>::BeGreaterThan(const T & expectedValue)
-    : Base(), expectedValue_(expectedValue) {
+    : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>
@@ -44,7 +44,6 @@ namespace Cedar { namespace Matchers {
 
     template<typename T> template<typename U>
     bool BeGreaterThan<T>::matches(const U & actualValue) const {
-        this->build_failure_message_start(actualValue);
         return Comparators::compare_greater_than(actualValue, expectedValue_);
     }
 

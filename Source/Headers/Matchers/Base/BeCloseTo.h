@@ -3,7 +3,7 @@
 
 namespace Cedar { namespace Matchers {
     template<typename T>
-    class BeCloseTo : public Base {
+    class BeCloseTo : public Base<> {
     private:
         BeCloseTo<T> & operator=(const BeCloseTo<T> &);
 
@@ -37,7 +37,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     BeCloseTo<T>::BeCloseTo(const T & expectedValue)
-    : Base(), expectedValue_(expectedValue), threshold_(0.01) {
+    : Base<>(), expectedValue_(expectedValue), threshold_(0.01) {
     }
 
     template<typename T>
@@ -57,7 +57,6 @@ namespace Cedar { namespace Matchers {
 
     template<typename T> template<typename U, typename V>
     bool BeCloseTo<T>::subtractable_types_match(const U & actualValue, const V & expectedValue) const {
-        this->build_failure_message_start(actualValue);
         return actualValue > expectedValue - threshold_ && actualValue < expectedValue + threshold_;
     }
 

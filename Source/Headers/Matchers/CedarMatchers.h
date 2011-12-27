@@ -14,3 +14,7 @@
 // Container
 #import "BeEmpty.h"
 #import "Contain.h"
+
+#ifdef CEDAR_CUSTOM_MATCHERS
+#import CEDAR_CUSTOM_MATCHERS
+#endif

@@ -1,12 +1,12 @@
 #import "Base.h"
 
 namespace Cedar { namespace Matchers {
-    class BeEmpty : public Base {
+    class BeEmpty : public Base<> {
     private:
         BeEmpty & operator=(const BeEmpty &);
 
     public:
-        inline BeEmpty() : Base() {}
+        inline BeEmpty() : Base<>() {}
         inline ~BeEmpty() {}
         // Allow default copy ctor.
 
@@ -24,7 +24,6 @@ namespace Cedar { namespace Matchers {
 #pragma mark Generic
     template<typename U>
     bool BeEmpty::matches(const U & actualValue) const {
-        this->build_failure_message_start(actualValue);
         return Comparators::compare_empty(actualValue);
     }
 }}

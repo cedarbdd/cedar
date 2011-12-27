@@ -76,8 +76,6 @@
 		96EA1CBB142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
 		AE0AF56513E9C0E300029396 /* CedarMatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; };
-		AE0AF57D13E9C5B200029396 /* BeInstanceOf.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */; };
-		AE0AF57E13E9C5B200029396 /* BeInstanceOf.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */; };
 		AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; };
 		AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
@@ -115,8 +113,6 @@
 		AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
 		AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
 		AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
-		AE8C87BB13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
-		AE8C87BC13625239006C9305 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87B813625239006C9305 /* Base.mm */; };
 		AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
 		AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C881113626FE6006C9305 /* CDRSpecFailure.m */; };
@@ -421,7 +417,6 @@
 		96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpecFailureSpec.mm; sourceTree = "<group>"; };
 		AE0AF55E13E9C0E300029396 /* CedarMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarMatchers.h; sourceTree = "<group>"; };
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
-		AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeInstanceOf.mm; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
 		AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Foundation.framework; sourceTree = SDKROOT; };
@@ -433,7 +428,6 @@
 		AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouldSyntax.h; sourceTree = "<group>"; };
 		AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectFailureWithMessage.h; sourceTree = "<group>"; };
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpectFailureWithMessage.m; sourceTree = "<group>"; };
-		AE8C87B813625239006C9305 /* Base.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Base.mm; sourceTree = "<group>"; };
 		AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecFailure.h; sourceTree = "<group>"; };
 		AE8C881113626FE6006C9305 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
@@ -781,7 +775,6 @@
 			children = (
 				AEEE1FCA11DC27B800029872 /* Headers */,
 				AEEE1FDC11DC27B800029872 /* iPhone */,
-				AEEE1FE311DC27B800029872 /* Matchers */,
 				AEEE1FC511DC27B800029872 /* CDRExample.m */,
 				AE8C881113626FE6006C9305 /* CDRSpecFailure.m */,
 				AEEE1FC611DC27B800029872 /* CDRExampleBase.m */,
@@ -854,15 +847,6 @@
 				960118BB1434867E00825FFF /* CDROTestIPhoneRunner.m */,
 			);
 			path = iPhone;
-			sourceTree = "<group>";
-		};
-		AEEE1FE311DC27B800029872 /* Matchers */ = {
-			isa = PBXGroup;
-			children = (
-				AE8C87B813625239006C9305 /* Base.mm */,
-				AE0AF57B13E9C5B200029396 /* BeInstanceOf.mm */,
-			);
-			path = Matchers;
 			sourceTree = "<group>";
 		};
 		AEEE1FE711DC27B800029872 /* Spec */ = {
@@ -1407,10 +1391,8 @@
 				AEEE201111DC27B800029872 /* SpecHelper.m in Sources */,
 				AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */,
 				AEC9DEEE12C2CC7E0039512D /* CDRColorizedReporter.m in Sources */,
-				AE8C87BB13625239006C9305 /* Base.mm in Sources */,
 				AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 				4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
-				AE0AF57D13E9C5B200029396 /* BeInstanceOf.mm in Sources */,
 				96EA1CA8142C6425001A78E0 /* CDROTestReporter.m in Sources */,
 				96EA1CAA142C6425001A78E0 /* CDROTestRunner.m in Sources */,
 				9637852B1491D6D40059C9F6 /* CDROTestHelper.m in Sources */,
@@ -1468,10 +1450,8 @@
 				AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */,
 				AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */,
 				AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */,
-				AE8C87BC13625239006C9305 /* Base.mm in Sources */,
 				AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 				4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
-				AE0AF57E13E9C5B200029396 /* BeInstanceOf.mm in Sources */,
 				96EA1CA9142C6425001A78E0 /* CDROTestReporter.m in Sources */,
 				960118BC1434867E00825FFF /* CDROTestIPhoneRunner.m in Sources */,
 				9637852C1491D6D40059C9F6 /* CDROTestHelper.m in Sources */,

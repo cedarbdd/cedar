@@ -1,7 +1,7 @@
 #import "Base.h"
 
 namespace Cedar { namespace Matchers {
-    class RaiseException : public Base {
+    class RaiseException : public Base<> {
         typedef void (^empty_block_t)();
 
     private:
@@ -36,7 +36,7 @@ namespace Cedar { namespace Matchers {
     static const RaiseException raise_exception = RaiseException();
 
     inline RaiseException::RaiseException(Class expectedExceptionClass /*= nil*/, bool allowSubclasses /*= false */)
-    : Base(), expectedExceptionClass_(expectedExceptionClass), allowSubclasses_(allowSubclasses) {
+    : Base<>(), expectedExceptionClass_(expectedExceptionClass), allowSubclasses_(allowSubclasses) {
     }
 
     inline RaiseException::~RaiseException() {
@@ -60,7 +60,6 @@ namespace Cedar { namespace Matchers {
     }
 
     inline bool RaiseException::matches(empty_block_t block) const {
-        this->build_failure_message_start(@"specified block");
         @try {
             block();
         }

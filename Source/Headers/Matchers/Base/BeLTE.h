@@ -4,7 +4,7 @@
 namespace Cedar { namespace Matchers {
 
     template<typename T>
-    class BeLTE : public Base {
+    class BeLTE : public Base<> {
     private:
         BeLTE<T> & operator=(const BeLTE<T> &);
 
@@ -35,7 +35,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     BeLTE<T>::BeLTE(const T & expectedValue)
-    : Base(), expectedValue_(expectedValue) {
+    : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>
@@ -49,7 +49,6 @@ namespace Cedar { namespace Matchers {
 
     template<typename T> template<typename U>
     bool BeLTE<T>::matches(const U & actualValue) const {
-        this->build_failure_message_start(actualValue);
         return !Comparators::compare_greater_than(actualValue, expectedValue_);
     }
 
