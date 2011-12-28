@@ -90,7 +90,7 @@ NSArray *CDRReporterClassesFromEnv(const char *defaultReporterClassName) {
     return reporterClasses;
 }
 
-NSArray *CDRReportersFromEnv(const char*defaultReporterClassName) {
+NSArray *CDRReportersFromEnv(const char *defaultReporterClassName) {
     NSArray *reporterClasses = CDRReporterClassesFromEnv(defaultReporterClassName);
 
     NSMutableArray *reporters = [NSMutableArray arrayWithCapacity:[reporterClasses count]];

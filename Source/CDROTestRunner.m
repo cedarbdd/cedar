@@ -17,7 +17,7 @@ void CDRRunTests(id self, SEL _cmd, id ignored) {
         exit(-999);
     }
 
-    int result = runSpecsWithCustomExampleReporters(reporters);
+    exitStatus |= runSpecsWithCustomExampleReporters(reporters);
 
     // otest always returns 0 as its exit code even if any test fails;
     // we need to forcibly exit with correct exit code to make CI happy.
