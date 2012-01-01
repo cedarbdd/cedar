@@ -5,7 +5,8 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     template<typename U>
     NSString * string_for(const U & value) {
         if (0 == strncmp(@encode(U), "@", 1)) {
-            return [reinterpret_cast<const id &>(value) description];
+            NSValue *valueId = [NSValue value:&value withObjCType:@encode(id)];
+            return [[valueId nonretainedObjectValue] description];
         } else {
             std::stringstream temp;
             temp << value;
