@@ -1,9 +1,0 @@
-#!/bin/sh
-
-echo "Creating code snippets directory if necessary..."
-mkdir -p ~/Library/Developer/XCode/UserData/CodeSnippets
-
-echo "Copying and installing Cedar code snippets..."
-cp CodeSnippets/* ~/Library/Developer/XCode/UserData/CodeSnippets
-
-echo "*** Restart Xcode to load the new code snippets ***"

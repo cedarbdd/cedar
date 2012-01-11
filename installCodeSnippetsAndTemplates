@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "\n===== Installing Code Snippets ====="
+echo "Creating code snippets directory if necessary..."
+mkdir -p ~/Library/Developer/XCode/UserData/CodeSnippets
+
+echo "Copying and installing Cedar code snippets..."
+cp CodeSnippetsAndTemplates/CodeSnippets/* ~/Library/Developer/XCode/UserData/CodeSnippets
+
+echo "\n===== Installing Templates ====="
+echo "Creating templates directory if necessary..."
+mkdir -p "$HOME/Library/Developer/Xcode/Templates/File Templates/Specs"
+
+echo "Copying and installing Cedar templates..."
+cp -r CodeSnippetsAndTemplates/Templates/ "$HOME/Library/Developer/Xcode/Templates/File Templates/Specs/"
+
+echo "\n*** Restart Xcode to load the new code snippets and templates.  The templates are available under the specs section. ***\n"
