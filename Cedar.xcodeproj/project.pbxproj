@@ -1978,9 +1978,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
-				SDKROOT = iphonesimulator;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -1992,9 +1993,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
-				SDKROOT = iphonesimulator;
+				SDKROOT = iphoneos;
 				ZERO_LINK = NO;
 			};
 			name = Release;
