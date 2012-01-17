@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-// Normally Cedar.h would include these files.  However, you can't have the specs
+// Normally Cedar-iOS.h would include these files.  However, you can't have the specs
 // for the spec classes include the files that define the classes that implement
 // the specs.  Is your head spinning?  It should be.
 #import "CedarApplicationDelegate.h"

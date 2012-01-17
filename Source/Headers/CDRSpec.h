@@ -35,6 +35,7 @@ void fail(NSString *);
 #import "ShouldSyntax.h"
 #import "CedarComparators.h"
 #import "CedarMatchers.h"
+#import "CedarDoubles.h"
 
 #endif // __cplusplus
 

@@ -12,7 +12,7 @@ BDD-style testing using Objective-C
         $ git submodule update --init
 
 
-### Non-iPhone testing
+### Non-iOS testing
 
 * Build the Cedar framework.  Note that you must build for an Objective-C
   runtime that supports blocks; this means Mac OS X 10.6, or a runtime from
@@ -56,7 +56,7 @@ BDD-style testing using Objective-C
 
 ### iPhone testing
 
-* Build the Cedar-iPhone static framework.  This framework contains a universal
+* Build the Cedar-iOS static framework.  This framework contains a universal
   binary that will work both on the simulator and the device.
   NOTE: due to a bug in the build process the script that builds the framework
   will sometimes not copy all of the header files appropriately.  If after you
@@ -66,7 +66,7 @@ BDD-style testing using Objective-C
   this target UISpecs, or something similar.
 * Open the Info.plist file for your project and remove the "Main nib file base
   name" entry.  The project template will likely have set this to "MainWindow."
-* Add the Cedar-iPhone static framework to your project, and link your UISpecs
+* Add the Cedar-iOS static framework to your project, and link your UISpecs
   target with it.
 * Add -ObjC and -all_load to the Other Linker Flags build setting for the
   UISpecs target.  This is necessary for the linker to correctly load symbols
@@ -74,7 +74,7 @@ BDD-style testing using Objective-C
 * Add a main.m to your UISpecs target that looks like this:
 
         #import <UIKit/UIKit.h>
-        #import <Cedar-iPhone/Cedar.h>
+        #import <Cedar-iOS/Cedar-iOS.h>
 
         int main(int argc, char *argv[]) {
             NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -96,7 +96,7 @@ BDD-style testing using Objective-C
   headers in your spec files depending on the target SDK.  For example:
 
         #if TARGET_OS_IPHONE
-        #import <Cedar-iPhone/SpecHelper.h>
+        #import <Cedar-iOS/SpecHelper.h>
         #else
         #import <Cedar/SpecHelper.h>
         #endif
@@ -387,8 +387,8 @@ command line.  To do so first copy Rakefile to your project and update
   tutorial](http://twobitlabs.com/2011/06/adding-ocunit-to-an-existing-ios-project-with-xcode-4/).
   Name your target ApplicationSpecs (or if you used "Include Unit Tests"
   option Xcode will create target for you named [AppName]Tests.)
-* Build the Cedar-iPhone static framework.
-* Add the Cedar-iPhone static framework to your project, and link
+* Build the Cedar-iOS static framework.
+* Add the Cedar-iOS static framework to your project, and link
   ApplicationSpecs target with it.
 * Add `-ObjC`, `-all_load` and `-lstdc++` to the Other Linker Flags build setting for the
   ApplicationSpecs target.
