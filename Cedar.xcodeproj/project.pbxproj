@@ -18,7 +18,7 @@
 			dependencies = (
 			);
 			name = "Cedar-iOS";
-			productName = "Cedar-iPhone";
+			productName = "Cedar-iOS";
 		};
 /* End PBXAggregateTarget section */
 
@@ -38,8 +38,14 @@
 		6628FC9914C4DD440016652A /* CDRSpy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC9814C4DD440016652A /* CDRSpy.h */; };
 		6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6628FC9814C4DD440016652A /* CDRSpy.h */; };
 		6628FC9C14C4DEC50016652A /* CDRSpy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
-		6628FC9E14C4DEC50016652A /* CDRSpy.mm in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
 		6628FCA114C503530016652A /* Cedar-iOS.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6628FCA014C503530016652A /* Cedar-iOS.h */; };
+		6639A77E14C50A6800B564B7 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77D14C50A6800B564B7 /* SimpleIncrementer.m */; };
+		6639A77F14C50D0100B564B7 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
+		6639A78114C50D3000B564B7 /* HaveReceived.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
+		6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
+		6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
+		6639A78914C544EB00B564B7 /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; };
+		6639A78A14C544EB00B564B7 /* Argument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; };
 		66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
 		960118BC1434867E00825FFF /* CDROTestIPhoneRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 960118BB1434867E00825FFF /* CDROTestIPhoneRunner.m */; };
 		96158A88144A915E005895CE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96158A87144A915E005895CE /* Cocoa.framework */; };
@@ -370,8 +376,9 @@
 				AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */,
 				6628FC8914C4DBA70016652A /* CedarDoubles.h in Copy headers to framework */,
 				6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */,
-				6628FC9E14C4DEC50016652A /* CDRSpy.mm in Copy headers to framework */,
 				6628FCA114C503530016652A /* Cedar-iOS.h in Copy headers to framework */,
+				6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */,
+				6639A78A14C544EB00B564B7 /* Argument.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +395,11 @@
 		6628FC9814C4DD440016652A /* CDRSpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpy.h; sourceTree = "<group>"; };
 		6628FC9B14C4DEC50016652A /* CDRSpy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpy.mm; sourceTree = "<group>"; };
 		6628FCA014C503530016652A /* Cedar-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cedar-iOS.h"; sourceTree = "<group>"; };
+		6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaveReceivedSpec.mm; sourceTree = "<group>"; };
+		6639A77C14C50A6800B564B7 /* SimpleIncrementer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleIncrementer.h; sourceTree = "<group>"; };
+		6639A77D14C50A6800B564B7 /* SimpleIncrementer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleIncrementer.m; sourceTree = "<group>"; };
+		6639A78014C50D3000B564B7 /* HaveReceived.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaveReceived.h; sourceTree = "<group>"; };
+		6639A78814C544EB00B564B7 /* Argument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Argument.h; sourceTree = "<group>"; };
 		66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpySpec.mm; sourceTree = "<group>"; };
 		960118BB1434867E00825FFF /* CDROTestIPhoneRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDROTestIPhoneRunner.m; sourceTree = "<group>"; };
 		96158A86144A915E005895CE /* OCUnitAppLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCUnitAppLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -495,8 +507,8 @@
 		AEEE222211DC2A1400029872 /* Rakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
 		AEEE222311DC2A1400029872 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEEE227611DC2CF900029872 /* iPhoneSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPhoneSpecs-Info.plist"; sourceTree = "<group>"; };
+		AEEE227611DC2CF900029872 /* iOSSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOSSpecs-Info.plist"; sourceTree = "<group>"; };
 		AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGreaterThan.h; sourceTree = "<group>"; };
 		AEF32FF3145A2E91002F93BB /* CompareEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareEqual.h; sourceTree = "<group>"; };
 		AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareGreaterThan.h; sourceTree = "<group>"; };
@@ -616,6 +628,8 @@
 			children = (
 				6628FC8714C4DBA70016652A /* CedarDoubles.h */,
 				6628FC9814C4DD440016652A /* CDRSpy.h */,
+				6639A78014C50D3000B564B7 /* HaveReceived.h */,
+				6639A78814C544EB00B564B7 /* Argument.h */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -624,6 +638,9 @@
 			isa = PBXGroup;
 			children = (
 				66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */,
+				6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */,
+				6639A77C14C50A6800B564B7 /* SimpleIncrementer.h */,
+				6639A77D14C50A6800B564B7 /* SimpleIncrementer.m */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -793,7 +810,7 @@
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
 				AEEE222211DC2A1400029872 /* Rakefile */,
 				AEEE222311DC2A1400029872 /* README.markdown */,
-				AEEE227811DC2CF900029872 /* iPhoneSpecs-Info.plist */,
+				AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -803,7 +820,7 @@
 				AEEE1FB611DC271300029872 /* Cedar.framework */,
 				AEEE218611DC28E200029872 /* Specs */,
 				AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */,
-				AEEE227611DC2CF900029872 /* iPhoneSpecs.app */,
+				AEEE227611DC2CF900029872 /* iOSSpecs.app */,
 				96A07F0813F276640021974D /* FocusedSpecs */,
 				96B5F9F6144A81A7000A6A5D /* OCUnitApp.app */,
 				96B5FA11144A81A8000A6A5D /* OCUnitAppTests.octest */,
@@ -1054,6 +1071,8 @@
 				492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */,
 				6628FC8814C4DBA70016652A /* CedarDoubles.h in Headers */,
 				6628FC9914C4DD440016652A /* CDRSpy.h in Headers */,
+				6639A78114C50D3000B564B7 /* HaveReceived.h in Headers */,
+				6639A78914C544EB00B564B7 /* Argument.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1200,9 +1219,9 @@
 			productReference = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		AEEE227511DC2CF900029872 /* iPhoneSpecs */ = {
+		AEEE227511DC2CF900029872 /* iOSSpecs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AEEE227B11DC2CF900029872 /* Build configuration list for PBXNativeTarget "iPhoneSpecs" */;
+			buildConfigurationList = AEEE227B11DC2CF900029872 /* Build configuration list for PBXNativeTarget "iOSSpecs" */;
 			buildPhases = (
 				AEEE227211DC2CF900029872 /* Resources */,
 				AEEE227311DC2CF900029872 /* Sources */,
@@ -1214,9 +1233,9 @@
 				AEEE227D11DC2D3400029872 /* PBXTargetDependency */,
 				AE135E6D11DEB45F00A922D4 /* PBXTargetDependency */,
 			);
-			name = iPhoneSpecs;
+			name = iOSSpecs;
 			productName = iPhoneSpecs;
-			productReference = AEEE227611DC2CF900029872 /* iPhoneSpecs.app */;
+			productReference = AEEE227611DC2CF900029872 /* iOSSpecs.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1254,7 +1273,7 @@
 				96A07EEE13F276640021974D /* FocusedSpecs */,
 				AEEE222811DC2B0600029872 /* Cedar-StaticLib */,
 				AEEE224B11DC2BBB00029872 /* Cedar-iOS */,
-				AEEE227511DC2CF900029872 /* iPhoneSpecs */,
+				AEEE227511DC2CF900029872 /* iOSSpecs */,
 				96B5F9F5144A81A7000A6A5D /* OCUnitApp */,
 				96B5FA10144A81A8000A6A5D /* OCUnitAppTests */,
 				96158A85144A915E005895CE /* OCUnitAppLogicTests */,
@@ -1478,6 +1497,8 @@
 				AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
 				492951E41482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */,
+				6639A77E14C50A6800B564B7 /* SimpleIncrementer.m in Sources */,
+				6639A77F14C50D0100B564B7 /* HaveReceivedSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1506,6 +1527,7 @@
 				960118BC1434867E00825FFF /* CDROTestIPhoneRunner.m in Sources */,
 				9637852C1491D6D40059C9F6 /* CDROTestHelper.m in Sources */,
 				492951E11481AAFA00FA8916 /* CDRJUnitXMLReporter.m in Sources */,
+				6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2097,7 +2119,7 @@
 					"\"$(SRCROOT)\"/Externals/OCMock/Source/**",
 					"\"$(SRCROOT)\"/Externals/OCHamcrest/Source/**",
 				);
-				INFOPLIST_FILE = "iPhoneSpecs-Info.plist";
+				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-lstdc++",
@@ -2109,8 +2131,9 @@
 					UIKit,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = iPhoneSpecs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				VERSION_INFO_FILE = $TARGET_NAME;
 			};
 			name = Debug;
 		};
@@ -2133,7 +2156,7 @@
 					"\"$(SRCROOT)\"/Externals/OCMock/Source/**",
 					"\"$(SRCROOT)\"/Externals/OCHamcrest/Source/**",
 				);
-				INFOPLIST_FILE = "iPhoneSpecs-Info.plist";
+				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-lstdc++",
@@ -2145,8 +2168,9 @@
 					UIKit,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = iPhoneSpecs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				VERSION_INFO_FILE = $TARGET_NAME;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -2235,7 +2259,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AEEE227B11DC2CF900029872 /* Build configuration list for PBXNativeTarget "iPhoneSpecs" */ = {
+		AEEE227B11DC2CF900029872 /* Build configuration list for PBXNativeTarget "iOSSpecs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AEEE227911DC2CF900029872 /* Debug */,

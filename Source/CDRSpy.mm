@@ -3,7 +3,7 @@
 
 @interface CDRSpy ()
 
-- (void)doAsOriginalObject:(void(^)())block;
+- (void)asOriginalObject:(void(^)())block;
 
 @end
 
@@ -20,18 +20,27 @@
     object_setClass(instance, self);
 }
 
+- (NSString *)description {
+    __block NSString *description;
+    [self asOriginalObject:^{
+        description = [self description];
+    }];
+
+    return description;
+}
+
 - (void)forwardInvocation:(NSInvocation *)invocation {
     NSMutableArray *sentMessages = objc_getAssociatedObject(self, @"sent-messages");
     [sentMessages addObject:invocation];
 
-    [self doAsOriginalObject:^{
+    [self asOriginalObject:^{
         [invocation invoke];
     }];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
-    __block NSMethodSignature *originalMethodSignature = nil;
-    [self doAsOriginalObject:^{
+    __block NSMethodSignature *originalMethodSignature;
+    [self asOriginalObject:^{
         originalMethodSignature = [self methodSignatureForSelector:sel];
     }];
 
@@ -41,7 +50,7 @@
 - (BOOL)respondsToSelector:(SEL)selector {
     __block BOOL respondsToSelector = sel_isEqual(selector, @selector(sent_messages));
 
-    [self doAsOriginalObject:^{
+    [self asOriginalObject:^{
         respondsToSelector = respondsToSelector || [self respondsToSelector:selector];
     }];
 
@@ -53,7 +62,7 @@
 }
 
 #pragma mark Private interface
-- (void)doAsOriginalObject:(void(^)())block {
+- (void)asOriginalObject:(void(^)())block {
     Class spyClass = object_getClass(self);
     object_setClass(self, objc_getAssociatedObject(self, @"original-class"));
 
