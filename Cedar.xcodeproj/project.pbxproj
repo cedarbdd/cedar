@@ -620,7 +620,7 @@
 			children = (
 				6628FC9B14C4DEC50016652A /* CDRSpy.mm */,
 			);
-			name = Doubles;
+			path = Doubles;
 			sourceTree = "<group>";
 		};
 		66F00B4F14C4D8F600146D88 /* Doubles */ = {

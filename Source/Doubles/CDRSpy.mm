@@ -66,9 +66,11 @@
     Class spyClass = object_getClass(self);
     object_setClass(self, objc_getAssociatedObject(self, @"original-class"));
 
-    block();
-
-    object_setClass(self, spyClass);
+    @try {
+        block();
+    } @finally {
+        object_setClass(self, spyClass);
+    }
 }
 
 @end

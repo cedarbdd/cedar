@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "CompareEqual.h"
 #import "CedarStringifiers.h"
+#import "CedarComparators.h"
 
 namespace Cedar { namespace Doubles {
 
@@ -46,14 +47,14 @@ namespace Cedar { namespace Doubles {
     /* virtual */ const char * TypedArgument<T>::value_encoding() const {
         return @encode(T);
     }
-    
+
     template<typename T>
     /* virtual */ NSString * TypedArgument<T>::value_string() const {
         return Matchers::Stringifiers::string_for(value_);
     }
-    
+
     template<typename T>
     /* virtual */ bool TypedArgument<T>::matches_bytes(void * expectedArgumentBytes) const {
-        return value_ == *(static_cast<T *>(expectedArgumentBytes));
+        return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(expectedArgumentBytes)));
     }
 }}
