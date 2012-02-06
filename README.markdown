@@ -68,7 +68,7 @@ BDD-style testing using Objective-C
   name" entry.  The project template will likely have set this to "MainWindow."
 * Add the Cedar-iOS static framework to your project, and link your UISpecs
   target with it.
-* Add -ObjC and -all_load to the Other Linker Flags build setting for the
+* Add `-ObjC`, `-lstdc++` and `-all_load` to the Other Linker Flags build setting for the
   UISpecs target.  This is necessary for the linker to correctly load symbols
   for Objective-C classes from static libraries.
 * Add a main.m to your UISpecs target that looks like this:
