@@ -1244,7 +1244,7 @@
 		AEEE1FA611DC26EA00029872 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = AEEE1FA911DC26EA00029872 /* Build configuration list for PBXProject "Cedar" */;
 			compatibilityVersion = "Xcode 3.2";
