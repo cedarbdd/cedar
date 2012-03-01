@@ -1,16 +1,18 @@
-PROJECT_NAME = "Cedar"
-APP_NAME = "OCUnitApp"
-CONFIGURATION = "Release"
+PROJECT_NAME ||= "Cedar"
+APP_NAME ||= "OCUnitApp"
+CONFIGURATION ||= "Release"
 
-SPECS_TARGET_NAME = "Specs"
-UI_SPECS_TARGET_NAME = "iOSSpecs"
+SPECS_TARGET_NAME ||= "Specs"
+UI_SPECS_TARGET_NAME ||= "iOSSpecs"
 
-OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
-OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
+OCUNIT_LOGIC_SPECS_TARGET_NAME ||= "OCUnitAppLogicTests"
+OCUNIT_APPLICATION_SPECS_TARGET_NAME ||= "OCUnitAppTests"
 
-SDK_VERSION = "4.3"
-SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
-BUILD_DIR = File.join(File.dirname(__FILE__), "build")
+SDK_VERSION ||= "4.3"
+SDK_DIR ||= "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
+BUILD_DIR ||= File.join(File.dirname(__FILE__), "build")
+
+IDE_BUNDLE_INJECTION ||= "/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection"
 
 
 def build_dir(effective_platform_name)
@@ -146,7 +148,7 @@ namespace :ocunit do
 
     env_vars = {
       "DYLD_ROOT_PATH" => SDK_DIR,
-      "DYLD_INSERT_LIBRARIES" => "/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
+      "DYLD_INSERT_LIBRARIES" => IDE_BUNDLE_INJECTION,
       "DYLD_FALLBACK_LIBRARY_PATH" => SDK_DIR,
       "XCInjectBundle" => "#{File.join(build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")}",
       "XCInjectBundleInto" => "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")}",
