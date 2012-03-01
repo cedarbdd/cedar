@@ -53,9 +53,9 @@ def output_file(target)
 end
 
 def kill_simulator
-  system %Q[killall -m -KILL "gdb"]
-  system %Q[killall -m -KILL "otest"]
-  system %Q[killall -m -KILL "iPhone Simulator"]
+  system %Q[killall -m -KILL "gdb" 2>&1 | grep -v "No matching processes"]
+  system %Q[killall -m -KILL "otest" 2>&1 | grep -v "No matching processes"]
+  system %Q[killall -m -KILL "iPhone Simulator" 2>&1 | grep -v "No matching processes"]
 end
 
 task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application"]
