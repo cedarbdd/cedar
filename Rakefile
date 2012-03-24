@@ -1,16 +1,18 @@
-PROJECT_NAME = "Cedar"
-APP_NAME = "OCUnitApp"
-CONFIGURATION = "Release"
+PROJECT_NAME ||= "Cedar"
+APP_NAME ||= "OCUnitApp"
+CONFIGURATION ||= "Release"
 
-SPECS_TARGET_NAME = "Specs"
-UI_SPECS_TARGET_NAME = "iOSSpecs"
+SPECS_TARGET_NAME ||= "Specs"
+UI_SPECS_TARGET_NAME ||= "iOSSpecs"
 
-OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
-OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
+OCUNIT_LOGIC_SPECS_TARGET_NAME ||= "OCUnitAppLogicTests"
+OCUNIT_APPLICATION_SPECS_TARGET_NAME ||= "OCUnitAppTests"
 
-SDK_VERSION = "4.3"
-SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
-BUILD_DIR = File.join(File.dirname(__FILE__), "build")
+SDK_VERSION ||= "4.3"
+SDK_DIR ||= "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
+BUILD_DIR ||= File.join(File.dirname(__FILE__), "build")
+
+IDE_BUNDLE_INJECTION ||= "/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection"
 
 
 def build_dir(effective_platform_name)
@@ -51,9 +53,9 @@ def output_file(target)
 end
 
 def kill_simulator
-  system %Q[killall -m -KILL "gdb"]
-  system %Q[killall -m -KILL "otest"]
-  system %Q[killall -m -KILL "iPhone Simulator"]
+  system %Q[killall -m -KILL "gdb" 2>&1 | grep -v "No matching processes"]
+  system %Q[killall -m -KILL "otest" 2>&1 | grep -v "No matching processes"]
+  system %Q[killall -m -KILL "iPhone Simulator" 2>&1 | grep -v "No matching processes"]
 end
 
 task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application"]
@@ -142,11 +144,11 @@ namespace :ocunit do
   task :application do
     kill_simulator
 
-    system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("ocunit_application_specs")
+    system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR} 2>&1 | grep -v 'IDELogStore'", output_file("ocunit_application_specs")
 
     env_vars = {
       "DYLD_ROOT_PATH" => SDK_DIR,
-      "DYLD_INSERT_LIBRARIES" => "/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
+      "DYLD_INSERT_LIBRARIES" => IDE_BUNDLE_INJECTION,
       "DYLD_FALLBACK_LIBRARY_PATH" => SDK_DIR,
       "XCInjectBundle" => "#{File.join(build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")}",
       "XCInjectBundleInto" => "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")}",
