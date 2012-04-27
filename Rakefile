@@ -9,9 +9,16 @@ OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
 OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
 
 SDK_VERSION = "4.3"
-SDK_DIR = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
 BUILD_DIR = File.join(File.dirname(__FILE__), "build")
 
+def sdk_dir
+  "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
+end
+
+# Xcode 4.3 stores its /Developer inside /Applications/Xcode.app, Xcode 4.2 stored it in /Developer
+def xcode_developer_dir
+  `xcode-select -print-path`.strip
+end
 
 def build_dir(effective_platform_name)
   File.join(BUILD_DIR, CONFIGURATION + effective_platform_name)
@@ -114,8 +121,8 @@ require 'tmpdir'
 desc "Run UI specs"
 task :uispecs => :build_uispecs do
   env_vars = {
-    "DYLD_ROOT_PATH" => SDK_DIR,
-    "IPHONE_SIMULATOR_ROOT" => SDK_DIR,
+    "DYLD_ROOT_PATH" => sdk_dir,
+    "IPHONE_SIMULATOR_ROOT" => sdk_dir,
     "CFFIXED_USER_HOME" => Dir.tmpdir,
     "CEDAR_HEADLESS_SPECS" => "1",
     "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
@@ -145,12 +152,12 @@ namespace :ocunit do
     system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("ocunit_application_specs")
 
     env_vars = {
-      "DYLD_ROOT_PATH" => SDK_DIR,
+      "DYLD_ROOT_PATH" => sdk_dir,
       "DYLD_INSERT_LIBRARIES" => "/Developer/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-      "DYLD_FALLBACK_LIBRARY_PATH" => SDK_DIR,
+      "DYLD_FALLBACK_LIBRARY_PATH" => sdk_dir,
       "XCInjectBundle" => "#{File.join(build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")}",
       "XCInjectBundleInto" => "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")}",
-      "IPHONE_SIMULATOR_ROOT" => SDK_DIR,
+      "IPHONE_SIMULATOR_ROOT" => sdk_dir,
       "CFFIXED_USER_HOME" => Dir.tmpdir,
       "CEDAR_HEADLESS_SPECS" => "1",
       "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
