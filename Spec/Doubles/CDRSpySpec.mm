@@ -44,6 +44,14 @@ describe(@"spy_on", ^{
     it(@"should return the description of the spied-upon object", ^{
         incrementer.description should contain(@"SimpleIncrementer");
     });
+
+    it(@"should only create one spy for a given object" , ^{
+        ((CDRSpy *)incrementer).sent_messages should be_empty;
+        spy_on(incrementer);
+        [incrementer increment];
+        ((CDRSpy *)incrementer).sent_messages should_not be_empty;
+    });
+
 });
 
 SPEC_END
