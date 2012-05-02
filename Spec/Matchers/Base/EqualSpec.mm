@@ -1233,6 +1233,8 @@ describe(@"equal matcher", ^{
     });
 });
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-comparison"
 describe(@"== operator matcher", ^{
     describe(@"when the actual value is equal to the expected value", ^{
         it(@"should pass", ^{
@@ -1302,5 +1304,6 @@ describe(@"!= operator matcher", ^{
         });
     });
 });
+#pragma clang diagnostic push
 
 SPEC_END
