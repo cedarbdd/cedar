@@ -30,6 +30,7 @@ using namespace Cedar::Matchers;
 
 - (void)dealloc {
     self.xml = nil;
+    [super dealloc];
 }
 
 - (void)writeXmlToFile:(NSString *)xmlString {
