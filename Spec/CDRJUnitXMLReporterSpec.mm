@@ -11,6 +11,7 @@
 
 #import "CDRExample.h"
 #import "CDRJUnitXMLReporter.h"
+#import "CDRSpecFailure.h"
 
 using namespace Cedar::Matchers;
 
@@ -101,8 +102,10 @@ describe(@"runDidComplete", ^{
 
     describe(@"Each failing spec", ^{
         it(@"should be written to the XML file", ^{
-            CDRExample *example1 = [CDRExample exampleWithText:@"Failing spec 1\nFailure reason 1" andState:CDRExampleStateFailed];
-            CDRExample *example2 = [CDRExample exampleWithText:@"Failing spec 2\nFailure reason 2" andState:CDRExampleStateFailed];
+            CDRExample *example1 = [CDRExample exampleWithText:@"Failing spec 1" andState:CDRExampleStateFailed];
+            example1.failure = [CDRSpecFailure specFailureWithReason:@"Failure reason 1"];
+            CDRExample *example2 = [CDRExample exampleWithText:@"Failing spec 2" andState:CDRExampleStateFailed];
+            example2.failure = [CDRSpecFailure specFailureWithReason:@"Failure reason 2"];
 
             [reporter reportOnExample:example1];
             [reporter reportOnExample:example2];
