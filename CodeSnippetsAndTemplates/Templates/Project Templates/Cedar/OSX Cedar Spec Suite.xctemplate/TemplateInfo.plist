@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+	<key>Nodes</key>
+	<array>
+		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
+		<string>___PACKAGENAME___-Prefix.pch:objC:importOCMock</string>
+		<string>___PACKAGENAME___-Prefix.pch:objC:importFoundation</string>
+		<string>Frameworks/Cedar.framework</string>
+		<string>main.m:include</string>
+		<string>main.m:main:content</string>
+	</array>
+	<key>Identifier</key>
+	<string>com.pivotallabs.cedar.OSXSpecSuite</string>
+	<key>Concrete</key>
+	<true/>
+	<key>Description</key>
+	<string>Creates a command-line target which runs Cedar specs.</string>
+	<key>Ancestors</key>
+	<array>
+		<string>com.apple.dt.unit.base</string>
+		<string>com.apple.dt.unit.macBase</string>
+		<string>com.apple.dt.unit.macReferenceCounting</string>
+	</array>
+	<key>Targets</key>
+	<array>
+		<dict>
+			<key>SharedSettings</key>
+			<dict>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>___PACKAGENAME___/___PACKAGENAME___-Prefix.pch</string>
+			</dict>
+			<key>Frameworks</key>
+			<array>
+				<string>Foundation</string>
+			</array>
+			<key>ProductType</key>
+			<string>com.apple.product-type.tool</string>
+			<key>BuildPhases</key>
+			<array>
+				<dict>
+					<key>Class</key>
+					<string>ShellScript</string>
+					<key>ShellPath</key>
+					<string>/bin/sh</string>
+					<key>ShellScript</key>
+					<string>cp -R &quot;${TARGET_NAME}&quot;/Frameworks/Cedar.framework &quot;${BUILT_PRODUCTS_DIR}&quot;
+if test -d &quot;${TARGET_NAME}&quot;/Frameworks/OCMock.framework ; then cp -R &quot;${TARGET_NAME}&quot;/Frameworks/OCMock.framework &quot;${BUILT_PRODUCTS_DIR}&quot; ; fi</string>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>Sources</string>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>Frameworks</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>useARC</string>
+			<key>Units</key>
+			<dict>
+				<key>false</key>
+				<array>
+					<dict>
+						<key>Project</key>
+						<dict>
+							<key>SharedSettings</key>
+							<dict>
+								<key>CLANG_ENABLE_OBJC_ARC</key>
+								<string>NO</string>
+							</dict>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>Definitions</key>
+	<dict>
+		<key>*:*:importOCMock</key>
+		<string>___CEDAR_IMPORT_OCMOCK___</string>
+		<key>*:*:importCedar</key>
+		<string>#import &lt;Cedar/SpecHelper.h&gt;</string>
+		<key>main.m:include</key>
+		<string>#import &lt;Cedar/Cedar.h&gt;
+</string>
+		<key>main.m:main:content</key>
+		<string>int main (int argc, const char *argv[]) {
+    return runSpecs();
+}</string>
+		<key>Frameworks/Cedar.framework</key>
+		<dict>
+			<key>Path</key>
+			<string>Cedar.framework</string>
+		</dict>
+		<key>*:*:importFoundation</key>
+		<string>#import &lt;Foundation/Foundation.h&gt;
+</string>
+	</dict>
+</dict>
+</plist>

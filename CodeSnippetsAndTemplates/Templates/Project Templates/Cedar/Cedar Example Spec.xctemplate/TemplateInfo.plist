@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Identifier</key>
+	<string>com.pivotallabs.cedar.exampleSpec</string>
+	<key>InjectionTargets</key>
+	<array>
+		<string>com.pivotallabs.cedar.testingBundle</string>
+		<string>com.pivotallabs.cedar.iOSSpecSuite</string>
+		<string>com.pivotallabs.cedar.OSXSpecSuite</string>
+	</array>
+	<key>Kind</key>
+	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+	<key>Nodes</key>
+	<array>
+		<string>ExampleSpec.mm</string>
+	</array>
+	<key>Definitions</key>
+	<dict>
+		<key>ExampleSpec.mm</key>
+		<dict>
+			<key>Path</key>
+			<string>ExampleSpec.mm</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -8,8 +8,19 @@ UI_SPECS_TARGET_NAME = "iOSSpecs"
 OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
 OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
 
+OCMOCK_PROJECT_PATH = "Externals/OCMock/Source/OCMock.xcodeproj"
+OCMOCK_FRAMEWORK_TARGET_NAME = "OCMock"
+OCMOCK_IOS_FRAMEWORK_TARGET_NAME = "OCMock-iPhone"
+CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
+CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
+XCODE_TEMPLATES_PATH = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
+XCODE_SNIPPETS_PATH = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
+
 SDK_VERSION = "4.3"
 BUILD_DIR = File.join(File.dirname(__FILE__), "build")
+TEMPLATES_DIR = File.join(File.dirname(__FILE__), "CodeSnippetsAndTemplates", "Templates")
+SNIPPETS_DIR = File.join(File.dirname(__FILE__), "CodeSnippetsAndTemplates", "CodeSnippets")
+SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 
 def sdk_dir
   "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
@@ -94,6 +105,14 @@ task :build_all do
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("build_all")
 end
 
+desc "Build Cedar and Cedar-iOS frameworks"
+task :build_frameworks do
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar")
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar_ios")
+  system_or_exit "xcodebuild -project #{OCMOCK_PROJECT_PATH} -target #{OCMOCK_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_ocmock")
+  system_or_exit "xcodebuild -project #{OCMOCK_PROJECT_PATH} -target #{OCMOCK_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_ocmock_ios")
+end
+
 desc "Run specs"
 task :specs => :build_specs do
   build_dir = build_dir("")
@@ -133,7 +152,6 @@ task :uispecs => :build_uispecs do
   end
 end
 
-
 desc "Build and run OCUnit logic and application specs"
 task :ocunit => ["ocunit:logic", "ocunit:application"]
 
@@ -168,3 +186,35 @@ namespace :ocunit do
     end
   end
 end
+
+desc "Build frameworks and install templates and code snippets"
+task :install => ["install:templates", "install:snippets"]
+
+desc "Remove code snippets and templates"
+task :uninstall do
+  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_PATH}/File Templates/Cedar\""
+  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar\""
+  system_or_exit "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_PATH} | xargs -I{} rm -f \"{}\""
+end
+
+namespace :install do
+  task :templates => :build_frameworks do
+    Dir.mkdir(XCODE_TEMPLATES_PATH) unless File.exists?(XCODE_TEMPLATES_PATH)
+    system_or_exit "cp -R \"#{TEMPLATES_DIR}\"/* \"#{XCODE_TEMPLATES_PATH}\""
+
+    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release-iphoneuniversal/Cedar-iOS.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/iOS Cedar Spec Suite.xctemplate/\""
+    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release-iphoneuniversal/Cedar-iOS.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/iOS Cedar Testing Bundle.xctemplate/\""
+
+    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release/Cedar.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/OSX Cedar Spec Suite.xctemplate/\""
+    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release/Cedar.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/OSX Cedar Testing Bundle.xctemplate/\""
+
+    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release-iphoneuniversal/OCMock-iPhone.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/iOS OCMock.xctemplate/\""
+    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release/OCMock.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/OSX OCMock.xctemplate/\""
+  end
+
+  task :snippets do
+    Dir.mkdir(XCODE_SNIPPETS_PATH) unless File.exists?(XCODE_SNIPPETS_PATH)
+    system_or_exit "cp \"#{SNIPPETS_DIR}\"/* \"#{XCODE_SNIPPETS_PATH}\""
+  end
+end
+

@@ -9,7 +9,7 @@
 	<key>DefaultCompletionName</key>
 	<string>MyClass</string>
 	<key>Description</key>
-	<string>A Cedar Domain Spec File</string>
+	<string>A Cedar Spec File</string>
 	<key>Kind</key>
 	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
 	<key>MainTemplateFile</key>
@@ -34,10 +34,11 @@
 	<key>Platforms</key>
 	<array>
 		<string>com.apple.platform.iphoneos</string>
+		<string>com.apple.platform.macosx</string>
 	</array>
 	<key>SortOrder</key>
 	<string>1</string>
 	<key>Summary</key>
-	<string>A Cedar Domain Spec</string>
+	<string>A Cedar Spec</string>
 </dict>
 </plist>
