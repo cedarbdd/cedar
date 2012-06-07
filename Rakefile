@@ -73,7 +73,7 @@ end
 
 desc "Clean all targets"
 task :clean do
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean SYMROOT=#{BUILD_DIR}", output_file("clean")
+  system_or_exit "rm -rf #{BUILD_DIR}/*", output_file("clean")
 end
 
 desc "Build specs"
