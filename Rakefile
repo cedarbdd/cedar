@@ -13,14 +13,16 @@ OCMOCK_FRAMEWORK_TARGET_NAME = "OCMock"
 OCMOCK_IOS_FRAMEWORK_TARGET_NAME = "OCMock-iPhone"
 CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
 CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
-XCODE_TEMPLATES_PATH = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
-XCODE_SNIPPETS_PATH = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
+SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
+
+XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
+XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 
 SDK_VERSION = "4.3"
 BUILD_DIR = File.join(File.dirname(__FILE__), "build")
 TEMPLATES_DIR = File.join(File.dirname(__FILE__), "CodeSnippetsAndTemplates", "Templates")
 SNIPPETS_DIR = File.join(File.dirname(__FILE__), "CodeSnippetsAndTemplates", "CodeSnippets")
-SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
+DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 
 def sdk_dir
   "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
@@ -187,34 +189,45 @@ namespace :ocunit do
   end
 end
 
-desc "Build frameworks and install templates and code snippets"
-task :install => ["install:templates", "install:snippets"]
-
 desc "Remove code snippets and templates"
 task :uninstall do
-  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_PATH}/File Templates/Cedar\""
-  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar\""
-  system_or_exit "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_PATH} | xargs -I{} rm -f \"{}\""
+  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/File Templates/Cedar\""
+  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/Project Templates/Cedar\""
+  system_or_exit "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_DIR} | xargs -I{} rm -f \"{}\""
 end
 
-namespace :install do
-  task :templates => :build_frameworks do
-    Dir.mkdir(XCODE_TEMPLATES_PATH) unless File.exists?(XCODE_TEMPLATES_PATH)
-    system_or_exit "cp -R \"#{TEMPLATES_DIR}\"/* \"#{XCODE_TEMPLATES_PATH}\""
+desc "Build a distribution of the templates and code snippets"
+task :dist => ["dist:prepare", "dist:package"]
 
-    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release-iphoneuniversal/Cedar-iOS.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/iOS Cedar Spec Suite.xctemplate/\""
-    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release-iphoneuniversal/Cedar-iOS.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/iOS Cedar Testing Bundle.xctemplate/\""
+namespace :dist do
+  task :prepare => :build_frameworks do
+    Dir.mkdir(DIST_STAGING_DIR) unless File.exists?(DIST_STAGING_DIR)
+    cedar_project_templates_dir = %{#{DIST_STAGING_DIR}/Library/Developer/Xcode/Templates/Project Templates/Cedar}
 
-    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release/Cedar.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/OSX Cedar Spec Suite.xctemplate/\""
-    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release/Cedar.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/OSX Cedar Testing Bundle.xctemplate/\""
+    system_or_exit %{rm -rf "#{DIST_STAGING_DIR}"/*}
+    system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode"}
+    system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData"}
+    system_or_exit %{cp -R "#{TEMPLATES_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/"}
+    system_or_exit %{cp -R "#{SNIPPETS_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData/"}
 
-    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release-iphoneuniversal/OCMock-iPhone.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/iOS OCMock.xctemplate/\""
-    system_or_exit "cp -R \"#{BUILD_DIR}\"/Release/OCMock.framework \"#{XCODE_TEMPLATES_PATH}/Project Templates/Cedar/OSX OCMock.xctemplate/\""
+
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{CEDAR_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS Cedar Spec Suite.xctemplate/"}
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{CEDAR_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS Cedar Testing Bundle.xctemplate/"}
+
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{CEDAR_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX Cedar Spec Suite.xctemplate/"}
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{CEDAR_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX Cedar Testing Bundle.xctemplate/"}
+
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{OCMOCK_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS OCMock.xctemplate/"}
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{OCMOCK_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX OCMock.xctemplate/"}
   end
 
-  task :snippets do
-    Dir.mkdir(XCODE_SNIPPETS_PATH) unless File.exists?(XCODE_SNIPPETS_PATH)
-    system_or_exit "cp \"#{SNIPPETS_DIR}\"/* \"#{XCODE_SNIPPETS_PATH}\""
+  task :package do
+    system_or_exit %{cd #{DIST_STAGING_DIR} ; tar --exclude .DS_Store -zcf "#{BUILD_DIR}/Cedar.tar.gz" * ; cd -}
   end
+end
+
+desc "Build frameworks and install templates and code snippets"
+task :install => [ "dist:prepare" ] do
+  system_or_exit %{cp -Rf "#{DIST_STAGING_DIR}/"* ~/}
 end
 
