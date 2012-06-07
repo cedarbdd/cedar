@@ -222,7 +222,9 @@ namespace :dist do
   end
 
   task :package do
-    system_or_exit %{cd #{DIST_STAGING_DIR} ; tar --exclude .DS_Store -zcf "#{BUILD_DIR}/Cedar.tar.gz" * ; cd -}
+    package_file_path = "#{BUILD_DIR}/Cedar-#{`git rev-parse --short HEAD`.strip}.tar.gz"
+    system_or_exit %{cd #{DIST_STAGING_DIR} ; tar --exclude .DS_Store -zcf "#{package_file_path}" * ; cd -}
+    puts "\n*** Built tarball is in #{package_file_path} ***\n"
   end
 end
 
