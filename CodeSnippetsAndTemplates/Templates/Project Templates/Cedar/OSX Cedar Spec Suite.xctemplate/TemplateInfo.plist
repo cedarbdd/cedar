@@ -63,29 +63,6 @@ if test -d &quot;${TARGET_NAME}&quot;/Frameworks/OCMock.framework ; then cp -R &
 			</array>
 		</dict>
 	</array>
-	<key>Options</key>
-	<array>
-		<dict>
-			<key>Identifier</key>
-			<string>useARC</string>
-			<key>Units</key>
-			<dict>
-				<key>false</key>
-				<array>
-					<dict>
-						<key>Project</key>
-						<dict>
-							<key>SharedSettings</key>
-							<dict>
-								<key>CLANG_ENABLE_OBJC_ARC</key>
-								<string>NO</string>
-							</dict>
-						</dict>
-					</dict>
-				</array>
-			</dict>
-		</dict>
-	</array>
 	<key>Definitions</key>
 	<dict>
 		<key>*:*:importOCMock</key>
