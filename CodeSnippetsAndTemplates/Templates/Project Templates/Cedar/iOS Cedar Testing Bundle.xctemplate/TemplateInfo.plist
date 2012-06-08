@@ -12,6 +12,10 @@
 	<key>Options</key>
 	<array>
 		<dict>
+			<key>EmptyReplacement</key>
+			<string>&lt;Your Test Target&gt;</string>
+			<key>SortOrder</key>
+			<integer>0</integer>
 			<key>Default</key>
 			<string></string>
 			<key>Required</key>
@@ -26,6 +30,22 @@
 			<string>The name of the project target this test suite is for</string>
 			<key>Type</key>
 			<string>text</string>
+		</dict>
+		<dict>
+			<key>SortOrder</key>
+			<integer>1</integer>
+			<key>Identifier</key>
+			<string>bundleLoader</string>
+			<key>Name</key>
+			<string>Bundle Loader</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Description</key>
+			<string>The target that will load this test bundle. [typically your app]</string>
+			<key>Default</key>
+			<string>$(BUILT_PRODUCTS_DIR)/___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___</string>
+			<key>Type</key>
+			<string>static</string>
 		</dict>
 	</array>
 	<key>Description</key>
