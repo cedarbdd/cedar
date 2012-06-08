@@ -19,9 +19,10 @@ XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 
 SDK_VERSION = "4.3"
-BUILD_DIR = File.join(File.dirname(__FILE__), "build")
-TEMPLATES_DIR = File.join(File.dirname(__FILE__), "CodeSnippetsAndTemplates", "Templates")
-SNIPPETS_DIR = File.join(File.dirname(__FILE__), "CodeSnippetsAndTemplates", "CodeSnippets")
+PROJECT_ROOT = File.dirname(__FILE__)
+BUILD_DIR = File.join(PROJECT_ROOT, "build")
+TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
+SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets")
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 
 def sdk_dir
@@ -207,6 +208,10 @@ namespace :dist do
     system_or_exit %{rm -rf "#{DIST_STAGING_DIR}"/*}
     system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode"}
     system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData"}
+
+    system_or_exit %{cp "#{PROJECT_ROOT}/README.markdown" "#{DIST_STAGING_DIR}/README-Cedar.markdown"}
+    system_or_exit %{cp "#{PROJECT_ROOT}/MIT.LICENSE" "#{DIST_STAGING_DIR}/LICENSE-Cedar.txt"}
+
     system_or_exit %{cp -R "#{TEMPLATES_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/"}
     system_or_exit %{cp -R "#{SNIPPETS_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData/"}
 
@@ -230,6 +235,6 @@ end
 
 desc "Build frameworks and install templates and code snippets"
 task :install => [ "dist:prepare" ] do
-  system_or_exit %{cp -Rf "#{DIST_STAGING_DIR}/"* ~/}
+  system_or_exit %{cp -Rf "#{DIST_STAGING_DIR}/Library" ~/}
 end
 
