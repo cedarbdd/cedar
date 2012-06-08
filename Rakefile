@@ -235,6 +235,6 @@ end
 
 desc "Build frameworks and install templates and code snippets"
 task :install => [ "dist:prepare" ] do
-  system_or_exit %{cp -Rf "#{DIST_STAGING_DIR}/Library" ~/}
+  system_or_exit %{ditto "#{DIST_STAGING_DIR}/Library" ~/Library}
 end
 
