@@ -150,6 +150,6 @@
 		</dict>
 	</array>
 	<key>Description</key>
-	<string>Creates an iOS application which runs Cedar specs.</string>
+	<string>Creates an iOS application which runs Cedar specs.  Using ARC is not recommended.</string>
 </dict>
 </plist>

@@ -21,7 +21,7 @@
 	<key>Concrete</key>
 	<true/>
 	<key>Description</key>
-	<string>This target builds a unit test bundle that uses Cedar</string>
+	<string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Unit Testing Bundle.  After creating this target, add it to the list of tests for your app.  Using ARC is not recommended.</string>
 	<key>SortOrder</key>
 	<integer>1</integer>
 	<key>Ancestors</key>

@@ -18,7 +18,7 @@
 	<key>Concrete</key>
 	<true/>
 	<key>Description</key>
-	<string>Creates a command-line target which runs Cedar specs.</string>
+	<string>Creates a command-line target which runs Cedar specs.  Using ARC is not recommended.</string>
 	<key>Ancestors</key>
 	<array>
 		<string>com.apple.dt.unit.base</string>
