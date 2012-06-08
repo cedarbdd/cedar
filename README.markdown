@@ -85,12 +85,14 @@ matcher libraries.  For example, rather than this (OCHamcrest):
 
     assertThat(aString, equalTo(@"something"));
     assertThatInt(anInteger, equalToInt(7));
+    assertThatInt(anInteger, isNot(equalToInt(9)));
     assertThatBool(aBoolean, equalTo(YES));
 
 you can write the following:
 
     expect(aString).to(equal(@"something"));
     expect(anInteger).to(equal(7));
+    expect(anInteger).to_not(equal(9));
     expect(aBoolean).to(equal(YES));
 
 although you would more likely write the last line as:
@@ -99,16 +101,45 @@ although you would more likely write the last line as:
 
 Here is a list of built-in matchers you can use:
 
-    expect(...).to(equal(10));
     expect(...).to(be_nil());
-    expect(...).to(be_close_to(5)); // default within(.01)
-    expect(...).to(be_close_to(5).within(.02));
-    expect(...).to(be_instance_of([NSObject class]));
-    expect(...).to(be_same_instance_as(object));
+
     expect(...).to(be_truthy());
     expect(...).to_not(be_truthy());
+
+    expect(...).to(equal(10));
+    expect(...).to == 10; // shortcut to the above
+    expect(...) == 10; // shortcut to the above
+
+    expect(...).to(be_greater_than(5));
+    expect(...).to > 5; // shortcut to the above
+    expect(...) > 5; // shortcut to the above
+
+    expect(...).to(be_greater_than_or_equal_to(10));
+    expect(...).to(be_gte(10)); // shortcut to the above
+    expect(...).to >= 10; // shortcut to the above
+    expect(...) >= 10; // shortcut to the above
+
+    expect(...).to(be_less_than(11));
+    expect(...).to < 11; // shortcut to the above
+    expect(...) < 11; // shortcut to the above
+
+    expect(...).to(be_less_than_or_equal_to(10));
+    expect(...).to(be_lte(10)); //shortcut to the above
+    expect(...).to <= 10; // shortcut to the above
+    expect(...) <= 10; // shortcut to the above
+
+    expect(...).to(be_close_to(5)); // default within(.01)
+    expect(...).to(be_close_to(5).within(.02));
+
+    expect(...).to(be_instance_of([NSObject class]));
+    expect(...).to(be_instance_of([NSObject class]).or_any_subclass());
+
+    expect(...).to(be_same_instance_as(object));
+
     expect(...).to(contain(@"something"));
     expect(...).to(be_empty());
+
+    expect(^{ ... }).to(raise_exception([NSInternalInconsistencyException]));
 
 These matchers use C++ templates for type deduction.  You'll need to do two things to use them:
 
