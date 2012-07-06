@@ -69,6 +69,7 @@
 }
 
 - (void)runDidComplete {
+	[super runDidComplete: NO];
     NSMutableString *xml = [NSMutableString string];
     [xml appendString:@"<?xml version=\"1.0\"?>\n"];
     [xml appendString:@"<testsuite>\n"];

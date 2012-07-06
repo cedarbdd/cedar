@@ -41,19 +41,25 @@
 }
 
 - (void)runDidComplete {
+	[self runDidComplete: YES];
+}
+
+- (void)runDidComplete:(BOOL)doPrint {
     endTime_ = [[NSDate alloc] init];
     [self stopObservingExamples:rootGroups_];
 
-    printf("\n");
-    if ([pendingMessages_ count]) {
-        [self printMessages:pendingMessages_];
-    }
+	if (doPrint) {
+		printf("\n");
+		if ([pendingMessages_ count]) {
+			[self printMessages:pendingMessages_];
+		}
 
-    if ([failureMessages_ count]) {
-        [self printMessages:failureMessages_];
-    }
+		if ([failureMessages_ count]) {
+			[self printMessages:failureMessages_];
+		}
 
-    [self printStats];
+		[self printStats];
+	}
 }
 
 - (int)result {
