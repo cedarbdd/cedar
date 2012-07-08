@@ -357,7 +357,7 @@ you can run cedar test suites.
 
 ## Troubleshooting
 
-### Linker problems
+### Linker problem ld: file not found
 Example failure:
 
     ld: file not found: <path to build dir>/Products/<Configuration>-<device>/<target name>.app/<target name>
@@ -367,6 +367,19 @@ Example failure:
   * To fix this, Update the `Bundle Loader` setting in build settings to
   `$(BUILT_PRODUCTS_DIR)/<target name>.app/<target name>`
   Ensuring that your new target name is the correct.
+
+### Linker problem ld: symbol(s) not found
+Example failure:
+
+    Undefined symbols for architecture i386:
+    "_OBJC_CLASS_$_SomeClassFromYourApp", referenced from:
+        objc-class-ref in SomeClassFromYourAppSpec.o
+        (maybe you meant: _OBJC_CLASS_$__OBJC_CLASS_$_SomeClassFromYourApp)
+    ld: symbol(s) not found for architecture i386
+
+This error can happen when you have a spec bundle which is run against code built with "Strip Debug Symbols During Copy" set to Yes.
+
+You should ensure that you're running your tests against code built with this configuration setting set to No.  This should be the default if you're building with the Debug configuration.
 
 ### No matching function to call
 Example failure:
