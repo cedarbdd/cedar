@@ -3,27 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>cit</string>
+	<string>cbl</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>it(@"should &lt;#expected behavior#&gt;", ^{
-    &lt;#content#&gt;
-});</string>
+	<string>itShouldBehaveLike(@"&lt;#shared behavior description#&gt;");</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>8e82bfce-c076-3857-3930-a7c16a6372cc</string>
+	<string>D6803E25-A620-4020-974E-2A246BD62127</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
-	<key>IDECodeSnippetSummary</key>
-	<string>Cedar example block</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Cedar example</string>
+	<string>Cedar should behave like</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>2</integer>
+	<integer>0</integer>
   <key>isCedarSnippet</key>
   <true/>
 </dict>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Identifier</key>
+	<string>com.pivotallabs.cedar.iOSOCMock</string>
+	<key>InjectionTargets</key>
+	<array>
+		<string>com.pivotallabs.cedar.iOSSpecSuite</string>
+		<string>com.pivotallabs.cedar.iOSTestingBundle</string>
+	</array>
+	<key>Kind</key>
+	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Default</key>
+			<string>false</string>
+			<key>Description</key>
+			<string>Whether or not to include OCMock for mocking and stubbing objects</string>
+			<key>Identifier</key>
+			<string>useOCMock</string>
+			<key>Name</key>
+			<string>Use OCMock</string>
+			<key>SortOrder</key>
+			<integer>2</integer>
+			<key>Type</key>
+			<string>checkbox</string>
+			<key>Units</key>
+			<dict>
+				<key>false</key>
+				<array>
+					<dict>
+						<key>Macros</key>
+						<dict>
+							<key>CEDAR_IMPORT_OCMOCK</key>
+							<string></string>
+						</dict>
+					</dict>
+				</array>
+				<key>true</key>
+				<array>
+					<dict>
+						<key>Macros</key>
+						<dict>
+							<key>CEDAR_IMPORT_OCMOCK</key>
+							<string>#import &lt;OCMock-iPhone/OCMock.h&gt;</string>
+						</dict>
+						<key>Nodes</key>
+						<array>
+							<string>Frameworks/OCMock-iPhone.framework</string>
+						</array>
+						<key>Definitions</key>
+						<dict>
+							<key>Frameworks/OCMock-iPhone.framework</key>
+							<dict>
+								<key>Path</key>
+								<string>OCMock-iPhone.framework</string>
+							</dict>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

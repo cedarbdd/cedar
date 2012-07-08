@@ -8,8 +8,22 @@ UI_SPECS_TARGET_NAME = "iOSSpecs"
 OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
 OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
 
+OCMOCK_PROJECT_PATH = "Externals/OCMock/Source/OCMock.xcodeproj"
+OCMOCK_FRAMEWORK_TARGET_NAME = "OCMock"
+OCMOCK_IOS_FRAMEWORK_TARGET_NAME = "OCMock-iPhone"
+CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
+CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
+SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
+
+XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
+XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
+
 SDK_VERSION = "4.3"
-BUILD_DIR = File.join(File.dirname(__FILE__), "build")
+PROJECT_ROOT = File.dirname(__FILE__)
+BUILD_DIR = File.join(PROJECT_ROOT, "build")
+TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
+SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets")
+DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 
 def sdk_dir
   "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
@@ -64,7 +78,7 @@ def kill_simulator
 end
 
 task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application"]
-task :cruise => [:clean, :build_all, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs]
+task :cruise => [:clean, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs]
 
 desc "Trim whitespace"
 task :trim_whitespace do
@@ -73,7 +87,7 @@ end
 
 desc "Clean all targets"
 task :clean do
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} clean SYMROOT=#{BUILD_DIR}", output_file("clean")
+  system_or_exit "rm -rf #{BUILD_DIR}/*", output_file("clean")
 end
 
 desc "Build specs"
@@ -88,10 +102,12 @@ task :build_uispecs do
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator build", output_file("uispecs")
 end
 
-desc "Build all targets"
-task :build_all do
-  kill_simulator
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -alltargets -configuration #{CONFIGURATION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("build_all")
+desc "Build Cedar and Cedar-iOS frameworks"
+task :build_frameworks do
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar")
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar_ios")
+  system_or_exit "xcodebuild -project #{OCMOCK_PROJECT_PATH} -target #{OCMOCK_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_ocmock")
+  system_or_exit "xcodebuild -project #{OCMOCK_PROJECT_PATH} -target #{OCMOCK_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_ocmock_ios")
 end
 
 desc "Run specs"
@@ -133,7 +149,6 @@ task :uispecs => :build_uispecs do
   end
 end
 
-
 desc "Build and run OCUnit logic and application specs"
 task :ocunit => ["ocunit:logic", "ocunit:application"]
 
@@ -141,7 +156,7 @@ namespace :ocunit do
   desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
   task :logic do
     with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-      system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build SYMROOT=#{BUILD_DIR}"
+      system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT=#{BUILD_DIR}"
     end
   end
 
@@ -168,3 +183,52 @@ namespace :ocunit do
     end
   end
 end
+
+desc "Remove code snippets and templates"
+task :uninstall do
+  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/File Templates/Cedar\""
+  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/Project Templates/Cedar\""
+  system_or_exit "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_DIR} | xargs -I{} rm -f \"{}\""
+end
+
+desc "Build a distribution of the templates and code snippets"
+task :dist => ["dist:prepare", "dist:package"]
+
+namespace :dist do
+  task :prepare => :build_frameworks do
+    Dir.mkdir(DIST_STAGING_DIR) unless File.exists?(DIST_STAGING_DIR)
+    cedar_project_templates_dir = %{#{DIST_STAGING_DIR}/Library/Developer/Xcode/Templates/Project Templates/Cedar}
+
+    system_or_exit %{rm -rf "#{DIST_STAGING_DIR}"/*}
+    system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode"}
+    system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData"}
+
+    system_or_exit %{cp "#{PROJECT_ROOT}/README.markdown" "#{DIST_STAGING_DIR}/README-Cedar.markdown"}
+    system_or_exit %{cp "#{PROJECT_ROOT}/MIT.LICENSE" "#{DIST_STAGING_DIR}/LICENSE-Cedar.txt"}
+
+    system_or_exit %{cp -R "#{TEMPLATES_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/"}
+    system_or_exit %{cp -R "#{SNIPPETS_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData/"}
+
+
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{CEDAR_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS Cedar Spec Suite.xctemplate/"}
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{CEDAR_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS Cedar Testing Bundle.xctemplate/"}
+
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{CEDAR_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX Cedar Spec Suite.xctemplate/"}
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{CEDAR_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX Cedar Testing Bundle.xctemplate/"}
+
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{OCMOCK_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS OCMock.xctemplate/"}
+    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{OCMOCK_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX OCMock.xctemplate/"}
+  end
+
+  task :package do
+    package_file_path = "#{BUILD_DIR}/Cedar-#{`git rev-parse --short HEAD`.strip}.tar.gz"
+    system_or_exit %{cd #{DIST_STAGING_DIR} ; tar --exclude .DS_Store -zcf "#{package_file_path}" * ; cd -}
+    puts "\n*** Built tarball is in #{package_file_path} ***\n"
+  end
+end
+
+desc "Build frameworks and install templates and code snippets"
+task :install => [ "dist:prepare" ] do
+  system_or_exit %{ditto "#{DIST_STAGING_DIR}/Library" ~/Library}
+end
+

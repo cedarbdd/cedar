@@ -22,5 +22,7 @@
 	<true/>
 	<key>IDECodeSnippetVersion</key>
 	<integer>2</integer>
+  <key>isCedarSnippet</key>
+  <true/>
 </dict>
 </plist>

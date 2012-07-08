@@ -1,9 +1,7 @@
-#import <Cedar/SpecHelper.h>
-#import <OCMock/OCMock.h>
-
 #import "___FILEBASENAME___.h"
 
 using namespace Cedar::Matchers;
+using namespace Cedar::Doubles;
 
 SPEC_BEGIN(___FILEBASENAMEASIDENTIFIER___Spec)
 

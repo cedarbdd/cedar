@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Identifier</key>
+	<string>com.pivotallabs.cedar.disableARCExplicitly</string>
+	<key>InjectionTargets</key>
+	<array>
+		<string>com.pivotallabs.cedar.iOSSpecSuite</string>
+		<string>com.pivotallabs.cedar.iOSTestingBundle</string>
+		<string>com.pivotallabs.cedar.OSXSpecSuite</string>
+		<string>com.pivotallabs.cedar.OSXTestingBundle</string>
+	</array>
+	<key>Kind</key>
+	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>useARC</string>
+			<key>Units</key>
+			<dict>
+				<key>false</key>
+				<array>
+					<dict>
+						<key>Project</key>
+						<dict>
+							<key>SharedSettings</key>
+							<dict>
+								<key>CLANG_ENABLE_OBJC_ARC</key>
+								<string>NO</string>
+							</dict>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
