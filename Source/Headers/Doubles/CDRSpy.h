@@ -5,13 +5,12 @@
 + (void)interceptMessagesForInstance:(id)instance;
 
 - (NSArray *)sent_messages;
-- (BOOL)is_cedar_spy;
 
 @end
 
 namespace Cedar { namespace Doubles {
     inline void CDR_spy_on(id instance) {
-        if(![instance respondsToSelector:@selector(is_cedar_spy)]) {
+        if (![instance respondsToSelector:@selector(sent_messages)]) {
             [CDRSpy interceptMessagesForInstance:instance];
         }
     }
