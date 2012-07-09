@@ -33,18 +33,14 @@
 		492951E11481AAFA00FA8916 /* CDRJUnitXMLReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */; };
 		492951E41482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 492951E31482FF6200FA8916 /* CDRJUnitXMLReporterSpec.mm */; };
 		492951E51482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 492951E31482FF6200FA8916 /* CDRJUnitXMLReporterSpec.mm */; };
-		6628FC8814C4DBA70016652A /* CedarDoubles.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC8714C4DBA70016652A /* CedarDoubles.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6628FC8914C4DBA70016652A /* CedarDoubles.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6628FC8714C4DBA70016652A /* CedarDoubles.h */; };
-		6628FC9914C4DD440016652A /* CDRSpy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC9814C4DD440016652A /* CDRSpy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6628FC9814C4DD440016652A /* CDRSpy.h */; };
 		6628FC9C14C4DEC50016652A /* CDRSpy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
 		6628FCA114C503530016652A /* Cedar-iOS.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6628FCA014C503530016652A /* Cedar-iOS.h */; };
 		6639A77E14C50A6800B564B7 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77D14C50A6800B564B7 /* SimpleIncrementer.m */; };
 		6639A77F14C50D0100B564B7 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
-		6639A78114C50D3000B564B7 /* HaveReceived.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
 		6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
-		6639A78914C544EB00B564B7 /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6639A78A14C544EB00B564B7 /* Argument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; };
 		66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
 		960118BC1434867E00825FFF /* CDROTestIPhoneRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 960118BB1434867E00825FFF /* CDROTestIPhoneRunner.m */; };
@@ -133,6 +129,10 @@
 		AE91CA6C11DE64A3002BA6B9 /* CDRSharedExampleGroupPool.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */; };
 		AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
+		AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC8714C4DBA70016652A /* CedarDoubles.h */; };
+		AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC9814C4DD440016652A /* CDRSpy.h */; };
+		AE9AA67715AB601500617E1A /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; };
+		AE9AA67815AB601500617E1A /* HaveReceived.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
 		AEB45A911496C8D800845D09 /* RaiseException.h in Headers */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; };
 		AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
@@ -1057,16 +1057,12 @@
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
-				6628FC9914C4DD440016652A /* CDRSpy.h in Headers */,
-				6639A78114C50D3000B564B7 /* HaveReceived.h in Headers */,
-				6639A78914C544EB00B564B7 /* Argument.h in Headers */,
+				AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */,
+				AE9AA67815AB601500617E1A /* HaveReceived.h in Headers */,
+				AE9AA67715AB601500617E1A /* Argument.h in Headers */,
 				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
-				6628FC8814C4DBA70016652A /* CedarDoubles.h in Headers */,
+				AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */,
 				AE18A7FB13F4601400C8872C /* Contain.h in Headers */,
-				6628FC8814C4DBA70016652A /* CedarDoubles.h in Headers */,
-				6628FC9914C4DD440016652A /* CDRSpy.h in Headers */,
-				6639A78114C50D3000B564B7 /* HaveReceived.h in Headers */,
-				6639A78914C544EB00B564B7 /* Argument.h in Headers */,
 				AEF32FF2145A2D79002F93BB /* BeGreaterThan.h in Headers */,
 				AEF32FF4145A2E91002F93BB /* CompareEqual.h in Headers */,
 				AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */,
@@ -1248,7 +1244,7 @@
 		AEEE1FA611DC26EA00029872 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = AEEE1FA911DC26EA00029872 /* Build configuration list for PBXProject "Cedar" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1736,7 +1732,6 @@
 					"\\\"$(SRCROOT)\\\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1747,7 +1742,6 @@
 					"-framework",
 					Foundation,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = FocusedSpecs;
 			};
 			name = Debug;
@@ -1762,7 +1756,6 @@
 					"$(inherited)",
 					"\\\"$(SRCROOT)\\\"",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -1772,7 +1765,6 @@
 					"-framework",
 					Foundation,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = FocusedSpecs;
 				ZERO_LINK = NO;
 			};
@@ -1953,7 +1945,6 @@
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1965,7 +1956,6 @@
 					"-framework",
 					Foundation,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = Cedar;
 			};
 			name = Debug;
@@ -1983,7 +1973,6 @@
 					"\"$(SRCROOT)\"",
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -1994,7 +1983,6 @@
 					"-framework",
 					Foundation,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = Cedar;
 				ZERO_LINK = NO;
 			};
@@ -2010,7 +1998,6 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2021,7 +2008,6 @@
 					"-framework",
 					Foundation,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = Specs;
 			};
 			name = Debug;
@@ -2036,7 +2022,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -2046,7 +2031,6 @@
 					"-framework",
 					Foundation,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = Specs;
 				ZERO_LINK = NO;
 			};
@@ -2061,7 +2045,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
 				SDKROOT = iphoneos;
 			};
@@ -2074,9 +2057,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PREBINDING = NO;
 				PRODUCT_NAME = "Cedar-StaticLib";
 				SDKROOT = iphoneos;
 				ZERO_LINK = NO;
@@ -2098,7 +2079,6 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PRODUCT_NAME = $TARGET_NAME;
 				ZERO_LINK = NO;
 			};
@@ -2134,7 +2114,6 @@
 					"-framework",
 					UIKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VERSION_INFO_FILE = $TARGET_NAME;
@@ -2153,7 +2132,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
 				HEADER_SEARCH_PATHS = (
@@ -2171,7 +2149,6 @@
 					"-framework",
 					UIKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VERSION_INFO_FILE = $TARGET_NAME;
