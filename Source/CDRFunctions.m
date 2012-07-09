@@ -8,9 +8,10 @@
 #import "CDRFunctions.h"
 
 BOOL CDRClassIsOfType(Class class, const char * const className) {
+    Protocol * protocol = NSProtocolFromString([NSString stringWithCString:className encoding:NSUTF8StringEncoding]);
     if (strcmp(className, class_getName(class))) {
         while (class) {
-            if (class_conformsToProtocol(class, NSProtocolFromString([NSString stringWithCString:className encoding:NSUTF8StringEncoding]))) {
+            if (class_conformsToProtocol(class, protocol)) {
                 return YES;
             }
             class = class_getSuperclass(class);
@@ -118,50 +119,46 @@ NSArray *CDRSpecClassesToRun() {
 }
 
 int runSpecsWithCustomExampleReporters(NSArray *reporters) {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
+        NSArray *specClasses = CDRSpecClassesToRun();
+        if (!specClasses) {
+            specClasses = CDRSelectClasses(^(Class class) { return CDRClassIsOfType(class, "CDRSpec"); });
+        }
 
-    NSArray *specClasses = CDRSpecClassesToRun();
-    if (!specClasses) {
-        specClasses = CDRSelectClasses(^(Class class) { return CDRClassIsOfType(class, "CDRSpec"); });
+        CDRDefineSharedExampleGroups();
+        CDRDefineGlobalBeforeAndAfterEachBlocks();
+        NSArray *groups = CDRCreateRootGroupsFromSpecClasses(specClasses);
+
+        for (CDRExampleGroup *group in groups) {
+            [SpecHelper specHelper].shouldOnlyRunFocused |= [group hasFocusedExamples];
+        }
+
+        for (id<CDRExampleReporter> reporter in reporters) {
+            [reporter runWillStartWithGroups:groups];
+        }
+
+        [groups makeObjectsPerformSelector:@selector(run)];
+
+        int result = 0;
+        for (id<CDRExampleReporter> reporter in reporters) {
+            [reporter runDidComplete];
+            result |= [reporter result];
+        }
+
+        [groups release];
+        return result;
     }
-
-    CDRDefineSharedExampleGroups();
-    CDRDefineGlobalBeforeAndAfterEachBlocks();
-    NSArray *groups = CDRCreateRootGroupsFromSpecClasses(specClasses);
-
-    for (CDRExampleGroup *group in groups) {
-        [SpecHelper specHelper].shouldOnlyRunFocused |= [group hasFocusedExamples];
-    }
-
-    for (id<CDRExampleReporter> reporter in reporters) {
-        [reporter runWillStartWithGroups:groups];
-    }
-
-    [groups makeObjectsPerformSelector:@selector(run)];
-
-    int result = 0;
-    for (id<CDRExampleReporter> reporter in reporters) {
-        [reporter runDidComplete];
-        result |= [reporter result];
-    }
-
-    [groups release];
-    [pool drain];
-    return result;
 }
 
 int runSpecs() {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
+        NSArray *reporters = CDRReportersFromEnv("CDRDefaultReporter");
+        if (![reporters count]) {
+            @throw @"No reporters?  WTF?";
+        }
 
-    NSArray *reporters = CDRReportersFromEnv("CDRDefaultReporter");
-    if (![reporters count]) {
-        return -999;
+        return runSpecsWithCustomExampleReporters(reporters);
     }
-
-    int result = runSpecsWithCustomExampleReporters(reporters);
-
-    [pool drain];
-    return result;
 }
 
 int runAllSpecs() {
