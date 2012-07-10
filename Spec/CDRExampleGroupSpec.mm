@@ -268,7 +268,7 @@ describe(@"CDRExampleGroup", ^{
 
                     it(@"should be CDRExampleStatePending", ^{
                         CDRExampleState state = group.state;
-                        expect([group state]).to(equal(CDRExampleStatePending));
+                        expect(state).to(equal(CDRExampleStatePending));
                     });
                 });
             });

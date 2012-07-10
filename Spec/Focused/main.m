@@ -9,7 +9,7 @@ extern NSMutableArray *expectedCallsInFocusedSpec2__;
 BOOL wereExpectedCallsMade(NSArray *actuallyCalled, NSArray *expectedCalls);
 
 int main (int argc, const char *argv[]) {
-    int result = runSpecs();
+    runSpecs();
 
     BOOL expectedCallsMade =
         wereExpectedCallsMade(calledInFocusedSpec__, expectedCallsInFocusedSpec__) &&

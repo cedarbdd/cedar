@@ -271,7 +271,7 @@ describe(@"CDRExample", ^{
 
                 context(@"and its parent group was focused", ^{
                     beforeEach(^{
-                        CDRExampleGroup *parentGroup = [[CDRExampleGroup alloc] initWithText:@"Parent group"];
+                        CDRExampleGroup *parentGroup = [[[CDRExampleGroup alloc] initWithText:@"Parent group"] autorelease];
                         parentGroup.focused = YES;
                         example.parent = parentGroup;
                     });
@@ -298,7 +298,7 @@ describe(@"CDRExample", ^{
 
                     context(@"and its parent's parent group was focused", ^{
                         beforeEach(^{
-                            CDRExampleGroup *parentsParentGroup = [[CDRExampleGroup alloc] initWithText:@"Parent's parent group"];
+                            CDRExampleGroup *parentsParentGroup = [[[CDRExampleGroup alloc] initWithText:@"Parent's parent group"] autorelease];
                             parentsParentGroup.focused = YES;
                             parentGroup.parent = parentsParentGroup;
                         });

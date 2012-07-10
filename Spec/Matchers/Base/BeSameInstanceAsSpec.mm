@@ -14,11 +14,11 @@ SPEC_BEGIN(BeSameInstanceAsSpec)
 
 describe(@"be_same_instance_as matcher", ^{
     describe(@"when the actual value is not a pointer", ^{
-        int actualValue;
-        int *expectedValue;
+        int actualValue = 1;
+        int *expectedValue = nil;
 
         it(@"should fail with an exception", ^{
-            expectFailureWithMessage([NSString stringWithFormat:@"Attempt to compare non-pointer type for sameness.", actualValue, expectedValue], ^{
+            expectFailureWithMessage(@"Attempt to compare non-pointer type for sameness.", ^{
                 expect(actualValue).to(be_same_instance_as(expectedValue));
             });
         });
@@ -47,7 +47,7 @@ describe(@"be_same_instance_as matcher", ^{
         });
 
         describe(@"and the values do not point to the same address space", ^{
-            int *expectedValue;
+            int *expectedValue = nil;
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{

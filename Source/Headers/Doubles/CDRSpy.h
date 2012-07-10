@@ -16,7 +16,6 @@ namespace Cedar { namespace Doubles {
     }
 }}
 
-
 #ifndef CEDAR_DOUBLES_COMPATIBILITY_MODE
 #define spy_on(x) CDR_spy_on((x))
 #endif

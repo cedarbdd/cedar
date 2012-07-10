@@ -5,10 +5,12 @@
 
 namespace Cedar { namespace Doubles {
 
+#pragma mark - Argument
     class Argument {
     public:
         virtual ~Argument() = 0;
 
+        virtual void * value_bytes() const = 0;
         virtual const char * value_encoding() const = 0;
         virtual NSString * value_string() const = 0;
 
@@ -17,6 +19,8 @@ namespace Cedar { namespace Doubles {
 
     inline /* virtual */ Argument::~Argument() {}
 
+
+#pragma mark - TypedArgument
     template<typename T>
     class TypedArgument : public Argument {
     private:
@@ -27,13 +31,14 @@ namespace Cedar { namespace Doubles {
         virtual ~TypedArgument();
         // Allow default copy ctor.
 
+        virtual void * value_bytes() const;
         virtual const char * value_encoding() const;
         virtual NSString * value_string() const;
 
         virtual bool matches_bytes(void * expectedArgumentBytes) const;
 
     private:
-        const T & value_;
+        const T value_;
     };
 
 
@@ -42,6 +47,11 @@ namespace Cedar { namespace Doubles {
 
     template<typename T>
     /* virtual */ TypedArgument<T>::~TypedArgument() {}
+
+    template<typename T>
+    /* virtual */ void * TypedArgument<T>::value_bytes() const {
+        return (const_cast<T *>(&value_));
+    }
 
     template<typename T>
     /* virtual */ const char * TypedArgument<T>::value_encoding() const {
@@ -57,4 +67,5 @@ namespace Cedar { namespace Doubles {
     /* virtual */ bool TypedArgument<T>::matches_bytes(void * expectedArgumentBytes) const {
         return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(expectedArgumentBytes)));
     }
+
 }}
