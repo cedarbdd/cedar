@@ -1,5 +1,6 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
+#import "StubbedMethod.h"
 
 SHARED_EXAMPLE_GROUPS_BEGIN(CedarDoubleSharedExamples)
 

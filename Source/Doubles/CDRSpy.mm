@@ -1,14 +1,17 @@
 #import "CDRSpy.h"
 #import "objc/runtime.h"
+#import "StubbedMethod.h"
+#import "StubbedMethodPrototype.h"
+#import "CedarDoubleImpl.h"
 
 @interface CDRSpy ()
 
 - (void)as_original_object:(void(^)())block;
-- (Cedar::Doubles::StubbedMethodPrototype *)stubbed_method_prototype_ptr;
-- (Cedar::Doubles::StubbedMethodMap_t *)stubbed_methods_ptr;
-- (Cedar::Doubles::StubbedMethodPtr_t)stubbed_selector:(SEL)selector;
+- (CedarDoubleImpl *)cedar_double_impl;
 
 @end
+
+static const NSString *foo = @"wibble";
 
 
 @implementation CDRSpy
@@ -17,25 +20,13 @@
     Class originalClass = [instance class];
     objc_setAssociatedObject(instance, @"original-class", originalClass, OBJC_ASSOCIATION_ASSIGN);
 
-    NSMutableArray *sentMessages = [NSMutableArray array];
-    objc_setAssociatedObject(instance, @"sent-messages", sentMessages, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
-    Cedar::Doubles::StubbedMethodPrototype * stubbedMethodPrototype = new Cedar::Doubles::StubbedMethodPrototype(instance);
-    NSValue *stubbedMethodPrototypeContainer = [NSValue valueWithPointer:stubbedMethodPrototype];
-    objc_setAssociatedObject(instance, @"stubbed-method-prototype", stubbedMethodPrototypeContainer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
-    Cedar::Doubles::StubbedMethodMap_t * stubbedMethods = new Cedar::Doubles::StubbedMethodMap_t();
-    NSValue *stubbedMethodsContainer = [NSValue valueWithPointer:stubbedMethods];
-    objc_setAssociatedObject(instance, @"stubbed-methods", stubbedMethodsContainer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    CedarDoubleImpl *cedar_double_impl = [[[CedarDoubleImpl alloc] initWithDouble:instance] autorelease];
+    objc_setAssociatedObject(instance, @"cedar-double-implementation", cedar_double_impl, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
     object_setClass(instance, self);
 }
 
 - (void)dealloc {
-    // Manually destroy associated C++ objects, since ObjC memory cleanup won't call C++ destructors.
-    delete self.stubbed_method_prototype_ptr;
-    delete self.stubbed_methods_ptr;
-
     object_setClass(self, objc_getAssociatedObject(self, @"original-class"));
     // Call the destructor for the original object.
     [self dealloc];
@@ -56,16 +47,9 @@
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
-    NSMutableArray *sentMessages = objc_getAssociatedObject(self, @"sent-messages");
-    [sentMessages addObject:invocation];
+    [self.cedar_double_impl record_method_invocation:invocation];
 
-    Cedar::Doubles::StubbedMethodPtr_t stubbedMethod = [self stubbed_selector:invocation.selector];
-    if (stubbedMethod) {
-        if (stubbedMethod->has_return_value()) {
-            const void * returnValue = stubbedMethod->return_value().value_bytes();
-            [invocation setReturnValue:const_cast<void *>(returnValue)];
-        }
-    } else {
+    if (![self.cedar_double_impl invoke_stubbed_method:invocation]) {
         [self as_original_object:^{
             [invocation invoke];
         }];
@@ -92,27 +76,18 @@
     return respondsToSelector;
 }
 
-- (NSArray *)sent_messages {
-    return objc_getAssociatedObject(self, @"sent-messages");
-}
-
 #pragma mark - CedarDouble protocol
-- (const Cedar::Doubles::StubbedMethodPrototype &)stub_method {
-    return *self.stubbed_method_prototype_ptr;
-}
 
+- (const Cedar::Doubles::StubbedMethodPrototype &)stub_method {
+    return self.cedar_double_impl.stubbed_method_prototype;
+}
 
 - (Cedar::Doubles::StubbedMethod &)create_stubbed_method_for:(SEL)selector {
-    Cedar::Doubles::StubbedMethodMap_t & stubbed_methods = *self.stubbed_methods_ptr;
-    Cedar::Doubles::StubbedMethodMap_t::iterator it = stubbed_methods.find(selector);
-    if (it != stubbed_methods.end()) {
-        [[NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"The method '%s' is already stubbed", selector]
-                               userInfo:nil] raise];
-    }
-    Cedar::Doubles::StubbedMethodPtr_t stubbed_method = Cedar::Doubles::StubbedMethodPtr_t(new Cedar::Doubles::StubbedMethod(selector, self));
-    stubbed_methods[selector] = stubbed_method;
-    return *stubbed_method;
+    return [self.cedar_double_impl create_stubbed_method_for:selector];
+}
+
+- (NSArray *)sent_messages {
+    return self.cedar_double_impl.sent_messages;
 }
 
 #pragma mark - Private interface
@@ -127,23 +102,8 @@
     }
 }
 
-- (Cedar::Doubles::StubbedMethodPrototype *)stubbed_method_prototype_ptr {
-    NSValue *stubbedMethodPrototypeContainer = objc_getAssociatedObject(self, @"stubbed-method-prototype");
-    return static_cast<Cedar::Doubles::StubbedMethodPrototype *>(stubbedMethodPrototypeContainer.pointerValue);
-}
-
-- (Cedar::Doubles::StubbedMethodMap_t *)stubbed_methods_ptr {
-    NSValue *stubbedMethodsContainer = objc_getAssociatedObject(self, @"stubbed-methods");
-    return static_cast<Cedar::Doubles::StubbedMethodMap_t *>(stubbedMethodsContainer.pointerValue);
-}
-
-- (Cedar::Doubles::StubbedMethodPtr_t)stubbed_selector:(SEL)selector {
-    Cedar::Doubles::StubbedMethodMap_t & stubbed_methods = *self.stubbed_methods_ptr;
-    Cedar::Doubles::StubbedMethodMap_t::iterator it = stubbed_methods.find(selector);
-    if (it != stubbed_methods.end()) {
-        return it->second;
-    }
-    return NULL;
+- (CedarDoubleImpl *)cedar_double_impl {
+    return objc_getAssociatedObject(self, @"cedar-double-implementation");
 }
 
 @end
