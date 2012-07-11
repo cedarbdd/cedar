@@ -83,10 +83,10 @@
 }
 
 - (BOOL)respondsToSelector:(SEL)selector {
-    __block BOOL respondsToSelector = sel_isEqual(selector, @selector(sent_messages));
+    __block BOOL respondsToSelector;
 
     [self as_original_object:^{
-        respondsToSelector = respondsToSelector || [self respondsToSelector:selector];
+        respondsToSelector = [self respondsToSelector:selector];
     }];
 
     return respondsToSelector;

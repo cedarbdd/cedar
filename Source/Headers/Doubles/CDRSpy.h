@@ -11,7 +11,7 @@
 
 namespace Cedar { namespace Doubles {
     inline void CDR_spy_on(id instance) {
-        if (![instance respondsToSelector:@selector(sent_messages)]) {
+        if (![[instance class] conformsToProtocol:@protocol(CedarDouble)]) {
             [CDRSpy interceptMessagesForInstance:instance];
         }
     }

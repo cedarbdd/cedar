@@ -84,7 +84,7 @@ namespace Cedar { namespace Doubles {
     }
 
     inline void HaveReceived::verify_object_is_a_double(id instance) const {
-        if (![instance respondsToSelector:@selector(sent_messages)]) {
+        if (![[instance class] conformsToProtocol:@protocol(CedarDouble)]) {
             [[CDRSpecFailure specFailureWithReason:[NSString stringWithFormat:@"Received expectation for non-double object <%@>", instance]] raise];
         }
     }

@@ -38,7 +38,7 @@
 }
 
 - (BOOL)respondsToSelector:(SEL)selector {
-    return sel_isEqual(selector, @selector(sent_messages)) || [self.klass instancesRespondToSelector:selector];
+    return [self.klass instancesRespondToSelector:selector];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {

@@ -32,10 +32,10 @@ describe(@"spy_on", ^{
     });
 
     it(@"should not affect other instances of the same class", ^{
-        [incrementer respondsToSelector:@selector(sent_messages)] should be_truthy;
+        [[incrementer class] conformsToProtocol:@protocol(CedarDouble)] should be_truthy;
 
         id other_incrementer = [[[SimpleIncrementer alloc] init] autorelease];
-        [other_incrementer respondsToSelector:@selector(sent_messages)] should_not be_truthy;
+        [[other_incrementer class] conformsToProtocol:@protocol(CedarDouble)] should_not be_truthy;
     });
 
     it(@"should record messages sent to the object", ^{
