@@ -6,7 +6,7 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(CDRClassFakeSpec)
 
-describe(@"create_double", ^{
+describe(@"fake (class)", ^{
     __block SimpleIncrementer<CedarDouble> *my_fake;
 
     beforeEach(^{
@@ -17,13 +17,23 @@ describe(@"create_double", ^{
 
     itShouldBehaveLike(@"a Cedar double");
 
-    it(@"should respond to instance methods for the class", ^{
-        [my_fake respondsToSelector:@selector(value)] should be_truthy;
-    });
-
     context(@"when calling a method which has not been stubbed", ^{
         it(@"should raise an exception", ^{
             ^{ [my_fake value]; } should raise_exception;
+        });
+    });
+    
+    describe(@"#respondsToSelector:", ^{
+        context(@"when an instance method is defined", ^{
+            it(@"should return true", ^{
+                [my_fake respondsToSelector:@selector(value)] should be_truthy;
+            });
+        });
+        
+        context(@"when an instance method is not defined", ^{
+            it(@"should return false", ^{
+                [my_fake respondsToSelector:@selector(wibble_wobble)] should_not be_truthy;
+            });
         });
     });
 

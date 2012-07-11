@@ -16,7 +16,11 @@ describe(@"spy_on", ^{
     beforeEach(^{
         incrementer = [[[SimpleIncrementer alloc] init] autorelease];
         spy_on(incrementer);
+
+        [[SpecHelper specHelper].sharedExampleContext setObject:incrementer forKey:@"double"];
     });
+
+    itShouldBehaveLike(@"a Cedar double");
 
     it(@"should not change the functionality of the given object", ^{
         [incrementer increment];

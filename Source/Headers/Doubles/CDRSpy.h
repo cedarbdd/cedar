@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "CedarDouble.h"
 
-@interface CDRSpy : NSProxy
+@interface CDRSpy : NSProxy<CedarDouble>
 
 + (void)interceptMessagesForInstance:(id)instance;
 

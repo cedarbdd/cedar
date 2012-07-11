@@ -3,19 +3,6 @@
 #import <map>
 #import "objc/runtime.h"
 
-namespace Cedar { namespace Doubles {
-
-    struct SelCompare {
-        bool operator() (const SEL& lhs, const SEL& rhs) const {
-            return strcmp(sel_getName(lhs), sel_getName(rhs)) < 0;
-        }
-    };
-
-    typedef std::shared_ptr<Cedar::Doubles::StubbedMethod> StubbedMethodPtr_t;
-    typedef std::map<SEL, StubbedMethodPtr_t, SelCompare> StubbedMethodMap_t;
-
-}}
-
 @interface CDRClassFake () {
     std::auto_ptr<Cedar::Doubles::StubbedMethodPrototype> method_stubbing_;
     Cedar::Doubles::StubbedMethodMap_t stubbed_methods_;
@@ -51,7 +38,7 @@ namespace Cedar { namespace Doubles {
 }
 
 - (BOOL)respondsToSelector:(SEL)selector {
-    return true;
+    return sel_isEqual(selector, @selector(sent_messages)) || [self.klass instancesRespondToSelector:selector];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
@@ -59,9 +46,10 @@ namespace Cedar { namespace Doubles {
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
+    [self.sent_messages addObject:invocation];
+
     Cedar::Doubles::StubbedMethodPtr_t stubbedMethod = [self stubbed_selector:invocation.selector];
     if (stubbedMethod) {
-        [self.sent_messages addObject:invocation];
         if (stubbedMethod->has_return_value()) {
             const void * returnValue = stubbedMethod->return_value().value_bytes();
             [invocation setReturnValue:const_cast<void *>(returnValue)];

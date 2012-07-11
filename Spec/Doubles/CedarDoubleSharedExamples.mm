@@ -15,7 +15,9 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
     describe(@"#stub_method", ^{
         context(@"with a method name that the stub does not respond to", ^{
-            it(@"should raise an exception", PENDING);
+            it(@"should raise an exception", ^{
+                ^{ [myDouble stub_method]("wibble_wobble"); } should raise_exception;
+            });
         });
 
         context(@"with a method with no parameters", ^{

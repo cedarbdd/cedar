@@ -3,9 +3,18 @@
 namespace Cedar { namespace Doubles {
     class StubbedMethod;
     class StubbedMethodPrototype;
+
+    struct SelCompare {
+        bool operator() (const SEL& lhs, const SEL& rhs) const {
+            return strcmp(sel_getName(lhs), sel_getName(rhs)) < 0;
+        }
+    };
+
+    typedef std::shared_ptr<StubbedMethod> StubbedMethodPtr_t;
+    typedef std::map<SEL, StubbedMethodPtr_t, SelCompare> StubbedMethodMap_t;
 }}
 
-@protocol CedarDouble
+@protocol CedarDouble<NSObject>
 
 - (const Cedar::Doubles::StubbedMethodPrototype &)stub_method;
 - (Cedar::Doubles::StubbedMethod &)create_stubbed_method_for:(SEL)selector;
@@ -35,7 +44,13 @@ namespace Cedar { namespace Doubles {
     }
 
     inline StubbedMethod & StubbedMethodPrototype::operator()(SEL selector) const {
-        return [parent_ create_stubbed_method_for:selector];
+        if ([parent_ respondsToSelector:selector]) {
+            return [parent_ create_stubbed_method_for:selector];
+        }
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempting to stub method %s, which double does not respond to", selector]
+                               userInfo:nil]
+         raise];
     }
 
     inline StubbedMethod & StubbedMethodPrototype::operator()(const char * selector_name) const {
