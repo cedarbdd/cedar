@@ -1304,6 +1304,6 @@ describe(@"!= operator matcher", ^{
         });
     });
 });
-#pragma clang diagnostic push
+#pragma clang diagnostic pop
 
 SPEC_END

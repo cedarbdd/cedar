@@ -20,6 +20,17 @@
     object_setClass(instance, self);
 }
 
+- (void)dealloc {
+    object_setClass(self, objc_getAssociatedObject(self, @"original-class"));
+    // Call the destructor for the original object.
+    [self dealloc];
+    // DO NOT call the destructor on super, since the superclass has already
+    // destroyed itself when the original class's destructor called [super dealloc].
+    // This (no-op) line must be here to prevent the compiler from helpfully
+    // generating an error that the method has no [super dealloc] call.
+    if(0) { [super dealloc]; }
+}
+
 - (NSString *)description {
     __block NSString *description;
     [self asOriginalObject:^{
