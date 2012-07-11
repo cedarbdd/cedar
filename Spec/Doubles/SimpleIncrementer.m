@@ -1,5 +1,10 @@
 #import "SimpleIncrementer.h"
 
+@interface SimpleIncrementer ()
+@property (nonatomic, assign) size_t value;
+@end
+
+
 @implementation SimpleIncrementer
 
 @synthesize value = value_;
