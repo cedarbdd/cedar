@@ -63,11 +63,7 @@
     }
 
     Cedar::Doubles::StubbedMethod::ptr_t stubbed_method_ptr = it->second;
-    if (stubbed_method_ptr->has_return_value()) {
-        const void * returnValue = stubbed_method_ptr->return_value().value_bytes();
-        [invocation setReturnValue:const_cast<void *>(returnValue)];
-    }
-    return true;
+    return stubbed_method_ptr->invoke(invocation);
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {

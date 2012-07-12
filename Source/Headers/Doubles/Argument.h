@@ -13,6 +13,7 @@ namespace Cedar { namespace Doubles {
         virtual void * value_bytes() const = 0;
         virtual const char * value_encoding() const = 0;
         virtual NSString * value_string() const = 0;
+        virtual size_t value_size() const = 0;
 
         virtual bool matches_bytes(void * expectedArgumentBytes) const = 0;
     };
@@ -34,6 +35,7 @@ namespace Cedar { namespace Doubles {
         virtual void * value_bytes() const;
         virtual const char * value_encoding() const;
         virtual NSString * value_string() const;
+        virtual size_t value_size() const;
 
         virtual bool matches_bytes(void * expectedArgumentBytes) const;
 
@@ -61,6 +63,11 @@ namespace Cedar { namespace Doubles {
     template<typename T>
     /* virtual */ NSString * TypedArgument<T>::value_string() const {
         return Matchers::Stringifiers::string_for(value_);
+    }
+
+    template<typename T>
+    /* virtual */ size_t TypedArgument<T>::value_size() const {
+        return sizeof(T);
     }
 
     template<typename T>

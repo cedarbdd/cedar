@@ -5,6 +5,8 @@
 
 namespace Cedar { namespace Doubles {
 
+    static const size_t NON_USER_ARGUMENTS = 2;
+
     class StubbedMethod {
     private:
         StubbedMethod(const StubbedMethod & );
@@ -32,14 +34,17 @@ namespace Cedar { namespace Doubles {
         typedef std::tr1::shared_ptr<StubbedMethod> ptr_t;
         typedef std::map<SEL, ptr_t, SelCompare> selector_map_t;
 
+        bool invoke(NSInvocation * invocation) const;
+
     private:
         NSMethodSignature *method_signature();
 
     private:
         SEL selector_;
         id parent_;
+        typedef std::vector<std::tr1::shared_ptr<Argument> > argument_list_t;
         std::auto_ptr<Argument> return_value_argument_;
-        std::vector<std::tr1::shared_ptr<Argument> > arguments_;
+        argument_list_t arguments_;
     };
 
     inline StubbedMethod::StubbedMethod(SEL selector, id parent)
@@ -58,8 +63,8 @@ namespace Cedar { namespace Doubles {
 
     template<typename T>
     StubbedMethod & StubbedMethod::with(const T & argument) {
-        NSUInteger correct_number_of_arguments = [this->method_signature() numberOfArguments];
-        if (arguments_.size() != correct_number_of_arguments) {
+        NSUInteger correct_number_of_arguments = [this->method_signature() numberOfArguments] - NON_USER_ARGUMENTS;
+        if (arguments_.size() >= correct_number_of_arguments) {
             [[NSException exceptionWithName:NSInternalInconsistencyException
                                      reason:[NSString stringWithFormat:@"Selector %s accepts %d arguments; stub expects too many.", selector_, correct_number_of_arguments]
                                    userInfo:nil] raise];
@@ -75,6 +80,36 @@ namespace Cedar { namespace Doubles {
 
     inline NSMethodSignature *StubbedMethod::method_signature() {
         return [parent_ methodSignatureForSelector:selector_];
+    }
+
+    inline bool StubbedMethod::invoke(NSInvocation * invocation) const {
+        if (has_return_value()) {
+            const void * returnValue = return_value().value_bytes();
+            [invocation setReturnValue:const_cast<void *>(returnValue)];
+        }
+
+        // Compiler cries about unused value in test part of for invocation if we try to initialize two values, possible compiler bug?
+        size_t index = NON_USER_ARGUMENTS;
+        std::vector<unsigned char> actualArgument;
+        for (argument_list_t::const_iterator it = arguments_.begin(); it != arguments_.end(); ++it, ++index) {
+            actualArgument.reserve((*it)->value_size());
+            [invocation getArgument:&actualArgument[0] atIndex:index];
+
+            if (!(*it)->matches_bytes(&actualArgument[0])) {
+                NSString * reason = [NSString stringWithFormat:@"Wrong value supplied to %dth argument of stubbed method %s expected %@.", // got %@.",
+                                        index - NON_USER_ARGUMENTS,
+                                        invocation.selector,
+                                     (*it)->value_string()];
+                // TODO: Better printing for the actual value
+                // Matchers::Stringifiers::string_for(&actualArgument[0], (*it)->value_encoding())];
+
+                [[NSException exceptionWithName:NSInternalInconsistencyException
+                                         reason:reason
+                                       userInfo:nil] raise];
+            }
+        }
+
+        return true;
     }
 
 }}

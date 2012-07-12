@@ -80,6 +80,58 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
             });
         });
+
+        context(@"with a method that takes a single parameter", ^{
+            __block Cedar::Doubles::StubbedMethod *stubbed_method_ptr;
+            size_t expectedValue = 1;
+            size_t actualValue = 6;
+
+            beforeEach(^{
+                stubbed_method_ptr = &[myDouble stub_method]("incrementBy:").with(expectedValue);
+            });
+
+            context(@"when invoked with a parameter of the expected value", ^{
+                it(@"should not raise an exception", ^{
+                    [myDouble incrementBy:expectedValue];
+                });
+            });
+
+            context(@"when invoked with a parameter of the wrong value", ^{
+                it(@"should raise an exception", ^{
+                    ^{ [myDouble incrementBy:actualValue]; } should raise_exception;
+                });
+            });
+
+            context(@"when trying to add an additional argument expectation", ^{
+                it(@"should raise an exception", ^{
+                    ^{ stubbed_method_ptr->with(actualValue); } should raise_exception;
+                });
+            });
+        });
+
+        context(@"with a method that takes multiple parameters", ^{
+            __block Cedar::Doubles::StubbedMethod *stubbed_method_ptr;
+            size_t expectedIncrementValue = 1;
+            NSNumber * expectedBitMoreValue = [NSNumber numberWithInteger:10];
+            NSNumber * actualBitMoreValue = [NSNumber numberWithInteger:60];
+
+            beforeEach(^{
+                stubbed_method_ptr = &[myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
+            });
+
+            context(@"when invoked with a parameter of the expected value", ^{
+                it(@"should not raise an exception", ^{
+                    [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue];
+                });
+            });
+
+            context(@"when invoked with a parameter of the wrong value", ^{
+                it(@"should raise an exception", ^{
+                    ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception;
+                });
+            });
+
+        });
     });
 });
 
