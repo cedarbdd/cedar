@@ -23,6 +23,9 @@ namespace Cedar { namespace Doubles {
         template<typename T>
         StubbedMethod & and_with(const T &);
 
+        StubbedMethod & and_raise_exception();
+        StubbedMethod & and_raise_exception(NSObject * exception);
+
         bool has_return_value() const { return return_value_argument_.get(); };
         Argument & return_value() const { return *return_value_argument_; };
 
@@ -45,10 +48,14 @@ namespace Cedar { namespace Doubles {
         typedef std::vector<std::tr1::shared_ptr<Argument> > argument_list_t;
         std::auto_ptr<Argument> return_value_argument_;
         argument_list_t arguments_;
+        NSObject * exception_to_raise_;
     };
 
-    inline StubbedMethod::StubbedMethod(SEL selector, id parent)
-    : selector_(selector), parent_(parent), return_value_argument_(0) {
+    inline StubbedMethod::StubbedMethod(SEL selector, id parent) :
+        selector_(selector),
+        parent_(parent),
+        return_value_argument_(0),
+        exception_to_raise_(0) {
     }
 
     template<typename T>
@@ -78,11 +85,24 @@ namespace Cedar { namespace Doubles {
         return with(argument);
     }
 
+    inline StubbedMethod & StubbedMethod::and_raise_exception() {
+        return and_raise_exception([NSException exceptionWithName:NSInternalInconsistencyException reason:@"Invoked a stub with exceptional behavior" userInfo:nil]);
+    }
+
+    inline StubbedMethod & StubbedMethod::and_raise_exception(NSObject * exception) {
+        exception_to_raise_ = exception;
+        return *this;
+    }
+
     inline NSMethodSignature *StubbedMethod::method_signature() {
         return [parent_ methodSignatureForSelector:selector_];
     }
 
     inline bool StubbedMethod::invoke(NSInvocation * invocation) const {
+        if (exception_to_raise_) {
+            @throw exception_to_raise_;
+        }
+
         if (has_return_value()) {
             const void * returnValue = return_value().value_bytes();
             [invocation setReturnValue:const_cast<void *>(returnValue)];

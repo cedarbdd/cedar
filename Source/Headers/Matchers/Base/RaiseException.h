@@ -9,11 +9,13 @@ namespace Cedar { namespace Matchers {
 
     public:
         explicit RaiseException(Class = nil, bool = false);
+        explicit RaiseException(NSObject *);
         ~RaiseException();
         // Allow default copy ctor.
 
-        RaiseException & operator()(Class = nil);
-        RaiseException operator()(Class = nil) const;
+        RaiseException operator()() const;
+        RaiseException operator()(Class) const;
+        RaiseException operator()(NSObject *) const;
 
         RaiseException & or_subclass();
         RaiseException or_subclass() const;
@@ -24,6 +26,11 @@ namespace Cedar { namespace Matchers {
         virtual NSString * failure_message_end() const;
 
     private:
+        bool exceptionMatchesExpectedClass(NSObject * const exception) const;
+        bool exceptionMatchesExpectedInstance(NSObject * const exception) const;
+
+    private:
+        const NSObject *expectedExceptionInstance_;
         const Class expectedExceptionClass_;
         bool allowSubclasses_;
     };
@@ -36,18 +43,26 @@ namespace Cedar { namespace Matchers {
     static const RaiseException raise_exception = RaiseException();
 
     inline RaiseException::RaiseException(Class expectedExceptionClass /*= nil*/, bool allowSubclasses /*= false */)
-    : Base<>(), expectedExceptionClass_(expectedExceptionClass), allowSubclasses_(allowSubclasses) {
+    : Base<>(), expectedExceptionInstance_(NULL), expectedExceptionClass_(expectedExceptionClass), allowSubclasses_(allowSubclasses) {
+    }
+
+    inline RaiseException::RaiseException(NSObject *expectedExceptionInstance)
+    : Base<>(), expectedExceptionInstance_(expectedExceptionInstance), expectedExceptionClass_(NULL), allowSubclasses_(false) {
     }
 
     inline RaiseException::~RaiseException() {
     }
 
-    inline RaiseException & RaiseException::operator()(Class expectedExceptionClass /*= nil*/) {
-        return *this;
+    inline RaiseException RaiseException::operator()() const {
+        return RaiseException();
     }
 
-    inline RaiseException RaiseException::operator()(Class expectedExceptionClass /*= nil*/) const {
+    inline RaiseException RaiseException::operator()(Class expectedExceptionClass) const {
         return RaiseException(expectedExceptionClass);
+    }
+
+    inline RaiseException RaiseException::operator()(NSObject *expectedExceptionInstance) const {
+        return RaiseException(expectedExceptionInstance);
     }
 
     inline RaiseException & RaiseException::or_subclass() {
@@ -63,10 +78,27 @@ namespace Cedar { namespace Matchers {
         @try {
             block();
         }
-        @catch (NSException *exception) {
-            return !expectedExceptionClass_ || (allowSubclasses_ ? [exception isKindOfClass:expectedExceptionClass_] : [exception isMemberOfClass:expectedExceptionClass_]);
+        @catch (NSObject *exception) {
+            if (expectedExceptionClass_) {
+                return this->exceptionMatchesExpectedClass(exception);
+            } else if (expectedExceptionInstance_) {
+                return this->exceptionMatchesExpectedInstance(exception);
+            } else {
+                return true;
+            }
         }
         return false;
+    }
+
+    inline bool RaiseException::exceptionMatchesExpectedClass(NSObject * const exception) const {
+        if (allowSubclasses_) {
+            return [exception isKindOfClass:expectedExceptionClass_];
+        }
+        return [exception isMemberOfClass:expectedExceptionClass_];
+    }
+
+    inline bool RaiseException::exceptionMatchesExpectedInstance(NSObject * const exception) const {
+        return [expectedExceptionInstance_ isEqual:exception];
     }
 
     /*virtual*/ inline NSString * RaiseException::failure_message_end() const {

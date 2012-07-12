@@ -110,13 +110,12 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
 
         context(@"with a method that takes multiple parameters", ^{
-            __block Cedar::Doubles::StubbedMethod *stubbed_method_ptr;
             size_t expectedIncrementValue = 1;
             NSNumber * expectedBitMoreValue = [NSNumber numberWithInteger:10];
             NSNumber * actualBitMoreValue = [NSNumber numberWithInteger:60];
 
             beforeEach(^{
-                stubbed_method_ptr = &[myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
+                [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
             });
 
             context(@"when invoked with a parameter of the expected value", ^{
@@ -130,7 +129,30 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception;
                 });
             });
+        });
 
+        context(@"when the stub is instructed to raise an exception", ^{
+            context(@"with no parameter", ^{
+                beforeEach(^{
+                    [myDouble stub_method]("increment").and_raise_exception();
+                });
+
+                it(@"should raise a generic exception", ^{
+                    ^{ [myDouble increment]; } should raise_exception([NSException class]);
+                });
+            });
+
+            context(@"with a specified exception", ^{
+                id someException = @"that's some pig (exception)";
+
+                beforeEach(^{
+                    [myDouble stub_method]("increment").and_raise_exception(someException);
+                });
+
+                it(@"should raise that exception instance", ^{
+                    ^{ [myDouble increment]; } should raise_exception(someException);
+                });
+            });
         });
     });
 });

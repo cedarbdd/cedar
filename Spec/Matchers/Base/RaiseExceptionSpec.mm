@@ -150,14 +150,14 @@ describe(@"raise_exception matcher", ^{
             context(@"when called with parentheses", ^{
                 describe(@"positive match", ^{
                     it(@"should should pass", ^{
-                        block should raise_exception();
+                        block should raise_exception;
                     });
                 });
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
                         expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception", block], ^{
-                            block should_not raise_exception();
+                            block should_not raise_exception;
                         });
                     });
                 });
@@ -189,14 +189,14 @@ describe(@"raise_exception matcher", ^{
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
                         expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception", block], ^{
-                            block should raise_exception();
+                            block should raise_exception;
                         });
                     });
                 });
 
                 describe(@"negative match", ^{
                     it(@"should should pass", ^{
-                        block should_not raise_exception();
+                        block should_not raise_exception;
                     });
                 });
             });
