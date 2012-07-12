@@ -128,6 +128,8 @@
 		<dict>
 			<key>SharedSettings</key>
 			<dict>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
 				<key>OTHER_LDFLAGS</key>
 				<string>-ObjC -all_load -lstdc++</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
