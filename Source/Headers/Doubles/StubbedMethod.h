@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <memory>
+#import <tr1/memory>
 #import <vector>
 #import "Argument.h"
 
@@ -29,7 +29,7 @@ namespace Cedar { namespace Doubles {
                 return strcmp(sel_getName(lhs), sel_getName(rhs)) < 0;
             }
         };
-        typedef std::shared_ptr<StubbedMethod> ptr_t;
+        typedef std::tr1::shared_ptr<StubbedMethod> ptr_t;
         typedef std::map<SEL, ptr_t, SelCompare> selector_map_t;
 
     private:
@@ -39,7 +39,7 @@ namespace Cedar { namespace Doubles {
         SEL selector_;
         id parent_;
         std::auto_ptr<Argument> return_value_argument_;
-        std::vector<std::shared_ptr<Argument>> arguments_;
+        std::vector<std::tr1::shared_ptr<Argument> > arguments_;
     };
 
     inline StubbedMethod::StubbedMethod(SEL selector, id parent)
@@ -64,7 +64,7 @@ namespace Cedar { namespace Doubles {
                                      reason:[NSString stringWithFormat:@"Selector %s accepts %d arguments; stub expects too many.", selector_, correct_number_of_arguments]
                                    userInfo:nil] raise];
         }
-        arguments_.push_back(std::shared_ptr<Argument>(new TypedArgument<T>(argument)));
+        arguments_.push_back(std::tr1::shared_ptr<Argument>(new TypedArgument<T>(argument)));
         return *this;
     }
 

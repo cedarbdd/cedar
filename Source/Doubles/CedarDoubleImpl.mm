@@ -43,35 +43,31 @@
     return stubbed_methods_;
 }
 
-- (Cedar::Doubles::StubbedMethod::ptr_t)stubbed_selector_ptr:(SEL)selector {
+- (Cedar::Doubles::StubbedMethod &)create_stubbed_method_for:(SEL)selector {
     Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(selector);
     if (it != stubbed_methods_.end()) {
-        return it->second;
-    }
-    return NULL;
-}
-
-- (Cedar::Doubles::StubbedMethod &)create_stubbed_method_for:(SEL)selector {
-    Cedar::Doubles::StubbedMethod::ptr_t stubbed_method_ptr = [self stubbed_selector_ptr:selector];
-    if (stubbed_method_ptr) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
                                  reason:[NSString stringWithFormat:@"The method '%s' is already stubbed", selector]
                                userInfo:nil] raise];
     }
-    stubbed_method_ptr = Cedar::Doubles::StubbedMethod::ptr_t(new Cedar::Doubles::StubbedMethod(selector, self.parent_double));
+
+    Cedar::Doubles::StubbedMethod::ptr_t stubbed_method_ptr = Cedar::Doubles::StubbedMethod::ptr_t(new Cedar::Doubles::StubbedMethod(selector, self.parent_double));
     stubbed_methods_[selector] = stubbed_method_ptr;
     return *stubbed_method_ptr;
 }
 
 - (BOOL)invoke_stubbed_method:(NSInvocation *)invocation {
-    Cedar::Doubles::StubbedMethod::ptr_t stubbedMethod = [self stubbed_selector_ptr:invocation.selector];
-    if (stubbedMethod) {
-        if (stubbedMethod->has_return_value()) {
-            const void * returnValue = stubbedMethod->return_value().value_bytes();
-            [invocation setReturnValue:const_cast<void *>(returnValue)];
-        }
+    Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(invocation.selector);
+    if (it == stubbed_methods_.end()) {
+        return false;
     }
-    return stubbedMethod;
+
+    Cedar::Doubles::StubbedMethod::ptr_t stubbed_method_ptr = it->second;
+    if (stubbed_method_ptr->has_return_value()) {
+        const void * returnValue = stubbed_method_ptr->return_value().value_bytes();
+        [invocation setReturnValue:const_cast<void *>(returnValue)];
+    }
+    return true;
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {
