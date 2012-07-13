@@ -6,6 +6,7 @@ SHARED_EXAMPLE_GROUPS_BEGIN(CedarDoubleSharedExamples)
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
+using namespace Cedar::Doubles::Arguments;
 
 sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
     __block id<CedarDouble, SimpleIncrementer> myDouble;
@@ -27,7 +28,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             beforeEach(^{
                 // This should work.  Thanks for the compiler bug, Apple.
                 // Radar #???
-//            myDouble.stub_method("value");
+                // myDouble.stub_method("value");
                 stubbed_method_ptr = &[myDouble stub_method]("value");
             });
 
@@ -39,12 +40,6 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             context(@"and then stubbed again", ^{
                 it(@"should raise an exception", ^{
                     ^{ [myDouble stub_method]("value"); } should raise_exception;
-                });
-            });
-
-            context(@"with a parameter", ^{
-                it(@"should raise an exception", ^{
-                    ^{ stubbed_method_ptr->with(1); } should raise_exception;
                 });
             });
 
@@ -79,6 +74,17 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     ^{ stubbed_method_ptr->and_return(@"foo"); } should raise_exception;
                 });
             });
+
+            context(@"with too many argument expectations", ^{
+                beforeEach(^{
+                    stubbed_method_ptr->with(@"foo");
+                });
+
+                it(@"should raise an exception", ^{
+                    NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <value>; expected: 1, actual: 0"];
+                    ^{ [myDouble value]; } should raise_exception.with_reason(reason);
+                });
+            });
         });
 
         context(@"with a method that takes a single parameter", ^{
@@ -87,7 +93,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             size_t actualValue = 6;
 
             beforeEach(^{
-                stubbed_method_ptr = &[myDouble stub_method]("incrementBy:").with(expectedValue);
+                stubbed_method_ptr = &[myDouble stub_method]("incrementBy:");
             });
 
             context(@"when invoked with a parameter of the expected value", ^{
@@ -96,15 +102,31 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
             });
 
-            context(@"when invoked with a parameter of the wrong value", ^{
-                it(@"should raise an exception", ^{
-                    ^{ [myDouble incrementBy:actualValue]; } should raise_exception;
+            context(@"with a specific expected argument", ^{
+                beforeEach(^{
+                    stubbed_method_ptr->with(expectedValue);
+                });
+
+                context(@"when invoked with a parameter of the expected value", ^{
+                    it(@"should not raise an exception", ^{
+                        [myDouble incrementBy:expectedValue];
+                    });
+                });
+
+                context(@"when invoked with a parameter of the wrong value", ^{
+                    it(@"should raise an exception", ^{
+                        ^{ [myDouble incrementBy:actualValue]; } should raise_exception;
+                    });
                 });
             });
 
-            context(@"when trying to add an additional argument expectation", ^{
-                it(@"should raise an exception", ^{
-                    ^{ stubbed_method_ptr->with(actualValue); } should raise_exception;
+            context(@"with any value", ^{
+                beforeEach(^{
+                    stubbed_method_ptr->with(anything);
+                });
+
+                it(@"should not raise an exception", ^{
+                    [myDouble incrementBy:actualValue];
                 });
             });
         });
@@ -114,19 +136,32 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             NSNumber * expectedBitMoreValue = [NSNumber numberWithInteger:10];
             NSNumber * actualBitMoreValue = [NSNumber numberWithInteger:60];
 
-            beforeEach(^{
-                [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
-            });
+            context(@"with the correct number of argument expectations", ^{
+                beforeEach(^{
+                    [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
+                });
 
-            context(@"when invoked with a parameter of the expected value", ^{
-                it(@"should not raise an exception", ^{
-                    [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue];
+                context(@"when invoked with a parameter of the expected value", ^{
+                    it(@"should not raise an exception", ^{
+                        [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue];
+                    });
+                });
+
+                context(@"when invoked with a parameter of the wrong value", ^{
+                    it(@"should raise an exception", ^{
+                        ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception;
+                    });
                 });
             });
 
-            context(@"when invoked with a parameter of the wrong value", ^{
+            context(@"with too few expected arguments", ^{
+                beforeEach(^{
+                    [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue);
+                });
+
                 it(@"should raise an exception", ^{
-                    ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception;
+                    NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <incrementByABit:andABitMore:>; expected: 1, actual: 2"];
+                    ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue]; } should raise_exception.with_reason(reason);
                 });
             });
         });

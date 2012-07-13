@@ -2,6 +2,7 @@
 #import "CompareEqual.h"
 #import "CedarStringifiers.h"
 #import "CedarComparators.h"
+#import <tr1/memory>
 
 namespace Cedar { namespace Doubles {
 
@@ -16,10 +17,11 @@ namespace Cedar { namespace Doubles {
         virtual size_t value_size() const = 0;
 
         virtual bool matches_bytes(void * expectedArgumentBytes) const = 0;
+
+        typedef std::tr1::shared_ptr<Argument> shared_ptr_t;
     };
 
     inline /* virtual */ Argument::~Argument() {}
-
 
 #pragma mark - TypedArgument
     template<typename T>
@@ -43,6 +45,23 @@ namespace Cedar { namespace Doubles {
         const T value_;
     };
 
+    class AnyArgument : public Argument {
+    private:
+        AnyArgument & operator=(const AnyArgument &) {};
+
+    public:
+        AnyArgument() {};
+        virtual ~AnyArgument() {};
+        // Allow default copy ctor.
+
+        virtual void * value_bytes() const { return NULL; };
+        virtual const char * value_encoding() const { return NULL; };
+        virtual NSString * value_string() const { return @"anything"; };
+        virtual size_t value_size() const { return 0; };
+
+        virtual bool matches_bytes(void * expectedArgumentBytes) const { return true; }
+
+    };
 
     template<typename T>
     TypedArgument<T>::TypedArgument(const T & value) : Argument(), value_(value) {}
@@ -73,6 +92,10 @@ namespace Cedar { namespace Doubles {
     template<typename T>
     /* virtual */ bool TypedArgument<T>::matches_bytes(void * expectedArgumentBytes) const {
         return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(expectedArgumentBytes)));
+    }
+
+    namespace Arguments {
+        extern Argument::shared_ptr_t anything;
     }
 
 }}

@@ -2,12 +2,11 @@
 #import <tr1/memory>
 #import <vector>
 #import "Argument.h"
+#import "InvocationMatcher.h"
 
 namespace Cedar { namespace Doubles {
 
-    static const size_t NON_USER_ARGUMENTS = 2;
-
-    class StubbedMethod {
+    class StubbedMethod : private InvocationMatcher {
     private:
         StubbedMethod(const StubbedMethod & );
         StubbedMethod & operator=(const StubbedMethod &);
@@ -17,6 +16,9 @@ namespace Cedar { namespace Doubles {
 
         template<typename T>
         StubbedMethod & and_return(const T &);
+
+        StubbedMethod & with(const Argument::shared_ptr_t argument);
+        StubbedMethod & and_with(const Argument::shared_ptr_t argument);
 
         template<typename T>
         StubbedMethod & with(const T &);
@@ -37,22 +39,20 @@ namespace Cedar { namespace Doubles {
         typedef std::tr1::shared_ptr<StubbedMethod> ptr_t;
         typedef std::map<SEL, ptr_t, SelCompare> selector_map_t;
 
-        bool invoke(NSInvocation * invocation) const;
+        bool matches(NSInvocation * const invocation) const;
+        bool invoke(const NSInvocation * const invocation) const;
 
     private:
         NSMethodSignature *method_signature();
 
     private:
-        SEL selector_;
         id parent_;
-        typedef std::vector<std::tr1::shared_ptr<Argument> > argument_list_t;
         std::auto_ptr<Argument> return_value_argument_;
-        argument_list_t arguments_;
         NSObject * exception_to_raise_;
     };
 
     inline StubbedMethod::StubbedMethod(SEL selector, id parent) :
-        selector_(selector),
+        InvocationMatcher(selector),
         parent_(parent),
         return_value_argument_(0),
         exception_to_raise_(0) {
@@ -62,22 +62,24 @@ namespace Cedar { namespace Doubles {
     StubbedMethod & StubbedMethod::and_return(const T & return_value) {
         if (strcmp([this->method_signature() methodReturnType], @encode(T))) {
             [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Invalid return value type (%s) for %s", @encode(T), selector_]
+                                     reason:[NSString stringWithFormat:@"Invalid return value type (%s) for %s", @encode(T), this->selector()]
                                    userInfo:nil] raise];
         }
         return_value_argument_ = std::auto_ptr<Argument>(new TypedArgument<T>(return_value));
     }
 
+    inline StubbedMethod & StubbedMethod::with(const Argument::shared_ptr_t argument) {
+        this->add_argument(argument);
+        return *this;
+    };
+
+    inline StubbedMethod & StubbedMethod::and_with(const Argument::shared_ptr_t argument) {
+        return with(argument);
+    }
+
     template<typename T>
     StubbedMethod & StubbedMethod::with(const T & argument) {
-        NSUInteger correct_number_of_arguments = [this->method_signature() numberOfArguments] - NON_USER_ARGUMENTS;
-        if (arguments_.size() >= correct_number_of_arguments) {
-            [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Selector %s accepts %d arguments; stub expects too many.", selector_, correct_number_of_arguments]
-                                   userInfo:nil] raise];
-        }
-        arguments_.push_back(std::tr1::shared_ptr<Argument>(new TypedArgument<T>(argument)));
-        return *this;
+        return with(Argument::shared_ptr_t(new TypedArgument<T>(argument)));
     }
 
     template<typename T>
@@ -94,42 +96,26 @@ namespace Cedar { namespace Doubles {
         return *this;
     }
 
-    inline NSMethodSignature *StubbedMethod::method_signature() {
-        return [parent_ methodSignatureForSelector:selector_];
+    inline bool StubbedMethod::matches(NSInvocation * const invocation) const {
+        this->verify_correct_number_of_arguments(parent_);
+        return this->matches_invocation(invocation);
     }
 
-    inline bool StubbedMethod::invoke(NSInvocation * invocation) const {
+    inline bool StubbedMethod::invoke(const NSInvocation * const invocation) const {
+        const void * returnValue;
+
         if (exception_to_raise_) {
             @throw exception_to_raise_;
-        }
 
-        if (has_return_value()) {
-            const void * returnValue = return_value().value_bytes();
+        } else if (has_return_value()) {
+            returnValue = return_value().value_bytes();
             [invocation setReturnValue:const_cast<void *>(returnValue)];
         }
+    }
 
-        // Compiler cries about unused value in test part of for invocation if we try to initialize two values, possible compiler bug?
-        size_t index = NON_USER_ARGUMENTS;
-        std::vector<unsigned char> actualArgument;
-        for (argument_list_t::const_iterator it = arguments_.begin(); it != arguments_.end(); ++it, ++index) {
-            actualArgument.reserve((*it)->value_size());
-            [invocation getArgument:&actualArgument[0] atIndex:index];
-
-            if (!(*it)->matches_bytes(&actualArgument[0])) {
-                NSString * reason = [NSString stringWithFormat:@"Wrong value supplied to %dth argument of stubbed method %s expected %@.", // got %@.",
-                                        index - NON_USER_ARGUMENTS,
-                                        invocation.selector,
-                                     (*it)->value_string()];
-                // TODO: Better printing for the actual value
-                // Matchers::Stringifiers::string_for(&actualArgument[0], (*it)->value_encoding())];
-
-                [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:reason
-                                       userInfo:nil] raise];
-            }
-        }
-
-        return true;
+#pragma mark - Private interface
+    inline NSMethodSignature *StubbedMethod::method_signature() {
+        return [parent_ methodSignatureForSelector:this->selector()];
     }
 
 }}

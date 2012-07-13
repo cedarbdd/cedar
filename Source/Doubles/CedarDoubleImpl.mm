@@ -63,7 +63,17 @@
     }
 
     Cedar::Doubles::StubbedMethod::ptr_t stubbed_method_ptr = it->second;
-    return stubbed_method_ptr->invoke(invocation);
+    if (stubbed_method_ptr->matches(invocation)) {
+        [self record_method_invocation:invocation];
+        stubbed_method_ptr->invoke(invocation);
+        return true;
+    } else {
+        NSString * reason = [NSString stringWithFormat:@"Wrong arguments supplied to stub"];
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:reason
+                               userInfo:nil] raise];
+        return false;
+    }
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {

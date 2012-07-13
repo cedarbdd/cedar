@@ -7,6 +7,7 @@ extern "C" {
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
+using namespace Cedar::Doubles::Arguments;
 
 SPEC_BEGIN(HaveReceivedSpec)
 
@@ -24,8 +25,7 @@ describe(@"have_received matcher", ^{
         });
 
         it(@"should raise a descriptive exception", ^{
-            expectFailureWithMessage([NSString stringWithFormat:@"Received expectation for non-double object <%@>", incrementer], ^{
-                [incrementer increment];
+            expectExceptionWithReason([NSString stringWithFormat:@"Received expectation for non-double object <%@>", incrementer], ^{
                 incrementer should have_received("increment");
             });
         });
@@ -33,6 +33,13 @@ describe(@"have_received matcher", ^{
 
     context(@"for a method with no parameters", ^{
         SEL method = @selector(increment);
+
+        context(@"with a parameter expectation", ^{
+            it(@"should raise an exception due to an invalid expectation", ^{
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: 1, actual: 0", method];
+                ^{ expect(incrementer).to(have_received(method).with(anything)); } should raise_exception.with_reason(reason);
+            });
+        });
 
         context(@"which has been called", ^{
             beforeEach(^{
@@ -83,6 +90,13 @@ describe(@"have_received matcher", ^{
 
     context(@"for a method with a non-object parameter", ^{
         SEL method = @selector(incrementBy:);
+
+        context(@"with too many parameter expectations", ^{
+            it(@"should raise an exception due to an invalid expectation", ^{
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: 2, actual: 1", method];
+                ^{ expect(incrementer).to(have_received(method).with(anything).and_with(anything)); } should raise_exception.with_reason(reason);
+            });
+        });
 
         context(@"which has been called", ^{
             int actualParameter = 2;
@@ -289,6 +303,13 @@ describe(@"have_received matcher", ^{
         int actualFirstParameter = 83;
         id actualSecondParameter = [NSNumber numberWithInt:32];
 
+        context(@"with too few parameter expectations", ^{
+            it(@"should raise an exception due to an invalid expectation", ^{
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: 1, actual: 2", method];
+                ^{ expect(incrementer).to(have_received(method).with(anything)); } should raise_exception.with_reason(reason);
+            });
+        });
+
         context(@"which has been called", ^{
             beforeEach(^{
                 [incrementer incrementByABit:actualFirstParameter andABitMore:actualSecondParameter];
@@ -313,63 +334,6 @@ describe(@"have_received matcher", ^{
 
                         expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
                             expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).and_with(expectedSecondParameter));
-                        });
-                    });
-                });
-            });
-
-            context(@"with fewer expected parameters than actual parameters", ^{
-                long long expectedFirstParameter = actualFirstParameter;
-
-                describe(@"positive match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too few parameters expected for message <%@>; required 2, expected 1", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to(have_received(method).with(expectedFirstParameter));
-                        });
-
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too few parameters expected for message <%@>; required 2, expected 1", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter));
-                        });
-                    });
-                });
-
-                describe(@"negative match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too few parameters expected for message <%@>; required 2, expected 1", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to_not(have_received(method).with(expectedFirstParameter));
-                        });
-
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too few parameters expected for message <%@>; required 2, expected 1", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter));
-                        });
-                    });
-                });
-            });
-
-            context(@"with more expected parameters than actual parameters", ^{
-                long long expectedFirstParameter = actualFirstParameter;
-                id expectedSecondParameter = @"second", expectedThirdParameter = @"third";
-
-                describe(@"positive match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too many parameters expected for message <%@>; required 2, expected 3", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to(have_received(method).with(expectedFirstParameter).with(expectedSecondParameter).and_with(expectedThirdParameter));
-                        });
-
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too many parameters expected for message <%@>; required 2, expected 3", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).with(expectedSecondParameter).and_with(expectedThirdParameter));
-                        });
-                    });
-                });
-
-                describe(@"negative match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too many parameters expected for message <%@>; required 2, expected 3", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to_not(have_received(method).with(expectedFirstParameter).with(expectedSecondParameter).and_with(expectedThirdParameter));
-                        });
-
-                        expectFailureWithMessage([NSString stringWithFormat:@"Too many parameters expected for message <%@>; required 2, expected 3", NSStringFromSelector(method)], ^{
-                            expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).with(expectedSecondParameter).and_with(expectedThirdParameter));
                         });
                     });
                 });
