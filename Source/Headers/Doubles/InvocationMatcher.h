@@ -22,7 +22,7 @@ namespace Cedar { namespace Doubles {
         const SEL & selector() const { return expectedSelector_; }
         const arguments_vector_t & arguments() const { return arguments_; }
         const bool match_any_arguments() const { return arguments_.empty(); }
-        void verify_correct_number_of_arguments(id instance) const;
+        void verify_count_and_types_of_arguments(id instance) const;
 
     private:
         bool matches_arguments(NSInvocation * const) const;
@@ -49,7 +49,7 @@ namespace Cedar { namespace Doubles {
         return sel_isEqual(invocation.selector, expectedSelector_) && this->matches_arguments(invocation);
     }
 
-    inline void InvocationMatcher::verify_correct_number_of_arguments(id instance) const {
+    inline void InvocationMatcher::verify_count_and_types_of_arguments(id instance) const {
         if (this->match_any_arguments()) {
             return true;
         }
@@ -63,6 +63,19 @@ namespace Cedar { namespace Doubles {
                                      reason:[NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: %d, actual: %d", this->selector(), expectedArgumentCount, actualArgumentCount]
                                    userInfo:nil]
              raise];
+        }
+
+        size_t index = OBJC_DEFAULT_ARGUMENT_COUNT;
+        for (arguments_vector_t::const_iterator cit = this->arguments().begin(); cit != this->arguments().end(); ++cit, ++index) {
+            const char * actual_argument_encoding = [methodSignature getArgumentTypeAtIndex:index];
+            if (!(*cit)->matches_encoding(actual_argument_encoding)) {
+                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #%d for <%s>",
+                                    (*cit)->value_string(),
+                                    actual_argument_encoding,
+                                    index - OBJC_DEFAULT_ARGUMENT_COUNT + 1,
+                                    this->selector()];
+                [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise];
+            }
         }
     }
 

@@ -97,7 +97,7 @@ namespace Cedar { namespace Doubles {
     }
 
     inline bool StubbedMethod::matches(NSInvocation * const invocation) const {
-        this->verify_correct_number_of_arguments(parent_);
+        this->verify_count_and_types_of_arguments(parent_);
         return this->matches_invocation(invocation);
     }
 

@@ -137,19 +137,34 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             NSNumber * actualBitMoreValue = [NSNumber numberWithInteger:60];
 
             context(@"with the correct number of argument expectations", ^{
-                beforeEach(^{
-                    [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
-                });
+                context(@"of the correct types", ^{
+                    beforeEach(^{
+                        [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
+                    });
 
-                context(@"when invoked with a parameter of the expected value", ^{
-                    it(@"should not raise an exception", ^{
-                        [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue];
+                    context(@"when invoked with a parameter of the expected value", ^{
+                        it(@"should not raise an exception", ^{
+                            [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue];
+                        });
+                    });
+
+                    context(@"when invoked with a parameter of the wrong value", ^{
+                        it(@"should raise an exception", ^{
+                            ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception;
+                        });
                     });
                 });
 
-                context(@"when invoked with a parameter of the wrong value", ^{
+                context(@"of incorrect types", ^{
+                    NSArray *argumentWithInvalidEncoding = [NSArray array];
+
+                    beforeEach(^{
+                        [myDouble stub_method]("incrementByABit:andABitMore:").with(argumentWithInvalidEncoding).and_with(@"your mom");
+                    });
+
                     it(@"should raise an exception", ^{
-                        ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception;
+                        NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", argumentWithInvalidEncoding, @encode(size_t)];
+                        ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception.with_reason(reason);
                     });
                 });
             });

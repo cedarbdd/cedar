@@ -292,7 +292,7 @@ describe(@"have_received matcher", ^{
             describe(@"negative match", ^{
                 it(@"should pass", ^{
                     expect(incrementer).to_not(have_received(method).with(expectedParameter));
-                    expect(incrementer).to_not(have_received("incrementBy:").with(expectedParameter));
+                    expect(incrementer).to_not(have_received("incrementByNumber:").with(expectedParameter));
                 });
             });
         });

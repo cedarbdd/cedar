@@ -61,7 +61,7 @@ namespace Cedar { namespace Doubles {
 
     inline bool HaveReceived::matches(id instance) const {
         this->verify_object_is_a_double(instance);
-        this->verify_correct_number_of_arguments(instance);
+        this->verify_count_and_types_of_arguments(instance);
 
         for (NSInvocation *invocation in [instance sent_messages]) {
             if (this->matches_invocation(invocation)) {
