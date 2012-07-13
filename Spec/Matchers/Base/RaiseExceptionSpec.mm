@@ -27,6 +27,87 @@ describe(@"raise_exception matcher", ^{
     __block void (^block)();
     __block NSException *exception;
 
+    context(@"with no exception class specified", ^{
+        context(@"when the block throws an exception", ^{
+            beforeEach(^{
+                exception = [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Because" userInfo:nil];
+                block = [[^{
+                    [exception raise];
+                } copy] autorelease];
+            });
+
+            context(@"when called with parentheses", ^{
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        block should raise_exception;
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception", block], ^{
+                            block should_not raise_exception;
+                        });
+                    });
+                });
+            });
+
+            context(@"when called without parentheses", ^{
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        block should raise_exception;
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception", block], ^{
+                            block should_not raise_exception;
+                        });
+                    });
+                });
+            });
+        });
+
+        context(@"when the block does not throw an exception", ^{
+            beforeEach(^{
+                block = [[^{} copy] autorelease];
+            });
+
+            context(@"when called with parentheses", ^{
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception", block], ^{
+                            block should raise_exception;
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        block should_not raise_exception;
+                    });
+                });
+            });
+
+            context(@"when called without parentheses", ^{
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception", block], ^{
+                            block should raise_exception;
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        block should_not raise_exception;
+                    });
+                });
+            });
+        });
+    });
+
     context(@"with an exception class specified", ^{
         Class expectedExceptionClass = [CustomException class];
 
@@ -39,7 +120,7 @@ describe(@"raise_exception matcher", ^{
             });
 
             describe(@"positive match", ^{
-                it(@"should should pass", ^{
+                it(@"should pass", ^{
                     block should raise_exception(expectedExceptionClass);
                 });
             });
@@ -87,7 +168,7 @@ describe(@"raise_exception matcher", ^{
                 });
 
                 describe(@"negative match", ^{
-                    it(@"should should pass", ^{
+                    it(@"should pass", ^{
                         block should_not raise_exception(expectedExceptionClass);
                     });
                 });
@@ -111,7 +192,7 @@ describe(@"raise_exception matcher", ^{
             });
 
             describe(@"negative match", ^{
-                it(@"should should pass", ^{
+                it(@"should pass", ^{
                     block should_not raise_exception(expectedExceptionClass);
                 });
             });
@@ -131,51 +212,60 @@ describe(@"raise_exception matcher", ^{
             });
 
             describe(@"negative match", ^{
-                it(@"should should pass", ^{
+                it(@"should pass", ^{
                     block should_not raise_exception(expectedExceptionClass);
                 });
             });
         });
     });
 
-    context(@"with no exception class specified", ^{
-        context(@"when the block throws an exception", ^{
+    context(@"with a reason specified", ^{
+        NSString *reason = @"Because of something you did.";
+
+        context(@"when the block throws an exception with the specified reason", ^{
             beforeEach(^{
-                exception = [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Because" userInfo:nil];
+                exception = [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
                 block = [[^{
                     [exception raise];
                 } copy] autorelease];
             });
 
-            context(@"when called with parentheses", ^{
-                describe(@"positive match", ^{
-                    it(@"should should pass", ^{
-                        block should raise_exception;
+            describe(@"positive match", ^{
+                it(@"should pass", ^{
+                    block should raise_exception.with_reason(reason);
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception with reason <%@>", block, reason], ^{
+                        block should_not raise_exception.with_reason(reason);
                     });
                 });
+            });
+        });
 
-                describe(@"negative match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception", block], ^{
-                            block should_not raise_exception;
-                        });
+        context(@"when the block throws an exception with a different reason", ^{
+            NSString *anotherReason = @"It's not you, it's me";
+
+            beforeEach(^{
+                exception = [NSException exceptionWithName:NSInternalInconsistencyException reason:anotherReason userInfo:nil];
+                block = [[^{
+                    [exception raise];
+                } copy] autorelease];
+            });
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception with reason <%@>", block, reason], ^{
+                        block should raise_exception.with_reason(reason);
                     });
                 });
             });
 
-            context(@"when called without parentheses", ^{
-                describe(@"positive match", ^{
-                    it(@"should should pass", ^{
-                        block should raise_exception;
-                    });
-                });
-
-                describe(@"negative match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception", block], ^{
-                            block should_not raise_exception;
-                        });
-                    });
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    block should_not raise_exception.with_reason(reason);
                 });
             });
         });
@@ -185,35 +275,17 @@ describe(@"raise_exception matcher", ^{
                 block = [[^{} copy] autorelease];
             });
 
-            context(@"when called with parentheses", ^{
-                describe(@"positive match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception", block], ^{
-                            block should raise_exception;
-                        });
-                    });
-                });
-
-                describe(@"negative match", ^{
-                    it(@"should should pass", ^{
-                        block should_not raise_exception;
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception with reason <%@>", block, reason], ^{
+                        block should raise_exception.with_reason(reason);
                     });
                 });
             });
 
-            context(@"when called without parentheses", ^{
-                describe(@"positive match", ^{
-                    it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception", block], ^{
-                            block should raise_exception;
-                        });
-                    });
-                });
-
-                describe(@"negative match", ^{
-                    it(@"should should pass", ^{
-                        block should_not raise_exception;
-                    });
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    block should_not raise_exception.with_reason(reason);
                 });
             });
         });
