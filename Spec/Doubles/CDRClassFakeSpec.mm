@@ -6,11 +6,11 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(CDRClassFakeSpec)
 
-describe(@"fake (class)", ^{
+describe(@"fake_for(Class)", ^{
     __block SimpleIncrementer<CedarDouble> *my_fake;
 
     beforeEach(^{
-        my_fake = fake([SimpleIncrementer class]);
+        my_fake = fake_for([SimpleIncrementer class]);
 
         [[SpecHelper specHelper].sharedExampleContext setObject:my_fake forKey:@"double"];
     });

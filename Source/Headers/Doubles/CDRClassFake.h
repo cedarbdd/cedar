@@ -7,10 +7,10 @@
 
 @end
 
-inline id CDR_fake(Class klass) {
+inline id CDR_fake_for(Class klass) {
     return [[[CDRClassFake alloc] initWithClass:klass] autorelease];
 }
 
 #ifndef CEDAR_DOUBLES_COMPATIBILITY_MODE
-#define fake(x) CDR_fake((x))
+#define fake_for(x) CDR_fake_for((x))
 #endif
