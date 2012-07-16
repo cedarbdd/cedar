@@ -13,6 +13,10 @@
     ++self.value;
 }
 
+- (size_t)aVeryLargeNumber {
+    return 0x7fffffff;
+}
+
 - (void)incrementBy:(size_t)amount {
     self.value += amount;
 }

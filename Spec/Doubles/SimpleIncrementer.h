@@ -2,7 +2,9 @@
 
 @protocol SimpleIncrementer<NSObject>
 
+@required
 - (size_t)value;
+- (size_t)aVeryLargeNumber;
 - (void)increment;
 - (void)incrementBy:(size_t)amount;
 - (void)incrementByNumber:(NSNumber *)number;

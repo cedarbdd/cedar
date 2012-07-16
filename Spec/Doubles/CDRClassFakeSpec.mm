@@ -6,42 +6,78 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(CDRClassFakeSpec)
 
-describe(@"fake_for(Class)", ^{
-    __block SimpleIncrementer<CedarDouble> *my_fake;
+sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
+    __block id<CedarDouble, SimpleIncrementer> fake;
 
     beforeEach(^{
-        my_fake = fake_for([SimpleIncrementer class]);
-
-        [[SpecHelper specHelper].sharedExampleContext setObject:my_fake forKey:@"double"];
+        fake = [sharedContext objectForKey:@"double"];
     });
 
-    itShouldBehaveLike(@"a Cedar double");
-
-    context(@"when calling a method which has not been stubbed", ^{
-        it(@"should raise an exception", ^{
-            ^{ [my_fake value]; } should raise_exception;
-        });
-    });
-    
     describe(@"#respondsToSelector:", ^{
         context(@"when an instance method is defined", ^{
             it(@"should return true", ^{
-                [my_fake respondsToSelector:@selector(value)] should be_truthy;
+                [fake respondsToSelector:@selector(value)] should be_truthy;
             });
         });
-        
+
         context(@"when an instance method is not defined", ^{
             it(@"should return false", ^{
-                [my_fake respondsToSelector:@selector(wibble_wobble)] should_not be_truthy;
+                [fake respondsToSelector:@selector(wibble_wobble)] should_not be_truthy;
             });
         });
     });
 
     describe(@"#description", ^{
         it(@"should return the description of the faked class", ^{
-            my_fake.description should contain(@"SimpleIncrementer");
+            fake.description should contain(@"Fake SimpleIncrementer");
         });
     });
 });
+
+describe(@"CDRClassFake", ^{
+    describe(@"fake_for(Class)", ^{
+        __block SimpleIncrementer<CedarDouble> *fake;
+
+        beforeEach(^{
+            fake = fake_for([SimpleIncrementer class]);
+
+            [[SpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
+        });
+
+        itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar class fake");
+
+        context(@"when calling a method which has not been stubbed", ^{
+            it(@"should raise an exception", ^{
+                ^{ [fake value]; } should raise_exception;
+            });
+        });
+
+    });
+
+    describe(@"nice_fake_for(Class)", ^{
+        __block SimpleIncrementer<CedarDouble> *nice_fake;
+
+        beforeEach(^{
+            nice_fake = nice_fake_for([SimpleIncrementer class]);
+
+            [[SpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
+        });
+
+        itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar class fake");
+
+        context(@"when calling a method which has not been stubbed", ^{
+            it(@"should allow method invocation without stubbing", ^{
+                [nice_fake incrementBy:3];
+            });
+
+            it(@"should default to returning a 0", ^{
+                expect(nice_fake.aVeryLargeNumber).to(equal(0));
+            });
+        });
+    });
+});
+
 
 SPEC_END

@@ -11,14 +11,14 @@
 
 @end
 
-
 @implementation CDRClassFake
 
-@synthesize klass = klass_, cedar_double_impl = cedar_double_impl_;
+@synthesize klass = klass_, cedar_double_impl = cedar_double_impl_, require_explicit_stubs = require_explicit_stubs_;
 
 - (id)initWithClass:(Class)klass {
     if (self = [super init]) {
         self.klass = klass;
+        self.require_explicit_stubs = true;
         self.cedar_double_impl = [[[CedarDoubleImpl alloc] initWithDouble:self] autorelease];
     }
     return self;
@@ -26,6 +26,7 @@
 
 - (void)dealloc {
     self.klass = nil;
+    self.require_explicit_stubs = nil;
     self.cedar_double_impl = nil;
     [super dealloc];
 }
@@ -42,10 +43,12 @@
     [self.cedar_double_impl record_method_invocation:invocation];
 
     if (![self.cedar_double_impl invoke_stubbed_method:invocation]) {
-        [[NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Invocation of unstubbed method: %s", invocation.selector]
-                               userInfo:nil]
-         raise];
+        if (self.require_explicit_stubs) {
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                     reason:[NSString stringWithFormat:@"Invocation of unstubbed method: %s", invocation.selector]
+                                   userInfo:nil]
+             raise];
+        }
     }
 }
 
