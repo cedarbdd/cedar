@@ -96,7 +96,7 @@ namespace Cedar { namespace Doubles {
     }
 
     namespace Arguments {
-        extern Argument::shared_ptr_t anything;
+        static const Argument::shared_ptr_t anything = Argument::shared_ptr_t(new Doubles::AnyArgument());
     }
 
 }}

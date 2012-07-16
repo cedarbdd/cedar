@@ -91,6 +91,8 @@
 		AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
 		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
 		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
+		AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
+		AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
 		AE18A7B913F450A700C8872C /* BeCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFC13ECC21E00786282 /* BeCloseTo.h */; };
 		AE18A7BA13F450A700C8872C /* BeInstanceOf.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFD13ECC21E00786282 /* BeInstanceOf.h */; };
@@ -133,7 +135,7 @@
 		AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
 		AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC8714C4DBA70016652A /* CedarDoubles.h */; };
 		AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC9814C4DD440016652A /* CDRSpy.h */; };
-		AE9AA67715AB601500617E1A /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; };
+		AE9AA67715AB601500617E1A /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE9AA67815AB601500617E1A /* HaveReceived.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
 		AE9AA67B15AB72DA00617E1A /* CDRClassFake.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA67915AB72DA00617E1A /* CDRClassFake.h */; };
 		AE9AA68015AB748E00617E1A /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
@@ -156,8 +158,6 @@
 		AE9AA6DC15AE0B0400617E1A /* CedarDoubleImpl.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; };
 		AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
 		AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
-		AE9AA70915AF465000617E1A /* Argument.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA70815AF465000617E1A /* Argument.mm */; };
-		AE9AA70A15AF465000617E1A /* Argument.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA70815AF465000617E1A /* Argument.mm */; };
 		AEB45A911496C8D800845D09 /* RaiseException.h in Headers */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; };
 		AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
@@ -479,6 +479,7 @@
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
 		AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Foundation.framework; sourceTree = SDKROOT; };
+		AE167EF115B216DA005960B9 /* RaiseException.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseException.mm; sourceTree = "<group>"; };
 		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
 		AE18A7FA13F4601400C8872C /* Contain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contain.h; sourceTree = "<group>"; };
@@ -500,7 +501,6 @@
 		AE9AA6D715AE092C00617E1A /* StubbedMethodPrototype.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StubbedMethodPrototype.mm; sourceTree = "<group>"; };
 		AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarDoubleImpl.h; sourceTree = "<group>"; };
 		AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDoubleImpl.mm; sourceTree = "<group>"; };
-		AE9AA70815AF465000617E1A /* Argument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Argument.mm; sourceTree = "<group>"; };
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
 		AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseExceptionSpec.mm; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
@@ -664,7 +664,6 @@
 				AE9AA68315AB78FB00617E1A /* CDRClassFake.mm */,
 				AE9AA6D715AE092C00617E1A /* StubbedMethodPrototype.mm */,
 				AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */,
-				AE9AA70815AF465000617E1A /* Argument.mm */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -829,6 +828,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AE167EEC15B210C9005960B9 /* Matchers */ = {
+			isa = PBXGroup;
+			children = (
+				AE167EF015B216A5005960B9 /* Base */,
+			);
+			path = Matchers;
+			sourceTree = "<group>";
+		};
+		AE167EF015B216A5005960B9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AE167EF115B216DA005960B9 /* RaiseException.mm */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		AE18A7D113F45BBE00C8872C /* Comparators */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,6 +903,7 @@
 			children = (
 				AEEE1FCA11DC27B800029872 /* Headers */,
 				AEEE1FDC11DC27B800029872 /* iPhone */,
+				AE167EEC15B210C9005960B9 /* Matchers */,
 				6628FC8414C4DAB90016652A /* Doubles */,
 				AEEE1FC511DC27B800029872 /* CDRExample.m */,
 				AE8C881113626FE6006C9305 /* CDRSpecFailure.m */,
@@ -1529,7 +1545,7 @@
 				AE9AA68715AB7E0900617E1A /* CDRClassFake.mm in Sources */,
 				AE9AA6D815AE092C00617E1A /* StubbedMethodPrototype.mm in Sources */,
 				AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
-				AE9AA70915AF465000617E1A /* Argument.mm in Sources */,
+				AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1598,7 +1614,7 @@
 				AE9AA68615AB7A8700617E1A /* CDRClassFake.mm in Sources */,
 				AE9AA6D915AE092C00617E1A /* StubbedMethodPrototype.mm in Sources */,
 				AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
-				AE9AA70A15AF465000617E1A /* Argument.mm in Sources */,
+				AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

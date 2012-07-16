@@ -47,7 +47,7 @@
     Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(selector);
     if (it != stubbed_methods_.end()) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"The method '%s' is already stubbed", selector]
+                                 reason:[NSString stringWithFormat:@"The method <%s> is already stubbed", selector]
                                userInfo:nil] raise];
     }
 
