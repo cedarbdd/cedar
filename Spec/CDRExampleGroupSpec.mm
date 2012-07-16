@@ -3,17 +3,17 @@
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
 #import "SpecHelper.h"
-#import "OCMock.h"
 #else
 #import <Cedar/SpecHelper.h>
-#import <OCMock/OCMock.h>
 #endif
 
 #import "CDRExampleBase.h"
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
+#import "NoOpKeyValueObserver.h"
 
 using namespace Cedar::Matchers;
+using namespace Cedar::Doubles;
 
 extern void (^runInFocusedSpecsMode)(CDRExampleBase *);
 
@@ -368,12 +368,14 @@ describe(@"CDRExampleGroup", ^{
         describe(@"KVO", ^{
             __block id mockObserver;
 
+            beforeEach(^{
+                mockObserver = [[[NoOpKeyValueObserver alloc] init] autorelease];
+                spy_on(mockObserver);
+            });
+
             describe(@"when a child changes state, causing the group to change state", ^{
                 beforeEach(^{
                     [group add:passingExample];
-
-                    mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
-                    [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
                 });
 
                 it(@"should report that the state has changed", ^{
@@ -381,7 +383,7 @@ describe(@"CDRExampleGroup", ^{
                     [group run];
                     [group removeObserver:mockObserver forKeyPath:@"state"];
 
-                    [mockObserver verify];
+                    mockObserver should have_received("observeValueForKeyPath:ofObject:change:context:");
                 });
             });
 
@@ -394,9 +396,6 @@ describe(@"CDRExampleGroup", ^{
                     [subgroup release];
 
                     [subgroup add:passingExample];
-
-                    mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
-                    [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
                 });
 
                 it(@"should report that the state has changed", ^{
@@ -404,7 +403,7 @@ describe(@"CDRExampleGroup", ^{
                     [group run];
                     [group removeObserver:mockObserver forKeyPath:@"state"];
 
-                    [mockObserver verify];
+                    mockObserver should have_received("observeValueForKeyPath:ofObject:change:context:");
                 });
             });
 
@@ -417,8 +416,7 @@ describe(@"CDRExampleGroup", ^{
                     CDRExampleState state = group.state;
                     expect(state).to(equal(CDRExampleStateFailed));
 
-                    mockObserver = [OCMockObject mockForClass:[NSObject class]];
-                    [[[mockObserver stub] andThrow:[NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil]] observeValueForKeyPath:@"state" ofObject:group change:[OCMArg any] context:NULL];
+                    [mockObserver stub_method]("observeValueForKeyPath:ofObject:change:context:").and_raise_exception();
                 });
 
                 it(@"should not report that the state has changed", ^{

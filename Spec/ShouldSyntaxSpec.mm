@@ -3,10 +3,8 @@
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
 #import "SpecHelper.h"
-#import "OCMock.h"
 #else
 #import <Cedar/SpecHelper.h>
-#import <OCMock/OCMock.h>
 #endif
 
 extern "C" {

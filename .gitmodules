@@ -1,6 +1,3 @@
-[submodule "Externals/OCMock"]
-	path = Externals/OCMock
-	url = git://github.com/pivotal/OCMock.git
 [submodule "Externals/OCHamcrest"]
 	path = Externals/OCHamcrest
 	url = git://github.com/pivotal/OCHamcrest.git

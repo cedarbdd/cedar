@@ -57,7 +57,6 @@
 		966E74ED145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; };
 		966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; };
 		968BA92F143485F800EA40B3 /* CDROTestIPhoneRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 968BA92E143485F800EA40B3 /* CDROTestIPhoneRunner.h */; };
-		96A07F0313F276640021974D /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
 		96A07F0413F276640021974D /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE1FB611DC271300029872 /* Cedar.framework */; };
 		96A07F0B13F276B10021974D /* FocusedSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0A13F276B10021974D /* FocusedSpec.m */; };
 		96A07F0F13F27F2F0021974D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0E13F27F2F0021974D /* main.m */; };
@@ -89,8 +88,6 @@
 		AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; };
 		AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
-		AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3111DEA6A900A922D4 /* OCMock.framework */; };
-		AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */; };
 		AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
@@ -118,6 +115,8 @@
 		AE18A7FC13F4601400C8872C /* Contain.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE18A7FA13F4601400C8872C /* Contain.h */; };
 		AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
+		AE36AC6215B4BBFB00EB6C51 /* NoOpKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */; };
+		AE36AC6315B4BBFC00EB6C51 /* NoOpKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */; };
 		AE597B4115B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		AE597B4215B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
@@ -290,13 +289,6 @@
 			remoteGlobalIDString = AEEE1FB511DC271300029872;
 			remoteInfo = Cedar;
 		};
-		96A07EF213F276640021974D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = OCMock;
-		};
 		96B5FA15144A81A8000A6A5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
@@ -310,41 +302,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = AEEE222811DC2B0600029872;
 			remoteInfo = "Cedar-StaticLib";
-		};
-		AE135D3011DEA6A900A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = OCMock;
-		};
-		AE135D3211DEA6A900A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 03BF2D3708F1C69500978C59;
-			remoteInfo = OCMockTests;
-		};
-		AE135D3411DEA6A900A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 508C285F119042C300E392B9;
-			remoteInfo = "OCMock-StaticLib";
-		};
-		AE135D3B11DEA6D700A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = OCMock;
-		};
-		AE135E6C11DEB45F00A922D4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 508C285E119042C300E392B9;
-			remoteInfo = "OCMock-StaticLib";
 		};
 		AEEE218A11DC28E700029872 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -487,13 +444,14 @@
 		AE0AF55E13E9C0E300029396 /* CedarMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarMatchers.h; sourceTree = "<group>"; };
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
-		AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Foundation.framework; sourceTree = SDKROOT; };
 		AE167EF115B216DA005960B9 /* RaiseException.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseException.mm; sourceTree = "<group>"; };
 		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
 		AE18A7FA13F4601400C8872C /* Contain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contain.h; sourceTree = "<group>"; };
 		AE18A80913F4640600C8872C /* ContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainSpec.mm; sourceTree = "<group>"; };
+		AE36AC5F15B4BB2D00EB6C51 /* NoOpKeyValueObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoOpKeyValueObserver.h; sourceTree = "<group>"; };
+		AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoOpKeyValueObserver.m; sourceTree = "<group>"; };
 		AE597B4015B0638B00EEF305 /* InvocationMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvocationMatcher.h; sourceTree = "<group>"; };
 		AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGreaterThanSpec.mm; sourceTree = "<group>"; };
 		AE74902E15B45E80008EA127 /* CDRProtocolFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRProtocolFake.h; sourceTree = "<group>"; };
@@ -613,7 +571,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96A07F0313F276640021974D /* OCMock.framework in Frameworks */,
 				96A07F0413F276640021974D /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,7 +605,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE135D4011DEA6F400A922D4 /* OCMock.framework in Frameworks */,
 				AEEE220311DC29AC00029872 /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,7 +620,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE135E7011DEB46F00A922D4 /* libOCMock-StaticLib.a in Frameworks */,
 				AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -714,6 +669,8 @@
 				6639A77C14C50A6800B564B7 /* SimpleIncrementer.h */,
 				6639A77D14C50A6800B564B7 /* SimpleIncrementer.m */,
 				AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */,
+				AE36AC5F15B4BB2D00EB6C51 /* NoOpKeyValueObserver.h */,
+				AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -830,24 +787,6 @@
 			path = Matchers;
 			sourceTree = "<group>";
 		};
-		AE135C9411DEA65500A922D4 /* Externals */ = {
-			isa = PBXGroup;
-			children = (
-				AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */,
-			);
-			path = Externals;
-			sourceTree = "<group>";
-		};
-		AE135D2711DEA6A900A922D4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AE135D3111DEA6A900A922D4 /* OCMock.framework */,
-				AE135D3311DEA6A900A922D4 /* OCMockTests.octest */,
-				AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AE167EEC15B210C9005960B9 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,7 +833,6 @@
 				AEEE1FE711DC27B800029872 /* Spec */,
 				9668DCDE144A92BA007C7294 /* OCUnit Support */,
 				AEEE202611DC286500029872 /* Frameworks */,
-				AE135C9411DEA65500A922D4 /* Externals */,
 				AEEE1FB711DC271300029872 /* Products */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
 				AEEE222211DC2A1400029872 /* Rakefile */,
@@ -1221,7 +1159,6 @@
 			);
 			dependencies = (
 				96A07EEF13F276640021974D /* PBXTargetDependency */,
-				96A07EF113F276640021974D /* PBXTargetDependency */,
 			);
 			name = FocusedSpecs;
 			productName = Specs;
@@ -1294,7 +1231,6 @@
 			);
 			dependencies = (
 				AEEE218B11DC28E700029872 /* PBXTargetDependency */,
-				AE135D3C11DEA6D700A922D4 /* PBXTargetDependency */,
 			);
 			name = Specs;
 			productName = Specs;
@@ -1330,7 +1266,6 @@
 			);
 			dependencies = (
 				AEEE227D11DC2D3400029872 /* PBXTargetDependency */,
-				AE135E6D11DEB45F00A922D4 /* PBXTargetDependency */,
 			);
 			name = iOSSpecs;
 			productName = iPhoneSpecs;
@@ -1359,12 +1294,6 @@
 			mainGroup = AEEE1FA411DC26EA00029872;
 			productRefGroup = AEEE1FB711DC271300029872 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = AE135D2711DEA6A900A922D4 /* Products */;
-					ProjectRef = AE135D2611DEA6A900A922D4 /* OCMock.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				AEEE1FB511DC271300029872 /* Cedar */,
@@ -1379,30 +1308,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		AE135D3111DEA6A900A922D4 /* OCMock.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMock.framework;
-			remoteRef = AE135D3011DEA6A900A922D4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AE135D3311DEA6A900A922D4 /* OCMockTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OCMockTests.octest;
-			remoteRef = AE135D3211DEA6A900A922D4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AE135D3511DEA6A900A922D4 /* libOCMock-StaticLib.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libOCMock-StaticLib.a";
-			remoteRef = AE135D3411DEA6A900A922D4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		96158A83144A915E005895CE /* Resources */ = {
@@ -1607,6 +1512,7 @@
 				AE9AA68015AB748E00617E1A /* CDRClassFakeSpec.mm in Sources */,
 				AE9AA69715ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
 				AE74903215B45EBA008EA127 /* CDRProtocolFakeSpec.mm in Sources */,
+				AE36AC6215B4BBFB00EB6C51 /* NoOpKeyValueObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1677,6 +1583,7 @@
 				492951E51482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				AE9AA68E15ACD8D400617E1A /* SimpleIncrementer.m in Sources */,
 				AE9AA69815ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
+				AE36AC6315B4BBFC00EB6C51 /* NoOpKeyValueObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1693,11 +1600,6 @@
 			target = AEEE1FB511DC271300029872 /* Cedar */;
 			targetProxy = 96A07EF013F276640021974D /* PBXContainerItemProxy */;
 		};
-		96A07EF113F276640021974D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OCMock;
-			targetProxy = 96A07EF213F276640021974D /* PBXContainerItemProxy */;
-		};
 		96B5FA16144A81A8000A6A5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 96B5F9F5144A81A7000A6A5D /* OCUnitApp */;
@@ -1707,16 +1609,6 @@
 			isa = PBXTargetDependency;
 			target = AEEE222811DC2B0600029872 /* Cedar-StaticLib */;
 			targetProxy = 96D34486144A859200352C4A /* PBXContainerItemProxy */;
-		};
-		AE135D3C11DEA6D700A922D4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OCMock;
-			targetProxy = AE135D3B11DEA6D700A922D4 /* PBXContainerItemProxy */;
-		};
-		AE135E6D11DEB45F00A922D4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "OCMock-StaticLib";
-			targetProxy = AE135E6C11DEB45F00A922D4 /* PBXContainerItemProxy */;
 		};
 		AEEE218B11DC28E700029872 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2193,10 +2085,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)\"/Externals/OCMock/Source/**",
-					"\"$(SRCROOT)\"/Externals/OCHamcrest/Source/**",
-				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -2228,10 +2117,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)\"/Externals/OCMock/Source/**",
-					"\"$(SRCROOT)\"/Externals/OCHamcrest/Source/**",
-				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (

@@ -1,5 +1,4 @@
 #import "SpecHelper.h"
-#import "OCMock.h"
 #import "CDRExampleStateMap.h"
 
 using namespace Cedar::Matchers;

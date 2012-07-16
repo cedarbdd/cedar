@@ -1,9 +1,7 @@
 #if TARGET_OS_IPHONE
 #import <Cedar/SpecHelper.h>
-#import "OCMock.h"
 #else
 #import <Cedar/SpecHelper.h>
-#import <OCMock/OCMock.h>
 #endif
 
 extern "C" {

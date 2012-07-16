@@ -8,9 +8,6 @@ UI_SPECS_TARGET_NAME = "iOSSpecs"
 OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
 OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
 
-OCMOCK_PROJECT_PATH = "Externals/OCMock/Source/OCMock.xcodeproj"
-OCMOCK_FRAMEWORK_TARGET_NAME = "OCMock"
-OCMOCK_IOS_FRAMEWORK_TARGET_NAME = "OCMock-iPhone"
 CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
 CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
 SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
@@ -106,8 +103,6 @@ desc "Build Cedar and Cedar-iOS frameworks"
 task :build_frameworks do
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar")
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar_ios")
-  system_or_exit "xcodebuild -project #{OCMOCK_PROJECT_PATH} -target #{OCMOCK_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_ocmock")
-  system_or_exit "xcodebuild -project #{OCMOCK_PROJECT_PATH} -target #{OCMOCK_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_ocmock_ios")
 end
 
 desc "Run specs"
@@ -215,9 +210,6 @@ namespace :dist do
 
     system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{CEDAR_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX Cedar Spec Suite.xctemplate/"}
     system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{CEDAR_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX Cedar Testing Bundle.xctemplate/"}
-
-    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{OCMOCK_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS OCMock.xctemplate/"}
-    system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}/#{OCMOCK_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/OSX OCMock.xctemplate/"}
   end
 
   task :package do

@@ -3,17 +3,17 @@
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
 #import "SpecHelper.h"
-#import "OCMock.h"
 #else
 #import <Cedar/SpecHelper.h>
-#import <OCMock/OCMock.h>
 #endif
 
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
+#import "NoOpKeyValueObserver.h"
 
 using namespace Cedar::Matchers;
+using namespace Cedar::Doubles;
 
 void (^runInFocusedSpecsMode)(CDRExampleBase *) = ^(CDRExampleBase *example){
     BOOL before = [SpecHelper specHelper].shouldOnlyRunFocused;
@@ -314,14 +314,14 @@ describe(@"CDRExample", ^{
 
         describe(@"KVO", ^{
             it(@"should report when the state changes", ^{
-                id mockObserver = [OCMockObject niceMockForClass:[NSObject class]];
-                [[mockObserver expect] observeValueForKeyPath:@"state" ofObject:example change:[OCMArg any] context:NULL];
+                id mockObserver = [[[NoOpKeyValueObserver alloc] init] autorelease];
+                spy_on(mockObserver);
 
                 [example addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
                 [example run];
                 [example removeObserver:mockObserver forKeyPath:@"state"];
 
-                [mockObserver verify];
+                mockObserver should have_received("observeValueForKeyPath:ofObject:change:context:");
             });
         });
     });
