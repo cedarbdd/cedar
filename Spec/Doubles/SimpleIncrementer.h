@@ -11,6 +11,9 @@
 - (void)incrementByABit:(size_t)aBit andABitMore:(NSNumber *)aBitMore;
 - (void)incrementWithException;
 
+@optional
+- (size_t)whatIfIIncrementedBy:(size_t)amount;
+
 @end
 
 @interface SimpleIncrementer : NSObject<SimpleIncrementer>

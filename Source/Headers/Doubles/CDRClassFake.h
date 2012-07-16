@@ -1,25 +1,11 @@
 #import <Foundation/Foundation.h>
+#import "CDRFake.h"
 #import "CedarDouble.h"
 
-@interface CDRClassFake : NSObject<CedarDouble>
-
-@property (nonatomic, assign) bool require_explicit_stubs;
-
-- (id)initWithClass:(Class)klass;
+@interface CDRClassFake : CDRFake
 
 @end
 
-inline id CDR_fake_for(Class klass) {
-    return [[[CDRClassFake alloc] initWithClass:klass] autorelease];
+inline id CDR_fake_for(Class klass, bool require_explicit_stubs = true) {
+    return [[[CDRClassFake alloc] initWithClass:klass requireExplicitStubs:require_explicit_stubs] autorelease];
 }
-
-inline id CDR_nice_fake_for(Class klass) {
-    CDRClassFake * fake = CDR_fake_for(klass);
-    fake.require_explicit_stubs = false;
-    return fake;
-}
-
-#ifndef CEDAR_DOUBLES_COMPATIBILITY_MODE
-#define fake_for(x) CDR_fake_for((x))
-#define nice_fake_for(x) CDR_nice_fake_for((x))
-#endif

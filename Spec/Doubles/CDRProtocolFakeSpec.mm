@@ -4,9 +4,9 @@
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(CDRClassFakeSpec)
+SPEC_BEGIN(CDRProtocolFakeSpec)
 
-sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
+sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
     __block id<CedarDouble, SimpleIncrementer> fake;
 
     beforeEach(^{
@@ -14,9 +14,15 @@ sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
     });
 
     describe(@"#respondsToSelector:", ^{
-        context(@"when an instance method is defined", ^{
+        context(@"when an instance method is required", ^{
             it(@"should return true", ^{
                 [fake respondsToSelector:@selector(value)] should be_truthy;
+            });
+        });
+
+        context(@"when an instance method is optional", ^{
+            it(@"should return true", ^{
+                [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should be_truthy;
             });
         });
 
@@ -28,24 +34,24 @@ sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
     });
 
     describe(@"#description", ^{
-        it(@"should return the description of the faked class", ^{
-            fake.description should contain(@"Fake implementation of SimpleIncrementer class");
+        it(@"should return the description of the faked protocol", ^{
+            fake.description should contain([NSString stringWithFormat:@"Fake implementation of %s protocol", protocol_getName(@protocol(SimpleIncrementer))]);
         });
     });
 });
 
-describe(@"CDRClassFake", ^{
-    describe(@"fake_for(Class)", ^{
+describe(@"fake (protocol)", ^{
+    describe(@"fake_for(Protocol)", ^{
         __block SimpleIncrementer<CedarDouble> *fake;
 
         beforeEach(^{
-            fake = fake_for([SimpleIncrementer class]);
+            fake = fake_for(@protocol(SimpleIncrementer));
 
             [[SpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");
-        itShouldBehaveLike(@"a Cedar class fake");
+        itShouldBehaveLike(@"a Cedar protocol fake");
 
         context(@"when calling a method which has not been stubbed", ^{
             it(@"should raise an exception", ^{
@@ -55,17 +61,17 @@ describe(@"CDRClassFake", ^{
 
     });
 
-    describe(@"nice_fake_for(Class)", ^{
+    describe(@"nice_fake_for(Protocol)", ^{
         __block SimpleIncrementer<CedarDouble> *nice_fake;
 
         beforeEach(^{
-            nice_fake = nice_fake_for([SimpleIncrementer class]);
+            nice_fake = nice_fake_for(@protocol(SimpleIncrementer));
 
             [[SpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");
-        itShouldBehaveLike(@"a Cedar class fake");
+        itShouldBehaveLike(@"a Cedar protocol fake");
 
         context(@"when calling a method which has not been stubbed", ^{
             it(@"should allow method invocation without stubbing", ^{
@@ -78,6 +84,5 @@ describe(@"CDRClassFake", ^{
         });
     });
 });
-
 
 SPEC_END
