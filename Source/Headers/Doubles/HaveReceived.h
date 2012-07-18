@@ -64,7 +64,7 @@ namespace Cedar { namespace Doubles {
         this->verify_count_and_types_of_arguments(instance);
 
         for (NSInvocation *invocation in [instance sent_messages]) {
-            if (this->matches_invocation(invocation)) {
+            if (InvocationMatcher::matches(invocation)) {
                 return true;
             }
         }

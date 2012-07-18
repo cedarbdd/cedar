@@ -98,7 +98,7 @@ describe(@"The spec failure exception", ^{
 //    });
 });
 
-describe(@"Hamcrest matchers", ^{
+describe(@"Matchers", ^{
     describe(@"equality", ^{
         describe(@"with Objective-C types", ^{
             __block NSNumber *expectedNumber;

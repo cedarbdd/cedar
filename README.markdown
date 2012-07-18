@@ -248,11 +248,23 @@ the +beforeEach and/or +afterEach methods.
 
 ## Mocks and stubs
 
-Cedar works fine with [OCMock](http://www.mulle-kybernetik.com/software/OCMock/).  You can add it to your
-spec target later, or simply check the "Use OCMock" setting when adding your spec target.  The version provided
-by the template is from a Pivotal fork of a [GitHub import of the OCMock codebase](http://github.com/pivotal/OCMock)
-which contains our iPhone-specific static framework target.
+Doubles.  Got 'em.
 
+spy_on(someInstance);
+id<CedarDouble> fake = fake_for(someClass);
+id<CedarDouble> anotherFake = fake_for(someProtocol);
+id<CedarDouble> niceFake = nice_fake_for(someClass);
+id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
+
+Method stubbing:
+
+fake stub_method("selector").with(x);
+fake stub_method("selector").with(x).and_with(y);
+fake stub_method("selector").and_return(z);
+fake stub_method("selector").with(x).and_return(z);
+fake stub_method("selector").and_raise_exception();
+fake stub_method("selector").and_raise_exception([NSException]);
+fake stub_method("selector").with(anything);
 
 ## Pending specs
 

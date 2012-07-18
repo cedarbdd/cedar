@@ -1,12 +1,28 @@
+#import <Foundation/Foundation.h>
+
 namespace Cedar { namespace Doubles {
-    class StubbedMethodPrototype;
     class StubbedMethod;
 }}
 
 @protocol CedarDouble<NSObject>
 
-- (const Cedar::Doubles::StubbedMethodPrototype &)stub_method;
-- (Cedar::Doubles::StubbedMethod &)create_stubbed_method_for:(SEL)selector;
+- (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method;
 - (NSArray *)sent_messages;
 
 @end
+
+namespace Cedar { namespace Doubles {
+
+    struct MethodStubbingMarker {
+        const char *fileName;
+        int lineNumber;
+    };
+
+    id<CedarDouble> operator,(id, const MethodStubbingMarker &);
+
+    void operator,(id<CedarDouble>, const StubbedMethod &);
+}}
+
+#ifndef CEDAR_MATCHERS_DISALLOW_STUB_METHOD
+#define stub_method(x) ,(Cedar::Doubles::MethodStubbingMarker){__FILE__, __LINE__},Cedar::Doubles::StubbedMethod((x))
+#endif

@@ -16,10 +16,10 @@ namespace Cedar { namespace Doubles {
         template<typename T>
         void add_argument(const T &);
 
-        bool matches_invocation(NSInvocation * const) const;
+        bool matches(NSInvocation * const) const;
         NSString *mismatch_reason();
 
-        const SEL & selector() const { return expectedSelector_; }
+        const SEL selector() const { return expectedSelector_; }
         const arguments_vector_t & arguments() const { return arguments_; }
         const bool match_any_arguments() const { return arguments_.empty(); }
         void verify_count_and_types_of_arguments(id instance) const;
@@ -30,10 +30,10 @@ namespace Cedar { namespace Doubles {
     private:
         const SEL expectedSelector_;
         arguments_vector_t arguments_;
-        mutable NSString *mismatch_reason_;
     };
 
-    inline InvocationMatcher::InvocationMatcher(const SEL selector) : expectedSelector_(selector) {
+    inline InvocationMatcher::InvocationMatcher(const SEL selector) :
+        expectedSelector_(selector) {
     }
 
     inline void InvocationMatcher::add_argument(const Argument::shared_ptr_t argument) {
@@ -45,8 +45,8 @@ namespace Cedar { namespace Doubles {
         this->add_argument(Argument::shared_ptr_t(new TypedArgument<T>(value)));
     }
 
-    inline bool InvocationMatcher::matches_invocation(NSInvocation * const invocation) const {
-        return sel_isEqual(invocation.selector, expectedSelector_) && this->matches_arguments(invocation);
+    inline bool InvocationMatcher::matches(NSInvocation * const invocation) const {
+        return sel_isEqual(invocation.selector, selector()) && this->matches_arguments(invocation);
     }
 
     inline void InvocationMatcher::verify_count_and_types_of_arguments(id instance) const {
@@ -82,7 +82,7 @@ namespace Cedar { namespace Doubles {
 #pragma mark - Private interface
     inline bool InvocationMatcher::matches_arguments(NSInvocation * const invocation) const {
         bool matches = true;
-        size_t index = 2;
+        size_t index = OBJC_DEFAULT_ARGUMENT_COUNT;
         for (arguments_vector_t::const_iterator cit = arguments_.begin(); cit != arguments_.end() && matches; ++cit, ++index) {
             const char *actualArgumentEncoding = [invocation.methodSignature getArgumentTypeAtIndex:index];
             NSUInteger actualArgumentSize;

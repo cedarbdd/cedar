@@ -1,7 +1,6 @@
 #import "CDRSpy.h"
 #import "objc/runtime.h"
 #import "StubbedMethod.h"
-#import "StubbedMethodPrototype.h"
 #import "CedarDoubleImpl.h"
 
 @interface CDRSpy ()
@@ -78,12 +77,8 @@ static const NSString *foo = @"wibble";
 
 #pragma mark - CedarDouble protocol
 
-- (const Cedar::Doubles::StubbedMethodPrototype &)stub_method {
-    return self.cedar_double_impl.stubbed_method_prototype;
-}
-
-- (Cedar::Doubles::StubbedMethod &)create_stubbed_method_for:(SEL)selector {
-    return [self.cedar_double_impl create_stubbed_method_for:selector];
+- (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method {
+    return [self.cedar_double_impl add_stub:stubbed_method];
 }
 
 - (NSArray *)sent_messages {

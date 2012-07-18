@@ -5,8 +5,6 @@
 
 + (void)interceptMessagesForInstance:(id)instance;
 
-- (NSArray *)sent_messages;
-
 @end
 
 namespace Cedar { namespace Doubles {

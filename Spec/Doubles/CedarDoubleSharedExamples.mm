@@ -16,34 +16,37 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
     });
 
     describe(@"#stub_method", ^{
-        context(@"with a method name that the stub does not respond to", ^{
+        context(@"with a non-double", ^{
             it(@"should raise an exception", ^{
-                ^{ [myDouble stub_method]("wibble_wobble"); } should raise_exception;
+                NSObject *non_double = [[[NSObject alloc] init] autorelease];
+                ^{ non_double stub_method("description"); } should raise_exception.with_reason([NSString stringWithFormat:@"%@ is not a double", non_double]);
             });
         });
 
-        context(@"with a method with no parameters", ^{
-            __block Cedar::Doubles::StubbedMethod *stubbed_method_ptr;
-
-            beforeEach(^{
-                // This should work.  Thanks for the compiler bug, Apple.
-                // Radar #???
-                // myDouble.stub_method("value");
-                stubbed_method_ptr = &[myDouble stub_method]("value");
+        context(@"with a method name that the stub does not respond to", ^{
+            it(@"should raise an exception", ^{
+                ^{ myDouble stub_method("wibble_wobble"); } should raise_exception;
             });
+        });
 
-            it(@"should record the invocation", ^{
-                [myDouble value];
-                myDouble should have_received("value");
-            });
-
-            context(@"and then stubbed again", ^{
+        context(@"with a method with no arguments", ^{
+            context(@"when stubbed twice", ^{
                 it(@"should raise an exception", ^{
-                    ^{ [myDouble stub_method]("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed");
+                    myDouble stub_method("value");
+                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed");
                 });
             });
 
             context(@"with no return value", ^{
+                beforeEach(^{
+                    myDouble stub_method("value");
+                });
+
+                it(@"should record the invocation", ^{
+                    [myDouble value];
+                    myDouble should have_received("value");
+                });
+
                 it(@"should return zero", ^{
                     myDouble.value should equal(0);
                 });
@@ -53,7 +56,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 size_t someArgument = 1;
 
                 beforeEach(^{
-                    stubbed_method_ptr->and_return(someArgument);
+                    myDouble stub_method("value").and_return(someArgument);
                 });
 
                 it(@"should return the specified return value", ^{
@@ -65,13 +68,13 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 int someArgument = 1;
 
                 it(@"should raise an exception", ^{
-                    ^{ stubbed_method_ptr->and_return(someArgument); } should raise_exception;
+                    ^{ myDouble stub_method("value").and_return(someArgument); } should raise_exception;
                 });
             });
 
             context(@"with a return value of an inappropriate type", ^{
                 it(@"should raise an exception", ^{
-                    ^{ stubbed_method_ptr->and_return(@"foo"); } should raise_exception;
+                    ^{ myDouble stub_method("value").and_return(@"foo"); } should raise_exception;
                 });
             });
         });
@@ -79,7 +82,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         context(@"when the stub is instructed to raise an exception", ^{
             context(@"with no parameter", ^{
                 beforeEach(^{
-                    [myDouble stub_method]("increment").and_raise_exception();
+                    myDouble stub_method("increment").and_raise_exception();
                 });
 
                 it(@"should raise a generic exception", ^{
@@ -91,7 +94,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 id someException = @"that's some pig (exception)";
 
                 beforeEach(^{
-                    [myDouble stub_method]("increment").and_raise_exception(someException);
+                    myDouble stub_method("increment").and_raise_exception(someException);
                 });
 
                 it(@"should raise that exception instance", ^{
@@ -104,25 +107,18 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             context(@"with too few", ^{
                 size_t expectedIncrementValue = 1;
                 NSNumber * expectedBitMoreValue = [NSNumber numberWithInteger:10];
-
-                beforeEach(^{
-                    [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue);
-                });
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <incrementByABit:andABitMore:>; expected: 1, actual: 2"];
 
                 it(@"should raise an exception", ^{
-                    NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <incrementByABit:andABitMore:>; expected: 1, actual: 2"];
-                    ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue]; } should raise_exception.with_reason(reason);
+                    ^{ myDouble stub_method("incrementByABit:andABitMore:").with(expectedIncrementValue); } should raise_exception.with_reason(reason);
                 });
             });
 
             context(@"with too many", ^{
-                beforeEach(^{
-                    [myDouble stub_method]("value").with(@"foo");
-                });
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <value>; expected: 1, actual: 0"];
 
                 it(@"should raise an exception", ^{
-                    NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <value>; expected: 1, actual: 0"];
-                    ^{ [myDouble value]; } should raise_exception.with_reason(reason);
+                    ^{ myDouble stub_method("value").with(@"foo"); } should raise_exception.with_reason(reason);
                 });
             });
 
@@ -133,7 +129,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     NSNumber *actualBitMoreValue = [NSNumber numberWithInteger:11];
 
                     beforeEach(^{
-                        [myDouble stub_method]("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
+                        myDouble stub_method("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
                     });
 
                     context(@"when invoked with a parameter of the expected value", ^{
@@ -151,14 +147,10 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                 context(@"of incorrect types", ^{
                     NSArray *argumentWithInvalidEncoding = [NSArray array];
-
-                    beforeEach(^{
-                        [myDouble stub_method]("incrementByABit:andABitMore:").with(argumentWithInvalidEncoding).and_with(@"your mom");
-                    });
+                    NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", argumentWithInvalidEncoding, @encode(size_t)];
 
                     it(@"should raise an exception", ^{
-                        NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", argumentWithInvalidEncoding, @encode(size_t)];
-                        ^{ [myDouble incrementByABit:7 andABitMore:[NSNumber numberWithInt:8]]; } should raise_exception.with_reason(reason);
+                        ^{ myDouble stub_method("incrementByABit:andABitMore:").with(argumentWithInvalidEncoding).and_with(@"your mom"); } should raise_exception.with_reason(reason);
                     });
                 });
             });
@@ -168,7 +160,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 size_t anotherValue = 7;
 
                 beforeEach(^{
-                    [myDouble stub_method]("incrementBy:").with(expectedValue);
+                    myDouble stub_method("incrementBy:").with(expectedValue);
                 });
 
                 context(@"when invoked with an argument of the expected value", ^{
@@ -190,7 +182,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 NSNumber *anotherBitMoreValue = [NSNumber numberWithInt:111];
 
                 beforeEach(^{
-                    [myDouble stub_method]("incrementByABit:andABitMore:").with(anything).and_with(expectedBitMoreValue);
+                    myDouble stub_method("incrementByABit:andABitMore:").with(anything).and_with(expectedBitMoreValue);
                 });
 
                 it(@"should allow any value for the 'anything' argument", ^{
@@ -209,7 +201,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 size_t returnValue = 1729;
 
                 beforeEach(^{
-                    [myDouble stub_method]("value").and_return(returnValue);
+                    myDouble stub_method("value").and_return(returnValue);
                 });
 
                 it(@"should return the expected value", ^{
@@ -221,7 +213,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 unsigned int invalidReturnValue = 3;
 
                 it(@"should raise an exception", ^{
-                    ^{ [myDouble stub_method]("value").and_return(invalidReturnValue); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return value type (%s) for value", @encode(unsigned int)]);
+                    ^{ myDouble stub_method("value").and_return(invalidReturnValue); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return value type (%s) for value", @encode(unsigned int)]);
                 });
             });
         });

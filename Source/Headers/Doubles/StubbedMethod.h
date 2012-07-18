@@ -8,11 +8,11 @@ namespace Cedar { namespace Doubles {
 
     class StubbedMethod : private InvocationMatcher {
     private:
-        StubbedMethod(const StubbedMethod & );
         StubbedMethod & operator=(const StubbedMethod &);
 
     public:
-        StubbedMethod(SEL, id);
+        StubbedMethod(SEL);
+        StubbedMethod(const char *);
 
         template<typename T>
         StubbedMethod & and_return(const T &);
@@ -36,36 +36,33 @@ namespace Cedar { namespace Doubles {
                 return strcmp(sel_getName(lhs), sel_getName(rhs)) < 0;
             }
         };
-        typedef std::tr1::shared_ptr<StubbedMethod> ptr_t;
-        typedef std::map<SEL, ptr_t, SelCompare> selector_map_t;
+        typedef std::tr1::shared_ptr<StubbedMethod> shared_ptr_t;
+        typedef std::map<SEL, shared_ptr_t, SelCompare> selector_map_t;
 
+        const SEL selector() const;
         bool matches(NSInvocation * const invocation) const;
         bool invoke(const NSInvocation * const invocation) const;
+        void validate_against_instance(id instance) const;
 
     private:
-        NSMethodSignature *method_signature();
-
-    private:
-        id parent_;
-        std::auto_ptr<Argument> return_value_argument_;
+        Argument::shared_ptr_t return_value_argument_;
         NSObject * exception_to_raise_;
     };
 
-    inline StubbedMethod::StubbedMethod(SEL selector, id parent) :
+    inline StubbedMethod::StubbedMethod(SEL selector) :
         InvocationMatcher(selector),
-        parent_(parent),
-        return_value_argument_(0),
+        exception_to_raise_(0) {
+    }
+
+    inline StubbedMethod::StubbedMethod(const char * method_name) :
+        InvocationMatcher(sel_registerName(method_name)),
         exception_to_raise_(0) {
     }
 
     template<typename T>
     StubbedMethod & StubbedMethod::and_return(const T & return_value) {
-        if (strcmp([this->method_signature() methodReturnType], @encode(T))) {
-            [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Invalid return value type (%s) for %s", @encode(T), this->selector()]
-                                   userInfo:nil] raise];
-        }
-        return_value_argument_ = std::auto_ptr<Argument>(new TypedArgument<T>(return_value));
+        return_value_argument_ = Argument::shared_ptr_t(new ReturnValue<T>(return_value));
+        return *this;
     }
 
     inline StubbedMethod & StubbedMethod::with(const Argument::shared_ptr_t argument) {
@@ -96,26 +93,36 @@ namespace Cedar { namespace Doubles {
         return *this;
     }
 
+    inline void StubbedMethod::validate_against_instance(id instance) const {
+        verify_count_and_types_of_arguments(instance);
+
+        if (has_return_value()) {
+            const char * const methodReturnType = [[instance methodSignatureForSelector:selector()] methodReturnType];
+            if (!return_value().matches_encoding(methodReturnType)) {
+                [[NSException exceptionWithName:NSInternalInconsistencyException
+                                         reason:[NSString stringWithFormat:@"Invalid return value type (%s) for %s", return_value().value_encoding(), selector()]
+                                       userInfo:nil] raise];
+
+            }
+        }
+    }
+
+    inline const SEL StubbedMethod::selector() const {
+        return InvocationMatcher::selector();
+    }
+
     inline bool StubbedMethod::matches(NSInvocation * const invocation) const {
-        this->verify_count_and_types_of_arguments(parent_);
-        return this->matches_invocation(invocation);
+        return InvocationMatcher::matches(invocation);
     }
 
     inline bool StubbedMethod::invoke(const NSInvocation * const invocation) const {
-        const void * returnValue;
-
         if (exception_to_raise_) {
             @throw exception_to_raise_;
 
         } else if (has_return_value()) {
-            returnValue = return_value().value_bytes();
+            const void * returnValue = return_value().value_bytes();
             [invocation setReturnValue:const_cast<void *>(returnValue)];
         }
-    }
-
-#pragma mark - Private interface
-    inline NSMethodSignature *StubbedMethod::method_signature() {
-        return [parent_ methodSignatureForSelector:this->selector()];
     }
 
 }}

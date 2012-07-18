@@ -2,7 +2,6 @@
 #import "CDRClassFake.h"
 #import "objc/runtime.h"
 #import "StubbedMethod.h"
-#import "StubbedMethodPrototype.h"
 #import "CedarDoubleImpl.h"
 
 @interface CDRClassFake ()

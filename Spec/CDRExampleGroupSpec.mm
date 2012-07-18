@@ -416,7 +416,7 @@ describe(@"CDRExampleGroup", ^{
                     CDRExampleState state = group.state;
                     expect(state).to(equal(CDRExampleStateFailed));
 
-                    [mockObserver stub_method]("observeValueForKeyPath:ofObject:change:context:").and_raise_exception();
+                    mockObserver stub_method("observeValueForKeyPath:ofObject:change:context:").and_raise_exception();
                 });
 
                 it(@"should not report that the state has changed", ^{
