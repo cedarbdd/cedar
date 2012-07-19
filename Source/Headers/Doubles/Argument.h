@@ -109,7 +109,7 @@ namespace Cedar { namespace Doubles {
 
     class AnyArgument : public Argument {
     private:
-        AnyArgument & operator=(const AnyArgument &) {};
+        AnyArgument & operator=(const AnyArgument &);
 
     public:
         AnyArgument() {};

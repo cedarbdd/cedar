@@ -51,7 +51,7 @@ namespace Cedar { namespace Doubles {
 
     inline void InvocationMatcher::verify_count_and_types_of_arguments(id instance) const {
         if (this->match_any_arguments()) {
-            return true;
+            return;
         }
 
         NSMethodSignature *methodSignature = [instance methodSignatureForSelector:this->selector()];

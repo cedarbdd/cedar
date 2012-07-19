@@ -118,11 +118,12 @@ namespace Cedar { namespace Doubles {
     inline bool StubbedMethod::invoke(const NSInvocation * const invocation) const {
         if (exception_to_raise_) {
             @throw exception_to_raise_;
-
-        } else if (has_return_value()) {
+        } else if (this->has_return_value()) {
             const void * returnValue = return_value().value_bytes();
             [invocation setReturnValue:const_cast<void *>(returnValue)];
+            return true;
         }
+        return false;
     }
 
 }}
