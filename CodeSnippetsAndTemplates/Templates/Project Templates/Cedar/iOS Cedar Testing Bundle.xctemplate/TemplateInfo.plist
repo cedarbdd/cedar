@@ -54,8 +54,6 @@
 	<string>com.pivotallabs.cedar.iOSTestingBundle</string>
 	<key>Definitions</key>
 	<dict>
-		<key>___PACKAGENAME___-Prefix.pch:objC:importOCMock</key>
-		<string>___CEDAR_IMPORT_OCMOCK___</string>
 		<key>___PACKAGENAME___-Prefix.pch:objC:importCedar</key>
 		<string>#import &lt;Cedar-iOS/SpecHelper.h&gt;</string>
 		<key>Frameworks/Cedar-iOS.framework</key>
@@ -72,7 +70,6 @@
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCocoa</string>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importFoundation</string>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importOCMock</string>
 	</array>
 	<key>SortOrder</key>
 	<integer>1</integer>
