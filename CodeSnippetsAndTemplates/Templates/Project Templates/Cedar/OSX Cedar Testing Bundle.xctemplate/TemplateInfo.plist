@@ -8,8 +8,6 @@
 	<dict>
 		<key>*:*:importCedar</key>
 		<string>#import &lt;Cedar/SpecHelper.h&gt;</string>
-		<key>*:*:importOCMock</key>
-		<string>___CEDAR_IMPORT_OCMOCK___</string>
 		<key>Frameworks/Cedar.framework</key>
 		<dict>
 			<key>Path</key>
@@ -21,7 +19,7 @@
 	<key>Concrete</key>
 	<true/>
 	<key>Description</key>
-	<string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Unit Testing Bundle.  After creating this target, add it to the list of tests for your app.  Using ARC is not recommended.</string>
+	<string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Unit Testing Bundle.  After creating this target, add it to the list of tests for your app.</string>
 	<key>SortOrder</key>
 	<integer>1</integer>
 	<key>Ancestors</key>
@@ -49,8 +47,7 @@
 				</dict>
 				<dict>
 					<key>ShellScript</key>
-					<string>cp -R &quot;${TARGET_NAME}&quot;/Frameworks/Cedar.framework &quot;${BUILT_PRODUCTS_DIR}&quot;
-if test -d &quot;${TARGET_NAME}&quot;/Frameworks/OCMock.framework ; then cp -R &quot;${TARGET_NAME}&quot;/Frameworks/OCMock.framework &quot;${BUILT_PRODUCTS_DIR}&quot; ; fi</string>
+					<string>cp -R &quot;${TARGET_NAME}&quot;/Frameworks/Cedar.framework &quot;${BUILT_PRODUCTS_DIR}&quot;</string>
 					<key>ShellPath</key>
 					<string>/bin/sh</string>
 					<key>Class</key>
@@ -83,7 +80,6 @@ if test -d &quot;${TARGET_NAME}&quot;/Frameworks/OCMock.framework ; then cp -R &
 	<array>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCocoa</string>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importOCMock</string>
 		<string>Frameworks/Cedar.framework</string>
 	</array>
 </dict>

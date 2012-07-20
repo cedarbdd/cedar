@@ -181,6 +181,7 @@ end
 
 desc "Remove code snippets and templates"
 task :uninstall do
+  puts "\nRemoving old templates...\n"
   system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/File Templates/Cedar\""
   system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/Project Templates/Cedar\""
   system_or_exit "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_DIR} | xargs -I{} rm -f \"{}\""
@@ -220,7 +221,8 @@ namespace :dist do
 end
 
 desc "Build frameworks and install templates and code snippets"
-task :install => [ "dist:prepare" ] do
+task :install => [ :clean, :uninstall, "dist:prepare" ] do
+  puts "\nInstalling templates...\n"
   system_or_exit %{ditto "#{DIST_STAGING_DIR}/Library" ~/Library}
 end
 

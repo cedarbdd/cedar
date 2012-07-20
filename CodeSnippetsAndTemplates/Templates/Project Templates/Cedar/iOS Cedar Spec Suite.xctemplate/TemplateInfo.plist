@@ -14,8 +14,6 @@
 	<dict>
 		<key>___PACKAGENAME___-Prefix.pch:objC:importCedar</key>
 		<string>#import &lt;Cedar-iOS/SpecHelper.h&gt;</string>
-		<key>___PACKAGENAME___-Prefix.pch:objC:importOCMock</key>
-		<string>___CEDAR_IMPORT_OCMOCK___</string>
 		<key>Frameworks/Cedar-iOS.framework</key>
 		<dict>
 			<key>Path</key>
@@ -119,7 +117,6 @@
 		<string>___PACKAGENAME___-Info.plist:NSMainNibFile</string>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importFoundation</string>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importOCMock</string>
 		<string>___PACKAGENAME___-Prefix.pch:Availability:iPhoneAvailability</string>
 		<string>Frameworks/Cedar-iOS.framework</string>
 	</array>
@@ -150,6 +147,6 @@
 		</dict>
 	</array>
 	<key>Description</key>
-	<string>Creates an iOS application which runs Cedar specs.  Using ARC is not recommended.</string>
+	<string>Creates an iOS application which runs Cedar specs.</string>
 </dict>
 </plist>
