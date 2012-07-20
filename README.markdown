@@ -30,9 +30,7 @@ BDD-style testing using Objective-C
   spec suite.  If you prefer to run your specs with Xcode's built-in
   OCUnit runner, choose the testing bundle.  Name this target Specs, or something
   else suitable.
-* While the template gives you the option of using ARC, at this time it is
-  not recommended because current clang compiler bugs prevent things from
-  working correctly.
+* If you're using ARC there are some caveats with using Cedar matchers, see below under "Matchers and ARC".
 * If you created a spec bundle, you must additionally add it to the list of tests
   for the intended target:
   * Select the target you want the tests to run against.
@@ -54,9 +52,7 @@ BDD-style testing using Objective-C
   spec suite.  If you prefer to run your specs with Xcode's built-in
   OCUnit runner, choose the testing bundle.  Name this target Specs, or something
   else suitable.
-* While the template gives you the option of using ARC, at this time it is
-  not recommended because current clang compiler bugs prevent things from
-  working correctly.
+* If you're using ARC there are some caveats with using Cedar matchers, see below under "Matchers and ARC".
 * If you're creating a spec bundle, you must specify the intended target of your tests
   when creating it in the Test Target field.  Additionally, once you have created your
   spec bundle target, you must then add it to the list of tests for the test target:
@@ -167,6 +163,17 @@ Note: If you prefer RSpec's `should` syntax you can write your expectations as f
         1 + 2 should equal(3);
         glass should_not be_empty();
 
+### Matchers and ARC
+
+A bug in the current Xcode compiler currently prevents the type C++ deduction from actually working if you have automatic reference counting enabled.  At this time, this leaves you with a few alternatives:
+
+1. Disable ARC for your spec files, but continue to use it for your application code.  You can do this by selecting spec files in the target's "Compile Sources" build phase and adding the compiler flag `-fno-objc-arc`.
+
+2. Use another matcher library like [Expecta](http://github.com/petejkim/expecta).  Just remove the following line from your spec files:
+
+
+        using namespace Cedar::Matchers;
+
 
 ## Shared example groups
 
@@ -250,21 +257,21 @@ the +beforeEach and/or +afterEach methods.
 
 Doubles.  Got 'em.
 
-spy_on(someInstance);
-id<CedarDouble> fake = fake_for(someClass);
-id<CedarDouble> anotherFake = fake_for(someProtocol);
-id<CedarDouble> niceFake = nice_fake_for(someClass);
-id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
+    spy_on(someInstance);
+    id<CedarDouble> fake = fake_for(someClass);
+    id<CedarDouble> anotherFake = fake_for(someProtocol);
+    id<CedarDouble> niceFake = nice_fake_for(someClass);
+    id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
 
 Method stubbing:
 
-fake stub_method("selector").with(x);
-fake stub_method("selector").with(x).and_with(y);
-fake stub_method("selector").and_return(z);
-fake stub_method("selector").with(x).and_return(z);
-fake stub_method("selector").and_raise_exception();
-fake stub_method("selector").and_raise_exception([NSException]);
-fake stub_method("selector").with(anything);
+    fake stub_method("selector").with(x);
+    fake stub_method("selector").with(x).and_with(y);
+    fake stub_method("selector").and_return(z);
+    fake stub_method("selector").with(x).and_return(z);
+    fake stub_method("selector").and_raise_exception();
+    fake stub_method("selector").and_raise_exception([NSException]);
+    fake stub_method("selector").with(anything);
 
 ## Pending specs
 
@@ -399,9 +406,7 @@ Example failure:
     error: no matching function for call to 'CDR_expect'
     note: candidate template ignored: substitution failure [with T = SOME_TYPE]
 
-  * This is most likely caused by having Automatic Reference Counting enabled.
-  * To fix this either disable arc, change the `Objective-C Automatic Reference Counting` setting to `No`.
-  You can still use ARC on your other targets, just not ones that contain Cedar specs.
+  * This is caused by a C++ compiler bug in Xcode when ARC is enabled and you use a Cedar matcher.  See the above section "Matchers and ARC" on how to deal with this.
 
 
 ## Contributions and feedback
