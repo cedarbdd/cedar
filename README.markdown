@@ -167,7 +167,11 @@ Note: If you prefer RSpec's `should` syntax you can write your expectations as f
 
 A bug in the current Xcode compiler currently prevents the type C++ deduction from actually working if you have automatic reference counting enabled.  At this time, this leaves you with a few alternatives:
 
-1. Disable ARC for your spec files, but continue to use it for your application code.  You can do this by selecting spec files in the target's "Compile Sources" build phase and adding the compiler flag `-fno-objc-arc`.
+1. Disable ARC for your spec files, but continue to use it for your application code.  You can do this by selecting spec files in the target's "Compile Sources" build phase and adding the compiler flag `-fno-objc-arc`.  You can help ensure that you do this by creating a `SpecHelper.h` file in your spec target that you `#import` into every spec which contains this guard:
+
+        #if __has_feature(objc_arc)
+            #error ARC must be disabled for specs!
+        #endif
 
 2. Use another matcher library like [Expecta](http://github.com/petejkim/expecta).  Just remove the following line from your spec files:
 
