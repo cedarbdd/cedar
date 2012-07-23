@@ -89,13 +89,13 @@ describe(@"runDidComplete", ^{
         });
 
         it(@"should have its name escaped", ^{
-            CDRExample *example = [CDRExample exampleWithText:@"Special'Characters\"" andState:CDRExampleStatePassed];
+            CDRExample *example = [CDRExample exampleWithText:@"Special ' characters \" should < be & escaped > " andState:CDRExampleStatePassed];
 
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
 
-            expect([reporter.xml rangeOfString:@"name=\"Special&apos;Characters&quot;\""].location).to_not(equal((NSUInteger)NSNotFound));
+            expect([reporter.xml rangeOfString:@"name=\"Special &apos; characters &quot; should &lt; be &amp; escaped &gt; \""].location).to_not(equal((NSUInteger)NSNotFound));
         });
     });
 
@@ -116,23 +116,23 @@ describe(@"runDidComplete", ^{
         });
 
         it(@"should have its name escaped", ^{
-            CDRExample *example = [CDRExample exampleWithText:@"Special'Characters\"\n" andState:CDRExampleStateFailed];
+            CDRExample *example = [CDRExample exampleWithText:@"Special ' characters \" should < be & escaped > " andState:CDRExampleStateFailed];
 
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
 
-            expect([reporter.xml rangeOfString:@"name=\"Special&apos;Characters&quot;\""].location).to_not(equal((NSUInteger)NSNotFound));
+            expect([reporter.xml rangeOfString:@"name=\"Special &apos; characters &quot; should &lt; be &amp; escaped &gt; \""].location).to_not(equal((NSUInteger)NSNotFound));
         });
 
         it(@"should escape the failure reason", ^{
-            CDRExample *example1 = [CDRExample exampleWithText:@"Failing spec 1\nEscape<these>characters&" andState:CDRExampleStateFailed];
+            CDRExample *example1 = [CDRExample exampleWithText:@"Failing spec 1\n Special ' characters \" should < be & escaped > " andState:CDRExampleStateFailed];
 
             [reporter reportOnExample:example1];
 
             [reporter runDidComplete];
 
-            expect([reporter.xml rangeOfString:@"<failure type=\"Failure\">Escape&lt;these&gt;characters&amp;</failure>"].location).to_not(equal((NSUInteger)NSNotFound));
+            expect([reporter.xml rangeOfString:@"<failure type=\"Failure\"> Special &apos; characters &quot; should &lt; be &amp; escaped &gt; </failure>"].location).to_not(equal((NSUInteger)NSNotFound));
         });
     });
 
