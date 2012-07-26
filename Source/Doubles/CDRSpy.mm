@@ -26,9 +26,10 @@ static const NSString *foo = @"wibble";
 }
 
 - (void)dealloc {
-    [self as_original_object:^{
-        [self dealloc];
-    }];
+    object_setClass(self, objc_getAssociatedObject(self, @"original-class"));
+
+    [self dealloc];
+
     // DO NOT call the destructor on super, since the superclass has already
     // destroyed itself when the original class's destructor called [super dealloc].
     // This (no-op) line must be here to prevent the compiler from helpfully
