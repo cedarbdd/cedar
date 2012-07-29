@@ -18,22 +18,15 @@
 
 #pragma mark - Private
 
-- (NSString *)escapeAttribute:(NSString *)s {
-    NSMutableString *escaped = [NSMutableString stringWithString:s];
-
-    [escaped setString:[escaped stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"]];
-    [escaped setString:[escaped stringByReplacingOccurrencesOfString:@"'" withString:@"&apos;"]];
-
-    return escaped;
-}
-
 - (NSString *)escape:(NSString *)s {
     NSMutableString *escaped = [NSMutableString stringWithString:s];
 
     [escaped setString:[escaped stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"]];
     [escaped setString:[escaped stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"]];
     [escaped setString:[escaped stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"]];
-
+    [escaped setString:[escaped stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"]];
+    [escaped setString:[escaped stringByReplacingOccurrencesOfString:@"'" withString:@"&apos;"]];
+    
     return escaped;
 }
 
@@ -74,7 +67,7 @@
     [xml appendString:@"<testsuite>\n"];
 
     for (NSString *spec in successMessages_) {
-        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\" />\n", [self escapeAttribute:spec]];
+        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\" />\n", [self escape:spec]];
     }
 
     for (NSString *spec in failureMessages_) {
@@ -82,7 +75,7 @@
         NSString *name = [parts objectAtIndex:0];
         NSString *message = [parts objectAtIndex:1];
 
-        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\">\n", [self escapeAttribute:name]];
+        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\">\n", [self escape:name]];
         [xml appendFormat:@"\t\t<failure type=\"Failure\">%@</failure>\n", [self escape:message]];
         [xml appendString:@"\t</testcase>\n"];
     }
