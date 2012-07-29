@@ -59,8 +59,9 @@ namespace Cedar { namespace Doubles {
         size_t expectedArgumentCount = this->arguments().size();
 
         if (actualArgumentCount != expectedArgumentCount) {
+            NSString * selectorString = NSStringFromSelector(this->selector());
             [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: %d, actual: %d", this->selector(), expectedArgumentCount, actualArgumentCount]
+                                     reason:[NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: %lu, actual: %lu", selectorString, (unsigned long)expectedArgumentCount, (unsigned long)actualArgumentCount]
                                    userInfo:nil]
              raise];
         }
@@ -69,11 +70,12 @@ namespace Cedar { namespace Doubles {
         for (arguments_vector_t::const_iterator cit = this->arguments().begin(); cit != this->arguments().end(); ++cit, ++index) {
             const char * actual_argument_encoding = [methodSignature getArgumentTypeAtIndex:index];
             if (!(*cit)->matches_encoding(actual_argument_encoding)) {
-                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #%d for <%s>",
+                NSString * selectorString = NSStringFromSelector(this->selector());
+                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #%lu for <%@>",
                                     (*cit)->value_string(),
                                     actual_argument_encoding,
-                                    index - OBJC_DEFAULT_ARGUMENT_COUNT + 1,
-                                    this->selector()];
+                                    (unsigned long)(index - OBJC_DEFAULT_ARGUMENT_COUNT + 1),
+                                    selectorString];
                 [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise];
             }
         }
