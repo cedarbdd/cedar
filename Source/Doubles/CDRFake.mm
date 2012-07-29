@@ -40,8 +40,9 @@
 
     if (![self.cedar_double_impl invoke_stubbed_method:invocation]) {
         if (require_explicit_stubs_) {
+            NSString * selectorString = NSStringFromSelector(invocation.selector);
             [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Invocation of unstubbed method: %s", invocation.selector]
+                                     reason:[NSString stringWithFormat:@"Invocation of unstubbed method: %@", selectorString]
                                    userInfo:nil]
              raise];
         }

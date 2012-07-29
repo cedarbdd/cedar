@@ -82,7 +82,8 @@ namespace Cedar { namespace Doubles {
 
 #pragma mark Protected interface
     inline /*virtual*/ NSString * HaveReceived::failure_message_end() const {
-        NSMutableString *message = [NSMutableString stringWithFormat:@"have received message <%s>", this->selector()];
+        NSString * selectorString = NSStringFromSelector(this->selector());
+        NSMutableString *message = [NSMutableString stringWithFormat:@"have received message <%@>", selectorString];
         if (this->arguments().size()) {
             [message appendString:@", with arguments: <"];
             arguments_vector_t::const_iterator cit = this->arguments().begin();

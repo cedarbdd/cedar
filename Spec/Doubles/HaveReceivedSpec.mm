@@ -36,7 +36,8 @@ describe(@"have_received matcher", ^{
 
         context(@"with a parameter expectation", ^{
             it(@"should raise an exception due to an invalid expectation", ^{
-                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: 1, actual: 0", method];
+                NSString *methodString = NSStringFromSelector(method);
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: 1, actual: 0", methodString];
                 ^{ expect(incrementer).to(have_received(method).with(anything)); } should raise_exception.with_reason(reason);
             });
         });
@@ -93,7 +94,8 @@ describe(@"have_received matcher", ^{
 
         context(@"with too many parameter expectations", ^{
             it(@"should raise an exception due to an invalid expectation", ^{
-                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: 2, actual: 1", method];
+                NSString *methodName = NSStringFromSelector(method);
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: 2, actual: 1", methodName];
                 ^{ expect(incrementer).to(have_received(method).with(anything).and_with(anything)); } should raise_exception.with_reason(reason);
             });
         });
@@ -178,11 +180,11 @@ describe(@"have_received matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%d>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%ld>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
                         expect(incrementer).to(have_received(method).with(expectedParameter));
                     });
 
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%d>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%ld>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
                         expect(incrementer).to(have_received("incrementBy:").with(expectedParameter));
                     });
                 });
@@ -305,7 +307,8 @@ describe(@"have_received matcher", ^{
 
         context(@"with too few parameter expectations", ^{
             it(@"should raise an exception due to an invalid expectation", ^{
-                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%s>; expected: 1, actual: 2", method];
+                NSString *methodName = NSStringFromSelector(method);
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: 1, actual: 2", methodName];
                 ^{ expect(incrementer).to(have_received(method).with(anything)); } should raise_exception.with_reason(reason);
             });
         });
@@ -328,11 +331,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
                             expect(incrementer).to_not(have_received(method).with(expectedFirstParameter).and_with(expectedSecondParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
                             expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).and_with(expectedSecondParameter));
                         });
                     });
@@ -345,11 +348,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
                             expect(incrementer).to(have_received(method).with(expectedFirstParameter).and_with(expectedSecondParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
                             expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).and_with(expectedSecondParameter));
                         });
                     });
