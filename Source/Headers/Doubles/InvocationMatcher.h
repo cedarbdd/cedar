@@ -1,5 +1,6 @@
 #import "objc/runtime.h"
 #import <vector>
+#import "TypedArgument.h"
 
 namespace Cedar { namespace Doubles {
 

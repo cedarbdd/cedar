@@ -1,8 +1,9 @@
 #import <Foundation/Foundation.h>
 #import <tr1/memory>
 #import <vector>
-#import "Argument.h"
 #import "InvocationMatcher.h"
+#import "Argument.h"
+#import "ReturnValue.h"
 
 namespace Cedar { namespace Doubles {
 

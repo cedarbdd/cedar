@@ -42,7 +42,6 @@
 		6639A77F14C50D0100B564B7 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
 		6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
 		6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
-		6639A78A14C544EB00B564B7 /* Argument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; };
 		66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
 		960118BC1434867E00825FFF /* CDROTestIPhoneRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 960118BB1434867E00825FFF /* CDROTestIPhoneRunner.m */; };
 		96158A88144A915E005895CE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96158A87144A915E005895CE /* Cocoa.framework */; };
@@ -146,7 +145,6 @@
 		AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
 		AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC8714C4DBA70016652A /* CedarDoubles.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FC9814C4DD440016652A /* CDRSpy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE9AA67715AB601500617E1A /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78814C544EB00B564B7 /* Argument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE9AA67815AB601500617E1A /* HaveReceived.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE9AA67B15AB72DA00617E1A /* CDRClassFake.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA67915AB72DA00617E1A /* CDRClassFake.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE9AA68015AB748E00617E1A /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
@@ -173,6 +171,14 @@
 		AEC9DEEF12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */; };
 		AEC9DEF112C2CC7E0039512D /* CDRColorizedReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */; };
 		AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC9DEEB12C2CC7E0039512D /* CDRColorizedReporter.m */; };
+		AECF136115D1425C003AAB9C /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136015D1425C003AAB9C /* Argument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AECF136215D1425C003AAB9C /* Argument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136015D1425C003AAB9C /* Argument.h */; };
+		AECF136415D14274003AAB9C /* TypedArgument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136315D14274003AAB9C /* TypedArgument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AECF136515D14274003AAB9C /* TypedArgument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136315D14274003AAB9C /* TypedArgument.h */; };
+		AECF136715D142E3003AAB9C /* ReturnValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136615D142E3003AAB9C /* ReturnValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136615D142E3003AAB9C /* ReturnValue.h */; };
+		AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136915D1439B003AAB9C /* AnyArgument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136915D1439B003AAB9C /* AnyArgument.h */; };
 		AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */; };
 		AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC511DC27B800029872 /* CDRExample.m */; };
 		AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC611DC27B800029872 /* CDRExampleBase.m */; };
@@ -367,7 +373,6 @@
 				6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */,
 				6628FCA114C503530016652A /* Cedar-iOS.h in Copy headers to framework */,
 				6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */,
-				6639A78A14C544EB00B564B7 /* Argument.h in Copy headers to framework */,
 				AE9AA68215AB76DB00617E1A /* CDRClassFake.h in Copy headers to framework */,
 				AE9AA68A15AC729E00617E1A /* CedarDouble.h in Copy headers to framework */,
 				AE9AA6D315AE087C00617E1A /* StubbedMethod.h in Copy headers to framework */,
@@ -375,6 +380,10 @@
 				AE74903515B45EEE008EA127 /* CDRProtocolFake.h in Copy headers to framework */,
 				22B6A22715B7ACF800960ADE /* InvocationMatcher.h in Copy headers to framework */,
 				AE74907515B493B6008EA127 /* CDRFake.h in Copy headers to framework */,
+				AECF136215D1425C003AAB9C /* Argument.h in Copy headers to framework */,
+				AECF136515D14274003AAB9C /* TypedArgument.h in Copy headers to framework */,
+				AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */,
+				AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,7 +404,6 @@
 		6639A77C14C50A6800B564B7 /* SimpleIncrementer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleIncrementer.h; sourceTree = "<group>"; };
 		6639A77D14C50A6800B564B7 /* SimpleIncrementer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleIncrementer.m; sourceTree = "<group>"; };
 		6639A78014C50D3000B564B7 /* HaveReceived.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaveReceived.h; sourceTree = "<group>"; };
-		6639A78814C544EB00B564B7 /* Argument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Argument.h; sourceTree = "<group>"; };
 		66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpySpec.mm; sourceTree = "<group>"; };
 		960118BB1434867E00825FFF /* CDROTestIPhoneRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDROTestIPhoneRunner.m; sourceTree = "<group>"; };
 		96158A86144A915E005895CE /* OCUnitAppLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCUnitAppLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -476,6 +484,10 @@
 		AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseExceptionSpec.mm; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
 		AEC9DEEB12C2CC7E0039512D /* CDRColorizedReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRColorizedReporter.m; sourceTree = "<group>"; };
+		AECF136015D1425C003AAB9C /* Argument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Argument.h; sourceTree = "<group>"; };
+		AECF136315D14274003AAB9C /* TypedArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypedArgument.h; sourceTree = "<group>"; };
+		AECF136615D142E3003AAB9C /* ReturnValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValue.h; sourceTree = "<group>"; };
+		AECF136915D1439B003AAB9C /* AnyArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyArgument.h; sourceTree = "<group>"; };
 		AEEE1FB611DC271300029872 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE1FB811DC271300029872 /* Cedar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cedar-Info.plist"; sourceTree = "<group>"; };
 		AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultReporter.m; sourceTree = "<group>"; };
@@ -641,12 +653,12 @@
 		66F00B4F14C4D8F600146D88 /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
+				AECF135E15D1421A003AAB9C /* Arguments */,
 				AE74902E15B45E80008EA127 /* CDRProtocolFake.h */,
 				6628FC8714C4DBA70016652A /* CedarDoubles.h */,
 				6628FC9814C4DD440016652A /* CDRSpy.h */,
 				AE9AA67915AB72DA00617E1A /* CDRClassFake.h */,
 				6639A78014C50D3000B564B7 /* HaveReceived.h */,
-				6639A78814C544EB00B564B7 /* Argument.h */,
 				AE9AA68815AC728A00617E1A /* CedarDouble.h */,
 				AE9AA6D115AE082500617E1A /* StubbedMethod.h */,
 				AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */,
@@ -821,6 +833,17 @@
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
 			);
 			path = Matchers;
+			sourceTree = "<group>";
+		};
+		AECF135E15D1421A003AAB9C /* Arguments */ = {
+			isa = PBXGroup;
+			children = (
+				AECF136015D1425C003AAB9C /* Argument.h */,
+				AECF136315D14274003AAB9C /* TypedArgument.h */,
+				AECF136615D142E3003AAB9C /* ReturnValue.h */,
+				AECF136915D1439B003AAB9C /* AnyArgument.h */,
+			);
+			path = Arguments;
 			sourceTree = "<group>";
 		};
 		AEEE1FA411DC26EA00029872 = {
@@ -1082,7 +1105,6 @@
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
-				AE9AA67715AB601500617E1A /* Argument.h in Headers */,
 				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
 				AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */,
 				AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */,
@@ -1105,6 +1127,10 @@
 				492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */,
 				AE9AA6D415AE087D00617E1A /* StubbedMethod.h in Headers */,
 				AE9AA6DB15AE0B0400617E1A /* CedarDoubleImpl.h in Headers */,
+				AECF136115D1425C003AAB9C /* Argument.h in Headers */,
+				AECF136415D14274003AAB9C /* TypedArgument.h in Headers */,
+				AECF136715D142E3003AAB9C /* ReturnValue.h in Headers */,
+				AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
