@@ -81,6 +81,7 @@
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {
+    [invocation retainArguments];
     [self.sent_messages addObject:invocation];
 }
 
