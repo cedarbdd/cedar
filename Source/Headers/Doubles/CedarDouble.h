@@ -8,6 +8,7 @@ namespace Cedar { namespace Doubles {
 
 - (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method;
 - (NSArray *)sent_messages;
+- (void)reset_sent_messages;
 
 @end
 

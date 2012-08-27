@@ -9,6 +9,8 @@
 
 - (id)initWithDouble:(NSObject<CedarDouble> *)parent_double;
 
+- (void)reset_sent_messages;
+
 - (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method;
 - (Cedar::Doubles::StubbedMethod::selector_map_t &)stubbed_methods;
 - (BOOL)invoke_stubbed_method:(NSInvocation *)invocation;

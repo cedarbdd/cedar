@@ -86,6 +86,10 @@ static const NSString *foo = @"wibble";
     return self.cedar_double_impl.sent_messages;
 }
 
+- (void)reset_sent_messages {
+    return self.cedar_double_impl.reset_sent_messages;
+}
+
 #pragma mark - Private interface
 - (void)as_original_object:(void(^)())block {
     Class spyClass = object_getClass(self);

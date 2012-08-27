@@ -32,6 +32,10 @@
     [super dealloc];
 }
 
+- (void)reset_sent_messages {
+    [self.sent_messages removeAllObjects];
+}
+
 - (Cedar::Doubles::StubbedMethod::selector_map_t &)stubbed_methods {
     return stubbed_methods_;
 }

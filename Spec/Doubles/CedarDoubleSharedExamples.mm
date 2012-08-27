@@ -15,6 +15,20 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         myDouble = [sharedContext objectForKey:@"double"];
     });
 
+    describe(@"reset_sent_messages", ^{
+        beforeEach(^{
+            myDouble stub_method("value");
+            [myDouble value];
+            myDouble should have_received("value");
+
+            [myDouble reset_sent_messages];
+        });
+
+        it(@"should remove any previously recorded invocations", ^{
+            myDouble should_not have_received("value");
+        });
+    });
+
     describe(@"#stub_method", ^{
         context(@"with a non-double", ^{
             it(@"should raise an exception", ^{
