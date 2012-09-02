@@ -65,7 +65,7 @@ namespace Cedar { namespace Doubles {
         if (this->has_invocation_block()) {
             NSString * selectorString = NSStringFromSelector(this->selector());
             [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Multiple return values specified for <value>", selectorString]
+                                     reason:[NSString stringWithFormat:@"Multiple return values specified for <%@>", selectorString]
                                    userInfo:nil] raise];
         }
 
