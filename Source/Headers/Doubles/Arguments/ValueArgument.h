@@ -15,15 +15,14 @@ namespace Cedar { namespace Doubles {
         virtual const char * const value_encoding() const;
         virtual void * value_bytes() const;
         virtual NSString * value_string() const;
-        virtual size_t value_size() const;
 
-        virtual bool matches_encoding(const char * expected_argument_encoding) const;
-        virtual bool matches_bytes(void * expected_argument_bytes) const;
+        virtual bool matches_encoding(const char *) const;
+        virtual bool matches_bytes(void *) const;
 
     private:
-        bool both_are_objects(const char * expected_argument_encoding) const;
-        bool both_are_not_objects(const char * expected_argument_encoding) const;
-        bool nil_argument(const char * expected_argument_encoding) const;
+        bool both_are_objects(const char *) const;
+        bool both_are_not_objects(const char *) const;
+        bool nil_argument(const char *) const;
 
     private:
         const T value_;
@@ -52,37 +51,32 @@ namespace Cedar { namespace Doubles {
     }
 
     template<typename T>
-    /* virtual */ size_t ValueArgument<T>::value_size() const {
-        return sizeof(T);
+    /* virtual */ bool ValueArgument<T>::matches_encoding(const char * actual_argument_encoding) const {
+        return this->both_are_objects(actual_argument_encoding) ||
+        this->both_are_not_objects(actual_argument_encoding) ||
+        this->nil_argument(actual_argument_encoding);
     }
 
     template<typename T>
-    /* virtual */ bool ValueArgument<T>::matches_encoding(const char * expected_argument_encoding) const {
-        return this->both_are_objects(expected_argument_encoding) ||
-        this->both_are_not_objects(expected_argument_encoding) ||
-        this->nil_argument(expected_argument_encoding);
-    }
-
-    template<typename T>
-    /* virtual */ bool ValueArgument<T>::matches_bytes(void * expected_argument_bytes) const {
-        return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(expected_argument_bytes)));
+    /* virtual */ bool ValueArgument<T>::matches_bytes(void * actual_argument_bytes) const {
+        return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(actual_argument_bytes)));
     }
 
 #pragma mark - Private interface
     template<typename T>
-    bool ValueArgument<T>::both_are_objects(const char * expected_argument_encoding) const {
-        return 0 == strncmp(@encode(T), "@", 1) && 0 == strncmp(expected_argument_encoding, "@", 1);
+    bool ValueArgument<T>::both_are_objects(const char * actual_argument_encoding) const {
+        return 0 == strncmp(@encode(T), "@", 1) && 0 == strncmp(actual_argument_encoding, "@", 1);
     }
 
     template<typename T>
-    bool ValueArgument<T>::both_are_not_objects(const char * expected_argument_encoding) const {
-        return 0 != strncmp(@encode(T), "@", 1) && 0 != strncmp(expected_argument_encoding, "@", 1);
+    bool ValueArgument<T>::both_are_not_objects(const char * actual_argument_encoding) const {
+        return 0 != strncmp(@encode(T), "@", 1) && 0 != strncmp(actual_argument_encoding, "@", 1);
     }
 
     template<typename T>
-    bool ValueArgument<T>::nil_argument(const char * expected_argument_encoding) const {
+    bool ValueArgument<T>::nil_argument(const char * actual_argument_encoding) const {
         void *nil_pointer = 0;
-        return 0 == strncmp(expected_argument_encoding, "@", 1) && this->matches_bytes(&nil_pointer);
+        return 0 == strncmp(actual_argument_encoding, "@", 1) && this->matches_bytes(&nil_pointer);
     }
 
 }}

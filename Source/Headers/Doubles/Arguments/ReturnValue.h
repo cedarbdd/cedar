@@ -11,7 +11,7 @@ namespace Cedar { namespace Doubles {
         explicit ReturnValue(const T &);
         virtual ~ReturnValue();
 
-        virtual bool matches_encoding(const char * expected_argument_encoding) const;
+        virtual bool matches_encoding(const char *) const;
     };
 
     template<typename T>
@@ -21,8 +21,8 @@ namespace Cedar { namespace Doubles {
     /* virtual */ ReturnValue<T>::~ReturnValue() {}
 
     template<typename T>
-    /* virtual */ bool ReturnValue<T>::matches_encoding(const char * expected_argument_encoding) const {
-        return 0 == strcmp(@encode(T), expected_argument_encoding);
+    /* virtual */ bool ReturnValue<T>::matches_encoding(const char * actual_argument_encoding) const {
+        return 0 == strcmp(@encode(T), actual_argument_encoding);
     }
 
 }}
