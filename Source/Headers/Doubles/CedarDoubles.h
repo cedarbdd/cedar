@@ -8,3 +8,4 @@
 #import "Argument.h"
 #import "AnyArgument.h"
 #import "ValueArgument.h"
+#import "AnyInstanceArgument.h"
