@@ -95,14 +95,14 @@ namespace Cedar { namespace Doubles {
     }
 
     inline void StubbedMethod::validate_against_instance(id instance) const {
-        verify_count_and_types_of_arguments(instance);
+        this->verify_count_and_types_of_arguments(instance);
 
-        if (has_return_value()) {
-            const char * const methodReturnType = [[instance methodSignatureForSelector:selector()] methodReturnType];
-            if (!return_value().matches_encoding(methodReturnType)) {
+        if (this->has_return_value()) {
+            const char * const methodReturnType = [[instance methodSignatureForSelector:this->selector()] methodReturnType];
+            if (!this->return_value().matches_encoding(methodReturnType)) {
                 NSString * selectorString = NSStringFromSelector(selector());
                 [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:[NSString stringWithFormat:@"Invalid return value type (%s) for %@", return_value().value_encoding(), selectorString]
+                                         reason:[NSString stringWithFormat:@"Invalid return value type (%s) for %@", this->return_value().value_encoding(), selectorString]
                                        userInfo:nil] raise];
 
             }

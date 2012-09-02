@@ -21,6 +21,11 @@ namespace Cedar { namespace Doubles {
         virtual bool matches_bytes(void * expected_argument_bytes) const;
 
     private:
+        bool both_are_objects(const char * expected_argument_encoding) const;
+        bool both_are_not_objects(const char * expected_argument_encoding) const;
+        bool nil_argument(const char * expected_argument_encoding) const;
+
+    private:
         const T value_;
     };
 
@@ -53,13 +58,31 @@ namespace Cedar { namespace Doubles {
 
     template<typename T>
     /* virtual */ bool TypedArgument<T>::matches_encoding(const char * expected_argument_encoding) const {
-        return (0 == strncmp(@encode(T), "@", 1) && 0 == strncmp(expected_argument_encoding, "@", 1)) ||
-        (0 != strncmp(@encode(T), "@", 1) && 0 != strncmp(expected_argument_encoding, "@", 1));
+        return this->both_are_objects(expected_argument_encoding) ||
+        this->both_are_not_objects(expected_argument_encoding) ||
+        this->nil_argument(expected_argument_encoding);
     }
 
     template<typename T>
     /* virtual */ bool TypedArgument<T>::matches_bytes(void * expected_argument_bytes) const {
         return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(expected_argument_bytes)));
+    }
+
+#pragma mark - Private interface
+    template<typename T>
+    bool TypedArgument<T>::both_are_objects(const char * expected_argument_encoding) const {
+        return 0 == strncmp(@encode(T), "@", 1) && 0 == strncmp(expected_argument_encoding, "@", 1);
+    }
+
+    template<typename T>
+    bool TypedArgument<T>::both_are_not_objects(const char * expected_argument_encoding) const {
+        return 0 != strncmp(@encode(T), "@", 1) && 0 != strncmp(expected_argument_encoding, "@", 1);
+    }
+
+    template<typename T>
+    bool TypedArgument<T>::nil_argument(const char * expected_argument_encoding) const {
+        void *nil_pointer = 0;
+        return 0 == strncmp(expected_argument_encoding, "@", 1) && this->matches_bytes(&nil_pointer);
     }
 
 }}

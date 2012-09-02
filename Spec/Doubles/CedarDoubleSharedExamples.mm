@@ -191,6 +191,25 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
             });
 
+            context(@"with nil", ^{
+                beforeEach(^{
+                    myDouble stub_method("incrementByNumber:").with(nil);
+                });
+
+                context(@"when invoked with a nil argument", ^{
+                    it(@"should record the invocation", ^{
+                        [myDouble incrementByNumber:nil];
+                        myDouble should have_received("incrementByNumber:").with(nil);
+                    });
+                });
+
+                context(@"when invoked with a non-nil argument", ^{
+                    it(@"should raise an exception", ^{
+                        ^{ [myDouble incrementByNumber:[NSNumber numberWithInt:1]]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
+                    });
+                });
+            });
+
             context(@"with an arugment specified as anything", ^{
                 NSNumber *expectedBitMoreValue = [NSNumber numberWithInt:777];
                 NSNumber *anotherBitMoreValue = [NSNumber numberWithInt:111];

@@ -27,6 +27,8 @@ namespace Cedar { namespace Doubles {
 
     private:
         bool matches_arguments(NSInvocation * const) const;
+        void compare_argument_count_to_method_signature(NSMethodSignature * const methodSignature) const;
+        void compare_argument_types_to_method_signature(NSMethodSignature * const methodSignature) const;
 
     private:
         const SEL expectedSelector_;
@@ -56,30 +58,9 @@ namespace Cedar { namespace Doubles {
         }
 
         NSMethodSignature *methodSignature = [instance methodSignatureForSelector:this->selector()];
-        size_t actualArgumentCount = [methodSignature numberOfArguments] - OBJC_DEFAULT_ARGUMENT_COUNT;
-        size_t expectedArgumentCount = this->arguments().size();
 
-        if (actualArgumentCount != expectedArgumentCount) {
-            NSString * selectorString = NSStringFromSelector(this->selector());
-            [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: %lu, actual: %lu", selectorString, (unsigned long)expectedArgumentCount, (unsigned long)actualArgumentCount]
-                                   userInfo:nil]
-             raise];
-        }
-
-        size_t index = OBJC_DEFAULT_ARGUMENT_COUNT;
-        for (arguments_vector_t::const_iterator cit = this->arguments().begin(); cit != this->arguments().end(); ++cit, ++index) {
-            const char * actual_argument_encoding = [methodSignature getArgumentTypeAtIndex:index];
-            if (!(*cit)->matches_encoding(actual_argument_encoding)) {
-                NSString * selectorString = NSStringFromSelector(this->selector());
-                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #%lu for <%@>",
-                                    (*cit)->value_string(),
-                                    actual_argument_encoding,
-                                    (unsigned long)(index - OBJC_DEFAULT_ARGUMENT_COUNT + 1),
-                                    selectorString];
-                [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise];
-            }
-        }
+        this->compare_argument_count_to_method_signature(methodSignature);
+        this->compare_argument_types_to_method_signature(methodSignature);
     }
 
 #pragma mark - Private interface
@@ -96,5 +77,34 @@ namespace Cedar { namespace Doubles {
             matches = (*cit)->matches_bytes(&actualArgumentBytes);
         }
         return matches;
+    }
+
+    inline void InvocationMatcher::compare_argument_count_to_method_signature(NSMethodSignature * const methodSignature) const {
+        size_t actualArgumentCount = [methodSignature numberOfArguments] - OBJC_DEFAULT_ARGUMENT_COUNT;
+        size_t expectedArgumentCount = this->arguments().size();
+
+        if (actualArgumentCount != expectedArgumentCount) {
+            NSString * selectorString = NSStringFromSelector(this->selector());
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                     reason:[NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: %lu, actual: %lu", selectorString, (unsigned long)expectedArgumentCount, (unsigned long)actualArgumentCount]
+                                   userInfo:nil]
+             raise];
+        }
+    }
+
+    inline void InvocationMatcher::compare_argument_types_to_method_signature(NSMethodSignature * const methodSignature) const {
+        size_t index = OBJC_DEFAULT_ARGUMENT_COUNT;
+        for (arguments_vector_t::const_iterator cit = this->arguments().begin(); cit != this->arguments().end(); ++cit, ++index) {
+            const char * actual_argument_encoding = [methodSignature getArgumentTypeAtIndex:index];
+            if (!(*cit)->matches_encoding(actual_argument_encoding)) {
+                NSString * selectorString = NSStringFromSelector(this->selector());
+                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #%lu for <%@>",
+                                    (*cit)->value_string(),
+                                    actual_argument_encoding,
+                                    (unsigned long)(index - OBJC_DEFAULT_ARGUMENT_COUNT + 1),
+                                    selectorString];
+                [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise];
+            }
+        }
     }
 }}
