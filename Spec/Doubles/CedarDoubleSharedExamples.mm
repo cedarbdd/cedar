@@ -168,7 +168,6 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         describe(@"argument expectations", ^{
             context(@"with too few", ^{
                 size_t expectedIncrementValue = 1;
-                NSNumber * expectedBitMoreValue = [NSNumber numberWithInteger:10];
                 NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <incrementByABit:andABitMore:>; expected: 1, actual: 2"];
 
                 it(@"should raise an exception", ^{
