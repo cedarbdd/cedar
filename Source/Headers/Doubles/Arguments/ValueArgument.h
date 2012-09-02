@@ -3,13 +3,13 @@
 namespace Cedar { namespace Doubles {
 
     template<typename T>
-    class TypedArgument : public Argument {
+    class ValueArgument : public Argument {
     private:
-        TypedArgument<T> & operator=(const TypedArgument<T> &);
+        ValueArgument<T> & operator=(const ValueArgument<T> &);
 
     public:
-        explicit TypedArgument(const T &);
-        virtual ~TypedArgument();
+        explicit ValueArgument(const T &);
+        virtual ~ValueArgument();
         // Allow default copy ctor.
 
         virtual const char * const value_encoding() const;
@@ -31,56 +31,56 @@ namespace Cedar { namespace Doubles {
 
 
     template<typename T>
-    TypedArgument<T>::TypedArgument(const T & value) : Argument(), value_(value) {}
+    ValueArgument<T>::ValueArgument(const T & value) : Argument(), value_(value) {}
 
     template<typename T>
-    /* virtual */ TypedArgument<T>::~TypedArgument() {}
+    /* virtual */ ValueArgument<T>::~ValueArgument() {}
 
     template<typename T>
-    /* virtual */ const char * const TypedArgument<T>::value_encoding() const {
+    /* virtual */ const char * const ValueArgument<T>::value_encoding() const {
         return @encode(T);
     }
 
     template<typename T>
-    /* virtual */ void * TypedArgument<T>::value_bytes() const {
+    /* virtual */ void * ValueArgument<T>::value_bytes() const {
         return (const_cast<T *>(&value_));
     }
 
     template<typename T>
-    /* virtual */ NSString * TypedArgument<T>::value_string() const {
+    /* virtual */ NSString * ValueArgument<T>::value_string() const {
         return Matchers::Stringifiers::string_for(value_);
     }
 
     template<typename T>
-    /* virtual */ size_t TypedArgument<T>::value_size() const {
+    /* virtual */ size_t ValueArgument<T>::value_size() const {
         return sizeof(T);
     }
 
     template<typename T>
-    /* virtual */ bool TypedArgument<T>::matches_encoding(const char * expected_argument_encoding) const {
+    /* virtual */ bool ValueArgument<T>::matches_encoding(const char * expected_argument_encoding) const {
         return this->both_are_objects(expected_argument_encoding) ||
         this->both_are_not_objects(expected_argument_encoding) ||
         this->nil_argument(expected_argument_encoding);
     }
 
     template<typename T>
-    /* virtual */ bool TypedArgument<T>::matches_bytes(void * expected_argument_bytes) const {
+    /* virtual */ bool ValueArgument<T>::matches_bytes(void * expected_argument_bytes) const {
         return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(expected_argument_bytes)));
     }
 
 #pragma mark - Private interface
     template<typename T>
-    bool TypedArgument<T>::both_are_objects(const char * expected_argument_encoding) const {
+    bool ValueArgument<T>::both_are_objects(const char * expected_argument_encoding) const {
         return 0 == strncmp(@encode(T), "@", 1) && 0 == strncmp(expected_argument_encoding, "@", 1);
     }
 
     template<typename T>
-    bool TypedArgument<T>::both_are_not_objects(const char * expected_argument_encoding) const {
+    bool ValueArgument<T>::both_are_not_objects(const char * expected_argument_encoding) const {
         return 0 != strncmp(@encode(T), "@", 1) && 0 != strncmp(expected_argument_encoding, "@", 1);
     }
 
     template<typename T>
-    bool TypedArgument<T>::nil_argument(const char * expected_argument_encoding) const {
+    bool ValueArgument<T>::nil_argument(const char * expected_argument_encoding) const {
         void *nil_pointer = 0;
         return 0 == strncmp(expected_argument_encoding, "@", 1) && this->matches_bytes(&nil_pointer);
     }

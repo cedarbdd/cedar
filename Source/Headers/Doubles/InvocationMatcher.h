@@ -1,6 +1,6 @@
 #import "objc/runtime.h"
 #import <vector>
-#import "TypedArgument.h"
+#import "ValueArgument.h"
 
 namespace Cedar { namespace Doubles {
 
@@ -45,7 +45,7 @@ namespace Cedar { namespace Doubles {
 
     template<typename T>
     inline void InvocationMatcher::add_argument(const T & value) {
-        this->add_argument(Argument::shared_ptr_t(new TypedArgument<T>(value)));
+        this->add_argument(Argument::shared_ptr_t(new ValueArgument<T>(value)));
     }
 
     inline bool InvocationMatcher::matches(NSInvocation * const invocation) const {

@@ -1,9 +1,9 @@
-#import "TypedArgument.h"
+#import "ValueArgument.h"
 
 namespace Cedar { namespace Doubles {
 
     template<typename T>
-    class ReturnValue : public TypedArgument<T> {
+    class ReturnValue : public ValueArgument<T> {
     private:
         ReturnValue & operator=(const ReturnValue &);
 
@@ -15,7 +15,7 @@ namespace Cedar { namespace Doubles {
     };
 
     template<typename T>
-    ReturnValue<T>::ReturnValue(const T & value) : TypedArgument<T>(value) {}
+    ReturnValue<T>::ReturnValue(const T & value) : ValueArgument<T>(value) {}
 
     template<typename T>
     /* virtual */ ReturnValue<T>::~ReturnValue() {}

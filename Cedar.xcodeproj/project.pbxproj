@@ -176,8 +176,8 @@
 		AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC9DEEB12C2CC7E0039512D /* CDRColorizedReporter.m */; };
 		AECF136115D1425C003AAB9C /* Argument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136015D1425C003AAB9C /* Argument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AECF136215D1425C003AAB9C /* Argument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136015D1425C003AAB9C /* Argument.h */; };
-		AECF136415D14274003AAB9C /* TypedArgument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136315D14274003AAB9C /* TypedArgument.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AECF136515D14274003AAB9C /* TypedArgument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136315D14274003AAB9C /* TypedArgument.h */; };
+		AECF136415D14274003AAB9C /* ValueArgument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136315D14274003AAB9C /* ValueArgument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AECF136515D14274003AAB9C /* ValueArgument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136315D14274003AAB9C /* ValueArgument.h */; };
 		AECF136715D142E3003AAB9C /* ReturnValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136615D142E3003AAB9C /* ReturnValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136615D142E3003AAB9C /* ReturnValue.h */; };
 		AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136915D1439B003AAB9C /* AnyArgument.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -384,7 +384,7 @@
 				22B6A22715B7ACF800960ADE /* InvocationMatcher.h in Copy headers to framework */,
 				AE74907515B493B6008EA127 /* CDRFake.h in Copy headers to framework */,
 				AECF136215D1425C003AAB9C /* Argument.h in Copy headers to framework */,
-				AECF136515D14274003AAB9C /* TypedArgument.h in Copy headers to framework */,
+				AECF136515D14274003AAB9C /* ValueArgument.h in Copy headers to framework */,
 				AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */,
 				AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */,
 				AEB1A74415F304A9002E4167 /* StubbedMethod.mm in Copy headers to framework */,
@@ -490,7 +490,7 @@
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
 		AEC9DEEB12C2CC7E0039512D /* CDRColorizedReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRColorizedReporter.m; sourceTree = "<group>"; };
 		AECF136015D1425C003AAB9C /* Argument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Argument.h; sourceTree = "<group>"; };
-		AECF136315D14274003AAB9C /* TypedArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypedArgument.h; sourceTree = "<group>"; };
+		AECF136315D14274003AAB9C /* ValueArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueArgument.h; sourceTree = "<group>"; };
 		AECF136615D142E3003AAB9C /* ReturnValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValue.h; sourceTree = "<group>"; };
 		AECF136915D1439B003AAB9C /* AnyArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyArgument.h; sourceTree = "<group>"; };
 		AEEE1FB611DC271300029872 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -845,7 +845,7 @@
 			isa = PBXGroup;
 			children = (
 				AECF136015D1425C003AAB9C /* Argument.h */,
-				AECF136315D14274003AAB9C /* TypedArgument.h */,
+				AECF136315D14274003AAB9C /* ValueArgument.h */,
 				AECF136615D142E3003AAB9C /* ReturnValue.h */,
 				AECF136915D1439B003AAB9C /* AnyArgument.h */,
 			);
@@ -1134,7 +1134,7 @@
 				AE9AA6D415AE087D00617E1A /* StubbedMethod.h in Headers */,
 				AE9AA6DB15AE0B0400617E1A /* CedarDoubleImpl.h in Headers */,
 				AECF136115D1425C003AAB9C /* Argument.h in Headers */,
-				AECF136415D14274003AAB9C /* TypedArgument.h in Headers */,
+				AECF136415D14274003AAB9C /* ValueArgument.h in Headers */,
 				AECF136715D142E3003AAB9C /* ReturnValue.h in Headers */,
 				AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */,
 			);

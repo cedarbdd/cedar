@@ -75,7 +75,7 @@ namespace Cedar { namespace Doubles {
 
     template<typename T>
     StubbedMethod & StubbedMethod::with(const T & argument) {
-        return with(Argument::shared_ptr_t(new TypedArgument<T>(argument)));
+        return with(Argument::shared_ptr_t(new ValueArgument<T>(argument)));
     }
 
     template<typename T>
