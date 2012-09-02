@@ -9,14 +9,20 @@ namespace Cedar { namespace Doubles {
 
     class StubbedMethod : private InvocationMatcher {
     private:
+        typedef void (^invocation_block_t)(NSInvocation *);
+
+    private:
         StubbedMethod & operator=(const StubbedMethod &);
 
     public:
         StubbedMethod(SEL);
         StubbedMethod(const char *);
+        StubbedMethod(const StubbedMethod &);
+        virtual ~StubbedMethod();
 
         template<typename T>
         StubbedMethod & and_return(const T &);
+        StubbedMethod & and_do(invocation_block_t);
 
         StubbedMethod & with(const Argument::shared_ptr_t argument);
         StubbedMethod & and_with(const Argument::shared_ptr_t argument);
@@ -29,7 +35,6 @@ namespace Cedar { namespace Doubles {
         StubbedMethod & and_raise_exception();
         StubbedMethod & and_raise_exception(NSObject * exception);
 
-        bool has_return_value() const { return return_value_argument_.get(); };
         Argument & return_value() const { return *return_value_argument_; };
 
         struct SelCompare {
@@ -42,37 +47,30 @@ namespace Cedar { namespace Doubles {
 
         const SEL selector() const;
         bool matches(NSInvocation * const invocation) const;
-        bool invoke(const NSInvocation * const invocation) const;
+        bool invoke(NSInvocation * invocation) const;
         void validate_against_instance(id instance) const;
 
     private:
+        bool has_return_value() const { return return_value_argument_.get(); };
+        bool has_invocation_block() const { return invocation_block_; }
+
+    private:
         Argument::shared_ptr_t return_value_argument_;
+        invocation_block_t invocation_block_;
         NSObject * exception_to_raise_;
     };
 
-    inline StubbedMethod::StubbedMethod(SEL selector) :
-        InvocationMatcher(selector),
-        exception_to_raise_(0) {
-    }
-
-    inline StubbedMethod::StubbedMethod(const char * method_name) :
-        InvocationMatcher(sel_registerName(method_name)),
-        exception_to_raise_(0) {
-    }
-
     template<typename T>
     StubbedMethod & StubbedMethod::and_return(const T & return_value) {
+        if (this->has_invocation_block()) {
+            NSString * selectorString = NSStringFromSelector(this->selector());
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                     reason:[NSString stringWithFormat:@"Multiple return values specified for <value>", selectorString]
+                                   userInfo:nil] raise];
+        }
+
         return_value_argument_ = Argument::shared_ptr_t(new ReturnValue<T>(return_value));
         return *this;
-    }
-
-    inline StubbedMethod & StubbedMethod::with(const Argument::shared_ptr_t argument) {
-        this->add_argument(argument);
-        return *this;
-    };
-
-    inline StubbedMethod & StubbedMethod::and_with(const Argument::shared_ptr_t argument) {
-        return with(argument);
     }
 
     template<typename T>
@@ -83,49 +81,6 @@ namespace Cedar { namespace Doubles {
     template<typename T>
     StubbedMethod & StubbedMethod::and_with(const T & argument) {
         return with(argument);
-    }
-
-    inline StubbedMethod & StubbedMethod::and_raise_exception() {
-        return and_raise_exception([NSException exceptionWithName:NSInternalInconsistencyException reason:@"Invoked a stub with exceptional behavior" userInfo:nil]);
-    }
-
-    inline StubbedMethod & StubbedMethod::and_raise_exception(NSObject * exception) {
-        exception_to_raise_ = exception;
-        return *this;
-    }
-
-    inline void StubbedMethod::validate_against_instance(id instance) const {
-        this->verify_count_and_types_of_arguments(instance);
-
-        if (this->has_return_value()) {
-            const char * const methodReturnType = [[instance methodSignatureForSelector:this->selector()] methodReturnType];
-            if (!this->return_value().matches_encoding(methodReturnType)) {
-                NSString * selectorString = NSStringFromSelector(selector());
-                [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:[NSString stringWithFormat:@"Invalid return value type (%s) for %@", this->return_value().value_encoding(), selectorString]
-                                       userInfo:nil] raise];
-
-            }
-        }
-    }
-
-    inline const SEL StubbedMethod::selector() const {
-        return InvocationMatcher::selector();
-    }
-
-    inline bool StubbedMethod::matches(NSInvocation * const invocation) const {
-        return InvocationMatcher::matches(invocation);
-    }
-
-    inline bool StubbedMethod::invoke(const NSInvocation * const invocation) const {
-        if (exception_to_raise_) {
-            @throw exception_to_raise_;
-        } else if (this->has_return_value()) {
-            const void * returnValue = return_value().value_bytes();
-            [invocation setReturnValue:const_cast<void *>(returnValue)];
-            return true;
-        }
-        return false;
     }
 
 }}

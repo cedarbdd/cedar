@@ -93,7 +93,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             });
         });
 
-        context(@"when the stub is instructed to raise an exception", ^{
+        context(@"when the stub is instructed to raise an exception (and_raise)", ^{
             context(@"with no parameter", ^{
                 beforeEach(^{
                     myDouble stub_method("increment").and_raise_exception();
@@ -113,6 +113,54 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                 it(@"should raise that exception instance", ^{
                     ^{ [myDouble increment]; } should raise_exception(someException);
+                });
+            });
+        });
+
+        context(@"with a replacement implementation (and_do)", ^{
+            __block BOOL replacement_invocation_called;
+            __block size_t sent_argument = 2, received_argument;
+            __block size_t return_value;
+
+            beforeEach(^{
+                replacement_invocation_called = NO;
+                return_value = 123;
+                myDouble stub_method("incrementBy:").and_do(^(NSInvocation *invocation) {
+                    replacement_invocation_called = YES;
+                    [invocation getArgument:&received_argument atIndex:2];
+                });
+                myDouble stub_method("value").and_do(^(NSInvocation *invocation) {
+                    [invocation setReturnValue:&return_value];
+                });
+
+                [myDouble incrementBy:sent_argument];
+            });
+
+            it(@"should invoke the block", ^{
+                replacement_invocation_called should be_truthy;
+            });
+
+            it(@"should receive the correct arguments in the invocation", ^{
+                received_argument should equal(sent_argument);
+            });
+
+            it(@"should return the value provided by the NSInvocation", ^{
+                [myDouble value] should equal(return_value);
+            });
+
+            context(@"when combined with an explicit return value", ^{
+                it(@"should raise an exception", ^{
+                    ^{
+                        myDouble stub_method("value").and_do(^(NSInvocation *invocation) {}).and_return(2);
+                    } should raise_exception.with_reason(@"Multiple return values specified for <value>");
+                });
+            });
+
+            context(@"when added after an explicit return value", ^{
+                it(@"should raise an exception", ^{
+                    ^{
+                        myDouble stub_method("value").and_return(2).and_do(^(NSInvocation *invocation) {});
+                    } should raise_exception.with_reason(@"Multiple return values specified for <value>");
                 });
             });
         });
@@ -210,7 +258,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
             });
 
-            context(@"with an arugment specified as anything", ^{
+            context(@"with an argument specified as anything", ^{
                 NSNumber *expectedBitMoreValue = [NSNumber numberWithInt:777];
                 NSNumber *anotherBitMoreValue = [NSNumber numberWithInt:111];
 
@@ -229,7 +277,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             });
         });
 
-        describe(@"return values", ^{
+        describe(@"return values (and_return)", ^{
             context(@"with a value of the correct type", ^{
                 size_t returnValue = 1729;
 

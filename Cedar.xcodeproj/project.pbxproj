@@ -162,6 +162,9 @@
 		AE9AA6DC15AE0B0400617E1A /* CedarDoubleImpl.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; };
 		AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
 		AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
+		AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
+		AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
+		AEB1A74415F304A9002E4167 /* StubbedMethod.mm in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
 		AEB45A911496C8D800845D09 /* RaiseException.h in Headers */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; };
 		AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
@@ -384,6 +387,7 @@
 				AECF136515D14274003AAB9C /* TypedArgument.h in Copy headers to framework */,
 				AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */,
 				AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */,
+				AEB1A74415F304A9002E4167 /* StubbedMethod.mm in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +484,7 @@
 		AE9AA6D115AE082500617E1A /* StubbedMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StubbedMethod.h; sourceTree = "<group>"; };
 		AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarDoubleImpl.h; sourceTree = "<group>"; };
 		AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDoubleImpl.mm; sourceTree = "<group>"; };
+		AEB1A74115F304A9002E4167 /* StubbedMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StubbedMethod.mm; sourceTree = "<group>"; };
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
 		AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseExceptionSpec.mm; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
@@ -646,6 +651,7 @@
 				AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */,
 				AE74907015B486CD008EA127 /* CDRFake.mm */,
 				AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */,
+				AEB1A74115F304A9002E4167 /* StubbedMethod.mm */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1497,6 +1503,7 @@
 				AE74906F15B48690008EA127 /* CDRProtocolFake.mm in Sources */,
 				AE74907115B486CD008EA127 /* CDRFake.mm in Sources */,
 				AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
+				AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1570,6 +1577,7 @@
 				AE74907215B486CD008EA127 /* CDRFake.mm in Sources */,
 				AE74907715B493C4008EA127 /* CDRProtocolFake.mm in Sources */,
 				AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
+				AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
