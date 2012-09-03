@@ -173,6 +173,10 @@
 		AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; };
 		AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
 		AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
+		AEC7873915F440980058A27B /* InvocationMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7873715F440980058A27B /* InvocationMatcher.mm */; };
+		AEC7873A15F440980058A27B /* InvocationMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7873715F440980058A27B /* InvocationMatcher.mm */; };
+		AEC7874D15F444A50058A27B /* HaveReceived.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7874C15F444A50058A27B /* HaveReceived.mm */; };
+		AEC7874E15F444A50058A27B /* HaveReceived.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7874C15F444A50058A27B /* HaveReceived.mm */; };
 		AEC9DEED12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */; };
 		AEC9DEEE12C2CC7E0039512D /* CDRColorizedReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC9DEEB12C2CC7E0039512D /* CDRColorizedReporter.m */; };
 		AEC9DEEF12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */; };
@@ -494,6 +498,8 @@
 		AEB1A74115F304A9002E4167 /* StubbedMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StubbedMethod.mm; sourceTree = "<group>"; };
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
 		AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseExceptionSpec.mm; sourceTree = "<group>"; };
+		AEC7873715F440980058A27B /* InvocationMatcher.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvocationMatcher.mm; sourceTree = "<group>"; };
+		AEC7874C15F444A50058A27B /* HaveReceived.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaveReceived.mm; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
 		AEC9DEEB12C2CC7E0039512D /* CDRColorizedReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRColorizedReporter.m; sourceTree = "<group>"; };
 		AECF136015D1425C003AAB9C /* Argument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Argument.h; sourceTree = "<group>"; };
@@ -660,6 +666,8 @@
 				AE74907015B486CD008EA127 /* CDRFake.mm */,
 				AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */,
 				AEB1A74115F304A9002E4167 /* StubbedMethod.mm */,
+				AEC7873715F440980058A27B /* InvocationMatcher.mm */,
+				AEC7874C15F444A50058A27B /* HaveReceived.mm */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1523,6 +1531,8 @@
 				AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */,
 				AE94D04515F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
+				AEC7873915F440980058A27B /* InvocationMatcher.mm in Sources */,
+				AEC7874D15F444A50058A27B /* HaveReceived.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1598,6 +1608,8 @@
 				AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */,
 				AE94D04615F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
+				AEC7873A15F440980058A27B /* InvocationMatcher.mm in Sources */,
+				AEC7874E15F444A50058A27B /* HaveReceived.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
