@@ -27,6 +27,7 @@ namespace Cedar { namespace Doubles {
 
     private:
         bool matches_arguments(NSInvocation * const) const;
+        NSMethodSignature *method_signature_for_instance(id instance) const;
         void compare_argument_count_to_method_signature(NSMethodSignature * const methodSignature) const;
         void compare_argument_types_to_method_signature(NSMethodSignature * const methodSignature) const;
 
@@ -57,8 +58,7 @@ namespace Cedar { namespace Doubles {
             return;
         }
 
-        NSMethodSignature *methodSignature = [instance methodSignatureForSelector:this->selector()];
-
+        NSMethodSignature *methodSignature = this->method_signature_for_instance(instance);
         this->compare_argument_count_to_method_signature(methodSignature);
         this->compare_argument_types_to_method_signature(methodSignature);
     }
@@ -77,6 +77,18 @@ namespace Cedar { namespace Doubles {
             matches = (*cit)->matches_bytes(&actualArgumentBytes);
         }
         return matches;
+    }
+
+    inline NSMethodSignature *InvocationMatcher::method_signature_for_instance(id instance) const {
+        NSMethodSignature *methodSignature = [instance methodSignatureForSelector:this->selector()];
+        if (!methodSignature) {
+            NSString * selectorString = NSStringFromSelector(this->selector());
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                     reason:[NSString stringWithFormat:@"Received expectation on method <%@>, which double <%@> does not respond to", selectorString, instance]
+                                   userInfo:nil]
+             raise];
+        }
+        return methodSignature;
     }
 
     inline void InvocationMatcher::compare_argument_count_to_method_signature(NSMethodSignature * const methodSignature) const {

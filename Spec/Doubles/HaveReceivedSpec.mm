@@ -389,6 +389,17 @@ describe(@"have_received matcher", ^{
         });
     });
 
+    context(@"for a method that the object does not respond to", ^{
+        SEL method = @selector(noSuchMethod:);
+
+        it(@"should raise an exception due to an invalid expectation", ^{
+            NSString *methodString = NSStringFromSelector(method);
+            NSString *reason = [NSString stringWithFormat:@"Received expectation on method <%@>, which double <%@> does not respond to", methodString, incrementer];
+            ^{ expect(incrementer).to(have_received(method).with(anything)); } should raise_exception.with_reason(reason);
+        });
+
+    });
+
     context(@"for a method that throws an exception", ^{
         it(@"should continue to record methods correctly", ^{
             @try {
