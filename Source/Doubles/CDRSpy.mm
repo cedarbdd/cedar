@@ -110,8 +110,19 @@
     Class originalClass = objc_getAssociatedObject(self, @"original-class");
     Method originalMethod = class_getInstanceMethod(originalClass, selector);
 
-    class_addMethod(klass, selector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+    /*
+     Every now and then a method returns NULL for its implementation.  Since I have no
+     idea why, or how to get around this in a generic way, fall back to the original
+     class itself.  This will cause the spy to not record subsequent methods invoked
+     on self, but hopefully this is rare enough to not cause a problem.
 
+     The alternative is an EXC_BAD_ACCESS.
+     */
+    if (!originalMethod) {
+        return originalClass;
+    }
+
+    class_addMethod(klass, selector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
     return klass;
 }
 
