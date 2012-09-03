@@ -362,6 +362,44 @@ describe(@"be_empty matcher", ^{
             });
         });
     });
+
+    describe(@"when the value is an NSString", ^{
+        describe(@"which is empty", ^{
+            NSString *container = [NSString string];
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(container).to(be_empty());
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                        expect(container).to_not(be_empty());
+                    });
+                });
+            });
+        });
+
+        describe(@"which is not empty", ^{
+            NSMutableSet *container = [NSString stringWithFormat:@"not empty"];
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                        expect(container).to(be_empty());
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    expect(container).to_not(be_empty());
+                });
+            });
+        });
+    });
 });
 
 describe(@"be_empty shorthand syntax (no parentheses)", ^{
