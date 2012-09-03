@@ -5,7 +5,13 @@ namespace Cedar { namespace Matchers {
 
     typedef void (^empty_block_t)();
 
-    class RaiseException : public Base<> {
+    struct RaiseExceptionMessageBuilder {
+        static NSString * string_for_actual_value(empty_block_t value) {
+            return [value description];
+        }
+    };
+
+    class RaiseException : public Base<RaiseExceptionMessageBuilder> {
     private:
         RaiseException & operator=(const RaiseException &);
 

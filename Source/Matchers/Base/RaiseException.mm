@@ -7,7 +7,7 @@ namespace Cedar { namespace Matchers {
                                           Class expectedExceptionClass /*= nil*/,
                                           bool allowSubclasses /*= false */,
                                           NSString *reason /*= nil*/) :
-    Base<>(),
+    Base<RaiseExceptionMessageBuilder>(),
     expectedExceptionInstance_([expectedExceptionInstance retain]),
     expectedExceptionClass_(expectedExceptionClass),
     allowSubclasses_(allowSubclasses),
