@@ -29,6 +29,7 @@ describe(@"spy_on", ^{
 
     it(@"should not change the methods the given object responds to", ^{
         [incrementer respondsToSelector:@selector(increment)] should be_truthy;
+        [incrementer respondsToSelector:@selector(wibble)] should_not be_truthy;
     });
 
     it(@"should not affect other instances of the same class", ^{
@@ -39,10 +40,14 @@ describe(@"spy_on", ^{
     });
 
     it(@"should record messages sent to the object", ^{
-        ((CDRSpy *)incrementer).sent_messages should be_empty;
-
+        incrementer should_not have_received("increment");
         [incrementer increment];
-        ((CDRSpy *)incrementer).sent_messages should_not be_empty;
+        incrementer should have_received("increment");
+    });
+
+    it(@"should record messages sent by the object to itself", ^{
+        [incrementer incrementBy:7];
+        incrementer should have_received("setValue:");
     });
 
     it(@"should return the description of the spied-upon object", ^{
@@ -50,10 +55,9 @@ describe(@"spy_on", ^{
     });
 
     it(@"should only spy on a given object once" , ^{
-        ((CDRSpy *)incrementer).sent_messages should be_empty;
-        spy_on(incrementer);
         [incrementer increment];
-        ((CDRSpy *)incrementer).sent_messages should_not be_empty;
+        spy_on(incrementer);
+        incrementer should have_received("increment");
     });
 });
 

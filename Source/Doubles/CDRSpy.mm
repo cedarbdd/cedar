@@ -3,16 +3,6 @@
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
 
-@interface CDRSpy ()
-
-- (void)as_original_object:(void(^)())block;
-- (CedarDoubleImpl *)cedar_double_impl;
-
-@end
-
-static const NSString *foo = @"wibble";
-
-
 @implementation CDRSpy
 
 + (void)interceptMessagesForInstance:(id)instance {
@@ -39,7 +29,7 @@ static const NSString *foo = @"wibble";
 
 - (NSString *)description {
     __block NSString *description;
-    [self as_original_object:^{
+    [self as_original_class:^{
         description = [self description];
     }];
 
@@ -50,7 +40,7 @@ static const NSString *foo = @"wibble";
     [self.cedar_double_impl record_method_invocation:invocation];
 
     if (![self.cedar_double_impl invoke_stubbed_method:invocation]) {
-        [self as_original_object:^{
+        [self as_class:[self createTransientClassForSelector:invocation.selector] :^{
             [invocation invoke];
         }];
     }
@@ -59,7 +49,7 @@ static const NSString *foo = @"wibble";
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
     __block NSMethodSignature *originalMethodSignature;
 
-    [self as_original_object:^{
+    [self as_original_class:^{
         originalMethodSignature = [self methodSignatureForSelector:sel];
     }];
 
@@ -69,7 +59,7 @@ static const NSString *foo = @"wibble";
 - (BOOL)respondsToSelector:(SEL)selector {
     __block BOOL respondsToSelector;
 
-    [self as_original_object:^{
+    [self as_original_class:^{
         respondsToSelector = [self respondsToSelector:selector];
     }];
 
@@ -91,9 +81,16 @@ static const NSString *foo = @"wibble";
 }
 
 #pragma mark - Private interface
-- (void)as_original_object:(void(^)())block {
+
+- (CedarDoubleImpl *)cedar_double_impl {
+    return objc_getAssociatedObject(self, @"cedar-double-implementation");
+}
+
+- (void)as_class:(Class)klass :(void(^)())block {
+    block = [[block copy] autorelease];
+
     Class spyClass = object_getClass(self);
-    object_setClass(self, objc_getAssociatedObject(self, @"original-class"));
+    object_setClass(self, klass);
 
     @try {
         block();
@@ -102,8 +99,28 @@ static const NSString *foo = @"wibble";
     }
 }
 
-- (CedarDoubleImpl *)cedar_double_impl {
-    return objc_getAssociatedObject(self, @"cedar-double-implementation");
+- (void)as_original_class:(void(^)())block {
+    [self as_class:objc_getAssociatedObject(self, @"original-class") :block];
+}
+
+- (Class)createTransientClassForSelector:(SEL)selector {
+    Class klass = objc_allocateClassPair([CDRSpy class], [self.uniqueClassName cStringUsingEncoding:NSUTF8StringEncoding], 0);
+    objc_registerClassPair(klass);
+
+    Class originalClass = objc_getAssociatedObject(self, @"original-class");
+    Method originalMethod = class_getInstanceMethod(originalClass, selector);
+
+    class_addMethod(klass, selector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+
+    return klass;
+}
+
+- (NSString *)uniqueClassName {
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidStr = [(NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid) autorelease];
+    CFRelease(uuid);
+
+    return [NSString stringWithFormat:@"CDRSpyTransientClass-%@", uuidStr];
 }
 
 @end
