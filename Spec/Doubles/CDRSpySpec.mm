@@ -45,7 +45,7 @@ describe(@"spy_on", ^{
         incrementer should have_received("increment");
     });
 
-    it(@"should record messages sent by the object to itself", ^{
+    xit(@"should record messages sent by the object to itself", ^{
         [incrementer incrementBy:7];
         incrementer should have_received("setValue:");
     });

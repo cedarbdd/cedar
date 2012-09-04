@@ -40,7 +40,9 @@
     [self.cedar_double_impl record_method_invocation:invocation];
 
     if (![self.cedar_double_impl invoke_stubbed_method:invocation]) {
-        [self as_class:[self createTransientClassForSelector:invocation.selector] :^{
+/* This *almost* works, but makes KVC and some UIKit classes unhappy. */
+//        [self as_class:[self createTransientClassForSelector:invocation.selector] :^{
+        [self as_original_class:^{
             [invocation invoke];
         }];
     }
