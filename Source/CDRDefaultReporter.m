@@ -2,6 +2,7 @@
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "SpecHelper.h"
+#import "CDRSlowTestStatistics.h"
 
 @interface CDRDefaultReporter (private)
 - (void)printMessages:(NSArray *)messages;
@@ -204,6 +205,11 @@
     }
 
     printf("\n");
+
+    if (getenv("CEDAR_REPORT_SLOW_TESTS")) {
+        CDRSlowTestStatistics *slowTestStats = [[[CDRSlowTestStatistics alloc] init] autorelease];
+        [slowTestStats printStatsForExampleGroups:rootGroups_];
+    }
 }
 
 #pragma mark KVO

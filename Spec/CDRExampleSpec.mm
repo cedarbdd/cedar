@@ -11,6 +11,7 @@
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
 #import "NoOpKeyValueObserver.h"
+#import "FibonacciCalculator.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -461,6 +462,33 @@ describe(@"CDRExample", ^{
                 NSString *message = example.message;
                 expect(message).to(equal(failureMessage));
             });
+        });
+    });
+
+    describe(@"runTime", ^{
+        __block CDRExample *fastExample;
+        __block CDRExample *slowExample;
+        __block BOOL test;
+
+        beforeEach(^{
+            test = NO;
+            FibonacciCalculator *calculator = [[[FibonacciCalculator alloc] init] autorelease];
+            fastExample = [[CDRExample alloc] initWithText:@"I'm Fast!" andBlock:^{
+                [calculator computeFibonnaciNumberVeryVeryQuickly:33];
+            }];
+            slowExample = [[CDRExample alloc] initWithText:@"I'm Slow!" andBlock:^{
+                [calculator computeFibonnaciNumberVeryVerySlowly:33];
+            }];
+        });
+
+        it(@"should return the running time of the test", ^{
+            fastExample.runTime should equal(0);
+            slowExample.runTime should equal(0);
+            [fastExample run];
+            [slowExample run];
+            fastExample.runTime should be_greater_than(0);
+            slowExample.runTime should be_greater_than(0);
+            slowExample.runTime should be_greater_than(fastExample.runTime);
         });
     });
 });
