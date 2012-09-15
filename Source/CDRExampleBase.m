@@ -9,6 +9,7 @@
     if (self = [super init]) {
         text_ = [text retain];
         focused_ = NO;
+        runTime_ = 0;
     }
     return self;
 }
@@ -56,6 +57,10 @@
     } else {
         return [NSMutableArray arrayWithObject:self.text];
     }
+}
+
+- (NSTimeInterval)runTime {
+    return runTime_;
 }
 
 @end

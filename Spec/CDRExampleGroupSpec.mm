@@ -11,6 +11,7 @@
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
 #import "NoOpKeyValueObserver.h"
+#import "FibonacciCalculator.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -601,6 +602,35 @@ describe(@"CDRExampleGroup", ^{
                 NSString *text = group.text;
                 expect([fullTextPieces isEqual:[NSArray arrayWithObject:text]]).to(be_truthy());
             });
+        });
+    });
+
+    describe(@"runTime", ^{
+        __block CDRExample *firstExample;
+        __block CDRExample *secondExample;
+        __block CDRExampleGroup *exampleGroup;
+        __block BOOL test;
+
+        beforeEach(^{
+            test = NO;
+            FibonacciCalculator *calculator = [[[FibonacciCalculator alloc] init] autorelease];
+            firstExample = [[CDRExample alloc] initWithText:@"I'm Slow!" andBlock:^{
+                [calculator computeFibonnaciNumberVeryVerySlowly:4];
+            }];
+            secondExample = [[CDRExample alloc] initWithText:@"I'm Slower!" andBlock:^{
+                [calculator computeFibonnaciNumberVeryVerySlowly:5];
+            }];
+
+            exampleGroup = [[[CDRExampleGroup alloc] initWithText:@"I have slow examples"] autorelease];
+            [exampleGroup add:firstExample];
+            [exampleGroup add:secondExample];
+        });
+
+        it(@"should return the running time of the test", ^{
+            exampleGroup.runTime should equal(0);
+            [exampleGroup run];
+            exampleGroup.runTime should be_greater_than(0);
+            exampleGroup.runTime should be_greater_than_or_equal_to(firstExample.runTime + secondExample.runTime);
         });
     });
 });
