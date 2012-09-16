@@ -290,6 +290,10 @@
 		AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
 		E32861321604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
+		E3F897991604FA6E00F5F454 /* CDRSlowTestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F897961604FA6E00F5F454 /* CDRSlowTestReporter.m */; };
+		E3F8979A1604FA6E00F5F454 /* CDRSlowTestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F897961604FA6E00F5F454 /* CDRSlowTestReporter.m */; };
+		E3F897A11604FA9F00F5F454 /* CDRSlowTestReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F8979F1604FA9F00F5F454 /* CDRSlowTestReporter.h */; };
+		E3F897A21604FA9F00F5F454 /* CDRSlowTestReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F8979F1604FA9F00F5F454 /* CDRSlowTestReporter.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -585,8 +589,10 @@
 		AEF7303913ECCB7B00786282 /* StringifiersContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringifiersContainer.h; sourceTree = "<group>"; };
 		AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSharedExampleGroupPool.m; sourceTree = "<group>"; };
 		AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSharedExampleGroupPool.h; sourceTree = "<group>"; };
-		E32861301604F287001FA77E /* FibonacciCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; path = FibonacciCalculator.h; sourceTree = "<group>"; };
+		E32861301604F287001FA77E /* FibonacciCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FibonacciCalculator.h; sourceTree = "<group>"; };
 		E32861311604F287001FA77E /* FibonacciCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FibonacciCalculator.m; sourceTree = "<group>"; };
+		E3F897961604FA6E00F5F454 /* CDRSlowTestReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSlowTestReporter.m; sourceTree = "<group>"; };
+		E3F8979F1604FA9F00F5F454 /* CDRSlowTestReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSlowTestReporter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -933,6 +939,7 @@
 				96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */,
 				96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */,
 				9637852A1491D6D30059C9F6 /* CDROTestHelper.m */,
+				E3F897961604FA6E00F5F454 /* CDRSlowTestReporter.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -961,6 +968,7 @@
 				96EA1CAC142C6449001A78E0 /* CDROTestReporter.h */,
 				96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */,
 				9637852D1491D84F0059C9F6 /* CDROTestHelper.h */,
+				E3F8979F1604FA9F00F5F454 /* CDRSlowTestReporter.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -1177,6 +1185,7 @@
 				AECF136715D142E3003AAB9C /* ReturnValue.h in Headers */,
 				AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */,
 				AE94D03F15F341B200A0C2B7 /* AnyInstanceArgument.h in Headers */,
+				E3F897A11604FA9F00F5F454 /* CDRSlowTestReporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,6 +1200,7 @@
 				9637852F1491D84F0059C9F6 /* CDROTestHelper.h in Headers */,
 				492951DE1481AADA00FA8916 /* CDRJUnitXMLReporter.h in Headers */,
 				AE597B4215B0638B00EEF305 /* InvocationMatcher.h in Headers */,
+				E3F897A21604FA9F00F5F454 /* CDRSlowTestReporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1547,6 +1557,7 @@
 				AE94D04515F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
 				AEC7873915F440980058A27B /* InvocationMatcher.mm in Sources */,
 				AEC7874D15F444A50058A27B /* HaveReceived.mm in Sources */,
+				E3F897991604FA6E00F5F454 /* CDRSlowTestReporter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1625,6 +1636,7 @@
 				AE94D04615F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
 				AEC7873A15F440980058A27B /* InvocationMatcher.mm in Sources */,
 				AEC7874E15F444A50058A27B /* HaveReceived.mm in Sources */,
+				E3F8979A1604FA6E00F5F454 /* CDRSlowTestReporter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
