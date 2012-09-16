@@ -352,6 +352,16 @@ written to output test results in a way that TeamCity CI server can understand.
 You can tell Cedar which reporter to use by setting `CEDAR_REPORTER_CLASS` env
 variable to your custom reporter class name.
 
+### Finding Slow-Running Tests
+
+The `CDRSlowTestReporter` is a custom reporter that identifies and prints out
+the slowest `N` (10 by default) tests in your suite, and the slowest `N` top-level groups.
+These top-level groups typically have a one to one correspondence with your spec
+files allowing you to easily identify the slowest running files.
+
+Simply set the `CEDAR_REPORTER_CLASS` env variable to `CDRSlowTestReporter` to ferret out your slow
+test.  In addition, you can modify `N` by setting the `CEDAR_TOP_N_SLOW_TESTS` env variable to an integer.
+
 ### JUnit XML Reporting
 
 The `CDRJUnitXMLReporter` can be used to generate (simple) JUnit compatible
