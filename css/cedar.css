@@ -52,6 +52,10 @@ a {
   color: #559922;
 }
 
+p {
+  margin-bottom: 1em;
+}
+
 pre {
   background: #000;
   color: #fff;
