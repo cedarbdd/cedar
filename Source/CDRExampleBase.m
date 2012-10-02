@@ -3,7 +3,7 @@
 
 @implementation CDRExampleBase
 
-@synthesize text = text_, parent = parent_, focused = focused_;
+@synthesize text = text_, parent = parent_, focused = focused_, stackAddress = stackAddress_;
 
 - (id)initWithText:(NSString *)text {
     if (self = [super init]) {
