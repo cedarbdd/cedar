@@ -24,6 +24,7 @@ typedef enum CDRExampleState CDRExampleState;
 @property (nonatomic, readonly) NSString *text;
 @property (nonatomic, assign) id<CDRExampleParent> parent;
 @property (nonatomic, assign, getter=isFocused) BOOL focused;
+@property (nonatomic) NSUInteger stackAddress;
 
 - (id)initWithText:(NSString *)text;
 
