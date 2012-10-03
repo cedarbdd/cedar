@@ -135,7 +135,7 @@ Here is a list of built-in matchers you can use:
     expect(...).to(contain(@"something"));
     expect(...).to(be_empty());
 
-    expect(^{ ... }).to(raise_exception([NSInternalInconsistencyException]));
+    expect(^{ ... }).to(raise_exception([NSInternalInconsistencyException class]));
 
 These matchers use C++ templates for type deduction.  You'll need to do two things to use them:
 
@@ -293,8 +293,8 @@ default parameters.
 ## Focused specs
 
 Sometimes when debugging or developing a new feature it is useful to run only a
-subset of your tests.  That can be achieved by marking any number/combination of
-examples with an 'f'. You can use `fit`, `fdescribe` and `fcontext` like this:
+subset of your tests.  That can be achieved by marking any number of examples
+with an 'f'. You can use `fit`, `fdescribe` and `fcontext` like this:
 
           fit(@"should do something eventually", ^{
               // ...
@@ -308,6 +308,10 @@ It might not be immediately obvious why the test runner always returns a
 non-zero exit code when a test suite contains at least one focused example. That
 was done to make CI fail if someone accidently forgets to unfocus focused
 examples before commiting and pushing.
+
+Note: For improved Xcode integration see
+[CedarShortcuts](https://github.com/cppforlife/CedarShortcuts), an Xcode plugin
+that provides keyboard shortcuts for focusing on specs under editor cursor.
 
 
 ## Reporters
