@@ -1,4 +1,5 @@
 #import "InvocationMatcher.h"
+#import <objc/runtime.h>
 
 namespace Cedar { namespace Doubles {
 

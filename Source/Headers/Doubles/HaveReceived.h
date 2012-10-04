@@ -1,6 +1,5 @@
 #import "Base.h"
 #import "Argument.h"
-#import "objc/runtime.h"
 #import "InvocationMatcher.h"
 
 namespace Cedar { namespace Doubles {
