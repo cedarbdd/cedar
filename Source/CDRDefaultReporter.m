@@ -187,6 +187,12 @@
 
     if (reporterOpts && strcmp(reporterOpts, "nested") == 0) {
         [self printNestedFullTextForExample:example stateToken:stateToken];
+    } else if (getenv("CEDAR_REPORT_FAILURES_IMMEDIATELY")) {
+        if (example.state == CDRExampleStateFailed || example.state == CDRExampleStateError) {
+            printf("%s\n%s", [stateToken cStringUsingEncoding:NSUTF8StringEncoding], [[failureMessages_ lastObject] cStringUsingEncoding:NSUTF8StringEncoding]);
+        } else {
+            printf("%s", [stateToken cStringUsingEncoding:NSUTF8StringEncoding]);
+        }
     } else {
         printf("%s", [stateToken cStringUsingEncoding:NSUTF8StringEncoding]);
     }
