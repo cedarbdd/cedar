@@ -23,6 +23,11 @@
     return pair;
 }
 
+- (void)dealloc {
+    self.title = nil;
+    [super dealloc];
+}
+
 - (NSString *)formattedDescription {
     NSString *timeString = [NSString stringWithFormat:@"%7.3fs | ", self.runTime];
     NSString *newLinePrefix = [NSString stringWithFormat:@"\n         | "];
@@ -42,12 +47,10 @@
         [currentLine addObject:titleChunk];
         currentLineLength += titleChunk.length + 1;
     }
-    
+
     [lines addObject:[currentLine componentsJoinedByString:@" "]];
-    
-    NSString *description = [timeString stringByAppendingString:[lines componentsJoinedByString:newLinePrefix]];
-    
-    return description;
+
+    return [timeString stringByAppendingString:[lines componentsJoinedByString:newLinePrefix]];
 }
 
 - (NSComparisonResult)compare:(RunTimeTitlePair *)otherPair {
@@ -56,10 +59,8 @@
     } else if (self.runTime < otherPair.runTime) {
         return NSOrderedAscending;
     }
-    
     return NSOrderedSame;
 }
-
 @end
 
 @interface CDRSlowTestStatistics ()
@@ -82,27 +83,25 @@
 - (void)printStatsForExampleGroups:(NSArray *)groups {
     NSMutableArray *rootPairs = [NSMutableArray array];
     NSMutableArray *examplePairs = [NSMutableArray array];
-    
+
     for (CDRExampleGroup *group in groups) {
-        RunTimeTitlePair *pair = [RunTimeTitlePair pairWithRunTime:group.runTime
-                                                             title:group.text];
-        [rootPairs addObject:pair];
+        [rootPairs addObject:[RunTimeTitlePair pairWithRunTime:group.runTime title:group.text]];
         [examplePairs addObjectsFromArray:[self runTimeTitlePairsForGroup:group]];
     }
-    
+
     int numberOfResultsToShow = self.numberOfResultsToShow;
-    
+
     NSArray *sortedRootPairs = [[[rootPairs sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator] allObjects];
     sortedRootPairs = [sortedRootPairs subarrayWithRange:NSMakeRange(0, MIN(numberOfResultsToShow, sortedRootPairs.count))];
-    
+
     NSArray *sortedExamplePairs = [[[examplePairs sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator] allObjects];    
     sortedExamplePairs = [sortedExamplePairs subarrayWithRange:NSMakeRange(0, MIN(numberOfResultsToShow, sortedExamplePairs.count))];
-    
+
     printf("\n%d Slowest Tests\n\n", (int)sortedExamplePairs.count);
     for (RunTimeTitlePair *pair in sortedExamplePairs) {
         printf("%s\n\n", pair.formattedDescription.UTF8String);
     }
-    
+
     printf("\n%d Slowest Top-Level Groups\n\n", (int)sortedRootPairs.count);
     for (RunTimeTitlePair *pair in sortedRootPairs) {
         printf("%s\n\n", pair.formattedDescription.UTF8String);
@@ -111,20 +110,16 @@
 
 - (NSArray *)runTimeTitlePairsForGroup:(CDRExampleGroup *)group {
     NSMutableArray *pairs = [NSMutableArray array];
-    
+
     if (group.hasChildren) {
         for (CDRExampleBase *example in group.examples) {
             if (example.hasChildren) {
                 [pairs addObjectsFromArray:[self runTimeTitlePairsForGroup:(CDRExampleGroup *) example]];
             } else {
-                RunTimeTitlePair *pair = [RunTimeTitlePair pairWithRunTime:example.runTime
-                                                                     title:example.fullText];
-                [pairs addObject:pair];
+                [pairs addObject:[RunTimeTitlePair pairWithRunTime:example.runTime title:example.fullText]];
             }
         }
     }
-    
     return pairs;
 }
-
 @end
