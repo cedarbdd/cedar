@@ -160,17 +160,44 @@ NSArray *CDRRootGroupsFromSpecs(NSArray *specs) {
     return groups;
 }
 
+NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed) {
+    srand(seed);
+    NSArray *sortedSpecClasses = [unsortedSpecClasses sortedArrayWithOptions:0 usingComparator:^NSComparisonResult(Class class1, Class class2) {
+        return [NSStringFromClass(class1) compare:NSStringFromClass(class2)];
+    }];
+    NSMutableArray *permutedSpecClasses = [sortedSpecClasses mutableCopy];
+    for (int i = 0 ; i < sortedSpecClasses.count ; i++) {
+        [permutedSpecClasses exchangeObjectAtIndex:i
+                                 withObjectAtIndex:rand() % sortedSpecClasses.count];
+    }
+    return permutedSpecClasses;
+}
+
+unsigned int CDRGetRandomSeed() {
+    unsigned int seed = time(NULL) % 100000 + 2;
+    if (getenv("CEDAR_RANDOM_SEED")) {
+        seed = [[NSString stringWithUTF8String:getenv("CEDAR_RANDOM_SEED")] intValue];
+    }
+    return seed;
+}
+
 int runSpecsWithCustomExampleReporters(NSArray *reporters) {
     @autoreleasepool {
         CDRDefineSharedExampleGroups();
         CDRDefineGlobalBeforeAndAfterEachBlocks();
 
         NSArray *specClasses = CDRSpecClassesToRun();
-        NSArray *specs = CDRSpecsFromSpecClasses(specClasses);
+        unsigned int seed = CDRGetRandomSeed();
+        NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
+        NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
         CDRMarkFocusedExamplesInSpecs(specs);
 
         NSArray *groups = CDRRootGroupsFromSpecs(specs);
-        [reporters makeObjectsPerformSelector:@selector(runWillStartWithGroups:) withObject:groups];
+        
+        for (id<CDRExampleReporter> reporter in reporters) {
+            [reporter runWillStartWithGroups:groups andRandomSeed:seed];
+        }
+        
         [groups makeObjectsPerformSelector:@selector(run)];
 
         int result = 0;
