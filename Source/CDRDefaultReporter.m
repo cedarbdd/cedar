@@ -190,6 +190,12 @@
     } else {
         printf("%s", [stateToken cStringUsingEncoding:NSUTF8StringEncoding]);
     }
+
+    if (getenv("CEDAR_REPORT_FAILURES_IMMEDIATELY")) {
+        if (example.state == CDRExampleStateFailed || example.state == CDRExampleStateError) {
+            printf("\n%s", [[failureMessages_ lastObject] cStringUsingEncoding:NSUTF8StringEncoding]);
+        }
+    }
 }
 
 - (void)printStats {
