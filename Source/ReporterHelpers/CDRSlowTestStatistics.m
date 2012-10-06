@@ -1,4 +1,4 @@
-#import "CDRSlowTestReporter.h"
+#import "CDRSlowTestStatistics.h"
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
 
@@ -26,7 +26,7 @@
 - (NSString *)formattedDescription {
     NSString *timeString = [NSString stringWithFormat:@"%7.3fs | ", self.runTime];
     NSString *newLinePrefix = [NSString stringWithFormat:@"\n         | "];
-
+    
     NSArray *titleChunks = [self.title componentsSeparatedByString:@" "];
     NSMutableArray *lines = [NSMutableArray array];
     NSMutableArray *currentLine = [NSMutableArray array];
@@ -44,7 +44,7 @@
     }
     
     [lines addObject:[currentLine componentsJoinedByString:@" "]];
-
+    
     NSString *description = [timeString stringByAppendingString:[lines componentsJoinedByString:newLinePrefix]];
     
     return description;
@@ -62,14 +62,14 @@
 
 @end
 
-@interface CDRSlowTestReporter ()
+@interface CDRSlowTestStatistics ()
 
 - (int)numberOfResultsToShow;
 - (NSArray *)runTimeTitlePairsForGroup:(CDRExampleGroup *)group;
 
 @end
 
-@implementation CDRSlowTestReporter
+@implementation CDRSlowTestStatistics
 
 - (int)numberOfResultsToShow {
     int numberOfResultsToShow = 10;
@@ -79,13 +79,11 @@
     return numberOfResultsToShow;
 }
 
-- (void)printStats {
-    [super printStats];
-    
+- (void)printStatsForExampleGroups:(NSArray *)groups {
     NSMutableArray *rootPairs = [NSMutableArray array];
     NSMutableArray *examplePairs = [NSMutableArray array];
     
-    for (CDRExampleGroup *group in rootGroups_) {
+    for (CDRExampleGroup *group in groups) {
         RunTimeTitlePair *pair = [RunTimeTitlePair pairWithRunTime:group.runTime
                                                              title:group.text];
         [rootPairs addObject:pair];
@@ -113,7 +111,7 @@
 
 - (NSArray *)runTimeTitlePairsForGroup:(CDRExampleGroup *)group {
     NSMutableArray *pairs = [NSMutableArray array];
-
+    
     if (group.hasChildren) {
         for (CDRExampleBase *example in group.examples) {
             if (example.hasChildren) {
@@ -130,4 +128,3 @@
 }
 
 @end
-

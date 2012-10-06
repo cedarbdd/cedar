@@ -354,13 +354,7 @@ variable to your custom reporter class name.
 
 ### Finding Slow-Running Tests
 
-The `CDRSlowTestReporter` is a custom reporter that identifies and prints out
-the slowest `N` (10 by default) tests in your suite, and the slowest `N` top-level groups.
-These top-level groups typically have a one to one correspondence with your spec
-files allowing you to easily identify the slowest running files.
-
-Simply set the `CEDAR_REPORTER_CLASS` env variable to `CDRSlowTestReporter` to ferret out your slow
-test.  In addition, you can modify `N` by setting the `CEDAR_TOP_N_SLOW_TESTS` env variable to an integer.
+Set the `CEDAR_REPORT_SLOW_TESTS` environment vairables to have cedar identify and prints out the slowest `N` (10 by default) tests in your suite, and the slowest `N` top-level groups. These top-level groups typically have a one to one correspondence with your spec files allowing you to easily identify the slowest running slow files. You can change `N` by setting the `CEDAR_TOP_N_SLOW_TESTS` env variable.
 
 ### JUnit XML Reporting
 
