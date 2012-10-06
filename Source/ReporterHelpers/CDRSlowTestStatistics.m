@@ -2,22 +2,21 @@
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
 
-@interface RunTimeTitlePair : NSObject
+@interface CDRRunTimeTitlePair : NSObject
 
 @property (nonatomic, assign) NSTimeInterval runTime;
 @property (nonatomic, retain) NSString *title;
 
-+ (RunTimeTitlePair *)pairWithRunTime:(NSTimeInterval)runTime title:(NSString *)title;
++ (CDRRunTimeTitlePair *)pairWithRunTime:(NSTimeInterval)runTime title:(NSString *)title;
 - (NSString *)formattedDescription;
-
 @end
 
-@implementation RunTimeTitlePair
+@implementation CDRRunTimeTitlePair
 
 @synthesize runTime, title;
 
-+ (RunTimeTitlePair *)pairWithRunTime:(NSTimeInterval)runTime title:(NSString *)title {
-    RunTimeTitlePair *pair = [[[RunTimeTitlePair alloc] init] autorelease];
++ (CDRRunTimeTitlePair *)pairWithRunTime:(NSTimeInterval)runTime title:(NSString *)title {
+    CDRRunTimeTitlePair *pair = [[[CDRRunTimeTitlePair alloc] init] autorelease];
     pair.runTime = runTime;
     pair.title = title;
     return pair;
@@ -53,7 +52,7 @@
     return [timeString stringByAppendingString:[lines componentsJoinedByString:newLinePrefix]];
 }
 
-- (NSComparisonResult)compare:(RunTimeTitlePair *)otherPair {
+- (NSComparisonResult)compare:(CDRRunTimeTitlePair *)otherPair {
     if (self.runTime > otherPair.runTime) {
         return NSOrderedDescending;
     } else if (self.runTime < otherPair.runTime) {
@@ -85,7 +84,7 @@
     NSMutableArray *examplePairs = [NSMutableArray array];
 
     for (CDRExampleGroup *group in groups) {
-        [rootPairs addObject:[RunTimeTitlePair pairWithRunTime:group.runTime title:group.text]];
+        [rootPairs addObject:[CDRRunTimeTitlePair pairWithRunTime:group.runTime title:group.text]];
         [examplePairs addObjectsFromArray:[self runTimeTitlePairsForGroup:group]];
     }
 
@@ -98,12 +97,12 @@
     sortedExamplePairs = [sortedExamplePairs subarrayWithRange:NSMakeRange(0, MIN(numberOfResultsToShow, sortedExamplePairs.count))];
 
     printf("\n%d Slowest Tests\n\n", (int)sortedExamplePairs.count);
-    for (RunTimeTitlePair *pair in sortedExamplePairs) {
+    for (CDRRunTimeTitlePair *pair in sortedExamplePairs) {
         printf("%s\n\n", pair.formattedDescription.UTF8String);
     }
 
     printf("\n%d Slowest Top-Level Groups\n\n", (int)sortedRootPairs.count);
-    for (RunTimeTitlePair *pair in sortedRootPairs) {
+    for (CDRRunTimeTitlePair *pair in sortedRootPairs) {
         printf("%s\n\n", pair.formattedDescription.UTF8String);
     }
 }
@@ -116,7 +115,7 @@
             if (example.hasChildren) {
                 [pairs addObjectsFromArray:[self runTimeTitlePairsForGroup:(CDRExampleGroup *) example]];
             } else {
-                [pairs addObject:[RunTimeTitlePair pairWithRunTime:example.runTime title:example.fullText]];
+                [pairs addObject:[CDRRunTimeTitlePair pairWithRunTime:example.runTime title:example.fullText]];
             }
         }
     }
