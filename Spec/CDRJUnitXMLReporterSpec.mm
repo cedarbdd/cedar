@@ -35,6 +35,19 @@ using namespace Cedar::Matchers;
     self.xml = xmlString;
 }
 
+// Temporarily redirect stdout to avoid unnecessary output when running tests
+- (void)runDidComplete {
+    FILE *realStdout = stdout;
+    stdout = fopen("/dev/null", "w");
+
+    @try {
+        [super runDidComplete];
+    }
+    @finally {
+        fclose(stdout);
+        stdout = realStdout;
+    }
+}
 @end
 
 // Allow setting state for testing purposes
@@ -44,12 +57,11 @@ using namespace Cedar::Matchers;
     state_ = state;
 }
 
-+ (id) exampleWithText:(NSString *)text andState:(CDRExampleState)state {
++ (id)exampleWithText:(NSString *)text andState:(CDRExampleState)state {
     CDRExample *example = [CDRExample exampleWithText:text andBlock:^{}];
     [example setState:state];
     return example;
 }
-
 @end
 
 
@@ -59,91 +71,76 @@ describe(@"runDidComplete", ^{
     __block TestCDRJUnitXMLReporter *reporter;
 
     beforeEach(^{
-        reporter = [[TestCDRJUnitXMLReporter alloc] init];
+        reporter = [[[TestCDRJUnitXMLReporter alloc] init] autorelease];
     });
 
-    afterEach(^{
-        [reporter release];
-    });
-
-    context(@"When no specs are run", ^{
+    context(@"when no specs are run", ^{
         it(@"should output a blank test suite report", ^{
             [reporter runDidComplete];
-
             expect(reporter.xml).to(equal(@"<?xml version=\"1.0\"?>\n<testsuite>\n</testsuite>\n"));
         });
     });
 
-    describe(@"Each passing spec", ^{
+    describe(@"each passing spec", ^{
         it(@"should be written to the XML file", ^{
             CDRExample *example1 = [CDRExample exampleWithText:@"Passing spec 1" andState:CDRExampleStatePassed];
-            CDRExample *example2 = [CDRExample exampleWithText:@"Passing spec 2" andState:CDRExampleStatePassed];
-
             [reporter reportOnExample:example1];
+
+            CDRExample *example2 = [CDRExample exampleWithText:@"Passing spec 2" andState:CDRExampleStatePassed];
             [reporter reportOnExample:example2];
 
             [reporter runDidComplete];
-
             expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Passing spec 1\" />"].location).to_not(equal((NSUInteger)NSNotFound));
             expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Passing spec 2\" />"].location).to_not(equal((NSUInteger)NSNotFound));
         });
 
         it(@"should have its name escaped", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Special ' characters \" should < be & escaped > " andState:CDRExampleStatePassed];
-
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-
             expect([reporter.xml rangeOfString:@"name=\"Special &apos; characters &quot; should &lt; be &amp; escaped &gt; \""].location).to_not(equal((NSUInteger)NSNotFound));
         });
     });
 
-    describe(@"Each failing spec", ^{
+    describe(@"each failing spec", ^{
         it(@"should be written to the XML file", ^{
             CDRExample *example1 = [CDRExample exampleWithText:@"Failing spec 1" andState:CDRExampleStateFailed];
             example1.failure = [CDRSpecFailure specFailureWithReason:@"Failure reason 1"];
+            [reporter reportOnExample:example1];
+
             CDRExample *example2 = [CDRExample exampleWithText:@"Failing spec 2" andState:CDRExampleStateFailed];
             example2.failure = [CDRSpecFailure specFailureWithReason:@"Failure reason 2"];
-
-            [reporter reportOnExample:example1];
             [reporter reportOnExample:example2];
 
             [reporter runDidComplete];
-
             expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Failing spec 1\">\n\t\t<failure type=\"Failure\">Failure reason 1</failure>\n\t</testcase>"].location).to_not(equal((NSUInteger)NSNotFound));
             expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Failing spec 2\">\n\t\t<failure type=\"Failure\">Failure reason 2</failure>\n\t</testcase>"].location).to_not(equal((NSUInteger)NSNotFound));
         });
 
         it(@"should have its name escaped", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Special ' characters \" should < be & escaped > " andState:CDRExampleStateFailed];
-
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-
             expect([reporter.xml rangeOfString:@"name=\"Special &apos; characters &quot; should &lt; be &amp; escaped &gt; \""].location).to_not(equal((NSUInteger)NSNotFound));
         });
 
         it(@"should escape the failure reason", ^{
-            CDRExample *example1 = [CDRExample exampleWithText:@"Failing spec 1\n Special ' characters \" should < be & escaped > " andState:CDRExampleStateFailed];
-
-            [reporter reportOnExample:example1];
+            CDRExample *example = [CDRExample exampleWithText:@"Failing spec 1\n Special ' characters \" should < be & escaped > " andState:CDRExampleStateFailed];
+            [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-
             expect([reporter.xml rangeOfString:@"<failure type=\"Failure\"> Special &apos; characters &quot; should &lt; be &amp; escaped &gt; </failure>"].location).to_not(equal((NSUInteger)NSNotFound));
         });
     });
 
-    describe(@"Each spec that causes an error", ^{
+    describe(@"each spec that causes an error", ^{
         it(@"should be handled the same as a failing spec", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Failing spec\nFailure reason" andState:CDRExampleStateError];
-
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-
             expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Failing spec\">\n\t\t<failure type=\"Failure\">Failure reason</failure>\n\t</testcase>"].location).to_not(equal((NSUInteger)NSNotFound));
         });
     });
