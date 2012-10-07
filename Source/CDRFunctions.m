@@ -115,7 +115,9 @@ NSArray *CDRSpecClassesToRun() {
 
         for (NSString *className in specClassNames) {
             Class specClass = NSClassFromString(className);
-            if (specClass) [specClassesToRun addObject:specClass];
+            if (specClass) {
+                [specClassesToRun addObject:specClass];
+            }
         }
         return [[specClassesToRun copy] autorelease];
     }

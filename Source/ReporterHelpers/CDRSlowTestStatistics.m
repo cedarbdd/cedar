@@ -30,19 +30,19 @@
 - (NSString *)formattedDescription {
     NSString *timeString = [NSString stringWithFormat:@"%7.3fs | ", self.runTime];
     NSString *newLinePrefix = [NSString stringWithFormat:@"\n         | "];
-    
+
     NSArray *titleChunks = [self.title componentsSeparatedByString:@" "];
     NSMutableArray *lines = [NSMutableArray array];
     NSMutableArray *currentLine = [NSMutableArray array];
     int currentLineLength = 0;
-    
+
     for (NSString *titleChunk in titleChunks) {
         if (currentLineLength > 0 && (titleChunk.length + 1 + currentLineLength > 70)) {
             [lines addObject:[currentLine componentsJoinedByString:@" "]];
             currentLine = [NSMutableArray array];
             currentLineLength = 0;
         }
-        
+
         [currentLine addObject:titleChunk];
         currentLineLength += titleChunk.length + 1;
     }
@@ -60,6 +60,7 @@
     }
     return NSOrderedSame;
 }
+
 @end
 
 @interface CDRSlowTestStatistics ()
@@ -93,7 +94,7 @@
     NSArray *sortedRootPairs = [[[rootPairs sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator] allObjects];
     sortedRootPairs = [sortedRootPairs subarrayWithRange:NSMakeRange(0, MIN(numberOfResultsToShow, sortedRootPairs.count))];
 
-    NSArray *sortedExamplePairs = [[[examplePairs sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator] allObjects];    
+    NSArray *sortedExamplePairs = [[[examplePairs sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator] allObjects];
     sortedExamplePairs = [sortedExamplePairs subarrayWithRange:NSMakeRange(0, MIN(numberOfResultsToShow, sortedExamplePairs.count))];
 
     printf("\n%d Slowest Tests\n\n", (int)sortedExamplePairs.count);
@@ -121,4 +122,5 @@
     }
     return pairs;
 }
+
 @end
