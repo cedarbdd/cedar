@@ -96,7 +96,7 @@ describe(@"have_received matcher", ^{
             it(@"should raise an exception due to an invalid expectation", ^{
                 NSString *methodName = NSStringFromSelector(method);
                 NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: 2, actual: 1", methodName];
-                ^{ expect(incrementer).to(have_received(method).with(anything).and_with(anything)); } should raise_exception.with_reason(reason);
+                ^{ expect(incrementer).to(have_received(method).with(anything, anything)); } should raise_exception.with_reason(reason);
             });
         });
 
@@ -324,19 +324,19 @@ describe(@"have_received matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should pass", ^{
-                        expect(incrementer).to(have_received(method).with(expectedFirstParameter).and_with(expectedSecondParameter));
-                        expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).and_with(expectedSecondParameter));
+                        expect(incrementer).to(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
+                        expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                     });
                 });
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
                         expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
-                            expect(incrementer).to_not(have_received(method).with(expectedFirstParameter).and_with(expectedSecondParameter));
+                            expect(incrementer).to_not(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
                         });
 
                         expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
-                            expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).and_with(expectedSecondParameter));
+                            expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                         });
                     });
                 });
@@ -349,19 +349,19 @@ describe(@"have_received matcher", ^{
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
                         expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
-                            expect(incrementer).to(have_received(method).with(expectedFirstParameter).and_with(expectedSecondParameter));
+                            expect(incrementer).to(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
                         });
 
                         expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
-                            expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).and_with(expectedSecondParameter));
+                            expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                         });
                     });
                 });
 
                 describe(@"negative match", ^{
                     it(@"should pass", ^{
-                        expect(incrementer).to_not(have_received(method).with(expectedFirstParameter).and_with(expectedSecondParameter));
-                        expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter).and_with(expectedSecondParameter));
+                        expect(incrementer).to_not(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
+                        expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                     });
                 });
             });

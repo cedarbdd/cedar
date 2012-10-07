@@ -15,6 +15,8 @@ namespace Cedar { namespace Doubles {
 
         template<typename T>
         HaveReceived & with(const T &);
+        template<typename T, typename... ArgumentPack>
+        HaveReceived & with(const T &, ArgumentPack... pack);
         template<typename T>
         HaveReceived & and_with(const T & argument) { return with(argument); }
 
@@ -33,6 +35,13 @@ namespace Cedar { namespace Doubles {
     template<typename T>
     HaveReceived & HaveReceived::with(const T & value) {
         this->add_argument(value);
+        return *this;
+    }
+
+    template<typename T, typename... ArgumentPack>
+    HaveReceived & HaveReceived::with(const T & value, ArgumentPack... pack) {
+        this->with(value);
+        this->with(pack...);
         return *this;
     }
 
