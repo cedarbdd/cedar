@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <tr1/memory>
+#import <memory>
 #import <vector>
 #import "InvocationMatcher.h"
 #import "Argument.h"
@@ -42,7 +42,7 @@ namespace Cedar { namespace Doubles {
                 return strcmp(sel_getName(lhs), sel_getName(rhs)) < 0;
             }
         };
-        typedef std::tr1::shared_ptr<StubbedMethod> shared_ptr_t;
+        typedef std::shared_ptr<StubbedMethod> shared_ptr_t;
         typedef std::map<SEL, shared_ptr_t, SelCompare> selector_map_t;
 
         const SEL selector() const;
