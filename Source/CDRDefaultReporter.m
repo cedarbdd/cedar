@@ -35,10 +35,11 @@
 }
 
 #pragma mark Public interface
-- (void)runWillStartWithGroups:(NSArray *)groups {
+- (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed {
     rootGroups_ = [groups retain];
     [self startObservingExamples:rootGroups_];
     startTime_ = [[NSDate alloc] init];
+    printf("Running With Random Seed: %i\n\n", seed);
 }
 
 - (void)runDidComplete {

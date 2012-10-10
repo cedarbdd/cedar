@@ -37,7 +37,7 @@
 }
 
 #pragma mark CDRExampleReporter
-- (void)runWillStartWithGroups:(NSArray *)groups {
+- (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed {
     // The specs run on a background thread, so callbacks from the runner will
     // arrive on that thread.  We need to push the event to the main thread in
     // order to update the UI.
