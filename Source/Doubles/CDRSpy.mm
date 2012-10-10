@@ -12,25 +12,39 @@
     CedarDoubleImpl *cedar_double_impl = [[[CedarDoubleImpl alloc] initWithDouble:instance] autorelease];
     objc_setAssociatedObject(instance, @"cedar-double-implementation", cedar_double_impl, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
-    NSUInteger originalRetainCount = [instance retainCount];
     object_setClass(instance, self);
-    NSInteger shortfall = originalRetainCount - [instance retainCount];
-
-    while (shortfall-- > 0) {
-        [instance retain];
-    }
 }
 
-- (void)dealloc {
-    object_setClass(self, objc_getAssociatedObject(self, @"original-class"));
+- (id)retain {
+    __block id that = self;
+    [self as_original_class:^{
+        [that retain];
+    }];
+    return self;
+}
 
-    [self dealloc];
+- (oneway void)release {
+    __block id that = self;
+    [self as_original_class:^{
+        [that release];
+    }];
+}
 
-    // DO NOT call the destructor on super, since the superclass has already
-    // destroyed itself when the original class's destructor called [super dealloc].
-    // This (no-op) line must be here to prevent the compiler from helpfully
-    // generating an error that the method has no [super dealloc] call.
-    if(0) { [super dealloc]; }
+- (id)autorelease {
+    __block id that = self;
+    [self as_original_class:^{
+        [that autorelease];
+    }];
+    return self;
+}
+
+- (NSUInteger)retainCount {
+   __block id that = self;
+   __block NSUInteger count;
+   [self as_original_class:^{
+       count = [that retainCount];
+   }];
+   return count;
 }
 
 - (NSString *)description {
