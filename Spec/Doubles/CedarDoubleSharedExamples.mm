@@ -297,6 +297,19 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
             });
         });
+
+        describe(@"chaining calls", ^{
+            size_t value = 0, largeValue = 1;
+
+            it(@"should set up multiple stubs", ^{
+                myDouble
+                    stub_method("value").and_return(value)
+                    stub_method("aVeryLargeNumber").and_return(largeValue);
+
+                myDouble.value should equal(value);
+                myDouble.aVeryLargeNumber should equal(largeValue);
+            });
+        });
     });
 });
 

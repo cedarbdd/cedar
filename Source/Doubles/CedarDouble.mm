@@ -14,8 +14,9 @@ namespace Cedar { namespace Doubles {
         return instance;
     }
 
-    void operator,(id<CedarDouble> double_instance, const StubbedMethod & stubbed_method) {
-        return [double_instance add_stub:stubbed_method];
+    id<CedarDouble> operator,(id<CedarDouble> double_instance, const StubbedMethod & stubbed_method) {
+        [double_instance add_stub:stubbed_method];
+        return double_instance;
     }
 
 }}
