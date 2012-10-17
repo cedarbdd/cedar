@@ -18,8 +18,9 @@ namespace Cedar { namespace Matchers {
     }
 
     template<typename T, typename MatcherType>
-    void operator,(const ActualValueMatchProxy<T> & matchProxy, const MatcherType & matcher) {
+    const ActualValueMatchProxy<T> operator,(const ActualValueMatchProxy<T> & matchProxy, const MatcherType & matcher) {
         matchProxy(matcher);
+        return matchProxy;
     }
 
 }}
