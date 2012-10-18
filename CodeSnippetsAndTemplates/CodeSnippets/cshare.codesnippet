@@ -9,7 +9,7 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>sharedExamplesFor(@"&lt;#shared behavior description#&gt;", ^(NSDictionary *context) {
+	<string>sharedExamplesFor(@"&lt;#shared behavior description#&gt;", ^(NSDictionary *sharedContext) {
     &lt;#content#&gt;
 });</string>
 	<key>IDECodeSnippetIdentifier</key>
