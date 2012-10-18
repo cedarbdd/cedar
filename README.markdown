@@ -319,13 +319,20 @@ that provides keyboard shortcuts for focusing on specs under editor cursor.
 When running in headless mode by default Cedar uses `CDRDefaultReporter` to
 output test results.  Here is how it looks:
 
-    .P..P..
+    .P..P.F
 
     PENDING CDRExample hasChildren should return false by default
     PENDING CDRExample hasFocusedExamples should return false by default
 
+    FAILURE CDRExample hasChildren should return false
+    /Users/workspace/cedar/Spec/CDRExampleSpec.mm:149 Expected <NO> to evaluate to true
+
     Finished in 0.0166 seconds
-    7 examples, 0 failures, 2 pending
+    7 examples, 1 failures, 2 pending
+
+Note: For improved Xcode integration see
+[BetterConsole](https://github.com/cppforlife/BetterConsole), an Xcode plugin
+that makes file paths shown in the console clickable.
 
 Most of the time above output is exactly what you want to see; however, in some
 cases you might actually want to see full names of running examples.  You can get
