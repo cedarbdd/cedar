@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "CedarDouble.h"
 #import "CDRFake.h"
-#import "objc/runtime.h"
 
 #import <sstream>
 #import <string>

@@ -1,4 +1,5 @@
 #import <Cedar/SpecHelper.h>
+#import <objc/runtime.h>
 #import "SimpleIncrementer.h"
 
 using namespace Cedar::Matchers;
