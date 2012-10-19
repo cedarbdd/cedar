@@ -70,6 +70,8 @@
 		96A07F0B13F276B10021974D /* FocusedSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0A13F276B10021974D /* FocusedSpec.m */; };
 		96A07F0F13F27F2F0021974D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0E13F27F2F0021974D /* main.m */; };
 		96A07F1113F283E40021974D /* FocusedSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F1013F283E40021974D /* FocusedSpec2.m */; };
+		96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
+		96B591911630F5B10068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
 		96B5F9F9144A81A7000A6A5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9F8144A81A7000A6A5D /* UIKit.framework */; };
 		96B5F9FC144A81A7000A6A5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
 		96B5FA02144A81A8000A6A5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA00144A81A8000A6A5D /* InfoPlist.strings */; };
@@ -459,6 +461,7 @@
 		96A07F0A13F276B10021974D /* FocusedSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FocusedSpec.m; path = Focused/FocusedSpec.m; sourceTree = "<group>"; };
 		96A07F0E13F27F2F0021974D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Focused/main.m; sourceTree = "<group>"; };
 		96A07F1013F283E40021974D /* FocusedSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FocusedSpec2.m; path = Focused/FocusedSpec2.m; sourceTree = "<group>"; };
+		96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjCHeadersSpec.mm; sourceTree = "<group>"; };
 		96B5F9F6144A81A7000A6A5D /* OCUnitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCUnitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B5F9F8144A81A7000A6A5D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1034,6 +1037,7 @@
 				AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */,
 				492951E31482FF6200FA8916 /* CDRJUnitXMLReporterSpec.mm */,
 				AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */,
+				96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */,
 				96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */,
 				AEEE1FF111DC27B800029872 /* SpecSpec.mm */,
 				AEEE1FF211DC27B800029872 /* SpecSpec2.m */,
@@ -1632,6 +1636,7 @@
 				96C95B7E161339160018606B /* CDRSymbolicatorSpec.mm in Sources */,
 				9672F0A91615C3F40012ED58 /* CDRSpecSpec.mm in Sources */,
 				E32861321604F287001FA77E /* FibonacciCalculator.m in Sources */,
+				96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1712,6 +1717,7 @@
 				9672F0A71615C1C10012ED58 /* CDRSymbolicatorSpec.mm in Sources */,
 				9672F0AA1615C3F40012ED58 /* CDRSpecSpec.mm in Sources */,
 				E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */,
+				96B591911630F5B10068EA5E /* ObjCHeadersSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
