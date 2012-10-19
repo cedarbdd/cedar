@@ -20,8 +20,7 @@ namespace Cedar { namespace Doubles {
     };
 
     id<CedarDouble> operator,(id, const MethodStubbingMarker &);
-
-    void operator,(id<CedarDouble>, const StubbedMethod &);
+    id<CedarDouble> operator,(id<CedarDouble>, const StubbedMethod &);
 }}
 
 #ifndef CEDAR_MATCHERS_DISALLOW_STUB_METHOD
