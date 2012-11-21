@@ -445,4 +445,4 @@ Welcomed!  Feel free to join and contribute to the public Tracker project [here]
 The [public Google group](http://groups.google.com/group/cedar-discuss) for Cedar is cedar-discuss@googlegroups.com.
 Or, you can follow the growth of Cedar on Twitter: [@cedarbdd](http://twitter.com/cedarbdd).
 
-Copyright (c) 2011 Pivotal Labs. This software is licensed under the MIT License.
+Copyright (c) 2012 Pivotal Labs. This software is licensed under the MIT License.
