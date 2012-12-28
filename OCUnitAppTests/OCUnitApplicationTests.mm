@@ -5,7 +5,7 @@ using namespace Cedar::Matchers;
 
 SPEC_BEGIN(OCUnitApplicationTests)
 
-describe(@"A spec file testing UI", ^ {
+describe(@"A spec file testing UI", ^{
     it(@"should run", ^{
         UILabel *label = [[[UILabel alloc] init] autorelease];
         expect([label class]).to(equal([UILabel class]));

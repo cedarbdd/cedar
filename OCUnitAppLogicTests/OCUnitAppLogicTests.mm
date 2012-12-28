@@ -5,7 +5,7 @@ using namespace Cedar::Matchers;
 
 SPEC_BEGIN(OCUnitAppLogicTests)
 
-describe(@"A spec file testing domain classes", ^ {
+describe(@"A spec file testing domain classes", ^{
     it(@"should run", ^{
         expect([DummyModel class]).to(equal([DummyModel class]));
     });

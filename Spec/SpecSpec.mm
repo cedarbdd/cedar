@@ -26,7 +26,7 @@ static NSString *globalValue__;
 
 SPEC_BEGIN(SpecSpec)
 
-describe(@"Spec", ^ {
+describe(@"Spec", ^{
     beforeEach(^{
         //    NSLog(@"=====================> I should run before all specs.");
     });
@@ -35,43 +35,43 @@ describe(@"Spec", ^ {
         //    NSLog(@"=====================> I should run after all specs.");
     });
 
-    describe(@"a nested spec", ^ {
+    describe(@"a nested spec", ^{
         beforeEach(^{
             //      NSLog(@"=====================> I should run only before the nested specs.");
         });
 
-        afterEach(^ {
+        afterEach(^{
             //      NSLog(@"=====================> I should run only after the nested specs.");
         });
 
-        it(@"should also run", ^ {
+        it(@"should also run", ^{
             //      NSLog(@"=====================> Nested spec");
         });
 
-        it(@"should also also run", ^ {
+        it(@"should also also run", ^{
             //      NSLog(@"=====================> Another nested spec");
         });
     });
 
-    context(@"a nested spec (context)", ^ {
+    context(@"a nested spec (context)", ^{
         beforeEach(^{
           //      NSLog(@"=====================> I should run only before the nested specs.");
         });
 
-        afterEach(^ {
+        afterEach(^{
           //      NSLog(@"=====================> I should run only after the nested specs.");
         });
 
-        it(@"should also run", ^ {
+        it(@"should also run", ^{
           //      NSLog(@"=====================> Nested spec");
         });
 
-        it(@"should also also run", ^ {
+        it(@"should also also run", ^{
           //      NSLog(@"=====================> Another nested spec");
         });
     });
 
-    it(@"should run", ^ {
+    it(@"should run", ^{
         //    NSLog(@"=====================> Spec");
     });
 
@@ -89,7 +89,7 @@ describe(@"Spec", ^ {
 });
 
 describe(@"The spec failure exception", ^{
-//    it(@"should generate a spec failure", ^ {
+//    it(@"should generate a spec failure", ^{
 //        [[CDRSpecFailure specFailureWithReason:@"'cuz"] raise];
 //    });
 //
