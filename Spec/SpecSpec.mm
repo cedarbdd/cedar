@@ -98,6 +98,30 @@ describe(@"The spec failure exception", ^{
 //    });
 });
 
+describe(@"subject", ^{
+    __block int value;
+
+    subject(^{ value = 5; });
+
+    beforeEach(^{
+        value = 100;
+    });
+
+    it(@"should run after the beforeEach", ^{
+        value should equal(5);
+    });
+
+    describe(@"in a nested describe block", ^{
+        beforeEach(^{
+            value = 200;
+        });
+
+        it(@"should run after all the beforeEach blocks", ^{
+            value should equal(5);
+        });
+    });
+});
+
 describe(@"Matchers", ^{
     describe(@"equality", ^{
         describe(@"with Objective-C types", ^{

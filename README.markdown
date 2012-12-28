@@ -314,6 +314,35 @@ Note: For improved Xcode integration see
 that provides keyboard shortcuts for focusing on specs under editor cursor.
 
 
+## Subject blocks
+
+Generally you want each top-level describe block to describe a single method or
+action.  Often you end up calling this action in multiple places at multiple 
+levels of nesting after various amounts of setup.  In this case you can use a
+subject block to simply your specs.  A subject block differs from a before each
+block because you may have only one for any given example (if multiple levels 
+define a subject block Cedar will throw an exception), and it will run after
+all before each blocks for a given example.  For example:
+
+describe(@"thing", ^{
+    __block BOOL parameter;
+
+    subject(^{ [object doThingWithParameter:parameter]; });
+
+    describe(@"when something is true", ^{
+        beforeEach(^{
+            parameter = YES;
+        });
+
+        it(@"should ...", ^{
+            // ...
+        });
+    });
+});
+
+In this case the parameter will be set to YES *before* the subject action runs.
+
+
 ## Reporters
 
 When running in headless mode by default Cedar uses `CDRDefaultReporter` to

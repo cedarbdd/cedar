@@ -31,6 +31,7 @@
     [afterBlocks_ release];
     [examples_ release];
     [beforeBlocks_ release];
+    self.subjectBlock = nil;
     [super dealloc];
 }
 
