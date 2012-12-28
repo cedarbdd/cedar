@@ -16,7 +16,7 @@ void afterEach(CDRSpecBlock block) {
 }
 
 #define with_stack_address(b) \
-    (b.stackAddress = CDRCallerStackAddress()) ? b : b
+    ((b.stackAddress = CDRCallerStackAddress()), b)
 
 CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
     CDRExampleGroup *parentGroup = currentSpec.currentGroup;
