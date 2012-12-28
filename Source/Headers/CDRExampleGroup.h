@@ -6,6 +6,7 @@
     BOOL isRoot_;
 }
 
+@property (nonatomic, copy) CDRSpecBlock subjectBlock;
 @property (nonatomic, readonly) NSArray *examples;
 
 + (id)groupWithText:(NSString *)text;

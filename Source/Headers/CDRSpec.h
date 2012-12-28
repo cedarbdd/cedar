@@ -17,10 +17,12 @@ void afterEach(CDRSpecBlock);
 
 CDRExampleGroup * describe(NSString *, CDRSpecBlock);
 extern CDRExampleGroup* (*context)(NSString *, CDRSpecBlock);
+
 CDRExample * it(NSString *, CDRSpecBlock);
 
 CDRExampleGroup * xdescribe(NSString *, CDRSpecBlock);
 extern CDRExampleGroup* (*xcontext)(NSString *, CDRSpecBlock);
+void subject(CDRSpecBlock);
 CDRExample * xit(NSString *, CDRSpecBlock);
 
 CDRExampleGroup * fdescribe(NSString *, CDRSpecBlock);

@@ -7,7 +7,7 @@
 
 @implementation CDRExampleGroup
 
-@synthesize examples = examples_;
+@synthesize examples = examples_, subjectBlock = subjectBlock_;
 
 + (id)groupWithText:(NSString *)text {
     return [[[[self class] alloc] initWithText: text] autorelease];
@@ -36,7 +36,23 @@
 
 #pragma mark Public interface
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Example Group: %@", self.text];
+    return [NSString stringWithFormat:@"Example Group: \"%@\"", self.fullText];
+}
+
+- (CDRSpecBlock)subjectBlock {
+    CDRSpecBlock parentSubjectBlock = self.parent.subjectBlock;
+    if (subjectBlock_) {
+        if (parentSubjectBlock) {
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                     reason:[NSString stringWithFormat:@"%@ has more than one subject block", self]
+                                   userInfo:nil]
+             raise];
+        } else {
+            return subjectBlock_;
+        }
+    } else {
+        return parentSubjectBlock;
+    }
 }
 
 - (void)add:(CDRExampleBase *)example {

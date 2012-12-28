@@ -3,8 +3,6 @@
 
 @protocol CDRExampleReporter;
 
-typedef void (^CDRSpecBlock)(void);
-
 enum CDRExampleState {
     CDRExampleStateIncomplete = 0x00,
     CDRExampleStateSkipped = 0x01,
