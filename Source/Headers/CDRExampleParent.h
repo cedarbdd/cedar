@@ -7,7 +7,7 @@ typedef void (^CDRSpecBlock)(void);
 - (BOOL)shouldRun;
 
 - (void)setUp;
-- (CDRSpecBlock)subjectBlock;
+- (CDRSpecBlock)subjectActionBlock;
 - (void)tearDown;
 
 @optional

@@ -22,7 +22,7 @@ CDRExample * it(NSString *, CDRSpecBlock);
 
 CDRExampleGroup * xdescribe(NSString *, CDRSpecBlock);
 extern CDRExampleGroup* (*xcontext)(NSString *, CDRSpecBlock);
-void subject(CDRSpecBlock);
+void subjectAction(CDRSpecBlock);
 CDRExample * xit(NSString *, CDRSpecBlock);
 
 CDRExampleGroup * fdescribe(NSString *, CDRSpecBlock);

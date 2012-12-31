@@ -98,10 +98,10 @@ describe(@"The spec failure exception", ^{
 //    });
 });
 
-describe(@"subject", ^{
+describe(@"subjectAction", ^{
     __block int value;
 
-    subject(^{ value = 5; });
+    subjectAction(^{ value = 5; });
 
     beforeEach(^{
         value = 100;

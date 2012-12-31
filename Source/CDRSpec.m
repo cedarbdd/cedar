@@ -34,8 +34,8 @@ CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
 
 CDRExampleGroup* (*context)(NSString *, CDRSpecBlock) = &describe;
 
-void subject(CDRSpecBlock block) {
-    currentSpec.currentGroup.subjectBlock = block;
+void subjectAction(CDRSpecBlock block) {
+    currentSpec.currentGroup.subjectActionBlock = block;
 }
 
 CDRExample * it(NSString *text, CDRSpecBlock block) {

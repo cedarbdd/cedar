@@ -58,7 +58,7 @@ static SpecHelper *specHelper__;
     [self.globalBeforeEachClasses makeObjectsPerformSelector:@selector(beforeEach)];
 }
 
-- (CDRSpecBlock)subjectBlock {
+- (CDRSpecBlock)subjectActionBlock {
     return nil;
 }
 

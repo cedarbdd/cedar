@@ -624,12 +624,12 @@ describe(@"CDRExampleGroup", ^{
         });
     });
 
-    describe(@"subjectBlock", ^{
-        context(@"with a subject block set", ^{
-            CDRSpecBlock subjectBlock = ^{};
+    describe(@"subjectActionBlock", ^{
+        context(@"with a subject action block set", ^{
+            CDRSpecBlock subjectActionBlock = ^{};
 
             beforeEach(^{
-                group.subjectBlock = subjectBlock;
+                group.subjectActionBlock = subjectActionBlock;
             });
 
             context(@"and with a parent", ^{
@@ -640,26 +640,26 @@ describe(@"CDRExampleGroup", ^{
                     group.parent = parent;
                 });
 
-                context(@"which has a subject block", ^{
-                    CDRSpecBlock parentSubjectBlock = ^{};
+                context(@"which has a subject action block", ^{
+                    CDRSpecBlock parentsubjectActionBlock = ^{};
 
                     beforeEach(^{
-                        parent.subjectBlock = parentSubjectBlock;
+                        parent.subjectActionBlock = parentsubjectActionBlock;
                     });
 
-                    it(@"should raise a duplicate subject block exception", ^{
+                    it(@"should raise a duplicate subject action block exception", ^{
                         __block id dummy;
-                        ^{ dummy = group.subjectBlock; } should raise_exception;
+                        ^{ dummy = group.subjectActionBlock; } should raise_exception;
                     });
                 });
 
-                context(@"which does not have a subject block", ^{
+                context(@"which does not have a subject action block", ^{
                     beforeEach(^{
-                        parent.subjectBlock should_not be_truthy;
+                        parent.subjectActionBlock should_not be_truthy;
                     });
 
-                    it(@"should return its subject block", ^{
-                        group.subjectBlock should equal(subjectBlock);
+                    it(@"should return its subject action block", ^{
+                        group.subjectActionBlock should equal(subjectActionBlock);
                     });
                 });
             });
@@ -669,13 +669,13 @@ describe(@"CDRExampleGroup", ^{
                     group.parent should be_nil;
                 });
 
-                it(@"should return its subject block", ^{
-                    group.subjectBlock should equal(subjectBlock);
+                it(@"should return its subject action block", ^{
+                    group.subjectActionBlock should equal(subjectActionBlock);
                 });
             });
         });
 
-        context(@"with no subject block set", ^{
+        context(@"with no subject action block set", ^{
             context(@"and with a parent", ^{
                 __block CDRExampleGroup *parent;
 
@@ -684,25 +684,25 @@ describe(@"CDRExampleGroup", ^{
                     group.parent = parent;
                 });
 
-                context(@"which has a subject block", ^{
-                    CDRSpecBlock parentSubjectBlock = ^{};
+                context(@"which has a subject action block", ^{
+                    CDRSpecBlock parentsubjectActionBlock = ^{};
 
                     beforeEach(^{
-                        parent.subjectBlock = parentSubjectBlock;
+                        parent.subjectActionBlock = parentsubjectActionBlock;
                     });
 
-                    it(@"should return its parent's subject block", ^{
-                        group.subjectBlock should equal(parentSubjectBlock);
+                    it(@"should return its parent's subject action block", ^{
+                        group.subjectActionBlock should equal(parentsubjectActionBlock);
                     });
                 });
 
-                context(@"which does not have a subject block", ^{
+                context(@"which does not have a subject action block", ^{
                     beforeEach(^{
-                        parent.subjectBlock should_not be_truthy;
+                        parent.subjectActionBlock should_not be_truthy;
                     });
 
                     it(@"should return nil", ^{
-                        group.subjectBlock should_not be_truthy;
+                        group.subjectActionBlock should_not be_truthy;
                     });
                 });
             });
@@ -713,7 +713,7 @@ describe(@"CDRExampleGroup", ^{
                 });
 
                 it(@"should return nil", ^{
-                    group.subjectBlock should_not be_truthy;
+                    group.subjectActionBlock should_not be_truthy;
                 });
             });
         });
