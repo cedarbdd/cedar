@@ -72,7 +72,6 @@
 
     Cedar::Doubles::StubbedMethod::shared_ptr_t stubbed_method_ptr = it->second;
     if (stubbed_method_ptr->matches(invocation)) {
-        [self record_method_invocation:invocation];
         stubbed_method_ptr->invoke(invocation);
         return true;
     } else {

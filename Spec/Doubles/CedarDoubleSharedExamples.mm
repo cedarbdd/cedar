@@ -15,6 +15,17 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         myDouble = [sharedContext objectForKey:@"double"];
     });
 
+    describe(@"sent_messages", ^{
+        beforeEach(^{
+            myDouble stub_method("value");
+            [myDouble value];
+        });
+
+        it(@"should have one recording per message sent", ^{
+            [[myDouble sent_messages] count] should equal(1);
+        });
+    });
+
     describe(@"reset_sent_messages", ^{
         beforeEach(^{
             myDouble stub_method("value");
