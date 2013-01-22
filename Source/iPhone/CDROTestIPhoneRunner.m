@@ -2,6 +2,7 @@
 #import "CDROTestIPhoneRunner.h"
 #import "CDROTestHelper.h"
 #import "CedarApplicationDelegate.h"
+#import "HeadlessSimulatorWorkaround.h"
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
 
@@ -16,6 +17,7 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 }
 
 + (void)load {
+    setUpFakeWorkspaceIfRequired();
     if (!objc_getClass("SenTestProbe"))
         return;
 

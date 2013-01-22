@@ -15,7 +15,7 @@ SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 
-SDK_VERSION = "5.1"
+SDK_VERSION = "6.0"
 PROJECT_ROOT = File.dirname(__FILE__)
 BUILD_DIR = File.join(PROJECT_ROOT, "build")
 TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")

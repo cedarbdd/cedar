@@ -1,5 +1,6 @@
 #import "CedarApplicationDelegate.h"
 #import "CDRExampleReporterViewController.h"
+#import "HeadlessSimulatorWorkaround.h"
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
 
@@ -42,6 +43,13 @@ void exitWithStatusFromUIApplication(int status) {
 @end
 
 @implementation CedarApplicationDelegate
+
+- (id)init {
+    if (self = [super init]) {
+        setUpFakeWorkspaceIfRequired();
+    }
+    return self;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
