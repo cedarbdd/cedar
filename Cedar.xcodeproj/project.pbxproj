@@ -181,7 +181,6 @@
 		AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
 		AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
 		AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
-		AEB1A74415F304A9002E4167 /* StubbedMethod.mm in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
 		AEB45A911496C8D800845D09 /* RaiseException.h in Headers */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; };
 		AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
@@ -415,7 +414,6 @@
 				AECF136515D14274003AAB9C /* ValueArgument.h in Copy headers to framework */,
 				AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */,
 				AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */,
-				AEB1A74415F304A9002E4167 /* StubbedMethod.mm in Copy headers to framework */,
 				AE94D04015F341B200A0C2B7 /* AnyInstanceArgument.h in Copy headers to framework */,
 				E31179D4161FD937007D3CDE /* CDRSlowTestStatistics.h in Copy headers to framework */,
 			);
