@@ -99,7 +99,7 @@
 }
 
 - (void)reset_sent_messages {
-    return self.cedar_double_impl.reset_sent_messages;
+    [self.cedar_double_impl reset_sent_messages];
 }
 
 #pragma mark - Private interface

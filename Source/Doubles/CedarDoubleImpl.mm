@@ -16,6 +16,7 @@
 
 - (id)init {
     [super doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 - (id)initWithDouble:(NSObject<CedarDouble> *)parent_double {
