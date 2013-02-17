@@ -101,8 +101,16 @@
 }
 
 - (NSString *)errorMessageForExample:(CDRExample *)example {
+    NSString *callStackSymbols = nil;
+
+    // Currently to symbolicate an exception
+    // we shell out to atos; thus this opt-out setting.
+    if (!getenv("CEDAR_SKIP_EXCEPTION_SYMBOLICATION")) {
+        callStackSymbols = example.failure.callStackSymbolicatedSymbols;
+    }
+
     return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n%@",
-            example.fullText, example.failure, example.failure.callStackSymbolicatedSymbols];
+            example.fullText, example.failure, callStackSymbols];
 }
 
 #pragma mark Private interface
