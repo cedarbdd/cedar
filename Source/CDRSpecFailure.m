@@ -41,7 +41,7 @@
     NSString *reason = nil;
     [[self class] extractReason:&reason fileName:&fileName lineNumber:&lineNumber fromObject:object];
 
-    if ((self = [super initWithName:@"Spec Failure" reason:[reason retain] userInfo:nil])) {
+    if ((self = [super initWithName:@"Spec Failure" reason:reason userInfo:nil])) {
         fileName_ = [fileName retain];
         lineNumber_ = lineNumber;
     }
