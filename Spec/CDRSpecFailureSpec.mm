@@ -145,6 +145,61 @@ describe(@"CDRSpecFailure", ^{
             });
         });
     });
+
+    describe(@"-callStackSymbolicatedSymbols", ^{
+        __block NSString *symbols;
+        __block id raisedObject;
+
+        subjectAction(^{
+            CDRSpecFailure *failure =
+                [CDRSpecFailure specFailureWithRaisedObject:raisedObject];
+            symbols = failure.callStackSymbolicatedSymbols;
+        });
+
+        context(@"when raised object provides call stack return addresses", ^{
+            void (^objectRaiser)(void) = ^{ [[NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil] raise]; };
+
+            beforeEach(^{
+                // Raise and then catch actual exception
+                // to populate its callStackReturnAddresses.
+                @try {
+                    objectRaiser();
+                } @catch (NSException *e) {
+                    raisedObject = e;
+                }
+            });
+
+            it(@"returns string with symbolicated call stack "
+                "showing originating error location closest to the top", ^{
+                 symbols should contain(
+                    @"  *CDRSpecFailureSpec.mm:160\n"
+                     "  *CDRSpecFailureSpec.mm:166\n"
+                );
+            });
+
+            it(@"indicates unsymbolicated portions of call stack with '...'", ^{
+                 symbols should contain(
+                    @"Call stack:\n"
+                     "  ...\n"                   // <-+ objc_exception_throw,
+                     "  *CDRSpecFailureSpec.mm"  //   | [NSException raise:...], etc.
+                );
+            });
+
+            it(@"includes asterisk before every path "
+                "because paths are not absolute and "
+                "Xcode plugins need to be able to recognize them", ^{
+                symbols should contain(@"*CDRSpecFailureSpec.mm");
+            });
+        });
+
+        context(@"when raised object does not provide call stack return addresses", ^{
+            beforeEach(^{ raisedObject = @"failure"; });
+
+            it(@"returns nil", ^{
+                symbols should be_nil;
+            });
+        });
+    });
 });
 
 SPEC_END

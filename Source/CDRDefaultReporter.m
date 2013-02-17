@@ -92,7 +92,8 @@
 }
 
 - (NSString *)failureMessageForExample:(CDRExample *)example {
-    return [NSString stringWithFormat:@"FAILURE %@\n%@\n",[example fullText], example.failure];
+    return [NSString stringWithFormat:@"FAILURE %@\n%@\n",
+            example.fullText, example.failure];
 }
 
 - (NSString *)errorToken {
@@ -100,10 +101,12 @@
 }
 
 - (NSString *)errorMessageForExample:(CDRExample *)example {
-    return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n", [example fullText], example.failure];
+    return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n%@",
+            example.fullText, example.failure, example.failure.callStackSymbolicatedSymbols];
 }
 
 #pragma mark Private interface
+
 - (void)printMessages:(NSArray *)messages {
     printf("\n");
 
