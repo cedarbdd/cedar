@@ -69,16 +69,24 @@ NSUInteger CDRCallerStackAddress() {
     atosTask.addresses = validAddresses;
     [atosTask launch];
 
+    BOOL atLeastOneSuccessfulSymbolication = NO;
+
     for (int i=0; i<validAddresses.count; i++) {
         NSString *fileName = nil;
         NSNumber *lineNumber = [NSNumber numberWithInt:0];
         [atosTask valuesOnLineNumber:i fileName:&fileName lineNumber:&lineNumber];
 
         if (fileName) {
+            atLeastOneSuccessfulSymbolication = YES;
             [self.addresses addObject:[validAddresses objectAtIndex:i]];
             [self.fileNames addObject:fileName];
             [self.lineNumbers addObject:lineNumber];
         }
+    }
+
+    if (!atLeastOneSuccessfulSymbolication) {
+        printf("atos was not able to symbolicate.\n");
+        printf("Try setting compiler Optimization Level to None (-O0).\n");
     }
 }
 
@@ -176,9 +184,6 @@ NSUInteger CDRCallerStackAddress() {
             encoding:NSUTF8StringEncoding] autorelease];
 
         *lineNumber = [NSNumber numberWithInteger:lineNumberStr.integerValue];
-    } else {
-        printf("atos was not able to symbolicate '%s'.\n", buf);
-        printf("Try setting compiler Optimization Level to None (-O0).\n");
     }
     free(matches);
 }
@@ -192,9 +197,10 @@ NSUInteger CDRCallerStackAddress() {
     NSPipe *pipe = [NSPipe pipe];
     [task setStandardOutput:pipe];
     [task launch];
-    [task waitUntilExit];
 
     NSData *data = [[pipe fileHandleForReading] readDataToEndOfFile];
+    [task waitUntilExit];
+
     NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     [task release];
 
