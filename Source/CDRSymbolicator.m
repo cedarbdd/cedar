@@ -194,11 +194,21 @@ NSUInteger CDRCallerStackAddress() {
     [task setLaunchPath:command];
     [task setArguments:arguments];
 
-    NSPipe *pipe = [NSPipe pipe];
-    [task setStandardOutput:pipe];
-    [task launch];
+    NSPipe *standardOutput = [NSPipe pipe];
+    if (standardOutput) {
+        [task setStandardOutput:standardOutput];
+    } else return nil;
 
-    NSData *data = [[pipe fileHandleForReading] readDataToEndOfFile];
+    @try {
+        [task launch];
+    } @catch (NSException *exception) {
+        // e.g. NSInvalidArgumentException reason: 'launch path is invalid'
+        if (exception.name == NSInvalidArgumentException) {
+            return nil;
+        } else @throw;
+    }
+
+    NSData *data = [[standardOutput fileHandleForReading] readDataToEndOfFile];
     [task waitUntilExit];
 
     NSString *string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
