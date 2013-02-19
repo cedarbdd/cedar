@@ -41,7 +41,6 @@ BDD-style testing using Objective-C
   * Spec suite: Select your spec suite target and Run/Debug.
 
 
-
 ### iOS testing
 
 * Select your project in Xcode to bring up the project editor.
@@ -63,6 +62,7 @@ BDD-style testing using Objective-C
   * Spec bundle: Choose Test (Cmd-U) for the target you want to run tests for.
   * Spec suite: Select your spec suite target and Run/Debug.
 
+
 #### Running iOS tests suites in headless mode
 
 * By default, when you run an iOS test suite target, the results are displayed in a UITableView
@@ -76,8 +76,8 @@ BDD-style testing using Objective-C
 
 ## Matchers
 
-Cedar has a new set of matchers that use C++ templates to circumvent type issues that plague other
-matcher libraries.  For example, rather than this (OCHamcrest):
+Cedar has a new set of matchers that use C++ templates to circumvent type issues
+that plague other matcher libraries.  For example, rather than this (OCHamcrest):
 
     assertThat(aString, equalTo(@"something"));
     assertThatInt(anInteger, equalToInt(7));
@@ -160,8 +160,9 @@ library's expect function.
 
 Note: If you prefer RSpec's `should` syntax you can write your expectations as follows:
 
-        1 + 2 should equal(3);
-        glass should_not be_empty();
+    1 + 2 should equal(3);
+    glass should_not be_empty();
+
 
 ### Matchers and ARC
 
@@ -175,8 +176,28 @@ A bug in the current Xcode compiler currently prevents the type C++ deduction fr
 
 2. Use another matcher library like [Expecta](http://github.com/petejkim/expecta).  Just remove the following line from your spec files:
 
-
         using namespace Cedar::Matchers;
+
+
+## Mocks and stubs
+
+Doubles.  Got 'em.
+
+    spy_on(someInstance);
+    id<CedarDouble> fake = fake_for(someClass);
+    id<CedarDouble> anotherFake = fake_for(someProtocol);
+    id<CedarDouble> niceFake = nice_fake_for(someClass);
+    id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
+
+Method stubbing:
+
+    fake stub_method("selector").with(x);
+    fake stub_method("selector").with(x).and_with(y);
+    fake stub_method("selector").and_return(z);
+    fake stub_method("selector").with(x).and_return(z);
+    fake stub_method("selector").and_raise_exception();
+    fake stub_method("selector").and_raise_exception([NSException]);
+    fake stub_method("selector").with(anything);
 
 
 ## Shared example groups
@@ -257,26 +278,6 @@ If you want to run your own code before or after every spec, simply declare a cl
 the +beforeEach and/or +afterEach methods.
 
 
-## Mocks and stubs
-
-Doubles.  Got 'em.
-
-    spy_on(someInstance);
-    id<CedarDouble> fake = fake_for(someClass);
-    id<CedarDouble> anotherFake = fake_for(someProtocol);
-    id<CedarDouble> niceFake = nice_fake_for(someClass);
-    id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
-
-Method stubbing:
-
-    fake stub_method("selector").with(x);
-    fake stub_method("selector").with(x).and_with(y);
-    fake stub_method("selector").and_return(z);
-    fake stub_method("selector").with(x).and_return(z);
-    fake stub_method("selector").and_raise_exception();
-    fake stub_method("selector").and_raise_exception([NSException]);
-    fake stub_method("selector").with(anything);
-
 ## Pending specs
 
 If you'd like to specify but not implement an example you can do so like this:
@@ -317,28 +318,28 @@ that provides keyboard shortcuts for focusing on specs under editor cursor.
 ## Subject action blocks
 
 Generally you want each top-level describe block to describe a single method or
-action.  Often you end up calling this action in multiple places at multiple 
+action.  Often you end up calling this action in multiple places at multiple
 levels of nesting after various amounts of setup.  In this case you can use a
 subject action block to simply your specs.  A subject action block differs from
-a before each block because you may have only one for any given example group 
+a before each block because you may have only one for any given example group
 (if multiple levels define a subject action block Cedar will throw an exception),
 and it will run after all before each blocks for a given example.  For example:
 
-describe(@"thing", ^{
-    __block BOOL parameter;
+    describe(@"thing", ^{
+        __block BOOL parameter;
 
-    subjectAction(^{ [object doThingWithParameter:parameter]; });
+        subjectAction(^{ [object doThingWithParameter:parameter]; });
 
-    describe(@"when something is true", ^{
-        beforeEach(^{
-            parameter = YES;
-        });
+        describe(@"when something is true", ^{
+            beforeEach(^{
+                parameter = YES;
+            });
 
-        it(@"should ...", ^{
-            // ...
+            it(@"should ...", ^{
+                // ...
+            });
         });
     });
-});
 
 In this case the parameter will be set to YES *before* the subject action runs.
 
@@ -392,6 +393,7 @@ written to output test results in a way that TeamCity CI server can understand.
 You can tell Cedar which reporter to use by setting `CEDAR_REPORTER_CLASS` env
 variable to your custom reporter class name.
 
+
 ### Finding Slow-Running Tests
 
 Set the `CEDAR_REPORT_SLOW_TESTS` environment vairables to have Cedar identify
@@ -401,10 +403,12 @@ correspondence with your spec files allowing you to easily identify the slowest
 running slow files. You can change `N` by setting the `CEDAR_TOP_N_SLOW_TESTS`
 env variable.
 
+
 ### Faster Failure Reporting
 
 Set the `CEDAR_REPORT_FAILURES_IMMEDIATELY` environment variable to have Cedar
 print failure details before finishing running all tests.
+
 
 ### JUnit XML Reporting
 
@@ -434,7 +438,9 @@ you can run cedar test suites.
 
 ## Troubleshooting
 
+
 ### Linker problem ld: file not found
+
 Example failure:
 
     ld: file not found: <path to build dir>/Products/<Configuration>-<device>/<target name>.app/<target name>
@@ -445,7 +451,9 @@ Example failure:
   `$(BUILT_PRODUCTS_DIR)/<target name>.app/<target name>`
   Ensuring that your new target name is the correct.
 
+
 ### Linker problem ld: symbol(s) not found
+
 Example failure:
 
     Undefined symbols for architecture i386:
@@ -454,24 +462,33 @@ Example failure:
         (maybe you meant: _OBJC_CLASS_$__OBJC_CLASS_$_SomeClassFromYourApp)
     ld: symbol(s) not found for architecture i386
 
-This error can happen when you have a spec bundle which is run against code built with "Strip Debug Symbols During Copy" set to Yes.
+This error can happen when you have a spec bundle which is run against code
+built with "Strip Debug Symbols During Copy" set to Yes.
 
-You should ensure that you're running your tests against code built with this configuration setting set to No.  This should be the default if you're building with the Debug configuration.
+You should ensure that you're running your tests against code built with this
+configuration setting set to No.  This should be the default if you're building
+with the Debug configuration.
+
 
 ### No matching function to call
+
 Example failure:
 
     error: no matching function for call to 'CDR_expect'
     note: candidate template ignored: substitution failure [with T = SOME_TYPE]
 
-  * This is caused by a C++ compiler bug in Xcode when ARC is enabled and you use a Cedar matcher.  See the above section "Matchers and ARC" on how to deal with this.
+  * This is caused by a C++ compiler bug in Xcode when ARC is enabled and you
+    use a Cedar matcher.  See the above section "Matchers and ARC" on how to
+    deal with this.
 
 
 ## Contributions and feedback
 
-Welcomed!  Feel free to join and contribute to the public Tracker project [here](http://www.pivotaltracker.com/projects/77775).
+Welcomed!  Feel free to join and contribute to the public Tracker project
+[here](http://www.pivotaltracker.com/projects/77775).
 
-The [public Google group](http://groups.google.com/group/cedar-discuss) for Cedar is cedar-discuss@googlegroups.com.
-Or, you can follow the growth of Cedar on Twitter: [@cedarbdd](http://twitter.com/cedarbdd).
+The [public Google group](http://groups.google.com/group/cedar-discuss) for
+Cedar is cedar-discuss@googlegroups.com. Or, you can follow the growth of
+Cedar on Twitter: [@cedarbdd](http://twitter.com/cedarbdd).
 
 Copyright (c) 2012 Pivotal Labs. This software is licensed under the MIT License.
