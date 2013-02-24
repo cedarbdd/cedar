@@ -1,6 +1,7 @@
 #import "CDRDefaultReporter.h"
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
+#import "CDRSymbolicator.h"
 #import "SpecHelper.h"
 #import "CDRSlowTestStatistics.h"
 
@@ -101,16 +102,29 @@
 }
 
 - (NSString *)errorMessageForExample:(CDRExample *)example {
-    NSString *callStackSymbols = nil;
+    return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n%@",
+            example.fullText, example.failure,
+            [self callStackSymbolsForFailure:example.failure]];
+}
 
+- (NSString *)callStackSymbolsForFailure:(CDRSpecFailure *)failure {
     // Currently to symbolicate an exception
     // we shell out to atos; thus this opt-out setting.
-    if (!getenv("CEDAR_SKIP_EXCEPTION_SYMBOLICATION")) {
-        callStackSymbols = example.failure.callStackSymbolicatedSymbols;
-    }
+    if (getenv("CEDAR_SKIP_EXCEPTION_SYMBOLICATION")) return nil;
 
-    return [NSString stringWithFormat:@"EXCEPTION %@\n%@\n%@",
-            example.fullText, example.failure, callStackSymbols];
+    NSError *error = nil;
+    NSString *callStackSymbols =
+        [failure callStackSymbolicatedSymbols:&error];
+
+    if (error.domain == kCDRSymbolicatorErrorDomain) {
+        if (error.code == kCDRSymbolicatorErrorNotSuccessful) {
+            NSString *details = [error.userInfo objectForKey:kCDRSymbolicatorErrorMessageKey];
+            printf("Exception symbolication was not successful.\n"
+                   "You can turn it off with CEDAR_SKIP_EXCEPTION_SYMBOLICATION.\n"
+                   "Details:\n%s\n", details.UTF8String);
+        }
+    }
+    return callStackSymbols;
 }
 
 #pragma mark Private interface

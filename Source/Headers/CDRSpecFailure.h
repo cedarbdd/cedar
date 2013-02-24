@@ -18,6 +18,6 @@
 - (id)initWithReason:(NSString *)reason fileName:(NSString *)fileName lineNumber:(int)lineNumber;
 - (id)initWithRaisedObject:(NSObject *)object;
 
-- (NSString *)callStackSymbolicatedSymbols;
+- (NSString *)callStackSymbolicatedSymbols:(NSError **)error;
 
 @end

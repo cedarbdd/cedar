@@ -22,7 +22,7 @@ describe(@"CDRSpec", ^{
         spec = [[[CDRSpec alloc] init] autorelease];
 
         spy_on(spec.symbolicator);
-        spec.symbolicator stub_method("symbolicateAddresses:");
+        spec.symbolicator stub_method("symbolicateAddresses:error:");
         spec.symbolicator stub_method("lineNumberForStackAddress:").and_do(^(NSInvocation *i){
             NSUInteger lineNumber;
             [i getArgument:&lineNumber atIndex:2];

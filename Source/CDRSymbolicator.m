@@ -4,6 +4,9 @@
 #import <libunwind.h>
 #import <regex.h>
 
+const NSString *kCDRSymbolicatorErrorDomain = @"kCDRSymbolicatorErrorDomain";
+const NSString *kCDRSymbolicatorErrorMessageKey = @"kCDRSymbolicatorErrorMessage";
+
 NSUInteger CDRCallerStackAddress() {
 #if __arm__ // libunwind functions are not available
     return 0;
@@ -62,8 +65,16 @@ NSUInteger CDRCallerStackAddress() {
     return (index == NSNotFound) ? 0 : [[self.lineNumbers objectAtIndex:index] unsignedIntegerValue];
 }
 
-- (void)symbolicateAddresses:(NSArray *)addresses {
+- (void)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error {
+#if __arm__
+    *error = self.buildNotAvailableError;
+    return;
+#else
     NSArray *validAddresses = [self.class validAddresses:addresses];
+    if (validAddresses.count == 0) {
+        *error = self.buildNoAddressesError;
+        return;
+    }
 
     CDRAtosTask *atosTask = [CDRAtosTask taskForCurrentTestExecutable];
     atosTask.addresses = validAddresses;
@@ -85,9 +96,34 @@ NSUInteger CDRCallerStackAddress() {
     }
 
     if (!atLeastOneSuccessfulSymbolication) {
-        printf("atos was not able to symbolicate.\n");
-        printf("Try setting compiler Optimization Level to None (-O0).\n");
+        *error = self.buildNotSuccessfulError;
+        return;
     }
+#endif
+}
+
+- (NSError *)buildNoAddressesError {
+    NSString *message = @"Must provide at least one address.\n";
+    return [self buildErrorWithCode:kCDRSymbolicatorErrorNoAddresses message:message];
+}
+
+- (NSError *)buildNotAvailableError {
+    NSString *message = @"atos is not available to symbolicate.\n";
+    return [self buildErrorWithCode:kCDRSymbolicatorErrorNotAvailable message:message];
+}
+
+- (NSError *)buildNotSuccessfulError {
+    NSString *message =
+        @"atos was not able to symbolicate.\n"
+         "Try setting compiler Optimization Level to None (-O0).\n";
+    return [self buildErrorWithCode:kCDRSymbolicatorErrorNotSuccessful message:message];
+}
+
+- (NSError *)buildErrorWithCode:(NSUInteger)code message:(NSString *)message {
+    NSDictionary *details =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         message, kCDRSymbolicatorErrorMessageKey, nil];
+    return [NSError errorWithDomain:(id)kCDRSymbolicatorErrorDomain code:code userInfo:details];
 }
 
 + (NSArray *)validAddresses:(NSArray *)addresses {
@@ -111,6 +147,7 @@ NSUInteger CDRCallerStackAddress() {
 - (void)setEnvironment:(NSDictionary *)dict;
 
 - (void)setStandardOutput:(NSPipe *)pipe;
+- (void)setStandardError:(NSPipe *)pipe;
 - (void)launch;
 - (void)waitUntilExit;
 @end
@@ -140,6 +177,15 @@ NSUInteger CDRCallerStackAddress() {
 }
 
 - (void)launch {
+    // atos must have at least one address to symbolicate
+    // because it will otherwise wait for stdin.
+    if (self.addresses.count == 0) {
+        [[NSException
+            exceptionWithName:NSInvalidArgumentException
+            reason:@"Must provide at least one address"
+            userInfo:nil] raise];
+    }
+
     NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"-o", self.executablePath, nil];
 
     // Position-independent executables addresses need to be adjusted hence the slide argument
@@ -197,6 +243,7 @@ NSUInteger CDRCallerStackAddress() {
     NSPipe *standardOutput = [NSPipe pipe];
     if (standardOutput) {
         [task setStandardOutput:standardOutput];
+        [task setStandardError:standardOutput];
     } else return nil;
 
     @try {

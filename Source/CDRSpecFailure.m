@@ -71,11 +71,18 @@
     return self.reason;
 }
 
-- (NSString *)callStackSymbolicatedSymbols {
+- (NSString *)callStackSymbolicatedSymbols:(NSError **)error {
     if (!self.callStackReturnAddresses) return nil;
 
-    CDRSymbolicator *symbolicator = [[CDRSymbolicator alloc] init];
-    [symbolicator symbolicateAddresses:self.callStackReturnAddresses];
+    CDRSymbolicator *symbolicator =
+        [[[CDRSymbolicator alloc] init] autorelease];
+
+    NSError *symbolicationError = nil;
+    [symbolicator symbolicateAddresses:self.callStackReturnAddresses error:&symbolicationError];
+    if (symbolicationError) {
+        *error = symbolicationError;
+        return nil;
+    }
 
     NSMutableString *result =
         [NSMutableString stringWithString:@"Call stack:\n"];
