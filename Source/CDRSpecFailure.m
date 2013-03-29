@@ -1,4 +1,5 @@
 #import "CDRSpecFailure.h"
+#import "CDRSymbolicator.h"
 #import <regex.h>
 
 @interface CDRSpecFailure ()
@@ -9,7 +10,10 @@
 
 @implementation CDRSpecFailure
 
-@synthesize fileName = fileName_, lineNumber = lineNumber_;
+@synthesize
+    fileName = fileName_,
+    lineNumber = lineNumber_,
+    callStackReturnAddresses = callStackReturnAddresses_;
 
 + (id)specFailureWithReason:(NSString *)reason {
     return [[[self alloc] initWithReason:reason] autorelease];
@@ -41,15 +45,22 @@
     NSString *reason = nil;
     [[self class] extractReason:&reason fileName:&fileName lineNumber:&lineNumber fromObject:object];
 
-    if ((self = [super initWithName:@"Spec Failure" reason:[reason retain] userInfo:nil])) {
+    if ((self = [super initWithName:@"Spec Failure" reason:reason userInfo:nil])) {
         fileName_ = [fileName retain];
         lineNumber_ = lineNumber;
+
+        // NSException subclasses tend to have
+        // -callStackReturnAddresses and -callStackSymbols.
+        if ([object respondsToSelector:@selector(callStackReturnAddresses)]) {
+            callStackReturnAddresses_ = [[(id)object callStackReturnAddresses] retain];
+        }
     }
     return self;
 }
 
 - (void)dealloc {
     [fileName_ release];
+    [callStackReturnAddresses_ release];
     [super dealloc];
 }
 
@@ -60,7 +71,41 @@
     return self.reason;
 }
 
-#pragma mark Private Interface
+- (NSString *)callStackSymbolicatedSymbols:(NSError **)error {
+    if (!self.callStackReturnAddresses) return nil;
+
+    CDRSymbolicator *symbolicator =
+        [[[CDRSymbolicator alloc] init] autorelease];
+
+    NSError *symbolicationError = nil;
+    [symbolicator symbolicateAddresses:self.callStackReturnAddresses error:&symbolicationError];
+    if (symbolicationError) {
+        *error = symbolicationError;
+        return nil;
+    }
+
+    NSMutableString *result =
+        [NSMutableString stringWithString:@"Call stack:\n"];
+    BOOL previousAddressWasUnknown = NO;
+
+    for (int i=0; i < self.callStackReturnAddresses.count; i++) {
+        NSUInteger address = [[self.callStackReturnAddresses objectAtIndex:i] unsignedIntegerValue];
+        NSString *fileName = [symbolicator fileNameForStackAddress:address];
+        unsigned long lineNumber = [symbolicator lineNumberForStackAddress:address];
+
+        if (fileName) {
+            previousAddressWasUnknown = NO;
+            [result appendFormat:@"  *%@:%lu\n", fileName, lineNumber];
+        } else if (!previousAddressWasUnknown) {
+            previousAddressWasUnknown = YES;
+            [result appendString:@"  ...\n"];
+        }
+    }
+    return result;
+}
+
+#pragma mark - Private Interface
+
 + (void)extractReason:(NSString **)reason fileName:(NSString **)fileName lineNumber:(int *)lineNumber fromObject:(NSObject *)object {
     if ([object isKindOfClass:[NSException class]]) {
         NSDictionary *userInfo = [(NSException *)object userInfo];

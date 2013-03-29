@@ -8,8 +8,11 @@
 #endif
 
 #import "CDRSpecFailure.h"
+#import "CDRSymbolicator.h"
 
 using namespace Cedar::Matchers;
+using namespace Cedar::Doubles;
+
 static NSDictionary *reasonsToFileNames;
 
 SPEC_BEGIN(CDRSpecFailureSpec)
@@ -142,6 +145,106 @@ describe(@"CDRSpecFailure", ^{
 
             it(@"should return 0 for line number", ^{
                 expect([failure lineNumber]).to(equal(0));
+            });
+        });
+    });
+
+    describe(@"-callStackSymbolicatedSymbols", ^{
+        __block NSString *symbols;
+        __block NSError *error;
+        __block id raisedObject;
+
+        subjectAction(^{
+            CDRSpecFailure *failure =
+                [CDRSpecFailure specFailureWithRaisedObject:raisedObject];
+            error = nil;
+            symbols = [failure callStackSymbolicatedSymbols:&error];
+        });
+
+        context(@"when raised object provides call stack return addresses", ^{
+            void (^objectRaiser)(void) = ^{ [[NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil] raise]; };
+
+            beforeEach(^{
+                // Raise and then catch actual exception
+                // to populate its callStackReturnAddresses.
+                @try {
+                    objectRaiser();
+                } @catch (NSException *e) {
+                    raisedObject = e;
+                }
+            });
+
+#if __arm__
+            context(@"when symbolication is not available (devices)", ^{
+                it(@"returns nil", ^{
+                    symbols should be_nil;
+                });
+
+                it(@"sets not available error", ^{
+                    error.domain should equal(kCDRSymbolicatorErrorDomain);
+                    error.code should equal(kCDRSymbolicatorErrorNotAvailable);
+                    [error.userInfo objectForKey:kCDRSymbolicatorErrorMessageKey] \
+                        should be_instance_of([NSString class]).or_any_subclass();
+                });
+            });
+#else
+            context(@"when symbolication is available (mac, simulator)", ^{
+                context(@"when symbolication is successful", ^{
+                    it(@"returns string with symbolicated call stack "
+                        "showing originating error location closest to the top", ^{
+                         symbols should contain(
+                            @"  *CDRSpecFailureSpec.mm:165\n"
+                             "  *CDRSpecFailureSpec.mm:171\n"
+                        );
+                    });
+
+                    it(@"indicates unsymbolicated portions of call stack with '...'", ^{
+                         symbols should contain(
+                            @"Call stack:\n"
+                             "  ...\n"                   // <-+ objc_exception_throw,
+                             "  *CDRSpecFailureSpec.mm"  //   | [NSException raise:...], etc.
+                        );
+                    });
+
+                    it(@"includes asterisk before every path "
+                        "because paths are not absolute and "
+                        "Xcode plugins need to be able to recognize them", ^{
+                        symbols should contain(@"*CDRSpecFailureSpec.mm");
+                    });
+
+                    it(@"does not set error", ^{
+                        error should be_nil;
+                    });
+                });
+
+                context(@"when symbolication is not successful", ^{
+                    beforeEach(^{
+                        NSNumber *badAddress = [NSNumber numberWithUnsignedInteger:123];
+                        NSArray *addresses = [NSArray arrayWithObject:badAddress];
+                        spy_on(raisedObject);
+                        raisedObject stub_method("callStackReturnAddresses").and_return(addresses);
+                    });
+
+                    it(@"returns nil", ^{
+                        symbols should be_nil;
+                    });
+
+                    it(@"sets not successful error", ^{
+                        error.domain should equal(kCDRSymbolicatorErrorDomain);
+                        error.code should equal(kCDRSymbolicatorErrorNotSuccessful);
+                        [error.userInfo objectForKey:kCDRSymbolicatorErrorMessageKey] \
+                            should be_instance_of([NSString class]).or_any_subclass();
+                    });
+                });
+            });
+#endif
+        });
+
+        context(@"when raised object does not provide call stack return addresses", ^{
+            beforeEach(^{ raisedObject = @"failure"; });
+
+            it(@"returns nil", ^{
+                symbols should be_nil;
             });
         });
     });

@@ -71,6 +71,8 @@
 		96A07F0B13F276B10021974D /* FocusedSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0A13F276B10021974D /* FocusedSpec.m */; };
 		96A07F0F13F27F2F0021974D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0E13F27F2F0021974D /* main.m */; };
 		96A07F1113F283E40021974D /* FocusedSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F1013F283E40021974D /* FocusedSpec2.m */; };
+		96A805E416D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
+		96A805E516D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
 		96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
 		96B591911630F5B10068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
 		96B5F9F9144A81A7000A6A5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9F8144A81A7000A6A5D /* UIKit.framework */; };
@@ -1533,6 +1535,7 @@
 				96158AA3144A9210005895CE /* DummyModel.m in Sources */,
 				96E807BD1491C6D200388D9D /* OCUnitAppLogicTestsWithSenTestingKit.m in Sources */,
 				968F9581161AC50800A78D36 /* CDRSymbolicatorSpec.mm in Sources */,
+				96A805E516D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1563,6 +1566,7 @@
 				96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */,
 				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m in Sources */,
 				968F9582161AC58200A78D36 /* CDRSymbolicatorSpec.mm in Sources */,
+				96A805E416D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1838,6 +1842,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCUnitAppLogicTests/OCUnitAppLogicTests-Prefix.pch";
 				INFOPLIST_FILE = "OCUnitAppLogicTests/OCUnitAppLogicTests-Info.plist";
@@ -1994,6 +1999,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCUnitAppTests/OCUnitAppTests-Prefix.pch";
 				INFOPLIST_FILE = "OCUnitAppTests/OCUnitAppTests-Info.plist";
@@ -2162,6 +2168,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = /usr/local/bin;
@@ -2268,6 +2275,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
 				HEADER_SEARCH_PATHS = "";

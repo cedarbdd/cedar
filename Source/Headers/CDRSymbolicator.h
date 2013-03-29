@@ -2,10 +2,17 @@
 
 NSUInteger CDRCallerStackAddress();
 
-@interface CDRSymbolicator : NSObject
-- (id)init;
-- (void)symbolicateAddresses:(NSArray *)addresses;
+extern NSString *kCDRSymbolicatorErrorDomain;
+extern NSString *kCDRSymbolicatorErrorMessageKey;
 
+typedef enum {
+    kCDRSymbolicatorErrorNotAvailable = 100,
+    kCDRSymbolicatorErrorNotSuccessful,
+    kCDRSymbolicatorErrorNoAddresses,
+} kCDRSymbolicatorError;
+
+@interface CDRSymbolicator : NSObject
+- (void)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error;
 - (NSString *)fileNameForStackAddress:(NSUInteger)address;
 - (NSUInteger)lineNumberForStackAddress:(NSUInteger)address;
 @end
