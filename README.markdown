@@ -421,6 +421,12 @@ you can take advantage of the ability to specify multiple reporters like so:
 By default, the XML file will be written to `build/TEST-Cedar.xml` but this
 path can be overridden with the `CEDAR_JUNIT_XML_FILE` env variable.
 
+### Exception Symbolication
+
+By default Cedar does not symbolicate exceptions that caused test failures,
+since symbolicating many exceptions can become a lengthy operation;
+however, this feature can be turned on with `CEDAR_SYMBOLICATE_EXCEPTIONS`.
+
 
 ## Code Snippets
 
