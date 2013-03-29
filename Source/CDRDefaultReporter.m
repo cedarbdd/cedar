@@ -109,8 +109,8 @@
 
 - (NSString *)callStackSymbolsForFailure:(CDRSpecFailure *)failure {
     // Currently to symbolicate an exception
-    // we shell out to atos; thus this opt-out setting.
-    if (getenv("CEDAR_SKIP_EXCEPTION_SYMBOLICATION")) return nil;
+    // we shell out to atos; thus this opt-in setting.
+    if (!getenv("CEDAR_SYMBOLICATE_EXCEPTIONS")) return nil;
 
     NSError *error = nil;
     NSString *callStackSymbols =
@@ -120,7 +120,7 @@
         if (error.code == kCDRSymbolicatorErrorNotSuccessful) {
             NSString *details = [error.userInfo objectForKey:kCDRSymbolicatorErrorMessageKey];
             printf("Exception symbolication was not successful.\n"
-                   "You can turn it off with CEDAR_SKIP_EXCEPTION_SYMBOLICATION.\n"
+                   "To turn it off remove CEDAR_SYMBOLICATE_EXCEPTIONS.\n"
                    "Details:\n%s\n", details.UTF8String);
         }
     }

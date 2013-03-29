@@ -419,9 +419,9 @@ path can be overridden with the `CEDAR_JUNIT_XML_FILE` env variable.
 
 ### Exception Symbolication
 
-By default Cedar symbolicates exceptions that caused test failures; however,
-this feature might be turned off with `CEDAR_SKIP_EXCEPTION_SYMBOLICATION`
-since symbolicating many exceptions can become a lengthy operation.
+By default Cedar does not symbolicate exceptions that caused test failures,
+since symbolicating many exceptions can become a lengthy operation;
+however, this feature can be turned on with `CEDAR_SYMBOLICATE_EXCEPTIONS`.
 
 
 ## Code Snippets
