@@ -282,7 +282,7 @@ the +beforeEach and/or +afterEach methods.
 
 If you'd like to specify but not implement an example you can do so like this:
 
-          it(@"should do something eventually", PENDING);
+    it(@"should do something eventually", PENDING);
 
 The spec runner will not try to run this example, but report it as pending.  The
 PENDING keyword simply references a nil block pointer; if you prefer you can
@@ -297,9 +297,9 @@ Sometimes when debugging or developing a new feature it is useful to run only a
 subset of your tests.  That can be achieved by marking any number of examples
 with an 'f'. You can use `fit`, `fdescribe` and `fcontext` like this:
 
-          fit(@"should do something eventually", ^{
-              // ...
-          });
+    fit(@"should do something eventually", ^{
+        // ...
+    });
 
 If your test suite has at least one focused example, all focused examples will
 run and non-focused examples will be skipped and reported as such (shown as '>'
