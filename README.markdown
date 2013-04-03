@@ -1,5 +1,7 @@
 # Cedar
 
+[![Build Status](https://travis-ci.org/pivotal/cedar.png?branch=master)](https://travis-ci.org/pivotal/cedar)
+
 BDD-style testing using Objective-C
 
 

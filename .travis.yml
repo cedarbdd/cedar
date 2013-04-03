@@ -1,0 +1,9 @@
+language: objective-c
+
+env:
+  - CEDAR_SDK_VERSION="5.1"
+  - CEDAR_SDK_VERSION="6.0"
+  # Travis does not currently have 6.1 iPhoneSim SDK
+  # - CEDAR_SDK_VERSION="6.1"
+
+script: rake
