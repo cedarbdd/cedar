@@ -1,3 +1,4 @@
+#import "NSInvocation+Cedar.h"
 #import "CedarDoubleImpl.h"
 #import "StubbedMethod.h"
 
@@ -85,7 +86,7 @@
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {
-    [invocation retainArguments];
+    [invocation retainMethodArgumentsAndCopyBlocks];
     [self.sent_messages addObject:invocation];
 }
 

@@ -148,6 +148,10 @@
 		AE74907515B493B6008EA127 /* CDRFake.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE74907315B488BE008EA127 /* CDRFake.h */; };
 		AE74907715B493C4008EA127 /* CDRProtocolFake.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE74906E15B48690008EA127 /* CDRProtocolFake.mm */; };
 		AE7DD11217296CB20058EB3B /* CedarApplicationDelegateSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE7DD11117296CB20058EB3B /* CedarApplicationDelegateSpec.mm */; };
+		AE7F1706172730B000E1146D /* NSInvocation+Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */; };
+		AE7F1707172730B000E1146D /* NSInvocation+Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */; };
+		AE7F1708172730B000E1146D /* NSInvocation+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */; };
+		AE7F170B172730B000E1146D /* NSInvocation+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */; };
 		AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE84F0DC145B70DD00769F85 /* ShouldSyntax.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; };
 		AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
@@ -510,6 +514,8 @@
 		AE74907015B486CD008EA127 /* CDRFake.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRFake.mm; sourceTree = "<group>"; };
 		AE74907315B488BE008EA127 /* CDRFake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRFake.h; sourceTree = "<group>"; };
 		AE7DD11117296CB20058EB3B /* CedarApplicationDelegateSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarApplicationDelegateSpec.mm; sourceTree = "<group>"; };
+		AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+Cedar.h"; path = "Source/NSInvocation+Cedar.h"; sourceTree = SOURCE_ROOT; };
+		AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+Cedar.m"; path = "Source/NSInvocation+Cedar.m"; sourceTree = SOURCE_ROOT; };
 		AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouldSyntax.h; sourceTree = "<group>"; };
 		AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectFailureWithMessage.h; sourceTree = "<group>"; };
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpectFailureWithMessage.m; sourceTree = "<group>"; };
@@ -879,6 +885,15 @@
 			path = Comparators;
 			sourceTree = "<group>";
 		};
+		AE7F170317272FB000E1146D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */,
+				AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AE8C879F1362068A006C9305 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
@@ -944,6 +959,7 @@
 		AEEE1FC311DC27B800029872 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				AE7F170317272FB000E1146D /* Extensions */,
 				E31179CE161FD90C007D3CDE /* ReporterHelpers */,
 				AEEE1FCA11DC27B800029872 /* Headers */,
 				AEEE1FDC11DC27B800029872 /* iPhone */,
@@ -1227,6 +1243,7 @@
 				AE94D03F15F341B200A0C2B7 /* AnyInstanceArgument.h in Headers */,
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
 				E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */,
+				AE7F1706172730B000E1146D /* NSInvocation+Cedar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1260,7 @@
 				AE597B4215B0638B00EEF305 /* InvocationMatcher.h in Headers */,
 				969B6F97160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
 				E31179D3161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */,
+				AE7F1707172730B000E1146D /* NSInvocation+Cedar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1605,6 +1623,7 @@
 				AEC7874D15F444A50058A27B /* HaveReceived.mm in Sources */,
 				969B6F84160C61E000C7C792 /* CDRSymbolicator.m in Sources */,
 				E31179D5161FD937007D3CDE /* CDRSlowTestStatistics.m in Sources */,
+				AE7F1708172730B000E1146D /* NSInvocation+Cedar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1689,6 +1708,7 @@
 				969B6F86160C678400C7C792 /* CDRSymbolicator.m in Sources */,
 				E31179D6161FD937007D3CDE /* CDRSlowTestStatistics.m in Sources */,
 				22FB7B4416ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m in Sources */,
+				AE7F170B172730B000E1146D /* NSInvocation+Cedar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,8 @@
 - (void)incrementByNumber:(NSNumber *)number;
 - (void)incrementByABit:(size_t)aBit andABitMore:(NSNumber *)aBitMore;
 - (void)incrementWithException;
+- (void)methodWithBlock:(void(^)())blockArgument;
+- (void)methodWithCString:(char *)string;
 
 @optional
 - (size_t)whatIfIIncrementedBy:(size_t)amount;

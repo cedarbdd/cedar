@@ -40,6 +40,67 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
     });
 
+
+
+    context(@"when recording an invocation", ^{
+        it(@"should not retain the double", ^{
+            myDouble stub_method("value");
+
+            int doubleRetainCount = myDouble.retainCount;
+
+            @autoreleasepool {
+                [myDouble value];
+                // spies are allowed to increment the retain count of the double by 1
+                // but should hand the retain over to the autorelease pool
+                myDouble.retainCount should be_less_than_or_equal_to(doubleRetainCount + 1);
+            }
+
+            myDouble.retainCount should equal(doubleRetainCount);
+        });
+
+        it(@"should exchange any block arguments with copies that can later be invoked", ^{
+            __block BOOL blockWasCalled = NO;
+            void *blockVariableLocationOnStack = &blockWasCalled;
+
+            myDouble stub_method("methodWithBlock:");
+
+            ^{
+                void(^originalBlock)() = ^{
+                    blockWasCalled = YES;
+                };
+                [myDouble methodWithBlock:originalBlock];
+            }();
+
+            NSInvocation *invocationWithBlock = [[myDouble sent_messages] lastObject];
+            void(^retrievedBlock)() = nil;
+
+            [invocationWithBlock getArgument:&retrievedBlock atIndex:2];
+
+            //Blocks don't change memory address when copied but we can detect copying
+            //by observing when it's enclosed block variables are moved to the heap.
+            //See: http://www.cocoawithlove.com/2009/10/how-blocks-are-implemented-and.html
+            (void *)&blockWasCalled should_not equal(blockVariableLocationOnStack);
+            retrievedBlock();
+            blockWasCalled should be_truthy;
+        });
+
+        it(@"should exchange any c-string arguments with copies that can later be accessed", ^{
+            char *string = (char *)malloc(6);
+            strcpy(string, "hello");
+
+            myDouble stub_method("methodWithCString:");
+
+            [myDouble methodWithCString:string];
+            strcpy(string, "byeby");
+
+            NSInvocation *invocation = [[myDouble sent_messages] lastObject];
+            char *argument = NULL;
+            [invocation getArgument:&argument atIndex:2];
+
+            strncmp(argument, "hello", 6) should equal(0);
+        });
+    });
+
     describe(@"#stub_method", ^{
         context(@"with a non-double", ^{
             it(@"should raise an exception", ^{
