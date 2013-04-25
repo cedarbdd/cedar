@@ -22,6 +22,10 @@ describe(@"spy_on", ^{
 
     itShouldBehaveLike(@"a Cedar double");
 
+    it(@"should blow up in an obvious manner when spying on nil", ^{
+        ^{ spy_on(nil); } should raise_exception.with_reason(@"Cannot spy on nil");
+    });
+
     it(@"should not change the functionality of the given object", ^{
         [incrementer increment];
         incrementer.value should equal(1);

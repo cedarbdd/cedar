@@ -6,6 +6,9 @@
 @implementation CDRSpy
 
 + (void)interceptMessagesForInstance:(id)instance {
+    if (!instance) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot spy on nil" userInfo:nil];
+    }
     Class originalClass = [instance class];
     objc_setAssociatedObject(instance, @"original-class", originalClass, OBJC_ASSOCIATION_ASSIGN);
 
