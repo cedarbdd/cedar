@@ -61,4 +61,8 @@ void exitWithStatusFromUIApplication(int status) {
     return NO;
 }
 
+- (UIWindow *)window {
+	return window_;
+}
+
 @end

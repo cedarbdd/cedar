@@ -19,4 +19,6 @@ void exitWithStatusFromUIApplication(int status);
     UIWindow *window_;
     CDRExampleReporterViewController *viewController_;
 }
+
+- (UIWindow *)window;
 @end
