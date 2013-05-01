@@ -514,7 +514,7 @@
 		AE74907015B486CD008EA127 /* CDRFake.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRFake.mm; sourceTree = "<group>"; };
 		AE74907315B488BE008EA127 /* CDRFake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRFake.h; sourceTree = "<group>"; };
 		AE7DD11117296CB20058EB3B /* CedarApplicationDelegateSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarApplicationDelegateSpec.mm; sourceTree = "<group>"; };
-		AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+Cedar.h"; path = "Source/NSInvocation+Cedar.h"; sourceTree = SOURCE_ROOT; };
+		AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+Cedar.h"; path = "Source/Headers/Extensions/NSInvocation+Cedar.h"; sourceTree = SOURCE_ROOT; };
 		AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+Cedar.m"; path = "Source/NSInvocation+Cedar.m"; sourceTree = SOURCE_ROOT; };
 		AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouldSyntax.h; sourceTree = "<group>"; };
 		AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectFailureWithMessage.h; sourceTree = "<group>"; };
@@ -885,10 +885,17 @@
 			path = Comparators;
 			sourceTree = "<group>";
 		};
-		AE7F170317272FB000E1146D /* Extensions */ = {
+		AE51227717314E27000FFF73 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AE7F170317272FB000E1146D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
 				AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */,
 			);
 			path = Extensions;
@@ -988,6 +995,7 @@
 		AEEE1FCA11DC27B800029872 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				AE51227717314E27000FFF73 /* Extensions */,
 				AEEE1FD411DC27B800029872 /* iPhone */,
 				AE0AF55D13E9C06900029396 /* Matchers */,
 				66F00B4F14C4D8F600146D88 /* Doubles */,
