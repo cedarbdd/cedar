@@ -53,6 +53,7 @@ describe(@"fake (protocol)", ^{
 
         itShouldBehaveLike(@"a Cedar double");
         itShouldBehaveLike(@"a Cedar protocol fake");
+        itShouldBehaveLike(@"a Cedar ordinary fake");
 
         context(@"when calling a method which has not been stubbed", ^{
             it(@"should raise an exception", ^{
@@ -73,6 +74,7 @@ describe(@"fake (protocol)", ^{
 
         itShouldBehaveLike(@"a Cedar double");
         itShouldBehaveLike(@"a Cedar protocol fake");
+        itShouldBehaveLike(@"a Cedar nice fake");
 
         context(@"when calling a method which has not been stubbed", ^{
             it(@"should allow method invocation without stubbing", ^{

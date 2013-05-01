@@ -244,112 +244,154 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
 
         describe(@"argument expectations", ^{
-            context(@"with too few", ^{
-                size_t expectedIncrementValue = 1;
-                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <incrementByABit:andABitMore:>; expected: 1, actual: 2"];
+            context(@"when specified with .with(varargs)", ^{
+                NSNumber *arg1 = @1;;
+                NSNumber *arg2 = @2;
+                NSNumber *arg3 = @3;
+                NSNumber *returnValue = @99;
 
-                it(@"should raise an exception", ^{
-                    ^{ myDouble stub_method("incrementByABit:andABitMore:").with(expectedIncrementValue); } should raise_exception.with_reason(reason);
+                context(@"with the incorrect number of arguments", ^{
+                    it(@"should raise an exception when invoked with too few arguments", ^{
+                        NSString *reason = @"Wrong number of expected parameters for <methodWithNumber1:andNumber2:>; expected: 1, actual: 2";
+                        ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1).and_return(returnValue); } should raise_exception.with_reason(reason);
+                    });
+
+                    it(@"should raise an exception when invoked with too many arguments", ^{
+                        NSString *reason = @"Wrong number of expected parameters for <methodWithNumber1:andNumber2:>; expected: 3, actual: 2";
+                        ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2, arg3).and_return(returnValue); } should raise_exception.with_reason(reason);
+                    });
+                });
+
+                context(@"with the correct number of arguments", ^{
+                    context(@"of the correct types", ^{
+                        beforeEach(^{
+                            myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValue);
+                        });
+
+                        context(@"when invoked with a parameters of the expected value", ^{
+                            it(@"should return the returnValue", ^{
+                                [myDouble methodWithNumber1:arg1 andNumber2:arg2] should equal(returnValue);
+                            });
+                        });
+                    });
+
+                    context(@"of incorrect types", ^{
+                        NSString *reason = @"Attempt to compare expected argument <10> with actual argument type @; argument #2 for <methodWithNumber1:andNumber2:>";
+                        it(@"should raise an exception", ^{
+                            int invalidInt = 10;
+                            ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, invalidInt); } should raise_exception.with_reason(reason);
+                        });
+                    });
                 });
             });
 
-            context(@"with too many", ^{
-                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <value>; expected: 1, actual: 0"];
-
-                it(@"should raise an exception", ^{
-                    ^{ myDouble stub_method("value").with(@"foo"); } should raise_exception.with_reason(reason);
-                });
-            });
-
-            context(@"with the correct number", ^{
-                context(@"of the correct types", ^{
+            context(@"when specified with .with().and_with()", ^{
+                context(@"with too few", ^{
                     size_t expectedIncrementValue = 1;
-                    NSNumber *expectedBitMoreValue = [NSNumber numberWithInteger:10];
-                    NSNumber *actualBitMoreValue = [NSNumber numberWithInteger:11];
+                    NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <incrementByABit:andABitMore:>; expected: 1, actual: 2"];
+
+                    it(@"should raise an exception", ^{
+                        ^{ myDouble stub_method("incrementByABit:andABitMore:").with(expectedIncrementValue); } should raise_exception.with_reason(reason);
+                    });
+                });
+
+                context(@"with too many", ^{
+                    NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <value>; expected: 1, actual: 0"];
+
+                    it(@"should raise an exception", ^{
+                        ^{ myDouble stub_method("value").with(@"foo"); } should raise_exception.with_reason(reason);
+                    });
+                });
+
+                context(@"with the correct number", ^{
+                    NSNumber *expectedBitMoreValue = @10;
+                    context(@"of the correct types", ^{
+                        size_t expectedIncrementValue = 1;
+
+                        beforeEach(^{
+                            myDouble stub_method("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
+                        });
+
+                        context(@"when invoked with a parameter of the expected value", ^{
+                            it(@"should not raise an exception", ^{
+                                [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue];
+                            });
+                        });
+                    });
+
+                    context(@"of incorrect types", ^{
+                        context(@"where the incorrect type is an object", ^{
+                            it(@"should raise an exception", ^{
+                                NSString *incorrectType = @"your mom";
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", @"your mom", @encode(size_t)];
+                                ^{ myDouble stub_method("incrementByABit:andABitMore:").with(incorrectType).and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
+                            });
+                        });
+
+                        context(@"where the incorrect type is a char *", ^{
+                            it(@"should raise an exception", ^{
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%s> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", "your mom", @encode(size_t)];
+                                ^{ myDouble stub_method("incrementByABit:andABitMore:").with((char *)"your mom").and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
+                            });
+                        });
+
+                        context(@"where the incorrect type is a non-object, non-cstring pointer", ^{
+                            it(@"should raise an exception", ^{
+                                int anInt = 1;
+                                int *ptr = &anInt;
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%p> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", ptr, @encode(size_t)];
+                                ^{ myDouble stub_method("incrementByABit:andABitMore:").with(ptr).and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
+                            });
+                        });
+                    });
+                });
+
+                context(@"with a specific value", ^{
+                    size_t expectedValue = 1;
 
                     beforeEach(^{
-                        myDouble stub_method("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
+                        myDouble stub_method("incrementBy:").with(expectedValue);
                     });
 
-                    context(@"when invoked with a parameter of the expected value", ^{
-                        it(@"should not raise an exception", ^{
-                            [myDouble incrementByABit:expectedIncrementValue andABitMore:expectedBitMoreValue];
-                        });
-                    });
-
-                    context(@"when invoked with a parameter of the wrong value", ^{
-                        it(@"should raise an exception", ^{
-                            ^{ [myDouble incrementByABit:expectedIncrementValue andABitMore:actualBitMoreValue]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
+                    context(@"when invoked with an argument of the expected value", ^{
+                        it(@"should record the invocation", ^{
+                            [myDouble incrementBy:expectedValue];
+                            myDouble should have_received("incrementBy:").with(expectedValue);
                         });
                     });
                 });
 
-                context(@"of incorrect types", ^{
-                    NSArray *argumentWithInvalidEncoding = [NSArray array];
-                    NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", argumentWithInvalidEncoding, @encode(size_t)];
-
-                    it(@"should raise an exception", ^{
-                        ^{ myDouble stub_method("incrementByABit:andABitMore:").with(argumentWithInvalidEncoding).and_with(@"your mom"); } should raise_exception.with_reason(reason);
+                context(@"with nil", ^{
+                    beforeEach(^{
+                        myDouble stub_method("incrementByNumber:").with(nil);
                     });
-                });
-            });
 
-            context(@"with a specific value", ^{
-                size_t expectedValue = 1;
-                size_t anotherValue = 7;
+                    context(@"when invoked with a nil argument", ^{
+                        it(@"should record the invocation", ^{
+                            [myDouble incrementByNumber:nil];
+                            myDouble should have_received("incrementByNumber:").with(nil);
+                        });
+                    });
 
-                beforeEach(^{
-                    myDouble stub_method("incrementBy:").with(expectedValue);
-                });
-
-                context(@"when invoked with an argument of the expected value", ^{
-                    it(@"should record the invocation", ^{
-                        [myDouble incrementBy:expectedValue];
-                        myDouble should have_received("incrementBy:").with(expectedValue);
+                    context(@"when invoked with a non-nil argument", ^{
+                        xit(@"should raise an exception", ^{
+                            ^{ [myDouble incrementByNumber:@1]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
+                        });
                     });
                 });
 
-                context(@"when invoked with a parameter of the wrong value", ^{
-                    it(@"should raise an exception", ^{
-                        ^{ [myDouble incrementBy:anotherValue]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
+                context(@"with an argument specified as anything", ^{
+                    NSNumber *arg = @123;
+                    NSNumber *returnValue = @99;
+
+                    beforeEach(^{
+                        myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg).and_return(returnValue);
                     });
-                });
-            });
 
-            context(@"with nil", ^{
-                beforeEach(^{
-                    myDouble stub_method("incrementByNumber:").with(nil);
-                });
-
-                context(@"when invoked with a nil argument", ^{
-                    it(@"should record the invocation", ^{
-                        [myDouble incrementByNumber:nil];
-                        myDouble should have_received("incrementByNumber:").with(nil);
+                    it(@"should allow any value for the 'anything' argument", ^{
+                        [myDouble methodWithNumber1:@8 andNumber2:arg] should equal(returnValue);
+                        [myDouble methodWithNumber1:@90210 andNumber2:arg] should equal(returnValue);
                     });
-                });
-
-                context(@"when invoked with a non-nil argument", ^{
-                    it(@"should raise an exception", ^{
-                        ^{ [myDouble incrementByNumber:[NSNumber numberWithInt:1]]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
-                    });
-                });
-            });
-
-            context(@"with an argument specified as anything", ^{
-                NSNumber *expectedBitMoreValue = [NSNumber numberWithInt:777];
-                NSNumber *anotherBitMoreValue = [NSNumber numberWithInt:111];
-
-                beforeEach(^{
-                    myDouble stub_method("incrementByABit:andABitMore:").with(anything).and_with(expectedBitMoreValue);
-                });
-
-                it(@"should allow any value for the 'anything' argument", ^{
-                    [myDouble incrementByABit:8 andABitMore:expectedBitMoreValue];
-                    [myDouble incrementByABit:88 andABitMore:expectedBitMoreValue];
-                });
-
-                it(@"should still require the non-'anything' argument to match", ^{
-                    ^{ [myDouble incrementByABit:8 andABitMore:anotherBitMoreValue]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
                 });
             });
         });
@@ -363,7 +405,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
 
                 it(@"should return the expected value", ^{
-                    expect(myDouble.value).to(equal(returnValue));
+                    expect([myDouble value]).to(equal(returnValue));
                 });
             });
 

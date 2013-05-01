@@ -27,6 +27,9 @@ namespace Cedar { namespace Doubles {
         StubbedMethod & with(const Argument::shared_ptr_t argument);
         StubbedMethod & and_with(const Argument::shared_ptr_t argument);
 
+        template<typename T, typename... ArgumentPack>
+        StubbedMethod & with(const T &, ArgumentPack... pack);
+
         template<typename T>
         StubbedMethod & with(const T &);
         template<typename T>
@@ -83,4 +86,10 @@ namespace Cedar { namespace Doubles {
         return with(argument);
     }
 
+    template<typename T, typename... ArgumentPack>
+    StubbedMethod & StubbedMethod::with(const T & value, ArgumentPack... pack) {
+        this->with(value);
+        this->with(pack...);
+        return *this;
+    }
 }}

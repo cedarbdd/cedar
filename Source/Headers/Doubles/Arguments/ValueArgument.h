@@ -22,6 +22,9 @@ namespace Cedar { namespace Doubles {
     private:
         bool both_are_objects(const char *) const;
         bool both_are_not_objects(const char *) const;
+        bool both_are_not_pointers(const char *) const;
+        bool both_are_not_cstrings(const char *) const;
+        bool both_are_not_objects_pointers_nor_cstrings(const char *) const;
         bool nil_argument(const char *) const;
 
     private:
@@ -53,7 +56,7 @@ namespace Cedar { namespace Doubles {
     template<typename T>
     /* virtual */ bool ValueArgument<T>::matches_encoding(const char * actual_argument_encoding) const {
         return this->both_are_objects(actual_argument_encoding) ||
-        this->both_are_not_objects(actual_argument_encoding) ||
+        this->both_are_not_objects_pointers_nor_cstrings(actual_argument_encoding) ||
         this->nil_argument(actual_argument_encoding);
     }
 
@@ -71,6 +74,23 @@ namespace Cedar { namespace Doubles {
     template<typename T>
     bool ValueArgument<T>::both_are_not_objects(const char * actual_argument_encoding) const {
         return 0 != strncmp(@encode(T), "@", 1) && 0 != strncmp(actual_argument_encoding, "@", 1);
+    }
+
+    template<typename T>
+    bool ValueArgument<T>::both_are_not_pointers(const char * actual_argument_encoding) const {
+        return 0 != strncmp(@encode(T), "^", 1) && 0 != strncmp(actual_argument_encoding, "^", 1);
+    }
+
+    template<typename T>
+    bool ValueArgument<T>::both_are_not_cstrings(const char * actual_argument_encoding) const {
+        return 0 != strncmp(@encode(T), "*", 1) && 0 != strncmp(actual_argument_encoding, "*", 1);
+    }
+
+    template<typename T>
+    bool ValueArgument<T>::both_are_not_objects_pointers_nor_cstrings(const char * actual_argument_encoding) const {
+        return this->both_are_not_objects(actual_argument_encoding) &&
+        this->both_are_not_pointers(actual_argument_encoding) &&
+        this->both_are_not_cstrings(actual_argument_encoding);
     }
 
     template<typename T>

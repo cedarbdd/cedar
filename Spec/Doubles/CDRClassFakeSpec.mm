@@ -46,34 +46,35 @@ describe(@"CDRClassFake", ^{
 
         itShouldBehaveLike(@"a Cedar double");
         itShouldBehaveLike(@"a Cedar class fake");
+        itShouldBehaveLike(@"a Cedar ordinary fake");
 
         context(@"when calling a method which has not been stubbed", ^{
             it(@"should raise an exception", ^{
                 ^{ [fake value]; } should raise_exception;
             });
         });
-
     });
 
     describe(@"nice_fake_for(Class)", ^{
-        __block SimpleIncrementer<CedarDouble> *nice_fake;
+        __block SimpleIncrementer<CedarDouble> *niceFake;
 
         beforeEach(^{
-            nice_fake = nice_fake_for([SimpleIncrementer class]);
+            niceFake = nice_fake_for([SimpleIncrementer class]);
 
-            [[SpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:niceFake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");
         itShouldBehaveLike(@"a Cedar class fake");
+        itShouldBehaveLike(@"a Cedar nice fake");
 
         context(@"when calling a method which has not been stubbed", ^{
             it(@"should allow method invocation without stubbing", ^{
-                [nice_fake incrementBy:3];
+                [niceFake incrementBy:3];
             });
 
             it(@"should default to returning a 0", ^{
-                expect(nice_fake.aVeryLargeNumber).to(equal(0));
+                expect([niceFake aVeryLargeNumber]).to(equal(0));
             });
         });
     });

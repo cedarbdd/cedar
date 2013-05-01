@@ -1,6 +1,7 @@
 #import "NSInvocation+Cedar.h"
 #import "CedarDoubleImpl.h"
 #import "StubbedMethod.h"
+#import "CDRClassFake.h"
 
 static NSMutableArray *registeredDoubleImpls__ = nil;
 
@@ -73,22 +74,18 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     return *stubbed_method_ptr;
 }
 
-- (BOOL)invoke_stubbed_method:(NSInvocation *)invocation {
+- (CDRStubInvokeStatus)invoke_stubbed_method:(NSInvocation *)invocation {
     Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(invocation.selector);
     if (it == stubbed_methods_.end()) {
-        return false;
+        return CDRStubMethodNotStubbed;
     }
 
     Cedar::Doubles::StubbedMethod::shared_ptr_t stubbed_method_ptr = it->second;
     if (stubbed_method_ptr->matches(invocation)) {
         stubbed_method_ptr->invoke(invocation);
-        return true;
+        return CDRStubMethodInvoked;
     } else {
-        NSString * reason = [NSString stringWithFormat:@"Wrong arguments supplied to stub"];
-        [[NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:reason
-                               userInfo:nil] raise];
-        return false;
+        return CDRStubWrongArguments;
     }
 }
 

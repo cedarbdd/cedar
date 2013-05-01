@@ -208,6 +208,10 @@
 		AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136615D142E3003AAB9C /* ReturnValue.h */; };
 		AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */ = {isa = PBXBuildFile; fileRef = AECF136915D1439B003AAB9C /* AnyArgument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136915D1439B003AAB9C /* AnyArgument.h */; };
+		AEE0665617315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
+		AEE0665717315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
+		AEE0665917315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
+		AEE0665A17315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
 		AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */; };
 		AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC511DC27B800029872 /* CDRExample.m */; };
 		AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC611DC27B800029872 /* CDRExampleBase.m */; };
@@ -526,7 +530,7 @@
 		AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRClassFakeSpec.mm; sourceTree = "<group>"; };
 		AE9AA68315AB78FB00617E1A /* CDRClassFake.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CDRClassFake.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE9AA68815AC728A00617E1A /* CedarDouble.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CedarDouble.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDoubleSharedExamples.mm; sourceTree = "<group>"; };
+		AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarDoubleSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE9AA6D115AE082500617E1A /* StubbedMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StubbedMethod.h; sourceTree = "<group>"; };
 		AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarDoubleImpl.h; sourceTree = "<group>"; };
 		AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDoubleImpl.mm; sourceTree = "<group>"; };
@@ -542,6 +546,8 @@
 		AECF136315D14274003AAB9C /* ValueArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueArgument.h; sourceTree = "<group>"; };
 		AECF136615D142E3003AAB9C /* ReturnValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnValue.h; sourceTree = "<group>"; };
 		AECF136915D1439B003AAB9C /* AnyArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyArgument.h; sourceTree = "<group>"; };
+		AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarNiceFakeSharedExamples.mm; sourceTree = "<group>"; };
+		AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarOrdinaryFakeSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEEE1FB611DC271300029872 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE1FB811DC271300029872 /* Cedar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cedar-Info.plist"; sourceTree = "<group>"; };
 		AEEE1FC411DC27B800029872 /* CDRDefaultReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRDefaultReporter.m; sourceTree = "<group>"; };
@@ -733,13 +739,15 @@
 		66F00B5014C4D92500146D88 /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
+				AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */,
 				AE74903015B45E9D008EA127 /* CDRProtocolFakeSpec.mm */,
 				66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */,
-				AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */,
 				6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */,
 				6639A77C14C50A6800B564B7 /* SimpleIncrementer.h */,
 				6639A77D14C50A6800B564B7 /* SimpleIncrementer.m */,
 				AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */,
+				AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */,
+				AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */,
 				AE36AC5F15B4BB2D00EB6C51 /* NoOpKeyValueObserver.h */,
 				AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */,
 			);
@@ -1574,6 +1582,8 @@
 				96A07F0B13F276B10021974D /* FocusedSpec.m in Sources */,
 				96A07F0F13F27F2F0021974D /* main.m in Sources */,
 				96A07F1113F283E40021974D /* FocusedSpec2.m in Sources */,
+				AEE0665717315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */,
+				AEE0665A17315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1674,6 +1684,8 @@
 				9672F0A91615C3F40012ED58 /* CDRSpecSpec.mm in Sources */,
 				E32861321604F287001FA77E /* FibonacciCalculator.m in Sources */,
 				96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */,
+				AEE0665617315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */,
+				AEE0665917315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
