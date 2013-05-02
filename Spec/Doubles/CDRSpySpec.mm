@@ -7,6 +7,7 @@ extern "C" {
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
+using namespace Cedar::Doubles::Arguments;
 
 SPEC_BEGIN(SpyOnSpec)
 
@@ -18,6 +19,65 @@ describe(@"spy_on", ^{
         spy_on(incrementer);
 
         [[SpecHelper specHelper].sharedExampleContext setObject:incrementer forKey:@"double"];
+    });
+
+    describe(@"method stubbing", ^{
+        NSNumber *arg1 = @1;
+        NSNumber *arg2 = @2;
+        NSNumber *arg3 = @3;
+        NSNumber *returnValue = @4;
+
+        context(@"with a specific argument value", ^{
+            context(@"when invoked with a parameter of non-matching value", ^{
+                beforeEach(^{
+                    incrementer stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValue);
+                });
+
+                it(@"should not raise an exception", ^{
+                    ^{ [incrementer methodWithNumber1:arg1 andNumber2:arg3]; } should_not raise_exception;
+                });
+
+                it(@"should invoke the original method", ^{
+                    [incrementer methodWithNumber1:arg1 andNumber2:arg3] should equal([arg1 floatValue] * [arg3 floatValue]);
+                });
+            });
+        });
+
+        context(@"with a nil argument", ^{
+            beforeEach(^{
+                incrementer stub_method("incrementByNumber:").with(nil);
+            });
+
+            context(@"when invoked with a non-nil argument", ^{
+                beforeEach(^{
+                    [incrementer incrementByNumber:@123];
+                });
+
+                it(@"should invoke the original method", ^{
+                    incrementer.value should equal(123);
+                });
+            });
+        });
+
+        context(@"with an argument specified as any instance of a specified class", ^{
+            NSNumber *arg = @123;
+
+            beforeEach(^{
+                incrementer stub_method("methodWithNumber1:andNumber2:").with(any([NSDecimalNumber class]), arg).and_return(@99);
+            });
+
+            context(@"when invoked with the incorrect class", ^{
+                it(@"should invoke the original method", ^{
+                    [incrementer methodWithNumber1:@2 andNumber2:arg] should equal(2 * [arg floatValue]);
+                });
+            });
+
+            context(@"when invoked with nil", ^{
+                it(@"should invoke the original method", ^{
+                    [incrementer methodWithNumber1:nil andNumber2:arg] should equal(0);
+                });
+            });
+        });
     });
 
     itShouldBehaveLike(@"a Cedar double");

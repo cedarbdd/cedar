@@ -107,7 +107,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
     });
 
-    describe(@"#stub_method", ^{
+    describe(@"-stub_method", ^{
         context(@"with a non-double", ^{
             it(@"should raise an exception", ^{
                 NSObject *non_double = [[[NSObject alloc] init] autorelease];
@@ -125,7 +125,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             context(@"when stubbed twice", ^{
                 it(@"should raise an exception", ^{
                     myDouble stub_method("value");
-                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed");
+                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed with arguments ()");
                 });
             });
 
@@ -362,35 +362,112 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
 
                 context(@"with nil", ^{
+                    __block BOOL stubbedBehaviorWasInvoked;
                     beforeEach(^{
-                        myDouble stub_method("incrementByNumber:").with(nil);
-                    });
-
-                    context(@"when invoked with a nil argument", ^{
-                        it(@"should record the invocation", ^{
-                            [myDouble incrementByNumber:nil];
-                            myDouble should have_received("incrementByNumber:").with(nil);
+                        stubbedBehaviorWasInvoked = NO;
+                        myDouble stub_method("incrementByNumber:").with(nil).and_do(^(NSInvocation *) {
+                            stubbedBehaviorWasInvoked = YES;
                         });
                     });
 
-                    context(@"when invoked with a non-nil argument", ^{
-                        xit(@"should raise an exception", ^{
-                            ^{ [myDouble incrementByNumber:@1]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
+                    context(@"when invoked with a nil argument", ^{
+                        beforeEach(^{
+                            [myDouble incrementByNumber:nil];
+                        });
+
+                        it(@"should record the invocation", ^{
+                            myDouble should have_received("incrementByNumber:").with(nil);
+                        });
+
+                        it(@"should invoke the stubbed behavior", ^{
+                            stubbedBehaviorWasInvoked should be_truthy;
                         });
                     });
                 });
 
                 context(@"with an argument specified as anything", ^{
+                    NSNumber *arg1 = @3;
+                    NSNumber *arg2 = @123;
+                    NSNumber *returnValueWithAnythingArg = @99;
+                    NSNumber *returnValueWithExplicitArgs = @100;
+
+                    context(@"and the 'anything' method is stubbed first", ^{
+                        beforeEach(^{
+                            myDouble stub_method("methodWithNumber1:andNumber2:").with(anything, arg2).and_return(returnValueWithAnythingArg);
+                            myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValueWithExplicitArgs);
+                        });
+
+                        it(@"should allow any value for the 'anything' argument", ^{
+                            [myDouble methodWithNumber1:@8 andNumber2:arg2] should equal(returnValueWithAnythingArg);
+                            [myDouble methodWithNumber1:@90210 andNumber2:arg2] should equal(returnValueWithAnythingArg);
+                        });
+
+                        context(@"and stubbing the method again with anything", ^{
+                            context(@"passed for the same parameter as in the stub", ^{
+                                it(@"should raise an exception", ^{
+                                    ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg2).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with an 'anything' argument");
+                                });
+                            });
+
+                            context(@"passed for a different parameter than as for the stub", ^{
+                                it(@"should raise an exception", ^{
+                                    ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg2).and_with(anything).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with an 'anything' argument");
+                                });
+                            });
+                        });
+
+                        context(@"when two stubs exist", ^{
+                            it(@"should invoke the more specific stub", ^{
+                                [myDouble methodWithNumber1:arg1 andNumber2:arg2] should equal(returnValueWithExplicitArgs);
+                            });
+                        });
+                    });
+
+                    context(@"and the 'anything' method is stubbed second", ^{
+                        beforeEach(^{
+                            myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValueWithExplicitArgs);
+                            myDouble stub_method("methodWithNumber1:andNumber2:").with(anything, arg2).and_return(returnValueWithAnythingArg);
+                        });
+
+                        it(@"should allow any value for the 'anything' argument", ^{
+                            [myDouble methodWithNumber1:@8 andNumber2:arg2] should equal(returnValueWithAnythingArg);
+                            [myDouble methodWithNumber1:@90210 andNumber2:arg2] should equal(returnValueWithAnythingArg);
+                        });
+
+                        context(@"and stubbing the method again with anything", ^{
+                            context(@"passed for the same parameter as in the stub", ^{
+                                it(@"should raise an exception", ^{
+                                    ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg2).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with an 'anything' argument");
+                                });
+                            });
+
+                            context(@"passed for a different parameter than as for the stub", ^{
+                                it(@"should raise an exception", ^{
+                                    ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg2).and_with(anything).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with an 'anything' argument");
+                                });
+                            });
+                        });
+
+                        context(@"when two stubs exist", ^{
+                            it(@"should invoke the more specific stub", ^{
+                                [myDouble methodWithNumber1:arg1 andNumber2:arg2] should equal(returnValueWithExplicitArgs);
+                            });
+                        });
+                    });
+                });
+
+                context(@"with an argument specified as any instance of a specified class", ^{
                     NSNumber *arg = @123;
                     NSNumber *returnValue = @99;
 
                     beforeEach(^{
-                        myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg).and_return(returnValue);
+                        myDouble stub_method("methodWithNumber1:andNumber2:").with(any([NSDecimalNumber class]), arg).and_return(returnValue);
                     });
 
-                    it(@"should allow any value for the 'anything' argument", ^{
-                        [myDouble methodWithNumber1:@8 andNumber2:arg] should equal(returnValue);
-                        [myDouble methodWithNumber1:@90210 andNumber2:arg] should equal(returnValue);
+                    context(@"when invoked with the correct class", ^{
+                        it(@"should return the expected value", ^{
+                            [myDouble methodWithNumber1:[NSDecimalNumber decimalNumberWithDecimal:[@3.14159265359 decimalValue]] andNumber2:arg] should equal(returnValue);
+                        });
                     });
                 });
             });
@@ -405,7 +482,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
 
                 it(@"should return the expected value", ^{
-                    expect([myDouble value]).to(equal(returnValue));
+                    [myDouble value] should equal(returnValue);
                 });
             });
 
@@ -414,6 +491,51 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                 it(@"should raise an exception", ^{
                     ^{ myDouble stub_method("value").and_return(invalidReturnValue); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return value type (%s) for value", @encode(unsigned int)]);
+                });
+            });
+        });
+
+        context(@"when the method has already been stubbed", ^{
+            NSNumber *arg1 = @1;
+            NSNumber *arg2 = @2;
+            NSNumber *returnValue1 = @3;
+
+            beforeEach(^{
+                myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValue1);
+            });
+
+            context(@"with different arguments", ^{
+                NSNumber *arg3 = @88;
+                NSNumber *returnValue2 = @42;
+                __block void(^stubMethodAgainWithDifferentArugmentsBlock)();
+
+                beforeEach(^{
+                    stubMethodAgainWithDifferentArugmentsBlock = [^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg3).and_return(returnValue2); } copy];
+                });
+
+                afterEach(^{
+                    [stubMethodAgainWithDifferentArugmentsBlock release];
+                });
+
+                it(@"should not raise an exception", ^{
+                    stubMethodAgainWithDifferentArugmentsBlock should_not raise_exception();
+                });
+
+                context(@"when invoked", ^{
+                    beforeEach(^{
+                        stubMethodAgainWithDifferentArugmentsBlock();
+                    });
+
+                    it(@"should return the value associated with the corresponding arguments", ^{
+                        [myDouble methodWithNumber1:arg1 andNumber2:arg2] should equal(returnValue1);
+                        [myDouble methodWithNumber1:arg1 andNumber2:arg3] should equal(returnValue2);
+                    });
+                });
+            });
+
+            context(@"with the same arguments", ^{
+                it(@"should raise an exception", ^{
+                    ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(@91); } should raise_exception().with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<1><2>)");
                 });
             });
         });

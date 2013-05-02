@@ -14,7 +14,7 @@ sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
         fake = [sharedContext objectForKey:@"double"];
     });
 
-    describe(@"#respondsToSelector:", ^{
+    describe(@"-respondsToSelector:", ^{
         context(@"when an instance method is required", ^{
             it(@"should return true", ^{
                 [fake respondsToSelector:@selector(value)] should be_truthy;
@@ -34,7 +34,7 @@ sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
         });
     });
 
-    describe(@"#description", ^{
+    describe(@"-description", ^{
         it(@"should return the description of the faked protocol", ^{
             fake.description should contain([NSString stringWithFormat:@"Fake implementation of %s protocol", protocol_getName(@protocol(SimpleIncrementer))]);
         });

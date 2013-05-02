@@ -46,12 +46,16 @@ namespace Cedar { namespace Doubles {
             }
         };
         typedef std::shared_ptr<StubbedMethod> shared_ptr_t;
-        typedef std::map<SEL, shared_ptr_t, SelCompare> selector_map_t;
+        typedef std::vector<shared_ptr_t> stubbed_method_vector_t;
+        typedef std::map<SEL, stubbed_method_vector_t, SelCompare> selector_map_t;
 
         const SEL selector() const;
+        bool matches_arguments(const StubbedMethod &) const;
         bool matches(NSInvocation * const invocation) const;
+        bool contains_anything_argument() const;
         bool invoke(NSInvocation * invocation) const;
         void validate_against_instance(id instance) const;
+        NSString *arguments_string() const;
 
     private:
         bool has_return_value() const { return return_value_argument_.get(); };

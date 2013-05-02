@@ -1,4 +1,5 @@
 #import "StubbedMethod.h"
+#import "AnyArgument.h"
 
 namespace Cedar { namespace Doubles {
 
@@ -44,6 +45,37 @@ namespace Cedar { namespace Doubles {
         return *this;
     }
 
+    bool StubbedMethod::matches_arguments(const StubbedMethod &other_stubbed_method) const {
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t arguments = this->arguments();
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t other_arguments = other_stubbed_method.arguments();
+
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t::iterator argument_it;
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t::iterator other_argument_it;
+        for (argument_it = arguments.begin(), other_argument_it = other_arguments.begin(); argument_it != arguments.end(); ++argument_it, ++other_argument_it) {
+            Cedar::Doubles::Argument::shared_ptr_t argument_ptr = *argument_it;
+            Cedar::Doubles::Argument::shared_ptr_t other_argument_ptr = *other_argument_it;
+
+            if ((*argument_ptr) != (*other_argument_ptr)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool StubbedMethod::contains_anything_argument() const {
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t arguments = this->arguments();
+
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t::iterator argument_it;
+        for (argument_it = arguments.begin(); argument_it != arguments.end(); ++argument_it) {
+            Cedar::Doubles::Argument::shared_ptr_t argument_ptr = *argument_it;
+
+            if (*argument_ptr == *Arguments::anything) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void StubbedMethod::validate_against_instance(id instance) const {
         this->verify_count_and_types_of_arguments(instance);
 
@@ -57,6 +89,16 @@ namespace Cedar { namespace Doubles {
 
             }
         }
+    }
+
+    NSString * StubbedMethod::arguments_string() const {
+        NSMutableString *argumentsString = [NSMutableString stringWithString:@"("];
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t arguments = this->arguments();
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t::iterator argument_it;
+        for (argument_it = arguments.begin(); argument_it != arguments.end(); ++argument_it) {
+            [argumentsString appendFormat:@"<%@>", (*argument_it)->value_string()];
+        }
+        return [argumentsString stringByAppendingString:@")"];
     }
 
     const SEL StubbedMethod::selector() const {

@@ -43,7 +43,7 @@
 
 - (NSNumber *)methodWithNumber1:(NSNumber *)arg1 andNumber2:(NSNumber *)arg2
 {
-    return @([arg1 intValue] * [arg2 intValue]);
+    return @([arg1 floatValue] * [arg2 floatValue]);
 }
 
 @end

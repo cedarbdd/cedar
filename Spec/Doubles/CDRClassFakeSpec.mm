@@ -13,7 +13,7 @@ sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
         fake = [sharedContext objectForKey:@"double"];
     });
 
-    describe(@"#respondsToSelector:", ^{
+    describe(@"-respondsToSelector:", ^{
         context(@"when an instance method is defined", ^{
             it(@"should return true", ^{
                 [fake respondsToSelector:@selector(value)] should be_truthy;
@@ -27,7 +27,7 @@ sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
         });
     });
 
-    describe(@"#description", ^{
+    describe(@"-description", ^{
         it(@"should return the description of the faked class", ^{
             fake.description should contain(@"Fake implementation of SimpleIncrementer class");
         });
