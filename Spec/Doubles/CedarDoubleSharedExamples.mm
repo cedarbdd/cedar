@@ -97,7 +97,8 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             char *argument = NULL;
             [invocation getArgument:&argument atIndex:2];
 
-            strncmp(argument, "hello", 6) should equal(0);
+            argument == string should_not be_truthy;
+            strcmp("hello", argument) should equal(0);
         });
     });
 

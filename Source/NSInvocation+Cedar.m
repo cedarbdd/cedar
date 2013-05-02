@@ -41,9 +41,7 @@
             } else if (encoding[0] == '@') {
                 [retainedArguments addObject:(id)argument];
             } else if (encoding[0] == '*') {
-                size_t stringLength = strlen(argument);
-                char *copiedArgument = malloc(stringLength);
-                strcpy(copiedArgument, argument);
+                char *copiedArgument = strdup((char *)argument);
                 [self setArgument:&copiedArgument atIndex:argumentIndex];
                 StringHolder *stringHolder = [[StringHolder alloc] initWithCString:argument];
                 [retainedArguments addObject:stringHolder];
