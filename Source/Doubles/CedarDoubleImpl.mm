@@ -2,6 +2,8 @@
 #import "CedarDoubleImpl.h"
 #import "StubbedMethod.h"
 
+static NSMutableArray *registeredDoubleImpls__ = nil;
+
 @interface CedarDoubleImpl () {
     Cedar::Doubles::StubbedMethod::selector_map_t stubbed_methods_;
 }
@@ -15,6 +17,10 @@
 
 @synthesize sent_messages = sent_messages_, parent_double = parent_double_;
 
++ (void)afterEach {
+    [CedarDoubleImpl releaseRecordedInvocations];
+}
+
 - (id)init {
     [super doesNotRecognizeSelector:_cmd];
     return nil;
@@ -24,6 +30,7 @@
     if (self = [super init]) {
         self.sent_messages = [NSMutableArray array];
         self.parent_double = parent_double;
+        [CedarDoubleImpl registerDoubleImpl:self];
     }
     return self;
 }
@@ -86,8 +93,26 @@
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {
-    [invocation retainMethodArgumentsAndCopyBlocks];
+    [invocation copyBlockArguments];
+    [invocation retainArguments];
     [self.sent_messages addObject:invocation];
+}
+
+#pragma mark - Private interface
+
++ (void)releaseRecordedInvocations {
+    for (CedarDoubleImpl *doubleImpl in registeredDoubleImpls__) {
+        [doubleImpl reset_sent_messages];
+    }
+    [registeredDoubleImpls__ release];
+    registeredDoubleImpls__ = nil;
+}
+
++ (void)registerDoubleImpl:(CedarDoubleImpl *)doubleImpl {
+    if (!registeredDoubleImpls__) {
+        registeredDoubleImpls__ = [[NSMutableArray alloc] init];
+    }
+    [registeredDoubleImpls__ addObject:doubleImpl];
 }
 
 @end

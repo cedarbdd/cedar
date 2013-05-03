@@ -2,6 +2,6 @@
 
 @interface NSInvocation (Cedar)
 
-- (void)retainMethodArgumentsAndCopyBlocks;
+- (void)copyBlockArguments;
 
 @end

@@ -1,6 +1,7 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
 #import "StubbedMethod.h"
+#import "CedarDoubleImpl.h"
 
 SHARED_EXAMPLE_GROUPS_BEGIN(CedarDoubleSharedExamples)
 
@@ -40,20 +41,24 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
     });
 
-
-
     context(@"when recording an invocation", ^{
-        it(@"should not retain the double", ^{
+        it(@"should release the invocations retaining the double in afterEach", ^{
+            static NSInteger numInvocations = 2;
             myDouble stub_method("value");
 
             int doubleRetainCount = myDouble.retainCount;
 
+            // spies are allowed to increment the retain count of the double by 1
+            // but should hand the retain over to the autorelease pool
             @autoreleasepool {
-                [myDouble value];
-                // spies are allowed to increment the retain count of the double by 1
-                // but should hand the retain over to the autorelease pool
-                myDouble.retainCount should be_less_than_or_equal_to(doubleRetainCount + 1);
+                for (NSInteger invocation = 0; invocation < numInvocations; ++invocation) {
+                    [myDouble value];
+                }
             }
+
+            myDouble.retainCount should equal(doubleRetainCount + numInvocations);
+
+            [CedarDoubleImpl afterEach];
 
             myDouble.retainCount should equal(doubleRetainCount);
         });

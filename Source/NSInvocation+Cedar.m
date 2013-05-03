@@ -1,56 +1,29 @@
 #import "NSInvocation+Cedar.h"
 #import <objc/runtime.h>
 
-@interface StringHolder: NSObject {
-    char *_cString;
-}
-- (id)initWithCString:(char *)cString;
-@end
-
-@implementation StringHolder
-- (void)dealloc {
-    free(_cString);
-    [super dealloc];
-}
-
-- (id)initWithCString:(char *)cString {
-    if (self = [super init]) {
-        _cString = cString;
-    }
-    return self;
-}
-@end
-
 @implementation NSInvocation (Cedar)
 
-- (void)retainMethodArgumentsAndCopyBlocks {
+- (void)copyBlockArguments {
+    static char *blockTypeEncoding = "@?";
     NSMethodSignature *methodSignature = [self methodSignature];
     NSUInteger numberOfArguments = [methodSignature numberOfArguments];
-    NSMutableArray *retainedArguments = [NSMutableArray arrayWithCapacity:numberOfArguments];
+    NSMutableArray *copiedBlocks = [NSMutableArray array];
 
-    for (NSUInteger argumentIndex = 2; argumentIndex < numberOfArguments; ++ argumentIndex) {
+    for (NSUInteger argumentIndex = 2; argumentIndex < numberOfArguments; ++argumentIndex) {
         const char *encoding = [methodSignature getArgumentTypeAtIndex:argumentIndex];
-        void *argument = nil;
-        [self getArgument:&argument atIndex:argumentIndex];
-        if (argument) {
-            if (strlen(encoding) == 2 && strncasecmp("@?", encoding, 2) == 0) {
-                argument = [(id)argument copy];
-                [retainedArguments addObject:(id)argument];
-                [(id)argument release];
+        if (strncasecmp(blockTypeEncoding, encoding, 2) == 0) {
+            id argument = nil;
+            [self getArgument:&argument atIndex:argumentIndex];
+            if (argument) {
+                argument = [argument copy];
+                [copiedBlocks addObject:(id)argument];
+                [argument release];
                 [self setArgument:&argument atIndex:argumentIndex];
-            } else if (encoding[0] == '@') {
-                [retainedArguments addObject:(id)argument];
-            } else if (encoding[0] == '*') {
-                char *copiedArgument = strdup((char *)argument);
-                [self setArgument:&copiedArgument atIndex:argumentIndex];
-                StringHolder *stringHolder = [[StringHolder alloc] initWithCString:argument];
-                [retainedArguments addObject:stringHolder];
-                [stringHolder release];
             }
         }
     }
 
-    objc_setAssociatedObject(self, @"retained-arguments", retainedArguments, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @"copied-blocks", copiedBlocks, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

@@ -7,6 +7,8 @@
 
 @property (nonatomic, retain, readonly) NSMutableArray *sent_messages;
 
++ (void)afterEach;
+
 - (id)initWithDouble:(NSObject<CedarDouble> *)parent_double;
 
 - (void)reset_sent_messages;
