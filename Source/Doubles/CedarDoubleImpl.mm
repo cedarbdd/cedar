@@ -101,9 +101,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 #pragma mark - Private interface
 
 + (void)releaseRecordedInvocations {
-    for (CedarDoubleImpl *doubleImpl in registeredDoubleImpls__) {
-        [doubleImpl reset_sent_messages];
-    }
+    [registeredDoubleImpls__ makeObjectsPerformSelector:@selector(reset_sent_messages)];
     [registeredDoubleImpls__ release];
     registeredDoubleImpls__ = nil;
 }

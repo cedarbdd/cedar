@@ -11,7 +11,7 @@
 
     for (NSUInteger argumentIndex = 2; argumentIndex < numberOfArguments; ++argumentIndex) {
         const char *encoding = [methodSignature getArgumentTypeAtIndex:argumentIndex];
-        if (strncasecmp(blockTypeEncoding, encoding, 2) == 0) {
+        if (strncmp(blockTypeEncoding, encoding, 2) == 0) {
             id argument = nil;
             [self getArgument:&argument atIndex:argumentIndex];
             if (argument) {
