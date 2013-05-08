@@ -16,6 +16,7 @@
 @end
 
 @interface CDRDefaultReporter (Protected)
+@property (nonatomic) unsigned int exampleCount;
 - (NSString *)successToken;
 - (NSString *)pendingToken;
 - (NSString *)pendingMessageForExample:(CDRExample *)example;

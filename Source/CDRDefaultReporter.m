@@ -68,6 +68,10 @@
 }
 
 #pragma mark Protected interface
+- (unsigned int)exampleCount {
+    return exampleCount_;
+}
+
 - (NSString *)successToken {
     return @".";
 }
@@ -141,7 +145,9 @@
     for (id example in examples) {
         if (![example hasChildren]) {
             [example addObserver:self forKeyPath:@"state" options:0 context:NULL];
-            ++exampleCount_;
+            if (![example isKindOfClass:[CDRExampleGroup class]]) {
+                ++exampleCount_;
+            }
         } else {
             [self startObservingExamples:[example examples]];
         }
