@@ -17,6 +17,7 @@ namespace Cedar { namespace Matchers {
         template<typename U>
         bool matches(const U &) const;
         bool matches(NSNumber * const &) const;
+        bool matches(NSDecimalNumber * const &) const;
 
     protected:
         virtual NSString * failure_message_end() const;
@@ -78,4 +79,33 @@ namespace Cedar { namespace Matchers {
     bool BeCloseTo<NSNumber *>::matches(const U & actualValue) const {
         return this->subtractable_types_match(actualValue, [expectedValue_ floatValue]);
     }
+
+#pragma mark NSDecimalNumber
+    template<typename T>
+    bool BeCloseTo<T>::matches(NSDecimalNumber * const & actualValue) const {
+        NSDecimalNumber *decimalThreshold = [NSDecimalNumber decimalNumberWithDecimal:[@(threshold_) decimalValue]];
+        NSDecimalNumber *expectedDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:[@(expectedValue_) decimalValue]];
+        NSDecimalNumber *maxExpectedValue = [expectedDecimalNumber decimalNumberByAdding:decimalThreshold];
+        NSDecimalNumber *minExpectedValue = [expectedDecimalNumber decimalNumberBySubtracting:decimalThreshold];
+        return [actualValue compare:minExpectedValue] != NSOrderedAscending && [actualValue compare:maxExpectedValue] != NSOrderedDescending;
+
+    }
+
+    template<> template<typename U>
+    bool BeCloseTo<NSDecimalNumber *>::matches(const U & actualValue) const {
+        NSDecimalNumber *decimalThreshold = [NSDecimalNumber decimalNumberWithDecimal:[@(threshold_) decimalValue]];
+        NSDecimalNumber *actualDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:[@(actualValue) decimalValue]];
+        NSDecimalNumber *maxExpectedValue = [expectedValue_ decimalNumberByAdding:decimalThreshold];
+        NSDecimalNumber *minExpectedValue = [expectedValue_ decimalNumberBySubtracting:decimalThreshold];
+        return [actualDecimalNumber compare:minExpectedValue] != NSOrderedAscending && [actualDecimalNumber compare:maxExpectedValue] != NSOrderedDescending;
+    }
+
+    template<>
+    bool BeCloseTo<NSNumber *>::matches(NSDecimalNumber * const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimalNumber *>::matches(NSDecimalNumber * const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimalNumber *>::matches(NSNumber * const & actualValue) const;
 }}

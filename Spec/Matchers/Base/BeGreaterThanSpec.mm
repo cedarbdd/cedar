@@ -146,12 +146,12 @@ describe(@"be_greater_than matcher", ^{
             });
         });
 
-        describe(@"and the expected value is declared as an NSNumber", ^{
+        describe(@"and the expected value is declared as an NSNumber *", ^{
             __block NSNumber *expectedValue;
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -171,7 +171,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -191,7 +191,71 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value equals the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:actualValue];
+                    expectedValue = @(actualValue);
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSDecimalNumber *", ^{
+            __block NSDecimalNumber *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"1.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"100.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"10"];
                 });
 
                 describe(@"positive match", ^{
@@ -212,14 +276,14 @@ describe(@"be_greater_than matcher", ^{
     });
 
     describe(@"when the actual value is declared as an id", ^{
-        id actualValue = [NSNumber numberWithInt:someInteger];
+        id actualValue = @(someInteger);
 
         describe(@"and the expected value is declared as an NSNumber *", ^{
             __block NSNumber *expectedValue;
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -239,7 +303,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -260,6 +324,70 @@ describe(@"be_greater_than matcher", ^{
             describe(@"and the actual value equals the expected value", ^{
                 beforeEach(^{
                     expectedValue = [[actualValue copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSDecimalNumber *", ^{
+            __block NSDecimalNumber *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"1.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"100.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"10"];
                 });
 
                 describe(@"positive match", ^{
@@ -280,14 +408,14 @@ describe(@"be_greater_than matcher", ^{
     });
 
     describe(@"when the actual value is declared as an NSObject *", ^{
-        NSObject *actualValue = [NSNumber numberWithInt:someInteger];
+        NSObject *actualValue = @(someInteger);
 
         describe(@"and the expected value is declared as an NSNumber *", ^{
             __block NSNumber *expectedValue;
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -307,7 +435,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -328,6 +456,70 @@ describe(@"be_greater_than matcher", ^{
             describe(@"and the actual value equals the expected value", ^{
                 beforeEach(^{
                     expectedValue = [[actualValue copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSDecimalNumber *", ^{
+            __block NSDecimalNumber *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"1.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"100.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"10"];
                 });
 
                 describe(@"positive match", ^{
@@ -348,14 +540,14 @@ describe(@"be_greater_than matcher", ^{
     });
 
     describe(@"when the actual value is declared as an NSValue *", ^{
-        NSValue *actualValue = [NSNumber numberWithInt:someInteger];
+        NSValue *actualValue = @(someInteger);
 
         describe(@"and the expected value is declared as an NSNumber *", ^{
             __block NSNumber *expectedValue;
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -375,7 +567,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -413,17 +605,81 @@ describe(@"be_greater_than matcher", ^{
                 });
             });
         });
+
+        describe(@"and the expected value is declared as an NSDecimalNumber *", ^{
+            __block NSDecimalNumber *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"1.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"100.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"10"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
     });
 
     describe(@"when the actual value is declared as an NSNumber *", ^{
-        NSNumber *actualValue = [NSNumber numberWithInt:someInteger];
+        NSNumber *actualValue = @(someInteger);
 
         describe(@"and the expected value is declared as an NSNumber *", ^{
             __block NSNumber *expectedValue;
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -443,7 +699,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -487,7 +743,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -507,7 +763,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -551,7 +807,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -571,7 +827,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -615,7 +871,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is greater than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:1];
+                    expectedValue = @1;
                 });
 
                 describe(@"positive match", ^{
@@ -635,7 +891,7 @@ describe(@"be_greater_than matcher", ^{
 
             describe(@"and the actual value is less than the expected value", ^{
                 beforeEach(^{
-                    expectedValue = [NSNumber numberWithInt:100];
+                    expectedValue = @100;
                 });
 
                 describe(@"positive match", ^{
@@ -784,6 +1040,522 @@ describe(@"be_greater_than matcher", ^{
             describe(@"and the actual value equals the expected value", ^{
                 beforeEach(^{
                     expectedValue = someInteger / 1.0;
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSDecimalNumber *", ^{
+            __block NSDecimalNumber *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"1.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"100.1"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithString:@"10"];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+    });
+
+    describe(@"when the actual value is declared as an NSDecimalNumber *", ^{
+        NSDecimalNumber *actualValue = [NSDecimalNumber decimalNumberWithDecimal:[@10.f decimalValue]];
+
+        describe(@"and the expected value is declared as an NSDecimalNumber *", ^{
+            __block NSDecimalNumber *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@1.5f decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@100.5f decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [[actualValue copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSNumber *", ^{
+            __block NSNumber *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@1.f decimalValue]];//[NSNumber numberWithInt:1];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@100.f decimalValue]];//[NSNumber numberWithInt:100];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [[actualValue copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSObject *", ^{
+            __block NSObject *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@1.5f decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@100.5f decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [[actualValue copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an NSValue *", ^{
+            __block NSValue *expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@1 decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@100 decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [[actualValue copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as an id", ^{
+            __block id expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@1 decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [NSDecimalNumber decimalNumberWithDecimal:[@100 decimalValue]];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = [[actualValue copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as a integer built-in type", ^{
+            __block long long expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = 1;
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = 100;
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = someInteger;
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as a floating point built-in type", ^{
+            __block double expectedValue;
+
+            describe(@"and the actual value is greater than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = 1.1;
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(be_greater_than(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                            expect(actualValue).to_not(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the actual value is less than the expected value", ^{
+                beforeEach(^{
+                    expectedValue = 100.1f;
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                            expect(actualValue).to(be_greater_than(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(be_greater_than(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the actual value equals the expected value", ^{
+                beforeEach(^{
+                    expectedValue = someInteger / 1.f;
                 });
 
                 describe(@"positive match", ^{

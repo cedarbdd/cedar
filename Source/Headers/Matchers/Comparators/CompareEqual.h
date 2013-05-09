@@ -47,4 +47,38 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return compare_equal(expectedValue, actualValue);
     }
 
+#pragma mark NSDecimalNumber
+    inline bool compare_equal(NSDecimalNumber * const actualValue, NSDecimalNumber * const expectedValue) {
+        return compare_equal(actualValue, static_cast<const id>(expectedValue));
+    }
+
+    inline bool compare_equal(NSDecimalNumber * const actualValue, NSNumber * const expectedValue) {
+        return compare_equal(actualValue, static_cast<const id>(expectedValue));
+    }
+
+    inline bool compare_equal(NSNumber * const actualValue, NSDecimalNumber * const expectedValue) {
+        return compare_equal(expectedValue, static_cast<const id>(actualValue));
+    }
+
+    inline bool compare_equal(NSDecimalNumber * const actualValue, const id expectedValue) {
+        return [expectedValue isEqual:actualValue];
+    }
+
+    inline bool compare_equal(NSDecimalNumber * const actualValue, NSObject * const expectedValue) {
+        return compare_equal(actualValue, static_cast<const id>(expectedValue));
+    }
+
+    inline bool compare_equal(NSDecimalNumber * const actualValue, NSValue * const expectedValue) {
+        return compare_equal(actualValue, static_cast<const id>(expectedValue));
+    }
+
+    template<typename U>
+    bool compare_equal(NSDecimalNumber * const actualValue, const U & expectedValue) {
+        return compare_equal(actualValue, @(expectedValue));
+    }
+
+    template<typename T>
+    bool compare_equal(const T & actualValue, NSDecimalNumber * const expectedValue) {
+        return compare_equal(expectedValue, actualValue);
+    }
 }}}
