@@ -2,30 +2,62 @@
 
 namespace Cedar { namespace Matchers {
 
+#pragma mark NSDecimalNumber
     template<>
     bool BeCloseTo<NSNumber *>::matches(NSDecimalNumber * const & actualValue) const {
-        NSDecimalNumber *decimalThreshold = [NSDecimalNumber decimalNumberWithDecimal:[@(threshold_) decimalValue]];
-        NSDecimalNumber *expectedDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:[expectedValue_ decimalValue]];
-        NSDecimalNumber *maxExpectedValue = [expectedDecimalNumber decimalNumberByAdding:decimalThreshold];
-        NSDecimalNumber *minExpectedValue = [expectedDecimalNumber decimalNumberBySubtracting:decimalThreshold];
-        return [actualValue compare:minExpectedValue] != NSOrderedAscending && [actualValue compare:maxExpectedValue] != NSOrderedDescending;
+        return this->matches([actualValue decimalValue]);
     }
 
     template<>
     bool BeCloseTo<NSDecimalNumber *>::matches(NSDecimalNumber * const & actualValue) const {
-        NSDecimalNumber *decimalThreshold = [NSDecimalNumber decimalNumberWithDecimal:[@(threshold_) decimalValue]];
-        NSDecimalNumber *maxExpectedValue = [expectedValue_ decimalNumberByAdding:decimalThreshold];
-        NSDecimalNumber *minExpectedValue = [expectedValue_ decimalNumberBySubtracting:decimalThreshold];
-        return [actualValue compare:minExpectedValue] != NSOrderedAscending && [actualValue compare:maxExpectedValue] != NSOrderedDescending;
+        return this->matches([actualValue decimalValue]);
     }
 
     template<>
     bool BeCloseTo<NSDecimalNumber *>::matches(NSNumber * const & actualValue) const {
-        NSDecimalNumber *decimalThreshold = [NSDecimalNumber decimalNumberWithDecimal:[@(threshold_) decimalValue]];
-        NSDecimalNumber *actualDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:[actualValue decimalValue]];
+        return this->matches([actualValue decimalValue]);
+    }
 
-        NSDecimalNumber *maxExpectedValue = [expectedValue_ decimalNumberByAdding:decimalThreshold];
-        NSDecimalNumber *minExpectedValue = [expectedValue_ decimalNumberBySubtracting:decimalThreshold];
-        return [actualDecimalNumber compare:minExpectedValue] != NSOrderedAscending && [actualDecimalNumber compare:maxExpectedValue] != NSOrderedDescending;
+#pragma mark NSDecimal
+    template<>
+    bool BeCloseTo<NSDecimal>::matches(NSDecimal const & actualValue) const {
+        NSDecimal decimalThreshold = [@(threshold_) decimalValue];
+        NSDecimal maxExpectedValue;
+        NSDecimal minExpectedValue;
+        NSDecimalAdd(&maxExpectedValue, &expectedValue_, &decimalThreshold, NSRoundPlain);
+        NSDecimalSubtract(&minExpectedValue, &expectedValue_, &decimalThreshold, NSRoundPlain);
+        return NSDecimalCompare(&actualValue, &minExpectedValue) != NSOrderedAscending && NSDecimalCompare(&actualValue, &maxExpectedValue) != NSOrderedDescending;
+    }
+
+    template<>
+    bool BeCloseTo<NSNumber *>::matches(NSDecimal const & actualValue) const {
+        NSDecimal decimalThreshold = [@(threshold_) decimalValue];
+        NSDecimal expectedDecimal = [expectedValue_ decimalValue];
+        NSDecimal maxExpectedValue;
+        NSDecimal minExpectedValue;
+        NSDecimalAdd(&maxExpectedValue, &expectedDecimal, &decimalThreshold, NSRoundPlain);
+        NSDecimalSubtract(&minExpectedValue, &expectedDecimal, &decimalThreshold, NSRoundPlain);
+        return NSDecimalCompare(&actualValue, &minExpectedValue) != NSOrderedAscending && NSDecimalCompare(&actualValue, &maxExpectedValue) != NSOrderedDescending;
+    }
+
+    template<>
+    bool BeCloseTo<NSDecimalNumber *>::matches(NSDecimal const & actualValue) const {
+        NSDecimal decimalThreshold = [@(threshold_) decimalValue];
+        NSDecimal expectedDecimal = [expectedValue_ decimalValue];
+        NSDecimal maxExpectedValue;
+        NSDecimal minExpectedValue;
+        NSDecimalAdd(&maxExpectedValue, &expectedDecimal, &decimalThreshold, NSRoundPlain);
+        NSDecimalSubtract(&minExpectedValue, &expectedDecimal, &decimalThreshold, NSRoundPlain);
+        return NSDecimalCompare(&actualValue, &minExpectedValue) != NSOrderedAscending && NSDecimalCompare(&actualValue, &maxExpectedValue) != NSOrderedDescending;
+    }
+
+    template<>
+    bool BeCloseTo<NSDecimal>::matches(NSDecimalNumber * const & actualValue) const {
+        return this->matches([actualValue decimalValue]);
+    }
+
+    template<>
+    bool BeCloseTo<NSDecimal>::matches(NSNumber * const & actualValue) const {
+        return this->matches([actualValue decimalValue]);
     }
 }}
