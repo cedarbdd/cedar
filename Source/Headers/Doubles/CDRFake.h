@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "CedarDouble.h"
 
-@interface CDRFake : NSObject<CedarDouble>
+@interface CDRFake : NSProxy <CedarDouble>
 
 @property (nonatomic, assign) Class klass;
 

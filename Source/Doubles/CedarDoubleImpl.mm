@@ -10,7 +10,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 }
 
 @property (nonatomic, retain, readwrite) NSMutableArray *sent_messages;
-@property (nonatomic, assign) NSObject<CedarDouble> *parent_double;
+@property (nonatomic, assign) id<CedarDouble>parent_double;
 
 @end
 
@@ -27,7 +27,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     return nil;
 }
 
-- (id)initWithDouble:(NSObject<CedarDouble> *)parent_double {
+- (id)initWithDouble:(id<CedarDouble>)parent_double {
     if (self = [super init]) {
         self.sent_messages = [NSMutableArray array];
         self.parent_double = parent_double;
