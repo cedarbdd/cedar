@@ -65,7 +65,7 @@ def output_file(target)
 
   output_file = File.join(output_dir, "#{target}.output")
   puts "Output: #{output_file}"
-  output_file
+  "'#{output_file}'"
 end
 
 def kill_simulator
@@ -84,13 +84,13 @@ end
 
 desc "Clean all targets"
 task :clean do
-  system_or_exit "rm -rf #{BUILD_DIR}/*", output_file("clean")
+  system_or_exit "rm -rf '#{BUILD_DIR}'/*", output_file("clean")
 end
 
 desc "Build specs"
 task :build_specs do
   puts "SYMROOT: #{ENV['SYMROOT']}"
-  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}], output_file("specs"))
+  system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'], output_file("specs"))
 end
 
 desc "Build UI specs"
@@ -101,8 +101,8 @@ end
 
 desc "Build Cedar and Cedar-iOS frameworks"
 task :build_frameworks do
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar")
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("build_cedar_ios")
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'", output_file("build_cedar")
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'", output_file("build_cedar_ios")
 end
 
 desc "Run specs"
@@ -119,7 +119,7 @@ task :focused_specs do
   # and should not be created in applications that want to use Cedar.
 
   focused_specs_target_name = "FocusedSpecs"
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{focused_specs_target_name} -configuration #{CONFIGURATION} build SYMROOT=#{BUILD_DIR}", output_file("focused_specs")
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{focused_specs_target_name} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'", output_file("focused_specs")
 
   build_dir = build_dir("")
   ENV["DYLD_FRAMEWORK_PATH"] = build_dir
@@ -151,7 +151,7 @@ namespace :ocunit do
   desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
   task :logic do
     with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-      system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT=#{BUILD_DIR}"
+      system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{BUILD_DIR}'"
     end
   end
 
@@ -159,7 +159,7 @@ namespace :ocunit do
   task :application do
     kill_simulator
 
-    system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT=#{BUILD_DIR}", output_file("ocunit_application_specs")
+    system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", output_file("ocunit_application_specs")
 
     env_vars = {
       "DYLD_ROOT_PATH" => sdk_dir,
