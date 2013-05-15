@@ -61,6 +61,7 @@ const CDRSpecBlock PENDING = nil;
             if (parent_.subjectActionBlock) { parent_.subjectActionBlock(); }
             block_();
             self.state = CDRExampleStatePassed;
+            [parent_ tearDown];
         } @catch (CDRSpecFailure *x) {
             self.failure = x;
             self.state = CDRExampleStateFailed;
@@ -68,7 +69,6 @@ const CDRSpecBlock PENDING = nil;
             self.failure = [CDRSpecFailure specFailureWithRaisedObject:x];
             self.state = CDRExampleStateError;
         }
-        [parent_ tearDown];
         [pool drain];
     } else {
         self.state = CDRExampleStatePending;

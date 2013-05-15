@@ -356,6 +356,37 @@ describe(@"CDRExampleGroup", ^{
             });
         });
 
+        describe(@"with an afterEach that raises an exception", ^{
+            __block CDRExample *passingExample2;
+            __block CDRExample *failingExample2;
+
+            beforeEach(^{
+                CDRSpecBlock afterEachBlock = ^{ [[NSException exceptionWithName:@"Exception in afterEach" reason:@"afterEach exception - test execution should continue" userInfo:nil] raise]; };
+                [group addAfter:afterEachBlock];
+                [group add:passingExample];
+                [group add:failingExample];
+
+                CDRExampleGroup *childGroup = [[[CDRExampleGroup alloc] initWithText:@"child group" isRoot:NO] autorelease];
+                passingExample2 = [[[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}] autorelease];
+                failingExample2 = [[[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}] autorelease];
+                [childGroup add:passingExample2];
+                [childGroup add:failingExample2];
+                [group add:childGroup];
+
+                [group run];
+            });
+
+            it(@"should mark all passing examples be CDRExampleStateError", ^{
+                passingExample.state should equal(CDRExampleStateError);
+                passingExample2.state should equal(CDRExampleStateError);
+            });
+
+            it(@"should leave examples that have already failed alone", ^{
+                failingExample.state should equal(CDRExampleStateFailed);
+                failingExample2.state should equal(CDRExampleStateFailed);
+            });
+        });
+
         describe(@"KVO", ^{
             __block id mockObserver;
 
