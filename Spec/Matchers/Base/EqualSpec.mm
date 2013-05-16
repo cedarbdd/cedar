@@ -26,6 +26,27 @@ using namespace Cedar::Matchers;
 }
 @end
 
+NS_ROOT_CLASS
+@interface ClassWithoutDescriptionMethod
+@end
+@implementation ClassWithoutDescriptionMethod
++ (id)alloc {
+    return NSAllocateObject(self, 0, NULL);
+}
+
+- (void)dealloc {
+    NSDeallocateObject(self);
+}
+
+- (id)init {
+    return self;
+}
+
+- (BOOL)isEqual:(id)other {
+    return NO;
+}
+@end
+
 SPEC_BEGIN(EqualSpec)
 
 describe(@"equal matcher", ^{
@@ -260,6 +281,25 @@ describe(@"equal matcher", ^{
             expectFailureWithMessage(@"Expected <1> to equal <63>", ^{
                 char expectedValue = 63;
                 expect(actualValue).to(equal(expectedValue));
+            });
+        });
+    });
+
+    describe(@"when the actual value is an id type that doesn't respond to -description", ^{
+        __block id actualValue;
+
+        beforeEach(^{
+            actualValue = [[ClassWithoutDescriptionMethod alloc] init];
+        });
+
+        afterEach(^{
+            [actualValue dealloc];
+        });
+
+        it(@"should properly display any failure message", ^{
+            ^{ [NSString stringWithFormat:@"%p", actualValue]; }();
+            expectFailureWithMessage([NSString stringWithFormat:@"Expected <ClassWithoutDescriptionMethod %p> to equal <doesntmatter>", actualValue], ^{
+                actualValue should equal(@"doesntmatter");
             });
         });
     });
