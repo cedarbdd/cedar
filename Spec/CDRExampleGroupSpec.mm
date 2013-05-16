@@ -130,6 +130,24 @@ describe(@"CDRExampleGroup", ^{
         });
     });
 
+    describe(@"afterEach", ^{
+        __block NSInteger blockInvocationCount;
+
+        beforeEach(^{
+            blockInvocationCount = 0;
+            CDRSpecBlock afterEachBlock = ^{ ++blockInvocationCount; };
+            [group addAfter:afterEachBlock];
+            [group add:errorExample];
+            [group add:failingExample];
+            [group add:passingExample];
+            [group run];
+        });
+
+        it(@"should be called after each example runs, regardless of failures or errors", ^{
+            blockInvocationCount should equal(3);
+        });
+    });
+
     describe(@"state", ^{
         describe(@"for a group containing no examples", ^{
             beforeEach(^{

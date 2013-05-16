@@ -61,13 +61,21 @@ const CDRSpecBlock PENDING = nil;
             if (parent_.subjectActionBlock) { parent_.subjectActionBlock(); }
             block_();
             self.state = CDRExampleStatePassed;
-            [parent_ tearDown];
         } @catch (CDRSpecFailure *x) {
             self.failure = x;
             self.state = CDRExampleStateFailed;
         } @catch (NSObject *x) {
             self.failure = [CDRSpecFailure specFailureWithRaisedObject:x];
             self.state = CDRExampleStateError;
+        } @finally {
+            @try {
+                [parent_ tearDown];
+            } @catch (NSObject *x) {
+                if (self.state != CDRExampleStateFailed) {
+                    self.failure = [CDRSpecFailure specFailureWithRaisedObject:x];
+                    self.state = CDRExampleStateError;
+                }
+            }
         }
         [pool drain];
     } else {
