@@ -1,0 +1,76 @@
+require 'pathname'
+
+module ___PACKAGENAME___
+  SPECS_TARGET_NAME = "___PACKAGENAME___"
+  CONFIGURATION = "Release"
+
+  PROJECT_ROOT = Pathname.new(File.dirname(__FILE__)).parent.to_s
+  BUILD_DIR = File.join(PROJECT_ROOT, "build")
+
+  class << self
+    def in_project_dir
+      original_dir = Dir.pwd
+      Dir.chdir(PROJECT_ROOT)
+
+      yield
+
+      ensure
+      Dir.chdir(original_dir)
+    end
+
+    def build_dir
+      File.join(BUILD_DIR, CONFIGURATION)
+    end
+
+    def system_or_exit(cmd, stdout = nil)
+      puts "Executing #{cmd}"
+      cmd += " >#{stdout}" if stdout
+      system(cmd) or raise "******** Build failed ********"
+    end
+
+    def with_env_vars(env_vars)
+      old_values = {}
+      env_vars.each do |key,new_value|
+        old_values[key] = ENV[key]
+        ENV[key] = new_value
+      end
+
+      yield
+
+      env_vars.each_key do |key|
+        ENV[key] = old_values[key]
+      end
+    end
+
+    def output_file(target)
+      output_dir = if ENV['IS_CI_BOX']
+        ENV['CC_BUILD_ARTIFACTS']
+      else
+        Dir.mkdir(BUILD_DIR) unless File.exists?(BUILD_DIR)
+        BUILD_DIR
+      end
+
+      output_file = File.join(output_dir, "#{target}.output")
+      puts "Output: #{output_file}"
+      output_file
+    end
+  end
+end
+
+desc "Clean build directory"
+task :clean____PACKAGENAME___ do
+  ___PACKAGENAME___.system_or_exit "rm -rf #{___PACKAGENAME___::BUILD_DIR}/*", ___PACKAGENAME___.output_file("clean")
+end
+
+desc "Build ___PACKAGENAME___ Specs"
+task :build____PACKAGENAME___ do
+  ___PACKAGENAME___.system_or_exit(%Q[pushd #{___PACKAGENAME___::PROJECT_ROOT} ; xcodebuild -target #{___PACKAGENAME___::SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} build SYMROOT=#{___PACKAGENAME___::BUILD_DIR} ; popd ], ___PACKAGENAME___.output_file("___PACKAGENAME___"))
+end
+
+desc "Run ___PACKAGENAME___ Specs"
+task :___PACKAGENAME___ => :build____PACKAGENAME___ do
+  ___PACKAGENAME___.with_env_vars("DYLD_FRAMEWORK_PATH" => ___PACKAGENAME___.build_dir, "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+    ___PACKAGENAME___.system_or_exit(File.join(___PACKAGENAME___.build_dir, ___PACKAGENAME___::SPECS_TARGET_NAME))
+  end
+end
+

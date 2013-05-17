@@ -12,6 +12,13 @@
 	<true/>
 	<key>Definitions</key>
 	<dict>
+		<key>Rakefile</key>
+		<dict>
+			<key>TargetIndices</key>
+			<array/>
+			<key>Path</key>
+			<string>Rakefile</string>
+		</dict>
 		<key>___PACKAGENAME___-Prefix.pch:objC:importCedar</key>
 		<string>#import &lt;Cedar-iOS/SpecHelper.h&gt;</string>
 		<key>Frameworks/Cedar-iOS.framework</key>
@@ -111,6 +118,7 @@
 	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
 	<key>Nodes</key>
 	<array>
+		<string>Rakefile</string>
 		<string>main.m:import:Cedar-iOS</string>
 		<string>main.m:main:UIApplicationMain</string>
 		<string>___PACKAGENAME___-Info.plist:iPhone</string>

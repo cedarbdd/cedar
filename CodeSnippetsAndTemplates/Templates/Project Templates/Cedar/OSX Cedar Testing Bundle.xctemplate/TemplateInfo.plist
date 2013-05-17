@@ -6,6 +6,13 @@
 	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
 	<key>Definitions</key>
 	<dict>
+		<key>Rakefile</key>
+		<dict>
+			<key>TargetIndices</key>
+			<array/>
+			<key>Path</key>
+			<string>Rakefile</string>
+		</dict>
 		<key>*:*:importCedar</key>
 		<string>#import &lt;Cedar/SpecHelper.h&gt;</string>
 		<key>Frameworks/Cedar.framework</key>
@@ -78,6 +85,7 @@
 	</array>
 	<key>Nodes</key>
 	<array>
+		<string>Rakefile</string>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCocoa</string>
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
 		<string>Frameworks/Cedar.framework</string>
