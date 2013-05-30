@@ -12,7 +12,7 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
                 if (!first) {
                     [result appendString:@","];
                 }
-                
+
                 NSString * string = string_for(*it);
                 [result appendString:[NSString stringWithFormat:@"\n    %@", string]];
             }
