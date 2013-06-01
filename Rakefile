@@ -16,14 +16,15 @@ XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 
 SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "6.1"
+UISPEC_VERSIONS = [SDK_VERSION, "5.1"]
 PROJECT_ROOT = File.dirname(__FILE__)
 BUILD_DIR = File.join(PROJECT_ROOT, "build")
 TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
 SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets")
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 
-def sdk_dir
-  "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{SDK_VERSION}.sdk"
+def sdk_dir(version = SDK_VERSION)
+  "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{version}.sdk"
 end
 
 # Xcode 4.3 stores its /Developer inside /Applications/Xcode.app, Xcode 4.2 stored it in /Developer
@@ -131,16 +132,19 @@ require 'tmpdir'
 
 desc "Run UI specs"
 task :uispecs => :build_uispecs do
-  env_vars = {
-    "DYLD_ROOT_PATH" => sdk_dir,
-    "IPHONE_SIMULATOR_ROOT" => sdk_dir,
-    "CFFIXED_USER_HOME" => Dir.tmpdir,
-    "CEDAR_HEADLESS_SPECS" => "1",
-    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-  }
+  UISPEC_VERSIONS.each do |version|
+    sdk_path = sdk_dir(version)
+    env_vars = {
+      "DYLD_ROOT_PATH" => sdk_path,
+      "IPHONE_SIMULATOR_ROOT" => sdk_path,
+      "CFFIXED_USER_HOME" => Dir.tmpdir,
+      "CEDAR_HEADLESS_SPECS" => "1",
+      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+    }
 
-  with_env_vars(env_vars) do
-    system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents";
+    with_env_vars(env_vars) do
+      system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents";
+    end
   end
 end
 
