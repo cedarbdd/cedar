@@ -14,12 +14,15 @@ SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 
 XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
+APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Preferences/appCode20/templates"
 
 SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "6.1"
 PROJECT_ROOT = File.dirname(__FILE__)
 BUILD_DIR = File.join(PROJECT_ROOT, "build")
 TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
 SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets")
+APPCODE_SNIPPETS_FILENAME = "Cedar.xml"
+APPCODE_SNIPPETS_FILE = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "AppCodeSnippets", APPCODE_SNIPPETS_FILENAME)
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 
 def sdk_dir
@@ -184,6 +187,7 @@ task :uninstall do
   puts "\nRemoving old templates...\n"
   system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/File Templates/Cedar\""
   system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/Project Templates/Cedar\""
+  system_or_exit "rm -f \"#{APPCODE_SNIPPETS_DIR}/#{APPCODE_SNIPPETS_FILENAME}\""
   system_or_exit "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_DIR} | xargs -I{} rm -f \"{}\""
 end
 
@@ -198,12 +202,14 @@ namespace :dist do
     system_or_exit %{rm -rf "#{DIST_STAGING_DIR}"/*}
     system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode"}
     system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData"}
+    system_or_exit %{mkdir -p "#{DIST_STAGING_DIR}/Library/Preferences/appCode20/templates"}
 
     system_or_exit %{cp "#{PROJECT_ROOT}/README.markdown" "#{DIST_STAGING_DIR}/README-Cedar.markdown"}
     system_or_exit %{cp "#{PROJECT_ROOT}/MIT.LICENSE" "#{DIST_STAGING_DIR}/LICENSE-Cedar.txt"}
 
     system_or_exit %{cp -R "#{TEMPLATES_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/"}
     system_or_exit %{cp -R "#{SNIPPETS_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData/"}
+    system_or_exit %{cp "#{APPCODE_SNIPPETS_FILE}" "#{DIST_STAGING_DIR}/Library/Preferences/appCode20/templates/#{APPCODE_SNIPPETS_FILENAME}"}
 
 
     system_or_exit %{cp -R "#{BUILD_DIR}/#{CONFIGURATION}-iphoneuniversal/#{CEDAR_IOS_FRAMEWORK_TARGET_NAME}.framework" "#{cedar_project_templates_dir}/iOS Cedar Spec Suite.xctemplate/"}
