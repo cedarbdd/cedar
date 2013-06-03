@@ -75,13 +75,11 @@
 		96A805E516D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
 		96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
 		96B591911630F5B10068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
-		96B5F9F9144A81A7000A6A5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9F8144A81A7000A6A5D /* UIKit.framework */; };
 		96B5F9FC144A81A7000A6A5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
 		96B5FA02144A81A8000A6A5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA00144A81A8000A6A5D /* InfoPlist.strings */; };
 		96B5FA05144A81A8000A6A5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B5FA04144A81A8000A6A5D /* main.m */; };
 		96B5FA08144A81A8000A6A5D /* OCUnitAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B5FA07144A81A8000A6A5D /* OCUnitAppAppDelegate.m */; };
 		96B5FA0B144A81A8000A6A5D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA09144A81A8000A6A5D /* MainWindow.xib */; };
-		96B5FA12144A81A8000A6A5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9F8144A81A7000A6A5D /* UIKit.framework */; };
 		96B5FA14144A81A8000A6A5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
 		96B5FA1C144A81A8000A6A5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA1A144A81A8000A6A5D /* InfoPlist.strings */; };
 		96C95B7E161339160018606B /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
@@ -193,6 +191,12 @@
 		AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
 		AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
 		AEBCDD7F173ACD6700B42B58 /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
+		AEC40C50174AC4C700474D2D /* UIGeometryCompareEqual.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */; };
+		AEC40C51174AC4C700474D2D /* UIGeometryStringifiers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */; };
+		AEC40C54174AC51D00474D2D /* UIKitEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */; };
+		AEC40C58174ACAD900474D2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC40C57174ACAD900474D2D /* UIKit.framework */; };
+		AEC40C59174ACAEE00474D2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC40C57174ACAD900474D2D /* UIKit.framework */; };
+		AEC40C5A174ACEBB00474D2D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC40C55174AC54500474D2D /* CoreGraphics.framework */; };
 		AEC7873915F440980058A27B /* InvocationMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7873715F440980058A27B /* InvocationMatcher.mm */; };
 		AEC7873A15F440980058A27B /* InvocationMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7873715F440980058A27B /* InvocationMatcher.mm */; };
 		AEC7874D15F444A50058A27B /* HaveReceived.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7874C15F444A50058A27B /* HaveReceived.mm */; };
@@ -430,6 +434,8 @@
 				AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */,
 				AE94D04015F341B200A0C2B7 /* AnyInstanceArgument.h in Copy headers to framework */,
 				E31179D4161FD937007D3CDE /* CDRSlowTestStatistics.h in Copy headers to framework */,
+				AEC40C50174AC4C700474D2D /* UIGeometryCompareEqual.h in Copy headers to framework */,
+				AEC40C51174AC4C700474D2D /* UIGeometryStringifiers.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +484,6 @@
 		96A07F1013F283E40021974D /* FocusedSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FocusedSpec2.m; path = Focused/FocusedSpec2.m; sourceTree = "<group>"; };
 		96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjCHeadersSpec.mm; sourceTree = "<group>"; };
 		96B5F9F6144A81A7000A6A5D /* OCUnitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCUnitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		96B5F9F8144A81A7000A6A5D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		96B5F9FF144A81A7000A6A5D /* OCUnitApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCUnitApp-Info.plist"; sourceTree = "<group>"; };
 		96B5FA01144A81A8000A6A5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -505,7 +510,6 @@
 		AE0AF55E13E9C0E300029396 /* CedarMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarMatchers.h; sourceTree = "<group>"; };
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
-		AE135E8311DEB4E400A922D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Foundation.framework; sourceTree = SDKROOT; };
 		AE167EF115B216DA005960B9 /* RaiseException.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseException.mm; sourceTree = "<group>"; };
 		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
@@ -543,6 +547,11 @@
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
 		AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseExceptionSpec.mm; sourceTree = "<group>"; };
 		AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRDefaultReporterSpec.mm; sourceTree = "<group>"; };
+		AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGeometryCompareEqual.h; sourceTree = "<group>"; };
+		AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGeometryStringifiers.h; sourceTree = "<group>"; };
+		AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UIKitEqualSpec.mm; sourceTree = "<group>"; };
+		AEC40C55174AC54500474D2D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		AEC40C57174ACAD900474D2D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AEC7873715F440980058A27B /* InvocationMatcher.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvocationMatcher.mm; sourceTree = "<group>"; };
 		AEC7874C15F444A50058A27B /* HaveReceived.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaveReceived.mm; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
@@ -659,7 +668,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B5F9F9144A81A7000A6A5D /* UIKit.framework in Frameworks */,
+				AEC40C58174ACAD900474D2D /* UIKit.framework in Frameworks */,
 				96B5F9FC144A81A7000A6A5D /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,7 +677,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B5FA12144A81A8000A6A5D /* UIKit.framework in Frameworks */,
+				AEC40C59174ACAEE00474D2D /* UIKit.framework in Frameworks */,
 				96B5FA14144A81A8000A6A5D /* CoreGraphics.framework in Frameworks */,
 				96D3448A144A85A500352C4A /* libCedar-StaticLib.a in Frameworks */,
 			);
@@ -700,6 +709,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEC40C5A174ACEBB00474D2D /* CoreGraphics.framework in Frameworks */,
 				AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,16 +768,6 @@
 				AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */,
 			);
 			path = Doubles;
-			sourceTree = "<group>";
-		};
-		96158A89144A915E005895CE /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				96158A8A144A915E005895CE /* AppKit.framework */,
-				96158A8B144A915E005895CE /* CoreData.framework */,
-				96158A8C144A915E005895CE /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		96158A8D144A915E005895CE /* OCUnitAppLogicTests */ = {
@@ -870,6 +870,7 @@
 				AEF72FF913ECC16400786282 /* Container */,
 				AEF7302E13ECC6EE00786282 /* Stringifiers */,
 				AE18A7D113F45BBE00C8872C /* Comparators */,
+				AEC40C4D174AC4C000474D2D /* UIGeometry */,
 				AE0AF58413E9E87E00029396 /* ActualValue.h */,
 				AE0AF55E13E9C0E300029396 /* CedarMatchers.h */,
 				AEF72F7713EC730700786282 /* CedarComparators.h */,
@@ -930,6 +931,7 @@
 			children = (
 				AEF7301313ECC4AE00786282 /* Base */,
 				AEF7302913ECC4C100786282 /* Container */,
+				AEC40C52174AC51800474D2D /* UI */,
 				966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
@@ -943,6 +945,24 @@
 				AE94D04315F3449500A0C2B7 /* AnyInstanceArgument.mm */,
 			);
 			path = Arguments;
+			sourceTree = "<group>";
+		};
+		AEC40C4D174AC4C000474D2D /* UIGeometry */ = {
+			isa = PBXGroup;
+			children = (
+				AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */,
+				AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */,
+			);
+			name = UIGeometry;
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		AEC40C52174AC51800474D2D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		AECF135E15D1421A003AAB9C /* Arguments */ = {
@@ -966,9 +986,9 @@
 				AEEE202611DC286500029872 /* Frameworks */,
 				AEEE1FB711DC271300029872 /* Products */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
+				AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */,
 				AEEE222211DC2A1400029872 /* Rakefile */,
 				AEEE222311DC2A1400029872 /* README.markdown */,
-				AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1116,11 +1136,13 @@
 		AEEE202611DC286500029872 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AE135E8311DEB4E400A922D4 /* Foundation.framework */,
-				96B5F9F8144A81A7000A6A5D /* UIKit.framework */,
+				96158A8A144A915E005895CE /* AppKit.framework */,
+				96158A8B144A915E005895CE /* CoreData.framework */,
 				96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */,
+				AEC40C55174AC54500474D2D /* CoreGraphics.framework */,
 				96158A87144A915E005895CE /* Cocoa.framework */,
-				96158A89144A915E005895CE /* Other Frameworks */,
+				96158A8C144A915E005895CE /* Foundation.framework */,
+				AEC40C57174ACAD900474D2D /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1790,6 +1812,7 @@
 				E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */,
 				96B591911630F5B10068EA5E /* ObjCHeadersSpec.mm in Sources */,
 				AE7DD11217296CB20058EB3B /* CedarApplicationDelegateSpec.mm in Sources */,
+				AEC40C54174AC51D00474D2D /* UIKitEqualSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2032,6 +2055,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCUnitAppTests/OCUnitAppTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"/Source/Matchers/UIKit",
+				);
 				INFOPLIST_FILE = "OCUnitAppTests/OCUnitAppTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2066,6 +2093,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCUnitAppTests/OCUnitAppTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"/Source/Matchers/UIKit",
+				);
 				INFOPLIST_FILE = "OCUnitAppTests/OCUnitAppTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2309,7 +2340,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -2342,7 +2376,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
