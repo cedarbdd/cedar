@@ -431,8 +431,9 @@ however, this feature can be turned on with `CEDAR_SYMBOLICATE_EXCEPTIONS`.
 
 ## Code Snippets
 
-Code snippets are installed as part of Cedar.  These are installed into
-`~/Library/Developer/XCode/UserData/CodeSnippets`
+Code snippets are installed as part of Cedar.  
+XCode 4 snippets are installed into `~/Library/Developer/XCode/UserData/CodeSnippets`  
+AppCode snippets are installed into `~/Library/Preferences/appCode20/templates`  
 
 
 ## Command line automation
