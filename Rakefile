@@ -233,6 +233,6 @@ end
 desc "Build frameworks and install templates and code snippets"
 task :install => [ :clean, :uninstall, "dist:prepare" ] do
   puts "\nInstalling templates...\n"
-  system_or_exit %{ditto "#{DIST_STAGING_DIR}/Library" ~/Library}
+  system_or_exit %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
 end
 
