@@ -1,5 +1,6 @@
 #import "SpecHelper.h"
 #import "ObjectWithWeakDelegate.h"
+#import "ARCViewController.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -32,6 +33,27 @@ describe(@"An object with a weak reference to a Cedar Double", ^{
 
         it(@"should result in the double having received the message", ^{
             object.delegate should have_received(@selector(someMessage));
+        });
+    });
+});
+
+fdescribe(@"A UIViewController subclass compiled under ARC", ^{
+    __block ARCViewController *controller;
+
+    beforeEach(^{
+        controller = [[[ARCViewController alloc] init] autorelease];
+        controller.view should_not be_nil;
+    });
+
+    describe(@"spying on a weakly referred-to subview property", ^{
+        beforeEach(^{
+            spy_on(controller.someSubview);
+
+            [controller.someSubview layoutIfNeeded];
+        });
+
+        it(@"should allow recording of sent messages, and not blow up on dealloc", ^{
+            controller.someSubview should have_received("layoutIfNeeded");
         });
     });
 });

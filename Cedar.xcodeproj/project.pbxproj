@@ -140,6 +140,7 @@
 		AE597B4215B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
 		AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
+		AE71E7CC175E958F002A54D5 /* ARCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE71E7CB175E958F002A54D5 /* ARCViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE74902F15B45E80008EA127 /* CDRProtocolFake.h in Headers */ = {isa = PBXBuildFile; fileRef = AE74902E15B45E80008EA127 /* CDRProtocolFake.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE74903215B45EBA008EA127 /* CDRProtocolFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE74903015B45E9D008EA127 /* CDRProtocolFakeSpec.mm */; };
 		AE74903515B45EEE008EA127 /* CDRProtocolFake.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE74902E15B45E80008EA127 /* CDRProtocolFake.h */; };
@@ -525,6 +526,8 @@
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
 		AE597B4015B0638B00EEF305 /* InvocationMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvocationMatcher.h; sourceTree = "<group>"; };
 		AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeGreaterThanSpec.mm; sourceTree = "<group>"; };
+		AE71E7CA175E958F002A54D5 /* ARCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCViewController.h; sourceTree = "<group>"; };
+		AE71E7CB175E958F002A54D5 /* ARCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCViewController.m; sourceTree = "<group>"; };
 		AE74902E15B45E80008EA127 /* CDRProtocolFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRProtocolFake.h; sourceTree = "<group>"; };
 		AE74903015B45E9D008EA127 /* CDRProtocolFakeSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRProtocolFakeSpec.mm; sourceTree = "<group>"; };
 		AE74906E15B48690008EA127 /* CDRProtocolFake.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRProtocolFake.mm; sourceTree = "<group>"; };
@@ -1230,6 +1233,8 @@
 		E328612E1604F254001FA77E /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				AE71E7CA175E958F002A54D5 /* ARCViewController.h */,
+				AE71E7CB175E958F002A54D5 /* ARCViewController.m */,
 				E32861301604F287001FA77E /* FibonacciCalculator.h */,
 				E32861311604F287001FA77E /* FibonacciCalculator.m */,
 				AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */,
@@ -1823,6 +1828,7 @@
 				AEC40C54174AC51D00474D2D /* UIKitEqualSpec.mm in Sources */,
 				AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */,
 				AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */,
+				AE71E7CC175E958F002A54D5 /* ARCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2345,6 +2351,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Spec/Support\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2382,6 +2389,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Spec/Support\"",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
