@@ -37,7 +37,7 @@ describe(@"An object with a weak reference to a Cedar Double", ^{
     });
 });
 
-fdescribe(@"A UIViewController subclass compiled under ARC", ^{
+describe(@"A UIViewController subclass compiled under ARC", ^{
     __block ARCViewController *controller;
 
     beforeEach(^{
