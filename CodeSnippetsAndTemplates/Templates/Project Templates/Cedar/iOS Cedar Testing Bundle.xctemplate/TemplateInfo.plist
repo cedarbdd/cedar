@@ -111,6 +111,7 @@
 			</array>
 			<key>Frameworks</key>
 			<array>
+				<string>CoreGraphics</string>
 				<string>UIKit</string>
 				<string>Foundation</string>
 			</array>
