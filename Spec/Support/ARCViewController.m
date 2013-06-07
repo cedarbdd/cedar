@@ -1,17 +1,26 @@
 #import "ARCViewController.h"
 
+@implementation ARCView @end
+
+@implementation AnotherARCViewController @end
+
 @implementation ARCViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIView *subview = [[UIView alloc] init];
+    ARCView *subview = [[ARCView alloc] init];
     [self.view addSubview:subview];
     self.someSubview = subview;
 
-    UIViewController *childController = [[UIViewController alloc] init];
+    AnotherARCViewController *childController = [[AnotherARCViewController alloc] init];
     [self addChildViewController:childController];
     self.someChildController = childController;
+
+    UITextField *textField = [[UITextField alloc] init];
+    [self.view addSubview:textField];
+    self.textField = textField;
 }
 
 @end
+

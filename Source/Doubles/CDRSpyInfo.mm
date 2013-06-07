@@ -1,5 +1,6 @@
 #import "CDRSpyInfo.h"
 #import "CedarDoubleImpl.h"
+#import <objc/runtime.h>
 
 static NSMutableSet *currentSpies__;
 
@@ -15,6 +16,13 @@ static NSMutableSet *currentSpies__;
     spyInfo.originalClass = [originalObject class];
     spyInfo.cedarDouble = [[[CedarDoubleImpl alloc] initWithDouble:originalObject] autorelease];
     [currentSpies__ addObject:spyInfo];
+}
+
+- (void)dealloc {
+    object_setClass(self.originalObject, self.originalClass);
+    self.originalObject = nil;
+    self.cedarDouble = nil;
+    [super dealloc];
 }
 
 + (CedarDoubleImpl *)cedarDoubleForObject:(id)originalObject {
@@ -34,6 +42,10 @@ static NSMutableSet *currentSpies__;
         }
     }];
     return returnedSpyInfo;
+}
+
++ (void)afterEach {
+    [currentSpies__ removeAllObjects];
 }
 
 @end
