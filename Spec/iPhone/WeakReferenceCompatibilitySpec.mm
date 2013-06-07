@@ -56,6 +56,30 @@ describe(@"A UIViewController subclass compiled under ARC", ^{
             controller.someSubview should have_received("layoutIfNeeded");
         });
     });
+
+    describe(@"spying on a weakly referred-to child controller", ^{
+        beforeEach(^{
+            spy_on(controller.someChildController);
+
+            [controller.someChildController isViewLoaded];
+        });
+
+        it(@"should allow recording of sent messages, and not blow up on dealloc", ^{
+            controller.someChildController should have_received(@selector(isViewLoaded));
+        });
+    });
+
+    describe(@"spying on a weakly referred-to text field", ^{
+        beforeEach(^{
+            spy_on(controller.textField);
+
+            [controller.textField becomeFirstResponder];
+        });
+
+        it(@"should allow recording of sent messages, and not blow up on dealloc", ^{
+            controller.textField should have_received("becomeFirstResponder");
+        });
+    });
 });
 
 SPEC_END

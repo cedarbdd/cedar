@@ -5,8 +5,8 @@
 @interface CDRSpyInfo : NSObject
 
 @property (nonatomic, assign) Class originalClass;
-@property (nonatomic, strong) id originalObject;
-@property (nonatomic, strong) CedarDoubleImpl *cedarDouble;
+@property (nonatomic, assign) id originalObject;
+@property (nonatomic, retain) CedarDoubleImpl *cedarDouble;
 
 + (void)storeSpyInfoForObject:(id)originalObject;
 

@@ -10,7 +10,6 @@
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot spy on nil" userInfo:nil];
     }
-
     [CDRSpyInfo storeSpyInfoForObject:instance];
     object_setClass(instance, self);
 }
@@ -125,7 +124,9 @@
 
 - (void)as_original_class:(void(^)())block {
     Class originalClass = [CDRSpyInfo originalClassForObject:self];
-    [self as_class:originalClass :block];
+    if (originalClass != Nil) {
+        [self as_class:originalClass :block];
+    }
 }
 
 - (Class)createTransientClassForSelector:(SEL)selector {
