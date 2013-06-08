@@ -51,9 +51,10 @@
 }
 
 - (NSString *)description {
+    __block id that = self;
     __block NSString *description;
     [self as_original_class:^{
-        description = [self description];
+        description = [that description];
     }];
 
     return description;
