@@ -134,6 +134,8 @@
 		AE36AC6315B4BBFC00EB6C51 /* NoOpKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */; };
 		AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
+		AE4B00FC1762A54000FB4342 /* CLLocationCompareEqual.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4B00FA1762A45500FB4342 /* CLLocationCompareEqual.h */; };
+		AE4B00FD1762A62800FB4342 /* CLLocationEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4B00F81762A32100FB4342 /* CLLocationEqualSpec.mm */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		AE597B4115B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -186,6 +188,8 @@
 		AE9AA6DC15AE0B0400617E1A /* CedarDoubleImpl.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; };
 		AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
 		AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
+		AE9F48BC1762A90B000450FE /* CLLocationStringifiers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE9F48BB1762A904000450FE /* CLLocationStringifiers.h */; };
+		AE9F48BE1762A9DB000450FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9F48BD1762A9DB000450FE /* CoreLocation.framework */; };
 		AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
 		AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
 		AEB45A911496C8D800845D09 /* RaiseException.h in Headers */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -438,6 +442,8 @@
 				E31179D4161FD937007D3CDE /* CDRSlowTestStatistics.h in Copy headers to framework */,
 				AEC40C50174AC4C700474D2D /* UIGeometryCompareEqual.h in Copy headers to framework */,
 				AEC40C51174AC4C700474D2D /* UIGeometryStringifiers.h in Copy headers to framework */,
+				AE4B00FC1762A54000FB4342 /* CLLocationCompareEqual.h in Copy headers to framework */,
+				AE9F48BC1762A90B000450FE /* CLLocationStringifiers.h in Copy headers to framework */,
 			);
 			name = "Copy headers to framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +526,8 @@
 		AE36AC5F15B4BB2D00EB6C51 /* NoOpKeyValueObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoOpKeyValueObserver.h; sourceTree = "<group>"; };
 		AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoOpKeyValueObserver.m; sourceTree = "<group>"; };
 		AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDouble.mm; sourceTree = "<group>"; };
+		AE4B00F81762A32100FB4342 /* CLLocationEqualSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CLLocationEqualSpec.mm; sourceTree = "<group>"; };
+		AE4B00FA1762A45500FB4342 /* CLLocationCompareEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLocationCompareEqual.h; sourceTree = "<group>"; };
 		AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithWeakDelegate.h; sourceTree = "<group>"; };
 		AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithWeakDelegate.m; sourceTree = "<group>"; };
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
@@ -548,6 +556,8 @@
 		AE9AA6D115AE082500617E1A /* StubbedMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StubbedMethod.h; sourceTree = "<group>"; };
 		AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarDoubleImpl.h; sourceTree = "<group>"; };
 		AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDoubleImpl.mm; sourceTree = "<group>"; };
+		AE9F48BB1762A904000450FE /* CLLocationStringifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLocationStringifiers.h; sourceTree = "<group>"; };
+		AE9F48BD1762A9DB000450FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		AEB1A74115F304A9002E4167 /* StubbedMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StubbedMethod.mm; sourceTree = "<group>"; };
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
 		AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseExceptionSpec.mm; sourceTree = "<group>"; };
@@ -714,6 +724,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE9F48BE1762A9DB000450FE /* CoreLocation.framework in Frameworks */,
 				AEC40C5A174ACEBB00474D2D /* CoreGraphics.framework in Frameworks */,
 				AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */,
 			);
@@ -880,6 +891,8 @@
 				AE0AF55E13E9C0E300029396 /* CedarMatchers.h */,
 				AEF72F7713EC730700786282 /* CedarComparators.h */,
 				AEF72F7A13EC734000786282 /* CedarStringifiers.h */,
+				AE4B00FA1762A45500FB4342 /* CLLocationCompareEqual.h */,
+				AE9F48BB1762A904000450FE /* CLLocationStringifiers.h */,
 				AE0AF57913E9C16D00029396 /* MatcherTemplate.h */,
 				AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */,
 			);
@@ -966,6 +979,7 @@
 			isa = PBXGroup;
 			children = (
 				AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */,
+				AE4B00F81762A32100FB4342 /* CLLocationEqualSpec.mm */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1146,6 +1160,7 @@
 				96158A8B144A915E005895CE /* CoreData.framework */,
 				96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */,
 				AEC40C55174AC54500474D2D /* CoreGraphics.framework */,
+				AE9F48BD1762A9DB000450FE /* CoreLocation.framework */,
 				96158A87144A915E005895CE /* Cocoa.framework */,
 				96158A8C144A915E005895CE /* Foundation.framework */,
 				AEC40C57174ACAD900474D2D /* UIKit.framework */,
@@ -1823,6 +1838,7 @@
 				AEC40C54174AC51D00474D2D /* UIKitEqualSpec.mm in Sources */,
 				AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */,
 				AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */,
+				AE4B00FD1762A62800FB4342 /* CLLocationEqualSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
