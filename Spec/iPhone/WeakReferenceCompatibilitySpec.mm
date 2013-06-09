@@ -47,37 +47,50 @@ describe(@"A UIViewController subclass compiled under ARC", ^{
 
     describe(@"spying on a weakly referred-to subview property", ^{
         beforeEach(^{
-            spy_on(controller.someSubview);
+            spy_on(controller.weakSubview);
 
-            [controller.someSubview layoutIfNeeded];
+            [controller.weakSubview layoutIfNeeded];
         });
 
         it(@"should allow recording of sent messages, and not blow up on dealloc", ^{
-            controller.someSubview should have_received("layoutIfNeeded");
+            controller.weakSubview should have_received("layoutIfNeeded");
         });
     });
 
     describe(@"spying on a weakly referred-to child controller", ^{
         beforeEach(^{
-            spy_on(controller.someChildController);
+            spy_on(controller.weakChildController);
 
-            [controller.someChildController isViewLoaded];
+            [controller.weakChildController isViewLoaded];
         });
 
         it(@"should allow recording of sent messages, and not blow up on dealloc", ^{
-            controller.someChildController should have_received(@selector(isViewLoaded));
+            controller.weakChildController should have_received("isViewLoaded");
         });
     });
 
     describe(@"spying on a weakly referred-to text field", ^{
         beforeEach(^{
-            spy_on(controller.textField);
+            spy_on(controller.weakTextField);
 
-            [controller.textField becomeFirstResponder];
+            [controller.weakTextField becomeFirstResponder];
         });
 
         it(@"should allow recording of sent messages, and not blow up on dealloc", ^{
-            controller.textField should have_received("becomeFirstResponder");
+            controller.weakTextField should have_received("becomeFirstResponder");
+        });
+    });
+
+    describe(@"spying on a weakly referred-to object not from UIKit", ^{
+        beforeEach(^{
+            spy_on(controller.weakObject);
+
+            controller.weakObject stub_method("someMethod");
+            [controller.weakObject someMethod];
+        });
+
+        it(@"should allow recording of sent messages, and not blow up on dealloc", ^{
+            controller.weakObject should have_received("someMethod");
         });
     });
 });
