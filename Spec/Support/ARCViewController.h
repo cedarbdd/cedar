@@ -4,10 +4,17 @@
 
 @interface ARCView : UIView @end
 
+@interface ARCObject : NSObject
+
+- (void)someMethod;
+
+@end
+
 @interface ARCViewController : UIViewController
 
-@property (weak, nonatomic) ARCView *someSubview;
-@property (weak, nonatomic) AnotherARCViewController *someChildController;
-@property (weak, nonatomic) UITextField *textField;
+@property (weak, nonatomic) ARCView *weakSubview;
+@property (weak, nonatomic) AnotherARCViewController *weakChildController;
+@property (weak, nonatomic) UITextField *weakTextField;
+@property (weak, nonatomic) ARCObject *weakObject;
 
 @end
