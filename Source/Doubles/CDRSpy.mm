@@ -2,6 +2,7 @@
 #import "objc/runtime.h"
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
+#import "CDRSpyInfo.h"
 
 @implementation CDRSpy
 
@@ -9,12 +10,7 @@
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot spy on nil" userInfo:nil];
     }
-    Class originalClass = [instance class];
-    objc_setAssociatedObject(instance, @"original-class", originalClass, OBJC_ASSOCIATION_ASSIGN);
-
-    CedarDoubleImpl *cedar_double_impl = [[[CedarDoubleImpl alloc] initWithDouble:instance] autorelease];
-    objc_setAssociatedObject(instance, @"cedar-double-implementation", cedar_double_impl, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
+    [CDRSpyInfo storeSpyInfoForObject:instance];
     object_setClass(instance, self);
 }
 
@@ -51,9 +47,10 @@
 }
 
 - (NSString *)description {
+    __block id that = self;
     __block NSString *description;
     [self as_original_class:^{
-        description = [self description];
+        description = [that description];
     }];
 
     return description;
@@ -109,7 +106,7 @@
 #pragma mark - Private interface
 
 - (CedarDoubleImpl *)cedar_double_impl {
-    return objc_getAssociatedObject(self, @"cedar-double-implementation");
+    return [CDRSpyInfo cedarDoubleForObject:self];
 }
 
 - (void)as_class:(Class)klass :(void(^)())block {
@@ -126,14 +123,17 @@
 }
 
 - (void)as_original_class:(void(^)())block {
-    [self as_class:objc_getAssociatedObject(self, @"original-class") :block];
+    Class originalClass = [CDRSpyInfo originalClassForObject:self];
+    if (originalClass != Nil) {
+        [self as_class:originalClass :block];
+    }
 }
 
 - (Class)createTransientClassForSelector:(SEL)selector {
     Class klass = objc_allocateClassPair([CDRSpy class], [self.uniqueClassName cStringUsingEncoding:NSUTF8StringEncoding], 0);
     objc_registerClassPair(klass);
 
-    Class originalClass = objc_getAssociatedObject(self, @"original-class");
+    Class originalClass = [CDRSpyInfo originalClassForObject:self];
     Method originalMethod = class_getInstanceMethod(originalClass, selector);
 
     /*
