@@ -120,6 +120,37 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 ^{ myDouble stub_method("wibble_wobble"); } should raise_exception;
             });
         });
+        
+        context(@"with a method implemented by NSObject", ^{
+            it(@"should return the stubbed value", ^{
+                myDouble stub_method("valueForKey:").and_return(@"wibble");
+                [myDouble valueForKey:nil] should equal(@"wibble");
+            });
+            
+            it(@"should record the invocation", ^{
+                myDouble stub_method("valueForKey:").and_return(@"wibble");
+                [myDouble valueForKey:nil] should equal(@"wibble");
+                myDouble should have_received("valueForKey:");
+            });
+            
+            context(@"when stubbed with an argument and return value", ^{
+                context(@"invoked with the stubbed argument", ^{
+                    it(@"should return the stubbed return value", ^{
+                        myDouble stub_method("valueForKey:").with(@"wobble").and_return(@"wibble");
+                        [myDouble valueForKey:@"wobble"] should equal(@"wibble");
+                    });
+                });
+                
+                context(@"twice", ^{
+                    it(@"should return the stubbed value for each method", ^{
+                        myDouble stub_method("valueForKey:").with(@"wobble").and_return(@"wibble");
+                        myDouble stub_method("valueForKey:").with(@"bar").and_return(@"foo");
+                        [myDouble valueForKey:@"wobble"] should equal(@"wibble");
+                        [myDouble valueForKey:@"bar"] should equal(@"foo");
+                    });
+                });
+            });
+        });
 
         context(@"with a method with no arguments", ^{
             context(@"when stubbed twice", ^{

@@ -16,11 +16,10 @@
 @synthesize klass = klass_, cedar_double_impl = cedar_double_impl_;
 
 - (id)initWithClass:(Class)klass requireExplicitStubs:(bool)requireExplicitStubs {
-    if (self = [super init]) {
-        require_explicit_stubs_ = requireExplicitStubs;
-        self.klass = klass;
-        self.cedar_double_impl = [[[CedarDoubleImpl alloc] initWithDouble:self] autorelease];
-    }
+    require_explicit_stubs_ = requireExplicitStubs;
+    self.klass = klass;
+    self.cedar_double_impl = [[[CedarDoubleImpl alloc] initWithDouble:self] autorelease];
+    
     return self;
 }
 

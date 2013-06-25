@@ -15,7 +15,7 @@ typedef enum {
 
 + (void)afterEach;
 
-- (id)initWithDouble:(NSObject<CedarDouble> *)parent_double;
+- (id)initWithDouble:(id<CedarDouble>)parent_double;
 
 - (void)reset_sent_messages;
 

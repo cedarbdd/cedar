@@ -4,9 +4,14 @@
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
 
-static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_required_method, BOOL is_instance_method) {
+static bool CDRProtocolHasSelector(Protocol *protocol, SEL selector, BOOL is_required_method, BOOL is_instance_method) {
     objc_method_description method_description = protocol_getMethodDescription(protocol, selector, is_required_method, is_instance_method);
     return method_description.name && method_description.types;
+}
+
+static bool CDRGetProtocolMethodDescription(Protocol *p, SEL aSel, BOOL isRequiredMethod, BOOL isInstanceMethod, struct objc_method_description *outDesc) {
+    *outDesc = protocol_getMethodDescription(p, aSel, isRequiredMethod, isInstanceMethod);
+    return outDesc->types != NULL;
 }
 
 @interface CDRProtocolFake () {
@@ -30,10 +35,24 @@ static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_requi
 }
 
 - (BOOL)respondsToSelector:(SEL)selector {
-    return protocol_hasSelector(protocol_, selector, true, true) ||
-    protocol_hasSelector(protocol_, selector, true, false) ||
-    protocol_hasSelector(protocol_, selector, false, true) ||
-    protocol_hasSelector(protocol_, selector, false, false);
+    return CDRProtocolHasSelector(protocol_, selector, true, true) ||
+    CDRProtocolHasSelector(protocol_, selector, true, false) ||
+    CDRProtocolHasSelector(protocol_, selector, false, true) ||
+    CDRProtocolHasSelector(protocol_, selector, false, false);
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
+    struct objc_method_description methodDescription;
+    
+    if (CDRGetProtocolMethodDescription(protocol_, sel, true, true, &methodDescription) ||
+        CDRGetProtocolMethodDescription(protocol_, sel, true, false, &methodDescription) ||
+        CDRGetProtocolMethodDescription(protocol_, sel, false, true, &methodDescription) ||
+        CDRGetProtocolMethodDescription(protocol_, sel, false, false, &methodDescription)) {
+        
+        return [NSMethodSignature signatureWithObjCTypes:methodDescription.types];
+    } else {
+        return nil;
+    }
 }
 
 - (NSString *)description {
