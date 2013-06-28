@@ -2346,7 +2346,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are not equal", ^{
                 beforeEach(^{
-                    expectedArray = [NSArray arrayWithObject:@"goodbye"];
+                    expectedArray = [@[@"goodbye"] mutableCopy];
                 });
 
                 describe(@"positive match", ^{

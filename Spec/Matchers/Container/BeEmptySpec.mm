@@ -383,7 +383,7 @@ describe(@"be_empty matcher", ^{
         });
 
         describe(@"which is not empty", ^{
-            NSMutableSet *container = [NSString stringWithFormat:@"not empty"];
+            NSString *container = [NSString stringWithFormat:@"not empty"];
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
