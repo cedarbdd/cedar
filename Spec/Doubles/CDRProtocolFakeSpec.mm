@@ -21,12 +21,6 @@ sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
             });
         });
 
-        context(@"when an instance method is optional", ^{
-            it(@"should return true", ^{
-                [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should be_truthy;
-            });
-        });
-
         context(@"when an instance method is not defined", ^{
             it(@"should return false", ^{
                 [fake respondsToSelector:@selector(wibble_wobble)] should_not be_truthy;
@@ -61,6 +55,27 @@ describe(@"fake (protocol)", ^{
             });
         });
 
+        context(@"when calling an optional protocol method", ^{
+            it(@"should raise an exception", ^{
+                ^{ [fake whatIfIIncrementedBy:2]; } should raise_exception;
+            });
+        });
+
+        context(@"when asked if it responds to an optional protocol method", ^{
+            it(@"should return NO", ^{
+                [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should equal(NO);
+            });
+
+            context(@"when the method is stubbed", ^{
+                beforeEach(^{
+                    fake stub_method(@selector(whatIfIIncrementedBy:)).and_return((size_t)42);
+                });
+
+                it(@"should return YES", ^{
+                    [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should equal(YES);
+                });
+            });
+        });
     });
 
     describe(@"nice_fake_for(Protocol)", ^{
@@ -83,6 +98,15 @@ describe(@"fake (protocol)", ^{
 
             it(@"should default to returning a 0", ^{
                 expect(nice_fake.aVeryLargeNumber).to(equal(0));
+            });
+
+            it(@"should respond to optional methods", ^{
+                [nice_fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should be_truthy;
+            });
+
+            it(@"should record invocations of optional methods", ^{
+                [nice_fake whatIfIIncrementedBy:7];
+                nice_fake should have_received(@selector(whatIfIIncrementedBy:)).with(7);
             });
         });
     });
