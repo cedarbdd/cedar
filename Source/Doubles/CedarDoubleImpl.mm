@@ -53,7 +53,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 - (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method {
     const SEL & selector = stubbed_method.selector();
 
-    if (![self.parent_double respondsToSelector:selector]) {
+    if (![self.parent_double can_stub:selector]) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
                                  reason:[NSString stringWithFormat:@"Attempting to stub method <%s>, which double does not respond to", sel_getName(selector)]
                                userInfo:nil]
@@ -111,6 +111,11 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
         }
     }
     return CDRStubWrongArguments;
+}
+
+- (BOOL)has_stubbed_method_for:(SEL)selector {
+    Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(selector);
+    return it != stubbed_methods_.end();
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {

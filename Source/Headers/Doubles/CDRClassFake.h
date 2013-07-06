@@ -6,4 +6,4 @@
 
 @end
 
-id CDR_fake_for(Class klass, bool require_explicit_stubs = true);
+id CDR_fake_for(Class klass, BOOL require_explicit_stubs = YES);

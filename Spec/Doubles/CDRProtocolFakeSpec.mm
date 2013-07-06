@@ -61,9 +61,13 @@ describe(@"fake (protocol)", ^{
             });
         });
 
-        context(@"when asked if it responds to an optional protocol method", ^{
-            it(@"should return NO", ^{
+        describe(@"handling optional protocol methods", ^{
+            it(@"should not respond to unstubbed selectors", ^{
                 [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should equal(NO);
+            });
+
+            it(@"should raise exception when unstubbed optional method invoked", ^{
+                ^{ [fake whatIfIIncrementedBy:1]; } should raise_exception;
             });
 
             context(@"when the method is stubbed", ^{
@@ -71,7 +75,7 @@ describe(@"fake (protocol)", ^{
                     fake stub_method(@selector(whatIfIIncrementedBy:)).and_return((size_t)42);
                 });
 
-                it(@"should return YES", ^{
+                it(@"should return respond to its selector", ^{
                     [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should equal(YES);
                 });
             });
