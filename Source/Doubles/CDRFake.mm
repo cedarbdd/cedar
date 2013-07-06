@@ -3,9 +3,7 @@
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
 
-@interface CDRFake () {
-    bool require_explicit_stubs_;
-}
+@interface CDRFake ()
 
 @property (nonatomic, retain) CedarDoubleImpl *cedar_double_impl;
 
@@ -13,11 +11,11 @@
 
 @implementation CDRFake
 
-@synthesize klass = klass_, cedar_double_impl = cedar_double_impl_;
+@synthesize klass = klass_, cedar_double_impl = cedar_double_impl_, requiresExplicitStubs = requiresExplicitStubs_;
 
-- (id)initWithClass:(Class)klass requireExplicitStubs:(bool)requireExplicitStubs {
+- (id)initWithClass:(Class)klass requireExplicitStubs:(BOOL)requireExplicitStubs {
     if (self = [super init]) {
-        require_explicit_stubs_ = requireExplicitStubs;
+        self.requiresExplicitStubs = requireExplicitStubs;
         self.klass = klass;
         self.cedar_double_impl = [[[CedarDoubleImpl alloc] initWithDouble:self] autorelease];
     }
@@ -25,7 +23,6 @@
 }
 
 - (void)dealloc {
-    require_explicit_stubs_ = nil;
     self.klass = nil;
     self.cedar_double_impl = nil;
     [super dealloc];
@@ -44,7 +41,7 @@
             // do nothing; everything's cool
         } break;
         case CDRStubMethodNotStubbed: {
-            if (require_explicit_stubs_) {
+            if (self.requiresExplicitStubs) {
                 NSString * selectorString = NSStringFromSelector(invocation.selector);
                 [[NSException exceptionWithName:NSInternalInconsistencyException
                                          reason:[NSString stringWithFormat:@"Invocation of unstubbed method: %@", selectorString]
@@ -53,7 +50,7 @@
             }
         } break;
         case CDRStubWrongArguments: {
-            if (require_explicit_stubs_) {
+            if (self.requiresExplicitStubs) {
                 NSString * reason = [NSString stringWithFormat:@"Wrong arguments supplied to stub"];
                 [[NSException exceptionWithName:NSInternalInconsistencyException
                                          reason:reason
@@ -77,6 +74,14 @@
 
 - (void)reset_sent_messages {
     [self.cedar_double_impl reset_sent_messages];
+}
+
+- (BOOL)can_stub:(SEL)selector {
+    return [self.klass instancesRespondToSelector:selector];
+}
+
+- (BOOL)has_stubbed_method_for:(SEL)selector {
+    return [self.cedar_double_impl has_stubbed_method_for:selector];
 }
 
 @end

@@ -23,5 +23,6 @@ typedef enum {
 - (Cedar::Doubles::StubbedMethod::selector_map_t &)stubbed_methods;
 - (CDRStubInvokeStatus)invoke_stubbed_method:(NSInvocation *)invocation;
 - (void)record_method_invocation:(NSInvocation *)invocation;
+- (BOOL)has_stubbed_method_for:(SEL)selector;
 
 @end

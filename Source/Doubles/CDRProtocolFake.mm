@@ -2,7 +2,6 @@
 #import "CDRProtocolFake.h"
 #import "objc/runtime.h"
 #import "StubbedMethod.h"
-#import "CedarDoubleImpl.h"
 
 static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_required_method, BOOL is_instance_method) {
     objc_method_description method_description = protocol_getMethodDescription(protocol, selector, is_required_method, is_instance_method);
@@ -17,7 +16,7 @@ static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_requi
 
 @implementation CDRProtocolFake
 
-- (id)initWithClass:(Class)klass forProtocol:(Protocol *)protocol requireExplicitStubs:(bool)requireExplicitStubs {
+- (id)initWithClass:(Class)klass forProtocol:(Protocol *)protocol requireExplicitStubs:(BOOL)requireExplicitStubs {
     if (self = [super initWithClass:klass requireExplicitStubs:requireExplicitStubs]) {
         protocol_ = protocol;
     }
@@ -29,11 +28,20 @@ static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_requi
     [super dealloc];
 }
 
+- (BOOL)can_stub:(SEL)selector {
+    return class_respondsToSelector(self.klass, selector)
+    || protocol_hasSelector(protocol_, selector, true, true)
+    || protocol_hasSelector(protocol_, selector, true, false)
+    || protocol_hasSelector(protocol_, selector, false, true)
+    || protocol_hasSelector(protocol_, selector, false, false);
+}
+
 - (BOOL)respondsToSelector:(SEL)selector {
-    return protocol_hasSelector(protocol_, selector, true, true) ||
-    protocol_hasSelector(protocol_, selector, true, false) ||
-    protocol_hasSelector(protocol_, selector, false, true) ||
-    protocol_hasSelector(protocol_, selector, false, false);
+    return class_respondsToSelector(self.klass, selector)
+    || protocol_hasSelector(protocol_, selector, true, true)
+    || protocol_hasSelector(protocol_, selector, true, false)
+    || (!self.requiresExplicitStubs && protocol_hasSelector(protocol_, selector, false, true))
+    || (self.requiresExplicitStubs && [self has_stubbed_method_for:selector]);
 }
 
 - (NSString *)description {
@@ -43,7 +51,7 @@ static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_requi
 @end
 
 
-id CDR_fake_for(Protocol *protocol, bool require_explicit_stubs /*= true*/) {
+id CDR_fake_for(Protocol *protocol, BOOL require_explicit_stubs /*= YES */) {
     static size_t protocol_dummy_class_id = 0;
 
     const char * protocol_name = protocol_getName(protocol);
