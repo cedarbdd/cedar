@@ -8,26 +8,23 @@ BDD-style testing using Objective-C
 ## Usage
 
 
-### Clone from GitHub
-
-* Don't forget to initialize submodules:
-
-        $ git submodule update --init
-
-
 ### Installation
+* Clone from GitHub and initialize submodules:
+
+        $ git clone https://github.com/pivotal/cedar.git && cd cedar
+        $ git submodule update --init
 
 * Run the `installCodeSnippetsAndTemplates` script in the Cedar directory.
 
         $ ./installCodeSnippetsAndTemplates
 
 
-### Non-iOS testing
+### OS X testing
 
 * Select your project in Xcode to bring up the project editor.
 * Click on "Add Target".
 * Select "Cedar" under the Mac section.
-* Select either an OSX Cedar Testing Bundle or a OSX Cedar Spec Suite.  If you
+* Select either an OS X Cedar Testing Bundle or a OSX Cedar Spec Suite.  If you
   prefer to run a separate target to see your spec results, choose the
   spec suite.  If you prefer to run your specs with Xcode's built-in
   OCUnit runner, choose the testing bundle.  Name this target Specs, or something
@@ -76,15 +73,7 @@ BDD-style testing using Objective-C
 
 ## Matchers
 
-Cedar has a new set of matchers that use C++ templates to circumvent type issues
-that plague other matcher libraries.  For example, rather than this (OCHamcrest):
-
-    assertThat(aString, equalTo(@"something"));
-    assertThatInt(anInteger, equalToInt(7));
-    assertThatInt(anInteger, isNot(equalToInt(9)));
-    assertThatBool(aBoolean, equalTo(YES));
-
-you can write the following:
+Cedar includes matchers that use C++ templates to implement type-specific matchers with greater flexibility compared to other matcher libraries.  For example, one can write the following:
 
     expect(aString).to(equal(@"something"));
     expect(anInteger).to(equal(7));
@@ -95,7 +84,12 @@ although you would more likely write the last line as:
 
     expect(aBoolean).to(be_truthy());
 
-Here is a list of built-in matchers you can use:
+Note: If you prefer `should` syntax you can also write your expectations as follows:
+
+    1 + 2 should equal(3);
+    glass should_not be_empty();
+
+Here is a list of built-in matchers:
 
     expect(...).to(be_nil());
 
@@ -157,11 +151,6 @@ build its expectations (e.g. [Expecta](http://github.com/petejkim/expecta)) you
 will need to add `#define CEDAR_MATCHERS_COMPATIBILITY_MODE` before importing
 SpecHelper.h.  That will prevent Cedar from defining a macro that overrides that
 library's expect function.
-
-Note: If you prefer RSpec's `should` syntax you can write your expectations as follows:
-
-    1 + 2 should equal(3);
-    glass should_not be_empty();
 
 
 ### Matchers and ARC
