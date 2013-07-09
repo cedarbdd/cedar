@@ -187,13 +187,14 @@
 		AE9AA6DC15AE0B0400617E1A /* CedarDoubleImpl.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; };
 		AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
 		AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
+		AE9EAAD9178C789800CCF7DA /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
+		AE9EAADA178C789900CCF7DA /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
 		AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
 		AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
 		AEB45A911496C8D800845D09 /* RaiseException.h in Headers */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEB45A901496C8D800845D09 /* RaiseException.h */; };
 		AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
 		AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; };
-		AEBCDD7F173ACD6700B42B58 /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
 		AEC40C50174AC4C700474D2D /* UIGeometryCompareEqual.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */; };
 		AEC40C51174AC4C700474D2D /* UIGeometryStringifiers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */; };
 		AEC40C54174AC51D00474D2D /* UIKitEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */; };
@@ -1702,7 +1703,6 @@
 				969B6F84160C61E000C7C792 /* CDRSymbolicator.m in Sources */,
 				E31179D5161FD937007D3CDE /* CDRSlowTestStatistics.m in Sources */,
 				AE7F1708172730B000E1146D /* NSInvocation+Cedar.m in Sources */,
-				AEBCDD7F173ACD6700B42B58 /* CDRDefaultReporterSpec.mm in Sources */,
 				AED23E6C173D5545003D7A41 /* BeCloseTo.mm in Sources */,
 				AE02021917452007009A7915 /* StringifiersBase.mm in Sources */,
 				AEE8DBD7175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */,
@@ -1750,6 +1750,7 @@
 				96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */,
 				AEE0665617315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */,
 				AEE0665917315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
+				AE9EAAD9178C789800CCF7DA /* CDRDefaultReporterSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1841,6 +1842,7 @@
 				AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */,
 				AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */,
 				AE71E7CC175E958F002A54D5 /* ARCViewController.m in Sources */,
+				AE9EAADA178C789900CCF7DA /* CDRDefaultReporterSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
