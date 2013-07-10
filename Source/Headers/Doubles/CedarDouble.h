@@ -7,8 +7,12 @@ namespace Cedar { namespace Doubles {
 @protocol CedarDouble<NSObject>
 
 - (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method;
+
 - (NSArray *)sent_messages;
 - (void)reset_sent_messages;
+
+- (BOOL)can_stub:(SEL)selector;
+- (BOOL)has_stubbed_method_for:(SEL)selector;
 
 @end
 

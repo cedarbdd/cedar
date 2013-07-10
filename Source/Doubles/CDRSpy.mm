@@ -89,6 +89,10 @@
     return respondsToSelector;
 }
 
+- (BOOL)can_stub:(SEL)selector {
+    return [self respondsToSelector:selector];
+}
+
 #pragma mark - CedarDouble protocol
 
 - (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method {
