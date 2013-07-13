@@ -17,7 +17,8 @@ XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippe
 APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Preferences/appCode20/templates"
 
 SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "6.1"
-UISPEC_VERSIONS = [SDK_VERSION, "5.1"]
+SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || SDK_VERSION
+
 PROJECT_ROOT = File.dirname(__FILE__)
 BUILD_DIR = File.join(PROJECT_ROOT, "build")
 TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
@@ -26,7 +27,7 @@ APPCODE_SNIPPETS_FILENAME = "Cedar.xml"
 APPCODE_SNIPPETS_FILE = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "AppCodeSnippets", APPCODE_SNIPPETS_FILENAME)
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 
-def sdk_dir(version = SDK_VERSION)
+def sdk_dir(version)
   "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{version}.sdk"
 end
 
@@ -135,19 +136,17 @@ require 'tmpdir'
 
 desc "Run UI specs"
 task :uispecs => :build_uispecs do
-  UISPEC_VERSIONS.each do |version|
-    sdk_path = sdk_dir(version)
-    env_vars = {
-      "DYLD_ROOT_PATH" => sdk_path,
-      "IPHONE_SIMULATOR_ROOT" => sdk_path,
-      "CFFIXED_USER_HOME" => Dir.tmpdir,
-      "CEDAR_HEADLESS_SPECS" => "1",
-      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-    }
+  sdk_path = sdk_dir(SDK_RUNTIME_VERSION)
+  env_vars = {
+    "DYLD_ROOT_PATH" => sdk_path,
+    "IPHONE_SIMULATOR_ROOT" => sdk_path,
+    "CFFIXED_USER_HOME" => Dir.tmpdir,
+    "CEDAR_HEADLESS_SPECS" => "1",
+    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+  }
 
-    with_env_vars(env_vars) do
-      system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents";
-    end
+  with_env_vars(env_vars) do
+    system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents"
   end
 end
 
@@ -168,20 +167,21 @@ namespace :ocunit do
 
     system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", output_file("ocunit_application_specs")
 
+    sdk_path = sdk_dir(SDK_RUNTIME_VERSION)
     env_vars = {
-      "DYLD_ROOT_PATH" => sdk_dir,
+      "DYLD_ROOT_PATH" => sdk_path,
       "DYLD_INSERT_LIBRARIES" => "#{xcode_developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-      "DYLD_FALLBACK_LIBRARY_PATH" => sdk_dir,
+      "DYLD_FALLBACK_LIBRARY_PATH" => sdk_path,
       "XCInjectBundle" => "#{File.join(build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")}",
       "XCInjectBundleInto" => "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")}",
-      "IPHONE_SIMULATOR_ROOT" => sdk_dir,
+      "IPHONE_SIMULATOR_ROOT" => sdk_path,
       "CFFIXED_USER_HOME" => Dir.tmpdir,
       "CEDAR_HEADLESS_SPECS" => "1",
       "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
     }
 
     with_env_vars(env_vars) do
-      system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")} -RegisterForSystemEvents -SenTest All";
+      system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{APP_NAME}.app/#{APP_NAME}")} -RegisterForSystemEvents -SenTest All"
     end
   end
 end
