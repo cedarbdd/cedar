@@ -75,61 +75,56 @@ BDD-style testing using Objective-C
 
 Cedar includes matchers that use C++ templates to implement type-specific matchers with greater flexibility compared to other matcher libraries.  For example, one can write the following:
 
-    expect(aString).to(equal(@"something"));
-    expect(anInteger).to(equal(7));
-    expect(anInteger).to_not(equal(9));
-    expect(aBoolean).to(equal(YES));
+    aString should equal(@"something");
+    anInteger should equal(7);
+    anInteger should_not equal(9);
+    aBoolean should equal(YES);
 
 although you would more likely write the last line as:
 
-    expect(aBoolean).to(be_truthy());
+    aBoolean should be_truthy;
 
-Note: If you prefer `should` syntax you can also write your expectations as follows:
+Note: If you prefer `expect` `to` syntax you can also write your expectations as follows:
 
-    1 + 2 should equal(3);
-    glass should_not be_empty();
+    expect(1 + 2).to(equal(3));
+    expect(glass).to_not(be_empty());
 
 Here is a list of built-in matchers:
 
-    expect(...).to(be_nil());
+    ... should be_nil;
 
-    expect(...).to(be_truthy());
-    expect(...).to_not(be_truthy());
+    ... should be_truthy;
+    ... should_not be_truthy;
 
-    expect(...).to(equal(10));
-    expect(...).to == 10; // shortcut to the above
-    expect(...) == 10; // shortcut to the above
+    ... should equal(10);
+    expect(...) == 10;
 
-    expect(...).to(be_greater_than(5));
-    expect(...).to > 5; // shortcut to the above
-    expect(...) > 5; // shortcut to the above
+    ... should be_greater_than(5);
+    expect(...) >= 5;
 
-    expect(...).to(be_greater_than_or_equal_to(10));
-    expect(...).to(be_gte(10)); // shortcut to the above
-    expect(...).to >= 10; // shortcut to the above
-    expect(...) >= 10; // shortcut to the above
+    ... should be_greater_than_or_equal_to(10);
+    ... should be_gte(10); // shortcut to the above
+    expect(...) >= 10;
 
-    expect(...).to(be_less_than(11));
-    expect(...).to < 11; // shortcut to the above
-    expect(...) < 11; // shortcut to the above
+    ... should be_less_than(11);
+    expect(...) >= 10;
 
-    expect(...).to(be_less_than_or_equal_to(10));
-    expect(...).to(be_lte(10)); //shortcut to the above
-    expect(...).to <= 10; // shortcut to the above
-    expect(...) <= 10; // shortcut to the above
+    ... should be_less_than_or_equal_to(10);
+    ... should be_lte(10); //shortcut to the above
+    expect(...) >= 10;
 
-    expect(...).to(be_close_to(5)); // default within(.01)
-    expect(...).to(be_close_to(5).within(.02));
+    ... should be_close_to(5); // default within(.01)
+    ... should be_close_to(5).within(.02);
 
-    expect(...).to(be_instance_of([NSObject class]));
-    expect(...).to(be_instance_of([NSObject class]).or_any_subclass());
+    ... should be_instance_of([NSObject class]);
+    ... should be_instance_of([NSObject class]).or_any_subclass();
 
-    expect(...).to(be_same_instance_as(object));
+    ... should be_same_instance_as(object);
 
-    expect(...).to(contain(@"something"));
-    expect(...).to(be_empty());
+    ... should contain(@"something");
+    ... should be_empty;
 
-    expect(^{ ... }).to(raise_exception([NSInternalInconsistencyException class]));
+    ^{ ... } should raise_exception([NSInternalInconsistencyException class]);
 
 These matchers use C++ templates for type deduction.  You'll need to do two things to use them:
 
@@ -236,7 +231,7 @@ object, and each shared example group will receive it:
     sharedExamplesFor(@"a red thing", ^(NSDictionary *context) {
         it(@"should be red", ^{
             Thing *thing = [context objectForKey:@"thing"];
-            expect(thing.color).to(equal(red));
+            thing.color should equal(red);
         });
     });
 
