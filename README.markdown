@@ -217,8 +217,11 @@ fake stub_method("selector").with(anything);
 
 Protocol fakes:
 
-    id<CedarDouble> anotherFake = fake_for(someProtocol);
-    id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
+```objective-c
+id<CedarDouble> anotherFake = fake_for(someProtocol);
+id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
+```
+
 
 A nice fake will respond to all protocol methods and record their invocations.
 A non-nice fake will not respond to optional protocol methods, and requires stubs to be set up before messages are received.
