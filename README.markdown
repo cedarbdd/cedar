@@ -100,18 +100,18 @@ Here is a list of built-in matchers:
     expect(...) == 10;
 
     ... should be_greater_than(5);
-    expect(...) >= 5;
+    expect(...) > 5;
 
     ... should be_greater_than_or_equal_to(10);
     ... should be_gte(10); // shortcut to the above
     expect(...) >= 10;
 
     ... should be_less_than(11);
-    expect(...) >= 10;
+    expect(...) < 11;
 
     ... should be_less_than_or_equal_to(10);
     ... should be_lte(10); //shortcut to the above
-    expect(...) >= 10;
+    expect(...) <= 10;
 
     ... should be_close_to(5); // default within(.01)
     ... should be_close_to(5).within(.02);
