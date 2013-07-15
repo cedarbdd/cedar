@@ -11,12 +11,17 @@ BDD-style testing using Objective-C
 ### Installation
 * Clone from GitHub and initialize submodules:
 
-        $ git clone https://github.com/pivotal/cedar.git && cd cedar
-        $ git submodule update --init
+```
+$ git clone https://github.com/pivotal/cedar.git && cd cedar
+$ git submodule update --init
+```
+
 
 * Run the `installCodeSnippetsAndTemplates` script in the Cedar directory.
 
-        $ ./installCodeSnippetsAndTemplates
+```
+$ ./installCodeSnippetsAndTemplates
+```
 
 
 ### OS X testing
@@ -75,56 +80,68 @@ BDD-style testing using Objective-C
 
 Cedar includes matchers that use C++ templates to implement type-specific matchers with greater flexibility compared to other matcher libraries.  For example, one can write the following:
 
-    aString should equal(@"something");
-    anInteger should equal(7);
-    anInteger should_not equal(9);
-    aBoolean should equal(YES);
+```objective-c
+aString should equal(@"something");
+anInteger should equal(7);
+anInteger should_not equal(9);
+aBoolean should equal(YES);
+```
+
 
 although you would more likely write the last line as:
 
-    aBoolean should be_truthy;
+```objective-c
+aBoolean should be_truthy;
+```
+
 
 Note: If you prefer `expect` `to` syntax you can also write your expectations as follows:
 
-    expect(1 + 2).to(equal(3));
-    expect(glass).to_not(be_empty());
+```objective-c
+expect(1 + 2).to(equal(3));
+expect(glass).to_not(be_empty());
+```
+
 
 Here is a list of built-in matchers:
 
-    ... should be_nil;
+```objective-c
+... should be_nil;
 
-    ... should be_truthy;
-    ... should_not be_truthy;
+... should be_truthy;
+... should_not be_truthy;
 
-    ... should equal(10);
-    expect(...) == 10;
+... should equal(10);
+expect(...) == 10;
 
-    ... should be_greater_than(5);
-    expect(...) > 5;
+... should be_greater_than(5);
+expect(...) > 5;
 
-    ... should be_greater_than_or_equal_to(10);
-    ... should be_gte(10); // shortcut to the above
-    expect(...) >= 10;
+... should be_greater_than_or_equal_to(10);
+... should be_gte(10); // shortcut to the above
+expect(...) >= 10;
 
-    ... should be_less_than(11);
-    expect(...) < 11;
+... should be_less_than(11);
+expect(...) < 11;
 
-    ... should be_less_than_or_equal_to(10);
-    ... should be_lte(10); //shortcut to the above
-    expect(...) <= 10;
+... should be_less_than_or_equal_to(10);
+... should be_lte(10); //shortcut to the above
+expect(...) <= 10;
 
-    ... should be_close_to(5); // default within(.01)
-    ... should be_close_to(5).within(.02);
+... should be_close_to(5); // default within(.01)
+... should be_close_to(5).within(.02);
 
-    ... should be_instance_of([NSObject class]);
-    ... should be_instance_of([NSObject class]).or_any_subclass();
+... should be_instance_of([NSObject class]);
+... should be_instance_of([NSObject class]).or_any_subclass();
 
-    ... should be_same_instance_as(object);
+... should be_same_instance_as(object);
 
-    ... should contain(@"something");
-    ... should be_empty;
+... should contain(@"something");
+... should be_empty;
 
-    ^{ ... } should raise_exception([NSInternalInconsistencyException class]);
+^{ ... } should raise_exception([NSInternalInconsistencyException class]);
+```
+
 
 These matchers use C++ templates for type deduction.  You'll need to do two things to use them:
 
@@ -132,7 +149,10 @@ These matchers use C++ templates for type deduction.  You'll need to do two thin
   compiler that the file contains C++ code).
 * Add the following line to the top of your spec files, after the file includes:
 
-        using namespace Cedar::Matchers;
+```objective-c
+using namespace Cedar::Matchers;
+```
+
 
 It's also theoretically very easy to add your own matchers without modifying the
 Cedar library (more on this later).
@@ -155,34 +175,44 @@ A bug in old versions of Xcode (< 4.6) can prevent the type C++ deduction from a
 1. Update to the latest Xcode version. (recommended)
 2. Disable ARC for your spec files, but continue to use it for your application code.  You can do this by selecting spec files in the target's "Compile Sources" build phase and adding the compiler flag `-fno-objc-arc`.  You can help ensure that you do this by creating a `SpecHelper.h` file in your spec target that you `#import` into every spec which contains this guard:
 
-        #if __has_feature(objc_arc)
-            #error ARC must be disabled for specs!
-        #endif
+```objective-c
+#if __has_feature(objc_arc)
+    #error ARC must be disabled for specs!
+#endif
+```
+
 
 3. Use another matcher library like [Expecta](http://github.com/petejkim/expecta).  Just remove the following line from your spec files:
 
-        using namespace Cedar::Matchers;
+```objective-c
+using namespace Cedar::Matchers;
+```
 
 
 ## Mocks and stubs
 
 Doubles.  Got 'em.
 
-    spy_on(someInstance);
-    id<CedarDouble> fake = fake_for(someClass);
-    id<CedarDouble> anotherFake = fake_for(someProtocol);
-    id<CedarDouble> niceFake = nice_fake_for(someClass);
-    id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
+```objective-c
+spy_on(someInstance);
+id<CedarDouble> fake = fake_for(someClass);
+id<CedarDouble> anotherFake = fake_for(someProtocol);
+id<CedarDouble> niceFake = nice_fake_for(someClass);
+id<CedarDouble> anotherNiceFake = nice_fake_for(someProtocol);
+```
+
 
 Method stubbing:
 
-    fake stub_method("selector").with(x);
-    fake stub_method("selector").with(x).and_with(y);
-    fake stub_method("selector").and_return(z);
-    fake stub_method("selector").with(x).and_return(z);
-    fake stub_method("selector").and_raise_exception();
-    fake stub_method("selector").and_raise_exception([NSException]);
-    fake stub_method("selector").with(anything);
+```objective-c
+fake stub_method("selector").with(x);
+fake stub_method("selector").with(x).and_with(y);
+fake stub_method("selector").and_return(z);
+fake stub_method("selector").with(x).and_return(z);
+fake stub_method("selector").and_raise_exception();
+fake stub_method("selector").and_raise_exception([NSException]);
+fake stub_method("selector").with(anything);
+```
 
 
 ## Shared example groups
@@ -192,62 +222,70 @@ either inline with your spec declarations, or separately.
 
 Declaring shared examples inline with your specs is the simplest:
 
-    SPEC_BEGIN(FooSpecs)
+```objective-c
+SPEC_BEGIN(FooSpecs)
 
-    sharedExamplesFor(@"a similarly-behaving thing", ^(NSDictionary *context) {
-        it(@"should do something common", ^{
-            ...
-        });
+sharedExamplesFor(@"a similarly-behaving thing", ^(NSDictionary *context) {
+    it(@"should do something common", ^{
+        ...
     });
+});
 
-    describe(@"Something that shares behavior", ^{
-        itShouldBehaveLike(@"a similarly-behaving thing");
-    });
+describe(@"Something that shares behavior", ^{
+    itShouldBehaveLike(@"a similarly-behaving thing");
+});
 
-    describe(@"Something else that shares behavior", ^{
-        itShouldBehaveLike(@"a similarly-behaving thing");
-    });
+describe(@"Something else that shares behavior", ^{
+    itShouldBehaveLike(@"a similarly-behaving thing");
+});
 
-    SPEC_END
+SPEC_END
+```
+
 
 Sometimes you'll want to put shared examples in a separate file so you can use
 them in several specs across different files.  You can do this using macros
 specifically for declaring shared example groups:
 
-    SHARED_EXAMPLE_GROUPS_BEGIN(GloballyCommon)
+```objective-c
+SHARED_EXAMPLE_GROUPS_BEGIN(GloballyCommon)
 
-    sharedExamplesFor(@"a thing with globally common behavior", ^(NSDictionary *context) {
-        it(@"should do something really common", ^{
-            ...
-        });
+sharedExamplesFor(@"a thing with globally common behavior", ^(NSDictionary *context) {
+    it(@"should do something really common", ^{
+        ...
     });
+});
 
-    SHARED_EXAMPLE_GROUPS_END
+SHARED_EXAMPLE_GROUPS_END
+```
+
 
 The context dictionary allows you to pass example-specific state into the shared
 example group.  You can populate the context dictionary available on the SpecHelper
 object, and each shared example group will receive it:
 
-    sharedExamplesFor(@"a red thing", ^(NSDictionary *context) {
-        it(@"should be red", ^{
-            Thing *thing = [context objectForKey:@"thing"];
-            thing.color should equal(red);
-        });
+```objective-c
+sharedExamplesFor(@"a red thing", ^(NSDictionary *context) {
+    it(@"should be red", ^{
+        Thing *thing = [context objectForKey:@"thing"];
+        thing.color should equal(red);
     });
+});
 
-    describe(@"A fire truck", ^{
-        beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[FireTruck fireTruck] forKey:@"thing"];
-        });
-        itShouldBehaveLike(@"a red thing");
+describe(@"A fire truck", ^{
+    beforeEach(^{
+        [[SpecHelper specHelper].sharedExampleContext setObject:[FireTruck fireTruck] forKey:@"thing"];
     });
+    itShouldBehaveLike(@"a red thing");
+});
 
-    describe(@"An apple", ^{
-        beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[Apple apple] forKey:@"thing"];
-        });
-        itShouldBehaveLike(@"a red thing");
+describe(@"An apple", ^{
+    beforeEach(^{
+        [[SpecHelper specHelper].sharedExampleContext setObject:[Apple apple] forKey:@"thing"];
     });
+    itShouldBehaveLike(@"a red thing");
+});
+```
 
 
 ## Global beforeEach and afterEach
@@ -267,7 +305,10 @@ the +beforeEach and/or +afterEach methods.
 
 If you'd like to specify but not implement an example you can do so like this:
 
-    it(@"should do something eventually", PENDING);
+```objective-c
+it(@"should do something eventually", PENDING);
+```
+
 
 The spec runner will not try to run this example, but report it as pending.  The
 PENDING keyword simply references a nil block pointer; if you prefer you can
@@ -282,9 +323,12 @@ Sometimes when debugging or developing a new feature it is useful to run only a
 subset of your tests.  That can be achieved by marking any number of examples
 with an 'f'. You can use `fit`, `fdescribe` and `fcontext` like this:
 
-    fit(@"should do something eventually", ^{
-        // ...
-    });
+```objective-c
+fit(@"should do something eventually", ^{
+    // ...
+});
+```
+
 
 If your test suite has at least one focused example, all focused examples will
 run and non-focused examples will be skipped and reported as such (shown as '>'
@@ -310,21 +354,24 @@ a before each block because you may have only one for any given example group
 (if multiple levels define a subject action block Cedar will throw an exception),
 and it will run after all before each blocks for a given example.  For example:
 
-    describe(@"thing", ^{
-        __block BOOL parameter;
+```objective-c
+describe(@"thing", ^{
+    __block BOOL parameter;
 
-        subjectAction(^{ [object doThingWithParameter:parameter]; });
+    subjectAction(^{ [object doThingWithParameter:parameter]; });
 
-        describe(@"when something is true", ^{
-            beforeEach(^{
-                parameter = YES;
-            });
+    describe(@"when something is true", ^{
+        beforeEach(^{
+            parameter = YES;
+        });
 
-            it(@"should ...", ^{
-                // ...
-            });
+        it(@"should ...", ^{
+            // ...
         });
     });
+});
+```
+
 
 In this case the parameter will be set to YES *before* the subject action runs.
 
