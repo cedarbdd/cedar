@@ -542,7 +542,6 @@ describe(@"CDRExampleGroup", ^{
 
         describe(@"when initialized as a root group", ^{
             beforeEach(^{
-                [group release];
                 group = [[CDRExampleGroup alloc] initWithText:@"I am a root group" isRoot:YES];
             });
 
