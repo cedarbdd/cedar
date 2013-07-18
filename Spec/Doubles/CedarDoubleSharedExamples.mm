@@ -63,6 +63,19 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             myDouble.retainCount should equal(doubleRetainCount);
         });
 
+        it(@"should keep a reference to all object parameters", ^{
+            myDouble stub_method("methodWithString:");
+            NSMutableString *parameter;
+
+            @autoreleasepool {
+                parameter = [[[NSMutableString alloc] initWithString:@"Boom"] autorelease];
+                [myDouble methodWithString:parameter];
+            }
+
+            [parameter appendString:@" goes the dynamite!"];
+            parameter should equal(@"Boom goes the dynamite!");
+        });
+
         it(@"should exchange any block arguments with copies that can later be invoked", ^{
             __block BOOL blockWasCalled = NO;
             void *blockVariableLocationOnStack = &blockWasCalled;
