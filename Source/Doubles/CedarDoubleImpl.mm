@@ -4,6 +4,7 @@
 #import "CDRClassFake.h"
 
 static NSMutableArray *registeredDoubleImpls__ = nil;
+static NSMutableArray *invokedActions__ = nil;
 
 @interface CedarDoubleImpl () {
     Cedar::Doubles::StubbedMethod::selector_map_t stubbed_methods_;
@@ -20,6 +21,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 
 + (void)afterEach {
     [CedarDoubleImpl releaseRecordedInvocations];
+    [CedarDoubleImpl releaseInvokedActions];
 }
 
 - (id)init {
@@ -119,12 +121,31 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {
+    [CedarDoubleImpl registerInvokedAction:invocation.target];
     [invocation copyBlockArguments];
-    [invocation retainArguments];
+    [self retainArguments:invocation];
     [self.sent_messages addObject:invocation];
 }
 
 #pragma mark - Private interface
+
+- (void)retainArguments:(NSInvocation *)invocation {
+    for (NSInteger argIndex = 2; argIndex < [[invocation methodSignature] numberOfArguments]; ++argIndex) {
+        const char *encoding = [[invocation methodSignature] getArgumentTypeAtIndex:argIndex];
+        if (strncmp("@", encoding, 1) == 0) {
+            id object = nil;
+            [invocation getArgument:&object atIndex:argIndex];
+            [object retain];
+        }
+        else if (strncmp("*", encoding, 1) == 0) {
+            char *object = nil;
+            [invocation getArgument:&object atIndex:argIndex];
+            char *string = (char *)malloc(strlen(object));
+            strcpy(string, object);
+            [invocation setArgument:&string atIndex:argIndex];
+        }
+    }
+}
 
 - (Cedar::Doubles::StubbedMethod &)add_stubbed_method:(const Cedar::Doubles::StubbedMethod &)stubbed_method at_vector_location:(Cedar::Doubles::StubbedMethod::stubbed_method_vector_t::iterator)iterator {
     const SEL & selector = stubbed_method.selector();
@@ -145,6 +166,19 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
         registeredDoubleImpls__ = [[NSMutableArray alloc] init];
     }
     [registeredDoubleImpls__ addObject:doubleImpl];
+}
+
++ (void)releaseInvokedActions {
+    [invokedActions__ makeObjectsPerformSelector:@selector(reset_sent_messages)];
+    [invokedActions__ release];
+    invokedActions__ = nil;
+}
+
++ (void)registerInvokedAction:(CedarDoubleImpl *)invokedAction {
+    if (!invokedActions__) {
+        invokedActions__ = [[NSMutableArray alloc] init];
+    }
+    [invokedActions__ addObject:invokedAction];
 }
 
 @end
