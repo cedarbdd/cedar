@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+typedef void (^RunBlock)();
+
 @protocol SimpleIncrementer<NSObject>
 
 @required
@@ -11,6 +13,7 @@
 - (void)incrementByABit:(size_t)aBit andABitMore:(NSNumber *)aBitMore;
 - (void)incrementWithException;
 - (void)methodWithBlock:(void(^)())blockArgument;
+- (void)methodWithRunBlock:RunBlock;
 - (void)methodWithCString:(char *)string;
 - (NSNumber *)methodWithNumber1:(NSNumber *)arg1 andNumber2:(NSNumber *)arg2;
 - (void)methodWithString:(NSMutableString *)mutableString;
