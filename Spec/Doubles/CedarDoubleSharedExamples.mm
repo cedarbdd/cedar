@@ -122,8 +122,8 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         it(@"should retain invocations for across nested async blocks with multiple dispatch groups", ^{
             __block bool called = false;
 
-            myDouble stub_method("methodWithRunBlock:").and_do(^(NSInvocation *invocation) {
-                RunBlock runBlock;
+            myDouble stub_method("methodWithBlock:").and_do(^(NSInvocation *invocation) {
+                void (^runBlock)();
                 [invocation getArgument:&runBlock atIndex:2];
                 runBlock();
                 called = true;
@@ -136,13 +136,13 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 dispatch_set_target_queue(priorityQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0));
                 dispatch_group_async(group, queue, ^{
                     dispatch_group_enter(group);
-                    [myDouble methodWithRunBlock:^{
+                    [myDouble methodWithBlock:^{
                         dispatch_group_leave(group);
                     }];
                 });
                 dispatch_group_notify(group, queue, ^{
                     dispatch_queue_t mainQueue = dispatch_get_main_queue();
-                    [myDouble methodWithRunBlock:^{
+                    [myDouble methodWithBlock:^{
                         dispatch_async(priorityQueue, ^{
                             dispatch_async(mainQueue, ^{
                                 called = true;
@@ -157,7 +157,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:0.1];
                 [[NSRunLoop currentRunLoop] runUntilDate:futureDate];
             }
-            myDouble should have_received("methodWithRunBlock:");
+            myDouble should have_received("methodWithBlock:");
         });
     });
 
