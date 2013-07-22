@@ -3,13 +3,15 @@ Feature:
   I should be able to use Cedar templates
 
   Scenario: Add Cedar spec bundle target
-    Given a Xcode project
+    Given an Xcode OS X project
 
-    When I add a Spec bundle target
+    When I add an OS X Spec bundle target
     Then the `rake Spec` should work
 
   Scenario: Add Cedar spec suite target
-    Given a Xcode project
+    Given an Xcode OS X project
 
-    When I add a Spec suite target
+    When I add an OS X Spec suite target
     Then the `rake Spec` should work
+
+
