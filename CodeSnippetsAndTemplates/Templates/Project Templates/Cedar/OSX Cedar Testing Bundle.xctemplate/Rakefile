@@ -7,6 +7,8 @@ module ___PACKAGENAME___
   PROJECT_ROOT = Pathname.new(File.dirname(__FILE__)).parent.to_s
   BUILD_DIR = File.join(PROJECT_ROOT, "build")
 
+  FileUtils.mkdir_p(File.join(BUILD_DIR, CONFIGURATION))
+
   class << self
     def in_project_dir
       original_dir = Dir.pwd
