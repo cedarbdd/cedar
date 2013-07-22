@@ -17,7 +17,7 @@ When(/^I add an OS X Spec suite target$/) do
   File.exist?("template-project/Specs").should be_true
 end
 
-Then(/^the `rake Spec` should work$/) do
+Then(/^the `rake Specs` should work$/) do
   `cd template-project; cd Specs; rake Specs 2> /dev/null`
   $?.exitstatus.should == 0
 end

@@ -6,12 +6,12 @@ Feature:
     Given an Xcode OS X project
 
     When I add an OS X Spec bundle target
-    Then the `rake Spec` should work
+    Then the `rake Specs` should work
 
   Scenario: Add Cedar spec suite target
     Given an Xcode OS X project
 
     When I add an OS X Spec suite target
-    Then the `rake Spec` should work
+    Then the `rake Specs` should work
 
 
