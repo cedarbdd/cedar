@@ -1,19 +1,19 @@
 Given(/^an Xcode OS X project$/) do
   `rm -rf template-project`
-  `cp -pr osx-project-template template-project`
+  `cp -pr features/support/osx-project-template template-project`
   $?.exitstatus.should == 0
   File.exist?("template-project").should be_true
 end
 
 When(/^I add an OS X Spec bundle target$/) do
   `open -a Xcode template-project/template-project.xcodeproj`
-  `osascript scripts/osx_add_spec_bundle.scpt`
+  `osascript features/support/scripts/osx_add_spec_bundle.scpt`
   File.exist?("template-project/Specs").should be_true
 end
 
 When(/^I add an OS X Spec suite target$/) do
   `open -a Xcode template-project/template-project.xcodeproj`
-  `osascript scripts/osx_add_spec_suite.scpt`
+  `osascript features/support/scripts/osx_add_spec_suite.scpt`
   File.exist?("template-project/Specs").should be_true
 end
 
