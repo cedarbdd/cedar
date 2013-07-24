@@ -63,6 +63,19 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             myDouble.retainCount should equal(doubleRetainCount);
         });
 
+        it(@"should keep a reference to all object parameters", ^{
+            myDouble stub_method("methodWithString:");
+            NSMutableString *parameter;
+
+            @autoreleasepool {
+                parameter = [[[NSMutableString alloc] initWithString:@"Boom"] autorelease];
+                [myDouble methodWithString:parameter];
+            }
+
+            [parameter appendString:@" goes the dynamite!"];
+            parameter should equal(@"Boom goes the dynamite!");
+        });
+
         it(@"should exchange any block arguments with copies that can later be invoked", ^{
             __block BOOL blockWasCalled = NO;
             void *blockVariableLocationOnStack = &blockWasCalled;
@@ -104,6 +117,47 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
             argument == string should_not be_truthy;
             strcmp("hello", argument) should equal(0);
+        });
+
+        it(@"should retain invocations for across nested async blocks with multiple dispatch groups", ^{
+            __block bool called = false;
+
+            myDouble stub_method("methodWithBlock:").and_do(^(NSInvocation *invocation) {
+                void (^runBlock)();
+                [invocation getArgument:&runBlock atIndex:2];
+                runBlock();
+                called = true;
+            });
+
+            ^{
+                dispatch_group_t group = dispatch_group_create();
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+                dispatch_queue_t priorityQueue = dispatch_queue_create("priorityQueue", 0);
+                dispatch_set_target_queue(priorityQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0));
+                dispatch_group_async(group, queue, ^{
+                    dispatch_group_enter(group);
+                    [myDouble methodWithBlock:^{
+                        dispatch_group_leave(group);
+                    }];
+                });
+                dispatch_group_notify(group, queue, ^{
+                    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+                    [myDouble methodWithBlock:^{
+                        dispatch_async(priorityQueue, ^{
+                            dispatch_async(mainQueue, ^{
+                                called = true;
+                            });
+                        });
+                    }];
+                });
+            }();
+
+            while (!called) {
+                [[NSRunLoop currentRunLoop] addTimer:[NSTimer timerWithTimeInterval:0.1 invocation:nil repeats:NO] forMode:NSDefaultRunLoopMode];
+                NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:0.1];
+                [[NSRunLoop currentRunLoop] runUntilDate:futureDate];
+            }
+            myDouble should have_received("methodWithBlock:");
         });
     });
 
