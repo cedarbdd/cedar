@@ -16,3 +16,7 @@ When(/^I add an iOS Spec suite target$/) do
   `osascript features/support/scripts/ios_add_spec_suite.scpt`
   File.exist?("template-project/Specs").should be_true
 end
+
+When(/^I reference AppDelegate in the test$/) do
+  `cp features/support/templates/ExampleSpec.mm template-project/Specs`
+end

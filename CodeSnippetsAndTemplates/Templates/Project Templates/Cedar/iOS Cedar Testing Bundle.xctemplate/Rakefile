@@ -87,8 +87,8 @@ end
 desc "Build ___PACKAGENAME___ OCUnit application specs"
 task :build____PACKAGENAME___ => :clean____PACKAGENAME___ do
   ___PACKAGENAME___.kill_simulator
-  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} ; xcodebuild -target ___VARIABLE_testTargetName___ -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator#{___PACKAGENAME___.deployment_target_sdk_version} build TEST_AFTER_BUILD=NO SYMROOT='#{___PACKAGENAME___::BUILD_DIR}' ; popd", ___PACKAGENAME___.output_file("___PACKAGENAME___-AppBuild")
-  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} ; xcodebuild -target #{___PACKAGENAME___::UI_SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator#{___PACKAGENAME___.deployment_target_sdk_version} build TEST_AFTER_BUILD=NO SYMROOT='#{___PACKAGENAME___::BUILD_DIR}' ; popd", ___PACKAGENAME___.output_file("___PACKAGENAME___-SpecBuild")
+  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} && xcodebuild -target ___VARIABLE_testTargetName___ -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator#{___PACKAGENAME___.deployment_target_sdk_version} build TEST_AFTER_BUILD=NO SYMROOT='#{___PACKAGENAME___::BUILD_DIR}' && popd", ___PACKAGENAME___.output_file("___PACKAGENAME___-AppBuild")
+  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} && xcodebuild -target #{___PACKAGENAME___::UI_SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator#{___PACKAGENAME___.deployment_target_sdk_version} build TEST_AFTER_BUILD=NO SYMROOT='#{___PACKAGENAME___::BUILD_DIR}' && popd", ___PACKAGENAME___.output_file("___PACKAGENAME___-SpecBuild")
 end
 
 desc "Run ___PACKAGENAME___ OCUnit application specs"

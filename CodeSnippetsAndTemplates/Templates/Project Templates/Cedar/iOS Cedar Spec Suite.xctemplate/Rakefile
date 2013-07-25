@@ -87,7 +87,7 @@ end
 desc "Build ___PACKAGENAME___"
 task :build____PACKAGENAME___ => :clean____PACKAGENAME___ do
   ___PACKAGENAME___.kill_simulator
-  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} ; xcodebuild -target #{___PACKAGENAME___::UI_SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator build ; popd", ___PACKAGENAME___.output_file("___PACKAGENAME___")
+  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} && xcodebuild -target #{___PACKAGENAME___::UI_SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator build && popd", ___PACKAGENAME___.output_file("___PACKAGENAME___")
 end
 
 desc "Run ___PACKAGENAME___"
