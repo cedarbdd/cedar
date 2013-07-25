@@ -21,3 +21,5 @@ Documentation lives here: [https://github.com/pivotal/cedar/wiki](https://github
 * [Adam Milligan](mailto:adam.milligan@alum.dartmouth.org) ([amilligan](http://github.com/amilligan)), Author
 
 Copyright (c) 2010-2013 Pivotal Labs. This software is licensed under the MIT License.
+
+[![Mixpanel](https://api.mixpanel.com/track/?data=CXsiZXZlbnQiOiAiSG9tZSBWaXNpdCIsIA0KICAgIAkJInByb3BlcnRpZXMiOiB7ICAJDQogICAgICAgIAkidG9rZW4iOiAiNmJjZmE3MmQ5OGU2ZjdhZjFkNjQ3YWNmY2Q2NjMwNTEiICAgDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICB9&ip=1&img=1)](http://mixpanel.com)
