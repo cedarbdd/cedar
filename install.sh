@@ -1,8 +1,16 @@
 #!/bin/sh
 
-log() { printf "%b\n" "$*"; }
+INSTALL_UUID=$(uuidgen)
 
-fail() { log "\nERROR: $*\n" ; exit 1 ; }
+log() {
+  printf "%b\n" "$*"
+}
+
+fail() {
+  log "\nERROR: $*\n"
+  log_event "Install Error" error "${*}"
+  exit 1
+}
 
 usage() {
   log "$0 [--head]"
@@ -14,7 +22,7 @@ usage() {
 }
 
 switch_to_latest_tag() {
-  LATEST_VERSION_TAG=$(git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\.\\d\\.\\d | head -n1)
+  LATEST_VERSION_TAG=$(git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\+\\.\\d\\+\\.\\d\\+ | head -n1)
 
   git checkout ${LATEST_VERSION_TAG} > /dev/null 2>&1
   if [[ $? != 0 ]]; then
@@ -22,11 +30,24 @@ switch_to_latest_tag() {
   fi
 }
 
+log_event() {
+  TOKEN=6bcfa72d98e6f7af1d647acfcd663051
+  EVENT=$1
+  PROPERTY_NAME=$2
+  PROPERTY_VALUE=$3
+  if [[ -n ${PROPERTY_NAME} ]] ; then
+    PAYLOAD=$(echo '{"event": "'${EVENT}'", "properties": { "distinct_id":"'${INSTALL_UUID}'", "'${PROPERTY_NAME}'":"'${PROPERTY_VALUE}'", "token": "'${TOKEN}'" } }' | base64)
+  else
+    PAYLOAD=$(echo '{"event": "'${EVENT}'", "properties": { "distinct_id":"'${INSTALL_UUID}'", "token": "'${TOKEN}'" } }' | base64)
+  fi
+  curl 'https://api.mixpanel.com/track/?data='${PAYLOAD} > /dev/null 2>&1
+}
+
 while (($# > 0))
 do
-  token="$1"
+  TOKEN="$1"
   shift
-  case "$token" in
+  case "$TOKEN" in
     --head|--HEAD|head|HEAD)
       GET_HEAD=1
       ;;
@@ -54,8 +75,10 @@ cd ~/.cedar > /dev/null
 
 if [[ $GET_HEAD == 1 ]] ; then
   LATEST_VERSION_TAG=$(git rev-parse HEAD)
+  log_event "Install Script Run" version HEAD
 else
   switch_to_latest_tag
+  log_event "Install Script Run" version "${LATEST_VERSION_TAG}"
 fi
 
 echo "Initializing Cedar submodules"
@@ -71,4 +94,5 @@ if [[ $? != 0 ]] ; then
 fi
 
 echo "Cedar version ${LATEST_VERSION_TAG} installed to ~/Library"
+log_event "Successful Install"
 
