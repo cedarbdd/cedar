@@ -6,7 +6,7 @@ Cedar is a BDD-style Objective-C testing framework.  It relies only on Foundatio
 
 # Quick start
 
-* Install the Xcode command line tools package (Under the Preferences tab 'Downloads') if you haven't already done so.
+* Install the Xcode command line tools package (Under the Preferences tab 'Downloads') if you haven't already done so
 * Run the following in a terminal:
 
 ```
@@ -19,7 +19,7 @@ Cedar is a BDD-style Objective-C testing framework.  It relies only on Foundatio
 
 # Documentation
 
-Documentation can be found on the [Cedar Wiki](https://github.com/pivotal/cedar/wiki)
+Documentation can be found on the [Cedar Wiki](https://github.com/pivotal/cedar/wiki).
 
 # Support and feedback
 
@@ -27,6 +27,10 @@ Documentation can be found on the [Cedar Wiki](https://github.com/pivotal/cedar/
 * Send an e-mail to the discussion list: [mailto:cedar-discuss@googlegroups.com](mailto:cedar-discuss@googlegroups.com)
 * View the project backlog on Pivotal Tracker: [http://www.pivotaltracker.com/projects/77775](http://www.pivotaltracker.com/projects/77775).
 * Follow us on twitter: [@cedarbdd](http://twitter.com/cedarbdd)
+
+# Contributing
+
+Please read the [Contributor Guide](https://github.com/pivotal/cedar/wiki/Contributor-guide) on the wiki.
 
 # Maintainers
 
