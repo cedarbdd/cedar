@@ -47,7 +47,7 @@ CDRExample * it(NSString *text, CDRSpecBlock block) {
 #pragma mark - Pending
 
 CDRExampleGroup * xdescribe(NSString *text, CDRSpecBlock block) {
-    CDRExampleGroup *group = describe(text, ^{});
+    CDRExampleGroup *group = describe(text, ^{it(@"is pending", PENDING);});
     return with_stack_address(group);
 }
 
