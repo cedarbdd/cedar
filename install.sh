@@ -67,7 +67,7 @@ fi
 rm -rf ~/.cedar > /dev/null
 
 echo "Cloning Cedar repo to ~/.cedar"
-git clone git@github.com:pivotal/cedar ~/.cedar > /dev/null 2>&1
+git clone git@github.com:pivotal/cedar.git ~/.cedar > /dev/null 2>&1
 if [[ $? != 0 ]] ; then
     fail "Unable to clone Cedar GitHub repo"
 fi
