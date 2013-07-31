@@ -5,6 +5,10 @@
 #import "CedarDoubleImpl.h"
 #import "CDRSpyInfo.h"
 
+@interface NSInvocation (UndocumentedPrivate)
+- (void)invokeUsingIMP:(IMP)imp;
+@end
+
 @implementation CDRSpy
 
 + (void)interceptMessagesForInstance:(id)instance {
@@ -62,11 +66,10 @@
         [self.cedar_double_impl record_method_invocation:invocation];
         int method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
         if (method_invocation_result != CDRStubMethodInvoked) {
-            /* This *almost* works, but makes KVC and some UIKit classes unhappy. */
-            //        [self as_class:[self createTransientClassForSelector:invocation.selector] :^{
-            [self as_original_class:^{
-                [invocation invoke];
-            }];
+            Class originalClass = [CDRSpyInfo originalClassForObject:self];
+            Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
+            IMP originalMethodImplementation = method_getImplementation(originalMethod);
+            [invocation invokeUsingIMP:originalMethodImplementation];
         }
     } @finally {
         [invocation copyBlockArguments];
@@ -136,37 +139,6 @@
     if (originalClass != Nil) {
         [self as_class:originalClass :block];
     }
-}
-
-- (Class)createTransientClassForSelector:(SEL)selector {
-    Class klass = objc_allocateClassPair([CDRSpy class], [self.uniqueClassName cStringUsingEncoding:NSUTF8StringEncoding], 0);
-    objc_registerClassPair(klass);
-
-    Class originalClass = [CDRSpyInfo originalClassForObject:self];
-    Method originalMethod = class_getInstanceMethod(originalClass, selector);
-
-    /*
-     Every now and then a method returns NULL for its implementation.  Since I have no
-     idea why, or how to get around this in a generic way, fall back to the original
-     class itself.  This will cause the spy to not record subsequent methods invoked
-     on self, but hopefully this is rare enough to not cause a problem.
-
-     The alternative is an EXC_BAD_ACCESS.
-     */
-    if (!originalMethod) {
-        return originalClass;
-    }
-
-    class_addMethod(klass, selector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
-    return klass;
-}
-
-- (NSString *)uniqueClassName {
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    NSString *uuidStr = [(NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid) autorelease];
-    CFRelease(uuid);
-
-    return [NSString stringWithFormat:@"CDRSpyTransientClass-%@", uuidStr];
 }
 
 @end
