@@ -81,6 +81,7 @@ describe(@"spy_on", ^{
     });
 
     itShouldBehaveLike(@"a Cedar double");
+    itShouldBehaveLike(@"a Cedar double when used with ARC");
 
     it(@"should blow up in an obvious manner when spying on nil", ^{
         ^{ spy_on(nil); } should raise_exception.with_reason(@"Cannot spy on nil");

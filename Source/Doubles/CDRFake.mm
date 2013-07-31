@@ -1,3 +1,4 @@
+#import "NSInvocation+Cedar.h"
 #import "CDRFake.h"
 #import "objc/runtime.h"
 #import "StubbedMethod.h"
@@ -33,32 +34,37 @@
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
-    [self.cedar_double_impl record_method_invocation:invocation];
+    @try {
+        [self.cedar_double_impl record_method_invocation:invocation];
+        CDRStubInvokeStatus method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
+        switch (method_invocation_result) {
+            case CDRStubMethodInvoked: {
+                // do nothing; everything's cool
+            } break;
+            case CDRStubMethodNotStubbed: {
+                if (self.requiresExplicitStubs) {
+                    NSString * selectorString = NSStringFromSelector(invocation.selector);
+                    [[NSException exceptionWithName:NSInternalInconsistencyException
+                                             reason:[NSString stringWithFormat:@"Invocation of unstubbed method: %@", selectorString]
+                                           userInfo:nil]
+                     raise];
+                }
+            } break;
+            case CDRStubWrongArguments: {
+                if (self.requiresExplicitStubs) {
+                    NSString * reason = [NSString stringWithFormat:@"Wrong arguments supplied to stub"];
+                    [[NSException exceptionWithName:NSInternalInconsistencyException
+                                             reason:reason
+                                           userInfo:nil] raise];
+                }
+            } break;
+            default:
+                break;
+        }
 
-    CDRStubInvokeStatus method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
-    switch (method_invocation_result) {
-        case CDRStubMethodInvoked: {
-            // do nothing; everything's cool
-        } break;
-        case CDRStubMethodNotStubbed: {
-            if (self.requiresExplicitStubs) {
-                NSString * selectorString = NSStringFromSelector(invocation.selector);
-                [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:[NSString stringWithFormat:@"Invocation of unstubbed method: %@", selectorString]
-                                       userInfo:nil]
-                 raise];
-            }
-        } break;
-        case CDRStubWrongArguments: {
-            if (self.requiresExplicitStubs) {
-                NSString * reason = [NSString stringWithFormat:@"Wrong arguments supplied to stub"];
-                [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:reason
-                                       userInfo:nil] raise];
-            }
-        } break;
-        default:
-            break;
+    } @finally {
+        [invocation copyBlockArguments];
+        [invocation retainArguments];
     }
 }
 

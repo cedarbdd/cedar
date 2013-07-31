@@ -1,3 +1,4 @@
+#import "NSInvocation+Cedar.h"
 #import "CDRSpy.h"
 #import "objc/runtime.h"
 #import "StubbedMethod.h"
@@ -57,15 +58,19 @@
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
-    [self.cedar_double_impl record_method_invocation:invocation];
-
-    int method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
-    if (method_invocation_result != CDRStubMethodInvoked) {
-        /* This *almost* works, but makes KVC and some UIKit classes unhappy. */
-        //        [self as_class:[self createTransientClassForSelector:invocation.selector] :^{
-        [self as_original_class:^{
-            [invocation invoke];
-        }];
+    @try {
+        [self.cedar_double_impl record_method_invocation:invocation];
+        int method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
+        if (method_invocation_result != CDRStubMethodInvoked) {
+            /* This *almost* works, but makes KVC and some UIKit classes unhappy. */
+            //        [self as_class:[self createTransientClassForSelector:invocation.selector] :^{
+            [self as_original_class:^{
+                [invocation invoke];
+            }];
+        }
+    } @finally {
+        [invocation copyBlockArguments];
+        [invocation retainArguments];
     }
 }
 

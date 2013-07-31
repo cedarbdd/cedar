@@ -1,7 +1,7 @@
-#import "NSInvocation+Cedar.h"
 #import "CedarDoubleImpl.h"
 #import "StubbedMethod.h"
 #import "CDRClassFake.h"
+#import <objc/runtime.h>
 
 static NSMutableArray *registeredDoubleImpls__ = nil;
 
@@ -119,8 +119,6 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {
-    [invocation copyBlockArguments];
-    [invocation retainArguments];
     [self.sent_messages addObject:invocation];
 }
 

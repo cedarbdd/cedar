@@ -1,6 +1,8 @@
 #import "NSInvocation+Cedar.h"
 #import <objc/runtime.h>
 
+static char COPIED_BLOCKS_KEY;
+
 @implementation NSInvocation (Cedar)
 
 - (void)copyBlockArguments {
@@ -16,14 +18,14 @@
             [self getArgument:&argument atIndex:argumentIndex];
             if (argument) {
                 argument = [argument copy];
-                [copiedBlocks addObject:(id)argument];
+                [copiedBlocks addObject:argument];
                 [argument release];
                 [self setArgument:&argument atIndex:argumentIndex];
             }
         }
     }
 
-    objc_setAssociatedObject(self, @"copied-blocks", copiedBlocks, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &COPIED_BLOCKS_KEY, copiedBlocks, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

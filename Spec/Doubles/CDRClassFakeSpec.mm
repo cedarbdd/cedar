@@ -45,6 +45,7 @@ describe(@"CDRClassFake", ^{
         });
 
         itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar double when used with ARC");
         itShouldBehaveLike(@"a Cedar class fake");
         itShouldBehaveLike(@"a Cedar ordinary fake");
 
@@ -65,6 +66,7 @@ describe(@"CDRClassFake", ^{
         });
 
         itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar double when used with ARC");
         itShouldBehaveLike(@"a Cedar class fake");
         itShouldBehaveLike(@"a Cedar nice fake");
 
