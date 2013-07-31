@@ -46,6 +46,7 @@ describe(@"fake (protocol)", ^{
         });
 
         itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar double when used with ARC");
         itShouldBehaveLike(@"a Cedar protocol fake");
         itShouldBehaveLike(@"a Cedar ordinary fake");
 
@@ -92,6 +93,7 @@ describe(@"fake (protocol)", ^{
         });
 
         itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar double when used with ARC");
         itShouldBehaveLike(@"a Cedar protocol fake");
         itShouldBehaveLike(@"a Cedar nice fake");
 
