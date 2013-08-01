@@ -115,6 +115,13 @@ describe(@"spy_on", ^{
         incrementer should have_received("setValue:");
     });
 
+    it(@"should raise a meaningful error when sent an unrecognized message", ^{
+        NSString *expectedReason = [NSString stringWithFormat:@"-[SimpleIncrementer rangeOfComposedCharacterSequenceAtIndex:]: unrecognized selector sent to spy %p", incrementer];
+        ^{
+            [(id)incrementer rangeOfComposedCharacterSequenceAtIndex:0];
+        } should raise_exception.with_reason(expectedReason);
+    });
+
     it(@"should return the description of the spied-upon object", ^{
         incrementer.description should contain(@"SimpleIncrementer");
     });
