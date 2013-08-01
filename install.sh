@@ -58,6 +58,11 @@ do
   esac
 done
 
+if [[ -z "$(which git)" ]] ; then
+  echo "Unable to find git.  Have you installed Xcode as well as command line tools?"
+  echo "You can install them from Xcode's Preferences, in the Downloads pane."
+  fail "Could not find git; installation aborted."
+fi
 
 if [[ $GET_HEAD == 1 ]] ; then
   echo "Installing Cedar HEAD from master"
