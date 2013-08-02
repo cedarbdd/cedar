@@ -1,5 +1,6 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
+#import "ObjectWithForwardingTarget.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -7,7 +8,7 @@ using namespace Cedar::Doubles;
 SPEC_BEGIN(CDRClassFakeSpec)
 
 sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
-    __block id<CedarDouble, SimpleIncrementer> fake;
+    __block SimpleIncrementer<CedarDouble> *fake;
 
     beforeEach(^{
         fake = [sharedContext objectForKey:@"double"];
@@ -78,6 +79,20 @@ describe(@"CDRClassFake", ^{
             it(@"should default to returning a 0", ^{
                 expect([niceFake aVeryLargeNumber]).to(equal(0));
             });
+        });
+    });
+
+    describe(@"faking a class with interface categories", ^{
+        __block ObjectWithForwardingTarget *fake;
+
+        beforeEach(^{
+            fake = fake_for([ObjectWithForwardingTarget class]);
+        });
+
+        it(@"should allow stubbing of methods declared in a category without a corresponding category implementation", ^{
+            fake stub_method("count").and_return(42UL);
+
+            fake.count should equal(42);
         });
     });
 });

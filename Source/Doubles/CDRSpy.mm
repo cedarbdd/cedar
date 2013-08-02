@@ -66,10 +66,19 @@
         [self.cedar_double_impl record_method_invocation:invocation];
         int method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
         if (method_invocation_result != CDRStubMethodInvoked) {
-            Class originalClass = [CDRSpyInfo originalClassForObject:self];
-            Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
-            IMP originalMethodImplementation = method_getImplementation(originalMethod);
-            [invocation invokeUsingIMP:originalMethodImplementation];
+            __block id forwardingTarget = nil;
+            __block id that = self;
+            [self as_original_class:^{
+                forwardingTarget = [that forwardingTargetForSelector:invocation.selector];
+            }];
+            if (forwardingTarget) {
+                [invocation invokeWithTarget:forwardingTarget];
+            } else {
+                Class originalClass = [CDRSpyInfo originalClassForObject:self];
+                Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
+                IMP originalMethodImplementation = method_getImplementation(originalMethod);
+                [invocation invokeUsingIMP:originalMethodImplementation];
+            }
         }
     } @finally {
         [invocation copyBlockArguments];

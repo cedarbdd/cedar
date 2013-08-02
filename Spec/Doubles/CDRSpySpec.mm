@@ -1,5 +1,6 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
+#import "ObjectWithForwardingTarget.h"
 
 extern "C" {
 #import "ExpectFailureWithMessage.h"
@@ -123,6 +124,24 @@ describe(@"spy_on", ^{
         [incrementer increment];
         spy_on(incrementer);
         incrementer should have_received("increment");
+    });
+
+    describe(@"spying on an object with a forwarding target", ^{
+        __block ObjectWithForwardingTarget *forwardingObject;
+        beforeEach(^{
+            forwardingObject = [[[ObjectWithForwardingTarget alloc] initWithNumberOfThings:42] autorelease];
+            spy_on(forwardingObject);
+        });
+
+        it(@"should not break message forwarding", ^{
+            forwardingObject.count should equal(42);
+        });
+
+        it(@"should allow stubbing of publicly visible methods, even if forwarded in actual implementation", ^{
+            forwardingObject stub_method("count").and_return(666UL);
+
+            forwardingObject.count should equal(666);
+        });
     });
 });
 
