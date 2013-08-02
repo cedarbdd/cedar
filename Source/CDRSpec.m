@@ -7,6 +7,8 @@
 
 CDRSpec *currentSpec;
 
+static void(^placeholderPendingTestBlock)() = ^{ it(@"is pending", PENDING); };
+
 void beforeEach(CDRSpecBlock block) {
     [currentSpec.currentGroup addBefore:block];
 }
@@ -19,15 +21,16 @@ void afterEach(CDRSpecBlock block) {
     ((b.stackAddress = CDRCallerStackAddress()), b)
 
 CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
-    CDRExampleGroup *parentGroup = currentSpec.currentGroup;
-
-    CDRExampleGroup *group = [CDRExampleGroup groupWithText:text];
-    [parentGroup add:group];
-
+    CDRExampleGroup *group = nil;
     if (block) {
+        CDRExampleGroup *parentGroup = currentSpec.currentGroup;
+        group = [CDRExampleGroup groupWithText:text];
+        [parentGroup add:group];
         currentSpec.currentGroup = group;
         block();
         currentSpec.currentGroup = parentGroup;
+    } else {
+        group = describe(text, placeholderPendingTestBlock);
     }
     return with_stack_address(group);
 }
@@ -47,7 +50,7 @@ CDRExample * it(NSString *text, CDRSpecBlock block) {
 #pragma mark - Pending
 
 CDRExampleGroup * xdescribe(NSString *text, CDRSpecBlock block) {
-    CDRExampleGroup *group = describe(text, ^{it(@"is pending", PENDING);});
+    CDRExampleGroup *group = describe(text, placeholderPendingTestBlock);
     return with_stack_address(group);
 }
 
