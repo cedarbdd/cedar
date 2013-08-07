@@ -11,5 +11,6 @@
 @interface ObjectWithForwardingTarget (Forwarded)
 
 - (NSUInteger)count;
+- (void)unforwardedUnimplementedMethod;
 
 @end

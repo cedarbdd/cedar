@@ -55,7 +55,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 
     if (![self.parent_double can_stub:selector]) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Attempting to stub method <%s>, which double does not respond to", sel_getName(selector)]
+                                 reason:[NSString stringWithFormat:@"Attempting to stub method <%s>, which double <%@> does not respond to", sel_getName(selector), [self.parent_double description]]
                                userInfo:nil]
          raise];
     }

@@ -142,6 +142,12 @@ describe(@"spy_on", ^{
 
             forwardingObject.count should equal(666);
         });
+
+        it(@"should raise a descriptive exception when a method signature couldn't be resolved", ^{
+            ^{
+                forwardingObject stub_method("unforwardedUnimplementedMethod");
+            } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <unforwardedUnimplementedMethod>, which double <%@> does not respond to", [forwardingObject description]]);
+        });
     });
 });
 

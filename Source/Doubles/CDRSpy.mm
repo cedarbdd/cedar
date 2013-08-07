@@ -107,7 +107,7 @@
 }
 
 - (BOOL)can_stub:(SEL)selector {
-    return [self respondsToSelector:selector];
+    return [self respondsToSelector:selector] && [self methodSignatureForSelector:selector];
 }
 
 #pragma mark - CedarDouble protocol
