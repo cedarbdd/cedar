@@ -97,6 +97,12 @@
     return respondsToSelector;
 }
 
+- (void)doesNotRecognizeSelector:(SEL)selector {
+    Class originalClass = [CDRSpyInfo originalClassForObject:self];
+    NSString *exceptionReason = [NSString stringWithFormat:@"-[%@ %@]: unrecognized selector sent to spy %p", NSStringFromClass(originalClass), NSStringFromSelector(selector), self];
+    @throw [NSException exceptionWithName:NSInvalidArgumentException reason:exceptionReason userInfo:nil];
+}
+
 - (BOOL)can_stub:(SEL)selector {
     return [self respondsToSelector:selector];
 }
