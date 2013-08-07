@@ -306,7 +306,11 @@ describe(@"equal matcher", ^{
 
     describe(@"when the actual value is declared as an id", ^{
         int someInteger = 7;
-        id actualValue = [NSNumber numberWithInt:someInteger];
+        __block id actualValue;
+
+        beforeEach(^{
+            actualValue = @(someInteger);
+        });
 
         describe(@"and the expected value is declared as an NSObject *", ^{
             __block NSObject *expectedValue;
@@ -354,6 +358,27 @@ describe(@"equal matcher", ^{
 
         describe(@"and the expected value is also declared as an id", ^{
             __block id expectedValue;
+
+            describe(@"and the values are nil", ^{
+                beforeEach(^{
+                    actualValue = nil;
+                    expectedValue = nil;
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        actualValue should equal(expectedValue);
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <(null)> to not equal <(null)>", ^{
+                            actualValue should_not equal(expectedValue);
+                        });
+                    });
+                });
+            });
 
             describe(@"and the values are equal", ^{
                 beforeEach(^{

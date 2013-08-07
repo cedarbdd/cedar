@@ -4,9 +4,9 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     template<typename T, typename U>
     bool compare_equal(const T & actualValue, const U & expectedValue) {
         if (strcmp(@encode(T), "@") == 0 && strcmp(@encode(U), "@") == 0) {
-            NSValue *actualValueId = [NSValue value:&actualValue withObjCType:@encode(id)];
-            NSValue *expectedValueId = [NSValue value:&expectedValue withObjCType:@encode(id)];
-            return [[actualValueId nonretainedObjectValue] isEqual:[expectedValueId nonretainedObjectValue]];
+            id actualObjectValue = [[NSValue value:&actualValue withObjCType:@encode(id)] nonretainedObjectValue];
+            id expectedObjectValue = [[NSValue value:&expectedValue withObjCType:@encode(id)] nonretainedObjectValue];
+            return actualObjectValue == expectedObjectValue || [actualObjectValue isEqual:expectedObjectValue];
         } else {
             return actualValue == expectedValue;
         }
