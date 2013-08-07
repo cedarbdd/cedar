@@ -50,7 +50,7 @@
 }
 
 - (NSMutableArray *)fullTextInPieces {
-    if (self.parent && [self.parent hasFullText]) {
+    if (self.parent && [self.parent respondsToSelector:@selector(hasFullText)] && [self.parent hasFullText]) {
         NSMutableArray *array = [self.parent fullTextInPieces];
         [array addObject:self.text];
         return array;

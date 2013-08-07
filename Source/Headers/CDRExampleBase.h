@@ -15,13 +15,13 @@ typedef enum CDRExampleState CDRExampleState;
 
 @interface CDRExampleBase : NSObject {
   NSString *text_;
-  id<CDRExampleParent> parent_;
+  NSObject<CDRExampleParent> *parent_;
   BOOL focused_;
   NSTimeInterval runTime_;
 }
 
 @property (nonatomic, readonly) NSString *text;
-@property (nonatomic, assign) id<CDRExampleParent> parent;
+@property (nonatomic, assign) NSObject<CDRExampleParent> *parent;
 @property (nonatomic, assign, getter=isFocused) BOOL focused;
 @property (nonatomic) NSUInteger stackAddress;
 
