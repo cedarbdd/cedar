@@ -244,6 +244,25 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
 
         describe(@"argument expectations", ^{
+            context(@"when stubbing the same method multiple times with distinctly different primitive arguments", ^{
+                __block BOOL firstStubWasCalled, secondStubWasCalled;
+                beforeEach(^{
+                    firstStubWasCalled = secondStubWasCalled = NO;
+                    myDouble stub_method("incrementByInteger:").with(1).and_do(^(NSInvocation *) {
+                        firstStubWasCalled = YES;
+                    });
+                    myDouble stub_method("incrementByInteger:").with(3).and_do(^(NSInvocation *) {
+                        secondStubWasCalled = YES;
+                    });
+                });
+
+                it(@"should perform the stub action associated with those arguments when invoked with those arguments", ^{
+                    [myDouble incrementByInteger:3];
+                    secondStubWasCalled should be_truthy;
+                    firstStubWasCalled should_not be_truthy;
+                });
+            });
+
             context(@"when specified with .with(varargs)", ^{
                 NSNumber *arg1 = @1;;
                 NSNumber *arg2 = @2;
