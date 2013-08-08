@@ -25,6 +25,10 @@
     self.value += [number intValue];
 }
 
+- (void)incrementByInteger:(NSUInteger)integer {
+    self.value += integer;
+}
+
 - (void)incrementByABit:(size_t)aBit andABitMore:(NSNumber *)aBitMore {
     self.value += aBit + [aBitMore intValue];
 }

@@ -8,6 +8,7 @@
 - (void)increment;
 - (void)incrementBy:(size_t)amount;
 - (void)incrementByNumber:(NSNumber *)number;
+- (void)incrementByInteger:(NSUInteger)number;
 - (void)incrementByABit:(size_t)aBit andABitMore:(NSNumber *)aBitMore;
 - (void)incrementWithException;
 - (void)methodWithBlock:(void(^)())blockArgument;

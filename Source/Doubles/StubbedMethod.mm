@@ -69,7 +69,7 @@ namespace Cedar { namespace Doubles {
         for (argument_it = arguments.begin(); argument_it != arguments.end(); ++argument_it) {
             Cedar::Doubles::Argument::shared_ptr_t argument_ptr = *argument_it;
 
-            if (*argument_ptr == *Arguments::anything) {
+            if (strcmp(typeid(*argument_ptr).name(), typeid(*Arguments::anything).name()) == 0) {
                 return true;
             }
         }
