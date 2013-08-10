@@ -23,6 +23,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
+		1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
+		1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
 		22B6A22715B7ACF800960ADE /* InvocationMatcher.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		22FB7B4416ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */; };
 		42064466139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
@@ -65,7 +68,7 @@
 		968F9582161AC58200A78D36 /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
 		969B6F84160C61E000C7C792 /* CDRSymbolicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 969B6F82160C61E000C7C792 /* CDRSymbolicator.m */; };
 		969B6F86160C678400C7C792 /* CDRSymbolicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 969B6F82160C61E000C7C792 /* CDRSymbolicator.m */; };
-		969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
+		969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		969B6F97160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
 		96A07F0413F276640021974D /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE1FB611DC271300029872 /* Cedar.framework */; };
 		96A07F0B13F276B10021974D /* FocusedSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0A13F276B10021974D /* FocusedSpec.m */; };
@@ -237,9 +240,9 @@
 		AEEE1FF711DC27B800029872 /* CDRFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC811DC27B800029872 /* CDRFunctions.m */; };
 		AEEE1FF811DC27B800029872 /* CDRSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FC911DC27B800029872 /* CDRSpec.m */; };
 		AEEE1FF911DC27B800029872 /* CDRDefaultReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCB11DC27B800029872 /* CDRDefaultReporter.h */; };
-		AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
+		AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE1FFB11DC27B800029872 /* CDRExampleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
+		AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE1FFD11DC27B800029872 /* CDRExampleParent.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE1FFE11DC27B800029872 /* CDRExampleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD011DC27B800029872 /* CDRExampleReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEEE1FFF11DC27B800029872 /* CDRFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD111DC27B800029872 /* CDRFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -328,7 +331,7 @@
 		AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */; };
 		AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */; };
 		AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
-		E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; };
+		E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E31179D3161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; };
 		E31179D4161FD937007D3CDE /* CDRSlowTestStatistics.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; };
 		E31179D5161FD937007D3CDE /* CDRSlowTestStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = E31179D1161FD937007D3CDE /* CDRSlowTestStatistics.m */; };
@@ -389,6 +392,9 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */,
+				1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */,
+				1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */,
 				AE18A7BF13F450BD00C8872C /* BeEmpty.h in Copy headers to framework */,
 				AE18A7C013F450BD00C8872C /* StringifiersBase.h in Copy headers to framework */,
 				AE18A7C113F450BD00C8872C /* StringifiersContainer.h in Copy headers to framework */,
@@ -1265,9 +1271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEEE1FF911DC27B800029872 /* CDRDefaultReporter.h in Headers */,
-				AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */,
 				AEEE1FFB11DC27B800029872 /* CDRExampleBase.h in Headers */,
-				AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */,
 				AEEE1FFD11DC27B800029872 /* CDRExampleParent.h in Headers */,
 				AEEE1FFE11DC27B800029872 /* CDRExampleReporter.h in Headers */,
 				AEEE1FFF11DC27B800029872 /* CDRFunctions.h in Headers */,
@@ -1311,7 +1315,11 @@
 				AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */,
 				AEF3300C145B4F75002F93BB /* BeGTE.h in Headers */,
 				AEF33017145B6222002F93BB /* BeLessThan.h in Headers */,
+				E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */,
 				AEF33021145B69DE002F93BB /* BeLTE.h in Headers */,
+				AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */,
+				AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */,
+				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
 				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
 				9637852E1491D84F0059C9F6 /* CDROTestHelper.h in Headers */,
 				AEB45A911496C8D800845D09 /* RaiseException.h in Headers */,
@@ -1323,8 +1331,6 @@
 				AECF136715D142E3003AAB9C /* ReturnValue.h in Headers */,
 				AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */,
 				AE94D03F15F341B200A0C2B7 /* AnyInstanceArgument.h in Headers */,
-				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
-				E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */,
 				AEE8DBD4175FFCF3008AF18A /* CDRSpyInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
