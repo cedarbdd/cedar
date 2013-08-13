@@ -1,5 +1,6 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
+#import "ObjectWithForwardingTarget.h"
 
 extern "C" {
 #import "ExpectFailureWithMessage.h"
@@ -115,6 +116,13 @@ describe(@"spy_on", ^{
         incrementer should have_received("setValue:");
     });
 
+    it(@"should raise a meaningful error when sent an unrecognized message", ^{
+        NSString *expectedReason = [NSString stringWithFormat:@"-[SimpleIncrementer rangeOfComposedCharacterSequenceAtIndex:]: unrecognized selector sent to spy %p", incrementer];
+        ^{
+            [(id)incrementer rangeOfComposedCharacterSequenceAtIndex:0];
+        } should raise_exception.with_reason(expectedReason);
+    });
+
     it(@"should return the description of the spied-upon object", ^{
         incrementer.description should contain(@"SimpleIncrementer");
     });
@@ -123,6 +131,30 @@ describe(@"spy_on", ^{
         [incrementer increment];
         spy_on(incrementer);
         incrementer should have_received("increment");
+    });
+
+    describe(@"spying on an object with a forwarding target", ^{
+        __block ObjectWithForwardingTarget *forwardingObject;
+        beforeEach(^{
+            forwardingObject = [[[ObjectWithForwardingTarget alloc] initWithNumberOfThings:42] autorelease];
+            spy_on(forwardingObject);
+        });
+
+        it(@"should not break message forwarding", ^{
+            forwardingObject.count should equal(42);
+        });
+
+        it(@"should allow stubbing of publicly visible methods, even if forwarded in actual implementation", ^{
+            forwardingObject stub_method("count").and_return(666UL);
+
+            forwardingObject.count should equal(666);
+        });
+
+        it(@"should raise a descriptive exception when a method signature couldn't be resolved", ^{
+            ^{
+                forwardingObject stub_method("unforwardedUnimplementedMethod");
+            } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <unforwardedUnimplementedMethod>, which double <%@> does not respond to", [forwardingObject description]]);
+        });
     });
 });
 

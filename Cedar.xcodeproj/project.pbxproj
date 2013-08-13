@@ -100,6 +100,8 @@
 		AE02021A17452007009A7915 /* StringifiersBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02021717452006009A7915 /* StringifiersBase.mm */; };
 		AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE0695F417A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AE06D88017AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
+		AE06D88117AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
 		AE0AF56513E9C0E300029396 /* CedarMatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; };
 		AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -519,6 +521,8 @@
 		96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpecFailureSpec.mm; sourceTree = "<group>"; };
 		AE02021717452006009A7915 /* StringifiersBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StringifiersBase.mm; sourceTree = "<group>"; };
 		AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDoubleARCSharedExamples.mm; sourceTree = "<group>"; };
+		AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithForwardingTarget.h; sourceTree = "<group>"; };
+		AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithForwardingTarget.m; sourceTree = "<group>"; };
 		AE0AF55E13E9C0E300029396 /* CedarMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarMatchers.h; sourceTree = "<group>"; };
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
@@ -1253,6 +1257,8 @@
 				E32861311604F287001FA77E /* FibonacciCalculator.m */,
 				AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */,
 				AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */,
+				AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */,
+				AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1729,6 +1735,7 @@
 				AEF7301D13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */,
 				AEF7301F13ECC4AE00786282 /* BeNilSpec.mm in Sources */,
 				AEF7302113ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */,
+				AE06D88017AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */,
 				AEF7302313ECC4AE00786282 /* BeTruthySpec.mm in Sources */,
 				AEF7302513ECC4AE00786282 /* EqualSpec.mm in Sources */,
 				AEF7302713ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
@@ -1838,6 +1845,7 @@
 				AE9AA68E15ACD8D400617E1A /* SimpleIncrementer.m in Sources */,
 				AE9AA69815ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
 				AE36AC6315B4BBFC00EB6C51 /* NoOpKeyValueObserver.m in Sources */,
+				AE06D88117AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */,
 				9672F0A71615C1C10012ED58 /* CDRSymbolicatorSpec.mm in Sources */,
 				9672F0AA1615C3F40012ED58 /* CDRSpecSpec.mm in Sources */,
 				E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */,

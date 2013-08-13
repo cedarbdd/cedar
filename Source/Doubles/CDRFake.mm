@@ -83,7 +83,7 @@
 }
 
 - (BOOL)can_stub:(SEL)selector {
-    return [self.klass instancesRespondToSelector:selector];
+    return [self.klass instancesRespondToSelector:selector] && [self.klass instanceMethodSignatureForSelector:selector];
 }
 
 - (BOOL)has_stubbed_method_for:(SEL)selector {
