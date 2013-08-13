@@ -117,7 +117,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
         context(@"with a method name that the stub does not respond to", ^{
             it(@"should raise an exception", ^{
-                ^{ myDouble stub_method("wibble_wobble"); } should raise_exception;
+                ^{ myDouble stub_method("wibble_wobble"); } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <wibble_wobble>, which double <%@> does not respond to", myDouble]);
             });
         });
 
