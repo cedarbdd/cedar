@@ -111,6 +111,11 @@ describe(@"spy_on", ^{
         incrementer should have_received("increment");
     });
 
+    it(@"should not affect the results of isKindOfClass:", ^{
+        [incrementer isKindOfClass:[SimpleIncrementer class]] should be_truthy;
+        [incrementer isKindOfClass:[NSObject class]] should be_truthy;
+    });
+
     it(@"should record messages sent by the object to itself", ^{
         [incrementer incrementBy:7];
         incrementer should have_received("setValue:");

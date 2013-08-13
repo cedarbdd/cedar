@@ -61,6 +61,11 @@
     return description;
 }
 
+- (BOOL)isKindOfClass:(Class)aClass {
+    Class originalClass = [CDRSpyInfo originalClassForObject:self];
+    return [originalClass isSubclassOfClass:aClass];
+}
+
 - (void)forwardInvocation:(NSInvocation *)invocation {
     @try {
         [self.cedar_double_impl record_method_invocation:invocation];
