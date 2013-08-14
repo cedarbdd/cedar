@@ -1,6 +1,6 @@
 #import "NSInvocation+Cedar.h"
 #import "CDRSpy.h"
-#import "objc/runtime.h"
+#import <objc/runtime.h>
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
 #import "CDRSpyInfo.h"
@@ -15,8 +15,10 @@
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot spy on nil" userInfo:nil];
     }
-    [CDRSpyInfo storeSpyInfoForObject:instance];
-    object_setClass(instance, self);
+    if (![object_getClass(instance) conformsToProtocol:@protocol(CedarDouble)]) {
+        [CDRSpyInfo storeSpyInfoForObject:instance];
+        object_setClass(instance, self);
+    }
 }
 
 - (id)retain {
@@ -59,6 +61,10 @@
     }];
 
     return description;
+}
+
+- (Class)class {
+    return [CDRSpyInfo originalClassForObject:self];
 }
 
 - (BOOL)isKindOfClass:(Class)aClass {

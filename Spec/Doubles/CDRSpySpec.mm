@@ -1,6 +1,7 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
+#import <objc/runtime.h>
 
 extern "C" {
 #import "ExpectFailureWithMessage.h"
@@ -99,10 +100,10 @@ describe(@"spy_on", ^{
     });
 
     it(@"should not affect other instances of the same class", ^{
-        [[incrementer class] conformsToProtocol:@protocol(CedarDouble)] should be_truthy;
+        [object_getClass(incrementer) conformsToProtocol:@protocol(CedarDouble)] should be_truthy;
 
         id other_incrementer = [[[SimpleIncrementer alloc] init] autorelease];
-        [[other_incrementer class] conformsToProtocol:@protocol(CedarDouble)] should_not be_truthy;
+        [object_getClass(other_incrementer) conformsToProtocol:@protocol(CedarDouble)] should_not be_truthy;
     });
 
     it(@"should record messages sent to the object", ^{
@@ -111,9 +112,15 @@ describe(@"spy_on", ^{
         incrementer should have_received("increment");
     });
 
-    it(@"should not affect the results of isKindOfClass:", ^{
-        [incrementer isKindOfClass:[SimpleIncrementer class]] should be_truthy;
-        [incrementer isKindOfClass:[NSObject class]] should be_truthy;
+    describe(@"class identity", ^{
+        it(@"-isKindOfClass: should work as expected", ^{
+            [incrementer isKindOfClass:[SimpleIncrementer class]] should be_truthy;
+            [incrementer isKindOfClass:[NSObject class]] should be_truthy;
+        });
+
+        it(@"-class should return original class", ^{
+            [incrementer class] should equal([SimpleIncrementer class]);
+        });
     });
 
     it(@"should record messages sent by the object to itself", ^{

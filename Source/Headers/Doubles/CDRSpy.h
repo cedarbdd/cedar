@@ -9,9 +9,7 @@
 
 namespace Cedar { namespace Doubles {
     inline void CDR_spy_on(id instance) {
-        if (![[instance class] conformsToProtocol:@protocol(CedarDouble)]) {
-            [CDRSpy interceptMessagesForInstance:instance];
-        }
+        [CDRSpy interceptMessagesForInstance:instance];
     }
 }}
 

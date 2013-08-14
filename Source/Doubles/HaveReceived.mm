@@ -1,5 +1,6 @@
 #import "HaveReceived.h"
 #import "CedarDouble.h"
+#import <objc/runtime.h>
 
 namespace Cedar { namespace Doubles {
 
@@ -23,7 +24,8 @@ namespace Cedar { namespace Doubles {
     }
 
     void HaveReceived::verify_object_is_a_double(id instance) const {
-        if (![[instance class] conformsToProtocol:@protocol(CedarDouble)]) {
+        Class clazz = object_getClass(instance);
+        if (![clazz conformsToProtocol:@protocol(CedarDouble)]) {
             [[NSException exceptionWithName:NSInternalInconsistencyException
                                      reason:[NSString stringWithFormat:@"Received expectation for non-double object <%@>", instance]
                                    userInfo:nil]
