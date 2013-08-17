@@ -1,6 +1,9 @@
 #import <Foundation/Foundation.h>
 
-@protocol SimpleIncrementer<NSObject>
+@protocol InheritedProtocol<NSObject>
+@end
+
+@protocol SimpleIncrementer<InheritedProtocol>
 
 @required
 - (size_t)value;
@@ -20,6 +23,10 @@
 
 @end
 
-@interface SimpleIncrementer : NSObject<SimpleIncrementer>
+@interface IncrementerBase : NSObject
+
+@end
+
+@interface SimpleIncrementer : IncrementerBase<SimpleIncrementer>
 
 @end

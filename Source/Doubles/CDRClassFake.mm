@@ -18,6 +18,18 @@
     return [NSString stringWithFormat:@"Fake implementation of %@ class", self.klass];
 }
 
+- (BOOL)isKindOfClass:(Class)aClass {
+    return [self.klass isSubclassOfClass:aClass];
+}
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    return [self.klass conformsToProtocol:aProtocol];
+}
+
+- (Class)class {
+    return self.klass;
+}
+
 @end
 
 id CDR_fake_for(Class klass, BOOL require_explicit_stubs /*= YES */) {
