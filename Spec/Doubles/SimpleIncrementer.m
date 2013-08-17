@@ -4,6 +4,9 @@
 @property (nonatomic, assign) size_t value;
 @end
 
+@implementation IncrementerBase
+
+@end
 
 @implementation SimpleIncrementer
 
