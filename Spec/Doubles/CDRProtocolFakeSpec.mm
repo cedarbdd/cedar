@@ -28,6 +28,21 @@ sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
         });
     });
 
+    describe(@"-conformsToProtocol:", ^{
+        it(@"should be true for the faked protocol", ^{
+            [fake conformsToProtocol:@protocol(SimpleIncrementer)] should be_truthy;
+        });
+
+        it(@"should be true for protocols inherited by the faked protocol", ^{
+            [fake conformsToProtocol:@protocol(InheritedProtocol)] should be_truthy;
+        });
+
+        it(@"should not be true for other protocols", ^{
+            [fake conformsToProtocol:@protocol(CedarDouble)] should_not be_truthy;
+            [fake conformsToProtocol:@protocol(NSCoding)] should_not be_truthy;
+        });
+    });
+
     describe(@"-description", ^{
         it(@"should return the description of the faked protocol", ^{
             fake.description should contain([NSString stringWithFormat:@"Fake implementation of %s protocol", protocol_getName(@protocol(SimpleIncrementer))]);

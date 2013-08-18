@@ -33,6 +33,40 @@ sharedExamplesFor(@"a Cedar class fake", ^(NSDictionary *sharedContext) {
             fake.description should contain(@"Fake implementation of SimpleIncrementer class");
         });
     });
+
+    describe(@"-conformsToProtocol:", ^{
+        it(@"should be true for protocols adopted by the faked class", ^{
+            [fake conformsToProtocol:@protocol(SimpleIncrementer)] should be_truthy;
+        });
+
+        it(@"should be true for protocols inherited by protocols adopted by the faked class", ^{
+            [fake conformsToProtocol:@protocol(InheritedProtocol)] should be_truthy;
+        });
+
+        it(@"should not be true for other protocols", ^{
+            [fake conformsToProtocol:@protocol(CedarDouble)] should_not be_truthy;
+            [fake conformsToProtocol:@protocol(NSCoding)] should_not be_truthy;
+        });
+    });
+
+    describe(@"-isKindOfClass:", ^{
+        it(@"should be true for the faked class", ^{
+            [fake isKindOfClass:[SimpleIncrementer class]] should be_truthy;
+        });
+
+        it(@"should be true for superclasses of the faked class", ^{
+            [fake isKindOfClass:[IncrementerBase class]] should be_truthy;
+        });
+
+        it(@"should be false for other classes", ^{
+            [fake isKindOfClass:[CDRClassFake class]] should_not be_truthy;
+            [fake isKindOfClass:[NSString class]] should_not be_truthy;
+        });
+    });
+
+    it(@"-class should return the faked class", ^{
+        [fake class] should equal([SimpleIncrementer class]);
+    });
 });
 
 describe(@"CDRClassFake", ^{

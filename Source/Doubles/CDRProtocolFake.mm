@@ -44,6 +44,10 @@ static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_requi
     || (self.requiresExplicitStubs && [self has_stubbed_method_for:selector]);
 }
 
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    return protocol_conformsToProtocol(protocol_, aProtocol);
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"Fake implementation of %s protocol", protocol_getName(protocol_)];
 }
