@@ -27,6 +27,12 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
     });
 
+    context(@"where the expected type is a char * and a char * is passed", ^{
+        it(@"should just work", ^{
+            ^{ myDouble stub_method("methodWithCString:").with("hello"); } should_not raise_exception;
+        });
+    });
+
     describe(@"reset_sent_messages", ^{
         beforeEach(^{
             myDouble stub_method("value");
@@ -104,6 +110,8 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
             argument == string should_not be_truthy;
             strcmp("hello", argument) should equal(0);
+
+            free(string);
         });
     });
 
