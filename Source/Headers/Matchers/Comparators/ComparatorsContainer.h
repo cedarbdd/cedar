@@ -91,4 +91,14 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     bool compare_contains(const typename std::set<U> & container, const U & element) {
         return container.end() != std::find_if(container.begin(), container.end(), CompareEqualTo<U>(element));
     }
+
+    template<typename U>
+    bool compare_contains(char *actualValue, const U & expectedContains) {
+        return actualValue != NULL && strstr(actualValue, expectedContains) != NULL;
+    }
+
+    template<typename U>
+    bool compare_contains(const char *actualValue, const U & expectedContains) {
+        return compare_contains((char *)actualValue, expectedContains);
+    }
 }}}
