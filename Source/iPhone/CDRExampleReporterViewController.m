@@ -11,11 +11,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if (getenv("CEDAR_HEADLESS_SPECS")) {
+    if (getenv("CEDAR_GUI_SPECS")) {
+        [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
+    } else {
         int exitStatus = runSpecsWithinUIApplication();
         exitWithStatusFromUIApplication(exitStatus);
-    } else {
-        [self performSelectorInBackground:@selector(startSpecs) withObject:NULL];
     }
 }
 
