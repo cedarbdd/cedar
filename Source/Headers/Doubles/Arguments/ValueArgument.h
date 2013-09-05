@@ -19,7 +19,7 @@ namespace Cedar { namespace Doubles {
         virtual bool matches_encoding(const char *) const;
         virtual bool matches_bytes(void *) const;
 
-    private:
+    protected:
         bool both_are_objects(const char *) const;
         bool both_are_not_objects(const char *) const;
         bool both_are_not_pointers(const char *) const;
@@ -30,7 +30,6 @@ namespace Cedar { namespace Doubles {
     private:
         const T value_;
     };
-
 
     template<typename T>
     ValueArgument<T>::ValueArgument(const T & value) : Argument(), value_(value) {}
@@ -65,7 +64,7 @@ namespace Cedar { namespace Doubles {
         return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(actual_argument_bytes)));
     }
 
-#pragma mark - Private interface
+#pragma mark - Protected interface
     template<typename T>
     bool ValueArgument<T>::both_are_objects(const char * actual_argument_encoding) const {
         return 0 == strncmp(@encode(T), "@", 1) && 0 == strncmp(actual_argument_encoding, "@", 1);
@@ -98,5 +97,23 @@ namespace Cedar { namespace Doubles {
         void *nil_pointer = 0;
         return 0 == strncmp(actual_argument_encoding, "@", 1) && this->matches_bytes(&nil_pointer);
     }
+    
+#pragma mark - CharValueArgument
+    // an explicit type for char[] ValueArguments
+    class CharValueArgument : public ValueArgument<const char*> {
+    public:
+        explicit CharValueArgument(const char *value) : ValueArgument<const char*>(value) {};
+        virtual bool matches_encoding(const char * actual_argument_encoding) const {
+            return this->both_are_objects(actual_argument_encoding) ||
+            this->both_are_cstrings(actual_argument_encoding) ||
+            this->nil_argument(actual_argument_encoding);
+        }
+    private:
+        bool both_are_cstrings(const char * actual_argument_encoding) const {
+            return this->both_are_not_objects(actual_argument_encoding) &&
+            this->both_are_not_pointers(actual_argument_encoding) &&
+            0 == strncmp(actual_argument_encoding, "*", 1);
+        }
+    };
 
 }}

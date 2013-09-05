@@ -34,4 +34,15 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     inline NSString * string_for(const NSDecimal value) {
         return NSDecimalString(&value, [NSLocale currentLocale]);
     }
+
+    inline NSString * string_for(char *value) {
+        if (value == NULL) {
+            return @"NULL";
+        }
+        return [NSString stringWithFormat:@"cstring(%s)", value];
+    }
+
+    inline NSString * string_for(const char *value) {
+        return string_for((char *)value);
+    }
 }}}

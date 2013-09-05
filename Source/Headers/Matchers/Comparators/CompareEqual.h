@@ -136,4 +136,15 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     bool compare_equal(const T & actualValue, const NSDecimal & expectedValue) {
         return compare_equal(@(actualValue), expectedValue);
     }
+
+#pragma mark C Strings
+    template<typename U>
+    bool compare_equal(char *actualValue, const U & expectedValue) {
+        return strcmp(actualValue, expectedValue) == 0;
+    }
+
+    template<typename U>
+    bool compare_equal(const char *actualValue, const U & expectedValue) {
+        return strcmp(actualValue, expectedValue) == 0;
+    }
 }}}

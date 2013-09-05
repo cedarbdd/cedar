@@ -34,6 +34,7 @@ namespace Cedar { namespace Doubles {
         StubbedMethod & with(const T &);
         template<typename T>
         StubbedMethod & and_with(const T &);
+        inline StubbedMethod & with(const char *argument);
 
         StubbedMethod & and_raise_exception();
         StubbedMethod & and_raise_exception(NSObject * exception);
@@ -83,6 +84,10 @@ namespace Cedar { namespace Doubles {
     template<typename T>
     StubbedMethod & StubbedMethod::with(const T & argument) {
         return with(Argument::shared_ptr_t(new ValueArgument<T>(argument)));
+    }
+    
+    StubbedMethod & StubbedMethod::with(const char *argument) {
+        return with(Argument::shared_ptr_t(new CharValueArgument(argument)));
     }
 
     template<typename T>
