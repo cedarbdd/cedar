@@ -331,6 +331,100 @@ describe(@"contain matcher", ^{
         });
     });
 
+    describe(@"when the container is a C string", ^{
+        describe(@"which is null", ^{
+            char *container = NULL;
+
+            describe(@"positive match", ^{
+                char *element = (char *)"foo";
+
+                it(@"should fail", ^{
+                    expectFailureWithMessage(@"Expected <NULL> to contain <cstring(foo)>", ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+        });
+
+        describe(@"which contains the substring", ^{
+            char *container = (char *)"jack and jill";
+            char *element = (char *)"jack";
+
+            describe(@"positive match", ^{
+                it(@"should pass", ^{
+                    expect(container).to(contain(element));
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage(@"Expected <cstring(jack and jill)> to not contain <cstring(jack)>", ^{
+                        expect(container).to_not(contain(element));
+                    });
+                });
+            });
+        });
+
+        describe(@"which does not contain the substring", ^{
+            char *container = (char *)"batman and robin";
+            char *element = (char *)"catwoman";
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage(@"Expected <cstring(batman and robin)> to contain <cstring(catwoman)>", ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    expect(container).to_not(contain(element));
+                });
+            });
+        });
+    });
+
+    describe(@"when the container is a const C string", ^{
+        describe(@"which contains the substring", ^{
+            const char *container = (char *)"jack and jill";
+            const char *element = (char *)"jack";
+
+            describe(@"positive match", ^{
+                it(@"should pass", ^{
+                    expect(container).to(contain(element));
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage(@"Expected <cstring(jack and jill)> to not contain <cstring(jack)>", ^{
+                        expect(container).to_not(contain(element));
+                    });
+                });
+            });
+        });
+
+        describe(@"which does not contain the substring", ^{
+            const char *container = (char *)"batman and robin";
+            const char *element = (char *)"catwoman";
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage(@"Expected <cstring(batman and robin)> to contain <cstring(catwoman)>", ^{
+                        expect(container).to(contain(element));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    expect(container).to_not(contain(element));
+                });
+            });
+        });
+    });
+
     describe(@"when the container is an NSString", ^{
         describe(@"which is nil", ^{
             NSString *container = nil;

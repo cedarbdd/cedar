@@ -754,6 +754,140 @@ describe(@"equal matcher", ^{
         });
     });
 
+    describe(@"when the actual value is declared as a C string", ^{
+        char *actualValue = (char *)"value";
+
+        describe(@"and the expected value is declared as a C string", ^{
+            __block char *expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = (char *)calloc(strlen(actualValue) + 1, sizeof(char));
+                    stpcpy(expectedValue, actualValue);
+                });
+
+                afterEach(^{
+                    free(expectedValue);
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <cstring(value)> to not equal <cstring(value)>", ^{
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedValue = (char *)calloc(strlen(actualValue) + 1, sizeof(char));
+                    stpcpy(expectedValue, "eulav");
+                });
+
+                afterEach(^{
+                    free(expectedValue);
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expectFailureWithMessage(@"Expected <cstring(value)> to equal <cstring(eulav)>", ^{
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expect(actualValue).to_not(equal(expectedValue));
+                    });
+                });
+            });
+        });
+
+        describe(@"and the expected value is declared as a const C string", ^{
+            __block const char *expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = "value";
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <cstring(value)> to not equal <cstring(value)>", ^{
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+
+    describe(@"when the actual value is declared as char array", ^{
+        // char[] cannot be copied through blocks
+        describe(@"and the expected value is declared as a C string", ^{
+            __block char *expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = (char *)"value";
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        char actualValue[] = "value";
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <cstring(value)> to not equal <cstring(value)>", ^{
+                            char actualValue[] = "value";
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the values are not equal", ^{
+                beforeEach(^{
+                    expectedValue = (char *)"eulav";
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expectFailureWithMessage(@"Expected <cstring(value)> to equal <cstring(eulav)>", ^{
+                            char actualValue[] = "value";
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        char actualValue[] = "value";
+                        expect(actualValue).to_not(equal(expectedValue));
+                    });
+                });
+            });
+        });
+    });
+
     describe(@"when the actual value is declared as an NSString *", ^{
         int someInteger = 7;
         NSString *actualValue = [[NSString alloc] initWithFormat:@"%d", someInteger];

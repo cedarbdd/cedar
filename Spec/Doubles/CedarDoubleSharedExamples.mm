@@ -27,6 +27,12 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
         });
     });
 
+    context(@"where the expected type is a char * and a char * is passed", ^{
+        it(@"should just work", ^{
+            ^{ myDouble stub_method("methodWithCString:").with("hello"); } should_not raise_exception;
+        });
+    });
+
     describe(@"reset_sent_messages", ^{
         beforeEach(^{
             myDouble stub_method("value");
@@ -104,6 +110,8 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
             argument == string should_not be_truthy;
             strcmp("hello", argument) should equal(0);
+
+            free(string);
         });
     });
 
@@ -349,7 +357,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                         context(@"where the incorrect type is a char *", ^{
                             it(@"should raise an exception", ^{
-                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%s> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", "your mom", @encode(size_t)];
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <cstring(%s)> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", "your mom", @encode(size_t)];
                                 ^{ myDouble stub_method("incrementByABit:andABitMore:").with((char *)"your mom").and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
                             });
                         });
