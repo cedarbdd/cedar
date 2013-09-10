@@ -40,7 +40,7 @@ namespace Cedar { namespace Matchers {
     template<typename T>
     /*virtual*/ NSString * Equal<T>::failure_message_end() const {
         NSString * expectedValueString = Stringifiers::string_for(expectedValue_);
-        return [NSString stringWithFormat:@"equal <%@>", expectedValueString];
+        return [NSString stringWithFormat:@"equal %@", expectedValueString];
     }
 
     template<typename T> template<typename U>
