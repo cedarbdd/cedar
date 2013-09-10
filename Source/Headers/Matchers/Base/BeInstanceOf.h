@@ -46,7 +46,7 @@ namespace Cedar { namespace Matchers {
     }
 
     inline /*virtual*/ NSString * BeInstanceOf::failure_message_end() const {
-        NSMutableString *messageEnd = [NSMutableString stringWithFormat:@"be an instance of class <%@>", expectedClass_];
+        NSMutableString *messageEnd = [NSMutableString stringWithFormat:@"be an instance of class %@", expectedClass_];
         if (includeSubclasses_) {
             [messageEnd appendString:@", or any of its subclasses"];
         }

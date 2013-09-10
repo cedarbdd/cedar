@@ -9,14 +9,14 @@
     for (id key in self.allKeys){
         if (!first){
             [result appendString:@","];
-            first = YES;
         }
+        first = NO;
 
         NSString *stringKey = Cedar::Matchers::Stringifiers::string_for(key);
         NSString *stringValue = Cedar::Matchers::Stringifiers::string_for(self[key]);
         [result appendFormat:@"\n    %@: %@", stringKey, stringValue];
     }
-    [result appendString:@"\n]"];
+    [result appendString:@"\n}"];
     return result;
 }
 

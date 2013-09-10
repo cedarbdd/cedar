@@ -35,7 +35,7 @@ describe(@"be_close_to matcher", ^{
 
                     describe(@"negative match", ^{
                         it(@"should fail with a sensible failure message", ^{
-                            expectFailureWithMessage(@"Expected <0.666667> to not be close to <0.676667> (within 0.1)", ^{
+                            expectFailureWithMessage(@"Expected 0.666667 to not be close to 0.676667 (within 0.1)", ^{
                                 expect(actualValue).to_not(be_close_to(expectedValue).within(threshold));
                             });
                         });
@@ -49,7 +49,7 @@ describe(@"be_close_to matcher", ^{
 
                     describe(@"positive match", ^{
                         it(@"should fail with a sensible failure message", ^{
-                            expectFailureWithMessage(@"Expected <0.666667> to be close to <0.866667> (within 0.1)", ^{
+                            expectFailureWithMessage(@"Expected 0.666667 to be close to 0.866667 (within 0.1)", ^{
                                 expect(actualValue).to(be_close_to(expectedValue).within(threshold));
                             });
                         });

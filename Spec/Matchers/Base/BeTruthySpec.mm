@@ -29,7 +29,7 @@ describe(@"be_truthy matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <YES> to not evaluate to true", ^{
+                    expectFailureWithMessage(@"Expected YES to not evaluate to true", ^{
                         expect(value).to_not(be_truthy());
                     });
                 });
@@ -43,7 +43,7 @@ describe(@"be_truthy matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <NO> to evaluate to true", ^{
+                    expectFailureWithMessage(@"Expected NO to evaluate to true", ^{
                         expect(value).to(be_truthy());
                     });
                 });

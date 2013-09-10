@@ -34,7 +34,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be less than or equal to <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than or equal to 100", ^{
                             expect(actualValue).to_not(be_lte(expectedValue));
                         });
                     });
@@ -48,7 +48,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be less than or equal to <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than or equal to 1", ^{
                             expect(actualValue).to(be_lte(expectedValue));
                         });
                     });
@@ -74,7 +74,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be less than or equal to <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than or equal to 10", ^{
                             expect(actualValue).to_not(be_lte(expectedValue));
                         });
                     });
@@ -98,7 +98,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be less than or equal to <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than or equal to 100", ^{
                             expect(actualValue).to_not(be_lte(expectedValue));
                         });
                     });
@@ -112,7 +112,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be less than or equal to <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than or equal to 1", ^{
                             expect(actualValue).to(be_lte(expectedValue));
                         });
                     });
@@ -138,7 +138,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be less than or equal to <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than or equal to 10", ^{
                             expect(actualValue).to_not(be_lte(expectedValue));
                         });
                     });
@@ -162,7 +162,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be less than or equal to <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than or equal to 100", ^{
                             expect(actualValue).to_not(be_lte(expectedValue));
                         });
                     });
@@ -176,7 +176,7 @@ describe(@"be_lte matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be less than or equal to <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than or equal to 1", ^{
                             expect(actualValue).to(be_lte(expectedValue));
                         });
                     });

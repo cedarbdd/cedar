@@ -33,7 +33,7 @@ describe(@"be_instance_of matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@ (%@)> to not be an instance of class <%@>", actualValue, [actualValue class], expectedClass], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ (%@) to not be an instance of class %@", actualValue, [actualValue class], expectedClass], ^{
                         expect(actualValue).to_not(be_instance_of(expectedClass));
                     });
                 });
@@ -45,7 +45,7 @@ describe(@"be_instance_of matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@ (%@)> to be an instance of class <%@>", actualValue, [actualValue class], expectedClass], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ (%@) to be an instance of class %@", actualValue, [actualValue class], expectedClass], ^{
                         expect(actualValue).to(be_instance_of(expectedClass));
                     });
                 });
@@ -63,7 +63,7 @@ describe(@"be_instance_of matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@ (%@)> to be an instance of class <%@>", actualValue, [actualValue class], expectedClass], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ (%@) to be an instance of class %@", actualValue, [actualValue class], expectedClass], ^{
                         expect(actualValue).to(be_instance_of(expectedClass));
                     });
                 });
@@ -91,7 +91,7 @@ describe(@"be_instance_of matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@ (%@)> to not be an instance of class <%@>, or any of its subclasses", actualValue, [actualValue class], expectedClass], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ (%@) to not be an instance of class %@, or any of its subclasses", actualValue, [actualValue class], expectedClass], ^{
                         expect(actualValue).to_not(be_instance_of(expectedClass).or_any_subclass());
                     });
                 });
@@ -109,7 +109,7 @@ describe(@"be_instance_of matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@ (%@)> to not be an instance of class <%@>, or any of its subclasses", actualValue, [actualValue class], expectedClass], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ (%@) to not be an instance of class %@, or any of its subclasses", actualValue, [actualValue class], expectedClass], ^{
                         expect(actualValue).to_not(be_instance_of(expectedClass).or_any_subclass());
                     });
                 });
@@ -121,7 +121,7 @@ describe(@"be_instance_of matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@ (%@)> to be an instance of class <%@>, or any of its subclasses", actualValue, [actualValue class], expectedClass], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ (%@) to be an instance of class %@, or any of its subclasses", actualValue, [actualValue class], expectedClass], ^{
                         expect(actualValue).to(be_instance_of(expectedClass).or_any_subclass());
                     });
                 });
