@@ -73,7 +73,7 @@ describe(@"be_truthy matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <wibble> to not evaluate to true", ^{
+                    expectFailureWithMessage(@"Expected @\"wibble\" to not evaluate to true", ^{
                         expect(value).to_not(be_truthy());
                     });
                 });
@@ -87,7 +87,7 @@ describe(@"be_truthy matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <(null)> to evaluate to true", ^{
+                    expectFailureWithMessage(@"Expected (null) to evaluate to true", ^{
                         expect(value).to(be_truthy());
                     });
                 });
@@ -113,7 +113,7 @@ describe(@"be_truthy shorthand syntax (no parentheses)", ^{
 
     describe(@"negative match", ^{
         it(@"should fail with a sensible failure message", ^{
-            expectFailureWithMessage(@"Expected <YES> to not evaluate to true", ^{
+            expectFailureWithMessage(@"Expected YES to not evaluate to true", ^{
                 expect(value).to_not(be_truthy);
             });
         });

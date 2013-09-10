@@ -66,7 +66,7 @@ namespace Cedar { namespace Matchers {
             if (allowSubclasses_) {
                 [message appendString:@", or subclass of class,"];
             }
-            [message appendFormat:@" <%@>", NSStringFromClass(expectedExceptionClass_)];
+            [message appendFormat:@" %@", NSStringFromClass(expectedExceptionClass_)];
         }
         if (expectedReason_) {
             [message appendFormat:@" with reason <%@>", expectedReason_];

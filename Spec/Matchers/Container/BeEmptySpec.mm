@@ -413,7 +413,7 @@ describe(@"be_empty shorthand syntax (no parentheses)", ^{
 
     describe(@"negative match", ^{
         it(@"should fail with a sensible failure message", ^{
-            expectFailureWithMessage(@"Expected (\n) to not be empty", ^{
+            expectFailureWithMessage(@"Expected @[\n] to not be empty", ^{
                 expect(container).to_not(be_empty);
             });
         });

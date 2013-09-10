@@ -40,7 +40,7 @@ namespace Cedar { namespace Matchers {
     template<typename T>
     /*virtual*/ NSString * BeLessThan<T>::failure_message_end() const {
         NSString * expectedValueString = Stringifiers::string_for(expectedValue_);
-        return [NSString stringWithFormat:@"be less than <%@>", expectedValueString];
+        return [NSString stringWithFormat:@"be less than %@", expectedValueString];
     }
 
     template<typename T> template<typename U>
