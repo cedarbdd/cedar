@@ -131,7 +131,7 @@ describe(@"contain matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[\n    @\"%@\"\n] to not contain @\"%@\"", element, element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[@\"%@\"] to not contain @\"%@\"", element, element], ^{
                         expect(container).to_not(contain(element));
                     });
                 });
@@ -143,7 +143,7 @@ describe(@"contain matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[\n] to contain @\"%@\"", element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[] to contain @\"%@\"", element], ^{
                         expect(container).to(contain(element));
                     });
                 });
@@ -182,7 +182,7 @@ describe(@"contain matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[\n    @\"%@\"\n] to not contain @\"%@\"", element, element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[@\"%@\"] to not contain @\"%@\"", element, element], ^{
                         expect(container).to_not(contain(element));
                     });
                 });
@@ -194,7 +194,7 @@ describe(@"contain matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[\n] to contain @\"%@\"", element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @[] to contain @\"%@\"", element], ^{
                         expect(container).to(contain(element));
                     });
                 });
@@ -254,7 +254,7 @@ describe(@"contain matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet setWithObjects:\n    @\"%@\",\nnil] to not contain @\"%@\"", element, element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet setWithObjects:@\"%@\", nil] to not contain @\"%@\"", element, element], ^{
                         expect(container).to_not(contain(element));
                     });
                 });
@@ -266,7 +266,7 @@ describe(@"contain matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet setWithObjects:\nnil] to contain @\"%@\"", element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet set] to contain @\"%@\"", element], ^{
                         expect(container).to(contain(element));
                     });
                 });
@@ -305,7 +305,7 @@ describe(@"contain matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet setWithObjects:\n    @\"%@\",\nnil] to not contain @\"%@\"", element, element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet setWithObjects:@\"%@\", nil] to not contain @\"%@\"", element, element], ^{
                         expect(container).to_not(contain(element));
                     });
                 });
@@ -317,7 +317,7 @@ describe(@"contain matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet setWithObjects:\nnil] to contain @\"%@\"", element], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected [NSSet set] to contain @\"%@\"", element], ^{
                         expect(container).to(contain(element));
                     });
                 });

@@ -5,7 +5,20 @@
 @implementation NSSet (Cedar)
 
 - (NSString *)CDR_description {
+    NSString *itemFormat = @"\n    %@";
+    NSString *prefixTerminator = @",";
+    NSString *terminator = @"\nnil]";
+
+    if (self.count == 0) {
+        return @"[NSSet set]";
+    } else if (self.count < 2) {
+        itemFormat = @"%@";
+        prefixTerminator = @", ";
+        terminator = @"nil]";
+    }
+
     NSMutableString *result = [NSMutableString stringWithString:@"[NSSet setWithObjects:"];
+
     BOOL first = YES;
     for (id item in self){
         if (!first){
@@ -14,12 +27,12 @@
         first = NO;
 
         NSString *string = Cedar::Matchers::Stringifiers::string_for(item);
-        [result appendFormat:@"\n    %@", string];
+        [result appendFormat:itemFormat, string];
     }
     if (!first){
-        [result appendString:@","];
+        [result appendString:prefixTerminator];
     }
-    [result appendString:@"\nnil]"];
+    [result appendString:terminator];
     return result;
 }
 

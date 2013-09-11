@@ -6,6 +6,12 @@
 
 - (NSString *)CDR_description {
     NSMutableString *result = [NSMutableString stringWithString:@"@["];
+    NSString *itemFormat = @"\n    %@";
+    NSString *terminator = @"\n]";
+    if (self.count < 2) {
+        itemFormat = @"%@";
+        terminator = @"]";
+    }
     BOOL first = YES;
     for (id item in self){
         if (!first){
@@ -14,9 +20,9 @@
         first = NO;
 
         NSString *string = Cedar::Matchers::Stringifiers::string_for(item);
-        [result appendFormat:@"\n    %@", string];
+        [result appendFormat:itemFormat, string];
     }
-    [result appendString:@"\n]"];
+    [result appendString:terminator];
     return result;
 }
 

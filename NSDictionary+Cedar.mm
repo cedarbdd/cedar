@@ -5,6 +5,12 @@
 
 - (NSString *)CDR_description {
     NSMutableString *result = [NSMutableString stringWithString:@"@{"];
+    NSString *pairFormat = @"\n    %@: %@";
+    NSString *terminator = @"\n}";
+    if (self.count < 2) {
+        pairFormat = @"%@: %@";
+        terminator = @"}";
+    }
     BOOL first = YES;
     for (id key in self.allKeys){
         if (!first){
@@ -14,9 +20,9 @@
 
         NSString *stringKey = Cedar::Matchers::Stringifiers::string_for(key);
         NSString *stringValue = Cedar::Matchers::Stringifiers::string_for(self[key]);
-        [result appendFormat:@"\n    %@: %@", stringKey, stringValue];
+        [result appendFormat:pairFormat, stringKey, stringValue];
     }
-    [result appendString:@"\n}"];
+    [result appendString:terminator];
     return result;
 }
 

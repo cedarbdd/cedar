@@ -2339,7 +2339,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to not equal @[\n    @\"Hello\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to not equal @[@\"Hello\"]", ^{
                             expect(actualArray).to_not(equal(expectedArray));
                         });
                     });
@@ -2353,7 +2353,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to equal @[\n    @\"goodbye\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to equal @[@\"goodbye\"]", ^{
                             expect(actualArray).to(equal(expectedArray));
                         });
                     });
@@ -2383,7 +2383,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to not equal @[\n    @\"Hello\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to not equal @[@\"Hello\"]", ^{
                             expect(actualArray).to_not(equal(expectedArray));
                         });
                     });
@@ -2397,7 +2397,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to equal @[\n    @\"goodbye\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to equal @[@\"goodbye\"]", ^{
                             expect(actualArray).to(equal(expectedArray));
                         });
                     });
@@ -2427,7 +2427,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to not equal @[\n    @\"Hello\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to not equal @[@\"Hello\"]", ^{
                             expect(actualArray).to_not(equal(expectedArray));
                         });
                     });
@@ -2441,7 +2441,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to equal @[\n    @\"goodbye\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to equal @[@\"goodbye\"]", ^{
                             expect(actualArray).to(equal(expectedArray));
                         });
                     });
@@ -2471,7 +2471,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to not equal @[\n    @\"Hello\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to not equal @[@\"Hello\"]", ^{
                             expect(actualArray).to_not(equal(expectedArray));
                         });
                     });
@@ -2485,7 +2485,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected @[\n    @\"Hello\"\n] to equal @[\n    @\"goodbye\"\n]", ^{
+                        expectFailureWithMessage(@"Expected @[@\"Hello\"] to equal @[@\"goodbye\"]", ^{
                             expect(actualArray).to(equal(expectedArray));
                         });
                     });
