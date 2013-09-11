@@ -26,7 +26,7 @@ describe(@"Should syntax", ^{
         });
 
         it(@"should work with negative case", ^{
-            expectFailureWithMessage(@"Expected <3> to equal <4>", ^{
+            expectFailureWithMessage(@"Expected 3 to equal 4", ^{
                 3 should equal(4);
             });
         });
@@ -38,7 +38,7 @@ describe(@"Should syntax", ^{
         });
 
         it(@"should work with negative case", ^{
-            expectFailureWithMessage(@"Expected <3> to not equal <3>", ^{
+            expectFailureWithMessage(@"Expected 3 to not equal 3", ^{
                 3 should_not equal(3);
             });
         });

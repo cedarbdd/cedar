@@ -43,13 +43,13 @@ namespace Cedar { namespace Matchers {
     NSString * Base<MessageBuilder_>::failure_message_for(const U & value) const {
         NSString * failureMessageEnd = this->failure_message_end();
         NSString * actualValueString = MessageBuilder_::string_for_actual_value(value);
-        return [NSString stringWithFormat:@"Expected <%@> to %@", actualValueString, failureMessageEnd];
+        return [NSString stringWithFormat:@"Expected %@ to %@", actualValueString, failureMessageEnd];
     }
 
     template<typename MessageBuilder_> template<typename U>
     NSString * Base<MessageBuilder_>::negative_failure_message_for(const U & value) const {
         NSString * failureMessageEnd = this->failure_message_end();
         NSString * actualValueString = MessageBuilder_::string_for_actual_value(value);
-        return [NSString stringWithFormat:@"Expected <%@> to not %@", actualValueString, failureMessageEnd];
+        return [NSString stringWithFormat:@"Expected %@ to not %@", actualValueString, failureMessageEnd];
     }
 }}

@@ -43,7 +43,7 @@ describe(@"raise_exception matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception", block], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to not raise an exception", block], ^{
                             block should_not raise_exception;
                         });
                     });
@@ -59,7 +59,7 @@ describe(@"raise_exception matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception", block], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to not raise an exception", block], ^{
                             block should_not raise_exception;
                         });
                     });
@@ -75,7 +75,7 @@ describe(@"raise_exception matcher", ^{
             context(@"when called with parentheses", ^{
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception", block], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to raise an exception", block], ^{
                             block should raise_exception;
                         });
                     });
@@ -91,7 +91,7 @@ describe(@"raise_exception matcher", ^{
             context(@"when called without parentheses", ^{
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception", block], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to raise an exception", block], ^{
                             block should raise_exception;
                         });
                     });
@@ -125,7 +125,7 @@ describe(@"raise_exception matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception of class <%@>", block, NSStringFromClass(expectedExceptionClass)], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to not raise an exception of class %@", block, NSStringFromClass(expectedExceptionClass)], ^{
                         block should_not raise_exception(expectedExceptionClass);
                     });
                 });
@@ -149,7 +149,7 @@ describe(@"raise_exception matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception of class, or subclass of class, <%@>", block, NSStringFromClass([expectedExceptionClass class])], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to not raise an exception of class, or subclass of class, %@", block, NSStringFromClass([expectedExceptionClass class])], ^{
                             block should_not raise_exception(expectedExceptionClass).or_subclass();
                         });
                     });
@@ -159,7 +159,7 @@ describe(@"raise_exception matcher", ^{
             context(@"when subclass exceptions are not expected", ^{
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception of class <%@>", block, NSStringFromClass([expectedExceptionClass class])], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to raise an exception of class %@", block, NSStringFromClass([expectedExceptionClass class])], ^{
                             block should raise_exception(expectedExceptionClass);
                         });
                     });
@@ -183,7 +183,7 @@ describe(@"raise_exception matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception of class <%@>", block, NSStringFromClass([expectedExceptionClass class])], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to raise an exception of class %@", block, NSStringFromClass([expectedExceptionClass class])], ^{
                         block should raise_exception(expectedExceptionClass);
                     });
                 });
@@ -203,7 +203,7 @@ describe(@"raise_exception matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception of class <%@>", block, NSStringFromClass([expectedExceptionClass class])], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to raise an exception of class %@", block, NSStringFromClass([expectedExceptionClass class])], ^{
                         block should raise_exception(expectedExceptionClass);
                     });
                 });
@@ -236,7 +236,7 @@ describe(@"raise_exception matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception with reason <%@>", block, reason], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to not raise an exception with reason <%@>", block, reason], ^{
                         block should_not raise_exception.with_reason(reason);
                     });
                 });
@@ -255,7 +255,7 @@ describe(@"raise_exception matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception with reason <%@>", block, reason], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to raise an exception with reason <%@>", block, reason], ^{
                         block should raise_exception.with_reason(reason);
                     });
                 });
@@ -275,7 +275,7 @@ describe(@"raise_exception matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to raise an exception with reason <%@>", block, reason], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %@ to raise an exception with reason <%@>", block, reason], ^{
                         block should raise_exception.with_reason(reason);
                     });
                 });

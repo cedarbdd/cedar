@@ -32,7 +32,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not equal <%@>", actualValue, expectedValue], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected @\"%@\" to not equal @\"%@\"", actualValue, expectedValue], ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -46,7 +46,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to equal <%@>", actualValue, expectedValue], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected @\"%@\" to equal @\"%@\"", actualValue, expectedValue], ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -80,7 +80,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not equal <%@>", actualValue, expectedValue], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected @\"%@\" to not equal @\"%@\"", actualValue, expectedValue], ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -94,7 +94,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to equal <%@>", actualValue, expectedValue], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected @\"%@\" to equal @\"%@\"", actualValue, expectedValue], ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });

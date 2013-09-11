@@ -41,7 +41,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     /*virtual*/ NSString * BeSameInstanceAs<T>::failure_message_end() const {
-        return [NSString stringWithFormat:@"be same instance as <%p>", expectedValue_];
+        return [NSString stringWithFormat:@"be same instance as %p", expectedValue_];
     }
 
 #pragma mark Generic

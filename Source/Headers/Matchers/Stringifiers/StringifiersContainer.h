@@ -23,12 +23,12 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     template<typename T>
     NSString * string_for(const typename std::vector<T> & container) {
         NSString * delimitedList = comma_and_newline_delimited_list(container);
-        return [NSString stringWithFormat:@"(%@\n)", delimitedList];
+        return [NSString stringWithFormat:@"std::vector(%@\n)", delimitedList];
     }
 
     template<typename T, typename U>
     NSString * string_for(const typename std::map<T, U> & container) {
-        NSMutableString *result = [NSMutableString stringWithString:@"{"];
+        NSMutableString *result = [NSMutableString stringWithString:@"std::map{"];
 
         for (typename std::map<T, U>::const_iterator it = container.begin(); it != container.end(); ++it) {
             NSString * keyString = string_for(it->first);
@@ -42,6 +42,6 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     template<typename T>
     NSString * string_for(const typename std::set<T> & container) {
         NSString * delimitedList = comma_and_newline_delimited_list(container);
-        return [NSString stringWithFormat:@"{(%@\n)}", delimitedList];
+        return [NSString stringWithFormat:@"std::set{(%@\n)}", delimitedList];
     }
 }}}

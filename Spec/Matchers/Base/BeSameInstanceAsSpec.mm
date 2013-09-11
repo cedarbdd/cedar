@@ -39,7 +39,7 @@ describe(@"be_same_instance_as matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%p> to not be same instance as <%p>", actualValue, expectedValue], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %p to not be same instance as %p", actualValue, expectedValue], ^{
                         expect(actualValue).to_not(be_same_instance_as(expectedValue));
                     });
                 });
@@ -51,7 +51,7 @@ describe(@"be_same_instance_as matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%p> to be same instance as <%p>", actualValue, expectedValue], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected %p to be same instance as %p", actualValue, expectedValue], ^{
                         expect(actualValue).to(be_same_instance_as(expectedValue));
                     });
                 });

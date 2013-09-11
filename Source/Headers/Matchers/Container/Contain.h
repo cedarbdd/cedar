@@ -38,7 +38,7 @@ namespace Cedar { namespace Matchers {
     template<typename T>
     inline /*virtual*/ NSString * Contain<T>::failure_message_end() const {
         NSString * elementString = Stringifiers::string_for(element_);
-        return [NSString stringWithFormat:@"contain <%@>", elementString];
+        return [NSString stringWithFormat:@"contain %@", elementString];
     }
 
 #pragma mark Generic

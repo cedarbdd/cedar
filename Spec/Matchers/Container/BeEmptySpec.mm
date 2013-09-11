@@ -29,7 +29,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <(\n)> to not be empty", ^{
+                    expectFailureWithMessage(@"Expected std::vector(\n) to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -41,7 +41,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <(\n    7,\n    7\n)> to be empty", ^{
+                    expectFailureWithMessage(@"Expected std::vector(\n    7,\n    7\n) to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -67,7 +67,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <{\n}> to not be empty", ^{
+                    expectFailureWithMessage(@"Expected std::map{\n} to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -81,7 +81,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <{\n    5 = 6;\n    7 = 10;\n}> to be empty", ^{
+                    expectFailureWithMessage(@"Expected std::map{\n    5 = 6;\n    7 = 10;\n} to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -107,7 +107,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <{(\n)}> to not be empty", ^{
+                    expectFailureWithMessage(@"Expected std::set{(\n)} to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -121,7 +121,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <{(\n    5,\n    7\n)}> to be empty", ^{
+                    expectFailureWithMessage(@"Expected std::set{(\n    5,\n    7\n)} to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -147,7 +147,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @[] to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -159,7 +159,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @[\n    @\"foo\",\n    @\"bar\"\n] to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -185,7 +185,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @[] to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -197,7 +197,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @[\n    @\"foo\",\n    @\"bar\"\n] to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -223,7 +223,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @{} to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -231,11 +231,11 @@ describe(@"be_empty matcher", ^{
         });
 
         describe(@"which is not empty", ^{
-            NSDictionary *container = [NSDictionary dictionaryWithObjectsAndKeys:@"object1", @"key1", @"object2", @"key2", nil];
+            NSDictionary *container = [NSDictionary dictionaryWithObjectsAndKeys:@"object1", @"key1", nil];
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @{@\"key1\": @\"object1\"} to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -261,7 +261,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @{} to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -273,7 +273,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                    expectFailureWithMessage(@"Expected @{\n    @\"key1\": @\"object1\",\n    @\"key2\": @\"object2\"\n} to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -299,7 +299,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                    expectFailureWithMessage(@"Expected [NSSet set] to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -311,7 +311,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                    expectFailureWithMessage(@"Expected [NSSet setWithObjects:\n    @\"object1\",\n    @\"object2\",\nnil] to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -337,7 +337,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                    expectFailureWithMessage(@"Expected [NSSet set] to not be empty", ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -349,7 +349,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                    expectFailureWithMessage(@"Expected [NSSet setWithObjects:\n    @\"object1\",\n    @\"object2\",\nnil] to be empty", ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -375,7 +375,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @\"%@\" to not be empty", container], ^{
                         expect(container).to_not(be_empty());
                     });
                 });
@@ -387,7 +387,7 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected @\"%@\" to be empty", container], ^{
                         expect(container).to(be_empty());
                     });
                 });
@@ -413,7 +413,7 @@ describe(@"be_empty shorthand syntax (no parentheses)", ^{
 
     describe(@"negative match", ^{
         it(@"should fail with a sensible failure message", ^{
-            expectFailureWithMessage(@"Expected <(\n)> to not be empty", ^{
+            expectFailureWithMessage(@"Expected @[] to not be empty", ^{
                 expect(container).to_not(be_empty);
             });
         });

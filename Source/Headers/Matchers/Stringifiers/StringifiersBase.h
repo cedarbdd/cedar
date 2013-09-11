@@ -1,8 +1,11 @@
 #import <Foundation/Foundation.h>
 #include <sstream>
+#import "NSNumber+CDRDescription.h"
 
 namespace Cedar { namespace Matchers { namespace Stringifiers {
     NSString * object_description_for(const void *objectValue);
+    NSString * escape_as_string(const NSString *str);
+    NSString * escape_as_string(const char *str);
 
     template<typename U>
     NSString * string_for(const U & value) {
@@ -13,6 +16,10 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
             temp << value;
             return [NSString stringWithCString:temp.str().c_str() encoding:NSUTF8StringEncoding];
         }
+    }
+
+    inline NSString * string_for(NSNumber * value) {
+        return [value CDR_description]; // @encode(NSNumber*) => f
     }
 
     inline NSString * string_for(const char value) {
@@ -27,10 +34,6 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         return value ? @"YES" : @"NO";
     }
 
-    inline NSString * string_for(NSNumber * const value) {
-        return string_for([value floatValue]);
-    }
-
     inline NSString * string_for(const NSDecimal value) {
         return NSDecimalString(&value, [NSLocale currentLocale]);
     }
@@ -39,7 +42,7 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         if (value == NULL) {
             return @"NULL";
         }
-        return [NSString stringWithFormat:@"cstring(%s)", value];
+        return [NSString stringWithFormat:@"\"%@\"", escape_as_string(value)];
     }
 
     inline NSString * string_for(const char *value) {

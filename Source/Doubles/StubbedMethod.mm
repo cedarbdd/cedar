@@ -96,7 +96,10 @@ namespace Cedar { namespace Doubles {
         Cedar::Doubles::InvocationMatcher::arguments_vector_t arguments = this->arguments();
         Cedar::Doubles::InvocationMatcher::arguments_vector_t::iterator argument_it;
         for (argument_it = arguments.begin(); argument_it != arguments.end(); ++argument_it) {
-            [argumentsString appendFormat:@"<%@>", (*argument_it)->value_string()];
+            if (argument_it != arguments.begin()) {
+                [argumentsString appendString:@", "];
+            }
+            [argumentsString appendString:(*argument_it)->value_string()];
         }
         return [argumentsString stringByAppendingString:@")"];
     }

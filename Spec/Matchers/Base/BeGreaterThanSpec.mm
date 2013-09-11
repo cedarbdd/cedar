@@ -34,7 +34,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than 1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -48,7 +48,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 100", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -68,7 +68,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -98,7 +98,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than 1.1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -112,7 +112,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 100.1", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -132,7 +132,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -162,7 +162,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -176,7 +176,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -196,7 +196,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -226,7 +226,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than @(1.1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -240,7 +240,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(100.1)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -260,7 +260,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -289,7 +289,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than 1.5", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -303,7 +303,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 100.5", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -323,7 +323,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -357,7 +357,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -371,7 +371,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -391,7 +391,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -421,7 +421,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1.1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -435,7 +435,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100.1)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -455,7 +455,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -484,7 +484,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1.5", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -498,7 +498,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100.5", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -518,7 +518,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -552,7 +552,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -566,7 +566,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -586,7 +586,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -616,7 +616,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1.1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -630,7 +630,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100.1)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -650,7 +650,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -679,7 +679,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1.5", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -693,7 +693,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100.5", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -713,7 +713,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -747,7 +747,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -761,7 +761,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -781,7 +781,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -811,7 +811,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1.1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -825,7 +825,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100.1)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -845,7 +845,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -874,7 +874,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1.5", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -888,7 +888,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100.5", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -908,7 +908,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -942,7 +942,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -956,7 +956,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -976,7 +976,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1006,7 +1006,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1020,7 +1020,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1040,7 +1040,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1070,7 +1070,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1084,7 +1084,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1104,7 +1104,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1134,7 +1134,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1148,7 +1148,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1168,7 +1168,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1198,7 +1198,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1212,7 +1212,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1232,7 +1232,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1262,7 +1262,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1.1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1276,7 +1276,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100.1", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1296,7 +1296,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1326,7 +1326,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1.1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1340,7 +1340,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100.1)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1360,7 +1360,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1389,7 +1389,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1.5", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1403,7 +1403,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100.5", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1423,7 +1423,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1457,7 +1457,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1.5)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1471,7 +1471,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100.5)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1491,7 +1491,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1521,7 +1521,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1535,7 +1535,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1555,7 +1555,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1585,7 +1585,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1.5)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1599,7 +1599,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100.5)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1619,7 +1619,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1649,7 +1649,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1663,7 +1663,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1683,7 +1683,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1713,7 +1713,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1727,7 +1727,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1747,7 +1747,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1777,7 +1777,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1791,7 +1791,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1811,7 +1811,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1841,7 +1841,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1.1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1855,7 +1855,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100.1", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1875,7 +1875,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1904,7 +1904,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be greater than 1.5", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1918,7 +1918,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 100.5", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1938,7 +1938,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -1971,7 +1971,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than 1.5", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -1985,7 +1985,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 100.5", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2005,7 +2005,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2035,7 +2035,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than @(1.5)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -2049,7 +2049,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(100.5)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2069,7 +2069,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2099,7 +2099,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -2113,7 +2113,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2133,7 +2133,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2163,7 +2163,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than @(1.5)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -2177,7 +2177,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.5>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(100.5)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2197,7 +2197,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2227,7 +2227,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -2241,7 +2241,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2261,7 +2261,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2291,7 +2291,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than @(1)", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -2305,7 +2305,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(100)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2325,7 +2325,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than @(10)", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2355,7 +2355,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than 1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -2369,7 +2369,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 100", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2389,7 +2389,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2419,7 +2419,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to not be greater than <1.1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be greater than 1.1", ^{
                             expect(actualValue).to_not(be_greater_than(expectedValue));
                         });
                     });
@@ -2433,7 +2433,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <100.1>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 100.1", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2453,7 +2453,7 @@ describe(@"be_greater_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+                        expectFailureWithMessage(@"Expected 10 to be greater than 10", ^{
                             expect(actualValue).to(be_greater_than(expectedValue));
                         });
                     });
@@ -2478,7 +2478,7 @@ describe(@"> operator matcher", ^{
 
     describe(@"when the actual value is less than the expected value", ^{
         it(@"should fail with a sensible failure message", ^{
-            expectFailureWithMessage(@"Expected <10> to be greater than <100>", ^{
+            expectFailureWithMessage(@"Expected 10 to be greater than 100", ^{
                 expect(10) > 100;
             });
         });
@@ -2486,7 +2486,7 @@ describe(@"> operator matcher", ^{
 
     describe(@"when the actual value equals the expected value", ^{
         it(@"should fail with a sensible failure message", ^{
-            expectFailureWithMessage(@"Expected <10> to be greater than <10>", ^{
+            expectFailureWithMessage(@"Expected 10 to be greater than 10", ^{
                 expect(10) > 10;
             });
         });
@@ -2504,7 +2504,7 @@ describe(@"> operator matcher", ^{
 
         describe(@"negative match", ^{
             it(@"should fail with a sensible failure message", ^{
-                expectFailureWithMessage(@"Expected <10> to not be greater than <1>", ^{
+                expectFailureWithMessage(@"Expected 10 to not be greater than 1", ^{
                     expect(actualValue).to_not > expectedValue;
                 });
             });

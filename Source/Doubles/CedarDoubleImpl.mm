@@ -55,7 +55,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 
     if (![self.parent_double can_stub:selector]) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:[NSString stringWithFormat:@"Attempting to stub method <%s>, which double <%@> does not respond to", sel_getName(selector), [self.parent_double description]]
+                                 reason:[NSString stringWithFormat:@"Attempting to stub method @selector(%s), which double <%@> does not respond to", sel_getName(selector), [self.parent_double description]]
                                userInfo:nil]
          raise];
     }
@@ -84,7 +84,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
             for (; stubbed_method_it != stubbed_methods.end(); ++stubbed_method_it) {
                 if ((**stubbed_method_it).matches_arguments(stubbed_method)) {
                     [[NSException exceptionWithName:NSInternalInconsistencyException
-                                             reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with arguments %@", sel_getName(selector), stubbed_method.arguments_string()]
+                                             reason:[NSString stringWithFormat:@"The method @selector(%s) is already stubbed with arguments %@", sel_getName(selector), stubbed_method.arguments_string()]
                                            userInfo:nil]
                      raise];
                 }
