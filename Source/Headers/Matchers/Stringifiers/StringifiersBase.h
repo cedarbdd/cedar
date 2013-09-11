@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #include <sstream>
-#import "NSObject+Cedar.h"
+#import "NSNumber+CDRDescription.h"
 
 namespace Cedar { namespace Matchers { namespace Stringifiers {
     NSString * object_description_for(const void *objectValue);

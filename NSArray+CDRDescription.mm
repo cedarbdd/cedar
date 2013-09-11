@@ -1,24 +1,17 @@
-#import "NSObject+Cedar.h"
+#import "NSArray+CDRDescription.h"
 #import "StringifiersBase.h"
 #import <objc/runtime.h>
 
-@implementation NSSet (Cedar)
+@implementation NSArray (Cedar)
 
 - (NSString *)CDR_description {
+    NSMutableString *result = [NSMutableString stringWithString:@"@["];
     NSString *itemFormat = @"\n    %@";
-    NSString *prefixTerminator = @",";
-    NSString *terminator = @"\nnil]";
-
-    if (self.count == 0) {
-        return @"[NSSet set]";
-    } else if (self.count < 2) {
+    NSString *terminator = @"\n]";
+    if (self.count < 2) {
         itemFormat = @"%@";
-        prefixTerminator = @", ";
-        terminator = @"nil]";
+        terminator = @"]";
     }
-
-    NSMutableString *result = [NSMutableString stringWithString:@"[NSSet setWithObjects:"];
-
     BOOL first = YES;
     for (id item in self){
         if (!first){
@@ -28,9 +21,6 @@
 
         NSString *string = Cedar::Matchers::Stringifiers::string_for(item);
         [result appendFormat:itemFormat, string];
-    }
-    if (!first){
-        [result appendString:prefixTerminator];
     }
     [result appendString:terminator];
     return result;

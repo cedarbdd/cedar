@@ -1,5 +1,5 @@
 #import "StringifiersBase.h"
-#import "NSObject+Cedar.h"
+#import "NSValue+CDRDescription.h"
 #import <objc/runtime.h>
 
 namespace Cedar { namespace Matchers { namespace Stringifiers {
@@ -7,8 +7,7 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         NSValue *valueId = [NSValue valueWithBytes:objectValue objCType:@encode(id)];
         id object = [valueId nonretainedObjectValue];
         Class klass = object_getClass(object);
-        if (object && class_getInstanceMethod(klass, @selector(CDR_description)) != NULL &&
-            [object respondsToSelector:@selector(CDR_description)]) {
+        if (object && class_getInstanceMethod(klass, @selector(CDR_description)) != NULL) {
             return [[valueId nonretainedObjectValue] CDR_description];
         } else if (object && class_getInstanceMethod(klass, @selector(description)) == NULL) {
             return [NSString stringWithFormat:@"<%@ %p>", NSStringFromClass(klass), object];

@@ -1,4 +1,4 @@
-#import "NSObject+Cedar.h"
+#import "NSNumber+CDRDescription.h"
 #import "StringifiersBase.h"
 
 @implementation NSNumber (Cedar)

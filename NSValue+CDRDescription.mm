@@ -1,4 +1,4 @@
-#import "NSObject+Cedar.h"
+#import "NSValue+CDRDescription.h"
 #import "StringifiersBase.h"
 #import <objc/runtime.h>
 #import <sstream>
@@ -9,14 +9,7 @@
     NSMutableString *result = [NSMutableString stringWithString:@"@("];
     const char *objctype = self.objCType;
     if (0 == strcmp(objctype, @encode(NSObject))){
-        id value = self.nonretainedObjectValue;
-        if ([value respondsToSelector:@selector(CDR_description)]) {
-            [result appendString:[value CDR_description]];
-        } else {
-            [result appendString:[value description]];
-        }
-    } else if (0 == strcmp(objctype, @encode(Class))) {
-        [result appendFormat:@"<%@>", NSStringFromClass(*((Class *)self.pointerValue))];
+        [result appendString:Cedar::Matchers::Stringifiers::string_for(self.nonretainedObjectValue)];
     } else if (0 == strcmp(objctype, @encode(float))) {
         float value;
         [self getValue:&value];

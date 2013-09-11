@@ -23,18 +23,21 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1F1BF08817DECF0900084012 /* NSArray+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF08717DECF0900084012 /* NSArray+Cedar.mm */; };
-		1F1BF08B17DECF0900084012 /* NSArray+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF08717DECF0900084012 /* NSArray+Cedar.mm */; };
-		1F1BF09217DED2C300084012 /* NSString+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09117DED2C300084012 /* NSString+Cedar.mm */; };
-		1F1BF09317DED2C300084012 /* NSString+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09117DED2C300084012 /* NSString+Cedar.mm */; };
-		1F1BF09517DED32200084012 /* NSDictionary+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09417DED32200084012 /* NSDictionary+Cedar.mm */; };
-		1F1BF09617DED32200084012 /* NSDictionary+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09417DED32200084012 /* NSDictionary+Cedar.mm */; };
-		1F1BF09817DED3E000084012 /* NSNumber+Cedar.mm in Resources */ = {isa = PBXBuildFile; fileRef = 1F1BF09717DED3E000084012 /* NSNumber+Cedar.mm */; };
-		1F1BF09C17DED49500084012 /* NSNumber+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09717DED3E000084012 /* NSNumber+Cedar.mm */; };
-		1F1BF0A417DEE0E400084012 /* NSSet+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A317DEE0E400084012 /* NSSet+Cedar.mm */; };
-		1F1BF0A517DEE0E400084012 /* NSSet+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A317DEE0E400084012 /* NSSet+Cedar.mm */; };
-		1F1BF0A817DFFE5700084012 /* NSValue+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A717DFFE5700084012 /* NSValue+Cedar.mm */; };
-		1F1BF0A917DFFE5700084012 /* NSValue+Cedar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A717DFFE5700084012 /* NSValue+Cedar.mm */; };
+		1F0D0D4B17E133250060B8EC /* NSNumber+CDRDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0D0D4A17E133250060B8EC /* NSNumber+CDRDescription.h */; };
+		1F0D0D4D17E133360060B8EC /* NSSet+CDRDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0D0D4C17E133360060B8EC /* NSSet+CDRDescription.h */; };
+		1F0D0D4F17E1334A0060B8EC /* NSValue+CDRDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0D0D4E17E1334A0060B8EC /* NSValue+CDRDescription.h */; };
+		1F1BF08817DECF0900084012 /* NSArray+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF08717DECF0900084012 /* NSArray+CDRDescription.mm */; };
+		1F1BF08B17DECF0900084012 /* NSArray+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF08717DECF0900084012 /* NSArray+CDRDescription.mm */; };
+		1F1BF09217DED2C300084012 /* NSString+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09117DED2C300084012 /* NSString+CDRDescription.mm */; };
+		1F1BF09317DED2C300084012 /* NSString+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09117DED2C300084012 /* NSString+CDRDescription.mm */; };
+		1F1BF09517DED32200084012 /* NSDictionary+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09417DED32200084012 /* NSDictionary+CDRDescription.mm */; };
+		1F1BF09617DED32200084012 /* NSDictionary+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09417DED32200084012 /* NSDictionary+CDRDescription.mm */; };
+		1F1BF09817DED3E000084012 /* NSNumber+CDRDescription.mm in Resources */ = {isa = PBXBuildFile; fileRef = 1F1BF09717DED3E000084012 /* NSNumber+CDRDescription.mm */; };
+		1F1BF09C17DED49500084012 /* NSNumber+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF09717DED3E000084012 /* NSNumber+CDRDescription.mm */; };
+		1F1BF0A417DEE0E400084012 /* NSSet+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A317DEE0E400084012 /* NSSet+CDRDescription.mm */; };
+		1F1BF0A517DEE0E400084012 /* NSSet+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A317DEE0E400084012 /* NSSet+CDRDescription.mm */; };
+		1F1BF0A817DFFE5700084012 /* NSValue+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A717DFFE5700084012 /* NSValue+CDRDescription.mm */; };
+		1F1BF0A917DFFE5700084012 /* NSValue+CDRDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BF0A717DFFE5700084012 /* NSValue+CDRDescription.mm */; };
 		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
 		1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
 		1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
@@ -474,13 +477,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1F1BF08617DEC4B000084012 /* NSObject+Cedar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Cedar.h"; sourceTree = "<group>"; };
-		1F1BF08717DECF0900084012 /* NSArray+Cedar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSArray+Cedar.mm"; sourceTree = SOURCE_ROOT; };
-		1F1BF09117DED2C300084012 /* NSString+Cedar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+Cedar.mm"; sourceTree = SOURCE_ROOT; };
-		1F1BF09417DED32200084012 /* NSDictionary+Cedar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSDictionary+Cedar.mm"; sourceTree = SOURCE_ROOT; };
-		1F1BF09717DED3E000084012 /* NSNumber+Cedar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSNumber+Cedar.mm"; sourceTree = SOURCE_ROOT; };
-		1F1BF0A317DEE0E400084012 /* NSSet+Cedar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSSet+Cedar.mm"; sourceTree = SOURCE_ROOT; };
-		1F1BF0A717DFFE5700084012 /* NSValue+Cedar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSValue+Cedar.mm"; sourceTree = SOURCE_ROOT; };
+		1F0D0D4517E132BC0060B8EC /* NSDictionary+CDRDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CDRDescription.h"; sourceTree = "<group>"; };
+		1F0D0D4717E133020060B8EC /* NSString+CDRDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CDRDescription.h"; sourceTree = "<group>"; };
+		1F0D0D4A17E133250060B8EC /* NSNumber+CDRDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+CDRDescription.h"; sourceTree = "<group>"; };
+		1F0D0D4C17E133360060B8EC /* NSSet+CDRDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+CDRDescription.h"; sourceTree = "<group>"; };
+		1F0D0D4E17E1334A0060B8EC /* NSValue+CDRDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+CDRDescription.h"; sourceTree = "<group>"; };
+		1F1BF08617DEC4B000084012 /* NSArray+CDRDescription.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+CDRDescription.h"; sourceTree = "<group>"; };
+		1F1BF08717DECF0900084012 /* NSArray+CDRDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSArray+CDRDescription.mm"; sourceTree = SOURCE_ROOT; };
+		1F1BF09117DED2C300084012 /* NSString+CDRDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+CDRDescription.mm"; sourceTree = SOURCE_ROOT; };
+		1F1BF09417DED32200084012 /* NSDictionary+CDRDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSDictionary+CDRDescription.mm"; sourceTree = SOURCE_ROOT; };
+		1F1BF09717DED3E000084012 /* NSNumber+CDRDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSNumber+CDRDescription.mm"; sourceTree = SOURCE_ROOT; };
+		1F1BF0A317DEE0E400084012 /* NSSet+CDRDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSSet+CDRDescription.mm"; sourceTree = SOURCE_ROOT; };
+		1F1BF0A717DFFE5700084012 /* NSValue+CDRDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSValue+CDRDescription.mm"; sourceTree = SOURCE_ROOT; };
 		22FB7B4016ACBA5900012D69 /* HeadlessSimulatorWorkaround.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadlessSimulatorWorkaround.h; sourceTree = "<group>"; };
 		22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadlessSimulatorWorkaround.m; sourceTree = "<group>"; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
@@ -965,7 +973,12 @@
 			isa = PBXGroup;
 			children = (
 				AE7F1704172730B000E1146D /* NSInvocation+Cedar.h */,
-				1F1BF08617DEC4B000084012 /* NSObject+Cedar.h */,
+				1F1BF08617DEC4B000084012 /* NSArray+CDRDescription.h */,
+				1F0D0D4517E132BC0060B8EC /* NSDictionary+CDRDescription.h */,
+				1F0D0D4717E133020060B8EC /* NSString+CDRDescription.h */,
+				1F0D0D4A17E133250060B8EC /* NSNumber+CDRDescription.h */,
+				1F0D0D4C17E133360060B8EC /* NSSet+CDRDescription.h */,
+				1F0D0D4E17E1334A0060B8EC /* NSValue+CDRDescription.h */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -974,12 +987,12 @@
 			isa = PBXGroup;
 			children = (
 				AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */,
-				1F1BF08717DECF0900084012 /* NSArray+Cedar.mm */,
-				1F1BF09117DED2C300084012 /* NSString+Cedar.mm */,
-				1F1BF09417DED32200084012 /* NSDictionary+Cedar.mm */,
-				1F1BF09717DED3E000084012 /* NSNumber+Cedar.mm */,
-				1F1BF0A317DEE0E400084012 /* NSSet+Cedar.mm */,
-				1F1BF0A717DFFE5700084012 /* NSValue+Cedar.mm */,
+				1F1BF08717DECF0900084012 /* NSArray+CDRDescription.mm */,
+				1F1BF09117DED2C300084012 /* NSString+CDRDescription.mm */,
+				1F1BF09417DED32200084012 /* NSDictionary+CDRDescription.mm */,
+				1F1BF09717DED3E000084012 /* NSNumber+CDRDescription.mm */,
+				1F1BF0A317DEE0E400084012 /* NSSet+CDRDescription.mm */,
+				1F1BF0A717DFFE5700084012 /* NSValue+CDRDescription.mm */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1303,6 +1316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEEE1FF911DC27B800029872 /* CDRDefaultReporter.h in Headers */,
+				1F0D0D4D17E133360060B8EC /* NSSet+CDRDescription.h in Headers */,
 				AEEE1FFB11DC27B800029872 /* CDRExampleBase.h in Headers */,
 				AEEE1FFD11DC27B800029872 /* CDRExampleParent.h in Headers */,
 				AEEE1FFE11DC27B800029872 /* CDRExampleReporter.h in Headers */,
@@ -1342,9 +1356,11 @@
 				AE74902F15B45E80008EA127 /* CDRProtocolFake.h in Headers */,
 				AE9AA67815AB601500617E1A /* HaveReceived.h in Headers */,
 				AEF32FF2145A2D79002F93BB /* BeGreaterThan.h in Headers */,
+				1F0D0D4B17E133250060B8EC /* NSNumber+CDRDescription.h in Headers */,
 				AE597B4115B0638B00EEF305 /* InvocationMatcher.h in Headers */,
 				AEF32FF4145A2E91002F93BB /* CompareEqual.h in Headers */,
 				AEF32FF8145A2EDF002F93BB /* CompareGreaterThan.h in Headers */,
+				1F0D0D4F17E1334A0060B8EC /* NSValue+CDRDescription.h in Headers */,
 				AEF3300C145B4F75002F93BB /* BeGTE.h in Headers */,
 				AEF33017145B6222002F93BB /* BeLessThan.h in Headers */,
 				E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */,
@@ -1597,7 +1613,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F1BF09817DED3E000084012 /* NSNumber+Cedar.mm in Resources */,
+				1F1BF09817DED3E000084012 /* NSNumber+CDRDescription.mm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1749,11 +1765,11 @@
 				AED23E6C173D5545003D7A41 /* BeCloseTo.mm in Sources */,
 				AE02021917452007009A7915 /* StringifiersBase.mm in Sources */,
 				AEE8DBD7175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */,
-				1F1BF08817DECF0900084012 /* NSArray+Cedar.mm in Sources */,
-				1F1BF09217DED2C300084012 /* NSString+Cedar.mm in Sources */,
-				1F1BF09517DED32200084012 /* NSDictionary+Cedar.mm in Sources */,
-				1F1BF0A417DEE0E400084012 /* NSSet+Cedar.mm in Sources */,
-				1F1BF0A817DFFE5700084012 /* NSValue+Cedar.mm in Sources */,
+				1F1BF08817DECF0900084012 /* NSArray+CDRDescription.mm in Sources */,
+				1F1BF09217DED2C300084012 /* NSString+CDRDescription.mm in Sources */,
+				1F1BF09517DED32200084012 /* NSDictionary+CDRDescription.mm in Sources */,
+				1F1BF0A417DEE0E400084012 /* NSSet+CDRDescription.mm in Sources */,
+				1F1BF0A817DFFE5700084012 /* NSValue+CDRDescription.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1847,12 +1863,12 @@
 				AED23E6D173D5545003D7A41 /* BeCloseTo.mm in Sources */,
 				AE02021A17452007009A7915 /* StringifiersBase.mm in Sources */,
 				AEE8DBD8175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */,
-				1F1BF08B17DECF0900084012 /* NSArray+Cedar.mm in Sources */,
-				1F1BF09317DED2C300084012 /* NSString+Cedar.mm in Sources */,
-				1F1BF09617DED32200084012 /* NSDictionary+Cedar.mm in Sources */,
-				1F1BF09C17DED49500084012 /* NSNumber+Cedar.mm in Sources */,
-				1F1BF0A517DEE0E400084012 /* NSSet+Cedar.mm in Sources */,
-				1F1BF0A917DFFE5700084012 /* NSValue+Cedar.mm in Sources */,
+				1F1BF08B17DECF0900084012 /* NSArray+CDRDescription.mm in Sources */,
+				1F1BF09317DED2C300084012 /* NSString+CDRDescription.mm in Sources */,
+				1F1BF09617DED32200084012 /* NSDictionary+CDRDescription.mm in Sources */,
+				1F1BF09C17DED49500084012 /* NSNumber+CDRDescription.mm in Sources */,
+				1F1BF0A517DEE0E400084012 /* NSSet+CDRDescription.mm in Sources */,
+				1F1BF0A917DFFE5700084012 /* NSValue+CDRDescription.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
