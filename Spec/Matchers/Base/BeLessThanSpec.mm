@@ -162,7 +162,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -176,7 +176,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -196,7 +196,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -226,7 +226,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.1", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than @(100.1)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -240,7 +240,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.1", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(1.1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -260,7 +260,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -358,7 +358,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -372,7 +372,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -392,7 +392,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -422,7 +422,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100.1)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -436,7 +436,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1.1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -456,7 +456,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -486,7 +486,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100.5", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -500,7 +500,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1.5", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -520,7 +520,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -554,7 +554,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -568,7 +568,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -588,7 +588,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -618,7 +618,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100.1)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -632,7 +632,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1.1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -652,7 +652,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -682,7 +682,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100.5", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -696,7 +696,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1.5", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -716,7 +716,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -750,7 +750,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -764,7 +764,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -784,7 +784,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -814,7 +814,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100.1)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -828,7 +828,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1.1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -848,7 +848,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -878,7 +878,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100.5", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -892,7 +892,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1.5", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -912,7 +912,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -946,7 +946,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -960,7 +960,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -980,7 +980,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1010,7 +1010,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1024,7 +1024,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1044,7 +1044,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1074,7 +1074,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1088,7 +1088,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1108,7 +1108,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1138,7 +1138,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1152,7 +1152,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1172,7 +1172,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1202,7 +1202,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1216,7 +1216,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1236,7 +1236,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1266,7 +1266,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1280,7 +1280,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1300,7 +1300,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1330,7 +1330,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100.1)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1344,7 +1344,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1.1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1364,7 +1364,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1394,7 +1394,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100.5", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1408,7 +1408,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1.5", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1428,7 +1428,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1462,7 +1462,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1476,7 +1476,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1496,7 +1496,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1526,7 +1526,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1540,7 +1540,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1560,7 +1560,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1590,7 +1590,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1604,7 +1604,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1624,7 +1624,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1654,7 +1654,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1668,7 +1668,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1688,7 +1688,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1718,7 +1718,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1732,7 +1732,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1752,7 +1752,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1782,7 +1782,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1796,7 +1796,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1816,7 +1816,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1846,7 +1846,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than @(100.1)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1860,7 +1860,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(1.1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1880,7 +1880,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1910,7 +1910,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to not be less than 100.5", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -1924,7 +1924,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.5", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 1.5", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -1944,7 +1944,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected @(10) to be less than 10", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2042,7 +2042,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -2056,7 +2056,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2076,7 +2076,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2106,7 +2106,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -2120,7 +2120,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2140,7 +2140,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2170,7 +2170,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -2184,7 +2184,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2204,7 +2204,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2234,7 +2234,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than @(100)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -2248,7 +2248,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2268,7 +2268,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2426,7 +2426,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to not be less than 100.1", ^{
+                        expectFailureWithMessage(@"Expected 10 to not be less than @(100.1)", ^{
                             expect(actualValue).to_not(be_less_than(expectedValue));
                         });
                     });
@@ -2440,7 +2440,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 1.1", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(1.1)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });
@@ -2460,7 +2460,7 @@ describe(@"be_less_than matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 10 to be less than 10", ^{
+                        expectFailureWithMessage(@"Expected 10 to be less than @(10)", ^{
                             expect(actualValue).to(be_less_than(expectedValue));
                         });
                     });

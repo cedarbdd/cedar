@@ -157,7 +157,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 1 to not equal 1", ^{
+                        expectFailureWithMessage(@"Expected 1 to not equal @(1)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -171,7 +171,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 1 to equal 1.1", ^{
+                        expectFailureWithMessage(@"Expected 1 to equal @(1.1)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -201,7 +201,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 1 to not equal 1", ^{
+                        expectFailureWithMessage(@"Expected 1 to not equal @(1)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -215,7 +215,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 1 to equal 1.1", ^{
+                        expectFailureWithMessage(@"Expected 1 to equal @(1.1)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -324,7 +324,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -338,7 +338,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -368,7 +368,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -382,7 +382,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -412,7 +412,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -426,7 +426,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -456,7 +456,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -470,7 +470,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(1.1)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -500,7 +500,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -514,7 +514,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -549,7 +549,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -563,7 +563,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -593,7 +593,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -607,7 +607,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -637,7 +637,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -651,7 +651,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -681,7 +681,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -695,7 +695,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(1.1)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -725,7 +725,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -739,7 +739,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1045,7 +1045,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1059,7 +1059,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1089,7 +1089,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1103,7 +1103,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1133,7 +1133,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1147,7 +1147,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1177,7 +1177,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1191,7 +1191,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(1.1)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1221,7 +1221,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1235,7 +1235,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1270,7 +1270,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1284,7 +1284,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1314,7 +1314,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1328,7 +1328,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1358,7 +1358,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1372,7 +1372,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1402,7 +1402,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1416,7 +1416,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1446,7 +1446,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1460,7 +1460,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1490,7 +1490,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1504,7 +1504,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8.7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8.7", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1534,7 +1534,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1548,7 +1548,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 1.1", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(1.1)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1578,7 +1578,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1592,7 +1592,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1626,7 +1626,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1640,7 +1640,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1670,7 +1670,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1684,7 +1684,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1714,7 +1714,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1728,7 +1728,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1758,7 +1758,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1772,7 +1772,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1802,7 +1802,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1816,7 +1816,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1846,7 +1846,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1860,7 +1860,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1890,7 +1890,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1904,7 +1904,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8.7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8.7", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1934,7 +1934,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected @(7) to not equal 7", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1948,7 +1948,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected @(7) to equal 8", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -1982,7 +1982,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected 7 to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -1996,7 +1996,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected 7 to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -2026,7 +2026,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected 7 to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -2040,7 +2040,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected 7 to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -2070,7 +2070,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected 7 to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -2084,7 +2084,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected 7 to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -2114,7 +2114,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected 7 to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -2128,7 +2128,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible (for NSValue objects) failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected 7 to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });
@@ -2158,7 +2158,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to not equal 7", ^{
+                        expectFailureWithMessage(@"Expected 7 to not equal @(7)", ^{
                             expect(actualValue).to_not(equal(expectedValue));
                         });
                     });
@@ -2172,7 +2172,7 @@ describe(@"equal matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage(@"Expected 7 to equal 8", ^{
+                        expectFailureWithMessage(@"Expected 7 to equal @(8)", ^{
                             expect(actualValue).to(equal(expectedValue));
                         });
                     });

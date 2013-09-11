@@ -132,7 +132,7 @@ describe(@"CDRClassFake", ^{
         it(@"should raise a descriptive exception when a method signature couldn't be resolved", ^{
             ^{
                 fake stub_method("unforwardedUnimplementedMethod");
-            } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <unforwardedUnimplementedMethod>, which double <%@> does not respond to", [fake description]]);
+            } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method @selector(unforwardedUnimplementedMethod), which double <%@> does not respond to", [fake description]]);
         });
     });
 });

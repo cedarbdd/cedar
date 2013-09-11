@@ -125,7 +125,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
         context(@"with a method name that the stub does not respond to", ^{
             it(@"should raise an exception", ^{
-                ^{ myDouble stub_method("wibble_wobble"); } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <wibble_wobble>, which double <%@> does not respond to", myDouble]);
+                ^{ myDouble stub_method("wibble_wobble"); } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method @selector(wibble_wobble), which double <%@> does not respond to", myDouble]);
             });
         });
 
@@ -133,7 +133,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             context(@"when stubbed twice", ^{
                 it(@"should raise an exception", ^{
                     myDouble stub_method("value");
-                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed with arguments ()");
+                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method @selector(value) is already stubbed with arguments ()");
                 });
             });
 
@@ -272,7 +272,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             });
 
             context(@"when specified with .with(varargs)", ^{
-                NSNumber *arg1 = @1;;
+                NSNumber *arg1 = @1;
                 NSNumber *arg2 = @2;
                 NSNumber *arg3 = @3;
                 NSNumber *returnValue = @99;
@@ -303,7 +303,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     });
 
                     context(@"of incorrect types", ^{
-                        NSString *reason = @"Attempt to compare expected argument <10> with actual argument type @; argument #2 for <methodWithNumber1:andNumber2:>";
+                        NSString *reason = @"Attempt to compare expected argument 10 with actual argument type @; argument #2 for @selector(methodWithNumber1:andNumber2:)";
                         it(@"should raise an exception", ^{
                             int invalidInt = 10;
                             ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, invalidInt); } should raise_exception.with_reason(reason);
@@ -350,14 +350,14 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         context(@"where the incorrect type is an object", ^{
                             it(@"should raise an exception", ^{
                                 NSString *incorrectType = @"your mom";
-                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", @"your mom", @encode(size_t)];
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument @\"%@\" with actual argument type %s; argument #1 for @selector(incrementByABit:andABitMore:)", @"your mom", @encode(size_t)];
                                 ^{ myDouble stub_method("incrementByABit:andABitMore:").with(incorrectType).and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
                             });
                         });
 
                         context(@"where the incorrect type is a char *", ^{
                             it(@"should raise an exception", ^{
-                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <\"%s\"> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", "your mom", @encode(size_t)];
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument \"%s\" with actual argument type %s; argument #1 for @selector(incrementByABit:andABitMore:)", "your mom", @encode(size_t)];
                                 ^{ myDouble stub_method("incrementByABit:andABitMore:").with((char *)"your mom").and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
                             });
                         });
@@ -366,7 +366,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                             it(@"should raise an exception", ^{
                                 int anInt = 1;
                                 int *ptr = &anInt;
-                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%p> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", ptr, @encode(size_t)];
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument %p with actual argument type %s; argument #1 for @selector(incrementByABit:andABitMore:)", ptr, @encode(size_t)];
                                 ^{ myDouble stub_method("incrementByABit:andABitMore:").with(ptr).and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
                             });
                         });
@@ -562,7 +562,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
             context(@"with the same arguments", ^{
                 it(@"should raise an exception", ^{
-                    ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(@91); } should raise_exception().with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<1><2>)");
+                    ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(@91); } should raise_exception().with_reason(@"The method @selector(methodWithNumber1:andNumber2:) is already stubbed with arguments (@(1), @(2))");
                 });
             });
         });

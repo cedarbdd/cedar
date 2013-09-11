@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #include <sstream>
+#import "NSObject+Cedar.h"
 
 namespace Cedar { namespace Matchers { namespace Stringifiers {
     NSString * object_description_for(const void *objectValue);
@@ -15,6 +16,10 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
             temp << value;
             return [NSString stringWithCString:temp.str().c_str() encoding:NSUTF8StringEncoding];
         }
+    }
+
+    inline NSString * string_for(NSNumber * value) {
+        return [value CDR_description]; // @encode(NSNumber*) => f
     }
 
     inline NSString * string_for(const char value) {

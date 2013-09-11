@@ -44,7 +44,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     /*virtual*/ NSString * <#MatcherClassName#><T>::failure_message_end() const {
-        return [NSString stringWithFormat:@"be related in some way to <%@>", this->string_for(expectedValue_)];
+        return [NSString stringWithFormat:@"be related in some way to %@", this->string_for(expectedValue_)];
     }
 
 #pragma mark Generic
