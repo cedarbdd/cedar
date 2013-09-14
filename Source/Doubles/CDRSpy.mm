@@ -87,8 +87,14 @@
             } else {
                 Class originalClass = [CDRSpyInfo originalClassForObject:self];
                 Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
-                IMP originalMethodImplementation = method_getImplementation(originalMethod);
-                [invocation invokeUsingIMP:originalMethodImplementation];
+
+                if (originalMethod) {
+                    [invocation invokeUsingIMP:method_getImplementation(originalMethod)];
+                } else {
+                    [self as_original_class:^{
+                        [invocation invoke];
+                    }];
+                }
             }
         }
     } @finally {
