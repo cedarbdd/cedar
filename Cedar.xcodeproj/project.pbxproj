@@ -144,6 +144,12 @@
 		AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
+		AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
+		AE53B67F17E7BCAA00D83D5E /* CDRProtocolFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE74903015B45E9D008EA127 /* CDRProtocolFakeSpec.mm */; };
+		AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
+		AE53B68117E7BCD300D83D5E /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
+		AE53B68217E7BCE700D83D5E /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
+		AE53B68317E7BDA900D83D5E /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
 		AE597B4115B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE597B4215B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
@@ -1833,6 +1839,7 @@
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */,
 				AEEE228711DC2D5800029872 /* main.m in Sources */,
 				AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */,
+				AE53B68117E7BCD300D83D5E /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
 				AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */,
 				96EA1CBB142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */,
 				AEF7301C13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */,
@@ -1840,12 +1847,14 @@
 				AEF7302013ECC4AE00786282 /* BeNilSpec.mm in Sources */,
 				AEF7302213ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */,
 				AEF7302413ECC4AE00786282 /* BeTruthySpec.mm in Sources */,
+				AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */,
 				AEF7302613ECC4AE00786282 /* EqualSpec.mm in Sources */,
 				AEF7302813ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
+				AE53B68217E7BCE700D83D5E /* CedarNiceFakeSharedExamples.mm in Sources */,
 				AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				AEF33015145B6188002F93BB /* BeLessThanSpec.mm in Sources */,
 				AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */,
@@ -1853,7 +1862,9 @@
 				AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
 				492951E51482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				AE9AA68E15ACD8D400617E1A /* SimpleIncrementer.m in Sources */,
+				AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */,
 				AE9AA69815ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
+				AE53B68317E7BDA900D83D5E /* HaveReceivedSpec.mm in Sources */,
 				AE36AC6315B4BBFC00EB6C51 /* NoOpKeyValueObserver.m in Sources */,
 				AE06D88117AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */,
 				9672F0A71615C1C10012ED58 /* CDRSymbolicatorSpec.mm in Sources */,
@@ -1867,6 +1878,7 @@
 				AE71E7CC175E958F002A54D5 /* ARCViewController.m in Sources */,
 				AE9EAADA178C789900CCF7DA /* CDRDefaultReporterSpec.mm in Sources */,
 				AE0695F417A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */,
+				AE53B67F17E7BCAA00D83D5E /* CDRProtocolFakeSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

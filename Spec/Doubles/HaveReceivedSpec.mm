@@ -319,7 +319,7 @@ describe(@"have_received matcher", ^{
             });
 
             context(@"with the correct expected parameter", ^{
-                unsigned long long expectedFirstParameter = actualFirstParameter;
+                int expectedFirstParameter = actualFirstParameter;
                 NSObject * expectedSecondParameter = [NSNumber numberWithFloat:[actualSecondParameter floatValue]];
 
                 describe(@"positive match", ^{
@@ -331,11 +331,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
                             expect(incrementer).to_not(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
                             expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                         });
                     });
