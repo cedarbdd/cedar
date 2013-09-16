@@ -124,7 +124,7 @@ describe(@"CDRClassFake", ^{
         });
 
         it(@"should allow stubbing of methods declared in a category without a corresponding category implementation", ^{
-            fake stub_method("count").and_return(42UL);
+            fake stub_method("count").and_return((NSUInteger)42);
 
             fake.count should equal(42);
         });
