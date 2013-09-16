@@ -157,7 +157,7 @@ describe(@"spy_on", ^{
         });
 
         it(@"should allow stubbing of publicly visible methods, even if forwarded in actual implementation", ^{
-            forwardingObject stub_method("count").and_return(666UL);
+            forwardingObject stub_method("count").and_return((NSUInteger)666);
 
             forwardingObject.count should equal(666);
         });
