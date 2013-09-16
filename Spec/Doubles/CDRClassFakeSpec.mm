@@ -1,6 +1,7 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
+#import "ObjectWithWeakDelegate.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -135,7 +136,20 @@ describe(@"CDRClassFake", ^{
             } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <unforwardedUnimplementedMethod>, which double <%@> does not respond to", [fake description]]);
         });
     });
-});
 
+    describe(@"using Key Value Coding to set values on a class fake", ^{
+        __block ObjectWithWeakDelegate *niceFake;
+
+        beforeEach(^{
+            niceFake = nice_fake_for([ObjectWithWeakDelegate class]);
+        });
+
+        it(@"should not blow up, silently failing when setValue:forKey: is invoked", ^{
+            [niceFake setValue:nice_fake_for(@protocol(ExampleDelegate)) forKey:@"delegate"];
+
+            niceFake.delegate should be_nil;
+        });
+    });
+});
 
 SPEC_END
