@@ -30,6 +30,10 @@
     return self.klass;
 }
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    /* fail silently unless stubbed */
+}
+
 @end
 
 id CDR_fake_for(Class klass, BOOL require_explicit_stubs /*= YES */) {
