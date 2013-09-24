@@ -49,7 +49,7 @@
 		</dict>
 	</array>
 	<key>Description</key>
-	<string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Touch Unit Testing Bundle.  Make sure you set the Test Target correctly.  After creating this target, add it to the list of tests for your the Test Target.</string>
+	<string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Touch Unit Testing Bundle.  Make sure you set the Test Target correctly.  After creating this target, add it to the list of tests for your Test Target.</string>
 	<key>Identifier</key>
 	<string>com.pivotallabs.cedar.iOSTestingBundle</string>
 	<key>Definitions</key>
