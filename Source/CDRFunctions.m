@@ -62,11 +62,13 @@ BOOL CDRClassHasClassMethod(Class class, SEL selector) {
 
 void CDRDefineGlobalBeforeAndAfterEachBlocks() {
     [SpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) {
-        return CDRClassHasClassMethod(class, @selector(beforeEach));
+        SEL beforeEachSelector = NSSelectorFromString(@"beforeEach");
+        return CDRClassHasClassMethod(class, beforeEachSelector);
     });
 
     [SpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) {
-        return CDRClassHasClassMethod(class, @selector(afterEach));
+        SEL afterEachSelector = NSSelectorFromString(@"afterEach");
+        return CDRClassHasClassMethod(class, afterEachSelector);
     });
 }
 
