@@ -21,8 +21,9 @@ int runSpecsWithinUIApplication() {
 
 void exitWithStatusFromUIApplication(int status) {
     UIApplication *application = [UIApplication sharedApplication];
-    if ([application respondsToSelector:@selector(_terminateWithStatus:)]) {
-        [application performSelector:@selector(_terminateWithStatus:) withObject:(id)status];
+    SEL _terminateWithStatusSelector = NSSelectorFromString(@"_terminateWithStatus:");
+    if ([application respondsToSelector:_terminateWithStatusSelector]) {
+        [application performSelector:_terminateWithStatusSelector withObject:(id)status];
     } else {
         exit(status);
     }

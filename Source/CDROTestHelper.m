@@ -10,9 +10,11 @@ int CDRRunOCUnitTests(id self, SEL _cmd, id ignored) {
     [[NSBundle allFrameworks] makeObjectsPerformSelector:@selector(principalClass)];
     [NSClassFromString(@"SenTestObserver") class];
 
-    id testSuite = [self performSelector:@selector(specifiedTestSuite)];
+    SEL specifiedTestSuiteSelector = NSSelectorFromString(@"specifiedTestSuite");
+    SEL hasSucceededSelector = NSSelectorFromString(@"specifiedTestSuite");
+    id testSuite = [self performSelector:specifiedTestSuiteSelector];
     id runResult = [testSuite performSelector:@selector(run)];
-    hasFailed = !(BOOL)[runResult performSelector:@selector(hasSucceeded)];
+    hasFailed = !(BOOL)[runResult performSelector:hasSucceededSelector];
 
     [pool release];
     return (int)hasFailed;
@@ -24,6 +26,7 @@ void CDRHijackOCUnitRun(IMP newImplementation) {
     Class senTestProbeClass = objc_getClass("SenTestProbe");
     if (senTestProbeClass) {
         Class senTestProbeMetaClass = objc_getMetaClass("SenTestProbe");
-        class_replaceMethod(senTestProbeMetaClass, @selector(runTests:), newImplementation, "v@:@");
+        SEL runTestsSelector = NSSelectorFromString(@"runTests:");
+        class_replaceMethod(senTestProbeMetaClass, runTestsSelector, newImplementation, "v@:@");
     }
 }
