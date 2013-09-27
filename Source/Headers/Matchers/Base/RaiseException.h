@@ -46,7 +46,7 @@ namespace Cedar { namespace Matchers {
         NSString *expectedReason_;
     };
 
-    RaiseException raise() __attribute__((deprecated)); // Please use raise_exception
+    RaiseException raise() __attribute__((deprecated("Please use raise_exception")));
     RaiseException raise();
 
     static const RaiseException raise_exception;
