@@ -16,7 +16,7 @@ namespace Cedar { namespace Matchers {
         RaiseException & operator=(const RaiseException &);
 
     public:
-        explicit RaiseException(NSObject * = nil, Class = nil, bool = false, NSString * = nil);
+        explicit RaiseException(NSObject * = nil, Class = nil, bool = false, NSString * = nil, NSString * = nil);
         ~RaiseException();
         // Allow default copy ctor.
 
@@ -29,6 +29,9 @@ namespace Cedar { namespace Matchers {
         RaiseException & with_reason(NSString * const reason);
         RaiseException with_reason(NSString * const reason) const;
 
+        RaiseException & with_name(NSString * const name);
+        RaiseException with_name(NSString * const name) const;
+
         bool matches(empty_block_t) const;
 
     protected:
@@ -38,12 +41,14 @@ namespace Cedar { namespace Matchers {
         bool exception_matches_expected_class(NSObject * const exception) const;
         bool exception_matches_expected_instance(NSObject * const exception) const;
         bool exception_matches_expected_reason(NSObject * const exception) const;
+        bool exception_matches_expected_name(NSObject * const exception) const;
 
     private:
         const NSObject *expectedExceptionInstance_;
         const Class expectedExceptionClass_;
         bool allowSubclasses_;
         NSString *expectedReason_;
+        NSString *expectedName_;
     };
 
     RaiseException raise() __attribute__((deprecated("Please use raise_exception")));
