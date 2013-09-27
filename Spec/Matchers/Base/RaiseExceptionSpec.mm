@@ -241,6 +241,29 @@ describe(@"raise_exception matcher", ^{
                     });
                 });
             });
+
+            context(@"and the name is different", ^{
+                beforeEach(^{
+                    exception = [NSException exceptionWithName:NSInvalidArgumentException reason:reason userInfo:nil];
+                    block = [[^{
+                        [exception raise];
+                    } copy] autorelease];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        block should raise_exception.with_name(NSInvalidArgumentException).with_reason(reason);
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not raise an exception with name <%@> and reason <%@>", block, NSInvalidArgumentException, reason], ^{
+                            block should_not raise_exception.with_name(NSInvalidArgumentException).with_reason(reason);
+                        });
+                    });
+                });
+            });
         });
 
         context(@"when the block throws an exception with a different reason", ^{

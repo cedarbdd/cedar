@@ -66,8 +66,8 @@ namespace Cedar { namespace Matchers {
         @catch (NSObject *exception) {
             return this->exception_matches_expected_class(exception) &&
             this->exception_matches_expected_instance(exception) &&
-            this->exception_matches_expected_reason(exception) &&
-            this->exception_matches_expected_name(exception);
+            this->exception_matches_expected_name(exception) &&
+            this->exception_matches_expected_reason(exception);
         }
         return false;
     }
@@ -81,13 +81,15 @@ namespace Cedar { namespace Matchers {
             }
             [message appendFormat:@" <%@>", NSStringFromClass(expectedExceptionClass_)];
         }
-        if (expectedReason_) {
-            [message appendFormat:@" with reason <%@>", expectedReason_];
-        }
         if (expectedName_) {
             [message appendFormat:@" with name <%@>", expectedName_];
+            if (expectedReason_) {
+                [message appendFormat:@" and reason <%@>", expectedReason_];
+            }
         }
-
+        else if (expectedReason_) {
+            [message appendFormat:@" with reason <%@>", expectedReason_];
+        }
         return message;
     }
 
