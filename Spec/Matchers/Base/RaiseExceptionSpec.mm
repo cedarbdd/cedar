@@ -291,6 +291,16 @@ describe(@"raise_exception matcher", ^{
             });
         });
 
+        context(@"when the block throws an exception which we compare to a string built at runtime", ^{
+            it(@"should not blow up when the autorelease pool drains", ^{
+                NSString *reason = [NSString stringWithFormat:@"Because we need to %@", @"test it."];
+                exception = [NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil];
+                ^{
+                    [exception raise];
+                } should raise_exception.with_name(NSInternalInconsistencyException).with_reason(reason);
+            });
+        });
+
         context(@"when the block does not throw an exception", ^{
             beforeEach(^{
                 block = [[^{} copy] autorelease];

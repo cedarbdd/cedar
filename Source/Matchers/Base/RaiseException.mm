@@ -3,11 +3,11 @@
 namespace Cedar { namespace Matchers {
 
 #pragma mark - RaiseException
-    RaiseException::RaiseException(NSObject *expectedExceptionInstance /*= nil*/,
-                                          Class expectedExceptionClass /*= nil*/,
+    RaiseException::RaiseException(NSObject *expectedExceptionInstance /*= nil */,
+                                          Class expectedExceptionClass /*= nil */,
                                           bool allowSubclasses /*= false */,
-                                          NSString *reason /*= nil*/,
-                                          NSString *name /* = nil*/) :
+                                          NSString *reason /*= nil */,
+                                          NSString *name /* = nil */) :
     Base<RaiseExceptionMessageBuilder>(),
     expectedExceptionInstance_([expectedExceptionInstance retain]),
     expectedExceptionClass_(expectedExceptionClass),
@@ -34,23 +34,22 @@ namespace Cedar { namespace Matchers {
         return RaiseException(expectedExceptionInstance);
     }
 
-
     RaiseException & RaiseException::or_subclass() {
         allowSubclasses_ = true;
         return *this;
     }
 
     RaiseException & RaiseException::with_reason(NSString * const reason) {
-        expectedReason_ = reason;
+        expectedReason_ = [reason retain];
         return *this;
     }
 
     RaiseException RaiseException::with_reason(NSString * const reason) const {
-        return RaiseException(nil, nil, false, reason);
+        return RaiseException(nil, nil, false, reason, nil);
     }
 
     RaiseException & RaiseException::with_name(NSString *const name) {
-        expectedName_ = name;
+        expectedName_ = [name retain];
         return *this;
     }
 
