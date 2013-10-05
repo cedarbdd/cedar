@@ -390,7 +390,7 @@ describe(@"have_received matcher", ^{
     });
 
     context(@"for a method that the object does not respond to", ^{
-        SEL method = @selector(noSuchMethod:);
+        SEL method = NSSelectorFromString(@"noSuchMethod:");
 
         it(@"should raise an exception due to an invalid expectation", ^{
             NSString *methodString = NSStringFromSelector(method);
