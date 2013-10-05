@@ -46,8 +46,7 @@ static SpecHelper *specHelper__;
 }
 
 - (void)setUp {
-    SEL beforeEachSelector = NSSelectorFromString(@"beforeEach");
-    if ([self respondsToSelector:beforeEachSelector]) {
+    if ([self respondsToSelector:@selector(beforeEach)]) {
         NSLog(@"********************************************************************************");
         NSLog(@"Cedar no longer runs beforeEach blocks defined on the SpecHelper class.\n");
         NSLog(@"Rather than defining a global beforeEach on the SpecHelper instance,");
@@ -56,7 +55,7 @@ static SpecHelper *specHelper__;
         NSLog(@"********************************************************************************");
     }
 
-    [self.globalBeforeEachClasses makeObjectsPerformSelector:beforeEachSelector];
+    [self.globalBeforeEachClasses makeObjectsPerformSelector:@selector(beforeEach)];
 }
 
 - (CDRSpecBlock)subjectActionBlock {
@@ -64,8 +63,7 @@ static SpecHelper *specHelper__;
 }
 
 - (void)tearDown {
-    SEL afterEachSelector = NSSelectorFromString(@"afterEach");
-    if ([self respondsToSelector:afterEachSelector]) {
+    if ([self respondsToSelector:@selector(afterEach)]) {
         NSLog(@"********************************************************************************");
         NSLog(@"Cedar no longer runs afterEach blocks defined on the SpecHelper class.\n");
         NSLog(@"Rather than defining a global afterEach on the SpecHelper instance,");
@@ -74,7 +72,7 @@ static SpecHelper *specHelper__;
         NSLog(@"********************************************************************************");
     }
 
-    [self.globalAfterEachClasses makeObjectsPerformSelector:afterEachSelector];
+    [self.globalAfterEachClasses makeObjectsPerformSelector:@selector(afterEach)];
     [self.sharedExampleContext removeAllObjects];
 }
 
