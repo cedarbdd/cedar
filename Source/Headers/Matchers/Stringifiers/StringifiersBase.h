@@ -32,7 +32,7 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     }
 
     inline NSString * string_for(const NSDecimal value) {
-        return NSDecimalString(&value, [NSLocale currentLocale]);
+        return NSDecimalString(&value, [NSLocale systemLocale]);
     }
 
     inline NSString * string_for(char *value) {

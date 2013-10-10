@@ -10,6 +10,7 @@
 #import "BeLessThan.h"
 #import "BeLTE.h"
 #import "RaiseException.h"
+#import "RespondsTo.h"
 
 // Container
 #import "BeEmpty.h"
