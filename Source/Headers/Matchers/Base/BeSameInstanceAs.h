@@ -47,6 +47,14 @@ namespace Cedar { namespace Matchers {
 #pragma mark Generic
     template<typename T> template<typename U>
     bool BeSameInstanceAs<T>::matches(const U & actualValue) const {
+        // ARC bug: http://lists.apple.com/archives/objc-language/2012/Feb/msg00078.html
+#if __has_feature(objc_arc)
+        if (strcmp(@encode(U), @encode(id)) == 0) {
+            void *ptrOfPtr = (void *)&actualValue;
+            const void *ptr = *(reinterpret_cast<const void **>(ptrOfPtr));
+            return ptr == reinterpret_cast<const void *>(expectedValue_);
+        }
+#endif
         [[CDRSpecFailure specFailureWithReason:@"Attempt to compare non-pointer type for sameness."] raise];
         return NO;
     }
