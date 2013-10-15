@@ -18,16 +18,25 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 
 + (void)load {
     setUpFakeWorkspaceIfRequired();
-    if (!objc_getClass("SenTestProbe"))
+
+    NSString *extension = nil;;
+
+    if (objc_getClass("SenTestProbe")) {
+        extension = @".octest";
+    } else if (objc_getClass("XCTestProbe")) {
+        extension = @".xctest";
+    }
+
+    if (!extension)
         return;
 
     BOOL mainBundleIsApp = [[[NSBundle mainBundle] bundlePath] hasSuffix:@".app"];
-    BOOL mainBundleIsOctest = [[[NSBundle mainBundle] bundlePath] hasSuffix:@".octest"];
+    BOOL mainBundleIsOctest = [[[NSBundle mainBundle] bundlePath] hasSuffix:extension];
 
     if (!mainBundleIsApp && !mainBundleIsOctest) {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         for (NSBundle *bundle in [NSBundle allBundles]) {
-            if ([[bundle bundlePath] hasSuffix:@".octest"]) {
+            if ([[bundle bundlePath] hasSuffix:extension]) {
                 mainBundle__ = [bundle retain];
                 Class nsBundleMetaClass = objc_getMetaClass("NSBundle");
                 class_replaceMethod(nsBundleMetaClass, @selector(mainBundle), (IMP)CDRMainBundle, "v@:");

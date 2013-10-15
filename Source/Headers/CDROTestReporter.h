@@ -1,8 +1,4 @@
-#import <Foundation/Foundation.h>
-#import "CDRDefaultReporter.h"
+#import "CDRExampleReporter.h"
 
-@interface CDROTestReporter : CDRDefaultReporter {
-    NSMutableArray *failedExamples_;
-}
-
+@interface CDROTestReporter : NSObject <CDRExampleReporter>
 @end
