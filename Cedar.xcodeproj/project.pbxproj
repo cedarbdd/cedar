@@ -493,9 +493,6 @@
 		1F956B97180E07CE00E603A9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1F956B98180E07CE00E603A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1F956BB2180E07CE00E603A9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		1F956BB9180E07CE00E603A9 /* OCUnitAppLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCUnitAppLogicTests-Info.plist"; sourceTree = "<group>"; };
-		1F956BBB180E07CE00E603A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1F956BBD180E07CE00E603A9 /* OCUnitAppLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCUnitAppLogicTests.m; sourceTree = "<group>"; };
 		1F956BC9180E083400E603A9 /* OCUnitAppLogic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCUnitAppLogic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F956BCD180E083400E603A9 /* OCUnitAppLogic-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCUnitAppLogic-Info.plist"; sourceTree = "<group>"; };
 		1F956BCF180E083400E603A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -811,24 +808,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		1F956BB7180E07CE00E603A9 /* OCUnitAppLogicTests */ = {
-			isa = PBXGroup;
-			children = (
-				1F956BBD180E07CE00E603A9 /* OCUnitAppLogicTests.m */,
-				1F956BB8180E07CE00E603A9 /* Supporting Files */,
-			);
-			path = OCUnitAppLogicTests;
-			sourceTree = "<group>";
-		};
-		1F956BB8180E07CE00E603A9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1F956BB9180E07CE00E603A9 /* OCUnitAppLogicTests-Info.plist */,
-				1F956BBA180E07CE00E603A9 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		1F956BCB180E083400E603A9 /* OCUnitAppLogic */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,6 +912,7 @@
 			isa = PBXGroup;
 			children = (
 				96B5F9FD144A81A7000A6A5D /* OCUnitApp */,
+				1F956BCB180E083400E603A9 /* OCUnitAppLogic */,
 				96B5FA17144A81A8000A6A5D /* OCUnitAppTests */,
 				96158A8D144A915E005895CE /* OCUnitAppLogicTests */,
 			);
@@ -1122,8 +1102,6 @@
 				AEEE1FC311DC27B800029872 /* Source */,
 				AEEE1FE711DC27B800029872 /* Spec */,
 				9668DCDE144A92BA007C7294 /* OCUnit Support */,
-				1F956BB7180E07CE00E603A9 /* OCUnitAppLogicTests */,
-				1F956BCB180E083400E603A9 /* OCUnitAppLogic */,
 				AEEE202611DC286500029872 /* Frameworks */,
 				AEEE1FB711DC271300029872 /* Products */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
@@ -2071,14 +2049,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1F956BBA180E07CE00E603A9 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1F956BBB180E07CE00E603A9 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		1F956BCE180E083400E603A9 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
