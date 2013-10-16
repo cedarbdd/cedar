@@ -5,9 +5,7 @@
 
 static NSMutableArray *registeredDoubleImpls__ = nil;
 
-@interface CedarDoubleImpl () {
-    Cedar::Doubles::StubbedMethod::selector_map_t stubbed_methods_;
-}
+@interface CedarDoubleImpl ()
 
 @property (nonatomic, retain, readwrite) NSMutableArray *sent_messages;
 @property (nonatomic, assign) NSObject<CedarDouble> *parent_double;
