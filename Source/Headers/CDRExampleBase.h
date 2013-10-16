@@ -18,6 +18,7 @@ typedef enum CDRExampleState CDRExampleState;
   NSObject<CDRExampleParent> *parent_;
   BOOL focused_;
   NSTimeInterval runTime_;
+  NSUInteger stackAddress_;
 }
 
 @property (nonatomic, readonly) NSString *text;

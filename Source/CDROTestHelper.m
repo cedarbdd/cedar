@@ -11,7 +11,7 @@ int CDRRunOCUnitTests(id self, SEL _cmd, id ignored) {
     [NSClassFromString(@"SenTestObserver") class];
 
     SEL specifiedTestSuiteSelector = NSSelectorFromString(@"specifiedTestSuite");
-    SEL hasSucceededSelector = NSSelectorFromString(@"specifiedTestSuite");
+    SEL hasSucceededSelector = NSSelectorFromString(@"hasSucceeded");
     id testSuite = [self performSelector:specifiedTestSuiteSelector];
     id runResult = [testSuite performSelector:@selector(run)];
     hasFailed = !(BOOL)[runResult performSelector:hasSucceededSelector];

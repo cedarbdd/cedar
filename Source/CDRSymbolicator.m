@@ -34,6 +34,7 @@ NSUInteger CDRCallerStackAddress() {
 @end
 
 @implementation CDRSymbolicator
+
 @synthesize
     addresses = addresses_,
     fileNames = fileNames_,
