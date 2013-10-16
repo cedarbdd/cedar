@@ -48,7 +48,14 @@ end
 def system_or_exit(cmd, stdout = nil)
   puts "Executing #{cmd}"
   cmd += " >#{stdout}" if stdout
-  system(cmd) or raise "******** Build failed ********"
+  system(cmd) or begin
+    output = `cat #{stdout}`
+    raise <<EOF
+******** Build failed ********
+#{output}
+
+EOF
+  end
 end
 
 def with_env_vars(env_vars)
