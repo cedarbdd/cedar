@@ -7,7 +7,8 @@
 
 @implementation CDRExampleGroup
 
-@synthesize examples = examples_, subjectActionBlock = subjectActionBlock_;
+@synthesize examples = examples_;
+@synthesize subjectActionBlock = subjectActionBlock_;
 
 + (id)groupWithText:(NSString *)text {
     return [[[[self class] alloc] initWithText: text] autorelease];

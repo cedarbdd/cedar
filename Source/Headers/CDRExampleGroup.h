@@ -2,8 +2,8 @@
 
 @interface CDRExampleGroup : CDRExampleBase <CDRExampleParent> {
     NSMutableArray *beforeBlocks_, *examples_, *afterBlocks_;
-    NSUInteger stackAddress_;
     BOOL isRoot_;
+    CDRSpecBlock subjectActionBlock_;
 }
 
 @property (nonatomic, copy) CDRSpecBlock subjectActionBlock;
