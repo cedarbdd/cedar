@@ -113,7 +113,7 @@ end
 desc "Build UI specs"
 task :build_uispecs do
   kill_simulator
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator build", output_file("uispecs")
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 SYMROOT='#{BUILD_DIR}'", output_file("uispecs")
 end
 
 desc "Build Cedar and Cedar-iOS frameworks"
@@ -184,7 +184,7 @@ namespace :ocunit do
     if is_run_unit_tests_deprecated?
       system_or_exit "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_IOS_NAME} -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' -destination 'OS=#{SDK_VERSION},name=iphone'"
     else
-      system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", output_file("ocunit_application_specs")
+      system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", output_file("ocunit_application_specs")
 
       sdk_path = sdk_dir(SDK_RUNTIME_VERSION)
       env_vars = {
