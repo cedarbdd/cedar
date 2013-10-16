@@ -182,7 +182,7 @@ namespace :ocunit do
     kill_simulator
 
     if is_run_unit_tests_deprecated?
-      system_or_exit "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_IOS_NAME} -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' -destination 'OS=#{SDK_VERSION},name=iphone'"
+      system_or_exit "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_IOS_NAME} -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' -destination 'OS=#{SDK_VERSION},name=iPhone Retina (3.5-inch)'"
     else
       system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", output_file("ocunit_application_specs")
 

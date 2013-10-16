@@ -21,10 +21,10 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 
     NSString *extension = nil;;
 
-    if (objc_getClass("SenTestProbe")) {
-        extension = @".octest";
-    } else if (objc_getClass("XCTestProbe")) {
+    if (objc_getClass("XCTestProbe")) {
         extension = @".xctest";
+    } else if (objc_getClass("SenTestProbe")) {
+        extension = @".octest";
     }
 
     if (!extension)
