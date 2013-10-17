@@ -187,7 +187,7 @@ NSUInteger CDRCallerStackAddress() {
             userInfo:nil] raise];
     }
 
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"atos", @"-o", self.executablePath, nil];
+    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"/Applications/Xcode.app/Contents/Developer/usr/bin/atos", @"-o", self.executablePath, nil];
 
     // Position-independent executables addresses need to be adjusted hence the slide argument
     // https://developer.apple.com/library/mac/#technotes/tn2004/tn2123.html
@@ -273,7 +273,7 @@ NSUInteger CDRCallerStackAddress() {
     long slide = _dyld_get_image_vmaddr_slide(0);
 
     // If running with SenTestingKit use test bundle executable
-    if (objc_getClass("SenTestProbe"))
+    if (objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe"))
         [self getOtestBundleExecutablePath:&executablePath slide:&slide];
 
     return [[[self alloc] initWithExecutablePath:executablePath slide:slide addresses:nil] autorelease];
@@ -281,7 +281,7 @@ NSUInteger CDRCallerStackAddress() {
 
 + (void)getOtestBundleExecutablePath:(NSString **)executablePath slide:(long *)slide {
     for (int i=0; i<_dyld_image_count(); i++) {
-        if (strstr(_dyld_get_image_name(i), ".octest/") != NULL) {
+        if (strstr(_dyld_get_image_name(i), ".octest/") != NULL || strstr(_dyld_get_image_name(i), ".xctest/") != NULL) {
             *executablePath = [NSString stringWithUTF8String:_dyld_get_image_name(i)];
             *slide = _dyld_get_image_vmaddr_slide(i);
             return;

@@ -9,6 +9,13 @@
 extern int *_NSGetArgc(void);
 extern char ***_NSGetArgv(void);
 
+bool CDRIsXCTest() {
+    return objc_getClass("XCTestProbe");
+}
+bool CDRIsOCTest() {
+    return objc_getClass("SenTestProbe");
+}
+
 @implementation NSBundle (MainBundleHijack)
 static NSBundle *mainBundle__ = nil;
 
@@ -21,9 +28,9 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 
     NSString *extension = nil;;
 
-    if (objc_getClass("XCTestProbe")) {
+    if (CDRIsXCTest()) {
         extension = @".xctest";
-    } else if (objc_getClass("SenTestProbe")) {
+    } else if (CDRIsOCTest()) {
         extension = @".octest";
     }
 
@@ -31,9 +38,9 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
         return;
 
     BOOL mainBundleIsApp = [[[NSBundle mainBundle] bundlePath] hasSuffix:@".app"];
-    BOOL mainBundleIsOctest = [[[NSBundle mainBundle] bundlePath] hasSuffix:extension];
+    BOOL mainBundleIsTestBundle = [[[NSBundle mainBundle] bundlePath] hasSuffix:extension];
 
-    if (!mainBundleIsApp && !mainBundleIsOctest) {
+    if (!mainBundleIsApp && !mainBundleIsTestBundle) {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         for (NSBundle *bundle in [NSBundle allBundles]) {
             if ([[bundle bundlePath] hasSuffix:extension]) {
@@ -51,7 +58,12 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 @implementation CDROTestIPhoneRunner
 
 void CDRRunTests(id self, SEL _cmd, id ignored) {
-    int exitStatus = CDRRunOCUnitTests(self, _cmd, ignored);
+    int exitStatus = 0;
+    if (CDRIsXCTest()) {
+        exitStatus = CDRRunXCUnitTests(self, _cmd, ignored);
+    } else {
+        exitStatus = CDRRunOCUnitTests(self, _cmd, ignored);
+    }
 
     if ([UIApplication sharedApplication]) {
         BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
@@ -74,6 +86,7 @@ void CDRRunTests(id self, SEL _cmd, id ignored) {
 
 + (void)load {
     CDRHijackOCUnitRun((IMP)CDRRunTests);
+    CDRHijackXCUnitRun((IMP)CDRRunTests);
 }
 
 @end

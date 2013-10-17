@@ -23,6 +23,11 @@ void CDRRunTests(id self, SEL _cmd, id ignored) {
     // we need to forcibly exit with correct exit code to make CI happy.
     [pool drain];
 
+    fflush(stdout);
+    fflush(stderr);
+    fclose(stdout);
+    fclose(stderr);
+
     exit(exitStatus);
 }
 

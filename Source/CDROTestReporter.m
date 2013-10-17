@@ -70,12 +70,30 @@
     fprintf(stderr, "Test Suite '%s' finished at %s.\n", name.UTF8String, date.description.UTF8String);
 }
 
+- (NSString *)methodNameForExample:(CDRExample *)example
+{
+    NSArray *fullTextPieces = example.fullTextInPieces;
+    NSArray *components = [fullTextPieces subarrayWithRange:NSMakeRange(1, fullTextPieces.count - 1)];
+    NSMutableString *methodName = [[components componentsJoinedByString:@"_"] mutableCopy];
+    [methodName replaceOccurrencesOfString:@" " withString:@"_" options:0 range:NSMakeRange(0, methodName.length)];
+
+    NSMutableCharacterSet *allowedCharacterSet = [[NSCharacterSet alphanumericCharacterSet] mutableCopy];
+    [allowedCharacterSet addCharactersInString:@"_"];
+
+    for (NSUInteger i=0; i<methodName.length; i++) {
+        if (![allowedCharacterSet characterIsMember:[methodName characterAtIndex:i]]) {
+            [methodName deleteCharactersInRange:NSMakeRange(i, 1)];
+            i--;
+        }
+    }
+
+    return methodName;
+}
+
 - (void)reportOnExample:(CDRExample *)example
 {
-    NSString *testSuite = [NSString stringWithFormat:@"%@Spec", example.fullTextInPieces[0]];
-    NSArray *fullTextPieces = example.fullTextInPieces;
-    NSString *caseName = [[[fullTextPieces subarrayWithRange:NSMakeRange(1, fullTextPieces.count - 1)]
-                           componentsJoinedByString:@"_"] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    NSString *testSuite = [NSString stringWithFormat:@"%@Spec", [example.fullTextInPieces objectAtIndex:0]];
+    NSString *methodName = [self methodNameForExample:example];
 
     NSString *status = nil;
     NSString *errorMessage = nil;
@@ -96,7 +114,7 @@
             status = @"failed";
             errorMessage = [self recordFailedExample:example
                                            suiteName:testSuite
-                                            caseName:caseName];
+                                            caseName:methodName];
             break;
         default:
             break;
@@ -113,13 +131,13 @@
         [self startSuite:testSuite atDate:startTime];
     }
 
-    fprintf(stderr, "Test Case '-[%s %s]' started.\n", testSuite.UTF8String, caseName.UTF8String);
+    fprintf(stderr, "Test Case '-[%s %s]' started.\n", testSuite.UTF8String, methodName.UTF8String);
 
     if (errorMessage){
         fprintf(stderr, "%s\n", errorMessage.UTF8String);
     }
     fprintf(stderr, "Test Case '-[%s %s]' %s (%.3f seconds).\n",
-            testSuite.UTF8String, caseName.UTF8String, status.UTF8String, example.runTime);
+            testSuite.UTF8String, methodName.UTF8String, status.UTF8String, example.runTime);
 
     self.currentSuiteName = testSuite;
     self.currentSuite = (CDRExampleGroup *)example.parent;
@@ -139,11 +157,11 @@
 
 - (void)printStatsForExamples:(NSArray *)examples {
     NSDictionary *stats = [self statsForExamples:examples];
-    NSUInteger count = [stats[@"count"] unsignedIntegerValue];
-    NSUInteger failed = [stats[@"failed"] unsignedIntegerValue];
-    NSUInteger unexpected = [stats[@"unexpected"] unsignedIntegerValue];
-    const char *testsString = count == 1 ? "test" : "tests";
-    const char *failuresString = failed == 1 ? "failure" : "failures";
+    NSUInteger count = [[stats objectForKey:@"count"] unsignedIntegerValue];
+    NSUInteger failed = [[stats objectForKey:@"failed"] unsignedIntegerValue];
+    NSUInteger unexpected = [[stats objectForKey:@"unexpected"] unsignedIntegerValue];
+    const char *testsString = (count == 1 ? "test" : "tests");
+    const char *failuresString = (failed == 1 ? "failure" : "failures");
     float totalTimeElapsed = [self.endTime timeIntervalSinceDate:self.startTime];
 
     fprintf(stderr, "Executed %lu %s, with %lu %s (%lu unexpected) in %.4f (%.4f) seconds\n",
@@ -168,14 +186,15 @@
             }
         } else {
             NSDictionary *stats = [self statsForExamples:[example examples]];
-            count += [stats[@"count"] unsignedIntegerValue];
-            unexpected += [stats[@"unexpected"] unsignedIntegerValue];
-            failed += [stats[@"failed"] unsignedIntegerValue];
+            count += [[stats objectForKey:@"count"] unsignedIntegerValue];
+            unexpected += [[stats objectForKey:@"unexpected"] unsignedIntegerValue];
+            failed += [[stats objectForKey:@"failed"] unsignedIntegerValue];
         }
     }
-    return @{@"count": @(count),
-             @"unexpected": @(unexpected),
-             @"failed": @(failed)};
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithUnsignedInteger:count], @"count",
+            [NSNumber numberWithUnsignedInteger:unexpected], @"unexpected",
+            [NSNumber numberWithUnsignedInteger:failed], @"failed", nil];
 }
 
 

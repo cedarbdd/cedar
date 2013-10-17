@@ -31,7 +31,7 @@
 		1F45A3D5180E4796003C1E36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
 		1F45A3D6180E4796003C1E36 /* libCedar-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */; };
 		1F45A3D8180E4796003C1E36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA1A144A81A8000A6A5D /* InfoPlist.strings */; };
-		1F45A3E0180E47E5003C1E36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F956BB2180E07CE00E603A9 /* XCTest.framework */; };
+		1F45A3E0180E47E5003C1E36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F956BB2180E07CE00E603A9 /* XCTest.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		1F45A3E3180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A3E2180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m */; };
 		1F956BCA180E083400E603A9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96158A87144A915E005895CE /* Cocoa.framework */; };
 		1F956BD0180E083400E603A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F956BCE180E083400E603A9 /* InfoPlist.strings */; };
@@ -2260,8 +2260,6 @@
 					"-ObjC",
 					"-framework",
 					Foundation,
-					"-framework",
-					SenTestingKit,
 				);
 				PRODUCT_NAME = XCUnitAppTests;
 				SDKROOT = iphoneos;
@@ -2300,8 +2298,6 @@
 					"-ObjC",
 					"-framework",
 					Foundation,
-					"-framework",
-					SenTestingKit,
 				);
 				PRODUCT_NAME = XCUnitAppTests;
 				SDKROOT = iphoneos;
@@ -2361,6 +2357,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCUnitAppLogic/OCUnitAppLogic-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2511,6 +2508,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCUnitApp/OCUnitApp-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;

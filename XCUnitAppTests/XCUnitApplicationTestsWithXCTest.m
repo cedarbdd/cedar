@@ -1,10 +1,10 @@
 #import <XCTest/XCTest.h>
 #import "OCUnitAppAppDelegate.h" // should NOT be included in OCUnitAppTests target
 
-@interface ExampleApplicationTestsWithXCTestingKit : XCTestCase
+@interface ExampleApplicationTestsWithXCTest : XCTestCase
 @end
 
-@implementation ExampleApplicationTestsWithXCTestingKit
+@implementation ExampleApplicationTestsWithXCTest
 - (void)testApplicationTestsRun {
     UILabel *label = [[[UILabel alloc] init] autorelease];
     XCTAssertEqual([label class], [UILabel class], @"expected an instance of UILabel to be UILabel kind");

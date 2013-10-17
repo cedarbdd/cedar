@@ -7,7 +7,9 @@
 int runSpecsWithinUIApplication() {
     int exitStatus;
 
-    char *defaultReporterClassName = objc_getClass("SenTestProbe") ? "CDROTestReporter" : "CDRDefaultReporter";
+    BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
+
+    char *defaultReporterClassName = isTestBundle ? "CDROTestReporter" : "CDRDefaultReporter";
     NSArray *reporters = CDRReportersFromEnv(defaultReporterClassName);
 
     if (![reporters count]) {
