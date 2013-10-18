@@ -1,5 +1,5 @@
 PROJECT_NAME = "Cedar"
-APP_NAME = "OCUnitAppLogic"
+APP_NAME = "Specs"
 APP_IOS_NAME = "OCUnitApp"
 CONFIGURATION = "Release"
 
