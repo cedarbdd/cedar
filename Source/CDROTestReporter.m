@@ -17,8 +17,7 @@
 
 @implementation CDROTestReporter
 
-- (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed
-{
+- (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed {
     self.startTime = [NSDate date];
     self.rootGroups = groups;
     [self startObservingExamples:self.rootGroups];
@@ -27,8 +26,7 @@
     [self startSuite:[self bundleSuiteName] atDate:self.startTime];
 }
 
-- (void)runDidComplete
-{
+- (void)runDidComplete {
     if (self.currentSuiteName){
         [self finishSuite:self.currentSuiteName atDate:[NSDate date]];
         [self printStatsForExamples:@[self.currentSuite]];
@@ -42,8 +40,7 @@
     [self printStatsForExamples:self.rootGroups];
 }
 
-- (int)result
-{
+- (int)result {
     if ([SpecHelper specHelper].shouldOnlyRunFocused || self.failedCount) {
         return 1;
     } else {
@@ -54,24 +51,20 @@
 
 #pragma mark - Private
 
-- (NSString *)bundleSuiteName
-{
+- (NSString *)bundleSuiteName {
     NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
     return testBundle.bundleURL.pathComponents.lastObject;
 }
 
-- (void)startSuite:(NSString *)name atDate:(NSDate *)date
-{
+- (void)startSuite:(NSString *)name atDate:(NSDate *)date {
     fprintf(stderr, "Test Suite '%s' started at %s\n", name.UTF8String, date.description.UTF8String);
 }
 
-- (void)finishSuite:(NSString *)name atDate:(NSDate *)date
-{
+- (void)finishSuite:(NSString *)name atDate:(NSDate *)date {
     fprintf(stderr, "Test Suite '%s' finished at %s.\n", name.UTF8String, date.description.UTF8String);
 }
 
-- (NSString *)methodNameForExample:(CDRExample *)example
-{
+- (NSString *)methodNameForExample:(CDRExample *)example {
     NSArray *fullTextPieces = example.fullTextInPieces;
     NSArray *components = [fullTextPieces subarrayWithRange:NSMakeRange(1, fullTextPieces.count - 1)];
     NSMutableString *methodName = [[components componentsJoinedByString:@"_"] mutableCopy];
@@ -90,8 +83,7 @@
     return methodName;
 }
 
-- (void)reportOnExample:(CDRExample *)example
-{
+- (void)reportOnExample:(CDRExample *)example {
     NSString *testSuite = [NSString stringWithFormat:@"%@Spec", [example.fullTextInPieces objectAtIndex:0]];
     NSString *methodName = [self methodNameForExample:example];
 
@@ -121,7 +113,6 @@
     }
 
     if (![self.currentSuiteName isEqual:testSuite]) {
-
         if (self.currentSuiteName) {
             [self finishSuite:self.currentSuiteName atDate:[NSDate date]];
             [self printStatsForExamples:@[self.currentSuite]];
@@ -145,8 +136,7 @@
 
 - (NSString *)recordFailedExample:(CDRExample *)example
                         suiteName:(NSString *)suiteName
-                         caseName:(NSString *)caseName
-{
+                         caseName:(NSString *)caseName {
     NSString *errorDescription = [example.failure.reason stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
     NSString *errorMessage = [NSString stringWithFormat:@"%@:%d: error: -[%@ %@] : %@",
                               example.failure.fileName, example.failure.lineNumber,
@@ -171,8 +161,7 @@
             totalTimeElapsed, totalTimeElapsed);
 }
 
-- (NSDictionary *)statsForExamples:(NSArray *)examples
-{
+- (NSDictionary *)statsForExamples:(NSArray *)examples {
     NSUInteger count = 0;
     NSUInteger unexpected = 0;
     NSUInteger failed = 0;
