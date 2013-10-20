@@ -1,4 +1,9 @@
+#ifdef USE_XCTEST
+#import <XCTest/XCTest.h>
+#else
 #import <SenTestingKit/SenTestingKit.h>
+#endif
+
 #import "DummyModel.h" // should be included in OCUnitAppLogicTests target
 
 @interface ExampleLogicTestsWithSenTestingKit : SenTestCase

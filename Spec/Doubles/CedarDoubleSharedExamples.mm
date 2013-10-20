@@ -52,7 +52,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             static NSInteger numInvocations = 2;
             myDouble stub_method("value");
 
-            int doubleRetainCount = myDouble.retainCount;
+            NSUInteger doubleRetainCount = myDouble.retainCount;
 
             // spies are allowed to increment the retain count of the double by 1
             // but should hand the retain over to the autorelease pool

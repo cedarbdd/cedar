@@ -1,4 +1,5 @@
 #import "CDRSpec.h"
+#import "CDRHooks.h"
 #import "CDRSharedExampleGroupPool.h"
 #import "CDRExampleParent.h"
 

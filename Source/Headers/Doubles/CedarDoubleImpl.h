@@ -9,7 +9,11 @@ typedef enum {
     CDRStubWrongArguments,
 } CDRStubInvokeStatus;
 
-@interface CedarDoubleImpl : NSObject
+@interface CedarDoubleImpl : NSObject {
+    Cedar::Doubles::StubbedMethod::selector_map_t stubbed_methods_;
+    NSMutableArray *sent_messages_;
+    NSObject<CedarDouble> *parent_double_;
+}
 
 @property (nonatomic, retain, readonly) NSMutableArray *sent_messages;
 

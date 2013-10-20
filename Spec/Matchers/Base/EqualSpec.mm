@@ -4,6 +4,10 @@
 #import <Cedar/SpecHelper.h>
 #endif
 
+#ifndef NS_ROOT_CLASS
+#define NS_ROOT_CLASS
+#endif
+
 extern "C" {
 #import "ExpectFailureWithMessage.h"
 }
@@ -26,9 +30,13 @@ using namespace Cedar::Matchers;
 }
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-root-class"
 NS_ROOT_CLASS
 @interface ClassWithoutDescriptionMethod
+#pragma clang diagnostic pop
 @end
+
 @implementation ClassWithoutDescriptionMethod
 + (id)alloc {
     return NSAllocateObject(self, 0, NULL);

@@ -1,20 +1,20 @@
 #import "CDRFake.h"
 #import "CDRProtocolFake.h"
-#import "objc/runtime.h"
 #import "StubbedMethod.h"
+#import <objc/runtime.h>
 
 static bool protocol_hasSelector(Protocol *protocol, SEL selector, BOOL is_required_method, BOOL is_instance_method) {
     objc_method_description method_description = protocol_getMethodDescription(protocol, selector, is_required_method, is_instance_method);
     return method_description.name && method_description.types;
 }
 
-@interface CDRProtocolFake () {
-    Protocol * protocol_;
-}
-
+@interface CDRProtocolFake ()
+@property (strong, nonatomic) Protocol *protocol;
 @end
 
 @implementation CDRProtocolFake
+
+@synthesize protocol = protocol_;
 
 - (id)initWithClass:(Class)klass forProtocol:(Protocol *)protocol requireExplicitStubs:(BOOL)requireExplicitStubs {
     if (self = [super initWithClass:klass requireExplicitStubs:requireExplicitStubs]) {

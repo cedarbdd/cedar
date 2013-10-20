@@ -7,7 +7,9 @@
 int runSpecsWithinUIApplication() {
     int exitStatus;
 
-    char *defaultReporterClassName = objc_getClass("SenTestProbe") ? "CDROTestReporter" : "CDRDefaultReporter";
+    BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
+
+    char *defaultReporterClassName = isTestBundle ? "CDROTestReporter" : "CDRDefaultReporter";
     NSArray *reporters = CDRReportersFromEnv(defaultReporterClassName);
 
     if (![reporters count]) {
@@ -21,8 +23,9 @@ int runSpecsWithinUIApplication() {
 
 void exitWithStatusFromUIApplication(int status) {
     UIApplication *application = [UIApplication sharedApplication];
-    if ([application respondsToSelector:@selector(_terminateWithStatus:)]) {
-        [application performSelector:@selector(_terminateWithStatus:) withObject:(id)status];
+    SEL _terminateWithStatusSelector = NSSelectorFromString(@"_terminateWithStatus:");
+    if ([application respondsToSelector:_terminateWithStatusSelector]) {
+        [application performSelector:_terminateWithStatusSelector withObject:(id)status];
     } else {
         exit(status);
     }
