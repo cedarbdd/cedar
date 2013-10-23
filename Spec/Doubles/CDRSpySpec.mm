@@ -2,6 +2,8 @@
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ArgumentReleaser.h"
+#import "ObjectWithProperties.h"
+#import "NoOpKeyValueObserver.h"
 #import <objc/runtime.h>
 
 extern "C" {
@@ -184,6 +186,62 @@ describe(@"spy_on", ^{
                 forwardingObject stub_method("unforwardedUnimplementedMethod");
             } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <unforwardedUnimplementedMethod>, which double <%@> does not respond to", [forwardingObject description]]);
         });
+    });
+
+    describe(@"spying on and object that uses KVO", ^{
+        __block ObjectWithProperties * observingObject;
+        __block NoOpKeyValueObserver * observer;
+        beforeEach(^{
+            observingObject = [[[ObjectWithProperties alloc] init] autorelease];
+            observer = [[NoOpKeyValueObserver new] autorelease];
+            spy_on(observingObject);
+        });
+
+        it(@"should not raise exception object adds observer", ^{
+            ^{[observingObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:nil];} should_not raise_exception;
+        });
+
+        it(@"should correctly track observer adding method call", ^{
+            observingObject should_not have_received("addObserver:forKeyPath:options:context:");
+            [observingObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:nil];
+            observingObject should have_received("addObserver:forKeyPath:options:context:");
+        });
+        
+        it(@"should still notify observers with KVO method", ^{
+            [observingObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:nil];
+            NSLog(@"Observation info : %@", [observingObject observationInfo]);
+            spy_on(observer);
+            observingObject.floatProperty = 12;
+            observer should have_received("observeValueForKeyPath:ofObject:change:context:");
+        });
+        
+        it(@"should not notify observers with KVO method after observer removal", ^{
+            [observingObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:nil];
+            [observingObject removeObserver:observer forKeyPath:@"floatProperty"];
+            spy_on(observer);
+            observingObject.floatProperty = 12;
+            observer should_not have_received("observeValueForKeyPath:ofObject:change:context:");
+        });
+        
+        it(@"should correctly track observer adding method call", ^{
+            observingObject should_not have_received("addObserver:forKeyPath:options:context:");
+            [observingObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:nil];
+            observingObject should have_received("addObserver:forKeyPath:options:context:");
+        });
+
+
+        it(@"should not raise exception object removes observer", ^{
+            [observingObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:nil];
+            ^{[observingObject removeObserver:observer forKeyPath:@"floatProperty"];} should_not raise_exception;
+        });
+
+        it(@"should correctly track observer observer removing call", ^{
+            [observingObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:nil];
+            observingObject should_not have_received("removeObserver:forKeyPath:");
+            [observingObject removeObserver:observer forKeyPath:@"floatProperty"];
+            observingObject should have_received("removeObserver:forKeyPath:");
+        });
+        
     });
 });
 

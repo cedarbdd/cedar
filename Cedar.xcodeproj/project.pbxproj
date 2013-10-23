@@ -373,6 +373,8 @@
 		E31179D6161FD937007D3CDE /* CDRSlowTestStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = E31179D1161FD937007D3CDE /* CDRSlowTestStatistics.m */; };
 		E32861321604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
+		E4BCFDD21817FA110083ED98 /* ObjectWithProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */; };
+		E4BCFDD31817FA110083ED98 /* ObjectWithProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -740,6 +742,8 @@
 		E31179D1161FD937007D3CDE /* CDRSlowTestStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSlowTestStatistics.m; sourceTree = "<group>"; };
 		E32861301604F287001FA77E /* FibonacciCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FibonacciCalculator.h; sourceTree = "<group>"; };
 		E32861311604F287001FA77E /* FibonacciCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FibonacciCalculator.m; sourceTree = "<group>"; };
+		E4BCFDD01817FA110083ED98 /* ObjectWithProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithProperties.h; sourceTree = "<group>"; };
+		E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithProperties.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1378,6 +1382,8 @@
 				AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */,
 				AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */,
 				AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */,
+				E4BCFDD01817FA110083ED98 /* ObjectWithProperties.h */,
+				E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1915,6 +1921,7 @@
 				AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
 				492951E41482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */,
+				E4BCFDD21817FA110083ED98 /* ObjectWithProperties.m in Sources */,
 				6639A77E14C50A6800B564B7 /* SimpleIncrementer.m in Sources */,
 				6639A77F14C50D0100B564B7 /* HaveReceivedSpec.mm in Sources */,
 				AE9AA68015AB748E00617E1A /* CDRClassFakeSpec.mm in Sources */,
@@ -1992,6 +1999,7 @@
 				AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */,
 				AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */,
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */,
+				E4BCFDD31817FA110083ED98 /* ObjectWithProperties.m in Sources */,
 				AEEE228711DC2D5800029872 /* main.m in Sources */,
 				AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */,
 				AE53B68117E7BCD300D83D5E /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
