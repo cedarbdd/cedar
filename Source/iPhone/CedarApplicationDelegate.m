@@ -5,9 +5,9 @@
 #import <objc/runtime.h>
 
 #ifdef __IPHONE_7_0
-/* Do this only for iOS SDK 7+:
- -- Declare __gcov_flush, Grant the target process access to the supplied buffer */
-extern void __gcov_flush(void);
+    /* Do this only for iOS SDK 7+:
+    -- Declare __gcov_flush, Grant the target process access to the supplied buffer */
+    extern void __gcov_flush(void);
 #endif
 
 int runSpecsWithinUIApplication() {
@@ -73,7 +73,7 @@ void exitWithStatusFromUIApplication(int status) {
 - (void)applicationWillTerminate:(UIApplication *)application {
 #ifdef __IPHONE_7_0
     /* Do this only for iOS SDK 7+:
-     -- Make the target copy it's buffer by calling __gcov_flush */
+    -- Make the target copy it's buffer by calling __gcov_flush */
     __gcov_flush();
 #endif
 }
