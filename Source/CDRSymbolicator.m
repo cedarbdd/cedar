@@ -187,7 +187,7 @@ NSUInteger CDRCallerStackAddress() {
             userInfo:nil] raise];
     }
 
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"/Applications/Xcode.app/Contents/Developer/usr/bin/atos", @"-o", self.executablePath, nil];
+    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"-o", self.executablePath, nil];
 
     // Position-independent executables addresses need to be adjusted hence the slide argument
     // https://developer.apple.com/library/mac/#technotes/tn2004/tn2123.html
@@ -198,7 +198,7 @@ NSUInteger CDRCallerStackAddress() {
         [arguments addObject:[NSString stringWithFormat:@"%lx", (long)address.unsignedIntegerValue]];
     }
 
-    NSString *output = [self.class shellOutWithCommand:@"/usr/bin/xcrun" arguments:arguments];
+    NSString *output = [self.class shellOutWithCommand:@"/Applications/Xcode.app/Contents/Developer/usr/bin/atos" arguments:arguments];
     self.outputLines = [output componentsSeparatedByString:@"\n"];
 }
 
