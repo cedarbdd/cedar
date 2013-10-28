@@ -4,7 +4,9 @@
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
 
+#ifdef __IPHONE_7_0
 extern void __gcov_flush(void);
+#endif
 
 int runSpecsWithinUIApplication() {
     int exitStatus;
@@ -66,9 +68,11 @@ void exitWithStatusFromUIApplication(int status) {
     return NO;
 }
 
+#ifdef __IPHONE_7_0
 - (void)applicationWillTerminate:(UIApplication *)application {
     __gcov_flush();
 }
+#endif
 
 - (UIWindow *)window {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
