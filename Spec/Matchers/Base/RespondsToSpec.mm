@@ -20,6 +20,9 @@ extern "C" {
 
 using namespace Cedar::Matchers;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+
 SPEC_BEGIN(RespondsToSpec)
 
 describe(@"responds_to matcher", ^{
@@ -45,7 +48,7 @@ describe(@"responds_to matcher", ^{
             });
 
             it(@"should fail with a sensible failure message", ^{
-                NSString *methodName = @"nonExistClassMethod";
+                NSString *methodName = @"nonExistentClassMethod";
                 expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to responds to <%@> selector", subject, methodName], ^{
                     subject should responds_to(methodName);
                 });
@@ -54,11 +57,11 @@ describe(@"responds_to matcher", ^{
 
         describe(@"negative match", ^{
             it(@"should pass with selector", ^{
-                subject should_not responds_to(@selector(nonExistClassMethod));
+                subject should_not responds_to(@selector(nonExistentClassMethod));
             });
 
             it(@"should pass with string", ^{
-                subject should_not responds_to(@"nonExistClassMethod");
+                subject should_not responds_to(@"nonExistentClassMethod");
             });
 
             it(@"should fail with a sensible failure message", ^{
@@ -91,7 +94,7 @@ describe(@"responds_to matcher", ^{
             });
 
             it(@"should fail with a sensible failure message", ^{
-                NSString *methodName = @"nonExistInstanceMethod";
+                NSString *methodName = @"nonExistentInstanceMethod";
                 expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to responds to <%@> selector", subject, methodName], ^{
                     subject should responds_to(methodName);
                 });
@@ -100,11 +103,11 @@ describe(@"responds_to matcher", ^{
 
         describe(@"negative match", ^{
             it(@"should pass with selector", ^{
-                subject should_not responds_to(@selector(nonExistInstanceMethod));
+                subject should_not responds_to(@selector(nonExistentInstanceMethod));
             });
 
             it(@"should pass with string", ^{
-                subject should_not responds_to(@"nonExistInstanceMethod");
+                subject should_not responds_to(@"nonExistentInstanceMethod");
             });
 
             it(@"should fail with a sensible failure message", ^{
@@ -116,5 +119,6 @@ describe(@"responds_to matcher", ^{
         });
     });
 });
+#pragma clang diagnostic pop
 
 SPEC_END
