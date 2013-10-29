@@ -20,12 +20,9 @@ extern "C" {
 
 using namespace Cedar::Matchers;
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
+SPEC_BEGIN(RespondToSpec)
 
-SPEC_BEGIN(RespondsToSpec)
-
-describe(@"responds_to matcher", ^{
+describe(@"respond_to matcher", ^{
 
     context(@"when called on class", ^{
         __block Class subject = Nil;
@@ -40,34 +37,34 @@ describe(@"responds_to matcher", ^{
 
         describe(@"positive match", ^{
             it(@"should pass with selector", ^{
-                subject should responds_to(@selector(classMethod));
+                subject should respond_to(@selector(classMethod));
             });
 
             it(@"should pass with string", ^{
-                subject should responds_to(@"classMethod");
+                subject should respond_to(@"classMethod");
             });
 
             it(@"should fail with a sensible failure message", ^{
                 NSString *methodName = @"nonExistentClassMethod";
-                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to responds to <%@> selector", subject, methodName], ^{
-                    subject should responds_to(methodName);
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to respond to <%@> selector", subject, methodName], ^{
+                    subject should respond_to(methodName);
                 });
             });
         });
 
         describe(@"negative match", ^{
             it(@"should pass with selector", ^{
-                subject should_not responds_to(@selector(nonExistentClassMethod));
+                subject should_not respond_to(NSSelectorFromString(@"nonExistentClassMethod"));
             });
 
             it(@"should pass with string", ^{
-                subject should_not responds_to(@"nonExistentClassMethod");
+                subject should_not respond_to(@"nonExistentClassMethod");
             });
 
             it(@"should fail with a sensible failure message", ^{
                 NSString *methodName = @"classMethod";
-                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not responds to <%@> selector", subject, methodName], ^{
-                    subject should_not responds_to(methodName);
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not respond to <%@> selector", subject, methodName], ^{
+                    subject should_not respond_to(methodName);
                 });
             });
         });
@@ -86,39 +83,38 @@ describe(@"responds_to matcher", ^{
 
         describe(@"positive match", ^{
             it(@"should pass with selector", ^{
-                subject should responds_to(@selector(instanceMethod));
+                subject should respond_to(@selector(instanceMethod));
             });
 
             it(@"should pass with string", ^{
-                subject should responds_to(@"instanceMethod");
+                subject should respond_to(@"instanceMethod");
             });
 
             it(@"should fail with a sensible failure message", ^{
                 NSString *methodName = @"nonExistentInstanceMethod";
-                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to responds to <%@> selector", subject, methodName], ^{
-                    subject should responds_to(methodName);
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to respond to <%@> selector", subject, methodName], ^{
+                    subject should respond_to(methodName);
                 });
             });
         });
 
         describe(@"negative match", ^{
             it(@"should pass with selector", ^{
-                subject should_not responds_to(@selector(nonExistentInstanceMethod));
+                subject should_not respond_to(NSSelectorFromString(@"nonExistentInstanceMethod"));
             });
 
             it(@"should pass with string", ^{
-                subject should_not responds_to(@"nonExistentInstanceMethod");
+                subject should_not respond_to(@"nonExistentInstanceMethod");
             });
 
             it(@"should fail with a sensible failure message", ^{
                 NSString *methodName = @"instanceMethod";
-                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not responds to <%@> selector", subject, methodName], ^{
-                    subject should_not responds_to(methodName);
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not respond to <%@> selector", subject, methodName], ^{
+                    subject should_not respond_to(methodName);
                 });
             });
         });
     });
 });
-#pragma clang diagnostic pop
 
 SPEC_END
