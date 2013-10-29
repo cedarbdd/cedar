@@ -11,11 +11,14 @@ static NSMutableSet *currentSpies__;
 }
 
 + (void)storeSpyInfoForObject:(id)originalObject {
-    CDRSpyInfo *spyInfo = [[[CDRSpyInfo alloc] init] autorelease];
+    CDRSpyInfo *spyInfo = [[CDRSpyInfo alloc] init];
     spyInfo.originalObject = originalObject;
     spyInfo.originalClass = [originalObject class];
-    spyInfo.cedarDouble = [[[CedarDoubleImpl alloc] initWithDouble:originalObject] autorelease];
+    CedarDoubleImpl *cedarDouble = [[CedarDoubleImpl alloc] initWithDouble:originalObject];
+    spyInfo.cedarDouble = cedarDouble;
     [currentSpies__ addObject:spyInfo];
+    [cedarDouble release];
+    [spyInfo release];
 }
 
 - (void)dealloc {
