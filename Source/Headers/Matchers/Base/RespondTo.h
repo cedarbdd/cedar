@@ -7,7 +7,7 @@ namespace Cedar { namespace Matchers {
         RespondTo & operator=(const RespondTo &);
 
     public:
-        explicit RespondTo(NSString *);
+        explicit RespondTo(const char *);
         RespondTo(SEL selector);
         ~RespondTo();
         // Allow default copy ctor.
@@ -18,14 +18,14 @@ namespace Cedar { namespace Matchers {
         virtual NSString * failure_message_end() const;
 
     private:
-        NSString *const expectedSelectorName_;
+        const char *expectedSelectorName_;
     };
 
     inline RespondTo respond_to(const SEL selector) {
         return RespondTo(selector);
     }
 
-    inline RespondTo respond_to(NSString *selectorName) {
+    inline RespondTo respond_to(const char *selectorName) {
         return RespondTo(selectorName);
     }
 }}
