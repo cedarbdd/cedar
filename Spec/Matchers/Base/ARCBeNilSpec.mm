@@ -59,7 +59,52 @@ describe(@"be_nil matcher (under ARC)", ^{
         });
     });
 
-    describe(@"when the value is an id", ^{
+    describe(@"when the value is an id (__weak)", ^{
+        __block id sValue;
+        __weak __block id value;
+
+        describe(@"which is nil", ^{
+            beforeEach(^{
+                value = nil;
+            });
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(value).to(be_nil());
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage(@"Expected <nil> to not be nil", ^{
+                        expect(value).to_not(be_nil());
+                    });
+                });
+            });
+        });
+
+        describe(@"which is not nil", ^{
+            beforeEach(^{
+                value = sValue = [NSString string];
+            });
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%p> to be nil", value], ^{
+                        expect(value).to(be_nil());
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should should pass", ^{
+                    expect(value).to_not(be_nil());
+                });
+            });
+        });
+    });
+
+    describe(@"when the value is an id (__strong)", ^{
         __block id value;
 
         describe(@"which is nil", ^{
