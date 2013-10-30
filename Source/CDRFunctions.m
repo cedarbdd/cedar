@@ -186,6 +186,9 @@ unsigned int CDRGetRandomSeed() {
     return seed;
 }
 
+void __attribute__((weak)) __gcov_flush(void) {
+}
+
 int runSpecsWithCustomExampleReporters(NSArray *reporters) {
     @autoreleasepool {
         CDRDefineSharedExampleGroups();
@@ -204,6 +207,8 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
         }
 
         [groups makeObjectsPerformSelector:@selector(run)];
+
+        __gcov_flush();
 
         int result = 0;
         for (id<CDRExampleReporter> reporter in reporters) {
