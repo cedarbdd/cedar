@@ -208,13 +208,14 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
 
         [groups makeObjectsPerformSelector:@selector(run)];
 
-        __gcov_flush();
-
         int result = 0;
         for (id<CDRExampleReporter> reporter in reporters) {
             [reporter runDidComplete];
             result |= [reporter result];
         }
+
+        __gcov_flush();
+
         return result;
     }
 }
