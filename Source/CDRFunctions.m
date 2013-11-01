@@ -186,6 +186,9 @@ unsigned int CDRGetRandomSeed() {
     return seed;
 }
 
+void __attribute__((weak)) __gcov_flush(void) {
+}
+
 int runSpecsWithCustomExampleReporters(NSArray *reporters) {
     @autoreleasepool {
         CDRDefineSharedExampleGroups();
@@ -210,6 +213,9 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
             [reporter runDidComplete];
             result |= [reporter result];
         }
+
+        __gcov_flush();
+
         return result;
     }
 }
