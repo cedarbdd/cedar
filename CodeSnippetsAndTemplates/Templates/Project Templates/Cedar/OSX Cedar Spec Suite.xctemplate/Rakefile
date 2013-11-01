@@ -1,6 +1,6 @@
 require 'pathname'
 
-module ___PACKAGENAMEASIDENTIFIER___
+module CedarTarget___PACKAGENAMEASIDENTIFIER___
   SPECS_TARGET_NAME = "___PACKAGENAME___"
   CONFIGURATION = "Release"
 
@@ -61,17 +61,17 @@ end
 
 desc "Clean build directory"
 task :clean____PACKAGENAMEASIDENTIFIER___ do
-  ___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", ___PACKAGENAMEASIDENTIFIER___.output_file("clean")
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("clean")
 end
 
 desc "Build ___PACKAGENAMEASIDENTIFIER___ Specs"
 task :build____PACKAGENAMEASIDENTIFIER___ do
-  ___PACKAGENAMEASIDENTIFIER___.system_or_exit(%Q[pushd #{___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} ; xcodebuild -target #{___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} build SYMROOT=#{___PACKAGENAMEASIDENTIFIER___::BUILD_DIR} ; popd ], ___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___"))
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit(%Q[pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} ; xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} build SYMROOT=#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR} ; popd ], CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___"))
 end
 
 desc "Run ___PACKAGENAMEASIDENTIFIER___ Specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
-  ___PACKAGENAMEASIDENTIFIER___.with_env_vars("DYLD_FRAMEWORK_PATH" => ___PACKAGENAMEASIDENTIFIER___.build_dir, "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-    ___PACKAGENAMEASIDENTIFIER___.system_or_exit(File.join(___PACKAGENAMEASIDENTIFIER___.build_dir, ___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME))
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars("DYLD_FRAMEWORK_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir, "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit(File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir, CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME))
   end
 end
