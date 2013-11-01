@@ -1,6 +1,6 @@
 require 'pathname'
 
-module ___PACKAGENAME___
+module ___PACKAGENAMEASIDENTIFIER___
   SPECS_TARGET_NAME = "___PACKAGENAME___"
   CONFIGURATION = "Release"
 
@@ -60,19 +60,18 @@ module ___PACKAGENAME___
 end
 
 desc "Clean build directory"
-task :clean____PACKAGENAME___ do
-  ___PACKAGENAME___.system_or_exit "rm -rf #{___PACKAGENAME___::BUILD_DIR}/*", ___PACKAGENAME___.output_file("clean")
+task :clean____PACKAGENAMEASIDENTIFIER___ do
+  ___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", ___PACKAGENAMEASIDENTIFIER___.output_file("clean")
 end
 
-desc "Build ___PACKAGENAME___ Specs"
-task :build____PACKAGENAME___ do
-  ___PACKAGENAME___.system_or_exit(%Q[pushd #{___PACKAGENAME___::PROJECT_ROOT} ; xcodebuild -target #{___PACKAGENAME___::SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} build SYMROOT=#{___PACKAGENAME___::BUILD_DIR} ; popd ], ___PACKAGENAME___.output_file("___PACKAGENAME___"))
+desc "Build ___PACKAGENAMEASIDENTIFIER___ Specs"
+task :build____PACKAGENAMEASIDENTIFIER___ do
+  ___PACKAGENAMEASIDENTIFIER___.system_or_exit(%Q[pushd #{___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} ; xcodebuild -target #{___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} build SYMROOT=#{___PACKAGENAMEASIDENTIFIER___::BUILD_DIR} ; popd ], ___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___"))
 end
 
-desc "Run ___PACKAGENAME___ Specs"
-task :___PACKAGENAME___ => :build____PACKAGENAME___ do
-  ___PACKAGENAME___.with_env_vars("DYLD_FRAMEWORK_PATH" => ___PACKAGENAME___.build_dir, "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-    ___PACKAGENAME___.system_or_exit(File.join(___PACKAGENAME___.build_dir, ___PACKAGENAME___::SPECS_TARGET_NAME))
+desc "Run ___PACKAGENAMEASIDENTIFIER___ Specs"
+task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
+  ___PACKAGENAMEASIDENTIFIER___.with_env_vars("DYLD_FRAMEWORK_PATH" => ___PACKAGENAMEASIDENTIFIER___.build_dir, "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+    ___PACKAGENAMEASIDENTIFIER___.system_or_exit(File.join(___PACKAGENAMEASIDENTIFIER___.build_dir, ___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME))
   end
 end
-
