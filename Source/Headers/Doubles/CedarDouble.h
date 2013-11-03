@@ -13,6 +13,7 @@ namespace Cedar { namespace Doubles {
 
 - (BOOL)can_stub:(SEL)selector;
 - (BOOL)has_stubbed_method_for:(SEL)selector;
+- (void)get_argument:(void *)argument at_index:(NSUInteger)index for_last_invocation_of_selector:(SEL)selector;
 
 @end
 

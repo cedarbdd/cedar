@@ -33,13 +33,13 @@ sharedExamplesFor(@"a Cedar double when used with ARC", ^(NSDictionary *sharedCo
 
                 dispatch_group_async(group, queue, ^{
                     dispatch_group_enter(group);
-                    [myDouble methodWithBlock:^{
+                    [myDouble methodWithBlock:^(BOOL){
                         dispatch_group_leave(group);
                     }];
                 });
 
                 dispatch_group_notify(group, queue, ^{
-                    [myDouble methodWithBlock:^{ }];
+                    [myDouble methodWithBlock:^(BOOL){ }];
                 });
 
                 while (!called) {

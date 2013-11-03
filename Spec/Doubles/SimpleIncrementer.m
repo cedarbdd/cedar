@@ -40,7 +40,7 @@
     [[NSException exceptionWithName:NSInternalInconsistencyException reason:@"wibble" userInfo:nil] raise];
 }
 
-- (void)methodWithBlock:(void(^)())blockArgument {
+- (void)methodWithBlock:(void(^)(BOOL blockReturnValue))blockArgument {
 }
 
 - (void)methodWithCString:(char *)string {
