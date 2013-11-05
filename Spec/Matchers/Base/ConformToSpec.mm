@@ -14,8 +14,7 @@ extern "C" {
 @protocol IConformer
 @end
 
-@interface Conformer : NSObject
-    <IConformer>
+@interface Conformer : NSObject <IConformer>
 
 @end
 
@@ -78,7 +77,7 @@ describe(@"conform_to matcher", ^{
         __block Conformer *subject = nil;
 
         beforeEach(^{
-            subject = [[Conformer new] autorelease];
+            subject = [[[Conformer alloc] init] autorelease];
         });
 
         afterEach(^{
