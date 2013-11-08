@@ -73,33 +73,33 @@
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
-    @try {
-        [self.cedar_double_impl record_method_invocation:invocation];
-        int method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
-        if (method_invocation_result != CDRStubMethodInvoked) {
-            __block id forwardingTarget = nil;
-            __block id that = self;
-            [self as_original_class:^{
-                forwardingTarget = [that forwardingTargetForSelector:invocation.selector];
-            }];
-            if (forwardingTarget) {
-                [invocation invokeWithTarget:forwardingTarget];
-            } else {
-                Class originalClass = [CDRSpyInfo originalClassForObject:self];
-                Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
+    [self.cedar_double_impl record_method_invocation:invocation];
+    int method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
 
-                if (originalMethod) {
-                    [invocation invokeUsingIMP:method_getImplementation(originalMethod)];
-                } else {
-                    [self as_original_class:^{
-                        [invocation invoke];
-                    }];
-                }
+    [invocation copyBlockArguments];
+    [invocation retainArguments];
+
+    if (method_invocation_result != CDRStubMethodInvoked) {
+        __block id forwardingTarget = nil;
+        __block id that = self;
+
+        [self as_original_class:^{
+            forwardingTarget = [that forwardingTargetForSelector:invocation.selector];
+        }];
+        if (forwardingTarget) {
+            [invocation invokeWithTarget:forwardingTarget];
+        } else {
+            Class originalClass = [CDRSpyInfo originalClassForObject:self];
+            Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
+
+            if (originalMethod) {
+                [invocation invokeUsingIMP:method_getImplementation(originalMethod)];
+            } else {
+                [self as_original_class:^{
+                    [invocation invoke];
+                }];
             }
         }
-    } @finally {
-        [invocation copyBlockArguments];
-        [invocation retainArguments];
     }
 }
 
