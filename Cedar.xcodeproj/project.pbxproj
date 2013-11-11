@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1F36A21D182CB1C1008B10D9 /* ArgumentReleaser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F36A21C182CB1C1008B10D9 /* ArgumentReleaser.m */; };
+		1F36A21E182CB1C1008B10D9 /* ArgumentReleaser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F36A21C182CB1C1008B10D9 /* ArgumentReleaser.m */; };
 		1F4251DE180E0CB200FC578B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4251DC180E0CA200FC578B /* SenTestingKit.framework */; };
 		1F45A3CE180E4796003C1E36 /* OCUnitApplicationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96D34483144A845100352C4A /* OCUnitApplicationTests.mm */; };
 		1F45A3D0180E4796003C1E36 /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
@@ -509,6 +511,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F36A21B182CB1C1008B10D9 /* ArgumentReleaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgumentReleaser.h; sourceTree = "<group>"; };
+		1F36A21C182CB1C1008B10D9 /* ArgumentReleaser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgumentReleaser.m; sourceTree = "<group>"; };
 		1F4251DC180E0CA200FC578B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCUnitAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F45A3DE180E4797003C1E36 /* XCUnitAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XCUnitAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -892,6 +896,8 @@
 				AE36AC5F15B4BB2D00EB6C51 /* NoOpKeyValueObserver.h */,
 				AE36AC6015B4BB3B00EB6C51 /* NoOpKeyValueObserver.m */,
 				AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */,
+				1F36A21B182CB1C1008B10D9 /* ArgumentReleaser.h */,
+				1F36A21C182CB1C1008B10D9 /* ArgumentReleaser.m */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1900,6 +1906,7 @@
 				AEF7302713ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
 				AEF7302C13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */,
+				1F36A21D182CB1C1008B10D9 /* ArgumentReleaser.m in Sources */,
 				AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				AEF3301C145B62E9002F93BB /* BeLessThanSpec.mm in Sources */,
@@ -2002,6 +2009,7 @@
 				228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
+				1F36A21E182CB1C1008B10D9 /* ArgumentReleaser.m in Sources */,
 				AE53B68217E7BCE700D83D5E /* CedarNiceFakeSharedExamples.mm in Sources */,
 				AEF3300A145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				AEF33015145B6188002F93BB /* BeLessThanSpec.mm in Sources */,

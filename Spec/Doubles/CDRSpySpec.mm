@@ -1,6 +1,7 @@
 #import <Cedar/SpecHelper.h>
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
+#import "ArgumentReleaser.h"
 #import <objc/runtime.h>
 
 extern "C" {
@@ -78,6 +79,21 @@ describe(@"spy_on", ^{
                 it(@"should invoke the original method", ^{
                     [incrementer methodWithNumber1:nil andNumber2:arg] should equal(0);
                 });
+            });
+        });
+    });
+
+    describe(@"method spying", ^{
+        context(@"with an argument that is released by the observed method", ^{
+            it(@"should retain the argument", ^{
+                ArgumentReleaser *releaser = [[[ArgumentReleaser alloc] init] autorelease];
+                spy_on(releaser);
+
+                ArgumentReleaser *citizen = [[ArgumentReleaser alloc] init];
+                [releaser releaseArgument:citizen];
+
+                citizen should_not be_nil;
+                releaser should have_received(@selector(releaseArgument:)).with(citizen);
             });
         });
     });
