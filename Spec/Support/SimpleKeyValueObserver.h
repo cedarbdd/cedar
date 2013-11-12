@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 
-@interface NoOpKeyValueObserver : NSObject
+@interface SimpleKeyValueObserver : NSObject
+
+@property (nonatomic, copy, readonly) NSString *lastObservedKeyPath;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 

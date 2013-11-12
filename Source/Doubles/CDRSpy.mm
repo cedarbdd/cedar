@@ -96,29 +96,24 @@
         [self as_original_class:^{
             forwardingTarget = [that forwardingTargetForSelector:invocation.selector];
         }];
+
         if (forwardingTarget) {
             [invocation invokeWithTarget:forwardingTarget];
         } else {
-            Class originalClass = [CDRSpyInfo originalClassForObject:self];
-            Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
-
-            if (originalMethod) {
+            CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForSpiedObject:self];
+            BOOL isKVO = (sel_isEqual(invocation.selector, @selector(addObserver:forKeyPath:options:context:)) ||
+                          sel_isEqual(invocation.selector, @selector(removeObserver:forKeyPath:)) ||
+                          sel_isEqual(invocation.selector, @selector(removeObserver:forKeyPath:context:)) ||
+                          [spyInfo isSpiedObjectUnderKVO]);
+            Method originalMethod = class_getInstanceMethod(spyInfo.originalClass, invocation.selector);
+            if (originalMethod && !isKVO) {
                 [invocation invokeUsingIMP:method_getImplementation(originalMethod)];
             } else {
-                Class originalClass = [CDRSpyInfo originalClassForObject:self];
-                Method originalMethod = class_getInstanceMethod(originalClass, invocation.selector);
-                BOOL isKVOSelector =
-                sel_isEqual(invocation.selector, @selector(addObserver:forKeyPath:options:context:)) ||
-                sel_isEqual(invocation.selector, @selector(removeObserver:forKeyPath:)) ||
-                sel_isEqual(invocation.selector, @selector(removeObserver:forKeyPath:context:));
-                
-                if (originalMethod && !isKVOSelector) {
-                    [invocation invokeUsingIMP:method_getImplementation(originalMethod)];
-                } else {
-                    [self as_original_class:^{
-                        [invocation invoke];
-                    }];
-                }
+                __block id that = self;
+                [self as_original_class:^{
+                    [invocation invoke];
+                    [spyInfo setSpiedClass:object_getClass(that)];
+                }];
             }
         }
     }
@@ -150,11 +145,11 @@
     @throw [NSException exceptionWithName:NSInvalidArgumentException reason:exceptionReason userInfo:nil];
 }
 
+#pragma mark - CedarDouble
+
 - (BOOL)can_stub:(SEL)selector {
     return [self respondsToSelector:selector] && [self methodSignatureForSelector:selector];
 }
-
-#pragma mark - CedarDouble protocol
 
 - (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method {
     return [self.cedar_double_impl add_stub:stubbed_method];
@@ -168,7 +163,7 @@
     [self.cedar_double_impl reset_sent_messages];
 }
 
-#pragma mark - Private interface
+#pragma mark - Private
 
 - (CedarDoubleImpl *)cedar_double_impl {
     return [CDRSpyInfo cedarDoubleForObject:self];
@@ -188,7 +183,8 @@
 }
 
 - (void)as_original_class:(void(^)())block {
-    Class originalClass = [CDRSpyInfo originalClassForObject:self];
+    CDRSpyInfo *info = [CDRSpyInfo spyInfoForSpiedObject:self];
+    Class originalClass = [info isSpiedObjectUnderKVO] ? info.spiedClass : info.originalClass;
     if (originalClass != Nil) {
         [self as_class:originalClass :block];
     }
