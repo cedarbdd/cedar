@@ -187,4 +187,15 @@ describe(@"spy_on", ^{
     });
 });
 
+describe(@"stop_spying_on", ^{
+    it(@"should blow up in an obvious manner when spying on nil", ^{
+        ^{ stop_spying_on(nil); } should raise_exception.with_reason(@"Cannot stop spying on nil");
+    });
+
+    it(@"should fail gracefully for an object that is not being spied upon", ^{
+        NSObject *object = [[NSObject new] autorelease];
+        ^{ stop_spying_on(object); } should_not raise_exception;
+    });
+});
+
 SPEC_END

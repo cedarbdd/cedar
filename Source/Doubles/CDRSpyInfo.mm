@@ -18,6 +18,15 @@ static NSMutableSet *currentSpies__;
     [currentSpies__ addObject:spyInfo];
 }
 
++ (BOOL)clearSpyInfoForObject:(id)originalObject {
+    CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:originalObject];
+    if (spyInfo) {
+        [currentSpies__ removeObject:spyInfo];
+        return YES;
+    }
+    return NO;
+}
+
 - (void)dealloc {
     object_setClass(self.originalObject, self.originalClass);
     self.originalObject = nil;
