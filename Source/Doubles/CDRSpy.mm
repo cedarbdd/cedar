@@ -21,8 +21,7 @@
     }
 }
 
-+ (void)stopInterceptingMessagesForInstance:(id)instance
-{
++ (void)stopInterceptingMessagesForInstance:(id)instance {
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot stop spying on nil" userInfo:nil];
     }
