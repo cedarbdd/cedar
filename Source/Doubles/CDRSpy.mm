@@ -33,7 +33,7 @@
 
 - (id)retain {
     __block id that = self;
-    [self as_original_class:^{
+    [self as_spied_class:^{
         [that retain];
     }];
     return self;
@@ -41,32 +41,32 @@
 
 - (oneway void)release {
     __block id that = self;
-    [self as_original_class:^{
+    [self as_spied_class:^{
         [that release];
     }];
 }
 
 - (id)autorelease {
     __block id that = self;
-    [self as_original_class:^{
+    [self as_spied_class:^{
         [that autorelease];
     }];
     return self;
 }
 
 - (NSUInteger)retainCount {
-   __block id that = self;
-   __block NSUInteger count;
-   [self as_original_class:^{
-       count = [that retainCount];
-   }];
-   return count;
+    __block id that = self;
+    __block NSUInteger count;
+    [self as_spied_class:^{
+        count = [that retainCount];
+    }];
+    return count;
 }
 
 - (NSString *)description {
     __block id that = self;
     __block NSString *description;
-    [self as_original_class:^{
+    [self as_spied_class:^{
         description = [that description];
     }];
 
@@ -74,11 +74,11 @@
 }
 
 - (Class)class {
-    return [CDRSpyInfo originalClassForObject:self];
+    return [CDRSpyInfo publicClassForObject:self];
 }
 
 - (BOOL)isKindOfClass:(Class)aClass {
-    Class originalClass = [CDRSpyInfo originalClassForObject:self];
+    Class originalClass = [CDRSpyInfo publicClassForObject:self];
     return [originalClass isSubclassOfClass:aClass];
 }
 
@@ -93,24 +93,21 @@
         __block id forwardingTarget = nil;
         __block id that = self;
 
-        [self as_original_class:^{
-            forwardingTarget = [that forwardingTargetForSelector:invocation.selector];
+        SEL selector = invocation.selector;
+        [self as_spied_class:^{
+            forwardingTarget = [that forwardingTargetForSelector:selector];
         }];
 
         if (forwardingTarget) {
             [invocation invokeWithTarget:forwardingTarget];
         } else {
-            CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForSpiedObject:self];
-            BOOL isKVO = (sel_isEqual(invocation.selector, @selector(addObserver:forKeyPath:options:context:)) ||
-                          sel_isEqual(invocation.selector, @selector(removeObserver:forKeyPath:)) ||
-                          sel_isEqual(invocation.selector, @selector(removeObserver:forKeyPath:context:)) ||
-                          [spyInfo isSpiedObjectUnderKVO]);
-            Method originalMethod = class_getInstanceMethod(spyInfo.originalClass, invocation.selector);
-            if (originalMethod && !isKVO) {
-                [invocation invokeUsingIMP:method_getImplementation(originalMethod)];
+            CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:self];
+            IMP privateImp = [spyInfo impForSelector:selector];
+            if (privateImp) {
+                [invocation invokeUsingIMP:privateImp];
             } else {
                 __block id that = self;
-                [self as_original_class:^{
+                [self as_spied_class:^{
                     [invocation invoke];
                     [spyInfo setSpiedClass:object_getClass(that)];
                 }];
@@ -122,7 +119,7 @@
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
     __block NSMethodSignature *originalMethodSignature;
 
-    [self as_original_class:^{
+    [self as_spied_class:^{
         originalMethodSignature = [self methodSignatureForSelector:sel];
     }];
 
@@ -132,7 +129,7 @@
 - (BOOL)respondsToSelector:(SEL)selector {
     __block BOOL respondsToSelector;
 
-    [self as_original_class:^{
+    [self as_spied_class:^{
         respondsToSelector = [self respondsToSelector:selector];
     }];
 
@@ -140,7 +137,7 @@
 }
 
 - (void)doesNotRecognizeSelector:(SEL)selector {
-    Class originalClass = [CDRSpyInfo originalClassForObject:self];
+    Class originalClass = [CDRSpyInfo publicClassForObject:self];
     NSString *exceptionReason = [NSString stringWithFormat:@"-[%@ %@]: unrecognized selector sent to spy %p", NSStringFromClass(originalClass), NSStringFromSelector(selector), self];
     @throw [NSException exceptionWithName:NSInvalidArgumentException reason:exceptionReason userInfo:nil];
 }
@@ -182,9 +179,9 @@
     }
 }
 
-- (void)as_original_class:(void(^)())block {
-    CDRSpyInfo *info = [CDRSpyInfo spyInfoForSpiedObject:self];
-    Class originalClass = [info isSpiedObjectUnderKVO] ? info.spiedClass : info.originalClass;
+- (void)as_spied_class:(void(^)())block {
+    CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
+    Class originalClass = info.spiedClass;
     if (originalClass != Nil) {
         [self as_class:originalClass :block];
     }

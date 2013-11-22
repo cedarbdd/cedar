@@ -4,18 +4,18 @@
 
 @interface CDRSpyInfo : NSObject
 
-@property (nonatomic, assign) Class originalClass;
+@property (nonatomic, assign) Class publicClass;
 @property (nonatomic, assign) Class spiedClass;
 @property (nonatomic, assign) id originalObject;
 @property (nonatomic, retain) CedarDoubleImpl *cedarDouble;
 
-+ (void)storeSpyInfoForObject:(id)originalObject;
-+ (BOOL)clearSpyInfoForObject:(id)originalObject;
++ (void)storeSpyInfoForObject:(id)object;
++ (BOOL)clearSpyInfoForObject:(id)object;
 
-+ (CDRSpyInfo *)spyInfoForSpiedObject:(id)object;
-+ (CedarDoubleImpl *)cedarDoubleForObject:(id)originalObject;
-+ (Class)originalClassForObject:(id)originalObject;
++ (CDRSpyInfo *)spyInfoForObject:(id)object;
++ (CedarDoubleImpl *)cedarDoubleForObject:(id)object;
++ (Class)publicClassForObject:(id)object;
 
-- (BOOL)isSpiedObjectUnderKVO;
+- (IMP)impForSelector:(SEL)selector;
 
 @end
