@@ -10,7 +10,7 @@
 #import "CDRExampleBase.h"
 #import "CDRExampleGroup.h"
 #import "CDRExample.h"
-#import "NoOpKeyValueObserver.h"
+#import "SimpleKeyValueObserver.h"
 #import "FibonacciCalculator.h"
 
 using namespace Cedar::Matchers;
@@ -409,7 +409,7 @@ describe(@"CDRExampleGroup", ^{
             __block id mockObserver;
 
             beforeEach(^{
-                mockObserver = [[[NoOpKeyValueObserver alloc] init] autorelease];
+                mockObserver = [[[SimpleKeyValueObserver alloc] init] autorelease];
                 spy_on(mockObserver);
             });
 
