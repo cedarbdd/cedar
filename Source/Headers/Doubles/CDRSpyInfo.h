@@ -9,6 +9,7 @@
 @property (nonatomic, retain) CedarDoubleImpl *cedarDouble;
 
 + (void)storeSpyInfoForObject:(id)originalObject;
++ (BOOL)clearSpyInfoForObject:(id)originalObject;
 
 + (CedarDoubleImpl *)cedarDoubleForObject:(id)originalObject;
 + (Class)originalClassForObject:(id)originalObject;

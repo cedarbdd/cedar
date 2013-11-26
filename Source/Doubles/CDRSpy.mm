@@ -21,6 +21,16 @@
     }
 }
 
++ (void)stopInterceptingMessagesForInstance:(id)instance {
+    if (!instance) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot stop spying on nil" userInfo:nil];
+    }
+    Class originalClass = [instance class];
+    if ([CDRSpyInfo clearSpyInfoForObject:instance]) {
+        object_setClass(instance, originalClass);
+    }
+}
+
 - (id)retain {
     __block id that = self;
     [self as_original_class:^{

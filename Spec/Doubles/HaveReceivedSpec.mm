@@ -31,6 +31,18 @@ describe(@"have_received matcher", ^{
         });
     });
 
+    context(@"with an object that is no longer being spied upon", ^{
+        beforeEach(^{
+            stop_spying_on(incrementer);
+        });
+
+        it(@"should raise a descriptive exception", ^{
+            expectExceptionWithReason([NSString stringWithFormat:@"Received expectation for non-double object <%@>", incrementer], ^{
+                incrementer should have_received("increment");
+            });
+        });
+    });
+
     context(@"for a method with no parameters", ^{
         SEL method = @selector(increment);
 
