@@ -120,6 +120,21 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     [self.sent_messages addObject:invocation];
 }
 
+- (void)get_argument:(void *)argument at_index:(NSUInteger)index for_last_invocation_of_selector:(SEL)selector {
+    NSInvocation *lastMessage = [[[self sent_messages] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSInvocation *invocation, NSDictionary *bindings) {
+        return invocation.selector == selector;
+    }]] lastObject];
+
+    if (!lastMessage) {
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempting to get an argument for method <%s>, which double <%@> has not yet received", sel_getName(selector), [self.parent_double description]]
+                               userInfo:nil]
+         raise];
+    }
+
+    [lastMessage getArgument:argument atIndex:index + 2];
+}
+
 #pragma mark - Private interface
 
 - (Cedar::Doubles::StubbedMethod &)add_stubbed_method:(const Cedar::Doubles::StubbedMethod &)stubbed_method at_vector_location:(Cedar::Doubles::StubbedMethod::stubbed_method_vector_t::iterator)iterator {

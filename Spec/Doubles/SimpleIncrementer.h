@@ -14,7 +14,7 @@
 - (void)incrementByInteger:(NSUInteger)number;
 - (void)incrementByABit:(size_t)aBit andABitMore:(NSNumber *)aBitMore;
 - (void)incrementWithException;
-- (void)methodWithBlock:(void(^)())blockArgument;
+- (void)methodWithBlock:(void(^)(BOOL blockReturnValue))blockArgument;
 - (void)methodWithCString:(char *)string;
 - (NSNumber *)methodWithNumber1:(NSNumber *)arg1 andNumber2:(NSNumber *)arg2;
 

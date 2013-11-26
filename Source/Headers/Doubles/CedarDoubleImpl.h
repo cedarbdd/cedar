@@ -28,5 +28,6 @@ typedef enum {
 - (CDRStubInvokeStatus)invoke_stubbed_method:(NSInvocation *)invocation;
 - (void)record_method_invocation:(NSInvocation *)invocation;
 - (BOOL)has_stubbed_method_for:(SEL)selector;
+- (void)get_argument:(void *)argument at_index:(NSUInteger)index for_last_invocation_of_selector:(SEL)selector;
 
 @end

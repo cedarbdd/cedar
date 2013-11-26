@@ -157,6 +157,10 @@
     [self.cedar_double_impl reset_sent_messages];
 }
 
+- (void)get_argument:(void *)argument at_index:(NSUInteger)index for_last_invocation_of_selector:(SEL)selector {
+    [self.cedar_double_impl get_argument:argument at_index:index for_last_invocation_of_selector:selector];
+}
+
 #pragma mark - Private interface
 
 - (CedarDoubleImpl *)cedar_double_impl {

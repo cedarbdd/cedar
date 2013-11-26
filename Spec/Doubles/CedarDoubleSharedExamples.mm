@@ -76,7 +76,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             myDouble stub_method("methodWithBlock:");
 
             ^{
-                void(^originalBlock)() = ^{
+                void(^originalBlock)(BOOL) = ^(BOOL){
                     blockWasCalled = YES;
                 };
                 [myDouble methodWithBlock:originalBlock];
@@ -112,6 +112,103 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             strcmp("hello", argument) should equal(0);
 
             free(string);
+        });
+    });
+
+    describe(@"get_argument:at_index:for_last_invocation_of_selector:", ^{
+        context(@"when requesting a primitive argument", ^{
+            __block int expectedInt;
+
+            beforeEach(^{
+                myDouble stub_method(@selector(incrementByInteger:));
+            });
+
+            context(@"before the object receives a message with that selector", ^{
+                it(@"should raise an exception", ^{
+                    NSString *reason = [NSString stringWithFormat:@"Attempting to get an argument for method <incrementByInteger:>, which double <%@> has not yet received", [myDouble description]];
+                    ^{ [myDouble get_argument:&expectedInt at_index:0 for_last_invocation_of_selector:@selector(incrementByInteger:)]; } should raise_exception.with_reason(reason);
+                });
+            });
+
+            context(@"after the object receives a message with that selector", ^{
+                __block int actualInt;
+
+                beforeEach(^{
+                    actualInt = 5;
+                    [myDouble incrementByInteger:actualInt];
+
+                    [myDouble get_argument:&expectedInt at_index:0 for_last_invocation_of_selector:@selector(incrementByInteger:)];
+                });
+
+                it(@"should return the same value that was passed in", ^{
+                    expectedInt should equal(actualInt);
+                });
+            });
+        });
+
+        context(@"when requesting a pointer argument", ^{
+            __block NSNumber *expectedNumber;
+
+            beforeEach(^{
+                myDouble stub_method(@selector(incrementByNumber:));
+            });
+
+            context(@"before the object receives a message with that selector", ^{
+                it(@"should raise an exception", ^{
+                    NSString *reason = [NSString stringWithFormat:@"Attempting to get an argument for method <incrementByNumber:>, which double <%@> has not yet received", [myDouble description]];
+                    ^{ [myDouble get_argument:&expectedNumber at_index:0 for_last_invocation_of_selector:@selector(incrementByNumber:)]; } should raise_exception.with_reason(reason);
+                });
+            });
+
+            context(@"after the object receives a message with that selector", ^{
+                __block NSNumber *actualNumber;
+
+                beforeEach(^{
+                    actualNumber = @5;
+                    [myDouble incrementByNumber:actualNumber];
+
+                    [myDouble get_argument:&expectedNumber at_index:0 for_last_invocation_of_selector:@selector(incrementByNumber:)];
+                });
+
+                it(@"should return the same instance that was passed in", ^{
+                    expectedNumber should be_same_instance_as(actualNumber);
+                });
+            });
+        });
+
+        context(@"when requesting a block argument", ^{
+            __block void(^completionBlock)(BOOL);
+
+            beforeEach(^{
+                myDouble stub_method(@selector(methodWithBlock:));
+            });
+
+            context(@"before the object receives a message with that selector", ^{
+                it(@"should raise an exception", ^{
+                    NSString *reason = [NSString stringWithFormat:@"Attempting to get an argument for method <methodWithBlock:>, which double <%@> has not yet received", [myDouble description]];
+                    ^{ [myDouble get_argument:&completionBlock at_index:0 for_last_invocation_of_selector:@selector(methodWithBlock:)]; } should raise_exception.with_reason(reason);
+                });
+            });
+
+            context(@"after the object receives a message with that selector", ^{
+                __block void(^argumentBlock)(BOOL);
+                __block BOOL blockWasCalled;
+
+                beforeEach(^{
+                    blockWasCalled = NO;
+                    argumentBlock = ^void(BOOL wasCalled){
+                        blockWasCalled = wasCalled;
+                    };
+                    [myDouble methodWithBlock:argumentBlock];
+
+                    [myDouble get_argument:&completionBlock at_index:0 for_last_invocation_of_selector:@selector(methodWithBlock:)];
+                });
+
+                it(@"calling the copied block should invoke the original implementation", ^{
+                    completionBlock(YES);
+                    blockWasCalled should be_truthy;
+                });
+            });
         });
     });
 

@@ -90,4 +90,8 @@
     return [self.cedar_double_impl has_stubbed_method_for:selector];
 }
 
+- (void)get_argument:(void *)argument at_index:(NSUInteger)index for_last_invocation_of_selector:(SEL)selector {
+    [self.cedar_double_impl get_argument:argument at_index:index for_last_invocation_of_selector:selector];
+}
+
 @end
