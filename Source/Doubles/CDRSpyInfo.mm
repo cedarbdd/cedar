@@ -10,16 +10,17 @@ static NSMutableSet *currentSpies__;
     currentSpies__ = [[NSMutableSet alloc] init];
 }
 
-+ (void)storeSpyInfoForObject:(id)originalObject {
++ (void)storeSpyInfoForObject:(id)object {
     CDRSpyInfo *spyInfo = [[[CDRSpyInfo alloc] init] autorelease];
-    spyInfo.originalObject = originalObject;
-    spyInfo.originalClass = [originalObject class];
-    spyInfo.cedarDouble = [[[CedarDoubleImpl alloc] initWithDouble:originalObject] autorelease];
+    spyInfo.originalObject = object;
+    spyInfo.publicClass = [object class];
+    spyInfo.spiedClass = object_getClass(object);
+    spyInfo.cedarDouble = [[[CedarDoubleImpl alloc] initWithDouble:object] autorelease];
     [currentSpies__ addObject:spyInfo];
 }
 
-+ (BOOL)clearSpyInfoForObject:(id)originalObject {
-    CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:originalObject];
++ (BOOL)clearSpyInfoForObject:(id)object {
+    CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:object];
     if (spyInfo) {
         spyInfo.originalObject = nil;
         [currentSpies__ removeObject:spyInfo];
@@ -30,30 +31,41 @@ static NSMutableSet *currentSpies__;
 
 - (void)dealloc {
     if (self.originalObject) {
-        object_setClass(self.originalObject, self.originalClass);
+        object_setClass(self.originalObject, self.spiedClass);
     }
     self.originalObject = nil;
     self.cedarDouble = nil;
     [super dealloc];
 }
 
-+ (CedarDoubleImpl *)cedarDoubleForObject:(id)originalObject {
-    return [[self spyInfoForObject:originalObject] cedarDouble];
++ (CedarDoubleImpl *)cedarDoubleForObject:(id)object {
+    return [[self spyInfoForObject:object] cedarDouble];
 }
 
-+ (Class)originalClassForObject:(id)originalObject {
-    return [[self spyInfoForObject:originalObject] originalClass];
++ (Class)publicClassForObject:(id)object {
+    return [[self spyInfoForObject:object] publicClass];
 }
 
-+ (CDRSpyInfo *)spyInfoForObject:(id)originalObject {
-    __block CDRSpyInfo *returnedSpyInfo = nil;
-    [currentSpies__ enumerateObjectsUsingBlock:^(CDRSpyInfo *spyInfo, BOOL *stop) {
-        if (spyInfo.originalObject == originalObject) {
-            returnedSpyInfo = spyInfo;
++ (CDRSpyInfo *)spyInfoForObject:(id)object {
+    return [currentSpies__ objectsPassingTest:^BOOL(CDRSpyInfo *spyInfo, BOOL *stop) {
+        if (spyInfo.originalObject == object) {
             *stop = YES;
+            return YES;
         }
-    }];
-    return returnedSpyInfo;
+        return NO;
+    }].anyObject;
+}
+
+- (IMP)impForSelector:(SEL)selector {
+    BOOL yieldToKVO = (sel_isEqual(selector, @selector(addObserver:forKeyPath:options:context:)) ||
+            sel_isEqual(selector, @selector(removeObserver:forKeyPath:)) ||
+            sel_isEqual(selector, @selector(removeObserver:forKeyPath:context:)) ||
+            strcmp(class_getName(self.publicClass), class_getName(self.spiedClass)));
+    if (yieldToKVO) {
+        return NULL;
+    }
+    Method originalMethod = class_getInstanceMethod(self.spiedClass, selector);
+    return method_getImplementation(originalMethod);
 }
 
 + (void)afterEach {

@@ -2,6 +2,9 @@
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ArgumentReleaser.h"
+#import "ObjectWithProperties.h"
+#import "SimpleKeyValueObserver.h"
+#import "ArgumentReleaser.h"
 #import <objc/runtime.h>
 
 extern "C" {
@@ -183,6 +186,73 @@ describe(@"spy_on", ^{
             ^{
                 forwardingObject stub_method("unforwardedUnimplementedMethod");
             } should raise_exception.with_reason([NSString stringWithFormat:@"Attempting to stub method <unforwardedUnimplementedMethod>, which double <%@> does not respond to", [forwardingObject description]]);
+        });
+    });
+
+    describe(@"spying on objects under KVO", ^{
+        __block ObjectWithProperties *observedObject;
+        __block SimpleKeyValueObserver *observer;
+        beforeEach(^{
+            observedObject = [[[ObjectWithProperties alloc] init] autorelease];
+            spy_on(observedObject);
+
+            observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+        });
+
+        it(@"should not raise exception when adding or removing an observer", ^{
+            ^{ [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
+               [observedObject removeObserver:observer forKeyPath:@"floatProperty" context:NULL]; }
+            should_not raise_exception;
+        });
+
+        it(@"should correctly record adding and removing an observer", ^{
+            observedObject should_not have_received("addObserver:forKeyPath:options:context:");
+            observedObject should_not have_received("removeObserver:forKeyPath:context:");
+
+            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
+            observedObject should have_received("addObserver:forKeyPath:options:context:");
+
+            [observedObject removeObserver:observer forKeyPath:@"floatProperty" context:NULL];
+            observedObject should have_received("removeObserver:forKeyPath:context:");
+        });
+
+        it(@"should record shorthand method for removing an observer", ^{
+            observedObject should_not have_received("removeObserver:forKeyPath:");
+            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
+
+            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
+            observedObject should have_received("removeObserver:forKeyPath:");
+        });
+
+        it(@"should not prevent existing observers from recording observations after they are spied upon", ^{
+            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
+            spy_on(observer);
+
+            observedObject.floatProperty = 12;
+            observer should have_received("observeValueForKeyPath:ofObject:change:context:");
+
+            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
+        });
+
+        it(@"should correctly notify other non-spy observers when an existing observer is spied", ^{
+            SimpleKeyValueObserver *neutralObserver = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            [observedObject addObserver:neutralObserver forKeyPath:@"floatProperty" options:0 context:NULL];
+            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
+            spy_on(observer);
+
+            observedObject.floatProperty = 12;
+            neutralObserver.lastObservedKeyPath should equal(@"floatProperty");
+
+            [observedObject removeObserver:neutralObserver forKeyPath:@"floatProperty"];
+            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
+        });
+        
+        it(@"should not notify observers method after being removed", ^{
+            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
+            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
+            spy_on(observer);
+            observedObject.floatProperty = 12;
+            observer should_not have_received("observeValueForKeyPath:ofObject:change:context:");
         });
     });
 });
