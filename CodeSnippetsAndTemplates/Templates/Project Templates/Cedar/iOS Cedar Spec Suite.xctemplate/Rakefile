@@ -1,7 +1,7 @@
 require 'pathname'
 require 'tmpdir'
 
-module ___PACKAGENAME___
+module CedarTarget___PACKAGENAMEASIDENTIFIER___
   UI_SPECS_TARGET_NAME = "___PACKAGENAME___"
   CONFIGURATION = "Release"
 
@@ -80,30 +80,29 @@ module ___PACKAGENAME___
 end
 
 desc "Clean build directory"
-task :clean____PACKAGENAME___ do
-  ___PACKAGENAME___.system_or_exit "rm -rf #{___PACKAGENAME___::BUILD_DIR}/*", ___PACKAGENAME___.output_file("clean")
+task :clean____PACKAGENAMEASIDENTIFIER___ do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("clean")
 end
 
-desc "Build ___PACKAGENAME___"
-task :build____PACKAGENAME___ => :clean____PACKAGENAME___ do
-  ___PACKAGENAME___.kill_simulator
-  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} && xcodebuild -target #{___PACKAGENAME___::UI_SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator build && popd", ___PACKAGENAME___.output_file("___PACKAGENAME___")
+desc "Build ___PACKAGENAMEASIDENTIFIER___"
+task :build____PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.kill_simulator
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator build ARCHS=i386 && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___")
 end
 
-desc "Run ___PACKAGENAME___"
-task :___PACKAGENAME___ => :build____PACKAGENAME___ do
+desc "Run ___PACKAGENAMEASIDENTIFIER___"
+task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
   env_vars = {
-    "DYLD_ROOT_PATH" => ___PACKAGENAME___.deployment_target_sdk_dir,
-    "IPHONE_SIMULATOR_ROOT" => ___PACKAGENAME___.deployment_target_sdk_dir,
+    "DYLD_ROOT_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
+    "IPHONE_SIMULATOR_ROOT" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
     "CFFIXED_USER_HOME" => Dir.tmpdir,
     "CEDAR_HEADLESS_SPECS" => "1",
     "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"
   }
 
-  app_path = File.join(___PACKAGENAME___.build_dir("-iphonesimulator"), "#{___PACKAGENAME___::UI_SPECS_TARGET_NAME}.app")
+  app_path = File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.app")
 
-  ___PACKAGENAME___.with_env_vars(env_vars) do
-    ___PACKAGENAME___.system_or_exit "#{File.join(___PACKAGENAME___.build_dir("-iphonesimulator"), "#{___PACKAGENAME___::UI_SPECS_TARGET_NAME}.app", ___PACKAGENAME___::UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents";
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.app", CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents";
   end
 end
-

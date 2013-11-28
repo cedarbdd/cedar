@@ -1,6 +1,6 @@
 require 'pathname'
 
-module ___PACKAGENAME___
+module CedarTarget___PACKAGENAMEASIDENTIFIER___
   SPECS_TARGET_NAME = "___PACKAGENAME___"
   CONFIGURATION = "Release"
 
@@ -60,14 +60,13 @@ module ___PACKAGENAME___
 end
 
 desc "Clean build directory"
-task :clean____PACKAGENAME___ do
-  ___PACKAGENAME___.system_or_exit "rm -rf #{___PACKAGENAME___::BUILD_DIR}/*", ___PACKAGENAME___.output_file("clean")
+task :clean____PACKAGENAMEASIDENTIFIER___ do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("clean")
 end
 
-desc "Build and run ___PACKAGENAME___ OCUnit logic specs"
-task :___PACKAGENAME___ => :clean____PACKAGENAME___ do
-  ___PACKAGENAME___.with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-    ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} ; xcodebuild -target #{___PACKAGENAME___::SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{___PACKAGENAME___::BUILD_DIR}' ; popd", ___PACKAGENAME___.output_file("___PACKAGENAME___")
+desc "Build and run ___PACKAGENAMEASIDENTIFIER___ OCUnit logic specs"
+task :___PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} ; xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' ; popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___")
   end
 end
-

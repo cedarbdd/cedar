@@ -1,7 +1,7 @@
 require 'pathname'
 require 'tmpdir'
 
-module ___PACKAGENAME___
+module CedarTarget___PACKAGENAMEASIDENTIFIER___
   UI_SPECS_TARGET_NAME = "___PACKAGENAME___"
   CONFIGURATION = "Release"
 
@@ -36,6 +36,10 @@ module ___PACKAGENAME___
 
     def build_dir(effective_platform_name)
       File.join(BUILD_DIR, CONFIGURATION + effective_platform_name)
+    end
+
+    def is_run_unit_tests_deprecated?
+      system("cat #{xcode_developer_dir}/Tools/RunUnitTests | grep -q 'RunUnitTests is obsolete.'")
     end
 
     def system_or_exit(cmd, stdout = nil)
@@ -80,33 +84,36 @@ module ___PACKAGENAME___
 end
 
 desc "Clean build directory"
-task :clean____PACKAGENAME___ do
-  ___PACKAGENAME___.system_or_exit "rm -rf #{___PACKAGENAME___::BUILD_DIR}/*", ___PACKAGENAME___.output_file("clean")
+task :clean____PACKAGENAMEASIDENTIFIER___ do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("clean")
 end
 
-desc "Build ___PACKAGENAME___ OCUnit application specs"
-task :build____PACKAGENAME___ => :clean____PACKAGENAME___ do
-  ___PACKAGENAME___.kill_simulator
-  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} && xcodebuild -target ___VARIABLE_testTargetName___ -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator#{___PACKAGENAME___.deployment_target_sdk_version} build TEST_AFTER_BUILD=NO GCC_SYMBOLS_PRIVATE_EXTERN=NO SYMROOT='#{___PACKAGENAME___::BUILD_DIR}' && popd", ___PACKAGENAME___.output_file("___PACKAGENAME___-AppBuild")
-  ___PACKAGENAME___.system_or_exit "pushd #{___PACKAGENAME___::PROJECT_ROOT} && xcodebuild -target #{___PACKAGENAME___::UI_SPECS_TARGET_NAME} -configuration #{___PACKAGENAME___::CONFIGURATION} -sdk iphonesimulator#{___PACKAGENAME___.deployment_target_sdk_version} build GCC_SYMBOLS_PRIVATE_EXTERN=NO TEST_AFTER_BUILD=NO SYMROOT='#{___PACKAGENAME___::BUILD_DIR}' && popd", ___PACKAGENAME___.output_file("___PACKAGENAME___-SpecBuild")
+desc "Build ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
+task :build____PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.kill_simulator
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version} build ARCHS=i386 TEST_AFTER_BUILD=NO GCC_SYMBOLS_PRIVATE_EXTERN=NO SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___-AppBuild")
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version} build ARCHS=i386 GCC_SYMBOLS_PRIVATE_EXTERN=NO TEST_AFTER_BUILD=NO SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___-SpecBuild")
 end
 
-desc "Run ___PACKAGENAME___ OCUnit application specs"
-task :___PACKAGENAME___ => :build____PACKAGENAME___ do
-  env_vars = {
-    "DYLD_ROOT_PATH" => ___PACKAGENAME___.deployment_target_sdk_dir,
-    "DYLD_INSERT_LIBRARIES" => "#{___PACKAGENAME___.xcode_developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-    "DYLD_FALLBACK_LIBRARY_PATH" => ___PACKAGENAME___.deployment_target_sdk_dir,
-    "XCInjectBundle" => "#{File.join(___PACKAGENAME___.build_dir("-iphonesimulator"), "#{___PACKAGENAME___::UI_SPECS_TARGET_NAME}.octest")}",
-    "XCInjectBundleInto" => "#{File.join(___PACKAGENAME___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")}",
-    "IPHONE_SIMULATOR_ROOT" => ___PACKAGENAME___.deployment_target_sdk_dir,
-    "CFFIXED_USER_HOME" => Dir.tmpdir,
-    "CEDAR_HEADLESS_SPECS" => "1",
-    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-  }
+desc "Run ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
+task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
+  if CedarTarget___PACKAGENAMEASIDENTIFIER___.is_run_unit_tests_deprecated?
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd"
+  else
+    env_vars = {
+      "DYLD_ROOT_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
+      "DYLD_INSERT_LIBRARIES" => "#{CedarTarget___PACKAGENAMEASIDENTIFIER___.xcode_developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
+      "DYLD_FALLBACK_LIBRARY_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
+      "XCInjectBundle" => "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.octest")}",
+      "XCInjectBundleInto" => "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")}",
+      "IPHONE_SIMULATOR_ROOT" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
+      "CFFIXED_USER_HOME" => Dir.tmpdir,
+      "CEDAR_HEADLESS_SPECS" => "1",
+      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+    }
 
-  ___PACKAGENAME___.with_env_vars(env_vars) do
-    ___PACKAGENAME___.system_or_exit "#{File.join(___PACKAGENAME___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")} -RegisterForSystemEvents -SenTest All";
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
+      CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")} -RegisterForSystemEvents -SenTest All";
+    end
   end
 end
-

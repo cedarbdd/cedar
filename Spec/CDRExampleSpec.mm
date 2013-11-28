@@ -10,7 +10,7 @@
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
-#import "NoOpKeyValueObserver.h"
+#import "SimpleKeyValueObserver.h"
 #import "FibonacciCalculator.h"
 
 using namespace Cedar::Matchers;
@@ -315,7 +315,7 @@ describe(@"CDRExample", ^{
 
         describe(@"KVO", ^{
             it(@"should report when the state changes", ^{
-                id mockObserver = [[[NoOpKeyValueObserver alloc] init] autorelease];
+                id mockObserver = [[[SimpleKeyValueObserver alloc] init] autorelease];
                 spy_on(mockObserver);
 
                 [example addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
