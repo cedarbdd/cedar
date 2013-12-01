@@ -151,7 +151,7 @@ void fail(NSString *reason) {
 
     NSUInteger bestAddressIndex = [children indexOfObject:self.rootGroup];
 
-    // Matches closest example/group located on or below specifed line number
+    // Matches closest example/group located on or below specified line number
     // (only takes into account start of an example/group)
     for (NSInteger i = 0, shortestDistance = -1; i < addresses.count; i++) {
         NSInteger address = [[addresses objectAtIndex:i] integerValue];
