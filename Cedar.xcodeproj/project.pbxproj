@@ -223,6 +223,7 @@
 		AE9AA6DC15AE0B0400617E1A /* CedarDoubleImpl.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; };
 		AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
 		AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */; };
+		AE9BA627184D203000079A97 /* ConformTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 5898AEAF3FE8C683E6F23C1D /* ConformTo.h */; };
 		AE9EAAD9178C789800CCF7DA /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
 		AE9EAADA178C789900CCF7DA /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
 		AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEB1A74115F304A9002E4167 /* StubbedMethod.mm */; };
@@ -499,6 +500,7 @@
 				AECF136215D1425C003AAB9C /* Argument.h in Copy headers to framework */,
 				AECF136515D14274003AAB9C /* ValueArgument.h in Copy headers to framework */,
 				AECF136815D142E3003AAB9C /* ReturnValue.h in Copy headers to framework */,
+				AE9BA627184D203000079A97 /* ConformTo.h in Copy headers to framework */,
 				AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */,
 				AE94D04015F341B200A0C2B7 /* AnyInstanceArgument.h in Copy headers to framework */,
 				E31179D4161FD937007D3CDE /* CDRSlowTestStatistics.h in Copy headers to framework */,
