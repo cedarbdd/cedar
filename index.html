@@ -1,89 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cedar by pivotal</title>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <link rel="stylesheet" type="text/css" media="screen, projection" href="css/reset.css"/>
-  <link rel="stylesheet" type="text/css" media="screen, projection" href="css/cedar.css"/>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Cedar</h1>
+        <p>BDD-style testing using Objective-C</p>
 
-  <title>Cedar: BDD for Objective-C </title>
-</head>
+        <p class="view"><a href="https://github.com/pivotal/cedar">View the Project on GitHub <small>pivotal/cedar</small></a></p>
 
-<body>
-<a href="http://github.com/pivotal/cedar">
-  <img style="position: absolute; top: 0; right: 0; border: 0;"
-       src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
-       alt="Fork me on GitHub"/>
-</a>
 
-<div id="container">
-  <header>
-    <h1><a href="http://pivotal.github.com/cedar">Cedar</a></h1>
-    <h2>BDD-style testing using Objective-C</h2>
-  </header>
+        <ul>
+          <li><a href="https://github.com/pivotal/cedar/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/pivotal/cedar/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/pivotal/cedar">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="cedar" class="anchor" href="#cedar"><span class="octicon octicon-link"></span></a>Cedar</h1>
 
-  <div id="content">
-    <div class="download">
-      <h2>Source</h2>
-      <a href="http://github.com/pivotal/cedar/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/pivotal/cedar/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-      <h2>Latest Binary</h2>
-      <a href="https://github.com/downloads/pivotal/cedar/Cedar-944ce03.tar.gz">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+<p><a href="https://travis-ci.org/pivotal/cedar"><img src="https://travis-ci.org/pivotal/cedar.png?branch=master" alt="Build Status"></a></p>
+
+<p>Cedar is a BDD-style Objective-C testing framework.  It provides a rich matcher DSL, test doubles, the ability to spy on live objects, and more.</p>
+
+<h1>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h1>
+
+<ul>
+<li>Install the Xcode command line tools package (Under the Preferences tab 'Downloads') if you haven't already done so</li>
+<li>Run the following in a terminal:</li>
+</ul><pre><code>    $ curl -L https://raw.github.com/pivotal/cedar/master/install.sh | bash
+</code></pre>
+
+<ul>
+<li>Restart Xcode</li>
+<li>Add Cedar target(s) to your app</li>
+<li>Start writing specs!</li>
+</ul><h1>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h1>
+
+<p>Documentation can be found on the <a href="https://github.com/pivotal/cedar/wiki">Cedar Wiki</a>.</p>
+
+<h1>
+<a name="support-and-feedback" class="anchor" href="#support-and-feedback"><span class="octicon octicon-link"></span></a>Support and feedback</h1>
+
+<ul>
+<li>Search past discussions: <a href="http://groups.google.com/group/cedar-discuss">http://groups.google.com/group/cedar-discuss</a>
+</li>
+<li>Send an e-mail to the discussion list: <a href="mailto:cedar-discuss@googlegroups.com">mailto:cedar-discuss@googlegroups.com</a>
+</li>
+<li>View the project backlog on Pivotal Tracker: <a href="http://www.pivotaltracker.com/projects/77775">http://www.pivotaltracker.com/projects/77775</a>.</li>
+<li>Follow us on twitter: <a href="http://twitter.com/cedarbdd">@cedarbdd</a>
+</li>
+</ul><h1>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<p>Please read the <a href="https://github.com/pivotal/cedar/wiki/Contributor-guide">Contributor Guide</a> on the wiki.</p>
+
+<h1>
+<a name="maintainers" class="anchor" href="#maintainers"><span class="octicon octicon-link"></span></a>Maintainers</h1>
+
+<ul>
+<li>
+<a href="mailto:akitchen@pivotallabs.com">Andrew Kitchen</a> (<a href="https://github.com/akitchen">akitchen</a>), Pivotal Labs</li>
+<li>
+<a href="mailto:dmitriy@pivotallabs.com">Dmitriy Kalinin</a> (<a href="http://github.com/cppforlife">cppforlife</a>), Pivotal Labs</li>
+<li>
+<a href="mailto:jeffh@pivotallabs.com">Jeff Hui</a> (<a href="http://github.com/jeffh">jeffh</a>), Pivotal Labs</li>
+<li>
+<a href="mailto:scoward@pivotallabs.com">Sam Coward</a> (<a href="http://github.com/idoru">idoru</a>), Pivotal Labs</li>
+</ul><p>Copyright (c) 2010-2013 Pivotal Labs. This software is licensed under the MIT License.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/pivotal">pivotal</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
-    <!--nav>
-      <ul>
-        <li><a href="index.html">Overview</a></li>
-        <li>Download</li>
-        <li>Documentation</li>
-        <li>Related Projects</li>
-      </ul>
-    </nav-->
-
-    <div>
-      <h2>Contact</h2>
-      <p>Cedar Discussion Group (cedar-discuss@googlegroups.com)</p>
-
-      <h2>Authors</h2>
-      <p>Adam Milligan (amilligan@pivotallabs.com)</p>
-
-      <h2>Source</h2>
-      <p>
-        You can download the latest source in
-        <a href="http://github.com/pivotal/cedar/zipball/master">zip</a> or
-        <a href="http://github.com/pivotal/cedar/tarball/master">tar</a> formats.
-      </p>
-
-      <p>
-        You can also clone the project with <a href="http://git-scm.com">Git</a>
-        by running:
-        <pre>$ git clone git://github.com/pivotal/cedar</pre>
-      </p>
-
-      <h2>Binaries</h2>
-      <p>
-      You can also download the latest build of cedar from the <a href="https://github.com/pivotal/cedar/downloads">downloads page</a>.
-      </p>
-      <p>
-      Un-tar it into your home directory &amp; restart Xcode to begin adding Cedar targets.
-      </p>
-
-      <h2>Documentation</h2>
-      <p>Check the <a href="https://github.com/pivotal/cedar/blob/master/README.markdown">README</a> for the latest documentation</p>
-
-    </div>
-  </div>
-
-  <div class="footer">
-    get the source code on GitHub : <a href="http://github.com/pivotal/cedar">pivotal/cedar</a>
-  </div>
-
-</div>
-
-
-</body>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
 </html>
