@@ -5,6 +5,7 @@ CONFIGURATION = "Release"
 
 SPECS_TARGET_NAME = "Specs"
 UI_SPECS_TARGET_NAME = "iOSSpecs"
+SMOKE_TEST_TARGET_NAME = 'CedarSmokeTest'
 
 OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
 OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
@@ -92,7 +93,7 @@ def kill_simulator
   system %Q[killall -m -KILL "iPhone Simulator"]
 end
 
-task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application", :xcunit]
+task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application", :xcunit, :smoke_test]
 task :cruise => [:clean, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs, :xcunit]
 
 desc "Trim whitespace"
@@ -109,6 +110,12 @@ desc "Build specs"
 task :build_specs do
   puts "SYMROOT: #{ENV['SYMROOT']}"
   system_or_exit(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{SPECS_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'], output_file("specs"))
+end
+
+desc "Build Smoke Test"
+task :build_smoke_test => :build_frameworks do
+  puts "SYMROOT: #{ENV['SYMROOT']}"
+  system_or_exit(%Q[xcodebuild -project #{SMOKE_TEST_TARGET_NAME}/#{SMOKE_TEST_TARGET_NAME}.xcodeproj -target #{SMOKE_TEST_TARGET_NAME} -configuration Release -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 SYMROOT='#{BUILD_DIR}'], output_file("smoke-test"))
 end
 
 desc "Build UI specs"
@@ -268,3 +275,18 @@ task :install => [ :clean, :uninstall, "dist:prepare" ] do
   system_or_exit %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
 end
 
+desc "Run Smoke Test specs"
+task :smoke_test => :build_smoke_test do
+  sdk_path = sdk_dir(SDK_RUNTIME_VERSION)
+  env_vars = {
+    "DYLD_ROOT_PATH" => sdk_path,
+    "IPHONE_SIMULATOR_ROOT" => sdk_path,
+    "CFFIXED_USER_HOME" => Dir.tmpdir,
+    "CEDAR_HEADLESS_SPECS" => "1",
+    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+  }
+
+  with_env_vars(env_vars) do
+    system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{SMOKE_TEST_TARGET_NAME}.app", SMOKE_TEST_TARGET_NAME)} -RegisterForSystemEvents"
+  end
+end
