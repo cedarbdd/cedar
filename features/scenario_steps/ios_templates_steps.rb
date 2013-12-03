@@ -20,3 +20,14 @@ end
 When(/^I reference AppDelegate in the test$/) do
   `cp features/support/templates/ExampleSpec.mm template-project/Specs`
 end
+
+Then(/^the `rake Specs` should work$/) do
+  Dir.chdir('template-project/Specs') do
+    output = `rake Specs 2> /dev/null`
+    if $? != 0
+      puts "!!! Spec target failed. Build output:"
+      puts output
+    end
+    $?.exitstatus.should == 0
+  end
+end
