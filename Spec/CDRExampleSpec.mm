@@ -12,6 +12,7 @@
 #import "CDRSpecFailure.h"
 #import "SimpleKeyValueObserver.h"
 #import "FibonacciCalculator.h"
+#import "SimpleCollection.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -314,13 +315,26 @@ describe(@"CDRExample", ^{
         });
 
         describe(@"KVO", ^{
-            it(@"should report when the state changes", ^{
-                id mockObserver = [[[SimpleKeyValueObserver alloc] init] autorelease];
-                spy_on(mockObserver);
+            __block id mockObserver;
 
+            beforeEach(^{
+                mockObserver = [[[SimpleKeyValueObserver alloc] init] autorelease];
+                spy_on(mockObserver);
+            });
+
+            it(@"should report when the state of a non-collection property changes", ^{
                 [example addObserver:mockObserver forKeyPath:@"state" options:0 context:NULL];
                 [example run];
                 [example removeObserver:mockObserver forKeyPath:@"state"];
+
+                mockObserver should have_received("observeValueForKeyPath:ofObject:change:context:");
+            });
+
+            it(@"should report when the state of a collection property changes", ^{
+                SimpleCollection *simpleCollection = [[SimpleCollection alloc] init];
+                [simpleCollection addObserver:mockObserver forKeyPath:@"collection" options:0 context:NULL];
+                [simpleCollection mutateCollection];
+                [simpleCollection removeObserver:mockObserver forKeyPath:@"collection"];
 
                 mockObserver should have_received("observeValueForKeyPath:ofObject:change:context:");
             });
