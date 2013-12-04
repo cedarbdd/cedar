@@ -17,6 +17,10 @@ When(/^I add an OS X Spec suite target$/) do
   File.exist?("template-project/Specs").should be_true
 end
 
+When(/^I add a failing test$/) do
+  `cp features/support/templates/FailingSpec.mm template-project/Specs/ExampleSpec.mm`
+end
+
 Then(/^the `rake Specs` should work$/) do
   Dir.chdir('template-project/Specs') do
     output = `rake Specs 2> /dev/null`
@@ -27,3 +31,11 @@ Then(/^the `rake Specs` should work$/) do
     $?.exitstatus.should == 0
   end
 end
+
+Then(/^running the specs from the rake task should fail$/) do
+  Dir.chdir('template-project/Specs') do
+    `rake Specs 2> /dev/null`
+    $?.exitstatus.should_not eq(0)
+  end
+end
+
