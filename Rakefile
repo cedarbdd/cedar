@@ -5,6 +5,7 @@ CONFIGURATION = "Release"
 
 SPECS_TARGET_NAME = "Specs"
 UI_SPECS_TARGET_NAME = "iOSSpecs"
+IOS_FRAMEWORK_SPECS_TARGET_NAME = "iOSFrameworkSpecs"
 
 OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
 OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
@@ -92,8 +93,8 @@ def kill_simulator
   system %Q[killall -m -KILL "iPhone Simulator"]
 end
 
-task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, "ocunit:logic", "ocunit:application", :xcunit]
-task :cruise => [:clean, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs, :xcunit]
+task :default => [:trim_whitespace, :specs, :focused_specs, :uispecs, :iosframeworkspecs, "ocunit:logic", "ocunit:application", :xcunit]
+task :cruise => [:clean, "ocunit:logic", "ocunit:application", :specs, :focused_specs, :uispecs, :iosframeworkspecs, :xcunit]
 
 desc "Trim whitespace"
 task :trim_whitespace do
@@ -115,6 +116,12 @@ desc "Build UI specs"
 task :build_uispecs do
   kill_simulator
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{UI_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 SYMROOT='#{BUILD_DIR}'", output_file("uispecs")
+end
+
+desc "Build iOS static framework specs"
+task :build_iosframeworkspecs do
+  kill_simulator
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{IOS_FRAMEWORK_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 SYMROOT='#{BUILD_DIR}'", output_file("iosframeworkspecs")
 end
 
 desc "Build Cedar and Cedar-iOS frameworks"
@@ -160,6 +167,22 @@ task :uispecs => :build_uispecs do
 
   with_env_vars(env_vars) do
     system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents"
+  end
+end
+
+desc "Run iOS static framework specs"
+task :iosframeworkspecs => :build_iosframeworkspecs do
+  sdk_path = sdk_dir(SDK_RUNTIME_VERSION)
+  env_vars = {
+    "DYLD_ROOT_PATH" => sdk_path,
+    "IPHONE_SIMULATOR_ROOT" => sdk_path,
+    "CFFIXED_USER_HOME" => Dir.tmpdir,
+    "CEDAR_HEADLESS_SPECS" => "1",
+    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+  }
+
+  with_env_vars(env_vars) do
+    system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{IOS_FRAMEWORK_SPECS_TARGET_NAME}.app", IOS_FRAMEWORK_SPECS_TARGET_NAME)} -RegisterForSystemEvents"
   end
 end
 
