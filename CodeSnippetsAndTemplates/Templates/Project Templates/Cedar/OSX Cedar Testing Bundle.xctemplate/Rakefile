@@ -30,6 +30,14 @@ module CedarTarget___PACKAGENAMEASIDENTIFIER___
       system(cmd) or raise "******** Build failed ********"
     end
 
+    def run_cmd_and_grep_for_failure(cmd)
+      puts "Executing #{cmd}"
+      puts result = %x[#{cmd} 2>&1]
+      if !result.index(/examples, 0 failures/)
+        exit(1)
+      end
+    end 
+
     def with_env_vars(env_vars)
       old_values = {}
       env_vars.each do |key,new_value|
@@ -67,6 +75,12 @@ end
 desc "Build and run ___PACKAGENAMEASIDENTIFIER___ OCUnit logic specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
   CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} ; xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' ; popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___")
+    build_and_test_command = <<END_SHELL_CMD
+      xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -arch x86_64 build SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' ; 
+      xcodebuild -scheme #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration Debug -arch x86_64 test SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}'
+END_SHELL_CMD
+    Dir.chdir(CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT) do
+      CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure build_and_test_command
+    end
   end
 end
