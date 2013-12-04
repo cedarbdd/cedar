@@ -48,6 +48,16 @@ module CedarTarget___PACKAGENAMEASIDENTIFIER___
       system(cmd) or raise "******** Build failed ********"
     end
 
+    def run_cmd_and_grep_for_failure(cmd)
+      puts "Executing #{cmd}"
+      puts result = %x[#{cmd} 2>&1]
+      if result.index(/Test Case.*failed/)
+        exit(1)
+      else
+        exit(0)
+      end
+    end 
+
     def with_env_vars(env_vars)
       old_values = {}
       env_vars.each do |key,new_value|
@@ -98,7 +108,7 @@ end
 desc "Run ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
   if CedarTarget___PACKAGENAMEASIDENTIFIER___.is_run_unit_tests_deprecated?
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd"
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd"
   else
     env_vars = {
       "DYLD_ROOT_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
@@ -113,7 +123,7 @@ task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
     }
 
     CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
-      CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")} -RegisterForSystemEvents -SenTest All";
+      CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")} -RegisterForSystemEvents -SenTest All"
     end
   end
 end
