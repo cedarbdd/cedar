@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "CedarObservedObject.h"
 
-@interface ObjectWithProperties : NSObject
+@interface ObjectWithProperty : NSObject <CedarObservedObject>
 
 @property (nonatomic, assign) CGFloat floatProperty;
 

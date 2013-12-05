@@ -2,13 +2,15 @@
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ArgumentReleaser.h"
-#import "ObjectWithProperties.h"
+#import "ObjectWithProperty.h"
 #import "SimpleKeyValueObserver.h"
 #import "ArgumentReleaser.h"
 #import <objc/runtime.h>
 
 extern "C" {
 #import "ExpectFailureWithMessage.h"
+#import "ObjectWithCollections.h"
+#import "CedarObservedObject.h"
 }
 
 using namespace Cedar::Matchers;
@@ -190,70 +192,119 @@ describe(@"spy_on", ^{
     });
 
     describe(@"spying on objects under KVO", ^{
-        __block ObjectWithProperties *observedObject;
+        __block id observedObject;
+        __block NSString *keyPath;
         __block SimpleKeyValueObserver *observer;
-        beforeEach(^{
-            observedObject = [[[ObjectWithProperties alloc] init] autorelease];
-            spy_on(observedObject);
 
-            observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+        void (^itShouldPlayNiceWithKVO)(void) = ^{
+            it(@"should not raise exception when adding or removing an observer", ^{
+                ^{ [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
+                    [observedObject removeObserver:observer forKeyPath:keyPath context:NULL]; }
+                should_not raise_exception;
+            });
+
+            it(@"should not raise exception when adding or removing an observer", ^{
+                ^{ [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
+                    [observedObject removeObserver:observer forKeyPath:keyPath context:NULL]; }
+                should_not raise_exception;
+            });
+
+            it(@"should correctly record adding and removing an observer", ^{
+                observedObject should_not have_received("addObserver:forKeyPath:options:context:");
+                observedObject should_not have_received("removeObserver:forKeyPath:context:");
+
+                [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
+                observedObject should have_received("addObserver:forKeyPath:options:context:");
+
+                [observedObject removeObserver:observer forKeyPath:keyPath context:NULL];
+                observedObject should have_received("removeObserver:forKeyPath:context:");
+            });
+
+            it(@"should record shorthand method for removing an observer", ^{
+                observedObject should_not have_received("removeObserver:forKeyPath:");
+                [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
+
+                [observedObject removeObserver:observer forKeyPath:keyPath];
+                observedObject should have_received("removeObserver:forKeyPath:");
+            });
+
+            it(@"should not prevent existing observers from recording observations after they are spied upon", ^{
+                [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
+                spy_on(observer);
+
+                [observedObject mutateObservedProperty];
+                observer should have_received("observeValueForKeyPath:ofObject:change:context:");
+
+                [observedObject removeObserver:observer forKeyPath:keyPath];
+            });
+
+            it(@"should correctly notify other non-spy observers when an existing observer is spied", ^{
+                SimpleKeyValueObserver *neutralObserver = [[[SimpleKeyValueObserver alloc] init] autorelease];
+                [observedObject addObserver:neutralObserver forKeyPath:keyPath options:0 context:NULL];
+                [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
+                spy_on(observer);
+
+                [observedObject mutateObservedProperty];
+                neutralObserver.lastObservedKeyPath should equal(keyPath);
+
+                [observedObject removeObserver:neutralObserver forKeyPath:keyPath];
+                [observedObject removeObserver:observer forKeyPath:keyPath];
+            });
+
+            fit(@"should not notify observers method after being removed", ^{
+                [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
+                [observedObject removeObserver:observer forKeyPath:keyPath];
+                spy_on(observer);
+
+                [observedObject mutateObservedProperty];
+                observer should_not have_received("observeValueForKeyPath:ofObject:change:context:");
+            });
+        };
+
+        context(@"with a KVO on a simple property", ^{
+            beforeEach(^{
+                keyPath = @"floatProperty";
+                observedObject = [[[ObjectWithProperty alloc] init] autorelease];
+                spy_on(observedObject);
+                observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            });
+
+            itShouldPlayNiceWithKVO();
         });
 
-        it(@"should not raise exception when adding or removing an observer", ^{
-            ^{ [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
-               [observedObject removeObserver:observer forKeyPath:@"floatProperty" context:NULL]; }
-            should_not raise_exception;
+        context(@"with KVO on an array property", ^{
+            beforeEach(^{
+                keyPath = @"array";
+                observedObject = [[[ObjectWithCollections alloc] init] autorelease];
+                spy_on(observedObject);
+                observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            });
+
+            itShouldPlayNiceWithKVO();
         });
 
-        it(@"should correctly record adding and removing an observer", ^{
-            observedObject should_not have_received("addObserver:forKeyPath:options:context:");
-            observedObject should_not have_received("removeObserver:forKeyPath:context:");
+        context(@"with KVO on a set property", ^{
+            beforeEach(^{
+                keyPath = @"set";
+                observedObject = [[[ObjectWithCollections alloc] init] autorelease];
+                spy_on(observedObject);
+                observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            });
 
-            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
-            observedObject should have_received("addObserver:forKeyPath:options:context:");
-
-            [observedObject removeObserver:observer forKeyPath:@"floatProperty" context:NULL];
-            observedObject should have_received("removeObserver:forKeyPath:context:");
+            itShouldPlayNiceWithKVO();
         });
 
-        it(@"should record shorthand method for removing an observer", ^{
-            observedObject should_not have_received("removeObserver:forKeyPath:");
-            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
+        context(@"with KVO on an ordered set property", ^{
+            beforeEach(^{
+                keyPath = @"orderedSet";
+                observedObject = [[[ObjectWithCollections alloc] init] autorelease];
+                spy_on(observedObject);
+                observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            });
 
-            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
-            observedObject should have_received("removeObserver:forKeyPath:");
+            itShouldPlayNiceWithKVO();
         });
 
-        it(@"should not prevent existing observers from recording observations after they are spied upon", ^{
-            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
-            spy_on(observer);
-
-            observedObject.floatProperty = 12;
-            observer should have_received("observeValueForKeyPath:ofObject:change:context:");
-
-            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
-        });
-
-        it(@"should correctly notify other non-spy observers when an existing observer is spied", ^{
-            SimpleKeyValueObserver *neutralObserver = [[[SimpleKeyValueObserver alloc] init] autorelease];
-            [observedObject addObserver:neutralObserver forKeyPath:@"floatProperty" options:0 context:NULL];
-            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
-            spy_on(observer);
-
-            observedObject.floatProperty = 12;
-            neutralObserver.lastObservedKeyPath should equal(@"floatProperty");
-
-            [observedObject removeObserver:neutralObserver forKeyPath:@"floatProperty"];
-            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
-        });
-        
-        it(@"should not notify observers method after being removed", ^{
-            [observedObject addObserver:observer forKeyPath:@"floatProperty" options:0 context:NULL];
-            [observedObject removeObserver:observer forKeyPath:@"floatProperty"];
-            spy_on(observer);
-            observedObject.floatProperty = 12;
-            observer should_not have_received("observeValueForKeyPath:ofObject:change:context:");
-        });
     });
 });
 

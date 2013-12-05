@@ -162,9 +162,9 @@
 		AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
-		AE3E8F37184FEEE000633740 /* ObjectWithCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = AE3E8F35184FEEE000633740 /* ObjectWithCollection.h */; };
-		AE3E8F39184FEEE900633740 /* ObjectWithCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */; };
-		AE3E8F3A184FEEEB00633740 /* ObjectWithCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */; };
+		AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */ = {isa = PBXBuildFile; fileRef = AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */; };
+		AE3E8F39184FEEE900633740 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
+		AE3E8F3A184FEEEB00633740 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
@@ -381,8 +381,8 @@
 		E31179D6161FD937007D3CDE /* CDRSlowTestStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = E31179D1161FD937007D3CDE /* CDRSlowTestStatistics.m */; };
 		E32861321604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
-		E4BCFDD21817FA110083ED98 /* ObjectWithProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */; };
-		E4BCFDD31817FA110083ED98 /* ObjectWithProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */; };
+		E4BCFDD21817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
+		E4BCFDD31817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -611,8 +611,8 @@
 		AE18A7FA13F4601400C8872C /* Contain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contain.h; sourceTree = "<group>"; };
 		AE18A80913F4640600C8872C /* ContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainSpec.mm; sourceTree = "<group>"; };
 		AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDouble.mm; sourceTree = "<group>"; };
-		AE3E8F35184FEEE000633740 /* ObjectWithCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithCollection.h; sourceTree = "<group>"; };
-		AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollection.m; sourceTree = "<group>"; };
+		AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithCollections.h; sourceTree = "<group>"; };
+		AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollections.m; sourceTree = "<group>"; };
 		AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithWeakDelegate.h; sourceTree = "<group>"; };
 		AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithWeakDelegate.m; sourceTree = "<group>"; };
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
@@ -639,6 +639,7 @@
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpectFailureWithMessage.m; sourceTree = "<group>"; };
 		AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecFailure.h; sourceTree = "<group>"; };
 		AE8C881113626FE6006C9305 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
+		AE8F1D901850F6C00059E840 /* CedarObservedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CedarObservedObject.h; sourceTree = "<group>"; };
 		AE94D03E15F341B200A0C2B7 /* AnyInstanceArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyInstanceArgument.h; sourceTree = "<group>"; };
 		AE94D04315F3449500A0C2B7 /* AnyInstanceArgument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnyInstanceArgument.mm; sourceTree = "<group>"; };
 		AE9AA67915AB72DA00617E1A /* CDRClassFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRClassFake.h; sourceTree = "<group>"; };
@@ -755,8 +756,8 @@
 		E31179D1161FD937007D3CDE /* CDRSlowTestStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSlowTestStatistics.m; sourceTree = "<group>"; };
 		E32861301604F287001FA77E /* FibonacciCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FibonacciCalculator.h; sourceTree = "<group>"; };
 		E32861311604F287001FA77E /* FibonacciCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FibonacciCalculator.m; sourceTree = "<group>"; };
-		E4BCFDD01817FA110083ED98 /* ObjectWithProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithProperties.h; sourceTree = "<group>"; };
-		E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithProperties.m; sourceTree = "<group>"; };
+		E4BCFDD01817FA110083ED98 /* ObjectWithProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithProperty.h; sourceTree = "<group>"; };
+		E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithProperty.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1391,16 +1392,17 @@
 				E32861311604F287001FA77E /* FibonacciCalculator.m */,
 				AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */,
 				AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */,
-				E4BCFDD01817FA110083ED98 /* ObjectWithProperties.h */,
-				E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */,
+				E4BCFDD01817FA110083ED98 /* ObjectWithProperty.h */,
+				E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */,
 				AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */,
 				AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */,
-				AE3E8F35184FEEE000633740 /* ObjectWithCollection.h */,
-				AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */,
+				AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */,
+				AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */,
 				AE807889183C71950078C608 /* SimpleIncrementer.h */,
 				AE80788A183C71950078C608 /* SimpleIncrementer.m */,
 				AE80788B183C71950078C608 /* SimpleKeyValueObserver.h */,
 				AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */,
+				AE8F1D901850F6C00059E840 /* CedarObservedObject.h */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1440,7 +1442,7 @@
 				AE18A7CD13F453CC00C8872C /* BeNil.h in Headers */,
 				AE18A7CE13F453CC00C8872C /* BeSameInstanceAs.h in Headers */,
 				2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */,
-				AE3E8F37184FEEE000633740 /* ObjectWithCollection.h in Headers */,
+				AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */,
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
@@ -1941,12 +1943,12 @@
 				AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
 				492951E41482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */,
-				E4BCFDD21817FA110083ED98 /* ObjectWithProperties.m in Sources */,
+				E4BCFDD21817FA110083ED98 /* ObjectWithProperty.m in Sources */,
 				6639A77F14C50D0100B564B7 /* HaveReceivedSpec.mm in Sources */,
 				AE9AA68015AB748E00617E1A /* CDRClassFakeSpec.mm in Sources */,
 				AE807893183C71950078C608 /* SimpleKeyValueObserver.m in Sources */,
 				AE9AA69715ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
-				AE3E8F39184FEEE900633740 /* ObjectWithCollection.m in Sources */,
+				AE3E8F39184FEEE900633740 /* ObjectWithCollections.m in Sources */,
 				AE74903215B45EBA008EA127 /* CDRProtocolFakeSpec.mm in Sources */,
 				96C95B7E161339160018606B /* CDRSymbolicatorSpec.mm in Sources */,
 				1F882AAC180FA8D800533238 /* ARCBeSameInstanceAs.mm in Sources */,
@@ -2021,7 +2023,7 @@
 				1FDCD5601821D3BB00B511DB /* ARCBeNilSpec.mm in Sources */,
 				AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */,
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */,
-				E4BCFDD31817FA110083ED98 /* ObjectWithProperties.m in Sources */,
+				E4BCFDD31817FA110083ED98 /* ObjectWithProperty.m in Sources */,
 				AEEE228711DC2D5800029872 /* main.m in Sources */,
 				AEEE228811DC2D5800029872 /* SlowSpec.m in Sources */,
 				AE807895183C71950078C608 /* SimpleKeyValueObserver.m in Sources */,
@@ -2051,7 +2053,7 @@
 				492951E51482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */,
 				AE9AA69815ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
-				AE3E8F3A184FEEEB00633740 /* ObjectWithCollection.m in Sources */,
+				AE3E8F3A184FEEEB00633740 /* ObjectWithCollections.m in Sources */,
 				AE53B68317E7BDA900D83D5E /* HaveReceivedSpec.mm in Sources */,
 				AE06D88117AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */,
 				9672F0A71615C1C10012ED58 /* CDRSymbolicatorSpec.mm in Sources */,
