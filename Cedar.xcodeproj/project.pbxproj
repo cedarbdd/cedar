@@ -162,9 +162,9 @@
 		AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
-		AE3E8F37184FEEE000633740 /* SimpleCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = AE3E8F35184FEEE000633740 /* SimpleCollection.h */; };
-		AE3E8F39184FEEE900633740 /* SimpleCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* SimpleCollection.m */; };
-		AE3E8F3A184FEEEB00633740 /* SimpleCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* SimpleCollection.m */; };
+		AE3E8F37184FEEE000633740 /* ObjectWithCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = AE3E8F35184FEEE000633740 /* ObjectWithCollection.h */; };
+		AE3E8F39184FEEE900633740 /* ObjectWithCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */; };
+		AE3E8F3A184FEEEB00633740 /* ObjectWithCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
@@ -611,8 +611,8 @@
 		AE18A7FA13F4601400C8872C /* Contain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contain.h; sourceTree = "<group>"; };
 		AE18A80913F4640600C8872C /* ContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainSpec.mm; sourceTree = "<group>"; };
 		AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDouble.mm; sourceTree = "<group>"; };
-		AE3E8F35184FEEE000633740 /* SimpleCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCollection.h; sourceTree = "<group>"; };
-		AE3E8F36184FEEE000633740 /* SimpleCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleCollection.m; sourceTree = "<group>"; };
+		AE3E8F35184FEEE000633740 /* ObjectWithCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithCollection.h; sourceTree = "<group>"; };
+		AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollection.m; sourceTree = "<group>"; };
 		AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithWeakDelegate.h; sourceTree = "<group>"; };
 		AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithWeakDelegate.m; sourceTree = "<group>"; };
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
@@ -1395,12 +1395,12 @@
 				E4BCFDD11817FA110083ED98 /* ObjectWithProperties.m */,
 				AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */,
 				AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */,
+				AE3E8F35184FEEE000633740 /* ObjectWithCollection.h */,
+				AE3E8F36184FEEE000633740 /* ObjectWithCollection.m */,
 				AE807889183C71950078C608 /* SimpleIncrementer.h */,
 				AE80788A183C71950078C608 /* SimpleIncrementer.m */,
 				AE80788B183C71950078C608 /* SimpleKeyValueObserver.h */,
 				AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */,
-				AE3E8F35184FEEE000633740 /* SimpleCollection.h */,
-				AE3E8F36184FEEE000633740 /* SimpleCollection.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1440,7 +1440,7 @@
 				AE18A7CD13F453CC00C8872C /* BeNil.h in Headers */,
 				AE18A7CE13F453CC00C8872C /* BeSameInstanceAs.h in Headers */,
 				2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */,
-				AE3E8F37184FEEE000633740 /* SimpleCollection.h in Headers */,
+				AE3E8F37184FEEE000633740 /* ObjectWithCollection.h in Headers */,
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
@@ -1946,7 +1946,7 @@
 				AE9AA68015AB748E00617E1A /* CDRClassFakeSpec.mm in Sources */,
 				AE807893183C71950078C608 /* SimpleKeyValueObserver.m in Sources */,
 				AE9AA69715ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
-				AE3E8F39184FEEE900633740 /* SimpleCollection.m in Sources */,
+				AE3E8F39184FEEE900633740 /* ObjectWithCollection.m in Sources */,
 				AE74903215B45EBA008EA127 /* CDRProtocolFakeSpec.mm in Sources */,
 				96C95B7E161339160018606B /* CDRSymbolicatorSpec.mm in Sources */,
 				1F882AAC180FA8D800533238 /* ARCBeSameInstanceAs.mm in Sources */,
@@ -2051,7 +2051,7 @@
 				492951E51482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */,
 				AE9AA69815ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
-				AE3E8F3A184FEEEB00633740 /* SimpleCollection.m in Sources */,
+				AE3E8F3A184FEEEB00633740 /* ObjectWithCollection.m in Sources */,
 				AE53B68317E7BDA900D83D5E /* HaveReceivedSpec.mm in Sources */,
 				AE06D88117AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */,
 				9672F0A71615C1C10012ED58 /* CDRSymbolicatorSpec.mm in Sources */,

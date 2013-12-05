@@ -12,7 +12,7 @@
 #import "CDRSpecFailure.h"
 #import "SimpleKeyValueObserver.h"
 #import "FibonacciCalculator.h"
-#import "SimpleCollection.h"
+#import "ObjectWithCollection.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -331,7 +331,7 @@ describe(@"CDRExample", ^{
             });
 
             it(@"should report when the state of a collection property changes", ^{
-                SimpleCollection *simpleCollection = [[SimpleCollection alloc] init];
+                ObjectWithCollection *simpleCollection = [[ObjectWithCollection alloc] init];
                 [simpleCollection addObserver:mockObserver forKeyPath:@"collection" options:0 context:NULL];
                 [simpleCollection mutateCollection];
                 [simpleCollection removeObserver:mockObserver forKeyPath:@"collection"];

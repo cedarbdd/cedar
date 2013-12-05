@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface SimpleCollection : NSObject
+@interface ObjectWithCollection : NSObject
 @property (retain) NSMutableArray *collection;
 
 - (void) mutateCollection;

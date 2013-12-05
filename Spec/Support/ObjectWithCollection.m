@@ -1,6 +1,6 @@
-#import "SimpleCollection.h"
+#import "ObjectWithCollection.h"
 
-@implementation SimpleCollection
+@implementation ObjectWithCollection
 
 -(instancetype) init {
     if (self = [super init]) {
