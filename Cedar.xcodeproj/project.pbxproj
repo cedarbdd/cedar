@@ -124,17 +124,6 @@
 		96EA1CBB142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
 		AE02021917452007009A7915 /* StringifiersBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02021717452006009A7915 /* StringifiersBase.mm */; };
 		AE02021A17452007009A7915 /* StringifiersBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02021717452006009A7915 /* StringifiersBase.mm */; };
-		AE02E7E5184EABCD00414F19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96158A8C144A915E005895CE /* Foundation.framework */; };
-		AE02E7E6184EABCD00414F19 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
-		AE02E7E7184EABCD00414F19 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC40C57174ACAD900474D2D /* UIKit.framework */; };
-		AE02E7ED184EABCD00414F19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE02E7EB184EABCD00414F19 /* InfoPlist.strings */; };
-		AE02E7EF184EABCE00414F19 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE02E7EE184EABCE00414F19 /* main.m */; };
-		AE02E810184EC79C00414F19 /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		AE02E811184EC7DA00414F19 /* ARCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE71E7CB175E958F002A54D5 /* ARCViewController.m */; };
-		AE02E812184EC7ED00414F19 /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; };
-		AE02E813184ECAEE00414F19 /* CDRSpecFailure.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
-		AE02E814184ECB0F00414F19 /* ShouldSyntax.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; };
-		AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE0695F417A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE06D88017AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
@@ -143,6 +132,7 @@
 		AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; };
 		AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; };
+		AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */; };
 		AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
@@ -205,6 +195,7 @@
 		AE807893183C71950078C608 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
 		AE807895183C71950078C608 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
 		AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE84F0DC145B70DD00769F85 /* ShouldSyntax.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; };
 		AE8C87AC13624524006C9305 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
 		AE8C87AE136245BB006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
 		AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */; };
@@ -319,6 +310,7 @@
 		AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD311DC27B800029872 /* Cedar.h */; };
 		AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDB11DC27B800029872 /* SpecHelper.h */; };
 		AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */; };
+		AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AEEE228011DC2D5200029872 /* CDRExampleSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */; };
 		AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */; };
 		AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; };
@@ -433,13 +425,6 @@
 			remoteGlobalIDString = AEEE222811DC2B0600029872;
 			remoteInfo = "Cedar-StaticLib";
 		};
-		AE02E80E184EADE100414F19 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AEEE224B11DC2BBB00029872;
-			remoteInfo = "Cedar-iOS";
-		};
 		AEEE218A11DC28E700029872 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
@@ -473,6 +458,7 @@
 				AEF72F7913EC732000786282 /* CedarComparators.h in Copy headers to framework */,
 				AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */,
 				AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */,
+				AE0D691213E8C6990048039A /* CDRSpecFailure.h in Copy headers to framework */,
 				AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */,
 				AEFD163311DCFDC800F4448A /* CDRExampleReporterViewController.h in Copy headers to framework */,
 				AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */,
@@ -481,7 +467,6 @@
 				AEFD167A11DCFF1700F4448A /* CDRSpec.h in Copy headers to framework */,
 				AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */,
 				AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */,
-				AE02E813184ECAEE00414F19 /* CDRSpecFailure.h in Copy headers to framework */,
 				AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */,
 				AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */,
 				AEEE226211DC2C8300029872 /* SpecHelper.h in Copy headers to framework */,
@@ -489,7 +474,6 @@
 				AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */,
 				AE18A7B913F450A700C8872C /* BeCloseTo.h in Copy headers to framework */,
 				2234907F18009DAD001C8E8D /* CDRHooks.h in Copy headers to framework */,
-				AE02E814184ECB0F00414F19 /* ShouldSyntax.h in Copy headers to framework */,
 				AE18A7BA13F450A700C8872C /* BeInstanceOf.h in Copy headers to framework */,
 				AE18A7BB13F450A700C8872C /* BeNil.h in Copy headers to framework */,
 				AE18A7BC13F450A700C8872C /* BeSameInstanceAs.h in Copy headers to framework */,
@@ -504,6 +488,7 @@
 				AEF3300D145B4F75002F93BB /* BeGTE.h in Copy headers to framework */,
 				AEF33018145B6222002F93BB /* BeLessThan.h in Copy headers to framework */,
 				AEF33022145B69DE002F93BB /* BeLTE.h in Copy headers to framework */,
+				AE84F0DC145B70DD00769F85 /* ShouldSyntax.h in Copy headers to framework */,
 				AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */,
 				6628FC8914C4DBA70016652A /* CedarDoubles.h in Copy headers to framework */,
 				6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */,
@@ -611,12 +596,6 @@
 		96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDROTestRunner.h; sourceTree = "<group>"; };
 		96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpecFailureSpec.mm; sourceTree = "<group>"; };
 		AE02021717452006009A7915 /* StringifiersBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StringifiersBase.mm; sourceTree = "<group>"; };
-		AE02E7E4184EABCD00414F19 /* iOSFrameworkSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSFrameworkSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE02E7EA184EABCD00414F19 /* Cedar-iOS.framework Specs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cedar-iOS.framework Specs-Info.plist"; sourceTree = "<group>"; };
-		AE02E7EC184EABCD00414F19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AE02E7EE184EABCE00414F19 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AE02E7F0184EABCE00414F19 /* Cedar-iOS.framework Specs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cedar-iOS.framework Specs-Prefix.pch"; sourceTree = "<group>"; };
-		AE02E81A184EEF0600414F19 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDoubleARCSharedExamples.mm; sourceTree = "<group>"; };
 		AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithForwardingTarget.h; sourceTree = "<group>"; };
 		AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithForwardingTarget.m; sourceTree = "<group>"; };
@@ -824,16 +803,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AE02E7E1184EABCD00414F19 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AE02E7E6184EABCD00414F19 /* CoreGraphics.framework in Frameworks */,
-				AE02E7E7184EABCD00414F19 /* UIKit.framework in Frameworks */,
-				AE02E7E5184EABCD00414F19 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AEEE1FB411DC271300029872 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1033,25 +1002,6 @@
 			path = Stringifiers;
 			sourceTree = "<group>";
 		};
-		AE02E7E8184EABCD00414F19 /* iOSFrameworkSpecs */ = {
-			isa = PBXGroup;
-			children = (
-				AE02E7E9184EABCD00414F19 /* Supporting Files */,
-			);
-			path = iOSFrameworkSpecs;
-			sourceTree = "<group>";
-		};
-		AE02E7E9184EABCD00414F19 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AE02E7EA184EABCD00414F19 /* Cedar-iOS.framework Specs-Info.plist */,
-				AE02E7EB184EABCD00414F19 /* InfoPlist.strings */,
-				AE02E7EE184EABCE00414F19 /* main.m */,
-				AE02E7F0184EABCE00414F19 /* Cedar-iOS.framework Specs-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		AE0AF55D13E9C06900029396 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1195,7 +1145,6 @@
 				96B5FA11144A81A8000A6A5D /* OCUnitAppTests.octest */,
 				96158A86144A915E005895CE /* OCUnitAppLogicTests.octest */,
 				1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */,
-				AE02E7E4184EABCD00414F19 /* iOSFrameworkSpecs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1296,7 +1245,6 @@
 			children = (
 				E328612E1604F254001FA77E /* Support */,
 				96A07F0D13F27ED70021974D /* Focused */,
-				AE02E7E8184EABCD00414F19 /* iOSFrameworkSpecs */,
 				AEEE1FEB11DC27B800029872 /* iPhone */,
 				AE8C879F1362068A006C9305 /* Matchers */,
 				66F00B5014C4D92500146D88 /* Doubles */,
@@ -1342,7 +1290,6 @@
 				96158A8C144A915E005895CE /* Foundation.framework */,
 				AEC40C57174ACAD900474D2D /* UIKit.framework */,
 				1F956BB2180E07CE00E603A9 /* XCTest.framework */,
-				AE02E81A184EEF0600414F19 /* CoreFoundation.framework */,
 				1F956B95180E07CE00E603A9 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -1637,24 +1584,6 @@
 			productReference = 96B5FA11144A81A8000A6A5D /* OCUnitAppTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		AE02E7E3184EABCD00414F19 /* iOSFrameworkSpecs */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AE02E808184EABCE00414F19 /* Build configuration list for PBXNativeTarget "iOSFrameworkSpecs" */;
-			buildPhases = (
-				AE02E7E0184EABCD00414F19 /* Sources */,
-				AE02E7E1184EABCD00414F19 /* Frameworks */,
-				AE02E7E2184EABCD00414F19 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AE02E80F184EADE100414F19 /* PBXTargetDependency */,
-			);
-			name = iOSFrameworkSpecs;
-			productName = "Cedar-iOS.FrameworkSpecs";
-			productReference = AE02E7E4184EABCD00414F19 /* iOSFrameworkSpecs.app */;
-			productType = "com.apple.product-type.application";
-		};
 		AEEE1FB511DC271300029872 /* Cedar */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEEE1FBC11DC271300029872 /* Build configuration list for PBXNativeTarget "Cedar" */;
@@ -1756,7 +1685,6 @@
 				AEEE222811DC2B0600029872 /* Cedar-StaticLib */,
 				AEEE224B11DC2BBB00029872 /* Cedar-iOS */,
 				AEEE227511DC2CF900029872 /* iOSSpecs */,
-				AE02E7E3184EABCD00414F19 /* iOSFrameworkSpecs */,
 				96B5F9F5144A81A7000A6A5D /* OCUnitApp */,
 				96B5FA10144A81A8000A6A5D /* OCUnitAppTests */,
 				1F45A3C8180E4796003C1E36 /* XCUnitAppTests */,
@@ -1797,14 +1725,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				96B5FA1C144A81A8000A6A5D /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AE02E7E2184EABCD00414F19 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AE02E7ED184EABCD00414F19 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1935,17 +1855,6 @@
 				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m in Sources */,
 				968F9582161AC58200A78D36 /* CDRSymbolicatorSpec.mm in Sources */,
 				96A805E416D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AE02E7E0184EABCD00414F19 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AE02E811184EC7DA00414F19 /* ARCViewController.m in Sources */,
-				AE02E812184EC7ED00414F19 /* ObjectWithWeakDelegate.m in Sources */,
-				AE02E810184EC79C00414F19 /* WeakReferenceCompatibilitySpec.mm in Sources */,
-				AE02E7EF184EABCE00414F19 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2096,6 +2005,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEEE227F11DC2D5200029872 /* CDRExampleGroupSpec.mm in Sources */,
 				AEEE228011DC2D5200029872 /* CDRExampleSpec.mm in Sources */,
 				AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */,
 				AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */,
@@ -2129,7 +2039,6 @@
 				AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */,
 				966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */,
 				AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
-				AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */,
 				492951E51482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */,
 				AE9AA69815ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
@@ -2186,11 +2095,6 @@
 			target = AEEE222811DC2B0600029872 /* Cedar-StaticLib */;
 			targetProxy = 96D34486144A859200352C4A /* PBXContainerItemProxy */;
 		};
-		AE02E80F184EADE100414F19 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AEEE224B11DC2BBB00029872 /* Cedar-iOS */;
-			targetProxy = AE02E80E184EADE100414F19 /* PBXContainerItemProxy */;
-		};
 		AEEE218B11DC28E700029872 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AEEE1FB511DC271300029872 /* Cedar */;
@@ -2242,14 +2146,6 @@
 				96D34480144A82D100352C4A /* en */,
 			);
 			name = DummyView.xib;
-			sourceTree = "<group>";
-		};
-		AE02E7EB184EABCD00414F19 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE02E7EC184EABCD00414F19 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2563,83 +2459,6 @@
 				SDKROOT = iphonesimulator;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		AE02E809184EABCE00414F19 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(BUILD_DIR)\"/$(CONFIGURATION)-iphoneuniversal/**",
-					"$(inherited)",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Spec/iOSFrameworkSpecs/iOSFrameworkSpecs-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				INFOPLIST_FILE = "Spec/iOSFrameworkSpecs/iOSFrameworkSpecs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = (
-					"-lstdc++",
-					"-all_load",
-					"-ObjC",
-					"-framework",
-					"Cedar-iOS",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		AE02E80A184EABCE00414F19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(BUILD_DIR)\"/$(CONFIGURATION)-iphoneuniversal/**",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Spec/iOSFrameworkSpecs/iOSFrameworkSpecs-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				INFOPLIST_FILE = "Spec/iOSFrameworkSpecs/iOSFrameworkSpecs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = (
-					"-lstdc++",
-					"-all_load",
-					"-ObjC",
-					"-framework",
-					"Cedar-iOS",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -2982,15 +2801,6 @@
 			buildConfigurations = (
 				96B5FA26144A81A8000A6A5D /* Debug */,
 				96B5FA27144A81A8000A6A5D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AE02E808184EABCE00414F19 /* Build configuration list for PBXNativeTarget "iOSFrameworkSpecs" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AE02E809184EABCE00414F19 /* Debug */,
-				AE02E80A184EABCE00414F19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
