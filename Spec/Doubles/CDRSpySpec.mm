@@ -305,6 +305,38 @@ describe(@"spy_on", ^{
             itShouldPlayNiceWithKVO();
         });
 
+        context(@"with a KVO on a simple manual property", ^{
+            beforeEach(^{
+                keyPath = @"manualFloatProperty";
+                observedObject = [[[ObjectWithProperty alloc] init] autorelease];
+                spy_on(observedObject);
+                observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            });
+
+            itShouldPlayNiceWithKVO();
+        });
+
+        context(@"with KVO on a manual array", ^{
+            beforeEach(^{
+                keyPath = @"manualArray";
+                observedObject = [[[ObjectWithCollections alloc] init] autorelease];
+                spy_on(observedObject);
+                observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            });
+
+            itShouldPlayNiceWithKVO();
+        });
+
+        context(@"with KVO on a manual set", ^{
+            beforeEach(^{
+                keyPath = @"manualSet";
+                observedObject = [[[ObjectWithCollections alloc] init] autorelease];
+                spy_on(observedObject);
+                observer = [[[SimpleKeyValueObserver alloc] init] autorelease];
+            });
+
+            itShouldPlayNiceWithKVO();
+        });
     });
 });
 

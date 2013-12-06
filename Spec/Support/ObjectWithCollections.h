@@ -6,5 +6,7 @@
 @property (retain) NSMutableArray *array;
 @property (retain) NSMutableSet *set;
 @property (retain) NSMutableOrderedSet *orderedSet;
+@property (retain) NSMutableArray *manualArray;
+@property (retain) NSMutableSet *manualSet;
 
 @end

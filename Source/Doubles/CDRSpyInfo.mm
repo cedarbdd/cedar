@@ -63,6 +63,8 @@ static NSMutableSet *currentSpies__;
             sel_isEqual(selector, @selector(mutableArrayValueForKey:)) ||
             sel_isEqual(selector, @selector(mutableSetValueForKey:)) ||
             sel_isEqual(selector, @selector(mutableOrderedSetValueForKey:)) ||
+            sel_isEqual(selector, @selector(willChange:valuesAtIndexes:forKey:)) ||
+            sel_isEqual(selector, @selector(didChange:valuesAtIndexes:forKey:)) ||
             strcmp(class_getName(self.publicClass), class_getName(self.spiedClass)));
     if (yieldToKVO) {
         return NULL;
