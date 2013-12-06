@@ -251,7 +251,7 @@ describe(@"spy_on", ^{
                 [observedObject removeObserver:observer forKeyPath:keyPath];
             });
 
-            fit(@"should not notify observers method after being removed", ^{
+            it(@"should not notify observers method after being removed", ^{
                 [observedObject addObserver:observer forKeyPath:keyPath options:0 context:NULL];
                 [observedObject removeObserver:observer forKeyPath:keyPath];
                 spy_on(observer);
