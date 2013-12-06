@@ -42,7 +42,7 @@
 
     NSSet *changeObjects = [NSSet setWithObjects:@"testing all the things", nil];
     [self willChangeValueForKey:@"manualSet" withSetMutation:NSKeyValueSetSetMutation usingObjects:changeObjects];
-    [self.manualSet addObject:[changeObjects allObjects][0]];
+    [self.manualSet addObject:[[changeObjects allObjects] objectAtIndex:0]];
     [self didChangeValueForKey:@"manualSet" withSetMutation:NSKeyValueSetSetMutation usingObjects:changeObjects];
 }
 
