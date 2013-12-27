@@ -1,7 +1,7 @@
 #import "CDRExample.h"
-#import "CDRExampleReporter.h"
 #import "CDRSpecFailure.h"
 #import "SpecHelper.h"
+#import "CDRReportDispatcher.h"
 
 const CDRSpecBlock PENDING = nil;
 
@@ -50,8 +50,11 @@ const CDRSpecBlock PENDING = nil;
     }
 }
 
-- (void)run {
-    NSDate *startDate = [[NSDate alloc] init];
+
+- (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher {
+    startDate_ = [[NSDate alloc] init];
+    [dispatcher runWillStartExample:self];
+
     if (!self.shouldRun) {
         self.state = CDRExampleStateSkipped;
     } else if (block_) {
@@ -81,8 +84,9 @@ const CDRSpecBlock PENDING = nil;
     } else {
         self.state = CDRExampleStatePending;
     }
-    runTime_ = -[startDate timeIntervalSinceNow];
-    [startDate release];
+    endDate_ = [[NSDate alloc] init];
+
+    [dispatcher runDidFinishExample:self];
 }
 
 #pragma mark Private interface

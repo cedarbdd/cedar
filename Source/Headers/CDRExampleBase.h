@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "CDRExampleParent.h"
 
-@protocol CDRExampleReporter;
+@class CDRSpec, CDRReportDispatcher;
 
 enum CDRExampleState {
     CDRExampleStateIncomplete = 0x00,
@@ -17,18 +17,23 @@ typedef enum CDRExampleState CDRExampleState;
   NSString *text_;
   NSObject<CDRExampleParent> *parent_;
   BOOL focused_;
-  NSTimeInterval runTime_;
   NSUInteger stackAddress_;
+  NSDate *startDate_;
+  NSDate *endDate_;
 }
 
 @property (nonatomic, readonly) NSString *text;
 @property (nonatomic, assign) NSObject<CDRExampleParent> *parent;
+@property (nonatomic, assign) CDRSpec *spec;
 @property (nonatomic, assign, getter=isFocused) BOOL focused;
 @property (nonatomic) NSUInteger stackAddress;
+@property (nonatomic, readonly) NSDate *startDate;
+@property (nonatomic, readonly) NSDate *endDate;
 
 - (id)initWithText:(NSString *)text;
 
-- (void)run;
+
+- (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher;
 - (BOOL)shouldRun;
 
 - (BOOL)hasChildren;
@@ -37,10 +42,11 @@ typedef enum CDRExampleState CDRExampleState;
 - (NSString *)message;
 - (NSString *)fullText;
 - (NSMutableArray *)fullTextInPieces;
+
+- (NSTimeInterval)runTime;
+- (CDRExampleState)state;
 @end
 
 @interface CDRExampleBase (RunReporting)
-- (CDRExampleState)state;
-- (NSTimeInterval)runTime;
 - (float)progress;
 @end
