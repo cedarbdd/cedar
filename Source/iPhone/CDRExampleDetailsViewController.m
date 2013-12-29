@@ -63,7 +63,7 @@ static const float TEXT_LABEL_MARGIN = 20.0;
 
 #pragma mark Target actions
 - (void)closeWindow {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 #pragma mark Private interface
