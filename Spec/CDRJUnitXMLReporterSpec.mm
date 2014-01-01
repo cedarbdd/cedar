@@ -51,11 +51,11 @@ using namespace Cedar::Matchers;
 @end
 
 // Allow setting state for testing purposes
-@implementation CDRExample (Spec)
+@interface CDRExample (SpecPrivate)
+- (void)setState:(CDRExampleState)state;
+@end
 
-- (void)setState:(CDRExampleState)state {
-    state_ = state;
-}
+@implementation CDRExample (Spec)
 
 + (id)exampleWithText:(NSString *)text andState:(CDRExampleState)state {
     CDRExample *example = [CDRExample exampleWithText:text andBlock:^{}];
