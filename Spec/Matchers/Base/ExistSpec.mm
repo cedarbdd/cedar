@@ -12,13 +12,13 @@ using namespace Cedar::Matchers;
 
 SPEC_BEGIN(ExistSpec)
 
+NSFileManager *fileManager = [NSFileManager defaultManager];
+NSURL *cacheURL = [fileManager URLsForDirectory:NSCachesDirectory
+                                      inDomains:NSUserDomainMask][0];
 describe(@"exist matcher", ^{
     describe(@"when the actual value is an NSURL *", ^{
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSURL *cacheURL = [fileManager URLsForDirectory:NSCachesDirectory
-                                              inDomains:NSUserDomainMask][0];
-
         __block NSURL *URL;
+
         context(@"pointing to a resource that exists on the filesystem", ^{
             beforeEach(^{
                 URL = [cacheURL URLByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
@@ -70,8 +70,56 @@ describe(@"exist matcher", ^{
         });
     });
 
-    xdescribe(@"when the actual value is an NSString *", ^{});
-});
+    describe(@"when the actual value is an NSString *", ^{
+        __block NSString *path;
 
+        context(@"pointing to a file path that exists", ^{
+            beforeEach(^{
+                path = [cacheURL URLByAppendingPathComponent:[[NSUUID UUID] UUIDString]].path;
+
+                [@"I exist." writeToFile:path
+                              atomically:YES
+                                encoding:NSUTF8StringEncoding
+                                   error:NULL] should be_truthy;
+            });
+
+            it(@"should pass for a file", ^{
+                expect(path).to(exist);
+            });
+
+            it(@"should pass for a directory", ^{
+                cacheURL.path should exist;
+            });
+
+            afterEach(^{
+                [fileManager removeItemAtPath:path error:NULL] should be_truthy;
+            });
+        });
+
+        context(@"pointing to a nonexistent file path", ^{
+            beforeEach(^{
+                path = @"/foo/bar/baz";
+            });
+
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to exist on the local filesystem", path], ^{
+                    expect(path).to(exist);
+                });
+            });
+        });
+
+        context(@"pointing to a non-filesystem resource", ^{
+            beforeEach(^{
+                path = @"http://zombo.com";
+            });
+
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to exist on the local filesystem", path], ^{
+                    expect(path).to(exist);
+                });
+            });
+        });
+    });
+});
 
 SPEC_END
