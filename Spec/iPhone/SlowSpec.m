@@ -1,5 +1,4 @@
 #import "SpecHelper.h"
-#import "unistd.h"
 
 SPEC_BEGIN(SlowSpec)
 

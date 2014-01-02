@@ -33,10 +33,10 @@
 		1F45A3D8180E4796003C1E36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA1A144A81A8000A6A5D /* InfoPlist.strings */; };
 		1F45A3E0180E47E5003C1E36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F956BB2180E07CE00E603A9 /* XCTest.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		1F45A3E3180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A3E2180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m */; };
-		1F882AAA180F9B6300533238 /* ARCBeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* ARCBeNilSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		1F882AAC180FA8D800533238 /* ARCBeSameInstanceAs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* ARCBeSameInstanceAs.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		1FDCD5601821D3BB00B511DB /* ARCBeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* ARCBeNilSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		1FDCD5611821D3BF00B511DB /* ARCBeSameInstanceAs.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* ARCBeSameInstanceAs.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1F882AAA180F9B6300533238 /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1F882AAC180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FDCD5601821D3BB00B511DB /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
 		1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
 		1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
@@ -543,8 +543,8 @@
 		1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCUnitAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F45A3DE180E4797003C1E36 /* XCUnitAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XCUnitAppTests-Info.plist"; sourceTree = "<group>"; };
 		1F45A3E2180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUnitApplicationTestsWithXCTest.m; sourceTree = "<group>"; };
-		1F882AA9180F9B6300533238 /* ARCBeNilSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ARCBeNilSpec.mm; sourceTree = "<group>"; };
-		1F882AAB180FA8D800533238 /* ARCBeSameInstanceAs.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ARCBeSameInstanceAs.mm; sourceTree = "<group>"; };
+		1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeNil_ARCSpec.mm; sourceTree = "<group>"; };
+		1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeSameInstanceAs_ARCSpec.mm; sourceTree = "<group>"; };
 		1F956B96180E07CE00E603A9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1F956B97180E07CE00E603A9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1F956B98180E07CE00E603A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1394,22 +1394,22 @@
 		AEF7301313ECC4AE00786282 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */,
+				1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */,
 				AEF7301413ECC4AE00786282 /* BeCloseToSpec.mm */,
+				AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */,
+				AEF33008145B4E3B002F93BB /* BeGTESpec.mm */,
 				AEF7301513ECC4AE00786282 /* BeInstanceOfSpec.mm */,
+				AEF33012145B6188002F93BB /* BeLessThanSpec.mm */,
+				AEF3301D145B68D7002F93BB /* BeLTESpec.mm */,
 				AEF7301613ECC4AE00786282 /* BeNilSpec.mm */,
 				AEF7301713ECC4AE00786282 /* BeSameInstanceAsSpec.mm */,
 				AEF7301813ECC4AE00786282 /* BeTruthySpec.mm */,
+				5898A53A07BC580786243CD0 /* ConformToSpec.mm */,
 				AEF7301913ECC4AE00786282 /* EqualSpec.mm */,
 				AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */,
-				AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */,
-				AEF33008145B4E3B002F93BB /* BeGTESpec.mm */,
-				AEF33012145B6188002F93BB /* BeLessThanSpec.mm */,
-				AEF3301D145B68D7002F93BB /* BeLTESpec.mm */,
 				AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */,
-				1F882AA9180F9B6300533238 /* ARCBeNilSpec.mm */,
-				1F882AAB180FA8D800533238 /* ARCBeSameInstanceAs.mm */,
 				CA17999217F8A0EE00C38060 /* RespondToSpec.mm */,
-				5898A53A07BC580786243CD0 /* ConformToSpec.mm */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2032,7 +2032,7 @@
 				AEF7302513ECC4AE00786282 /* EqualSpec.mm in Sources */,
 				AEF7302713ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
 				AEF7302C13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
-				1F882AAA180F9B6300533238 /* ARCBeNilSpec.mm in Sources */,
+				1F882AAA180F9B6300533238 /* BeNil_ARCSpec.mm in Sources */,
 				AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
@@ -2050,7 +2050,7 @@
 				AE3E8F39184FEEE900633740 /* ObjectWithCollections.m in Sources */,
 				AE74903215B45EBA008EA127 /* CDRProtocolFakeSpec.mm in Sources */,
 				96C95B7E161339160018606B /* CDRSymbolicatorSpec.mm in Sources */,
-				1F882AAC180FA8D800533238 /* ARCBeSameInstanceAs.mm in Sources */,
+				1F882AAC180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm in Sources */,
 				9672F0A91615C3F40012ED58 /* CDRSpecSpec.mm in Sources */,
 				E32861321604F287001FA77E /* FibonacciCalculator.m in Sources */,
 				96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */,
@@ -2118,7 +2118,7 @@
 				AEEE228011DC2D5200029872 /* CDRExampleSpec.mm in Sources */,
 				AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */,
 				AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */,
-				1FDCD5601821D3BB00B511DB /* ARCBeNilSpec.mm in Sources */,
+				1FDCD5601821D3BB00B511DB /* BeNil_ARCSpec.mm in Sources */,
 				AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */,
 				AEEE228611DC2D5800029872 /* CDRExampleStateMapSpec.mm in Sources */,
 				E4BCFDD31817FA110083ED98 /* ObjectWithProperty.m in Sources */,
@@ -2137,7 +2137,7 @@
 				AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */,
 				AEF7302613ECC4AE00786282 /* EqualSpec.mm in Sources */,
 				AEF7302813ECC4AE00786282 /* MutableEqualSpec.mm in Sources */,
-				1FDCD5611821D3BF00B511DB /* ARCBeSameInstanceAs.mm in Sources */,
+				1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */,
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
