@@ -73,7 +73,7 @@
     } else {
         CDRExampleDetailsViewController * exampleDetailsController = [[CDRExampleDetailsViewController alloc] initWithExample:selectedExample];
         exampleDetailsController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:exampleDetailsController animated:YES];
+        [self presentViewController:exampleDetailsController animated:YES completion:^{}];
         [exampleDetailsController release];
     }
 }
