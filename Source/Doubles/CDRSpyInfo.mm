@@ -60,6 +60,11 @@ static NSMutableSet *currentSpies__;
     BOOL yieldToKVO = (sel_isEqual(selector, @selector(addObserver:forKeyPath:options:context:)) ||
             sel_isEqual(selector, @selector(removeObserver:forKeyPath:)) ||
             sel_isEqual(selector, @selector(removeObserver:forKeyPath:context:)) ||
+            sel_isEqual(selector, @selector(mutableArrayValueForKey:)) ||
+            sel_isEqual(selector, @selector(mutableSetValueForKey:)) ||
+            sel_isEqual(selector, @selector(mutableOrderedSetValueForKey:)) ||
+            sel_isEqual(selector, @selector(willChange:valuesAtIndexes:forKey:)) ||
+            sel_isEqual(selector, @selector(didChange:valuesAtIndexes:forKey:)) ||
             strcmp(class_getName(self.publicClass), class_getName(self.spiedClass)));
     if (yieldToKVO) {
         return NULL;
