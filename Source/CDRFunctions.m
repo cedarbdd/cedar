@@ -6,6 +6,7 @@
 #import "CDRDefaultReporter.h"
 #import "SpecHelper.h"
 #import "CDRFunctions.h"
+#import "CDRReportDispatcher.h"
 
 #pragma mark - Helpers
 
@@ -201,18 +202,15 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
         NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
         CDRMarkFocusedExamplesInSpecs(specs);
 
+        CDRReportDispatcher *dispatcher = [[CDRReportDispatcher alloc] initWithReporters:reporters];
+
         NSArray *groups = CDRRootGroupsFromSpecs(specs);
-        for (id<CDRExampleReporter> reporter in reporters) {
-            [reporter runWillStartWithGroups:groups andRandomSeed:seed];
-        }
+        [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];
 
-        [groups makeObjectsPerformSelector:@selector(run)];
+        [groups makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:dispatcher];
 
-        int result = 0;
-        for (id<CDRExampleReporter> reporter in reporters) {
-            [reporter runDidComplete];
-            result |= [reporter result];
-        }
+        [dispatcher runDidComplete];
+        int result = [dispatcher result];
 
         __gcov_flush();
 

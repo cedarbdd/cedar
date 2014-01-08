@@ -3,10 +3,12 @@
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "SpecHelper.h"
+#import "CDRSpec.h"
 
 @interface CDROTestReporter ()
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSDate *endTime;
+@property (strong, nonatomic) NSDateFormatter *formatter;
 
 @property (strong, nonatomic) NSString *currentSuiteName;
 @property (strong, nonatomic) CDRExampleGroup *currentSuite;
@@ -17,12 +19,34 @@
 
 @implementation CDROTestReporter
 
+- (void)dealloc {
+    self.startTime = nil;
+    self.endTime = nil;
+    self.formatter = nil;
+    self.currentSuiteName = nil;
+    self.currentSuite = nil;
+    self.rootGroups = nil;
+    [super dealloc];
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.formatter = [[[NSDateFormatter alloc] init] autorelease];
+        [self.formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
+    }
+    return self;
+}
+
+#pragma mark - <CDRExampleReporter>
+
 - (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed {
     self.startTime = [NSDate date];
     self.rootGroups = groups;
-    [self startObservingExamples:self.rootGroups];
 
-    [self startSuite:@"All tests" atDate:self.startTime];
+    [self logMessage:[NSString stringWithFormat:@"Cedar Random Seed: %d", seed]];
+
+    [self startSuite:@"Cedar Tests" atDate:self.startTime];
     [self startSuite:[self bundleSuiteName] atDate:self.startTime];
 }
 
@@ -32,11 +56,10 @@
         [self printStatsForExamples:@[self.currentSuite]];
     }
     self.endTime = [NSDate date];
-    [self stopObservingExamples:self.rootGroups];
 
     [self finishSuite:[self bundleSuiteName] atDate:self.endTime];
     [self printStatsForExamples:self.rootGroups];
-    [self finishSuite:@"All tests" atDate:self.endTime];
+    [self finishSuite:@"Cedar Tests" atDate:self.endTime];
     [self printStatsForExamples:self.rootGroups];
 }
 
@@ -48,8 +71,43 @@
     }
 }
 
+#pragma mark Optional Methods
+
+- (void)runWillStartExample:(CDRExample *)example {
+    NSString *testSuite = [self classNameForExample:example];
+    NSString *methodName = [self methodNameForExample:example];
+    [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' started.", testSuite, methodName]];
+}
+
+- (void)runDidFinishExample:(CDRExample *)example {
+    NSString *testSuite = [self classNameForExample:example];
+    NSString *methodName = [self methodNameForExample:example];
+    NSString *status = [self stateNameForExample:example];
+
+    [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' %@ (%.3f seconds).\n",
+                      testSuite, methodName, status, example.runTime]];
+}
+
+- (void)runWillStartSpec:(CDRSpec *)spec {
+    [self startSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
+}
+
+- (void)runDidFinishSpec:(CDRSpec *)spec {
+    [self finishSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
+    [self printStatsForExamples:@[spec.rootGroup]];
+}
+
+#pragma mark - Protected
+
+- (void)logMessage:(NSString *)message {
+    fprintf(stderr, "%s\n", message.UTF8String);
+}
 
 #pragma mark - Private
+
+- (BOOL)shouldReportExample:(CDRExample *)example {
+    return example.state == CDRExampleStateSkipped || example.state == CDRExampleStatePending;
+}
 
 - (NSString *)bundleSuiteName {
     NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
@@ -57,81 +115,62 @@
 }
 
 - (void)startSuite:(NSString *)name atDate:(NSDate *)date {
-    fprintf(stderr, "Test Suite '%s' started at %s\n", name.UTF8String, date.description.UTF8String);
+    NSString *format = [self.formatter stringFromDate:date];
+    [self logMessage:[NSString stringWithFormat:@"Test Suite '%@' started at %@.", name, format]];
 }
 
 - (void)finishSuite:(NSString *)name atDate:(NSDate *)date {
-    fprintf(stderr, "Test Suite '%s' finished at %s.\n", name.UTF8String, date.description.UTF8String);
+    NSString *format = [self.formatter stringFromDate:date];
+    [self logMessage:[NSString stringWithFormat:@"Test Suite '%@' finished at %@.", name, format]];
 }
 
-- (NSString *)methodNameForExample:(CDRExample *)example {
-    NSArray *fullTextPieces = example.fullTextInPieces;
-    NSArray *components = [fullTextPieces subarrayWithRange:NSMakeRange(1, fullTextPieces.count - 1)];
-    NSMutableString *methodName = [[components componentsJoinedByString:@"_"] mutableCopy];
-    [methodName replaceOccurrencesOfString:@" " withString:@"_" options:0 range:NSMakeRange(0, methodName.length)];
+- (NSString *)sanitizedStringFromString:(NSString *)string {
+    NSMutableString *mutableString = [string mutableCopy];
+    [mutableString replaceOccurrencesOfString:@" " withString:@"_" options:0 range:NSMakeRange(0, mutableString.length)];
 
     NSMutableCharacterSet *allowedCharacterSet = [[NSCharacterSet alphanumericCharacterSet] mutableCopy];
     [allowedCharacterSet addCharactersInString:@"_"];
 
-    for (NSUInteger i=0; i<methodName.length; i++) {
-        if (![allowedCharacterSet characterIsMember:[methodName characterAtIndex:i]]) {
-            [methodName deleteCharactersInRange:NSMakeRange(i, 1)];
+    for (NSUInteger i=0; i<mutableString.length; i++) {
+        if (![allowedCharacterSet characterIsMember:[mutableString characterAtIndex:i]]) {
+            [mutableString deleteCharactersInRange:NSMakeRange(i, 1)];
             i--;
         }
     }
-
-    return methodName;
+    return mutableString;
 }
 
-- (void)reportOnExample:(CDRExample *)example {
-    NSString *testSuite = [NSString stringWithFormat:@"%@Spec", [example.fullTextInPieces objectAtIndex:0]];
-    NSString *methodName = [self methodNameForExample:example];
+- (NSString *)classNameForExample:(CDRExample *)example {
+    NSString *className = NSStringFromClass([example.spec class]);
+    return [self sanitizedStringFromString:className];
+}
 
-    NSString *status = nil;
-    NSString *errorMessage = nil;
+- (NSString *)methodNameForExample:(CDRExample *)example {
+    NSMutableArray *fullTextPieces = [example.fullTextInPieces mutableCopy];
+    NSString *specClassName = [self classNameForExample:example];
+    NSString *firstPieceWithSpecPostfix = [NSString stringWithFormat:@"%@Spec", [fullTextPieces objectAtIndex:0]];
+    if ([firstPieceWithSpecPostfix isEqual:specClassName]) {
+        [fullTextPieces removeObjectAtIndex:0];
+    }
 
+    NSString *methodName = [fullTextPieces componentsJoinedByString:@"_"];
+    return [self sanitizedStringFromString:methodName];
+}
+
+- (NSString *)stateNameForExample:(CDRExample *)example {
     switch (example.state) {
         case CDRExampleStatePassed:
-            status = @"passed";
-            break;
+            return @"passed";
         case CDRExampleStatePending:
-            status = @"pending";
-            break;
+            return @"pending";
         case CDRExampleStateSkipped:
-            status = @"skipped";
-            break;
+            return @"skipped";
         case CDRExampleStateFailed:
         case CDRExampleStateError:
-            ++self.failedCount;
-            status = @"failed";
-            errorMessage = [self recordFailedExample:example
-                                           suiteName:testSuite
-                                            caseName:methodName];
-            break;
-        default:
-            break;
+            return @"failed";
+        case CDRExampleStateIncomplete:
+            return @"incomplete";
     }
-
-    if (![self.currentSuiteName isEqual:testSuite]) {
-        if (self.currentSuiteName) {
-            [self finishSuite:self.currentSuiteName atDate:[NSDate date]];
-            [self printStatsForExamples:@[self.currentSuite]];
-        }
-
-        NSDate *startTime = [NSDate dateWithTimeIntervalSinceNow:-example.runTime];
-        [self startSuite:testSuite atDate:startTime];
-    }
-
-    fprintf(stderr, "Test Case '-[%s %s]' started.\n", testSuite.UTF8String, methodName.UTF8String);
-
-    if (errorMessage){
-        fprintf(stderr, "%s\n", errorMessage.UTF8String);
-    }
-    fprintf(stderr, "Test Case '-[%s %s]' %s (%.3f seconds).\n",
-            testSuite.UTF8String, methodName.UTF8String, status.UTF8String, example.runTime);
-
-    self.currentSuiteName = testSuite;
-    self.currentSuite = (CDRExampleGroup *)example.parent;
 }
 
 - (NSString *)recordFailedExample:(CDRExample *)example
@@ -154,11 +193,12 @@
     const char *failuresString = (failed == 1 ? "failure" : "failures");
     float totalTimeElapsed = [self.endTime timeIntervalSinceDate:self.startTime];
 
-    fprintf(stderr, "Executed %lu %s, with %lu %s (%lu unexpected) in %.4f (%.4f) seconds\n",
-            (unsigned long)count, testsString,
-            (unsigned long)failed, failuresString,
-            (unsigned long)unexpected,
-            totalTimeElapsed, totalTimeElapsed);
+    [self logMessage:[NSString stringWithFormat:
+                      @"Executed %lu %s, with %lu %s (%lu unexpected) in %.4f (%.4f) seconds",
+                      (unsigned long)count, testsString,
+                      (unsigned long)failed, failuresString,
+                      (unsigned long)unexpected,
+                      totalTimeElapsed, totalTimeElapsed]];
 }
 
 - (NSDictionary *)statsForExamples:(NSArray *)examples {
@@ -184,33 +224,6 @@
             [NSNumber numberWithUnsignedInteger:count], @"count",
             [NSNumber numberWithUnsignedInteger:unexpected], @"unexpected",
             [NSNumber numberWithUnsignedInteger:failed], @"failed", nil];
-}
-
-
-- (void)startObservingExamples:(NSArray *)examples {
-    for (id example in examples) {
-        if (![example hasChildren]) {
-            [example addObserver:self forKeyPath:@"state" options:0 context:NULL];
-        } else {
-            [self startObservingExamples:[example examples]];
-        }
-    }
-}
-
-- (void)stopObservingExamples:(NSArray *)examples {
-    for (id example in examples) {
-        if (![example hasChildren]) {
-            [example removeObserver:self forKeyPath:@"state"];
-        } else {
-            [self stopObservingExamples:[example examples]];
-        }
-    }
-}
-
-#pragma mark KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self reportOnExample:object];
 }
 
 @end
