@@ -50,6 +50,9 @@ const CDRSpecBlock PENDING = nil;
     }
 }
 
+- (BOOL)isPending {
+    return block_ == nil;
+}
 
 - (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher {
     startDate_ = [[NSDate alloc] init];
@@ -57,7 +60,9 @@ const CDRSpecBlock PENDING = nil;
 
     if (!self.shouldRun) {
         self.state = CDRExampleStateSkipped;
-    } else if (block_) {
+    } else if (self.isPending) {
+        self.state = CDRExampleStatePending;
+    } else {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         @try {
             [parent_ setUp];
@@ -81,8 +86,6 @@ const CDRSpecBlock PENDING = nil;
             }
         }
         [pool drain];
-    } else {
-        self.state = CDRExampleStatePending;
     }
     endDate_ = [[NSDate alloc] init];
 

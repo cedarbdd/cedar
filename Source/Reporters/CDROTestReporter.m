@@ -4,11 +4,13 @@
 #import "CDRExampleGroup.h"
 #import "SpecHelper.h"
 #import "CDRSpec.h"
+#import "CDROTestNamer.h"
 
 @interface CDROTestReporter ()
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSDate *endTime;
 @property (strong, nonatomic) NSDateFormatter *formatter;
+@property (strong, nonatomic) CDROTestNamer *namer;
 
 @property (strong, nonatomic) NSString *currentSuiteName;
 @property (strong, nonatomic) CDRExampleGroup *currentSuite;
@@ -26,6 +28,7 @@
     self.currentSuiteName = nil;
     self.currentSuite = nil;
     self.rootGroups = nil;
+    self.namer = nil;
     [super dealloc];
 }
 
@@ -34,6 +37,7 @@
     if (self) {
         self.formatter = [[[NSDateFormatter alloc] init] autorelease];
         [self.formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
+        self.namer = [[CDROTestNamer alloc] init];
     }
     return self;
 }
@@ -46,7 +50,7 @@
 
     [self logMessage:[NSString stringWithFormat:@"Cedar Random Seed: %d", seed]];
 
-    [self startSuite:@"Cedar Tests" atDate:self.startTime];
+    [self startSuite:[self rootSuiteName] atDate:self.startTime];
     [self startSuite:[self bundleSuiteName] atDate:self.startTime];
 }
 
@@ -59,12 +63,12 @@
 
     [self finishSuite:[self bundleSuiteName] atDate:self.endTime];
     [self printStatsForExamples:self.rootGroups];
-    [self finishSuite:@"Cedar Tests" atDate:self.endTime];
+    [self finishSuite:[self rootSuiteName] atDate:self.endTime];
     [self printStatsForExamples:self.rootGroups];
 }
 
 - (int)result {
-    if ([SpecHelper specHelper].shouldOnlyRunFocused || self.failedCount) {
+    if ([self isFocused] || self.failedCount) {
         return 1;
     } else {
         return 0;
@@ -74,27 +78,34 @@
 #pragma mark Optional Methods
 
 - (void)runWillStartExample:(CDRExample *)example {
-    NSString *testSuite = [self classNameForExample:example];
-    NSString *methodName = [self methodNameForExample:example];
-    [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' started.", testSuite, methodName]];
+    if ([self shouldReportExample:example]) {
+        NSString *testSuite = [self.namer classNameForExample:example];
+        NSString *methodName = [self.namer methodNameForExample:example];
+        [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' started.", testSuite, methodName]];
+    }
 }
 
 - (void)runDidFinishExample:(CDRExample *)example {
-    NSString *testSuite = [self classNameForExample:example];
-    NSString *methodName = [self methodNameForExample:example];
-    NSString *status = [self stateNameForExample:example];
-
-    [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' %@ (%.3f seconds).\n",
-                      testSuite, methodName, status, example.runTime]];
+    if ([self shouldReportExample:example]) {
+        NSString *testSuite = [self.namer classNameForExample:example];
+        NSString *methodName = [self.namer methodNameForExample:example];
+        NSString *status = [self stateNameForExample:example];
+        [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' %@ (%.3f seconds).\n",
+                          testSuite, methodName, status, example.runTime]];
+    }
 }
 
 - (void)runWillStartSpec:(CDRSpec *)spec {
-    [self startSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
+    if ([self shouldReportSpec:spec]){
+        [self startSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
+    }
 }
 
 - (void)runDidFinishSpec:(CDRSpec *)spec {
-    [self finishSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
-    [self printStatsForExamples:@[spec.rootGroup]];
+    if ([self shouldReportSpec:spec]) {
+        [self finishSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
+        [self printStatsForExamples:@[spec.rootGroup]];
+    }
 }
 
 #pragma mark - Protected
@@ -105,8 +116,21 @@
 
 #pragma mark - Private
 
+- (BOOL)isFocused {
+    return [SpecHelper specHelper].shouldOnlyRunFocused;
+}
+
+- (NSString *)rootSuiteName {
+    return [self isFocused] ? @"Multiple Selected Tests" : @"All tests";
+}
+
 - (BOOL)shouldReportExample:(CDRExample *)example {
-    return example.state == CDRExampleStateSkipped || example.state == CDRExampleStatePending;
+    BOOL isNotSkippedOrPending = !example.shouldRun || !example.isPending;
+    return isNotSkippedOrPending && (![self isFocused] || example.isFocused);
+}
+
+- (BOOL)shouldReportSpec:(CDRSpec *)spec {
+    return ![self isFocused] || spec.rootGroup.hasFocusedExamples;
 }
 
 - (NSString *)bundleSuiteName {
@@ -124,52 +148,17 @@
     [self logMessage:[NSString stringWithFormat:@"Test Suite '%@' finished at %@.", name, format]];
 }
 
-- (NSString *)sanitizedStringFromString:(NSString *)string {
-    NSMutableString *mutableString = [string mutableCopy];
-    [mutableString replaceOccurrencesOfString:@" " withString:@"_" options:0 range:NSMakeRange(0, mutableString.length)];
-
-    NSMutableCharacterSet *allowedCharacterSet = [[NSCharacterSet alphanumericCharacterSet] mutableCopy];
-    [allowedCharacterSet addCharactersInString:@"_"];
-
-    for (NSUInteger i=0; i<mutableString.length; i++) {
-        if (![allowedCharacterSet characterIsMember:[mutableString characterAtIndex:i]]) {
-            [mutableString deleteCharactersInRange:NSMakeRange(i, 1)];
-            i--;
-        }
-    }
-    return mutableString;
-}
-
-- (NSString *)classNameForExample:(CDRExample *)example {
-    NSString *className = NSStringFromClass([example.spec class]);
-    return [self sanitizedStringFromString:className];
-}
-
-- (NSString *)methodNameForExample:(CDRExample *)example {
-    NSMutableArray *fullTextPieces = [example.fullTextInPieces mutableCopy];
-    NSString *specClassName = [self classNameForExample:example];
-    NSString *firstPieceWithSpecPostfix = [NSString stringWithFormat:@"%@Spec", [fullTextPieces objectAtIndex:0]];
-    if ([firstPieceWithSpecPostfix isEqual:specClassName]) {
-        [fullTextPieces removeObjectAtIndex:0];
-    }
-
-    NSString *methodName = [fullTextPieces componentsJoinedByString:@"_"];
-    return [self sanitizedStringFromString:methodName];
-}
-
 - (NSString *)stateNameForExample:(CDRExample *)example {
     switch (example.state) {
         case CDRExampleStatePassed:
             return @"passed";
-        case CDRExampleStatePending:
-            return @"pending";
-        case CDRExampleStateSkipped:
-            return @"skipped";
         case CDRExampleStateFailed:
         case CDRExampleStateError:
             return @"failed";
+        case CDRExampleStatePending:
+        case CDRExampleStateSkipped:
         case CDRExampleStateIncomplete:
-            return @"incomplete";
+            return nil;
     }
 }
 
@@ -208,7 +197,7 @@
     for (id example in examples) {
         if (![example hasChildren]) {
             if (![example isKindOfClass:[CDRExampleGroup class]]) {
-                ++count;
+                count += ([self stateNameForExample:example] != nil);
                 CDRExampleState state = ((CDRExample *)example).state;
                 unexpected += (state == CDRExampleStateError);
                 failed += (state == CDRExampleStateFailed);
