@@ -7,8 +7,8 @@
 
 @interface CDRProtocolFake : CDRFake
 
-- (id)initWithClass:(Class)klass forProtocol:(Protocol *)protocol requireExplicitStubs:(BOOL)requireExplicitStubs;
+- (id)initWithClass:(Class)klass forProtocols:(NSArray *)protocols requireExplicitStubs:(BOOL)requireExplicitStubs;
 
 @end
 
-id CDR_fake_for(Protocol *protocol, BOOL require_explicit_stubs = YES);
+id CDR_fake_for(BOOL require_explicit_stubs, Protocol *protocol, ...);
