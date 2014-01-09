@@ -19,7 +19,7 @@ XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Preferences/appCode20/templates"
 
-SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "6.1"
+SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "7.0"
 SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || SDK_VERSION
 
 PROJECT_ROOT = File.dirname(__FILE__)
