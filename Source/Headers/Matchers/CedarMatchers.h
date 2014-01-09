@@ -17,6 +17,9 @@
 #import "BeEmpty.h"
 #import "Contain.h"
 
+// Verifiers
+#import "Exist.h"
+
 #ifdef CEDAR_CUSTOM_MATCHERS
 #import CEDAR_CUSTOM_MATCHERS
 #endif

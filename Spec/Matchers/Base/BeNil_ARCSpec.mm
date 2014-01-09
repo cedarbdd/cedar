@@ -10,7 +10,7 @@ extern "C" {
 
 using namespace Cedar::Matchers;
 
-SPEC_BEGIN(ARCBeNilSpec)
+SPEC_BEGIN(BeNil_ARCSpec)
 
 describe(@"be_nil matcher (under ARC)", ^{
     describe(@"when the value is a pointer to a built-in type", ^{

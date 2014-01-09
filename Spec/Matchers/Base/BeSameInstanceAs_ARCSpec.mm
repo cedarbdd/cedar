@@ -10,7 +10,7 @@ extern "C" {
 
 using namespace Cedar::Matchers;
 
-SPEC_BEGIN(ARCBeSameInstanceAsSpec)
+SPEC_BEGIN(BeSameInstanceAs_ARCSpec)
 
 describe(@"be_same_instance_as matcher (under ARC)", ^{
     describe(@"when the actual value is not a pointer", ^{
