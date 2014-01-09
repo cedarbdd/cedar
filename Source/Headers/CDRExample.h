@@ -11,5 +11,6 @@
 
 + (id)exampleWithText:(NSString *)text andBlock:(CDRSpecBlock)block;
 - (id)initWithText:(NSString *)text andBlock:(CDRSpecBlock)block;
+- (BOOL)isPending;
 
 @end
