@@ -1,6 +1,7 @@
 // Base
 #import "Equal.h"
 #import "BeTruthy.h"
+#import "BeFalsy.h"
 #import "BeNil.h"
 #import "BeCloseTo.h"
 #import "BeSameInstanceAs.h"
