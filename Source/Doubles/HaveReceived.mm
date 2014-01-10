@@ -1,5 +1,7 @@
 #import "HaveReceived.h"
 #import "CedarDouble.h"
+#import "NSInvocation+Cedar.h"
+#import "MethodStringifierHelper.h"
 #import <objc/runtime.h>
 
 namespace Cedar { namespace Doubles {
@@ -35,20 +37,25 @@ namespace Cedar { namespace Doubles {
 
 #pragma mark - Protected interface
     /*virtual*/ NSString * HaveReceived::failure_message_end() const {
-        NSString * selectorString = NSStringFromSelector(this->selector());
-        NSMutableString *message = [NSMutableString stringWithFormat:@"have received message <%@>", selectorString];
-        if (this->arguments().size()) {
-            [message appendString:@", with arguments: <"];
-            arguments_vector_t::const_iterator cit = this->arguments().begin();
-            [message appendString:(*cit++)->value_string()];
-            for (; cit != this->arguments().end(); ++cit) {
-                [message appendString:[NSString stringWithFormat:@", %@", (*cit)->value_string()]];
+        NSMutableArray *arguments = [NSMutableArray array];
+        arguments_vector_t::const_iterator cit = this->arguments().begin();
+        for (; cit != this->arguments().end(); ++cit) {
+            NSString *value = (*cit)->value_string();
+            [arguments addObject:value];
+        }
+        NSString *methodSignatureString = Cedar::Matchers::Stringifiers::string_for_method_invocation(this->selector(), arguments);
+        return [NSString stringWithFormat:@"have received message [%@]", methodSignatureString];
+    }
+    /*virtual*/ NSString * HaveReceived::failure_message_end(id<CedarDouble> cedarDouble) const {
+        NSMutableString *message = [this->failure_message_end() mutableCopy];
+        if ([cedarDouble sent_messages].count) {
+            [message appendString:@", but received:\n"];
+            for (NSInvocation *invocation in [cedarDouble sent_messages]) {
+                [message appendFormat:@" [%@]\n", Cedar::Matchers::Stringifiers::string_for_method_invocation(invocation)];
             }
-            [message appendString:@">"];
         }
         return message;
     }
-
 
 #pragma mark -
     HaveReceived have_received(const SEL expectedSelector) {

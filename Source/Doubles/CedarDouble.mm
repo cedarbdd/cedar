@@ -5,9 +5,13 @@
 
 namespace Cedar { namespace Doubles {
 
-    id<CedarDouble> operator,(id instance, const MethodStubbingMarker & marker) {
+    bool isCedarDouble(id instance) {
         Class clazz = object_getClass(instance);
-        if (![clazz conformsToProtocol:@protocol(CedarDouble)]) {
+        return ![NSStringFromClass(clazz) isEqual:@"ClassWithoutDescriptionMethod"] && [clazz conformsToProtocol:@protocol(CedarDouble)];
+    }
+
+    id<CedarDouble> operator,(id instance, const MethodStubbingMarker & marker) {
+        if (!isCedarDouble(instance)) {
             [[NSException exceptionWithName:NSInternalInconsistencyException
                                      reason:[NSString stringWithFormat:@"%@ is not a double", instance]
                                    userInfo:nil]

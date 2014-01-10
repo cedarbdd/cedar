@@ -23,6 +23,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1F0E45D9187FD64100779430 /* MethodStringifierHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E45D8187FD64100779430 /* MethodStringifierHelper.mm */; };
+		1F0E45DA187FD64100779430 /* MethodStringifierHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E45D8187FD64100779430 /* MethodStringifierHelper.mm */; };
+		1F0E45DF187FD6A200779430 /* MethodStringifierHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E45DE187FD6A200779430 /* MethodStringifierHelper.h */; };
+		1F0E45E0187FD6A200779430 /* MethodStringifierHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E45DE187FD6A200779430 /* MethodStringifierHelper.h */; };
 		1F4251DE180E0CB200FC578B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4251DC180E0CA200FC578B /* SenTestingKit.framework */; };
 		1F45A3CE180E4796003C1E36 /* OCUnitApplicationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96D34483144A845100352C4A /* OCUnitApplicationTests.mm */; };
 		1F45A3D0180E4796003C1E36 /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
@@ -35,6 +39,8 @@
 		1F45A3E3180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A3E2180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m */; };
 		1F882AAA180F9B6300533238 /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1F882AAC180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FA617AE187EA71B00ABCE11 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FA617AC187EA71B00ABCE11 /* Base.mm */; };
+		1FA617AF187EA71B00ABCE11 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FA617AC187EA71B00ABCE11 /* Base.mm */; };
 		1FDCD5601821D3BB00B511DB /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
@@ -544,6 +550,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F0E45D8187FD64100779430 /* MethodStringifierHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MethodStringifierHelper.mm; sourceTree = "<group>"; };
+		1F0E45DE187FD6A200779430 /* MethodStringifierHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodStringifierHelper.h; sourceTree = "<group>"; };
 		1F4251DC180E0CA200FC578B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCUnitAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F45A3DE180E4797003C1E36 /* XCUnitAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XCUnitAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -554,6 +562,7 @@
 		1F956B97180E07CE00E603A9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1F956B98180E07CE00E603A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1F956BB2180E07CE00E603A9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1FA617AC187EA71B00ABCE11 /* Base.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Base.mm; sourceTree = "<group>"; };
 		2234907C18009DA6001C8E8D /* CDRHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRHooks.h; sourceTree = "<group>"; };
 		228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpyiOSSpec.mm; sourceTree = "<group>"; };
 		22FB7B4016ACBA5900012D69 /* HeadlessSimulatorWorkaround.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadlessSimulatorWorkaround.h; sourceTree = "<group>"; };
@@ -1047,6 +1056,7 @@
 			isa = PBXGroup;
 			children = (
 				AE02021717452006009A7915 /* StringifiersBase.mm */,
+				1F0E45D8187FD64100779430 /* MethodStringifierHelper.mm */,
 			);
 			path = Stringifiers;
 			sourceTree = "<group>";
@@ -1103,6 +1113,7 @@
 				AED23E69173D5545003D7A41 /* BeCloseTo.mm */,
 				CA17998F17F89C9700C38060 /* RespondTo.mm */,
 				5898AADDDCB0B204C88D1199 /* ConformTo.mm */,
+				1FA617AC187EA71B00ABCE11 /* Base.mm */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1437,6 +1448,7 @@
 			children = (
 				AEF7303813ECCB7B00786282 /* StringifiersBase.h */,
 				AEF7303913ECCB7B00786282 /* StringifiersContainer.h */,
+				1F0E45DE187FD6A200779430 /* MethodStringifierHelper.h */,
 			);
 			path = Stringifiers;
 			sourceTree = "<group>";
@@ -1513,6 +1525,7 @@
 				2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */,
 				AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */,
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
+				1F0E45DF187FD6A200779430 /* MethodStringifierHelper.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
 				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
@@ -1559,6 +1572,7 @@
 			files = (
 				AEC9DEEF12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
 				42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */,
+				1F0E45E0187FD6A200779430 /* MethodStringifierHelper.h in Headers */,
 				96EA1CAF142C6449001A78E0 /* CDROTestReporter.h in Headers */,
 				968BA92F143485F800EA40B3 /* CDROTestIPhoneRunner.h in Headers */,
 				9637852F1491D84F0059C9F6 /* CDROTestHelper.h in Headers */,
@@ -1984,6 +1998,7 @@
 				AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */,
 				AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */,
 				AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */,
+				1FA617AE187EA71B00ABCE11 /* Base.mm in Sources */,
 				AEEE1FF611DC27B800029872 /* CDRExampleGroup.m in Sources */,
 				AEEE1FF711DC27B800029872 /* CDRFunctions.m in Sources */,
 				AEEE1FF811DC27B800029872 /* CDRSpec.m in Sources */,
@@ -2001,6 +2016,7 @@
 				AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
 				AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */,
 				AE74906F15B48690008EA127 /* CDRProtocolFake.mm in Sources */,
+				1F0E45D9187FD64100779430 /* MethodStringifierHelper.mm in Sources */,
 				AE74907115B486CD008EA127 /* CDRFake.mm in Sources */,
 				AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */,
@@ -2095,6 +2111,7 @@
 				AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */,
 				AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 				4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
+				1F0E45DA187FD64100779430 /* MethodStringifierHelper.mm in Sources */,
 				96EA1CA9142C6425001A78E0 /* CDROTestReporter.m in Sources */,
 				960118BC1434867E00825FFF /* CDROTestIPhoneRunner.m in Sources */,
 				9637852C1491D6D40059C9F6 /* CDROTestHelper.m in Sources */,
@@ -2102,6 +2119,7 @@
 				6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */,
 				AE9AA68615AB7A8700617E1A /* CDRClassFake.mm in Sources */,
 				AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
+				1FA617AF187EA71B00ABCE11 /* Base.mm in Sources */,
 				AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */,
 				AE74907215B486CD008EA127 /* CDRFake.mm in Sources */,
 				AE74907715B493C4008EA127 /* CDRProtocolFake.mm in Sources */,

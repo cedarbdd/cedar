@@ -11,6 +11,12 @@ using namespace Cedar::Doubles::Arguments;
 
 SPEC_BEGIN(HaveReceivedSpec)
 
+NSString *expectedNonDoubleFormat = @"Received expectation for non-double object <%@>";
+NSString *expectedNotHaveReceivedWithHistoryFormat = @"Expected <%@> to not have received message [%@%@], but received:\n%@";
+NSString *expectedHaveReceivedWithHistoryFormat = @"Expected <%@> to have received message [%@%@], but received:\n%@";
+NSString *expectedHaveReceivedWithoutHistoryFormat = @"Expected <%@> to have received message [%@%@]";
+NSString *expectedArgumentsMismatchFormat = @"Wrong number of expected parameters for <%@>; expected: %d, actual: %d";
+
 describe(@"have_received matcher", ^{
     __block SimpleIncrementer *incrementer;
 
@@ -25,7 +31,7 @@ describe(@"have_received matcher", ^{
         });
 
         it(@"should raise a descriptive exception", ^{
-            expectExceptionWithReason([NSString stringWithFormat:@"Received expectation for non-double object <%@>", incrementer], ^{
+            expectExceptionWithReason([NSString stringWithFormat:expectedNonDoubleFormat, incrementer], ^{
                 incrementer should have_received("increment");
             });
         });
@@ -37,7 +43,7 @@ describe(@"have_received matcher", ^{
         });
 
         it(@"should raise a descriptive exception", ^{
-            expectExceptionWithReason([NSString stringWithFormat:@"Received expectation for non-double object <%@>", incrementer], ^{
+            expectExceptionWithReason([NSString stringWithFormat:expectedNonDoubleFormat, incrementer], ^{
                 incrementer should have_received("increment");
             });
         });
@@ -49,12 +55,15 @@ describe(@"have_received matcher", ^{
         context(@"with a parameter expectation", ^{
             it(@"should raise an exception due to an invalid expectation", ^{
                 NSString *methodString = NSStringFromSelector(method);
-                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: 1, actual: 0", methodString];
+                NSString *reason = [NSString stringWithFormat:expectedArgumentsMismatchFormat, methodString, 1, 0];
                 ^{ expect(incrementer).to(have_received(method).with(anything)); } should raise_exception.with_reason(reason);
             });
         });
 
         context(@"which has been called", ^{
+            NSString *expectedInvocationHistory = (@" [increment]\n"
+                                                   @" [value]\n"
+                                                   @" [setValue:1]\n");
             beforeEach(^{
                 [incrementer increment];
             });
@@ -68,11 +77,11 @@ describe(@"have_received matcher", ^{
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @"", expectedInvocationHistory], ^{
                         expect(incrementer).to_not(have_received(method));
                     });
 
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @"", expectedInvocationHistory], ^{
                         expect(incrementer).to_not(have_received("increment"));
                     });
                 });
@@ -82,11 +91,47 @@ describe(@"have_received matcher", ^{
         context(@"which has not been called", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), @""], ^{
                         expect(incrementer).to(have_received(method));
                     });
 
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), @""], ^{
+                        expect(incrementer).to(have_received("increment"));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    expect(incrementer).to_not(have_received(method));
+                    expect(incrementer).to_not(have_received("increment"));
+                });
+            });
+        });
+
+        context(@"which has not been called, but other methods were called", ^{
+            NSString *expectedInvocationHistory = (@" [incrementBy:1]\n"
+                                                   @" [value]\n"
+                                                   @" [setValue:1]\n"
+                                                   @" [incrementByNumber:2]\n"
+                                                   @" [value]\n"
+                                                   @" [setValue:3]\n"
+                                                   @" [incrementByInteger:3]\n"
+                                                   @" [value]\n"
+                                                   @" [setValue:6]\n");
+            beforeEach(^{
+                [incrementer incrementBy:1];
+                [incrementer incrementByNumber:@2];
+                [incrementer incrementByInteger:3];
+            });
+
+            describe(@"positive match", ^{
+                it(@"should fail with all the recorded method calls", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, @"increment", @"", expectedInvocationHistory], ^{
+                        expect(incrementer).to(have_received(method));
+                    });
+
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, @"increment", @"", expectedInvocationHistory], ^{
                         expect(incrementer).to(have_received("increment"));
                     });
                 });
@@ -114,6 +159,9 @@ describe(@"have_received matcher", ^{
 
         context(@"which has been called", ^{
             int actualParameter = 2;
+            NSString *expectedInvocationHistory = (@" [incrementBy:2]\n"
+                                                   @" [value]\n"
+                                                   @" [setValue:2]\n");
 
             beforeEach(^{
                 [incrementer incrementBy:actualParameter];
@@ -129,11 +177,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @"", expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received(method));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @"", expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received("incrementBy:"));
                         });
                     });
@@ -152,11 +200,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @(expectedParameter), expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received(method).with(expectedParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @(expectedParameter), expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received("incrementBy:").with(expectedParameter));
                         });
                     });
@@ -168,11 +216,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%d>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @(expectedParameter), expectedInvocationHistory], ^{
                             expect(incrementer).to(have_received(method).with(expectedParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%d>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @(expectedParameter), expectedInvocationHistory], ^{
                             expect(incrementer).to(have_received("incrementBy:").with(expectedParameter));
                         });
                     });
@@ -192,11 +240,11 @@ describe(@"have_received matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%ld>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), @(expectedParameter)], ^{
                         expect(incrementer).to(have_received(method).with(expectedParameter));
                     });
 
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%ld>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), @(expectedParameter)], ^{
                         expect(incrementer).to(have_received("incrementBy:").with(expectedParameter));
                     });
                 });
@@ -216,6 +264,9 @@ describe(@"have_received matcher", ^{
         id actualParameter = [NSNumber numberWithInt:3];
 
         context(@"which has been called", ^{
+            NSString *expectedInvocationHistory = (@" [incrementByNumber:3]\n"
+                                                   @" [value]\n"
+                                                   @" [setValue:3]\n");
             beforeEach(^{
                 [incrementer incrementByNumber:actualParameter];
             });
@@ -230,11 +281,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @"", expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received(method));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), @"", expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received("incrementByNumber:"));
                         });
                     });
@@ -253,11 +304,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), expectedParameter, expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received(method).with(expectedParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), expectedParameter, expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received("incrementByNumber:").with(expectedParameter));
                         });
                     });
@@ -269,11 +320,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), expectedParameter, expectedInvocationHistory], ^{
                             expect(incrementer).to(have_received(method).with(expectedParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, NSStringFromSelector(method), expectedParameter, expectedInvocationHistory], ^{
                             expect(incrementer).to(have_received("incrementByNumber:").with(expectedParameter));
                         });
                     });
@@ -293,11 +344,11 @@ describe(@"have_received matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), expectedParameter], ^{
                         expect(incrementer).to(have_received(method).with(expectedParameter));
                     });
 
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), expectedParameter], ^{
                         expect(incrementer).to(have_received("incrementByNumber:").with(expectedParameter));
                     });
                 });
@@ -320,12 +371,15 @@ describe(@"have_received matcher", ^{
         context(@"with too few parameter expectations", ^{
             it(@"should raise an exception due to an invalid expectation", ^{
                 NSString *methodName = NSStringFromSelector(method);
-                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: 1, actual: 2", methodName];
+                NSString *reason = [NSString stringWithFormat:expectedArgumentsMismatchFormat, methodName, 1, 2];
                 ^{ expect(incrementer).to(have_received(method).with(anything)); } should raise_exception.with_reason(reason);
             });
         });
 
         context(@"which has been called", ^{
+            NSString *expectedInvocationHistory = (@" [incrementByABit:83 andABitMore:32]\n"
+                                                   @" [value]\n"
+                                                   @" [setValue:115]\n");
             beforeEach(^{
                 [incrementer incrementByABit:actualFirstParameter andABitMore:actualSecondParameter];
             });
@@ -343,11 +397,11 @@ describe(@"have_received matcher", ^{
 
                 describe(@"negative match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, [NSString stringWithFormat:@"incrementByABit:%d andABitMore:%@", expectedFirstParameter, expectedSecondParameter], @"", expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, with arguments: <%d, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedNotHaveReceivedWithHistoryFormat, incrementer, [NSString stringWithFormat:@"incrementByABit:%d andABitMore:%@", expectedFirstParameter, expectedSecondParameter], @"", expectedInvocationHistory], ^{
                             expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                         });
                     });
@@ -355,16 +409,16 @@ describe(@"have_received matcher", ^{
             });
 
             context(@"with an incorrect parameter expectation", ^{
-                unsigned long long expectedFirstParameter = actualFirstParameter;
+                int expectedFirstParameter = actualFirstParameter;
                 NSObject * expectedSecondParameter = [NSNumber numberWithFloat:[actualSecondParameter floatValue] + 0.6];
 
                 describe(@"positive match", ^{
                     it(@"should fail with a sensible failure message", ^{
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, [NSString stringWithFormat:@"incrementByABit:%d andABitMore:%@", expectedFirstParameter, expectedSecondParameter], @"", expectedInvocationHistory], ^{
                             expect(incrementer).to(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
                         });
 
-                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%llu, %@>", incrementer, NSStringFromSelector(method), expectedFirstParameter, expectedSecondParameter], ^{
+                        expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithHistoryFormat, incrementer, [NSString stringWithFormat:@"incrementByABit:%d andABitMore:%@", expectedFirstParameter, expectedSecondParameter], @"", expectedInvocationHistory], ^{
                             expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                         });
                     });
@@ -382,11 +436,11 @@ describe(@"have_received matcher", ^{
         context(@"which has not been called", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), @""], ^{
                         expect(incrementer).to(have_received(method));
                     });
 
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>", incrementer, NSStringFromSelector(method)], ^{
+                    expectFailureWithMessage([NSString stringWithFormat:expectedHaveReceivedWithoutHistoryFormat, incrementer, NSStringFromSelector(method), @""], ^{
                         expect(incrementer).to(have_received("incrementByABit:andABitMore:"));
                     });
                 });
