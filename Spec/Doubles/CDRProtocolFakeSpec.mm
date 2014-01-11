@@ -138,6 +138,20 @@ describe(@"fake (protocol)", ^{
                 nice_fake should have_received(@selector(whatIfIIncrementedBy:)).with(7);
             });
         });
+        
+        describe(@"rejecting an optional method", ^{
+            beforeEach(^{
+                nice_fake reject_method(@selector(whatIfIIncrementedBy:));
+            });
+
+            it(@"should not respond to the method's selector", ^{
+                nice_fake should_not respond_to(@selector(whatIfIIncrementedBy:));
+            });
+            
+            it(@"should raise a helpful exception when the method is called", ^{
+                ^{ [nice_fake whatIfIIncrementedBy:1]; } should raise_exception.with_reason(@"Received message with explicitly rejected selector <whatIfIIncrementedBy:>");
+            });
+        });
     });
 
     describe(@"fake_for(Protocol, Protocol, ...)", ^{

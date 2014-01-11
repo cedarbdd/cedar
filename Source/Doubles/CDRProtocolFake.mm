@@ -60,6 +60,16 @@ static bool CDR_protocol_hasSelector(Protocol *protocol, SEL selector) {
     return NO;
 }
 
+- (void)doesNotRecognizeSelector:(SEL)selector {
+    if ([self has_rejected_method_for:selector]) {
+        NSString *reason = [NSString stringWithFormat:@"Received message with explicitly rejected selector <%@>", NSStringFromSelector(selector)];
+        [[NSException exceptionWithName:NSInvalidArgumentException reason:reason userInfo:nil] raise];
+    }
+    else {
+        [super doesNotRecognizeSelector:selector];
+    }
+}
+
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
     for (Protocol *protocol in self.protocols) {
         if (protocol_conformsToProtocol(protocol, aProtocol)) {
@@ -80,10 +90,18 @@ static bool CDR_protocol_hasSelector(Protocol *protocol, SEL selector) {
 }
 
 - (BOOL)respondsToSelector:(SEL)selector fromProtocol:(Protocol *)protocol {
-    return protocol_hasSelector(protocol, selector, true, true)
-    || protocol_hasSelector(protocol, selector, true, false)
-    || (!self.requiresExplicitStubs && protocol_hasSelector(protocol, selector, false, true))
-    || (self.requiresExplicitStubs && [self has_stubbed_method_for:selector]);
+    if (protocol_hasSelector(protocol, selector, true, true) || protocol_hasSelector(protocol, selector, true, false)) {
+        return YES;
+    }
+    if (self.requiresExplicitStubs) {
+        return [self has_stubbed_method_for:selector];
+    }
+    if (!self.requiresExplicitStubs) {
+        if ([self has_rejected_method_for:selector]) {
+            return NO;
+        }
+    }
+    return protocol_hasSelector(protocol, selector, false, true);
 }
 
 @end
