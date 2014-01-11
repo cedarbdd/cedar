@@ -1,6 +1,7 @@
 #import <Cedar/SpecHelper.h>
 #import <objc/runtime.h>
 #import "SimpleIncrementer.h"
+#import "SimpleMultiplier.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -17,14 +18,14 @@ sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
     describe(@"-respondsToSelector:", ^{
         context(@"when an instance method is required", ^{
             it(@"should return true", ^{
-                [fake respondsToSelector:@selector(value)] should be_truthy;
+                fake should respond_to(@selector(value));
             });
         });
 
         context(@"when an instance method is not defined", ^{
             it(@"should return false", ^{
                 SEL wibble_wobbleSelector = NSSelectorFromString(@"wibble_wobble");
-                [fake respondsToSelector:wibble_wobbleSelector] should_not be_truthy;
+                fake should_not respond_to(wibble_wobbleSelector);
             });
         });
     });
@@ -43,17 +44,11 @@ sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
             [fake conformsToProtocol:@protocol(NSCoding)] should_not be_truthy;
         });
     });
-
-    describe(@"-description", ^{
-        it(@"should return the description of the faked protocol", ^{
-            fake.description should contain([NSString stringWithFormat:@"Fake implementation of %s protocol", protocol_getName(@protocol(SimpleIncrementer))]);
-        });
-    });
 });
 
 describe(@"fake (protocol)", ^{
     describe(@"fake_for(Protocol)", ^{
-        __block SimpleIncrementer<CedarDouble> *fake;
+        __block id<SimpleIncrementer, CedarDouble> fake;
 
         beforeEach(^{
             fake = fake_for(@protocol(SimpleIncrementer));
@@ -78,9 +73,15 @@ describe(@"fake (protocol)", ^{
             });
         });
 
+        describe(@"-description", ^{
+            it(@"should return the description of the faked protocol", ^{
+                fake.description should contain(@"Fake implementation of SimpleIncrementer protocol(s)");
+            });
+        });
+
         describe(@"handling optional protocol methods", ^{
             it(@"should not respond to unstubbed selectors", ^{
-                [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should equal(NO);
+                fake should_not respond_to(@selector(whatIfIIncrementedBy:));
             });
 
             it(@"should raise exception when unstubbed optional method invoked", ^{
@@ -93,14 +94,14 @@ describe(@"fake (protocol)", ^{
                 });
 
                 it(@"should return respond to its selector", ^{
-                    [fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should equal(YES);
+                    fake should respond_to(@selector(whatIfIIncrementedBy:));
                 });
             });
         });
     });
 
     describe(@"nice_fake_for(Protocol)", ^{
-        __block SimpleIncrementer<CedarDouble> *nice_fake;
+        __block id<SimpleIncrementer, CedarDouble> nice_fake;
 
         beforeEach(^{
             nice_fake = nice_fake_for(@protocol(SimpleIncrementer));
@@ -113,6 +114,12 @@ describe(@"fake (protocol)", ^{
         itShouldBehaveLike(@"a Cedar protocol fake");
         itShouldBehaveLike(@"a Cedar nice fake");
 
+        describe(@"-description", ^{
+            it(@"should return the description of the faked protocol", ^{
+                nice_fake.description should contain(@"Fake implementation of SimpleIncrementer protocol(s)");
+            });
+        });
+
         context(@"when calling a method which has not been stubbed", ^{
             it(@"should allow method invocation without stubbing", ^{
                 [nice_fake incrementBy:3];
@@ -123,12 +130,107 @@ describe(@"fake (protocol)", ^{
             });
 
             it(@"should respond to optional methods", ^{
-                [nice_fake respondsToSelector:@selector(whatIfIIncrementedBy:)] should be_truthy;
+                nice_fake should respond_to(@selector(whatIfIIncrementedBy:));
             });
 
             it(@"should record invocations of optional methods", ^{
                 [nice_fake whatIfIIncrementedBy:7];
                 nice_fake should have_received(@selector(whatIfIIncrementedBy:)).with(7);
+            });
+        });
+    });
+
+    describe(@"fake_for(Protocol, Protocol, ...)", ^{
+        __block id<SimpleIncrementer, SimpleMultiplier, CedarDouble> fake;
+
+        beforeEach(^{
+            fake = fake_for(@protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
+
+            [[SpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
+        });
+
+        itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar double when used with ARC");
+        itShouldBehaveLike(@"a Cedar protocol fake");
+        itShouldBehaveLike(@"a Cedar ordinary fake");
+
+        it(@"should respond to methods from both protocols", ^{
+            fake should respond_to(@selector(incrementBy:));
+            fake should respond_to(@selector(multiplyBy:));
+        });
+
+        it(@"should conform to both protocols", ^{
+            [fake conformsToProtocol:@protocol(SimpleIncrementer)] should equal(YES);
+            [fake conformsToProtocol:@protocol(SimpleMultiplier)] should equal(YES);
+        });
+
+        describe(@"-description", ^{
+            it(@"should return the description of the faked protocols", ^{
+                fake.description should contain(@"Fake implementation of SimpleIncrementer, SimpleMultiplier protocol(s)");
+            });
+        });
+
+        context(@"when calling methods that have been stubbed", ^{
+            beforeEach(^{
+                fake stub_method(@selector(incrementBy:));
+                fake stub_method(@selector(multiplyBy:));
+            });
+
+            it(@"should allow invocation of methods from both protocols", ^{
+                [fake incrementBy:3];
+                [fake multiplyBy:5];
+            });
+
+            it(@"should record invocations of methods from both protocols", ^{
+                [fake incrementBy:7];
+                fake should have_received(@selector(incrementBy:)).with(7);
+
+                [fake multiplyBy:8];
+                fake should have_received(@selector(multiplyBy:)).with(8);
+            });
+        });
+    });
+
+    describe(@"nice_fake_for(Protocol, Protocol, ...)", ^{
+        __block id<SimpleIncrementer, SimpleMultiplier, CedarDouble> nice_fake;
+
+        beforeEach(^{
+            nice_fake = nice_fake_for(@protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
+
+            [[SpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
+        });
+
+        itShouldBehaveLike(@"a Cedar double");
+        itShouldBehaveLike(@"a Cedar double when used with ARC");
+        itShouldBehaveLike(@"a Cedar protocol fake");
+        itShouldBehaveLike(@"a Cedar nice fake");
+
+        it(@"should respond to methods from both protocols", ^{
+            nice_fake should respond_to(@selector(incrementBy:));
+            nice_fake should respond_to(@selector(multiplyBy:));
+        });
+
+        it(@"should allow method invocation from both protocols without stubbing", ^{
+            [nice_fake incrementBy:3];
+            [nice_fake multiplyBy:5];
+        });
+
+        it(@"should conform to both protocols", ^{
+            [nice_fake conformsToProtocol:@protocol(SimpleIncrementer)] should equal(YES);
+            [nice_fake conformsToProtocol:@protocol(SimpleMultiplier)] should equal(YES);
+        });
+
+        it(@"should record invocations of methods from both protocols", ^{
+            [nice_fake incrementBy:7];
+            nice_fake should have_received(@selector(incrementBy:)).with(7);
+
+            [nice_fake multiplyBy:8];
+            nice_fake should have_received(@selector(multiplyBy:)).with(8);
+        });
+
+        describe(@"-description", ^{
+            it(@"should return the description of the faked protocols", ^{
+                nice_fake.description should contain(@"Fake implementation of SimpleIncrementer, SimpleMultiplier protocol(s)");
             });
         });
     });
