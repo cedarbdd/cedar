@@ -1,12 +1,11 @@
 #import "MethodStringifierHelper.h"
+#import <objc/runtime.h>
 
 namespace Cedar { namespace Matchers { namespace Stringifiers {
 
     NSString * string_for_argument_invocation(NSInvocation *invocation, NSUInteger argumentIndex) {
         const char *type = [invocation.methodSignature getArgumentTypeAtIndex:argumentIndex];
 
-        // yes, the 'larger' types need to be enumerated for
-        // ios-simulator support.
         switch (type[0]) {
             case '@':
             case '#': {
@@ -18,7 +17,7 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
                 return [obj description];
             }
             case ':': {
-                SEL sel;
+                SEL sel = nil;
                 [invocation getArgument:&sel atIndex:argumentIndex];
                 return NSStringFromSelector(sel);
             }
@@ -74,35 +73,4 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         }
     }
 
-    NSString * string_for_method_invocation(SEL selector, NSArray *argumentStrings) {
-        NSString *selectorString = NSStringFromSelector(selector);
-        NSArray *components = [selectorString componentsSeparatedByString:@":"];
-        BOOL hasAtLeastOneArg = [selectorString rangeOfString:@":"].location != NSNotFound;
-        NSMutableString *result = [NSMutableString string];
-        NSUInteger numberOfArguments = (hasAtLeastOneArg ? components.count - 1 : 0);
-        for (NSUInteger i=0; i<numberOfArguments; i++) {
-            NSString *methodNameFragment = [components objectAtIndex:i];
-            NSString *argumentValue = @"";
-            if (argumentStrings.count > i) {
-                argumentValue = [argumentStrings objectAtIndex:i];
-            }
-            if (argumentValue.length) {
-                argumentValue = [NSString stringWithFormat:@"%@ ", argumentValue];
-            }
-            [result appendFormat:@"%@:%@", methodNameFragment, argumentValue];
-        }
-        [result appendString:components.lastObject];
-        return [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    }
-
-    NSString * string_for_method_invocation(NSInvocation *invocation) {
-        NSMutableArray *argumentStrings = [NSMutableArray array];
-        NSUInteger argumentsOffset = 2;
-        NSUInteger numberOfArguments = invocation.methodSignature.numberOfArguments;
-        for (NSUInteger i=argumentsOffset; i<numberOfArguments; i++) {
-            NSString *value = string_for_argument_invocation(invocation, i);
-            [argumentStrings addObject:value];
-        }
-        return string_for_method_invocation(invocation.selector, argumentStrings);
-    }\
 }}}
