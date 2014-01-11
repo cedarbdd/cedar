@@ -6,6 +6,8 @@
 #import "CDRDefaultReporter.h"
 #import "SpecHelper.h"
 #import "CDRFunctions.h"
+#import "CDRReportDispatcher.h"
+#import "CDROTestNamer.h"
 
 #pragma mark - Helpers
 
@@ -154,6 +156,68 @@ void CDRMarkFocusedExamplesInSpecs(NSArray *specs) {
     }
 }
 
+void CDRMarkXcodeFocusedExamplesInSpecs(NSArray *specs, NSArray *arguments) {
+    // Xcode gives us this:
+    //   App ...  -SenTest All TestBundle.xctest
+    // when not focused and
+    //   App ... -SenTest <SpecClass>/<TestMethod>,<SpecClass>/<TestMethod> TestBundle.xctest
+    // when focused in the arguments list.
+    //
+    // The list defaults to the tests to focused UNLESS "-SenTestInvertScope YES" is
+    // provided, in which case the tests provided should be excluded from running.
+    NSUInteger index = [arguments indexOfObject:@"-SenTest"];
+    if (index == NSNotFound) {
+        return;
+    }
+
+    NSString *examplesArgument = [arguments objectAtIndex:index + 1];
+
+    BOOL isExclusive = NO;
+    index = [arguments indexOfObject:@"-SenTestInvertScope"];
+    if (index != NSNotFound) {
+        isExclusive = [@"YES" isEqual:[arguments objectAtIndex:index + 1]];
+    }
+
+    // TODO: should we handle the InvertScope + All case?
+    if ([@"All" isEqual:examplesArgument]) {
+        return;
+    }
+
+    NSMutableDictionary *testMethodNamesBySpecClass = [NSMutableDictionary dictionary];
+    for (NSString *testName in [examplesArgument componentsSeparatedByString:@","]) {
+        NSArray *components = [testName componentsSeparatedByString:@"/"];
+        NSString *specClass = [components objectAtIndex:0];
+        NSString *testMethod = [components objectAtIndex:1];
+
+        NSMutableSet *testMethods = [testMethodNamesBySpecClass objectForKey:specClass];
+        if (!testMethods) {
+            testMethods = [NSMutableSet set];
+            [testMethodNamesBySpecClass setObject:testMethods forKey:specClass];
+        }
+        [testMethods addObject:testMethod];
+    }
+
+    CDROTestNamer *testNamer = [[CDROTestNamer alloc] init];
+
+    for (CDRSpec *spec in specs) {
+        NSSet *methods = [testMethodNamesBySpecClass objectForKey:NSStringFromClass([spec class])];
+
+        for (CDRExampleBase *example in [spec allChildren]) {
+            if (example.hasChildren) {
+                continue;
+            }
+
+            example.focused = (isExclusive != [methods containsObject:[testNamer methodNameForExample:example]]);
+        }
+    }
+
+    [testNamer release];
+
+    for (CDRSpec *spec in specs) {
+        SpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
+    }
+}
+
 NSArray *CDRRootGroupsFromSpecs(NSArray *specs) {
     NSMutableArray *groups = [NSMutableArray arrayWithCapacity:specs.count];
     for (CDRSpec *spec in specs) {
@@ -200,19 +264,17 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
         NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
         NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
         CDRMarkFocusedExamplesInSpecs(specs);
+        CDRMarkXcodeFocusedExamplesInSpecs(specs, [[NSProcessInfo processInfo] arguments]);
+
+        CDRReportDispatcher *dispatcher = [[CDRReportDispatcher alloc] initWithReporters:reporters];
 
         NSArray *groups = CDRRootGroupsFromSpecs(specs);
-        for (id<CDRExampleReporter> reporter in reporters) {
-            [reporter runWillStartWithGroups:groups andRandomSeed:seed];
-        }
+        [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];
 
-        [groups makeObjectsPerformSelector:@selector(run)];
+        [groups makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:dispatcher];
 
-        int result = 0;
-        for (id<CDRExampleReporter> reporter in reporters) {
-            [reporter runDidComplete];
-            result |= [reporter result];
-        }
+        [dispatcher runDidComplete];
+        int result = [dispatcher result];
 
         __gcov_flush();
 

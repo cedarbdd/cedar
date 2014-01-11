@@ -19,7 +19,7 @@ XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Preferences/appCode20/templates"
 
-SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "6.1"
+SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "7.0"
 SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || SDK_VERSION
 
 PROJECT_ROOT = File.dirname(__FILE__)
@@ -124,10 +124,9 @@ task :build_iosframeworkspecs do
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{IOS_FRAMEWORK_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 SYMROOT='#{BUILD_DIR}'", output_file("iosframeworkspecs")
 end
 
-desc "Build Cedar and Cedar-iOS frameworks"
-task :build_frameworks do
+desc "Build Cedar and Cedar-iOS frameworks, and verify built Cedar-iOS.framework"
+task :build_frameworks => :iosframeworkspecs do
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'", output_file("build_cedar")
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_IOS_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'", output_file("build_cedar_ios")
 end
 
 desc "Run specs"

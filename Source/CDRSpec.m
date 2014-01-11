@@ -111,10 +111,20 @@ void fail(NSString *reason) {
     currentSpec = self;
     [self declareBehaviors];
     currentSpec = nil;
+    [self markSpecClassForExampleBase:self.rootGroup];
 }
 
 - (void)failWithException:(NSException *)exception {
     [[CDRSpecFailure specFailureWithReason:exception.reason] raise];
+}
+
+- (void)markSpecClassForExampleBase:(CDRExampleBase *)example {
+    example.spec = self;
+    if (example.hasChildren) {
+        for (CDRExampleBase *childExample in [(CDRExampleGroup *)example examples]) {
+            [self markSpecClassForExampleBase:childExample];
+        }
+    }
 }
 
 - (void)markAsFocusedClosestToLineNumber:(NSUInteger)lineNumber {

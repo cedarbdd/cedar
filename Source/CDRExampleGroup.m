@@ -1,4 +1,5 @@
 #import "CDRExampleGroup.h"
+#import "CDRReportDispatcher.h"
 
 @interface CDRExampleGroup (Private)
 - (void)startObservingExamples;
@@ -98,13 +99,15 @@
     return aggregateProgress / [examples_ count];
 }
 
-- (void)run {
-    NSDate *startDate = [[NSDate alloc] init];
+
+- (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher {
+    [dispatcher runWillStartExampleGroup:self];
+    startDate_ = [[NSDate alloc] init];
     [self startObservingExamples];
-    [examples_ makeObjectsPerformSelector:@selector(run)];
+    [examples_ makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:dispatcher];
     [self stopObservingExamples];
-    runTime_ = -[startDate timeIntervalSinceNow];
-    [startDate release];
+    endDate_ = [[NSDate alloc] init];
+    [dispatcher runDidFinishExampleGroup:self];
 }
 
 - (BOOL)hasFocusedExamples {
