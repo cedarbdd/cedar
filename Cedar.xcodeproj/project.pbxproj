@@ -55,6 +55,8 @@
 		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
 		1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
 		1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
+		1FF3BF4F1881FA1F00EC4382 /* HaveReceivedARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3BF4E1881FA1F00EC4382 /* HaveReceivedARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FF3BF501881FA1F00EC4382 /* HaveReceivedARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3BF4E1881FA1F00EC4382 /* HaveReceivedARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */ = {isa = PBXBuildFile; fileRef = 2234907C18009DA6001C8E8D /* CDRHooks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2234907F18009DAD001C8E8D /* CDRHooks.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 2234907C18009DA6001C8E8D /* CDRHooks.h */; };
 		228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */; };
@@ -577,6 +579,7 @@
 		1FA617AC187EA71B00ABCE11 /* Base.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Base.mm; sourceTree = "<group>"; };
 		1FE15C191869091900207F0C /* CDRReportDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRReportDispatcher.h; sourceTree = "<group>"; };
 		1FE15C1A1869091900207F0C /* CDRReportDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRReportDispatcher.m; sourceTree = "<group>"; };
+		1FF3BF4E1881FA1F00EC4382 /* HaveReceivedARCSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaveReceivedARCSpec.mm; sourceTree = "<group>"; };
 		2234907C18009DA6001C8E8D /* CDRHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRHooks.h; sourceTree = "<group>"; };
 		228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRSpyiOSSpec.mm; sourceTree = "<group>"; };
 		22FB7B4016ACBA5900012D69 /* HeadlessSimulatorWorkaround.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadlessSimulatorWorkaround.h; sourceTree = "<group>"; };
@@ -1013,6 +1016,7 @@
 				AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */,
 				AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */,
 				6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */,
+				1FF3BF4E1881FA1F00EC4382 /* HaveReceivedARCSpec.mm */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -2099,6 +2103,7 @@
 				AE80788D183C71950078C608 /* ArgumentReleaser.m in Sources */,
 				AEF7301D13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */,
 				AE807890183C71950078C608 /* SimpleIncrementer.m in Sources */,
+				1FF3BF4F1881FA1F00EC4382 /* HaveReceivedARCSpec.mm in Sources */,
 				AEF7301F13ECC4AE00786282 /* BeNilSpec.mm in Sources */,
 				AEF7302113ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */,
 				AE06D88017AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */,
@@ -2195,6 +2200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF3BF501881FA1F00EC4382 /* HaveReceivedARCSpec.mm in Sources */,
 				AEEE228011DC2D5200029872 /* CDRExampleSpec.mm in Sources */,
 				AEEE228311DC2D5200029872 /* GlobalBeforeEachSpec.mm in Sources */,
 				AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */,
