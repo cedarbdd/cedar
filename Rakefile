@@ -285,8 +285,27 @@ namespace :dist do
 end
 
 desc "Build frameworks and install templates and code snippets"
-task :install => [ :clean, :uninstall, "dist:prepare" ] do
+task :install => [:clean, :uninstall, "dist:prepare"] do
   puts "\nInstalling templates...\n"
   system_or_exit %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
 end
 
+desc "Build the frameworks and upgrade the target"
+task :upgrade, [:path_to_framework] => [:build_frameworks] do |task, args|
+  framework_folder = args.path_to_framework.split("/").last
+
+  case framework_folder
+    when "Cedar-iOS.framework"
+      cedar_name = "Cedar-iOS"
+      cedar_path = "#{CONFIGURATION}-iphoneuniversal"
+    when "Cedar.framework"
+      cedar_name = "Cedar"
+      cedar_path = "#{CONFIGURATION}"
+    else
+      raise "*** No framework found. ***"
+  end
+
+  puts "\nUpgrading #{cedar_name} framework...\n"
+
+  system_or_exit %{rsync -vkcr --delete "#{BUILD_DIR}/#{cedar_path}/#{cedar_name}.framework/" "#{args.path_to_framework}/"}
+end
