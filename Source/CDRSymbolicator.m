@@ -242,9 +242,11 @@ NSUInteger CDRCallerStackAddress() {
     [task setArguments:arguments];
 
     NSPipe *standardOutput = [NSPipe pipe];
+    // toss stderr, but suppress its output
+    NSPipe *standardError = [NSPipe pipe];
     if (standardOutput) {
         [task setStandardOutput:standardOutput];
-        [task setStandardError:standardOutput];
+        [task setStandardError:standardError];
     } else return nil;
 
     @try {
