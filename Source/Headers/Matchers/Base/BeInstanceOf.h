@@ -14,7 +14,7 @@ namespace Cedar { namespace Matchers {
         BeInstanceOf & operator=(const BeInstanceOf &);
 
     public:
-        explicit BeInstanceOf(const Class expectedValue);
+        explicit BeInstanceOf(Class expectedValue);
         ~BeInstanceOf();
         // Allow default copy ctor.
 
@@ -31,11 +31,11 @@ namespace Cedar { namespace Matchers {
         bool includeSubclasses_;
     };
 
-    inline BeInstanceOf be_instance_of(const Class expectedValue) {
+    inline BeInstanceOf be_instance_of(Class expectedValue) {
         return BeInstanceOf(expectedValue);
     }
 
-    inline BeInstanceOf::BeInstanceOf(const Class expectedClass)
+    inline BeInstanceOf::BeInstanceOf(Class expectedClass)
     : Base<BeInstanceOfMessageBuilder>(), expectedClass_(expectedClass), includeSubclasses_(false) {}
 
     inline BeInstanceOf::~BeInstanceOf() {}
