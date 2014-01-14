@@ -55,7 +55,14 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 }
 
 - (void)reject_method:(const Cedar::Doubles::RejectedMethod &)rejected_method {
-    //TODO: test rejecting methods not included in the protocol
+    const SEL & selector = rejected_method.selector();
+
+    if (![self.parent_double can_stub:selector]) {
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempting to reject method <%s>, which double <%@> already does not respond to", sel_getName(selector), [self.parent_double description]]
+                               userInfo:nil]
+         raise];
+    }
     [self.rejected_methods addObject:NSStringFromSelector(rejected_method.selector())];
 }
 
