@@ -96,10 +96,8 @@ static bool CDR_protocol_hasSelector(Protocol *protocol, SEL selector) {
     if (self.requiresExplicitStubs) {
         return [self has_stubbed_method_for:selector];
     }
-    if (!self.requiresExplicitStubs) {
-        if ([self has_rejected_method_for:selector]) {
-            return NO;
-        }
+    else if ([self has_rejected_method_for:selector]) {
+        return NO;
     }
     return protocol_hasSelector(protocol, selector, false, true);
 }
