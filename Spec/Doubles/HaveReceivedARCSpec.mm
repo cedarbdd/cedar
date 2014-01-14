@@ -29,10 +29,6 @@ describe(@"have_received matcher (ARC)", ^{
         spy_on(incrementer);
     });
 
-    afterEach(^{
-        incrementer = nil;
-    });
-
     context(@"with an actual value that is not a spy", ^{
         beforeEach(^{
             incrementer = [[SimpleIncrementer alloc] init];
