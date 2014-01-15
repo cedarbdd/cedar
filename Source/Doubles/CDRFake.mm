@@ -1,6 +1,6 @@
 #import "NSInvocation+Cedar.h"
 #import "CDRFake.h"
-#import "objc/runtime.h"
+#import <objc/runtime.h>
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
 
@@ -30,6 +30,9 @@
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
+    if ([self.cedar_double_impl has_rejected_method_for:sel]) {
+        return nil;
+    }
     return [self.klass instanceMethodSignatureForSelector:sel];
 }
 
@@ -74,6 +77,10 @@
     return [self.cedar_double_impl add_stub:stubbed_method];
 }
 
+- (void)reject_method:(const Cedar::Doubles::RejectedMethod &)rejected_method {
+    [self.cedar_double_impl reject_method:rejected_method];
+}
+
 - (NSArray *)sent_messages {
     return self.cedar_double_impl.sent_messages;
 }
@@ -88,6 +95,10 @@
 
 - (BOOL)has_stubbed_method_for:(SEL)selector {
     return [self.cedar_double_impl has_stubbed_method_for:selector];
+}
+
+- (BOOL)has_rejected_method_for:(SEL)selector {
+    return [self.cedar_double_impl has_rejected_method_for:selector];
 }
 
 @end
