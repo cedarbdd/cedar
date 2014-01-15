@@ -3,10 +3,10 @@
 
 @interface ObjectWithCollections : NSObject <CedarObservedObject>
 
-@property (retain) NSMutableArray *array;
-@property (retain) NSMutableSet *set;
-@property (retain) NSMutableOrderedSet *orderedSet;
-@property (retain) NSMutableArray *manualArray;
-@property (retain) NSMutableSet *manualSet;
+@property (retain, nonatomic) NSMutableArray *array;
+@property (retain, nonatomic) NSMutableSet *set;
+@property (retain, nonatomic) NSMutableOrderedSet *orderedSet;
+@property (retain, nonatomic) NSMutableArray *manualArray;
+@property (retain, nonatomic) NSMutableSet *manualSet;
 
 @end

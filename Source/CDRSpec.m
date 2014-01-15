@@ -90,11 +90,13 @@ void fail(NSString *reason) {
     symbolicator = symbolicator_;
 
 #pragma mark Memory
+
 - (id)init {
     if (self = [super init]) {
         self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
         self.rootGroup.parent = [SpecHelper specHelper];
         self.currentGroup = self.rootGroup;
+        self.symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
     }
     return self;
 }
@@ -191,10 +193,4 @@ void fail(NSString *reason) {
     return seenChildren;
 }
 
-- (CDRSymbolicator *)symbolicator {
-    if (!symbolicator_) {
-        symbolicator_ = [[CDRSymbolicator alloc] init];
-    }
-    return symbolicator_;
-}
 @end

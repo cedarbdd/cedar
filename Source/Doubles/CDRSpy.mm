@@ -31,41 +31,9 @@
     }
 }
 
-- (id)retain {
-    __block id that = self;
-    [self as_spied_class:^{
-        [that retain];
-    }];
-    return self;
-}
-
-- (oneway void)release {
-    __block id that = self;
-    [self as_spied_class:^{
-        [that release];
-    }];
-}
-
-- (id)autorelease {
-    __block id that = self;
-    [self as_spied_class:^{
-        [that autorelease];
-    }];
-    return self;
-}
-
-- (NSUInteger)retainCount {
-    __block id that = self;
-    __block NSUInteger count;
-    [self as_spied_class:^{
-        count = [that retainCount];
-    }];
-    return count;
-}
-
 - (NSString *)description {
     __block id that = self;
-    __block NSString *description;
+    __block NSString *description = nil;
     [self as_spied_class:^{
         description = [that description];
     }];
@@ -117,7 +85,7 @@
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
-    __block NSMethodSignature *originalMethodSignature;
+    __block NSMethodSignature *originalMethodSignature = nil;
 
     [self as_spied_class:^{
         originalMethodSignature = [self methodSignatureForSelector:sel];
@@ -127,7 +95,7 @@
 }
 
 - (BOOL)respondsToSelector:(SEL)selector {
-    __block BOOL respondsToSelector;
+    __block BOOL respondsToSelector = NO;
 
     [self as_spied_class:^{
         respondsToSelector = [self respondsToSelector:selector];
@@ -167,8 +135,6 @@
 }
 
 - (void)as_class:(Class)klass :(void(^)())block {
-    block = [[block copy] autorelease];
-
     Class spyClass = object_getClass(self);
     object_setClass(self, klass);
 

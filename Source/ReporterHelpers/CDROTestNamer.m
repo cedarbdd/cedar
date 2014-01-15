@@ -18,6 +18,7 @@
     }
 
     NSString *methodName = [fullTextPieces componentsJoinedByString:@"_"];
+    [fullTextPieces release];
     return [self sanitizeNameFromString:methodName];
 }
 
@@ -36,7 +37,9 @@
             i--;
         }
     }
-    return mutableString;
+
+    [allowedCharacterSet release];
+    return [mutableString autorelease];
 }
 
 @end

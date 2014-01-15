@@ -2488,7 +2488,7 @@ describe(@"equal matcher", ^{
 
             describe(@"and the values are not equal", ^{
                 beforeEach(^{
-                    expectedArray = [@[@"goodbye"] mutableCopy];
+                    expectedArray = [[@[@"goodbye"] mutableCopy] autorelease];
                 });
 
                 describe(@"positive match", ^{
