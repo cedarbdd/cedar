@@ -8,6 +8,7 @@
 @property (nonatomic, assign) Class spiedClass;
 @property (nonatomic, assign) id originalObject;
 @property (nonatomic, retain) CedarDoubleImpl *cedarDouble;
+@property (nonatomic, retain) NSMutableArray *callStack;
 
 + (void)storeSpyInfoForObject:(id)object;
 + (BOOL)clearSpyInfoForObject:(id)object;
@@ -17,5 +18,9 @@
 + (Class)publicClassForObject:(id)object;
 
 - (IMP)impForSelector:(SEL)selector;
+
+- (BOOL)isInvocationRepeatedInCallStack:(NSInvocation *)invocation;
+- (void)addToCallStack:(NSInvocation *)invocation;
+- (void)popCallStack;
 
 @end

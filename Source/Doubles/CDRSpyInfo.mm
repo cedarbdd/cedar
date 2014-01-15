@@ -16,6 +16,7 @@ static NSMutableSet *currentSpies__;
     spyInfo.publicClass = [object class];
     spyInfo.spiedClass = object_getClass(object);
     spyInfo.cedarDouble = [[[CedarDoubleImpl alloc] initWithDouble:object] autorelease];
+    spyInfo.callStack = [NSMutableArray array];
     [currentSpies__ addObject:spyInfo];
 }
 
@@ -35,6 +36,7 @@ static NSMutableSet *currentSpies__;
     }
     self.originalObject = nil;
     self.cedarDouble = nil;
+    self.callStack = nil;
     [super dealloc];
 }
 
@@ -71,6 +73,23 @@ static NSMutableSet *currentSpies__;
     }
     Method originalMethod = class_getInstanceMethod(self.spiedClass, selector);
     return method_getImplementation(originalMethod);
+}
+
+- (BOOL)isInvocationRepeatedInCallStack:(NSInvocation *)invocation {
+    NSIndexSet *repeatedInvocationIndexSet = [self.callStack indexesOfObjectsPassingTest:^BOOL(NSInvocation *anInvocation, NSUInteger idx, BOOL *stop) {
+        return sel_isEqual(anInvocation.selector, invocation.selector);
+    }];
+    // some magic constant to avoid infinite recursion to
+    // defensive Apple-internal methods
+    return repeatedInvocationIndexSet.count > 15;
+}
+
+- (void)addToCallStack:(NSInvocation *)invocation {
+    [self.callStack addObject:invocation];
+}
+
+- (void)popCallStack {
+    [self.callStack removeLastObject];
 }
 
 + (void)afterEach {

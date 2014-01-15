@@ -191,6 +191,40 @@ describe(@"spy_on", ^{
         });
     });
 
+    describe(@"spying on NSTimer (bridged object)", ^{
+        __block NSTimer *timer;
+
+        beforeEach(^{
+            timer = [NSTimer timerWithTimeInterval:1 target:nil selector:nil userInfo:nil repeats:YES];
+            [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+            spy_on(timer);
+        });
+
+        it(@"should not stack overflow", ^{
+            __block BOOL called = NO;
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // calling this seems to trigger _cffireTime if it's not a
+                // certain internal class, which then calls fireDate
+                // if its class another internal timer class. This
+                // cycle repeats forever unless the spy restores to
+                // its original class.
+                [timer fireDate] should_not be_nil;
+                called = YES;
+            });
+
+            [[NSRunLoop currentRunLoop] addTimer:[NSTimer timerWithTimeInterval:0.1 invocation:nil repeats:NO] forMode:NSDefaultRunLoopMode];
+            NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:0.1];
+            [[NSRunLoop currentRunLoop] runUntilDate:futureDate];
+
+            timer should have_received(@selector(fireDate));
+        });
+
+        afterEach(^{
+            [timer invalidate];
+        });
+    });
+
     describe(@"spying on objects under KVO", ^{
         __block id observedObject;
         __block NSString *keyPath;

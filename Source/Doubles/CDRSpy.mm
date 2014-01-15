@@ -103,8 +103,13 @@
         } else {
             CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:self];
             IMP privateImp = [spyInfo impForSelector:selector];
-            if (privateImp) {
-                [invocation invokeUsingIMP:privateImp];
+            if (privateImp && ![spyInfo isInvocationRepeatedInCallStack:invocation]) {
+                [spyInfo addToCallStack:invocation];
+                @try {
+                    [invocation invokeUsingIMP:privateImp];
+                } @finally {
+                    [spyInfo popCallStack];
+                }
             } else {
                 __block id that = self;
                 [self as_spied_class:^{
