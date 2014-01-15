@@ -30,7 +30,9 @@ NSUInteger CDRCallerStackAddress() {
 }
 
 @interface CDRSymbolicator ()
-@property (nonatomic, retain) NSMutableArray *addresses, *fileNames, *lineNumbers;
+@property (nonatomic, retain) NSMutableArray *addresses;
+@property (nonatomic, retain) NSMutableArray *fileNames;
+@property (nonatomic, retain) NSMutableArray *lineNumbers;
 @end
 
 @implementation CDRSymbolicator
@@ -42,9 +44,9 @@ NSUInteger CDRCallerStackAddress() {
 
 - (id)init {
     if (self = [super init]) {
-        self.addresses = [NSMutableArray array];
-        self.fileNames = [NSMutableArray array];
-        self.lineNumbers = [NSMutableArray array];
+        addresses_ = [[NSMutableArray alloc] init];
+        fileNames_ = [[NSMutableArray alloc] init];
+        lineNumbers_ = [[NSMutableArray alloc] init];
     }
     return self;
 }

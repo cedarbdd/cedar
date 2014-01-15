@@ -37,7 +37,7 @@
     if (self) {
         self.formatter = [[[NSDateFormatter alloc] init] autorelease];
         [self.formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
-        self.namer = [[CDROTestNamer alloc] init];
+        self.namer = [[[CDROTestNamer alloc] init] autorelease];
     }
     return self;
 }

@@ -32,11 +32,10 @@ static SpecHelper *specHelper__;
 }
 
 - (void)dealloc {
-    [sharedExampleGroups_ release];
-    [sharedExampleContext_ release];
-    [globalBeforeEachClasses_ release];
-    [globalAfterEachClasses_ release];
-
+    self.sharedExampleGroups = nil;
+    self.sharedExampleContext = nil;
+    self.globalBeforeEachClasses = nil;
+    self.globalAfterEachClasses = nil;
     [super dealloc];
 }
 

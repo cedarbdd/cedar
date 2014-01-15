@@ -16,6 +16,7 @@ typedef enum CDRExampleState CDRExampleState;
 @interface CDRExampleBase : NSObject {
   NSString *text_;
   NSObject<CDRExampleParent> *parent_;
+  CDRSpec *spec_;
   BOOL focused_;
   NSUInteger stackAddress_;
   NSDate *startDate_;

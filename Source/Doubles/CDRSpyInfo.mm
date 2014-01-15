@@ -33,6 +33,8 @@ static NSMutableSet *currentSpies__;
     if (self.originalObject) {
         object_setClass(self.originalObject, self.spiedClass);
     }
+    self.publicClass = nil;
+    self.spiedClass = nil;
     self.originalObject = nil;
     self.cedarDouble = nil;
     [super dealloc];
