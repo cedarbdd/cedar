@@ -192,6 +192,10 @@
 		AE4A9459187F7D8F008566F5 /* BeFalsy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4A9457187F7D8F008566F5 /* BeFalsy.h */; };
 		AE4A945B187F7E52008566F5 /* BeFalsySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */; };
 		AE4A945C187F7E52008566F5 /* BeFalsySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */; };
+		AE4A945E1880792E008566F5 /* RejectedMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4A945D1880792E008566F5 /* RejectedMethod.h */; };
+		AE4A945F1880792E008566F5 /* RejectedMethod.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4A945D1880792E008566F5 /* RejectedMethod.h */; };
+		AE4A946118807DA6008566F5 /* RejectedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A946018807DA6008566F5 /* RejectedMethod.mm */; };
+		AE4A946218807DA6008566F5 /* RejectedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A946018807DA6008566F5 /* RejectedMethod.mm */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
@@ -504,6 +508,7 @@
 				AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */,
 				AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */,
 				AE02E813184ECAEE00414F19 /* CDRSpecFailure.h in Copy headers to framework */,
+				AE4A945F1880792E008566F5 /* RejectedMethod.h in Copy headers to framework */,
 				AE0721E4187518FD0031CC42 /* Exist.h in Copy headers to framework */,
 				AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */,
 				AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */,
@@ -663,6 +668,8 @@
 		AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollections.m; sourceTree = "<group>"; };
 		AE4A9457187F7D8F008566F5 /* BeFalsy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeFalsy.h; sourceTree = "<group>"; };
 		AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeFalsySpec.mm; sourceTree = "<group>"; };
+		AE4A945D1880792E008566F5 /* RejectedMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectedMethod.h; sourceTree = "<group>"; };
+		AE4A946018807DA6008566F5 /* RejectedMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RejectedMethod.mm; sourceTree = "<group>"; };
 		AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithWeakDelegate.h; sourceTree = "<group>"; };
 		AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithWeakDelegate.m; sourceTree = "<group>"; };
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
@@ -974,6 +981,7 @@
 				AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */,
 				AE74907015B486CD008EA127 /* CDRFake.mm */,
 				AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */,
+				AE4A946018807DA6008566F5 /* RejectedMethod.mm */,
 				AEB1A74115F304A9002E4167 /* StubbedMethod.mm */,
 				AEC7873715F440980058A27B /* InvocationMatcher.mm */,
 				AEC7874C15F444A50058A27B /* HaveReceived.mm */,
@@ -993,6 +1001,7 @@
 				AE9AA67915AB72DA00617E1A /* CDRClassFake.h */,
 				6639A78014C50D3000B564B7 /* HaveReceived.h */,
 				AE9AA68815AC728A00617E1A /* CedarDouble.h */,
+				AE4A945D1880792E008566F5 /* RejectedMethod.h */,
 				AE9AA6D115AE082500617E1A /* StubbedMethod.h */,
 				AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */,
 				AE597B4015B0638B00EEF305 /* InvocationMatcher.h */,
@@ -1585,6 +1594,7 @@
 				AEF33017145B6222002F93BB /* BeLessThan.h in Headers */,
 				E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */,
 				AEF33021145B69DE002F93BB /* BeLTE.h in Headers */,
+				AE4A945E1880792E008566F5 /* RejectedMethod.h in Headers */,
 				AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */,
 				AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */,
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
@@ -2039,6 +2049,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4A946118807DA6008566F5 /* RejectedMethod.mm in Sources */,
 				AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */,
 				AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */,
 				AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */,
@@ -2172,6 +2183,7 @@
 				AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */,
 				AE94D04615F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
+				AE4A946218807DA6008566F5 /* RejectedMethod.mm in Sources */,
 				AEC7873A15F440980058A27B /* InvocationMatcher.mm in Sources */,
 				AEC7874E15F444A50058A27B /* HaveReceived.mm in Sources */,
 				969B6F86160C678400C7C792 /* CDRSymbolicator.m in Sources */,

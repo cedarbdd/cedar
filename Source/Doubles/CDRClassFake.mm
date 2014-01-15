@@ -70,8 +70,7 @@
 id CDR_fake_for(BOOL require_explicit_stubs, Class klass, ...) {
     va_list args;
     va_start(args, klass);
-    id other_klass = va_arg(args, Class);
-    if (other_klass) {
+    if (va_arg(args, Class)) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
                                  reason:@"Can't create a fake for multiple classes."
                                userInfo:nil] raise];

@@ -44,6 +44,18 @@ sharedExamplesFor(@"a Cedar protocol fake", ^(NSDictionary *sharedContext) {
             [fake conformsToProtocol:@protocol(NSCoding)] should_not be_truthy;
         });
     });
+
+    describe(@"stubbing methods not included in the faked protocol(s)", ^{
+        it(@"should blow up", ^{
+            ^{ fake stub_method(@selector(addObject:)); } should raise_exception;
+        });
+    });
+
+    describe(@"rejecting methods not included in the faked protocol(s)", ^{
+        it(@"should blow up", ^{
+            ^{ fake reject_method(@selector(addObject:)); } should raise_exception;
+        });
+    });
 });
 
 describe(@"fake (protocol)", ^{
@@ -93,7 +105,7 @@ describe(@"fake (protocol)", ^{
                     fake stub_method(@selector(whatIfIIncrementedBy:)).and_return((size_t)42);
                 });
 
-                it(@"should return respond to its selector", ^{
+                it(@"should respond to its selector", ^{
                     fake should respond_to(@selector(whatIfIIncrementedBy:));
                 });
             });
@@ -136,6 +148,20 @@ describe(@"fake (protocol)", ^{
             it(@"should record invocations of optional methods", ^{
                 [nice_fake whatIfIIncrementedBy:7];
                 nice_fake should have_received(@selector(whatIfIIncrementedBy:)).with(7);
+            });
+        });
+
+        describe(@"rejecting an optional method", ^{
+            beforeEach(^{
+                nice_fake reject_method(@selector(whatIfIIncrementedBy:));
+            });
+
+            it(@"should not respond to the method's selector", ^{
+                nice_fake should_not respond_to(@selector(whatIfIIncrementedBy:));
+            });
+
+            it(@"should raise a helpful exception when the method is called", ^{
+                ^{ [nice_fake whatIfIIncrementedBy:1]; } should raise_exception.with_reason(@"Received message with explicitly rejected selector <whatIfIIncrementedBy:>");
             });
         });
     });

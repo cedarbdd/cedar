@@ -60,6 +60,14 @@ static bool CDR_protocol_hasSelector(Protocol *protocol, SEL selector) {
     return NO;
 }
 
+- (void)doesNotRecognizeSelector:(SEL)selector {
+    if ([self has_rejected_method_for:selector]) {
+        NSString *reason = [NSString stringWithFormat:@"Received message with explicitly rejected selector <%@>", NSStringFromSelector(selector)];
+        [[NSException exceptionWithName:NSInvalidArgumentException reason:reason userInfo:nil] raise];
+    }
+    [super doesNotRecognizeSelector:selector];
+}
+
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol {
     for (Protocol *protocol in self.protocols) {
         if (protocol_conformsToProtocol(protocol, aProtocol)) {
@@ -80,10 +88,16 @@ static bool CDR_protocol_hasSelector(Protocol *protocol, SEL selector) {
 }
 
 - (BOOL)respondsToSelector:(SEL)selector fromProtocol:(Protocol *)protocol {
-    return protocol_hasSelector(protocol, selector, true, true)
-    || protocol_hasSelector(protocol, selector, true, false)
-    || (!self.requiresExplicitStubs && protocol_hasSelector(protocol, selector, false, true))
-    || (self.requiresExplicitStubs && [self has_stubbed_method_for:selector]);
+    if (protocol_hasSelector(protocol, selector, true, true) || protocol_hasSelector(protocol, selector, true, false)) {
+        return YES;
+    }
+    if (self.requiresExplicitStubs) {
+        return [self has_stubbed_method_for:selector];
+    }
+    else if ([self has_rejected_method_for:selector]) {
+        return NO;
+    }
+    return protocol_hasSelector(protocol, selector, false, true);
 }
 
 @end
@@ -92,6 +106,10 @@ static bool CDR_protocol_hasSelector(Protocol *protocol, SEL selector) {
 id CDR_fake_for(BOOL require_explicit_stubs, Protocol *protocol, ...) {
     static size_t protocol_dummy_class_id = 0;
 
+    const char *protocol_name = protocol_getName(protocol);
+    std::stringstream class_name_emitter;
+    class_name_emitter << "Cedar fake for <" << protocol_name;
+
     NSMutableArray *protocolArray = [NSMutableArray arrayWithObject:protocol];
 
     va_list args;
@@ -99,14 +117,11 @@ id CDR_fake_for(BOOL require_explicit_stubs, Protocol *protocol, ...) {
     Protocol *p = nil;
     while ((p = va_arg(args, Protocol *))) {
         [protocolArray addObject:p];
+        class_name_emitter << ", " << protocol_getName(p);
     }
     va_end(args);
 
-    //TODO: emit all names
-    const char * protocol_name = protocol_getName(protocol);
-    std::stringstream class_name_emitter;
-    class_name_emitter << "fake for Protocol " << protocol_name << " #" << protocol_dummy_class_id++;
-
+    class_name_emitter << "> #" << protocol_dummy_class_id++;
     Class klass = objc_allocateClassPair([CDRProtocolFake class], class_name_emitter.str().c_str(), 0);
 
     if (!klass) {

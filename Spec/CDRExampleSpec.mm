@@ -84,12 +84,8 @@ CDRSharedExampleBlock sharedExampleMethod = [^(NSDictionary *context) {
             NSString *rootGroupText = @"Root!";
 
             beforeEach(^{
-                rootGroup = [[CDRExampleGroup alloc] initWithText:rootGroupText];
+                rootGroup = [[[CDRExampleGroup alloc] initWithText:rootGroupText] autorelease];
                 [rootGroup add:group];
-            });
-
-            afterEach(^{
-                [rootGroup release];
             });
 
             it(@"should include the text from all parents, pre-pended in the appropriate order", ^{
@@ -247,8 +243,7 @@ describe(@"CDRExample", ^{
 
         describe(@"for an example that has run and failed", ^{
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{ fail(@"fail"); }];
+                example = [[[CDRExample alloc] initWithText:@"I should fail" andBlock:^{ fail(@"fail"); }] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -260,8 +255,7 @@ describe(@"CDRExample", ^{
 
         describe(@"for an example that has run and thrown an NSException", ^{
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should throw an NSException" andBlock:^{ [[NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil] raise]; }];
+                example = [[[CDRExample alloc] initWithText:@"I should throw an NSException" andBlock:^{ [[NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil] raise]; }] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -273,8 +267,7 @@ describe(@"CDRExample", ^{
 
         describe(@"for an example that has run and thrown something other than an NSException", ^{
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should throw some nonsense" andBlock:^{ @throw @"Some nonsense"; }];
+                example = [[[CDRExample alloc] initWithText:@"I should throw some nonsense" andBlock:^{ @throw @"Some nonsense"; }] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -286,8 +279,7 @@ describe(@"CDRExample", ^{
 
         describe(@"for a pending example", ^{
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should be pending" andBlock:PENDING];
+                example = [[[CDRExample alloc] initWithText:@"I should be pending" andBlock:PENDING] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -428,8 +420,7 @@ describe(@"CDRExample", ^{
 
         describe(@"for a passing example", ^{
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}];
+                example = [[[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -441,8 +432,7 @@ describe(@"CDRExample", ^{
 
         describe(@"for a pending example", ^{
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
+                example = [[[CDRExample alloc] initWithText:@"I should pend" andBlock:nil] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -454,8 +444,7 @@ describe(@"CDRExample", ^{
 
         describe(@"for a skipped example", ^{
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should pend" andBlock:nil];
+                example = [[[CDRExample alloc] initWithText:@"I should pend" andBlock:nil] autorelease];
                 example.focused = NO;
                 runInFocusedSpecsMode(example, dispatcher);
             });
@@ -470,8 +459,7 @@ describe(@"CDRExample", ^{
             __block NSString *failureMessage = @"I should fail";
 
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should fail" andBlock:^{[[CDRSpecFailure specFailureWithReason:failureMessage] raise];}];
+                example = [[[CDRExample alloc] initWithText:@"I should fail" andBlock:^{[[CDRSpecFailure specFailureWithReason:failureMessage] raise];}] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -487,8 +475,7 @@ describe(@"CDRExample", ^{
             beforeEach(^{
                 exception = [NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil];
 
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should throw an exception" andBlock:^{ [exception raise]; }];
+                example = [[[CDRExample alloc] initWithText:@"I should throw an exception" andBlock:^{ [exception raise]; }] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
@@ -501,8 +488,7 @@ describe(@"CDRExample", ^{
             __block NSString *failureMessage = @"wibble wobble";
 
             beforeEach(^{
-                [example release];
-                example = [[CDRExample alloc] initWithText:@"I should throw an exception" andBlock:^{ @throw failureMessage; }];
+                example = [[[CDRExample alloc] initWithText:@"I should throw an exception" andBlock:^{ @throw failureMessage; }] autorelease];
                 [example runWithDispatcher:dispatcher];
             });
 
