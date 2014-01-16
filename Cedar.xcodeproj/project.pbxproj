@@ -58,6 +58,8 @@
 		42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
+		44B9A71E1888660400CBCA1B /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
+		44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */; };
 		4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
 		4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */; };
 		492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2249,6 +2251,7 @@
 				1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */,
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */,
+				44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AE53B68217E7BCE700D83D5E /* CedarNiceFakeSharedExamples.mm in Sources */,
@@ -2256,6 +2259,7 @@
 				AEF33015145B6188002F93BB /* BeLessThanSpec.mm in Sources */,
 				AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */,
 				966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */,
+				44B9A71E1888660400CBCA1B /* GDataXMLNode.m in Sources */,
 				AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
 				AE4A945C187F7E52008566F5 /* BeFalsySpec.mm in Sources */,
 				AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */,
@@ -3039,6 +3043,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -3050,6 +3055,7 @@
 					Foundation,
 					"-framework",
 					UIKit,
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3079,6 +3085,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -3090,6 +3097,7 @@
 					Foundation,
 					"-framework",
 					UIKit,
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
