@@ -112,11 +112,13 @@ describe(@"runDidComplete", ^{
             NSArray *testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
             expect(testCases.count).to(equal(2));
 
-            expect([[testCases[0] attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
-            expect([[testCases[0] attributeForName:@"name"] stringValue]).to(equal(@"Passing spec 1"));
+            GDataXMLElement *example1XML = [testCases objectAtIndex:0];
+            expect([[example1XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example1XML attributeForName:@"name"] stringValue]).to(equal(@"Passing spec 1"));
 
-            expect([[testCases[1] attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
-            expect([[testCases[1] attributeForName:@"name"] stringValue]).to(equal(@"Passing spec 2"));
+            GDataXMLElement *example2XML = [testCases objectAtIndex:1];
+            expect([[example2XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example2XML attributeForName:@"name"] stringValue]).to(equal(@"Passing spec 2"));
         });
 
         it(@"should have its name escaped", ^{
@@ -125,8 +127,8 @@ describe(@"runDidComplete", ^{
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
-            expect([[testCase attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
         });
 
         it(@"should have its running time", ^{
@@ -138,9 +140,9 @@ describe(@"runDidComplete", ^{
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
-            expect([[testCase attributeForName:@"time"] stringValue]).to_not(be_nil);
-            expect([[[testCase attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"time"] stringValue]).to_not(be_nil);
+            expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
 
         });
     });
@@ -159,16 +161,19 @@ describe(@"runDidComplete", ^{
 
             NSArray *testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
             expect(testCases.count).to(equal(2));
-            expect([[testCases[0] attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
-            expect([[testCases[0] attributeForName:@"name"] stringValue]).to(equal(@"Failing spec 1"));
-            expect([[[testCases[0] nodesForXPath:@"failure/@type" error:nil] firstObject] stringValue]).to(equal(@"Failure"));
-            expect([[[testCases[0] nodesForXPath:@"failure/text()" error:nil] firstObject] stringValue]).to(equal(@"Failure reason 1"));
+
+            GDataXMLElement *example1XML = [testCases objectAtIndex:0];
+            expect([[example1XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example1XML attributeForName:@"name"] stringValue]).to(equal(@"Failing spec 1"));
+            expect([[[example1XML nodesForXPath:@"failure/@type" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure"));
+            expect([[[example1XML nodesForXPath:@"failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure reason 1"));
 
 
-            expect([[testCases[1] attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
-            expect([[testCases[1] attributeForName:@"name"] stringValue]).to(equal(@"Failing spec 2"));
-            expect([[[testCases[1] nodesForXPath:@"failure/@type" error:nil] firstObject] stringValue]).to(equal(@"Failure"));
-            expect([[[testCases[1] nodesForXPath:@"failure/text()" error:nil] firstObject] stringValue]).to(equal(@"Failure reason 2"));
+            GDataXMLElement *example2XML = [testCases objectAtIndex:1];
+            expect([[example2XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example2XML attributeForName:@"name"] stringValue]).to(equal(@"Failing spec 2"));
+            expect([[[example2XML nodesForXPath:@"failure/@type" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure"));
+            expect([[[example2XML nodesForXPath:@"failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure reason 2"));
         });
 
         it(@"should have its name escaped", ^{
@@ -177,8 +182,8 @@ describe(@"runDidComplete", ^{
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
-            expect([[testCase attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
         });
 
         it(@"should escape the failure reason", ^{
@@ -193,7 +198,7 @@ describe(@"runDidComplete", ^{
 
             [reporter runDidComplete];
 
-            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/text()" error:nil] firstObject] stringValue]).to(equal(failureReason));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(failureReason));
         });
 
         it(@"should have its running time", ^{
@@ -204,9 +209,9 @@ describe(@"runDidComplete", ^{
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
-            expect([[testCase attributeForName:@"time"] stringValue]).to_not(be_nil);
-            expect([[[testCase attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"time"] stringValue]).to_not(be_nil);
+            expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
 
         });
 
@@ -219,10 +224,10 @@ describe(@"runDidComplete", ^{
 
             [reporter runDidComplete];
 
-            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/@classname" error:nil] firstObject] stringValue]).to(equal(@"Cedar"));
-            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/@name" error:nil] firstObject] stringValue]).to(equal(@"Failing spec"));
-            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/@type" error:nil] firstObject] stringValue]).to(equal(@"Failure"));
-            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/text()" error:nil] firstObject] stringValue]).to(equal(@"Failure reason"));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/@classname" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Cedar"));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/@name" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failing spec"));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/@type" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure"));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure reason"));
         });
     });
 });
