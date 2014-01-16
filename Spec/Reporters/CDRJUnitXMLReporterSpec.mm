@@ -20,12 +20,12 @@ using namespace Cedar::Matchers;
 @private
     NSString *xml_;
     GDataXMLDocument *xmlDocument_;
-    GDataXMLElement * xmlRootElement_;
+    GDataXMLElement *xmlRootElement_;
 }
 
 @property (nonatomic, copy) NSString *xml;
-@property (nonatomic, strong) GDataXMLDocument * xmlDocument;
-@property (nonatomic, strong) GDataXMLElement * xmlRootElement;
+@property (nonatomic, strong) GDataXMLDocument *xmlDocument;
+@property (nonatomic, strong) GDataXMLElement *xmlRootElement;
 @end
 
 @implementation TestCDRJUnitXMLReporter
@@ -109,7 +109,7 @@ describe(@"runDidComplete", ^{
             expect(reporter.xmlDocument).to_not(be_nil);
             expect(reporter.xmlRootElement).to_not(be_nil);
 
-            NSArray * testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
+            NSArray *testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
             expect(testCases.count).to(equal(2));
 
             expect([[testCases[0] attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
@@ -120,25 +120,25 @@ describe(@"runDidComplete", ^{
         });
 
         it(@"should have its name escaped", ^{
-            NSString * stringToEscape = @"Special ' characters \" should < be & escaped > ";
+            NSString *stringToEscape = @"Special ' characters \" should < be & escaped > ";
             CDRExample *example = [CDRExample exampleWithText:stringToEscape andState:CDRExampleStatePassed];
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement * testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
+            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
             expect([[testCase attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
         });
 
         it(@"should have its running time", ^{
             ExampleWithPublicRunDates *example = [ExampleWithPublicRunDates exampleWithText:@"Running task" andState:CDRExampleStatePassed];
-            NSDate * startDate = [NSDate date];
+            NSDate *startDate = [NSDate date];
             [example setStartDate:startDate];
             [example setEndDate:[startDate dateByAddingTimeInterval:5]];
 
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement * testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
+            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
             expect([[testCase attributeForName:@"time"] stringValue]).to_not(be_nil);
             expect([[[testCase attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
 
@@ -157,7 +157,7 @@ describe(@"runDidComplete", ^{
 
             [reporter runDidComplete];
 
-            NSArray * testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
+            NSArray *testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
             expect(testCases.count).to(equal(2));
             expect([[testCases[0] attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
             expect([[testCases[0] attributeForName:@"name"] stringValue]).to(equal(@"Failing spec 1"));
@@ -172,20 +172,20 @@ describe(@"runDidComplete", ^{
         });
 
         it(@"should have its name escaped", ^{
-            NSString * stringToEscape = @"Special ' characters \" should < be & escaped > ";
+            NSString *stringToEscape = @"Special ' characters \" should < be & escaped > ";
             CDRExample *example = [CDRExample exampleWithText:stringToEscape andState:CDRExampleStateFailed];
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement * testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
+            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
             expect([[testCase attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
         });
 
         it(@"should escape the failure reason", ^{
 
-            NSString * exampleName = @"Failing spec 1";
-            NSString * failureReason = @" Special ' characters \" should < be & escaped > ";
-            NSString * fullExampleText = [NSString stringWithFormat:@"%@\n%@", exampleName, failureReason];
+            NSString *exampleName = @"Failing spec 1";
+            NSString *failureReason = @" Special ' characters \" should < be & escaped > ";
+            NSString *fullExampleText = [NSString stringWithFormat:@"%@\n%@", exampleName, failureReason];
             CDRExample *example = [CDRExample exampleWithText:fullExampleText andState:CDRExampleStateFailed];
             example.failure = [CDRSpecFailure specFailureWithReason:failureReason];
 
@@ -198,13 +198,13 @@ describe(@"runDidComplete", ^{
 
         it(@"should have its running time", ^{
             ExampleWithPublicRunDates *example = [ExampleWithPublicRunDates exampleWithText:@"Failing spec\nFailure reason" andState:CDRExampleStateFailed];
-            NSDate * startDate = [NSDate date];
+            NSDate *startDate = [NSDate date];
             [example setStartDate:startDate];
             [example setEndDate:[startDate dateByAddingTimeInterval:5]];
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            GDataXMLElement * testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
+            GDataXMLElement *testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
             expect([[testCase attributeForName:@"time"] stringValue]).to_not(be_nil);
             expect([[[testCase attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
 
