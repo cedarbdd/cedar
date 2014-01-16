@@ -58,6 +58,7 @@
 		42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
+		4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
 		492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		492951DE1481AADA00FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; };
 		492951E01481AAFA00FA8916 /* CDRJUnitXMLReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */; };
@@ -584,6 +585,8 @@
 		22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadlessSimulatorWorkaround.m; sourceTree = "<group>"; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
+		4523F5938DFF8768B6E8902F /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		4523FB751BC9186566CE8E10 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRJUnitXMLReporter.h; sourceTree = "<group>"; };
 		492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRJUnitXMLReporter.m; sourceTree = "<group>"; };
 		492951E31482FF6200FA8916 /* CDRJUnitXMLReporterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRJUnitXMLReporterSpec.mm; sourceTree = "<group>"; };
@@ -969,6 +972,15 @@
 				1F47B9A6186D69CD005A8CE1 /* CDROTestReporterSpec.mm */,
 			);
 			path = Reporters;
+			sourceTree = "<group>";
+		};
+		4523FFB9BD607306C7ED94A3 /* GData */ = {
+			isa = PBXGroup;
+			children = (
+				4523FB751BC9186566CE8E10 /* GDataXMLNode.m */,
+				4523F5938DFF8768B6E8902F /* GDataXMLNode.h */,
+			);
+			path = GData;
 			sourceTree = "<group>";
 		};
 		6628FC8414C4DAB90016652A /* Doubles */ = {
@@ -1535,6 +1547,7 @@
 				AE80788B183C71950078C608 /* SimpleKeyValueObserver.h */,
 				AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */,
 				AE8F1D901850F6C00059E840 /* CedarObservedObject.h */,
+				4523FFB9BD607306C7ED94A3 /* GData */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -2144,6 +2157,7 @@
 				AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */,
 				5898A7EC5992B2CC74E399F6 /* RespondToSpec.mm in Sources */,
 				5898A61AAABFE1802E87E6C3 /* ConformToSpec.mm in Sources */,
+				4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2894,12 +2908,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
+					"-lxml2",
 				);
 				PRODUCT_NAME = Specs;
 			};
@@ -2919,12 +2939,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
+					"-lxml2",
 				);
 				PRODUCT_NAME = Specs;
 				ZERO_LINK = NO;
