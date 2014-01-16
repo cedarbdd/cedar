@@ -22,7 +22,7 @@ static NSMutableSet *currentSpies__;
 + (BOOL)clearSpyInfoForObject:(id)object {
     CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:object];
     if (spyInfo) {
-        [spyInfo.originalObject release];
+//        [spyInfo.originalObject release];
         [spyInfo clear];
         return YES;
     }

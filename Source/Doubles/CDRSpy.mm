@@ -38,61 +38,66 @@
 // To do this, we need to keep track of retain counts to cleanup CDRSpyInfo once we hit
 // zero.
 //
-// Fortunately, NSProxy has its own retain count mechanism that we can utilize to keep a
-// "delta" from the original object's retain count to determine when we need to free spy
-// info following some rules:
+// Now we break it up by platform:
 //
-//  1. we can't let our NSProxy's retainCount from hitting zero via -[NSProxy release],
-//     doing so will trigger a dealloc (which would be incorrect behavior).
+// iOS
 //
-//     - this is why we retain in +[CDRSpy interceptMessagesForInstance] as an extra +1
+//  Fortunately, NSProxy has its own retain count mechanism that we can utilize to keep a
+//  "delta" from the original object's retain count to determine when we need to free the spy
+//  info following some rules:
 //
-//  2. Since we can't count negative retainCount deltas because of #1, decrement the
-//     original object's retainCount when NSProxy's retainCount == 1
+//   1. we can't let our NSProxy's retainCount from hitting zero via -[NSProxy release],
+//      doing so will trigger a dealloc prematurely. This is why we retain in
+//      +[CDRSpy interceptMessagesForInstance:] as an extra +1 and release in
+//      +[CDRSpy clearSpyInfoForObject:]
 //
-//  3. When our total retain count is 1 (original + proxy), then we can release the spy
-//     info and ourselves.
+//   2. Since we can't count negative retainCount deltas because of #1, decrement the
+//      original object's retainCount when NSProxy's retainCount == 1
 //
+//   3. When our retain count is 1 (for proxy) and 0 (for original), then we can release
+//      the spy info and ourselves (the proxy).
 //
+// OSX
+//
+//  NSProxy's don't have their own retain counts, but also doesn't have ARC UIKit,
+//  where a lot of the strange internal memory management behavior occurs.
+//
+//  In this case, we're simply doing more work by "double" counting everything.
+//  No harm done.
 
 - (oneway void)release {
     CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
     Class originalClass = info.spiedClass;
     if (originalClass != Nil) {
+        BOOL isFreed = NO;
         Class spyClass = object_getClass(self);
-        NSUInteger spyRetainCount = [super retainCount];
+        NSUInteger proxyRetainCount = [super retainCount];
+
         object_setClass(self, originalClass);
         {
             NSUInteger originalRetainCount = [self retainCount];
 
-            if (spyRetainCount == 1) {
-                [self release];
+            if (proxyRetainCount == 1) {
+                [self release]; // original
                 --originalRetainCount;
             } else {
                 object_setClass(self, spyClass);
-                [super release];
+                {
+                    [super release]; // proxy
+                }
                 object_setClass(self, originalClass);
             }
+            isFreed = (originalRetainCount + proxyRetainCount == 1);
+        }
+        object_setClass(self, spyClass);
 
-            if (originalRetainCount + spyRetainCount == 1) {
-                info = [CDRSpyInfo spyInfoForObject:self];
-                [info clear];
-                [self release];
-            } else {
-                object_setClass(self, spyClass);
-            }
+        if (isFreed) {
+            info = [CDRSpyInfo spyInfoForObject:self];
+            [info clear];
+            [self release]; // original
         }
     }
 }
-
-- (id)autorelease {
-    __block id that = self;
-    [self as_spied_class:^{
-        [that autorelease];
-    }];
-    return self;
-}
-
 
 #pragma mark - Emulating the original object
 
