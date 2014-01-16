@@ -59,6 +59,7 @@
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
+		4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */; };
 		492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		492951DE1481AADA00FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; };
 		492951E01481AAFA00FA8916 /* CDRJUnitXMLReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */; };
@@ -585,6 +586,8 @@
 		22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadlessSimulatorWorkaround.m; sourceTree = "<group>"; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
+		4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWithPublicRunDates.h; sourceTree = "<group>"; };
+		4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleWithPublicRunDates.m; sourceTree = "<group>"; };
 		4523F5938DFF8768B6E8902F /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		4523FB751BC9186566CE8E10 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRJUnitXMLReporter.h; sourceTree = "<group>"; };
@@ -1548,6 +1551,8 @@
 				AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */,
 				AE8F1D901850F6C00059E840 /* CedarObservedObject.h */,
 				4523FFB9BD607306C7ED94A3 /* GData */,
+				4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */,
+				4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -2158,6 +2163,7 @@
 				5898A7EC5992B2CC74E399F6 /* RespondToSpec.mm in Sources */,
 				5898A61AAABFE1802E87E6C3 /* ConformToSpec.mm in Sources */,
 				4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */,
+				4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

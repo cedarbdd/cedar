@@ -11,6 +11,7 @@
 #import "CDRJUnitXMLReporter.h"
 #import "CDRSpecFailure.h"
 #import "GDataXMLNode.h"
+#import "ExampleWithPublicRunDates.h"
 
 using namespace Cedar::Matchers;
 
@@ -71,7 +72,7 @@ using namespace Cedar::Matchers;
 @implementation CDRExample (Spec)
 
 + (id)exampleWithText:(NSString *)text andState:(CDRExampleState)state {
-    CDRExample *example = [CDRExample exampleWithText:text andBlock:^{}];
+    CDRExample *example = [[self class] exampleWithText:text andBlock:^{}];
     [example setState:state];
     return example;
 }
@@ -127,6 +128,21 @@ describe(@"runDidComplete", ^{
             GDataXMLElement * testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
             expect([[testCase attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
         });
+
+        it(@"should have its running time", ^{
+            ExampleWithPublicRunDates *example = [ExampleWithPublicRunDates exampleWithText:@"Running task" andState:CDRExampleStatePassed];
+            NSDate * startDate = [NSDate date];
+            [example setStartDate:startDate];
+            [example setEndDate:[startDate dateByAddingTimeInterval:5]];
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement * testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
+            expect([[testCase attributeForName:@"time"] stringValue]).to_not(be_nil);
+            expect([[[testCase attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+
+        });
     });
 
     describe(@"each failing spec", ^{
@@ -179,6 +195,21 @@ describe(@"runDidComplete", ^{
 
             expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/text()" error:nil] firstObject] stringValue]).to(equal(failureReason));
         });
+
+        it(@"should have its running time", ^{
+            ExampleWithPublicRunDates *example = [ExampleWithPublicRunDates exampleWithText:@"Failing spec\nFailure reason" andState:CDRExampleStateFailed];
+            NSDate * startDate = [NSDate date];
+            [example setStartDate:startDate];
+            [example setEndDate:[startDate dateByAddingTimeInterval:5]];
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement * testCase = [reporter.xmlRootElement elementsForName:@"testcase"][0];
+            expect([[testCase attributeForName:@"time"] stringValue]).to_not(be_nil);
+            expect([[[testCase attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+
+        });
+
     });
 
     describe(@"each spec that causes an error", ^{
