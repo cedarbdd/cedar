@@ -7,7 +7,7 @@ namespace Cedar { namespace Matchers {
         virtual NSString * failure_message_end() const {
             return @"exist on the local filesystem";
         }
-        
+
         template<typename T>
         bool matches(T * const &) const;
 

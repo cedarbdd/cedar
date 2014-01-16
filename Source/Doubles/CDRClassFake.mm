@@ -76,6 +76,6 @@ id CDR_fake_for(BOOL require_explicit_stubs, Class klass, ...) {
                                userInfo:nil] raise];
     }
     va_end(args);
-    
+
     return [[[CDRClassFake alloc] initWithClass:klass requireExplicitStubs:require_explicit_stubs] autorelease];
 }

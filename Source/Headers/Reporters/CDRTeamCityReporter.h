@@ -2,7 +2,7 @@
 #import "CDRDefaultReporter.h"
 
 @interface CDRTeamCityReporter : CDRDefaultReporter {
-    
+
 }
 
 @end

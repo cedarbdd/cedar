@@ -18,7 +18,7 @@
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-void (^runInFocusedSpecsMode)(CDRExampleBase *, CDRReportDispatcher *) = ^(CDRExampleBase *example, CDRReportDispatcher *dispatcher){
+void (^runInFocusedSpecsMode)(CDRExampleBase *, CDRReportDispatcher *) = ^(CDRExampleBase *example, CDRReportDispatcher *dispatcher) {
     BOOL before = [SpecHelper specHelper].shouldOnlyRunFocused;
     [SpecHelper specHelper].shouldOnlyRunFocused = YES;
     @try {

@@ -187,7 +187,7 @@ describe(@"CDRClassFake", ^{
             });
         });
     });
-    
+
     describe(@"trying to create a fake for multiple classes", ^{
         it(@"should fail with a reasonable message", ^{
             ^{ nice_fake_for([SimpleIncrementer class], [NSValue class]); } should raise_exception.with_reason(@"Can't create a fake for multiple classes.");
