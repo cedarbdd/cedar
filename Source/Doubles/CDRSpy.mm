@@ -18,8 +18,11 @@
     if (![object_getClass(instance) conformsToProtocol:@protocol(CedarDouble)]) {
         [CDRSpyInfo storeSpyInfoForObject:instance];
         object_setClass(instance, self);
-        // see -[CDRSpy release] method below to see why
+
+        // This increments the Proxy's retainCount
+        // See "Memory Management" below for more details.
         [instance retain];
+        //
     }
 }
 
@@ -27,6 +30,14 @@
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot stop spying on nil" userInfo:nil];
     }
+
+    // This decrements the Proxy's retainCount
+    // See "Memory Management" below for more details.
+    if ([CDRSpyInfo spyInfoForObject:instance]) {
+        [instance release];
+    }
+    //
+
     [CDRSpyInfo clearSpyInfoForObject:instance];
 }
 
@@ -38,6 +49,9 @@
 // To do this, we need to keep track of retain counts to cleanup CDRSpyInfo once we hit
 // zero.
 //
+// There is one way a spy gets created - +[interceptMessagesForInstance:].
+// But there are two ways a spy gets freed - +[stopInterceptingMessagesForInstance:] and releases.
+//
 // Now we break it up by platform:
 //
 // iOS
@@ -46,7 +60,7 @@
 //  "delta" from the original object's retain count to determine when we need to free the spy
 //  info following some rules:
 //
-//   1. we can't let our NSProxy's retainCount from hitting zero via -[NSProxy release],
+//   1. We can't let our NSProxy's retainCount from hitting zero via -[NSProxy release],
 //      doing so will trigger a dealloc prematurely. This is why we retain in
 //      +[CDRSpy interceptMessagesForInstance:] as an extra +1 and release in
 //      +[CDRSpy clearSpyInfoForObject:]
@@ -69,7 +83,7 @@
     CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
     Class originalClass = info.spiedClass;
     if (originalClass != Nil) {
-        BOOL isFreed = NO;
+        BOOL needsToDealloc = NO;
         Class spyClass = object_getClass(self);
         NSUInteger proxyRetainCount = [super retainCount];
 
@@ -87,12 +101,11 @@
                 }
                 object_setClass(self, originalClass);
             }
-            isFreed = (originalRetainCount + proxyRetainCount == 1);
+            needsToDealloc = (originalRetainCount + proxyRetainCount == 1);
         }
         object_setClass(self, spyClass);
 
-        if (isFreed) {
-            info = [CDRSpyInfo spyInfoForObject:self];
+        if (needsToDealloc) {
             [info clear];
             [self release]; // original
         }
