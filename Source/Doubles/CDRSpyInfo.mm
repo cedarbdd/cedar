@@ -22,17 +22,21 @@ static NSMutableSet *currentSpies__;
 + (BOOL)clearSpyInfoForObject:(id)object {
     CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:object];
     if (spyInfo) {
-        spyInfo.originalObject = nil;
-        [currentSpies__ removeObject:spyInfo];
+        [spyInfo.originalObject release];
+        [spyInfo clear];
         return YES;
     }
     return NO;
 }
 
-- (void)dealloc {
+- (void)clear {
     if (self.originalObject) {
+        [currentSpies__ removeObject:self];
         object_setClass(self.originalObject, self.spiedClass);
     }
+}
+
+- (void)dealloc {
     self.publicClass = nil;
     self.spiedClass = nil;
     self.originalObject = nil;
@@ -49,13 +53,12 @@ static NSMutableSet *currentSpies__;
 }
 
 + (CDRSpyInfo *)spyInfoForObject:(id)object {
-    return [currentSpies__ objectsPassingTest:^BOOL(CDRSpyInfo *spyInfo, BOOL *stop) {
+    for (CDRSpyInfo *spyInfo in currentSpies__) {
         if (spyInfo.originalObject == object) {
-            *stop = YES;
-            return YES;
+            return spyInfo;
         }
-        return NO;
-    }].anyObject;
+    }
+    return nil;
 }
 
 - (IMP)impForSelector:(SEL)selector {
@@ -75,7 +78,10 @@ static NSMutableSet *currentSpies__;
     return method_getImplementation(originalMethod);
 }
 
-+ (void)afterEach {
++ (void)restoreAllSpies {
+    for (CDRSpyInfo *spyInfo in currentSpies__) {
+        [spyInfo clear];
+    }
     [currentSpies__ removeAllObjects];
 }
 

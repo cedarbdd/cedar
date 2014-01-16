@@ -18,6 +18,8 @@
     if (![object_getClass(instance) conformsToProtocol:@protocol(CedarDouble)]) {
         [CDRSpyInfo storeSpyInfoForObject:instance];
         object_setClass(instance, self);
+        // see -[CDRSpy release] method below to see why
+        [instance retain];
     }
 }
 
@@ -25,11 +27,74 @@
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot stop spying on nil" userInfo:nil];
     }
-    Class originalClass = [instance class];
-    if ([CDRSpyInfo clearSpyInfoForObject:instance]) {
-        object_setClass(instance, originalClass);
+    [CDRSpyInfo clearSpyInfoForObject:instance];
+}
+
+#pragma mark - Memory Management
+
+// REASONING
+//
+// We need to know when to release our corresponding CDRSpyInfo to avoid leaking any memory.
+// To do this, we need to keep track of retain counts to cleanup CDRSpyInfo once we hit
+// zero.
+//
+// Fortunately, NSProxy has its own retain count mechanism that we can utilize to keep a
+// "delta" from the original object's retain count to determine when we need to free spy
+// info following some rules:
+//
+//  1. we can't let our NSProxy's retainCount from hitting zero via -[NSProxy release],
+//     doing so will trigger a dealloc (which would be incorrect behavior).
+//
+//     - this is why we retain in +[CDRSpy interceptMessagesForInstance] as an extra +1
+//
+//  2. Since we can't count negative retainCount deltas because of #1, decrement the
+//     original object's retainCount when NSProxy's retainCount == 1
+//
+//  3. When our total retain count is 1 (original + proxy), then we can release the spy
+//     info and ourselves.
+//
+//
+
+- (oneway void)release {
+    CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
+    Class originalClass = info.spiedClass;
+    if (originalClass != Nil) {
+        Class spyClass = object_getClass(self);
+        NSUInteger spyRetainCount = [super retainCount];
+        object_setClass(self, originalClass);
+        {
+            NSUInteger originalRetainCount = [self retainCount];
+
+            if (spyRetainCount == 1) {
+                [self release];
+                --originalRetainCount;
+            } else {
+                object_setClass(self, spyClass);
+                [super release];
+                object_setClass(self, originalClass);
+            }
+
+            if (originalRetainCount + spyRetainCount == 1) {
+                info = [CDRSpyInfo spyInfoForObject:self];
+                [info clear];
+                [self release];
+            } else {
+                object_setClass(self, spyClass);
+            }
+        }
     }
 }
+
+- (id)autorelease {
+    __block id that = self;
+    [self as_spied_class:^{
+        [that autorelease];
+    }];
+    return self;
+}
+
+
+#pragma mark - Emulating the original object
 
 - (NSString *)description {
     __block id that = self;
