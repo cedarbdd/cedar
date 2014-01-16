@@ -112,6 +112,15 @@
     }
 }
 
+- (NSUInteger)retainCount {
+    __block id that = self;
+    __block NSUInteger total = [super retainCount];
+    [self as_spied_class:^{
+        total += [that retainCount];
+    }];
+    return total;
+}
+
 #pragma mark - Emulating the original object
 
 - (NSString *)description {

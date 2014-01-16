@@ -62,7 +62,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 }
             }
 
-            myDouble.retainCount should_not equal(doubleRetainCount);
+            myDouble.retainCount should be_greater_than(doubleRetainCount);
 
             [CedarDoubleImpl afterEach];
 
