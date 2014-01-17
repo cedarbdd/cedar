@@ -31,6 +31,8 @@
     }
 }
 
+#pragma mark - Emulating the original object
+
 - (NSString *)description {
     __block id that = self;
     __block NSString *description = nil;
