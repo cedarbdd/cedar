@@ -18,6 +18,11 @@
     if (![object_getClass(instance) conformsToProtocol:@protocol(CedarDouble)]) {
         [CDRSpyInfo storeSpyInfoForObject:instance];
         object_setClass(instance, self);
+
+        // This increments the Proxy's retain count
+        // See "Memory Management" below for more details.
+        [instance retain];
+        //
     }
 }
 
@@ -25,47 +30,95 @@
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot stop spying on nil" userInfo:nil];
     }
-    Class originalClass = [instance class];
-    if ([CDRSpyInfo clearSpyInfoForObject:instance]) {
-        object_setClass(instance, originalClass);
+
+    // This decrements the Proxy's retain count
+    // See "Memory Management" below for more details.
+    if ([CDRSpyInfo spyInfoForObject:instance]) {
+        [instance release];
     }
+    //
+
+    [CDRSpyInfo clearSpyInfoForObject:instance];
 }
 
-- (id)retain {
-    __block id that = self;
-    [self as_spied_class:^{
-        [that retain];
-    }];
-    return self;
-}
+#pragma mark - Memory Management
+
+// THEORY
+//
+// We need to know when to release our corresponding CDRSpyInfo to avoid leaking any memory.
+// To do this, we need to keep track of retain counts to cleanup CDRSpyInfo once we hit
+// zero (aka, we are freed). This only applies to when we're freed (vs cleared in afterEach).
+//
+// Now we break it up by platform:
+//
+// iOS
+//
+//  Fortunately, NSProxy has its own retain count mechanism that we can utilize to keep a
+//  "delta" from the original object's retain count to determine when we need to free the spy
+//  info following some rules:
+//
+//   1. We can't let our NSProxy's retainCount from hitting zero via -[NSProxy release],
+//      doing so will trigger a dealloc prematurely. This is why we retain in
+//      +[interceptMessagesForInstance:] as an extra +1. The release occurs in
+//      +[stopInterceptingMessagesForInstance:] or -[release]
+//
+//   2. Since we can't count negative retainCount deltas because of #1, decrement the
+//      original object's retainCount when NSProxy's retainCount == 1
+//
+//   3. When our retain count is 1 (for proxy) and 0 (for original), then we can release
+//      the spy info and ourselves. The act of removing spy info will clear our proxy,
+//      and its +1 retain count.
+//
+// OSX
+//
+//  NSProxy's don't have their own retain counts, but also doesn't have ARC UIKit,
+//  where a lot of the strange internal memory management behavior occurs.
+//
+//  In this case, we're simply doing more work by double counting everything.
+//  No harm done.
 
 - (oneway void)release {
-    __block id that = self;
-    [self as_spied_class:^{
-        [that release];
-    }];
-}
+    CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
+    Class originalClass = info.spiedClass;
+    if (originalClass != Nil) {
+        Class spyClass = object_getClass(self);
+        NSUInteger proxyRetainCount = [super retainCount];
 
-- (id)autorelease {
-    __block id that = self;
-    [self as_spied_class:^{
-        [that autorelease];
-    }];
-    return self;
+        object_setClass(self, originalClass);
+        NSUInteger originalRetainCount = [self retainCount];
+
+        if (proxyRetainCount == 1) {
+            [self release]; // original
+            --originalRetainCount;
+        } else {
+            object_setClass(self, spyClass);
+            [super release]; // proxy
+            object_setClass(self, originalClass);
+        }
+        object_setClass(self, spyClass);
+
+        if (originalRetainCount + proxyRetainCount == 1) {
+            [info clearSpy];
+            [self release]; // original
+        }
+    }
 }
 
 - (NSUInteger)retainCount {
     __block id that = self;
-    __block NSUInteger count;
+    __block NSUInteger total = [super retainCount];
     [self as_spied_class:^{
-        count = [that retainCount];
+        total += [that retainCount];
     }];
-    return count;
+
+    return total;
 }
+
+#pragma mark - Emulating the original object
 
 - (NSString *)description {
     __block id that = self;
-    __block NSString *description;
+    __block NSString *description = nil;
     [self as_spied_class:^{
         description = [that description];
     }];
@@ -117,7 +170,7 @@
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
-    __block NSMethodSignature *originalMethodSignature;
+    __block NSMethodSignature *originalMethodSignature = nil;
 
     [self as_spied_class:^{
         originalMethodSignature = [self methodSignatureForSelector:sel];
@@ -127,7 +180,7 @@
 }
 
 - (BOOL)respondsToSelector:(SEL)selector {
-    __block BOOL respondsToSelector;
+    __block BOOL respondsToSelector = NO;
 
     [self as_spied_class:^{
         respondsToSelector = [self respondsToSelector:selector];
@@ -167,8 +220,6 @@
 }
 
 - (void)as_class:(Class)klass :(void(^)())block {
-    block = [[block copy] autorelease];
-
     Class spyClass = object_getClass(self);
     object_setClass(self, klass);
 

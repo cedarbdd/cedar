@@ -54,7 +54,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
             NSUInteger doubleRetainCount = myDouble.retainCount;
 
-            // spies are allowed to increment the retain count of the double by 1
+            // spies are allowed to increment the retain count of the double
             // but should hand the retain over to the autorelease pool
             @autoreleasepool {
                 for (NSInteger invocation = 0; invocation < numInvocations; ++invocation) {
@@ -62,7 +62,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 }
             }
 
-            myDouble.retainCount should equal(doubleRetainCount + numInvocations);
+            myDouble.retainCount should be_greater_than(doubleRetainCount);
 
             [CedarDoubleImpl afterEach];
 

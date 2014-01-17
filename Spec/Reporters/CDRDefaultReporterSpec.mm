@@ -59,12 +59,12 @@ describe(@"CDRDefaultReporter", ^{
         __block CDRExampleGroup *group;
 
         beforeEach(^{
-            group = [[CDRExampleGroup alloc] initWithText:@"example group" isRoot:YES];
+            group = [[[CDRExampleGroup alloc] initWithText:@"example group" isRoot:YES] autorelease];
         });
 
         context(@"with one child 'it' example", ^{
             it(@"exampleCount should be 1", ^{
-                CDRExample *example = [[CDRExample alloc] initWithText:@"example" andBlock:^{ }];
+                CDRExample *example = [[[CDRExample alloc] initWithText:@"example" andBlock:^{ }] autorelease];
                 [group add:example];
 
                 [reporter runWillStartWithGroups:@[group] andRandomSeed:33];

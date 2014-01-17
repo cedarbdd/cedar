@@ -132,9 +132,10 @@ NSArray *CDRSpecClassesToRun() {
 NSArray *CDRSpecsFromSpecClasses(NSArray *specClasses) {
     NSMutableArray *specs = [NSMutableArray arrayWithCapacity:specClasses.count];
     for (Class class in specClasses) {
-        CDRSpec *spec = [[[class alloc] init] autorelease];
+        CDRSpec *spec = [[class alloc] init];
         [spec defineBehaviors];
         [specs addObject:spec];
+        [spec release];
     }
     return specs;
 }
@@ -239,7 +240,7 @@ NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned in
         NSUInteger idx = rand() % permutedSpecClasses.count;
         [permutedSpecClasses exchangeObjectAtIndex:i withObjectAtIndex:idx];
     }
-    return permutedSpecClasses;
+    return [permutedSpecClasses autorelease];
 }
 
 unsigned int CDRGetRandomSeed() {
@@ -275,6 +276,8 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
 
         [dispatcher runDidComplete];
         int result = [dispatcher result];
+
+        [dispatcher release];
 
         __gcov_flush();
 

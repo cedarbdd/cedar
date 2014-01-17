@@ -2,7 +2,7 @@
 
 @implementation ObjectWithCollections
 
--(instancetype) init {
+- (instancetype)init {
     if (self = [super init]) {
         self.array = [NSMutableArray array];
         self.set = [NSMutableSet set];
@@ -12,6 +12,15 @@
     }
 
     return self;
+}
+
+- (void)dealloc {
+    self.array = nil;
+    self.set = nil;
+    self.orderedSet = nil;
+    self.manualArray = nil;
+    self.manualSet = nil;
+    [super dealloc];
 }
 
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {

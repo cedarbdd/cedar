@@ -17,5 +17,6 @@
 + (Class)publicClassForObject:(id)object;
 
 - (IMP)impForSelector:(SEL)selector;
+- (void)clearSpy;
 
 @end
