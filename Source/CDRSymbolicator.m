@@ -68,15 +68,19 @@ NSUInteger CDRCallerStackAddress() {
     return (index == NSNotFound) ? 0 : [[self.lineNumbers objectAtIndex:index] unsignedIntegerValue];
 }
 
-- (void)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error {
+- (BOOL)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error {
 #if __arm__
-    *error = self.buildNotAvailableError;
-    return;
+    if (error) {
+        *error = self.buildNotAvailableError;
+    }
+    return NO;
 #else
     NSArray *validAddresses = [self.class validAddresses:addresses];
     if (validAddresses.count == 0) {
-        *error = self.buildNoAddressesError;
-        return;
+        if (error) {
+            *error = self.buildNoAddressesError;
+        }
+        return NO;
     }
 
     CDRAtosTask *atosTask = [CDRAtosTask taskForCurrentTestExecutable];
@@ -99,9 +103,13 @@ NSUInteger CDRCallerStackAddress() {
     }
 
     if (!atLeastOneSuccessfulSymbolication) {
-        *error = self.buildNotSuccessfulError;
-        return;
+        if (error) {
+            *error = self.buildNotSuccessfulError;
+        }
+        return NO;
     }
+
+    return YES;
 #endif
 }
 
