@@ -24,5 +24,5 @@ namespace Cedar { namespace Doubles {
     void operator,(id<CedarDouble> double_instance, const RejectedMethod & rejected_method) {
         [double_instance reject_method:rejected_method];
     }
-    
+
 }}

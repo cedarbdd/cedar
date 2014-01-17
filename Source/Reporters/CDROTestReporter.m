@@ -55,7 +55,7 @@
 }
 
 - (void)runDidComplete {
-    if (self.currentSuiteName){
+    if (self.currentSuiteName) {
         [self finishSuite:self.currentSuiteName atDate:[NSDate date]];
         [self printStatsForExamples:@[self.currentSuite]];
     }
@@ -96,7 +96,7 @@
 }
 
 - (void)runWillStartSpec:(CDRSpec *)spec {
-    if ([self shouldReportSpec:spec]){
+    if ([self shouldReportSpec:spec]) {
         [self startSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
     }
 }

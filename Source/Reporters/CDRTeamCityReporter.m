@@ -6,7 +6,7 @@
 
 @implementation CDRTeamCityReporter
 
-- (NSString *)escapeText:(NSString *)text{
+- (NSString *)escapeText:(NSString *)text {
     NSString *tmp = text;
     tmp = [text stringByReplacingOccurrencesOfString:@"|" withString:@"||"];
     tmp = [tmp stringByReplacingOccurrencesOfString:@"'" withString:@"|'"];
@@ -18,24 +18,24 @@
     return tmp;
 }
 
-- (NSString *)startedMessageForExample:(CDRExample *)example{
+- (NSString *)startedMessageForExample:(CDRExample *)example {
     return [NSString stringWithFormat:@"##teamcity[testStarted name='%@']", [self escapeText:example.fullText]];
 }
 
-- (NSString *)finishedMessageForExample:(CDRExample *)example{
+- (NSString *)finishedMessageForExample:(CDRExample *)example {
     return [NSString stringWithFormat:@"##teamcity[testFinished name='%@']", [self escapeText:example.fullText]];
 }
 
-- (NSString *)pendingMessageForExample:(CDRExample *)example{
+- (NSString *)pendingMessageForExample:(CDRExample *)example {
     return [NSString stringWithFormat:@"##teamcity[testIgnored name='%@']", [self escapeText:example.fullText]];
 }
 
-- (NSString *)skippedMessageForExample:(CDRExample *)example{
+- (NSString *)skippedMessageForExample:(CDRExample *)example {
     return [NSString stringWithFormat:@"##teamcity[testIgnored name='%@']", [self escapeText:example.fullText]];
 }
 
-- (NSString *)failureMessageForExample:(CDRExample *)example{
-    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='%@']", 
+- (NSString *)failureMessageForExample:(CDRExample *)example {
+    return [NSString stringWithFormat:@"##teamcity[testFailed name='%@' message='%@']",
             [self escapeText:example.fullText],
             [self escapeText:example.message]];
 }
@@ -43,7 +43,7 @@
 - (void)reportOnExample:(CDRExample *)example {
     switch (example.state) {
         case CDRExampleStatePassed:
-            printf("%s\n%s\n", 
+            printf("%s\n%s\n",
                     [[self startedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding],
                     [[self finishedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);
             break;
@@ -57,7 +57,7 @@
             break;
         case CDRExampleStateError:
         case CDRExampleStateFailed:
-            printf("%s\n%s\n%s\n", 
+            printf("%s\n%s\n%s\n",
                    [[self startedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding],
                    [[self failureMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding],
                    [[self finishedMessageForExample:example] cStringUsingEncoding:NSUTF8StringEncoding]);

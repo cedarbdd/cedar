@@ -10,7 +10,7 @@ typedef enum {
     CDRStubWrongArguments,
 } CDRStubInvokeStatus;
 
-@interface CedarDoubleImpl : NSObject 
+@interface CedarDoubleImpl : NSObject
 
 @property (nonatomic, retain, readonly) NSMutableArray *sent_messages;
 
