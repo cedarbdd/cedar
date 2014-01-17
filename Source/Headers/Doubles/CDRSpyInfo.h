@@ -8,7 +8,6 @@
 @property (nonatomic, assign) Class spiedClass;
 @property (nonatomic, assign) id originalObject;
 @property (nonatomic, retain) CedarDoubleImpl *cedarDouble;
-@property (nonatomic, assign) NSUInteger retainCount;
 
 + (void)storeSpyInfoForObject:(id)object;
 + (BOOL)clearSpyInfoForObject:(id)object;
