@@ -2,6 +2,7 @@
 #import "CDRDefaultReporter.h"
 
 @interface CDRJUnitXMLReporter : CDRDefaultReporter {
-    NSMutableArray *successMessages_;
+    NSMutableArray *successExamples_;
+    NSMutableArray *failureExamples_;
 }
 @end

@@ -58,6 +58,10 @@
 		42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
+		44B9A71E1888660400CBCA1B /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
+		44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */; };
+		4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
+		4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */; };
 		492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		492951DE1481AADA00FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; };
 		492951E01481AAFA00FA8916 /* CDRJUnitXMLReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */; };
@@ -584,6 +588,10 @@
 		22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadlessSimulatorWorkaround.m; sourceTree = "<group>"; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
+		4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWithPublicRunDates.h; sourceTree = "<group>"; };
+		4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleWithPublicRunDates.m; sourceTree = "<group>"; };
+		4523F5938DFF8768B6E8902F /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		4523FB751BC9186566CE8E10 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRJUnitXMLReporter.h; sourceTree = "<group>"; };
 		492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRJUnitXMLReporter.m; sourceTree = "<group>"; };
 		492951E31482FF6200FA8916 /* CDRJUnitXMLReporterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRJUnitXMLReporterSpec.mm; sourceTree = "<group>"; };
@@ -969,6 +977,15 @@
 				1F47B9A6186D69CD005A8CE1 /* CDROTestReporterSpec.mm */,
 			);
 			path = Reporters;
+			sourceTree = "<group>";
+		};
+		4523FFB9BD607306C7ED94A3 /* GData */ = {
+			isa = PBXGroup;
+			children = (
+				4523FB751BC9186566CE8E10 /* GDataXMLNode.m */,
+				4523F5938DFF8768B6E8902F /* GDataXMLNode.h */,
+			);
+			path = GData;
 			sourceTree = "<group>";
 		};
 		6628FC8414C4DAB90016652A /* Doubles */ = {
@@ -1535,6 +1552,9 @@
 				AE80788B183C71950078C608 /* SimpleKeyValueObserver.h */,
 				AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */,
 				AE8F1D901850F6C00059E840 /* CedarObservedObject.h */,
+				4523FFB9BD607306C7ED94A3 /* GData */,
+				4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */,
+				4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -2144,6 +2164,8 @@
 				AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */,
 				5898A7EC5992B2CC74E399F6 /* RespondToSpec.mm in Sources */,
 				5898A61AAABFE1802E87E6C3 /* ConformToSpec.mm in Sources */,
+				4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */,
+				4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2229,6 +2251,7 @@
 				1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */,
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */,
+				44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AE53B68217E7BCE700D83D5E /* CedarNiceFakeSharedExamples.mm in Sources */,
@@ -2236,6 +2259,7 @@
 				AEF33015145B6188002F93BB /* BeLessThanSpec.mm in Sources */,
 				AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */,
 				966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */,
+				44B9A71E1888660400CBCA1B /* GDataXMLNode.m in Sources */,
 				AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
 				AE4A945C187F7E52008566F5 /* BeFalsySpec.mm in Sources */,
 				AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */,
@@ -2894,12 +2918,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
+					"-lxml2",
 				);
 				PRODUCT_NAME = Specs;
 			};
@@ -2919,12 +2949,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
+					"-lxml2",
 				);
 				PRODUCT_NAME = Specs;
 				ZERO_LINK = NO;
@@ -3007,6 +3043,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -3018,6 +3055,7 @@
 					Foundation,
 					"-framework",
 					UIKit,
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3047,6 +3085,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -3058,6 +3097,7 @@
 					Foundation,
 					"-framework",
 					UIKit,
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
