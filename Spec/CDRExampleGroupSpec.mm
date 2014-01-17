@@ -33,7 +33,7 @@ describe(@"CDRExampleGroup", ^{
         group = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
         incompleteExample = [[[CDRExample alloc] initWithText:@"incomplete" andBlock:^{}] autorelease];
         passingExample = [[[CDRExample alloc] initWithText:@"I should pass" andBlock:^{}] autorelease];
-        failingExample = [[[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(nil);}] autorelease];
+        failingExample = [[[CDRExample alloc] initWithText:@"I should fail" andBlock:^{fail(@"I have failed.");}] autorelease];
         pendingExample = [[[CDRExample alloc] initWithText:@"I should pend" andBlock:nil] autorelease];
         errorExample = [[[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }] autorelease];
         nonFocusedExample = [[[CDRExample alloc] initWithText:@"I should not be focused" andBlock:^{}] autorelease];
