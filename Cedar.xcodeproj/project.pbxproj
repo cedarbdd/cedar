@@ -40,12 +40,24 @@
 		1F483E34187D3CD200521F81 /* CDROTestNamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F483E31187D39D000521F81 /* CDROTestNamer.m */; };
 		1F882AAA180F9B6300533238 /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1F882AAC180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
+		1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FB4F27F188919A200227772 /* ARCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE71E7CB175E958F002A54D5 /* ARCViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FB4F28018891ED400227772 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
+		1FB4F28118891EF200227772 /* ArgumentReleaser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE807888183C71950078C608 /* ArgumentReleaser.m */; };
+		1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
+		1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
+		1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
+		1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
+		1FB4F28618891F0D00227772 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
 		1FDCD5601821D3BB00B511DB /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FE15C1B1869091900207F0C /* CDRReportDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE15C191869091900207F0C /* CDRReportDispatcher.h */; };
 		1FE15C1C1869091900207F0C /* CDRReportDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE15C191869091900207F0C /* CDRReportDispatcher.h */; };
 		1FE15C1D1869091900207F0C /* CDRReportDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE15C1A1869091900207F0C /* CDRReportDispatcher.m */; };
 		1FE15C201869091900207F0C /* CDRReportDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE15C1A1869091900207F0C /* CDRReportDispatcher.m */; };
+		1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; };
+		1FE2ACBA18891FE90000C063 /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
 		1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
 		1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
@@ -2027,8 +2039,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */,
+				1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */,
+				1FB4F27F188919A200227772 /* ARCViewController.m in Sources */,
+				1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */,
+				1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */,
 				96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */,
+				1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */,
 				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m in Sources */,
+				1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */,
+				1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */,
+				1FB4F28118891EF200227772 /* ArgumentReleaser.m in Sources */,
+				1FB4F28018891ED400227772 /* CDRSpySpec.mm in Sources */,
+				1FB4F28618891F0D00227772 /* SimpleKeyValueObserver.m in Sources */,
+				1FE2ACBA18891FE90000C063 /* CedarDoubleARCSharedExamples.mm in Sources */,
 				968F9582161AC58200A78D36 /* CDRSymbolicatorSpec.mm in Sources */,
 				96A805E416D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */,
 			);

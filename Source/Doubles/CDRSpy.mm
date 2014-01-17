@@ -19,7 +19,7 @@
         [CDRSpyInfo storeSpyInfoForObject:instance];
         object_setClass(instance, self);
 
-        // This increments the Proxy's retainCount
+        // This increments the Proxy's retain count
         // See "Memory Management" below for more details.
         [instance retain];
         //
@@ -31,7 +31,7 @@
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot stop spying on nil" userInfo:nil];
     }
 
-    // This decrements the Proxy's retainCount
+    // This decrements the Proxy's retain count
     // See "Memory Management" below for more details.
     if ([CDRSpyInfo spyInfoForObject:instance]) {
         [instance release];
@@ -43,14 +43,11 @@
 
 #pragma mark - Memory Management
 
-// REASONING
+// THEORY
 //
 // We need to know when to release our corresponding CDRSpyInfo to avoid leaking any memory.
 // To do this, we need to keep track of retain counts to cleanup CDRSpyInfo once we hit
-// zero.
-//
-// There is one way a spy gets created - +[interceptMessagesForInstance:].
-// But there are two ways a spy gets freed - +[stopInterceptingMessagesForInstance:] and releases.
+// zero (aka, we are freed). This only applies to when we're freed (vs cleared in afterEach).
 //
 // Now we break it up by platform:
 //
@@ -62,51 +59,46 @@
 //
 //   1. We can't let our NSProxy's retainCount from hitting zero via -[NSProxy release],
 //      doing so will trigger a dealloc prematurely. This is why we retain in
-//      +[CDRSpy interceptMessagesForInstance:] as an extra +1 and release in
-//      +[CDRSpy clearSpyInfoForObject:]
+//      +[interceptMessagesForInstance:] as an extra +1. The release occurs in
+//      +[stopInterceptingMessagesForInstance:] or -[release]
 //
 //   2. Since we can't count negative retainCount deltas because of #1, decrement the
 //      original object's retainCount when NSProxy's retainCount == 1
 //
 //   3. When our retain count is 1 (for proxy) and 0 (for original), then we can release
-//      the spy info and ourselves (the proxy).
+//      the spy info and ourselves. The act of removing spy info will clear our proxy,
+//      and its +1 retain count.
 //
 // OSX
 //
 //  NSProxy's don't have their own retain counts, but also doesn't have ARC UIKit,
 //  where a lot of the strange internal memory management behavior occurs.
 //
-//  In this case, we're simply doing more work by "double" counting everything.
+//  In this case, we're simply doing more work by double counting everything.
 //  No harm done.
 
 - (oneway void)release {
     CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
     Class originalClass = info.spiedClass;
     if (originalClass != Nil) {
-        BOOL needsToDealloc = NO;
         Class spyClass = object_getClass(self);
         NSUInteger proxyRetainCount = [super retainCount];
 
         object_setClass(self, originalClass);
-        {
-            NSUInteger originalRetainCount = [self retainCount];
+        NSUInteger originalRetainCount = [self retainCount];
 
-            if (proxyRetainCount == 1) {
-                [self release]; // original
-                --originalRetainCount;
-            } else {
-                object_setClass(self, spyClass);
-                {
-                    [super release]; // proxy
-                }
-                object_setClass(self, originalClass);
-            }
-            needsToDealloc = (originalRetainCount + proxyRetainCount == 1);
+        if (proxyRetainCount == 1) {
+            [self release]; // original
+            --originalRetainCount;
+        } else {
+            object_setClass(self, spyClass);
+            [super release]; // proxy
+            object_setClass(self, originalClass);
         }
         object_setClass(self, spyClass);
 
-        if (needsToDealloc) {
-            [info clear];
+        if (originalRetainCount + proxyRetainCount == 1) {
+            [info clearSpy];
             [self release]; // original
         }
     }
@@ -118,6 +110,7 @@
     [self as_spied_class:^{
         total += [that retainCount];
     }];
+
     return total;
 }
 
