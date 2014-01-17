@@ -1,10 +1,10 @@
 #import "CDRColorizedReporter.h"
 
 static const char * const ANSI_NORMAL = "\033[0m";
-static const char * const ANSI_RED = "\033[0;40;31m";
-static const char * const ANSI_GREEN = "\033[0;40;32m";
-static const char * const ANSI_YELLOW = "\033[0;40;33m";
-static const char * const ANSI_CYAN = "\033[0;40;36m";
+static const char * const ANSI_RED = "\033[1;31m";
+static const char * const ANSI_GREEN = "\033[1;32m";
+static const char * const ANSI_YELLOW = "\033[33m";
+static const char * const ANSI_CYAN = "\033[36m";
 
 @implementation CDRColorizedReporter
 
