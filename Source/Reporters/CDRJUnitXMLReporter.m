@@ -72,8 +72,9 @@
 
 - (NSString *)classNameForExample:(CDRExample *)example {
     NSString *className = @"Cedar";
-    if (example.spec.fileName && [example.spec.fileName length]) {
-        className = example.spec.fileName;
+    NSString *fileName = [[example.spec.fileName lastPathComponent] stringByDeletingPathExtension];
+    if (fileName && [fileName length]) {
+        className = fileName;
     }
     return className;
 }

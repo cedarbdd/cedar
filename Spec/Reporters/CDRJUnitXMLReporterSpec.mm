@@ -147,27 +147,25 @@ describe(@"runDidComplete", ^{
         it(@"should have it's classname set from spec filename", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
             example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"ExampleSpec";
+            example.spec.fileName = @"/SomePath/ExampleSpec.mm";
 
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
             GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
-            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"ExampleSpec"));
         });
 
-        it(@"should have it's classname escaped", ^{
+        it(@"should have it's classname set from spec filename even if it contains special characters", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
             example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"Special ' characters \" should < be & escaped > ";
-
+            example.spec.fileName = @"Path That \"' Contains ?*&^|+!~ Special Characters";
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
             GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
             expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
         });
-
 
         it(@"should have it's classname to default value if spec filename is empty", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
@@ -220,7 +218,6 @@ describe(@"runDidComplete", ^{
         });
 
         it(@"should escape the failure reason", ^{
-
             NSString *exampleName = @"Failing spec 1";
             NSString *failureReason = @" Special ' characters \" should < be & escaped > ";
             NSString *fullExampleText = [NSString stringWithFormat:@"%@\n%@", exampleName, failureReason];
@@ -250,20 +247,19 @@ describe(@"runDidComplete", ^{
         it(@"should have it's classname set from spec filename", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
             example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"ExampleSpec";
+            example.spec.fileName = @"/Some/Path/FailureSpec.mm";
 
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
             GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
-            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"FailureSpec"));
         });
 
-        it(@"should have it's classname escaped", ^{
+        it(@"should have it's classname set from spec filename even if it contains special characters", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
             example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"Special ' characters \" should < be & escaped > ";
-
+            example.spec.fileName = @"Path That \"' Contains ?*&^|+!~ Special Characters";
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
