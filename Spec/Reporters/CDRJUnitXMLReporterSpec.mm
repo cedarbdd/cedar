@@ -9,7 +9,6 @@
 
 #import "CDRExample.h"
 #import "CDRJUnitXMLReporter.h"
-#import "CDRSpecFailure.h"
 #import "GDataXMLNode.h"
 #import "ExampleWithPublicRunDates.h"
 
@@ -143,7 +142,41 @@ describe(@"runDidComplete", ^{
             GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
             expect([[exampleXML attributeForName:@"time"] stringValue]).to_not(be_nil);
             expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+        });
 
+        it(@"should have it's classname set from spec filename", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
+            example.spec = [[CDRSpec new] autorelease];
+            example.spec.fileName = @"ExampleSpec";
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+        });
+
+        it(@"should have it's classname escaped", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
+            example.spec = [[CDRSpec new] autorelease];
+            example.spec.fileName = @"Special ' characters \" should < be & escaped > ";
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+        });
+
+
+        it(@"should have it's classname to default value if spec filename is empty", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
         });
     });
 
@@ -212,7 +245,40 @@ describe(@"runDidComplete", ^{
             GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
             expect([[exampleXML attributeForName:@"time"] stringValue]).to_not(be_nil);
             expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+        });
 
+        it(@"should have it's classname set from spec filename", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
+            example.spec = [[CDRSpec new] autorelease];
+            example.spec.fileName = @"ExampleSpec";
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+        });
+
+        it(@"should have it's classname escaped", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
+            example.spec = [[CDRSpec new] autorelease];
+            example.spec.fileName = @"Special ' characters \" should < be & escaped > ";
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+        });
+
+        it(@"should have it's classname to default value if spec filename is empty", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
         });
 
     });

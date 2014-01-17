@@ -1,5 +1,7 @@
 #import "CDRJUnitXMLReporter.h"
 #import "CDRExample.h"
+#import "CDRSpec.h"
+
 
 @implementation CDRJUnitXMLReporter
 
@@ -46,7 +48,8 @@
     [xml appendString:@"<testsuite>\n"];
 
     for (CDRExample *example in successExamples_) {
-        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\" time=\"%f\" />\n", [self escapeString:example.fullText], example.runTime];
+        NSString *className = [self classNameForExample:example];
+        [xml appendFormat:@"\t<testcase classname=\"%@\" name=\"%@\" time=\"%f\" />\n", [self escapeString:className], [self escapeString:example.fullText], example.runTime];
     }
 
     for (CDRExample *example in failureExamples_) {
@@ -54,8 +57,9 @@
         NSArray *parts = [failureMessage componentsSeparatedByString:@"\n"];
         NSString *testCaseName = [parts objectAtIndex:0];
         NSString *failureDescription = [parts objectAtIndex:1];
+        NSString *className = [self classNameForExample:example];
 
-        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\" time=\"%f\" >\n", [self escapeString:testCaseName], example.runTime];
+        [xml appendFormat:@"\t<testcase classname=\"%@\" name=\"%@\" time=\"%f\" >\n", [self escapeString:className], [self escapeString:testCaseName], example.runTime];
         [xml appendFormat:@"\t\t<failure type=\"Failure\">%@</failure>\n", [self escapeString:failureDescription]];
         [xml appendString:@"\t</testcase>\n"];
     }
@@ -65,6 +69,14 @@
 }
 
 #pragma mark - Private
+
+- (NSString *)classNameForExample:(CDRExample *)example {
+    NSString *className = @"Cedar";
+    if (example.spec.fileName && [example.spec.fileName length]) {
+        className = example.spec.fileName;
+    }
+    return className;
+}
 
 - (NSString *)escapeString:(NSString *)unescaped {
     NSString *escaped = [unescaped stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
