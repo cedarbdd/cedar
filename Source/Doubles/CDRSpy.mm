@@ -33,6 +33,38 @@
 
 #pragma mark - Emulating the original object
 
+- (id)retain {
+    __block id that = self;
+    [self as_spied_class:^{
+        [that retain];
+    }];
+    return self;
+}
+
+- (oneway void)release {
+    __block id that = self;
+    [self as_spied_class:^{
+        [that release];
+    }];
+}
+
+- (id)autorelease {
+    __block id that = self;
+    [self as_spied_class:^{
+        [that autorelease];
+    }];
+    return self;
+}
+
+- (NSUInteger)retainCount {
+    __block id that = self;
+    __block NSUInteger count;
+    [self as_spied_class:^{
+        count = [that retainCount];
+    }];
+    return count;
+}
+
 - (NSString *)description {
     __block id that = self;
     __block NSString *description = nil;

@@ -1,5 +1,12 @@
 #import "CDRJUnitXMLReporter.h"
 #import "CDRExample.h"
+#import "CDRSpec.h"
+#import "CDROTestNamer.h"
+
+
+@interface CDRJUnitXMLReporter ()
+@property (nonatomic, retain) CDROTestNamer * namer;
+@end
 
 @implementation CDRJUnitXMLReporter
 
@@ -7,6 +14,7 @@
     if (self = [super init]) {
         successExamples_ = [[NSMutableArray alloc] init];
         failureExamples_ = [[NSMutableArray alloc] init];
+        self.namer = [[[CDROTestNamer alloc] init] autorelease];
     }
     return self;
 }
@@ -14,6 +22,7 @@
 - (void)dealloc {
     [successExamples_ release];
     [failureExamples_ release];
+    self.namer = nil;
     [super dealloc];
 }
 
@@ -46,7 +55,8 @@
     [xml appendString:@"<testsuite>\n"];
 
     for (CDRExample *example in successExamples_) {
-        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\" time=\"%f\" />\n", [self escapeString:example.fullText], example.runTime];
+        NSString *className = [self.namer classNameForExample:example];
+        [xml appendFormat:@"\t<testcase classname=\"%@\" name=\"%@\" time=\"%f\" />\n", [self escapeString:className], [self escapeString:example.fullText], example.runTime];
     }
 
     for (CDRExample *example in failureExamples_) {
@@ -54,8 +64,9 @@
         NSArray *parts = [failureMessage componentsSeparatedByString:@"\n"];
         NSString *testCaseName = [parts objectAtIndex:0];
         NSString *failureDescription = [parts objectAtIndex:1];
+        NSString *className = [self.namer classNameForExample:example];
 
-        [xml appendFormat:@"\t<testcase classname=\"Cedar\" name=\"%@\" time=\"%f\" >\n", [self escapeString:testCaseName], example.runTime];
+        [xml appendFormat:@"\t<testcase classname=\"%@\" name=\"%@\" time=\"%f\" >\n", [self escapeString:className], [self escapeString:testCaseName], example.runTime];
         [xml appendFormat:@"\t\t<failure type=\"Failure\">%@</failure>\n", [self escapeString:failureDescription]];
         [xml appendString:@"\t</testcase>\n"];
     }
