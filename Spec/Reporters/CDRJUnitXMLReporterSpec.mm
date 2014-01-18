@@ -144,27 +144,20 @@ describe(@"runDidComplete", ^{
             expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
         });
 
-        it(@"should have it's classname set from spec filename", ^{
+        it(@"should have it's classname", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
             example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"/SomePath/ExampleSpec.mm";
-
             [reporter reportOnExample:example];
+
+            CDRExample *junitExample = [CDRExample exampleWithText:@"JUnitExample" andState:CDRExampleStatePassed];
+            junitExample.spec = [[CDRJUnitXMLReporterSpec new] autorelease];
+            [reporter reportOnExample:junitExample];
 
             [reporter runDidComplete];
             GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
-            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"ExampleSpec"));
-        });
-
-        it(@"should have it's classname set from spec filename even if it contains special characters", ^{
-            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
-            example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"Path That \"' Contains ?*&^|+!~ Special Characters";
-            [reporter reportOnExample:example];
-
-            [reporter runDidComplete];
-            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
-            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRSpec"));
+            GDataXMLElement *junitExampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:1];
+            expect([[junitExampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRJUnitXMLReporterSpec"));
         });
 
         it(@"should have it's classname to default value if spec filename is empty", ^{
@@ -244,27 +237,20 @@ describe(@"runDidComplete", ^{
             expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
         });
 
-        it(@"should have it's classname set from spec filename", ^{
+        it(@"should have it's classname", ^{
             CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
             example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"/Some/Path/FailureSpec.mm";
-
             [reporter reportOnExample:example];
+
+            CDRExample *junitExample = [CDRExample exampleWithText:@"JUnitExample" andState:CDRExampleStateFailed];
+            junitExample.spec = [[CDRJUnitXMLReporterSpec new] autorelease];
+            [reporter reportOnExample:junitExample];
 
             [reporter runDidComplete];
             GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
-            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"FailureSpec"));
-        });
-
-        it(@"should have it's classname set from spec filename even if it contains special characters", ^{
-            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
-            example.spec = [[CDRSpec new] autorelease];
-            example.spec.fileName = @"Path That \"' Contains ?*&^|+!~ Special Characters";
-            [reporter reportOnExample:example];
-
-            [reporter runDidComplete];
-            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
-            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(example.spec.fileName));
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRSpec"));
+            GDataXMLElement *junitExampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:1];
+            expect([[junitExampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRJUnitXMLReporterSpec"));
         });
 
         it(@"should have it's classname to default value if spec filename is empty", ^{

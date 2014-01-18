@@ -1,7 +1,12 @@
 #import "CDRJUnitXMLReporter.h"
 #import "CDRExample.h"
 #import "CDRSpec.h"
+#import "CDROTestNamer.h"
 
+
+@interface CDRJUnitXMLReporter ()
+@property (nonatomic, retain) CDROTestNamer * namer;
+@end
 
 @implementation CDRJUnitXMLReporter
 
@@ -9,6 +14,7 @@
     if (self = [super init]) {
         successExamples_ = [[NSMutableArray alloc] init];
         failureExamples_ = [[NSMutableArray alloc] init];
+        self.namer = [[[CDROTestNamer alloc] init] autorelease];
     }
     return self;
 }
@@ -16,6 +22,7 @@
 - (void)dealloc {
     [successExamples_ release];
     [failureExamples_ release];
+    self.namer = nil;
     [super dealloc];
 }
 
@@ -48,7 +55,7 @@
     [xml appendString:@"<testsuite>\n"];
 
     for (CDRExample *example in successExamples_) {
-        NSString *className = [self classNameForExample:example];
+        NSString *className = [self.namer classNameForExample:example];
         [xml appendFormat:@"\t<testcase classname=\"%@\" name=\"%@\" time=\"%f\" />\n", [self escapeString:className], [self escapeString:example.fullText], example.runTime];
     }
 
@@ -57,7 +64,7 @@
         NSArray *parts = [failureMessage componentsSeparatedByString:@"\n"];
         NSString *testCaseName = [parts objectAtIndex:0];
         NSString *failureDescription = [parts objectAtIndex:1];
-        NSString *className = [self classNameForExample:example];
+        NSString *className = [self.namer classNameForExample:example];
 
         [xml appendFormat:@"\t<testcase classname=\"%@\" name=\"%@\" time=\"%f\" >\n", [self escapeString:className], [self escapeString:testCaseName], example.runTime];
         [xml appendFormat:@"\t\t<failure type=\"Failure\">%@</failure>\n", [self escapeString:failureDescription]];
@@ -69,15 +76,6 @@
 }
 
 #pragma mark - Private
-
-- (NSString *)classNameForExample:(CDRExample *)example {
-    NSString *className = @"Cedar";
-    NSString *fileName = [[example.spec.fileName lastPathComponent] stringByDeletingPathExtension];
-    if (fileName && [fileName length]) {
-        className = fileName;
-    }
-    return className;
-}
 
 - (NSString *)escapeString:(NSString *)unescaped {
     NSString *escaped = [unescaped stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
