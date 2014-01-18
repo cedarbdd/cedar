@@ -74,33 +74,31 @@
 - (NSString *)callStackSymbolicatedSymbols:(NSError **)error {
     if (!self.callStackReturnAddresses) return nil;
 
-    CDRSymbolicator *symbolicator =
-        [[[CDRSymbolicator alloc] init] autorelease];
+    CDRSymbolicator *symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
 
+    NSMutableString *result = nil;
     NSError *symbolicationError = nil;
-    [symbolicator symbolicateAddresses:self.callStackReturnAddresses error:&symbolicationError];
-    if (symbolicationError) {
-        *error = symbolicationError;
-        return nil;
-    }
+    if ([symbolicator symbolicateAddresses:self.callStackReturnAddresses error:&symbolicationError]) {
+        result = [NSMutableString stringWithString:@"Call stack:\n"];
+        BOOL previousAddressWasUnknown = NO;
 
-    NSMutableString *result =
-        [NSMutableString stringWithString:@"Call stack:\n"];
-    BOOL previousAddressWasUnknown = NO;
+        for (int i=0; i < self.callStackReturnAddresses.count; i++) {
+            NSUInteger address = [[self.callStackReturnAddresses objectAtIndex:i] unsignedIntegerValue];
+            NSString *fileName = [symbolicator fileNameForStackAddress:address];
+            unsigned long lineNumber = [symbolicator lineNumberForStackAddress:address];
 
-    for (int i=0; i < self.callStackReturnAddresses.count; i++) {
-        NSUInteger address = [[self.callStackReturnAddresses objectAtIndex:i] unsignedIntegerValue];
-        NSString *fileName = [symbolicator fileNameForStackAddress:address];
-        unsigned long lineNumber = [symbolicator lineNumberForStackAddress:address];
-
-        if (fileName) {
-            previousAddressWasUnknown = NO;
-            [result appendFormat:@"  *%@:%lu\n", fileName, lineNumber];
-        } else if (!previousAddressWasUnknown) {
-            previousAddressWasUnknown = YES;
-            [result appendString:@"  ...\n"];
+            if (fileName) {
+                previousAddressWasUnknown = NO;
+                [result appendFormat:@"  *%@:%lu\n", fileName, lineNumber];
+            } else if (!previousAddressWasUnknown) {
+                previousAddressWasUnknown = YES;
+                [result appendString:@"  ...\n"];
+            }
         }
+    } else if (error && symbolicationError) {
+        *error = symbolicationError;
     }
+
     return result;
 }
 

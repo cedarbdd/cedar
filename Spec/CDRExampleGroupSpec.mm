@@ -566,7 +566,7 @@ describe(@"CDRExampleGroup", ^{
 
         describe(@"when initialized as a root group", ^{
             beforeEach(^{
-                group = [[CDRExampleGroup alloc] initWithText:@"I am a root group" isRoot:YES];
+                group = [[[CDRExampleGroup alloc] initWithText:@"I am a root group" isRoot:YES] autorelease];
             });
 
             it(@"should return false", ^{
@@ -643,7 +643,7 @@ describe(@"CDRExampleGroup", ^{
             __block CDRExampleGroup *rootGroup;
 
             beforeEach(^{
-                rootGroup = [[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES];
+                rootGroup = [[[CDRExampleGroup alloc] initWithText:@"wibble wobble" isRoot:YES] autorelease];
                 [rootGroup add:group];
 
                 id<CDRExampleParent> parent = group.parent;
@@ -676,12 +676,12 @@ describe(@"CDRExampleGroup", ^{
         beforeEach(^{
             test = NO;
             FibonacciCalculator *calculator = [[[FibonacciCalculator alloc] init] autorelease];
-            firstExample = [[CDRExample alloc] initWithText:@"I'm Slow!" andBlock:^{
+            firstExample = [[[CDRExample alloc] initWithText:@"I'm Slow!" andBlock:^{
                 [calculator computeFibonnaciNumberVeryVerySlowly:4];
-            }];
-            secondExample = [[CDRExample alloc] initWithText:@"I'm Slower!" andBlock:^{
+            }] autorelease];
+            secondExample = [[[CDRExample alloc] initWithText:@"I'm Slower!" andBlock:^{
                 [calculator computeFibonnaciNumberVeryVerySlowly:5];
-            }];
+            }] autorelease];
 
             exampleGroup = [[[CDRExampleGroup alloc] initWithText:@"I have slow examples"] autorelease];
             [exampleGroup add:firstExample];

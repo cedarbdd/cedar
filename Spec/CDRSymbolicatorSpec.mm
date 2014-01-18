@@ -53,7 +53,7 @@ describe(@"CDRSymbolicator", ^{
                     NSArray *addresses = [NSArray arrayWithObject:address];
 
                     NSError *error = nil;
-                    [symbolicator symbolicateAddresses:addresses error:&error];
+                    [symbolicator symbolicateAddresses:addresses error:&error] should be_truthy;
                     error should be_nil;
 
                     [[symbolicator fileNameForStackAddress:b.stackAddress] hasSuffix:fileName] should be_truthy;
@@ -108,7 +108,7 @@ describe(@"CDRSymbolicator", ^{
 
             subjectAction(^{
                 error = nil;
-                [symbolicator symbolicateAddresses:addresses error:&error];
+                [symbolicator symbolicateAddresses:addresses error:&error] should be_falsy;
             });
 
             it(@"does not return filename or line number", ^{

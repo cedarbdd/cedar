@@ -26,6 +26,7 @@ const CDRSpecBlock PENDING = nil;
 }
 
 - (void)dealloc {
+    self.failure = nil;
     [block_ release];
     [super dealloc];
 }
@@ -55,6 +56,7 @@ const CDRSpecBlock PENDING = nil;
 }
 
 - (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher {
+    [startDate_ release];
     startDate_ = [[NSDate alloc] init];
     [dispatcher runWillStartExample:self];
 
@@ -87,6 +89,7 @@ const CDRSpecBlock PENDING = nil;
         }
         [pool drain];
     }
+    [endDate_ release];
     endDate_ = [[NSDate alloc] init];
 
     [dispatcher runDidFinishExample:self];
