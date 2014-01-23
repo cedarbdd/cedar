@@ -28,6 +28,10 @@ CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
         [parentGroup add:group];
         currentSpec.currentGroup = group;
         block();
+        if ([group.examples count] == 0) {
+            block = placeholderPendingTestBlock;
+            block();
+        }
         currentSpec.currentGroup = parentGroup;
     } else {
         group = describe(text, placeholderPendingTestBlock);

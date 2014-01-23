@@ -86,6 +86,9 @@ describe(@"Spec", ^{
     context(@"contexted specs should be pending", PENDING);
     context(@"contexted specs should also be pending", nil);
     xcontext(@"xcontexted specs should be pending", ^{});
+
+    describe(@"empty describe blocks should be pending", ^{});
+    context(@"empty context blocks should be pending", ^{});
 });
 
 describe(@"The spec failure exception", ^{
