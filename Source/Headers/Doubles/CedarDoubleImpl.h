@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "CedarDouble.h"
 #import "StubbedMethod.h"
-
-@protocol CedarDouble;
+#import "RejectedMethod.h"
 
 typedef enum {
     CDRStubMethodNotStubbed = 0,
@@ -9,24 +9,13 @@ typedef enum {
     CDRStubWrongArguments,
 } CDRStubInvokeStatus;
 
-@interface CedarDoubleImpl : NSObject {
-    Cedar::Doubles::StubbedMethod::selector_map_t stubbed_methods_;
-    NSMutableArray *sent_messages_;
-    NSObject<CedarDouble> *parent_double_;
-}
-
-@property (nonatomic, retain, readonly) NSMutableArray *sent_messages;
+@interface CedarDoubleImpl : NSObject<CedarDouble>
 
 + (void)afterEach;
 
 - (id)initWithDouble:(NSObject<CedarDouble> *)parent_double;
 
-- (void)reset_sent_messages;
-
-- (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method;
-- (Cedar::Doubles::StubbedMethod::selector_map_t &)stubbed_methods;
 - (CDRStubInvokeStatus)invoke_stubbed_method:(NSInvocation *)invocation;
 - (void)record_method_invocation:(NSInvocation *)invocation;
-- (BOOL)has_stubbed_method_for:(SEL)selector;
 
 @end

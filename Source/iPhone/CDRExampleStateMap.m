@@ -15,7 +15,7 @@ const NSString *exampleStateDescriptions[] = {@"RUNNING", @"PASSED", @"PENDING",
 @implementation CDRExampleStateMap
 
 + (id)stateMap {
-    if (!sharedInstance__){
+    if (!sharedInstance__) {
         sharedInstance__ = [[CDRExampleStateMap alloc] init];
     }
     return sharedInstance__;

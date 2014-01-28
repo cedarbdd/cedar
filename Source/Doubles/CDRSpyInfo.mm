@@ -22,18 +22,19 @@ static NSMutableSet *currentSpies__;
 + (BOOL)clearSpyInfoForObject:(id)object {
     CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:object];
     if (spyInfo) {
-        [spyInfo restoreOriginalClass];
+        spyInfo.originalObject = nil;
+        [currentSpies__ removeObject:spyInfo];
         return YES;
     }
     return NO;
 }
 
-- (void)restoreOriginalClass {
-    object_setClass(self.originalObject, self.spiedClass);
-    [currentSpies__ removeObject:self];
-}
-
 - (void)dealloc {
+    if (self.originalObject) {
+        object_setClass(self.originalObject, self.spiedClass);
+    }
+    self.publicClass = nil;
+    self.spiedClass = nil;
     self.originalObject = nil;
     self.cedarDouble = nil;
     [super dealloc];
@@ -59,14 +60,14 @@ static NSMutableSet *currentSpies__;
 
 - (IMP)impForSelector:(SEL)selector {
     BOOL yieldToKVO = (sel_isEqual(selector, @selector(addObserver:forKeyPath:options:context:)) ||
-            sel_isEqual(selector, @selector(removeObserver:forKeyPath:)) ||
-            sel_isEqual(selector, @selector(removeObserver:forKeyPath:context:)) ||
-            sel_isEqual(selector, @selector(mutableArrayValueForKey:)) ||
-            sel_isEqual(selector, @selector(mutableSetValueForKey:)) ||
-            sel_isEqual(selector, @selector(mutableOrderedSetValueForKey:)) ||
-            sel_isEqual(selector, @selector(willChange:valuesAtIndexes:forKey:)) ||
-            sel_isEqual(selector, @selector(didChange:valuesAtIndexes:forKey:)) ||
-            strcmp(class_getName(self.publicClass), class_getName(self.spiedClass)));
+                       sel_isEqual(selector, @selector(removeObserver:forKeyPath:)) ||
+                       sel_isEqual(selector, @selector(removeObserver:forKeyPath:context:)) ||
+                       sel_isEqual(selector, @selector(mutableArrayValueForKey:)) ||
+                       sel_isEqual(selector, @selector(mutableSetValueForKey:)) ||
+                       sel_isEqual(selector, @selector(mutableOrderedSetValueForKey:)) ||
+                       sel_isEqual(selector, @selector(willChange:valuesAtIndexes:forKey:)) ||
+                       sel_isEqual(selector, @selector(didChange:valuesAtIndexes:forKey:)) ||
+                       strcmp(class_getName(self.publicClass), class_getName(self.spiedClass)));
     if (yieldToKVO) {
         return NULL;
     }
@@ -75,7 +76,6 @@ static NSMutableSet *currentSpies__;
 }
 
 + (void)afterEach {
-    [currentSpies__ makeObjectsPerformSelector:@selector(restoreOriginalClass)];
     [currentSpies__ removeAllObjects];
 }
 

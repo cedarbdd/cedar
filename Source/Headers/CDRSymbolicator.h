@@ -12,7 +12,7 @@ typedef enum {
 } kCDRSymbolicatorError;
 
 @interface CDRSymbolicator : NSObject
-- (void)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error;
+- (BOOL)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error;
 - (NSString *)fileNameForStackAddress:(NSUInteger)address;
 - (NSUInteger)lineNumberForStackAddress:(NSUInteger)address;
 @end

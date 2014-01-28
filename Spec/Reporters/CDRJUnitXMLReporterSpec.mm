@@ -9,7 +9,8 @@
 
 #import "CDRExample.h"
 #import "CDRJUnitXMLReporter.h"
-#import "CDRSpecFailure.h"
+#import "GDataXMLNode.h"
+#import "ExampleWithPublicRunDates.h"
 
 using namespace Cedar::Matchers;
 
@@ -17,17 +18,25 @@ using namespace Cedar::Matchers;
 @interface TestCDRJUnitXMLReporter : CDRJUnitXMLReporter {
 @private
     NSString *xml_;
+    GDataXMLDocument *xmlDocument_;
+    GDataXMLElement *xmlRootElement_;
 }
 
 @property (nonatomic, copy) NSString *xml;
+@property (nonatomic, strong) GDataXMLDocument *xmlDocument;
+@property (nonatomic, strong) GDataXMLElement *xmlRootElement;
 @end
 
 @implementation TestCDRJUnitXMLReporter
 
 @synthesize xml = xml_;
+@synthesize xmlDocument = xmlDocument_;
+@synthesize xmlRootElement = xmlRootElement_;
 
 - (void)dealloc {
     self.xml = nil;
+    self.xmlRootElement = nil;
+    self.xmlDocument = nil;
     [super dealloc];
 }
 
@@ -47,8 +56,12 @@ using namespace Cedar::Matchers;
         fclose(stdout);
         stdout = realStdout;
     }
+
+    self.xmlDocument = [[[GDataXMLDocument alloc] initWithXMLString:self.xml options:0 error:nil] autorelease];
+    self.xmlRootElement = self.xmlDocument.rootElement;
 }
 @end
+
 
 // Allow setting state for testing purposes
 @interface CDRExample (SpecPrivate)
@@ -58,7 +71,7 @@ using namespace Cedar::Matchers;
 @implementation CDRExample (Spec)
 
 + (id)exampleWithText:(NSString *)text andState:(CDRExampleState)state {
-    CDRExample *example = [CDRExample exampleWithText:text andBlock:^{}];
+    CDRExample *example = [[self class] exampleWithText:text andBlock:^{}];
     [example setState:state];
     return example;
 }
@@ -77,7 +90,9 @@ describe(@"runDidComplete", ^{
     context(@"when no specs are run", ^{
         it(@"should output a blank test suite report", ^{
             [reporter runDidComplete];
-            expect(reporter.xml).to(equal(@"<?xml version=\"1.0\"?>\n<testsuite>\n</testsuite>\n"));
+            expect(reporter.xmlDocument).to_not(be_nil);
+            expect(reporter.xmlRootElement).to_not(be_nil);
+            expect(reporter.xmlRootElement.name).to(equal(@"testsuite"));
         });
     });
 
@@ -90,16 +105,69 @@ describe(@"runDidComplete", ^{
             [reporter reportOnExample:example2];
 
             [reporter runDidComplete];
-            expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Passing spec 1\" />"].location).to_not(equal((NSUInteger)NSNotFound));
-            expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Passing spec 2\" />"].location).to_not(equal((NSUInteger)NSNotFound));
+            expect(reporter.xmlDocument).to_not(be_nil);
+            expect(reporter.xmlRootElement).to_not(be_nil);
+
+            NSArray *testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
+            expect(testCases.count).to(equal(2));
+
+            GDataXMLElement *example1XML = [testCases objectAtIndex:0];
+            expect([[example1XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example1XML attributeForName:@"name"] stringValue]).to(equal(@"Passing spec 1"));
+
+            GDataXMLElement *example2XML = [testCases objectAtIndex:1];
+            expect([[example2XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example2XML attributeForName:@"name"] stringValue]).to(equal(@"Passing spec 2"));
         });
 
         it(@"should have its name escaped", ^{
-            CDRExample *example = [CDRExample exampleWithText:@"Special ' characters \" should < be & escaped > " andState:CDRExampleStatePassed];
+            NSString *stringToEscape = @"Special ' characters \" should < be & escaped > ";
+            CDRExample *example = [CDRExample exampleWithText:stringToEscape andState:CDRExampleStatePassed];
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            expect([reporter.xml rangeOfString:@"name=\"Special &apos; characters &quot; should &lt; be &amp; escaped &gt; \""].location).to_not(equal((NSUInteger)NSNotFound));
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
+        });
+
+        it(@"should have its running time", ^{
+            ExampleWithPublicRunDates *example = [ExampleWithPublicRunDates exampleWithText:@"Running task" andState:CDRExampleStatePassed];
+            NSDate *startDate = [NSDate date];
+            [example setStartDate:startDate];
+            [example setEndDate:[startDate dateByAddingTimeInterval:5]];
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"time"] stringValue]).to_not(be_nil);
+            expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+        });
+
+        it(@"should have it's classname", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
+            example.spec = [[CDRSpec new] autorelease];
+            [reporter reportOnExample:example];
+
+            CDRExample *junitExample = [CDRExample exampleWithText:@"JUnitExample" andState:CDRExampleStatePassed];
+            junitExample.spec = [[CDRJUnitXMLReporterSpec new] autorelease];
+            [reporter reportOnExample:junitExample];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRSpec"));
+            GDataXMLElement *junitExampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:1];
+            expect([[junitExampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRJUnitXMLReporterSpec"));
+        });
+
+        it(@"should have it's classname to default value if spec filename is empty", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStatePassed];
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
         });
     });
 
@@ -114,25 +182,87 @@ describe(@"runDidComplete", ^{
             [reporter reportOnExample:example2];
 
             [reporter runDidComplete];
-            expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Failing spec 1\">\n\t\t<failure type=\"Failure\">Failure reason 1</failure>\n\t</testcase>"].location).to_not(equal((NSUInteger)NSNotFound));
-            expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Failing spec 2\">\n\t\t<failure type=\"Failure\">Failure reason 2</failure>\n\t</testcase>"].location).to_not(equal((NSUInteger)NSNotFound));
+
+            NSArray *testCases = [reporter.xmlRootElement elementsForName:@"testcase"];
+            expect(testCases.count).to(equal(2));
+
+            GDataXMLElement *example1XML = [testCases objectAtIndex:0];
+            expect([[example1XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example1XML attributeForName:@"name"] stringValue]).to(equal(@"Failing spec 1"));
+            expect([[[example1XML nodesForXPath:@"failure/@type" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure"));
+            expect([[[example1XML nodesForXPath:@"failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure reason 1"));
+
+
+            GDataXMLElement *example2XML = [testCases objectAtIndex:1];
+            expect([[example2XML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+            expect([[example2XML attributeForName:@"name"] stringValue]).to(equal(@"Failing spec 2"));
+            expect([[[example2XML nodesForXPath:@"failure/@type" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure"));
+            expect([[[example2XML nodesForXPath:@"failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure reason 2"));
         });
 
         it(@"should have its name escaped", ^{
-            CDRExample *example = [CDRExample exampleWithText:@"Special ' characters \" should < be & escaped > " andState:CDRExampleStateFailed];
+            NSString *stringToEscape = @"Special ' characters \" should < be & escaped > ";
+            CDRExample *example = [CDRExample exampleWithText:stringToEscape andState:CDRExampleStateFailed];
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            expect([reporter.xml rangeOfString:@"name=\"Special &apos; characters &quot; should &lt; be &amp; escaped &gt; \""].location).to_not(equal((NSUInteger)NSNotFound));
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"name"] stringValue]).to(equal(stringToEscape));
         });
 
         it(@"should escape the failure reason", ^{
-            CDRExample *example = [CDRExample exampleWithText:@"Failing spec 1\n Special ' characters \" should < be & escaped > " andState:CDRExampleStateFailed];
+            NSString *exampleName = @"Failing spec 1";
+            NSString *failureReason = @" Special ' characters \" should < be & escaped > ";
+            NSString *fullExampleText = [NSString stringWithFormat:@"%@\n%@", exampleName, failureReason];
+            CDRExample *example = [CDRExample exampleWithText:fullExampleText andState:CDRExampleStateFailed];
+            example.failure = [CDRSpecFailure specFailureWithReason:failureReason];
+
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            expect([reporter.xml rangeOfString:@"<failure type=\"Failure\"> Special &apos; characters &quot; should &lt; be &amp; escaped &gt; </failure>"].location).to_not(equal((NSUInteger)NSNotFound));
+
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(failureReason));
         });
+
+        it(@"should have its running time", ^{
+            ExampleWithPublicRunDates *example = [ExampleWithPublicRunDates exampleWithText:@"Failing spec\nFailure reason" andState:CDRExampleStateFailed];
+            NSDate *startDate = [NSDate date];
+            [example setStartDate:startDate];
+            [example setEndDate:[startDate dateByAddingTimeInterval:5]];
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"time"] stringValue]).to_not(be_nil);
+            expect([[[exampleXML attributeForName:@"time"] stringValue] floatValue]).to(be_close_to(5));
+        });
+
+        it(@"should have it's classname", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
+            example.spec = [[CDRSpec new] autorelease];
+            [reporter reportOnExample:example];
+
+            CDRExample *junitExample = [CDRExample exampleWithText:@"JUnitExample" andState:CDRExampleStateFailed];
+            junitExample.spec = [[CDRJUnitXMLReporterSpec new] autorelease];
+            [reporter reportOnExample:junitExample];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRSpec"));
+            GDataXMLElement *junitExampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:1];
+            expect([[junitExampleXML attributeForName:@"classname"] stringValue]).to(equal(@"CDRJUnitXMLReporterSpec"));
+        });
+
+        it(@"should have it's classname to default value if spec filename is empty", ^{
+            CDRExample *example = [CDRExample exampleWithText:@"Spec" andState:CDRExampleStateFailed];
+
+            [reporter reportOnExample:example];
+
+            [reporter runDidComplete];
+            GDataXMLElement *exampleXML = [[reporter.xmlRootElement elementsForName:@"testcase"] objectAtIndex:0];
+            expect([[exampleXML attributeForName:@"classname"] stringValue]).to(equal(@"Cedar"));
+        });
+
     });
 
     describe(@"each spec that causes an error", ^{
@@ -141,7 +271,11 @@ describe(@"runDidComplete", ^{
             [reporter reportOnExample:example];
 
             [reporter runDidComplete];
-            expect([reporter.xml rangeOfString:@"<testcase classname=\"Cedar\" name=\"Failing spec\">\n\t\t<failure type=\"Failure\">Failure reason</failure>\n\t</testcase>"].location).to_not(equal((NSUInteger)NSNotFound));
+
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/@classname" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Cedar"));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/@name" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failing spec"));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/@type" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure"));
+            expect([[[reporter.xmlRootElement nodesForXPath:@"testcase/failure/text()" error:nil] objectAtIndex:0] stringValue]).to(equal(@"Failure reason"));
         });
     });
 });

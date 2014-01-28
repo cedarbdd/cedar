@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "\n===== Upgrading framework =====\n"
+
+TARGET_PATH=$1
+if rake upgrade[$TARGET_PATH]
+then
+  echo "\n*** Finished upgrading the framework ***\n"
+else
+  echo "\n*** It seems something went wrong with the upgrade. Make sure you supply the full path to the target framework i.e. path_to/Cedar-iOS.framework ***\n"
+fi

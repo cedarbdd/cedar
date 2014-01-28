@@ -211,7 +211,7 @@ describe(@"CDROTestReporter", ^{
         });
 
         it(@"should finish the passing example", ^{
-            reporter.reporter_output should contain(@"Test Case '-[CDRSpec my_group_passing]' passed (0.000 seconds).");
+            reporter.reporter_output should contain(@"Test Case '-[CDRSpec my_group_passing]' passed (");
         });
 
         it(@"should report the passing example", ^{
@@ -219,7 +219,7 @@ describe(@"CDROTestReporter", ^{
         });
 
         it(@"should finish the passing example", ^{
-            reporter.reporter_output should contain(@"Test Case '-[CDRSpec my_group_failing]' failed (0.000 seconds).");
+            reporter.reporter_output should contain(@"Test Case '-[CDRSpec my_group_failing]' failed (");
         });
     });
 
@@ -256,7 +256,7 @@ describe(@"CDROTestReporter", ^{
         });
 
         it(@"should finish the passing example", ^{
-            reporter.reporter_output should contain(@"Test Case '-[CDRSpec my_group_passing]' passed (0.000 seconds).");
+            reporter.reporter_output should contain(@"Test Case '-[CDRSpec my_group_passing]' passed");
         });
 
         it(@"should report the spec class finishing after the run completes", ^{
@@ -273,7 +273,7 @@ describe(@"CDROTestReporter", ^{
         });
 
         it(@"should finish the passing example", ^{
-            reporter.reporter_output should contain(@"Test Case '-[MyExampleSpec my_group_other_failing]' failed (0.000 seconds).");
+            reporter.reporter_output should contain(@"Test Case '-[MyExampleSpec my_group_other_failing]' failed");
         });
 
         it(@"should not report the pending example", ^{

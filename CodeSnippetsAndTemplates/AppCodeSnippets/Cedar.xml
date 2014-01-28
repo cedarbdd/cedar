@@ -194,8 +194,49 @@
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="clog" value="NSLog(@&quot;================&gt; %@&quot;, $object_of_interest$);" description="Cedar console log output" toReformat="true" toShortenFQNames="true">
-    <variable name="object_of_interest" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="clogv" value="NSLog(@&quot;================&gt; $object_of_interest_COPY$: $format$&quot;, $object_of_interest$);$END$" description="Cedar console log variable" toReformat="true" toShortenFQNames="true">
+    <variable name="object_of_interest" expression="variableOfType(&quot;&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="object_of_interest_COPY" expression="object_of_interest" defaultValue="x" alwaysStopAt="false" />
+    <variable name="format" expression="expressionFormatCode(object_of_interest)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="HTML_TEXT" value="false" />
+      <option name="HTML" value="false" />
+      <option name="XSL_TEXT" value="false" />
+      <option name="XML" value="false" />
+      <option name="objc" value="false" />
+      <option name="OC_DECLARATION" value="false" />
+      <option name="OC_STATEMENT" value="true" />
+      <option name="OC_EXPRESSION" value="false" />
+      <option name="CSS_PROPERTY_VALUE" value="false" />
+      <option name="CSS_DECLARATION_BLOCK" value="false" />
+      <option name="CSS_RULESET_LIST" value="false" />
+      <option name="CSS" value="false" />
+      <option name="JAVA_SCRIPT" value="false" />
+      <option name="OTHER" value="false" />
+    </context>
+  </template>
+  <template name="clog" value="NSLog(@&quot;================&gt; $format$&quot;, $object_of_interest$);$END$" description="Cedar console log" toReformat="true" toShortenFQNames="true">
+    <variable name="object_of_interest" expression="variableOfType(&quot;&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="format" expression="expressionFormatCode(object_of_interest)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="HTML_TEXT" value="false" />
+      <option name="HTML" value="false" />
+      <option name="XSL_TEXT" value="false" />
+      <option name="XML" value="false" />
+      <option name="objc" value="false" />
+      <option name="OC_DECLARATION" value="false" />
+      <option name="OC_STATEMENT" value="true" />
+      <option name="OC_EXPRESSION" value="false" />
+      <option name="CSS_PROPERTY_VALUE" value="false" />
+      <option name="CSS_DECLARATION_BLOCK" value="false" />
+      <option name="CSS_RULESET_LIST" value="false" />
+      <option name="CSS" value="false" />
+      <option name="JAVA_SCRIPT" value="false" />
+      <option name="OTHER" value="false" />
+    </context>
+  </template>
+  <template name="cxit" value="xit(@&quot;$expected_behavior$&quot;, ^{ });" description="Pending Cedar example block" toReformat="false" toShortenFQNames="true">
+    <variable name="expected_behavior" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="HTML_TEXT" value="false" />
       <option name="HTML" value="false" />

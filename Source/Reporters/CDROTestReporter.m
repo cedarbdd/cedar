@@ -7,15 +7,15 @@
 #import "CDROTestNamer.h"
 
 @interface CDROTestReporter ()
-@property (strong, nonatomic) NSDate *startTime;
-@property (strong, nonatomic) NSDate *endTime;
-@property (strong, nonatomic) NSDateFormatter *formatter;
-@property (strong, nonatomic) CDROTestNamer *namer;
+@property (retain, nonatomic) NSDate *startTime;
+@property (retain, nonatomic) NSDate *endTime;
+@property (retain, nonatomic) NSDateFormatter *formatter;
+@property (retain, nonatomic) CDROTestNamer *namer;
 
-@property (strong, nonatomic) NSString *currentSuiteName;
-@property (strong, nonatomic) CDRExampleGroup *currentSuite;
+@property (retain, nonatomic) NSString *currentSuiteName;
+@property (retain, nonatomic) CDRExampleGroup *currentSuite;
 
-@property (strong, nonatomic) NSArray *rootGroups;
+@property (retain, nonatomic) NSArray *rootGroups;
 @property (assign, nonatomic) NSUInteger failedCount;
 @end
 
@@ -37,7 +37,7 @@
     if (self) {
         self.formatter = [[[NSDateFormatter alloc] init] autorelease];
         [self.formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
-        self.namer = [[CDROTestNamer alloc] init];
+        self.namer = [[[CDROTestNamer alloc] init] autorelease];
     }
     return self;
 }
@@ -55,7 +55,7 @@
 }
 
 - (void)runDidComplete {
-    if (self.currentSuiteName){
+    if (self.currentSuiteName) {
         [self finishSuite:self.currentSuiteName atDate:[NSDate date]];
         [self printStatsForExamples:@[self.currentSuite]];
     }
@@ -96,7 +96,7 @@
 }
 
 - (void)runWillStartSpec:(CDRSpec *)spec {
-    if ([self shouldReportSpec:spec]){
+    if ([self shouldReportSpec:spec]) {
         [self startSuite:NSStringFromClass([spec class]) atDate:[NSDate date]];
     }
 }

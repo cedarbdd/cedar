@@ -1,13 +1,15 @@
 #import "CedarDoubleImpl.h"
-#import "StubbedMethod.h"
-#import "CDRClassFake.h"
-#import <objc/runtime.h>
 
 static NSMutableArray *registeredDoubleImpls__ = nil;
 
-@interface CedarDoubleImpl ()
+@interface CedarDoubleImpl () {
+    Cedar::Doubles::StubbedMethod::selector_map_t stubbed_methods_;
+    NSMutableArray *sent_messages_;
+    NSObject<CedarDouble> *parent_double_;
+}
 
 @property (nonatomic, retain, readwrite) NSMutableArray *sent_messages;
+@property (nonatomic, retain) NSMutableArray *rejected_methods;
 @property (nonatomic, assign) NSObject<CedarDouble> *parent_double;
 
 @end
@@ -28,6 +30,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 - (id)initWithDouble:(NSObject<CedarDouble> *)parent_double {
     if (self = [super init]) {
         self.sent_messages = [NSMutableArray array];
+        self.rejected_methods = [NSMutableArray array];
         self.parent_double = parent_double;
         [CedarDoubleImpl registerDoubleImpl:self];
     }
@@ -37,6 +40,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 - (void)dealloc {
     self.parent_double = nil;
     self.sent_messages = nil;
+    self.rejected_methods = nil;
     [super dealloc];
 }
 
@@ -44,14 +48,22 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     [self.sent_messages removeAllObjects];
 }
 
-- (Cedar::Doubles::StubbedMethod::selector_map_t &)stubbed_methods {
-    return stubbed_methods_;
+- (void)reject_method:(const Cedar::Doubles::RejectedMethod &)rejected_method {
+    const SEL & selector = rejected_method.selector();
+
+    if (![self can_stub:selector]) {
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempting to reject method <%s>, which double <%@> already does not respond to", sel_getName(selector), [self.parent_double description]]
+                               userInfo:nil]
+         raise];
+    }
+    [self.rejected_methods addObject:NSStringFromSelector(rejected_method.selector())];
 }
 
 - (Cedar::Doubles::StubbedMethod &)add_stub:(const Cedar::Doubles::StubbedMethod &)stubbed_method {
     const SEL & selector = stubbed_method.selector();
 
-    if (![self.parent_double can_stub:selector]) {
+    if (![self can_stub:selector]) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
                                  reason:[NSString stringWithFormat:@"Attempting to stub method <%s>, which double <%@> does not respond to", sel_getName(selector), [self.parent_double description]]
                                userInfo:nil]
@@ -92,6 +104,10 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     return [self add_stubbed_method:stubbed_method at_vector_location:stubbed_methods_[selector].end()];
 }
 
+- (BOOL)can_stub:(SEL)selector {
+    return [self.parent_double can_stub:selector];
+}
+
 - (CDRStubInvokeStatus)invoke_stubbed_method:(NSInvocation *)invocation {
     Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(invocation.selector);
     if (it == stubbed_methods_.end()) {
@@ -114,6 +130,10 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 - (BOOL)has_stubbed_method_for:(SEL)selector {
     Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(selector);
     return it != stubbed_methods_.end();
+}
+
+- (BOOL)has_rejected_method_for:(SEL)selector {
+    return [self.rejected_methods containsObject:NSStringFromSelector(selector)];
 }
 
 - (void)record_method_invocation:(NSInvocation *)invocation {

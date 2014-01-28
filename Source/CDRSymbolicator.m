@@ -30,7 +30,9 @@ NSUInteger CDRCallerStackAddress() {
 }
 
 @interface CDRSymbolicator ()
-@property (nonatomic, retain) NSMutableArray *addresses, *fileNames, *lineNumbers;
+@property (nonatomic, retain) NSMutableArray *addresses;
+@property (nonatomic, retain) NSMutableArray *fileNames;
+@property (nonatomic, retain) NSMutableArray *lineNumbers;
 @end
 
 @implementation CDRSymbolicator
@@ -42,9 +44,9 @@ NSUInteger CDRCallerStackAddress() {
 
 - (id)init {
     if (self = [super init]) {
-        self.addresses = [NSMutableArray array];
-        self.fileNames = [NSMutableArray array];
-        self.lineNumbers = [NSMutableArray array];
+        addresses_ = [[NSMutableArray alloc] init];
+        fileNames_ = [[NSMutableArray alloc] init];
+        lineNumbers_ = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -66,15 +68,19 @@ NSUInteger CDRCallerStackAddress() {
     return (index == NSNotFound) ? 0 : [[self.lineNumbers objectAtIndex:index] unsignedIntegerValue];
 }
 
-- (void)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error {
+- (BOOL)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error {
 #if __arm__
-    *error = self.buildNotAvailableError;
-    return;
+    if (error) {
+        *error = self.buildNotAvailableError;
+    }
+    return NO;
 #else
     NSArray *validAddresses = [self.class validAddresses:addresses];
     if (validAddresses.count == 0) {
-        *error = self.buildNoAddressesError;
-        return;
+        if (error) {
+            *error = self.buildNoAddressesError;
+        }
+        return NO;
     }
 
     CDRAtosTask *atosTask = [CDRAtosTask taskForCurrentTestExecutable];
@@ -97,9 +103,13 @@ NSUInteger CDRCallerStackAddress() {
     }
 
     if (!atLeastOneSuccessfulSymbolication) {
-        *error = self.buildNotSuccessfulError;
-        return;
+        if (error) {
+            *error = self.buildNotSuccessfulError;
+        }
+        return NO;
     }
+
+    return YES;
 #endif
 }
 
@@ -242,9 +252,11 @@ NSUInteger CDRCallerStackAddress() {
     [task setArguments:arguments];
 
     NSPipe *standardOutput = [NSPipe pipe];
+    // toss stderr, but suppress its output
+    NSPipe *standardError = [NSPipe pipe];
     if (standardOutput) {
         [task setStandardOutput:standardOutput];
-        [task setStandardError:standardOutput];
+        [task setStandardError:standardError];
     } else return nil;
 
     @try {

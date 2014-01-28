@@ -46,12 +46,24 @@
 		1F882AAC180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FA617AE187EA71B00ABCE11 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FA617AC187EA71B00ABCE11 /* Base.mm */; };
 		1FA617AF187EA71B00ABCE11 /* Base.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FA617AC187EA71B00ABCE11 /* Base.mm */; };
+		1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
+		1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FB4F27F188919A200227772 /* ARCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE71E7CB175E958F002A54D5 /* ARCViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		1FB4F28018891ED400227772 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
+		1FB4F28118891EF200227772 /* ArgumentReleaser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE807888183C71950078C608 /* ArgumentReleaser.m */; };
+		1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
+		1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
+		1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
+		1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
+		1FB4F28618891F0D00227772 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
 		1FDCD5601821D3BB00B511DB /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FE15C1B1869091900207F0C /* CDRReportDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE15C191869091900207F0C /* CDRReportDispatcher.h */; };
 		1FE15C1C1869091900207F0C /* CDRReportDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE15C191869091900207F0C /* CDRReportDispatcher.h */; };
 		1FE15C1D1869091900207F0C /* CDRReportDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE15C1A1869091900207F0C /* CDRReportDispatcher.m */; };
 		1FE15C201869091900207F0C /* CDRReportDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE15C1A1869091900207F0C /* CDRReportDispatcher.m */; };
+		1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; };
+		1FE2ACBA18891FE90000C063 /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
 		1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
 		1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
@@ -66,6 +78,10 @@
 		42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
+		44B9A71E1888660400CBCA1B /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
+		44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */; };
+		4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
+		4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */; };
 		492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		492951DE1481AADA00FA8916 /* CDRJUnitXMLReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */; };
 		492951E01481AAFA00FA8916 /* CDRJUnitXMLReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */; };
@@ -196,6 +212,14 @@
 		AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */ = {isa = PBXBuildFile; fileRef = AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */; };
 		AE3E8F39184FEEE900633740 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
 		AE3E8F3A184FEEEB00633740 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
+		AE4A9458187F7D8F008566F5 /* BeFalsy.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4A9457187F7D8F008566F5 /* BeFalsy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE4A9459187F7D8F008566F5 /* BeFalsy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4A9457187F7D8F008566F5 /* BeFalsy.h */; };
+		AE4A945B187F7E52008566F5 /* BeFalsySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */; };
+		AE4A945C187F7E52008566F5 /* BeFalsySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */; };
+		AE4A945E1880792E008566F5 /* RejectedMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4A945D1880792E008566F5 /* RejectedMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE4A945F1880792E008566F5 /* RejectedMethod.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4A945D1880792E008566F5 /* RejectedMethod.h */; };
+		AE4A946118807DA6008566F5 /* RejectedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A946018807DA6008566F5 /* RejectedMethod.mm */; };
+		AE4A946218807DA6008566F5 /* RejectedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A946018807DA6008566F5 /* RejectedMethod.mm */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
@@ -508,6 +532,7 @@
 				AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */,
 				AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */,
 				AE02E813184ECAEE00414F19 /* CDRSpecFailure.h in Copy headers to framework */,
+				AE4A945F1880792E008566F5 /* RejectedMethod.h in Copy headers to framework */,
 				AE0721E4187518FD0031CC42 /* Exist.h in Copy headers to framework */,
 				AE91CA6D11DE64B3002BA6B9 /* CDRSharedExampleGroupPool.h in Copy headers to framework */,
 				AEEE226111DC2C8300029872 /* Cedar.h in Copy headers to framework */,
@@ -532,6 +557,7 @@
 				AEF33018145B6222002F93BB /* BeLessThan.h in Copy headers to framework */,
 				AEF33022145B69DE002F93BB /* BeLTE.h in Copy headers to framework */,
 				AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */,
+				AE4A9459187F7D8F008566F5 /* BeFalsy.h in Copy headers to framework */,
 				6628FC8914C4DBA70016652A /* CedarDoubles.h in Copy headers to framework */,
 				6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */,
 				6628FCA114C503530016652A /* Cedar-iOS.h in Copy headers to framework */,
@@ -586,6 +612,10 @@
 		22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadlessSimulatorWorkaround.m; sourceTree = "<group>"; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
+		4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWithPublicRunDates.h; sourceTree = "<group>"; };
+		4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleWithPublicRunDates.m; sourceTree = "<group>"; };
+		4523F5938DFF8768B6E8902F /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		4523FB751BC9186566CE8E10 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRJUnitXMLReporter.h; sourceTree = "<group>"; };
 		492951DF1481AAFA00FA8916 /* CDRJUnitXMLReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRJUnitXMLReporter.m; sourceTree = "<group>"; };
 		492951E31482FF6200FA8916 /* CDRJUnitXMLReporterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRJUnitXMLReporterSpec.mm; sourceTree = "<group>"; };
@@ -668,6 +698,10 @@
 		AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDouble.mm; sourceTree = "<group>"; };
 		AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithCollections.h; sourceTree = "<group>"; };
 		AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollections.m; sourceTree = "<group>"; };
+		AE4A9457187F7D8F008566F5 /* BeFalsy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeFalsy.h; sourceTree = "<group>"; };
+		AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeFalsySpec.mm; sourceTree = "<group>"; };
+		AE4A945D1880792E008566F5 /* RejectedMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectedMethod.h; sourceTree = "<group>"; };
+		AE4A946018807DA6008566F5 /* RejectedMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RejectedMethod.mm; sourceTree = "<group>"; };
 		AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithWeakDelegate.h; sourceTree = "<group>"; };
 		AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithWeakDelegate.m; sourceTree = "<group>"; };
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
@@ -785,6 +819,7 @@
 		AEF33016145B6222002F93BB /* BeLessThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeLessThan.h; sourceTree = "<group>"; };
 		AEF3301D145B68D7002F93BB /* BeLTESpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeLTESpec.mm; sourceTree = "<group>"; };
 		AEF33020145B69DE002F93BB /* BeLTE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeLTE.h; sourceTree = "<group>"; };
+		AEF52C26187F236D00C8D2D8 /* SimpleMultiplier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleMultiplier.h; sourceTree = "<group>"; };
 		AEF72F7713EC730700786282 /* CedarComparators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarComparators.h; sourceTree = "<group>"; };
 		AEF72F7A13EC734000786282 /* CedarStringifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarStringifiers.h; sourceTree = "<group>"; };
 		AEF72FFB13ECC21E00786282 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
@@ -968,6 +1003,15 @@
 			path = Reporters;
 			sourceTree = "<group>";
 		};
+		4523FFB9BD607306C7ED94A3 /* GData */ = {
+			isa = PBXGroup;
+			children = (
+				4523FB751BC9186566CE8E10 /* GDataXMLNode.m */,
+				4523F5938DFF8768B6E8902F /* GDataXMLNode.h */,
+			);
+			path = GData;
+			sourceTree = "<group>";
+		};
 		6628FC8414C4DAB90016652A /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
@@ -978,6 +1022,7 @@
 				AE9AA6DD15AE0BE200617E1A /* CedarDoubleImpl.mm */,
 				AE74907015B486CD008EA127 /* CDRFake.mm */,
 				AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */,
+				AE4A946018807DA6008566F5 /* RejectedMethod.mm */,
 				AEB1A74115F304A9002E4167 /* StubbedMethod.mm */,
 				AEC7873715F440980058A27B /* InvocationMatcher.mm */,
 				AEC7874C15F444A50058A27B /* HaveReceived.mm */,
@@ -997,6 +1042,7 @@
 				AE9AA67915AB72DA00617E1A /* CDRClassFake.h */,
 				6639A78014C50D3000B564B7 /* HaveReceived.h */,
 				AE9AA68815AC728A00617E1A /* CedarDouble.h */,
+				AE4A945D1880792E008566F5 /* RejectedMethod.h */,
 				AE9AA6D115AE082500617E1A /* StubbedMethod.h */,
 				AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */,
 				AE597B4015B0638B00EEF305 /* InvocationMatcher.h */,
@@ -1438,6 +1484,7 @@
 			children = (
 				AEF72FFB13ECC21E00786282 /* Base.h */,
 				AEF72FFC13ECC21E00786282 /* BeCloseTo.h */,
+				AE4A9457187F7D8F008566F5 /* BeFalsy.h */,
 				AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */,
 				AEF3300B145B4F75002F93BB /* BeGTE.h */,
 				AEF72FFD13ECC21E00786282 /* BeInstanceOf.h */,
@@ -1459,6 +1506,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF7301413ECC4AE00786282 /* BeCloseToSpec.mm */,
+				AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */,
 				AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */,
 				AEF33008145B4E3B002F93BB /* BeGTESpec.mm */,
 				AEF7301513ECC4AE00786282 /* BeInstanceOfSpec.mm */,
@@ -1528,9 +1576,13 @@
 				AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */,
 				AE807889183C71950078C608 /* SimpleIncrementer.h */,
 				AE80788A183C71950078C608 /* SimpleIncrementer.m */,
+				AEF52C26187F236D00C8D2D8 /* SimpleMultiplier.h */,
 				AE80788B183C71950078C608 /* SimpleKeyValueObserver.h */,
 				AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */,
 				AE8F1D901850F6C00059E840 /* CedarObservedObject.h */,
+				4523FFB9BD607306C7ED94A3 /* GData */,
+				4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.m */,
+				4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1565,6 +1617,7 @@
 				AE18A7CB13F453CC00C8872C /* BeCloseTo.h in Headers */,
 				AE18A7CC13F453CC00C8872C /* BeInstanceOf.h in Headers */,
 				AE18A7CD13F453CC00C8872C /* BeNil.h in Headers */,
+				AE4A9458187F7D8F008566F5 /* BeFalsy.h in Headers */,
 				AE18A7CE13F453CC00C8872C /* BeSameInstanceAs.h in Headers */,
 				2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */,
 				AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */,
@@ -1590,6 +1643,7 @@
 				AEF33017145B6222002F93BB /* BeLessThan.h in Headers */,
 				E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */,
 				AEF33021145B69DE002F93BB /* BeLTE.h in Headers */,
+				AE4A945E1880792E008566F5 /* RejectedMethod.h in Headers */,
 				AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */,
 				AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */,
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
@@ -2023,8 +2077,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */,
+				1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */,
+				1FB4F27F188919A200227772 /* ARCViewController.m in Sources */,
+				1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */,
+				1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */,
 				96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */,
+				1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */,
 				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m in Sources */,
+				1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */,
+				1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */,
+				1FB4F28118891EF200227772 /* ArgumentReleaser.m in Sources */,
+				1FB4F28018891ED400227772 /* CDRSpySpec.mm in Sources */,
+				1FB4F28618891F0D00227772 /* SimpleKeyValueObserver.m in Sources */,
+				1FE2ACBA18891FE90000C063 /* CedarDoubleARCSharedExamples.mm in Sources */,
 				968F9582161AC58200A78D36 /* CDRSymbolicatorSpec.mm in Sources */,
 				96A805E416D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */,
 			);
@@ -2045,6 +2111,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4A946118807DA6008566F5 /* RejectedMethod.mm in Sources */,
 				AEEE1FF311DC27B800029872 /* CDRDefaultReporter.m in Sources */,
 				AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */,
 				AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */,
@@ -2101,6 +2168,7 @@
 				AEF7301B13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */,
 				AE53B68417E7CD8D00D83D5E /* ObjectWithWeakDelegate.m in Sources */,
 				AE80788D183C71950078C608 /* ArgumentReleaser.m in Sources */,
+				AE4A945B187F7E52008566F5 /* BeFalsySpec.mm in Sources */,
 				AEF7301D13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */,
 				AE807890183C71950078C608 /* SimpleIncrementer.m in Sources */,
 				1FF3BF4F1881FA1F00EC4382 /* HaveReceivedARCSpec.mm in Sources */,
@@ -2141,6 +2209,8 @@
 				AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */,
 				5898A7EC5992B2CC74E399F6 /* RespondToSpec.mm in Sources */,
 				5898A61AAABFE1802E87E6C3 /* ConformToSpec.mm in Sources */,
+				4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */,
+				4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2182,6 +2252,7 @@
 				AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */,
 				AE94D04615F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
+				AE4A946218807DA6008566F5 /* RejectedMethod.mm in Sources */,
 				AEC7873A15F440980058A27B /* InvocationMatcher.mm in Sources */,
 				AEC7874E15F444A50058A27B /* HaveReceived.mm in Sources */,
 				969B6F86160C678400C7C792 /* CDRSymbolicator.m in Sources */,
@@ -2228,6 +2299,7 @@
 				1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */,
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */,
+				44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
 				AE53B68217E7BCE700D83D5E /* CedarNiceFakeSharedExamples.mm in Sources */,
@@ -2235,7 +2307,9 @@
 				AEF33015145B6188002F93BB /* BeLessThanSpec.mm in Sources */,
 				AEF3301F145B68D7002F93BB /* BeLTESpec.mm in Sources */,
 				966E74EE145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */,
+				44B9A71E1888660400CBCA1B /* GDataXMLNode.m in Sources */,
 				AEBB92631496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
+				AE4A945C187F7E52008566F5 /* BeFalsySpec.mm in Sources */,
 				AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */,
 				492951E51482FF6300FA8916 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */,
@@ -2892,12 +2966,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
+					"-lxml2",
 				);
 				PRODUCT_NAME = Specs;
 			};
@@ -2917,12 +2997,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
+					"-lxml2",
 				);
 				PRODUCT_NAME = Specs;
 				ZERO_LINK = NO;
@@ -3005,6 +3091,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -3016,6 +3103,7 @@
 					Foundation,
 					"-framework",
 					UIKit,
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3045,6 +3133,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/Source/Headers/Matchers/UIKit",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "iOSSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -3056,6 +3145,7 @@
 					Foundation,
 					"-framework",
 					UIKit,
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
