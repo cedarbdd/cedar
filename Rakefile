@@ -67,10 +67,12 @@ def with_env_vars(env_vars)
     ENV[key] = new_value
   end
 
-  yield
-
-  env_vars.each_key do |key|
-    ENV[key] = old_values[key]
+  begin
+    yield
+  ensure
+    env_vars.each_key do |key|
+      ENV[key] = old_values[key]
+    end
   end
 end
 
