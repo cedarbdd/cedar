@@ -268,11 +268,15 @@ describe(@"CDROTestReporter", ^{
             [reporter.reporter_output substringFromIndex:range.location] should contain(@"Executed 3 tests, with 1 failure (0 unexpected) in");
         });
 
-        it(@"should report the passing example", ^{
+        it(@"should report the failing example", ^{
             reporter.reporter_output should contain(@"Test Case '-[MyExampleSpec my_group_other_failing]' started.");
         });
 
-        it(@"should finish the passing example", ^{
+        it(@"should report the failing example's error", ^{
+            reporter.reporter_output should contain(@": error: -[MyExampleSpec my_group_other_failing] :");
+        });
+
+        it(@"should finish the failing example", ^{
             reporter.reporter_output should contain(@"Test Case '-[MyExampleSpec my_group_other_failing]' failed");
         });
 

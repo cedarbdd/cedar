@@ -90,6 +90,9 @@
         NSString *testSuite = [self.namer classNameForExample:example];
         NSString *methodName = [self.namer methodNameForExample:example];
         NSString *status = [self stateNameForExample:example];
+        [self logMessage:[self stringForErrorsForExample:example
+                                               suiteName:testSuite
+                                                caseName:methodName]];
         [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' %@ (%.3f seconds).\n",
                           testSuite, methodName, status, example.runTime]];
     }
@@ -162,15 +165,19 @@
     }
 }
 
-- (NSString *)recordFailedExample:(CDRExample *)example
-                        suiteName:(NSString *)suiteName
-                         caseName:(NSString *)caseName {
-    NSString *errorDescription = [example.failure.reason stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-    NSString *errorMessage = [NSString stringWithFormat:@"%@:%d: error: -[%@ %@] : %@",
-                              example.failure.fileName, example.failure.lineNumber,
-                              suiteName, caseName,
-                              errorDescription];
-    return errorMessage;
+- (NSString *)stringForErrorsForExample:(CDRExample *)example
+                              suiteName:(NSString *)suiteName
+                               caseName:(NSString *)caseName {
+    if (example.failure) {
+        NSString *errorDescription = [example.failure.reason stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+        NSString *errorMessage = [NSString stringWithFormat:@"%@:%d: error: -[%@ %@] : %@",
+                                  example.failure.fileName, example.failure.lineNumber,
+                                  suiteName, caseName,
+                                  errorDescription];
+        return errorMessage;
+    } else {
+        return @"";
+    }
 }
 
 - (void)printStatsForExamples:(NSArray *)examples {
