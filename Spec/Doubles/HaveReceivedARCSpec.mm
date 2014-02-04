@@ -9,63 +9,29 @@ using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 using namespace Cedar::Doubles::Arguments;
 
-NSString *argumentsString(NSArray *arguments) {
-    return [[arguments valueForKey:@"description"] componentsJoinedByString:@", "];
-}
+extern NSString *argumentsString(NSArray *arguments);
+extern void expectNonDoubleException(id obj, void (^block)());
+extern void expectNotHaveReceivedFailureWithHistory(id obj, SEL selector, NSString *history, void (^block)());
+extern void expectNotHaveReceivedFailureWithHistory(id obj, SEL selector, NSArray *arguments, NSString *history, void (^block)());
+extern void expectHaveReceivedFailureWithHistory(id obj, SEL selector, NSString *history, void (^block)());
+extern void expectHaveReceivedFailureWithHistory(id obj, SEL selector, NSArray *arguments, NSString *history, void (^block)());
+extern void expectHaveReceivedFailureWithoutHistory(id obj, SEL selector, void(^block)());
+extern void expectHaveReceivedFailureWithoutHistory(id obj, SEL selector, NSArray *arguments, void(^block)());
+extern void expectArgumentMismatchFailure(SEL selector, int expectedCount, int actualCount, void(^block)());
 
-void expectNonDoubleException(id obj, void (^block)()) {
-    expectExceptionWithReason([NSString stringWithFormat:@"Received expectation for non-double object <%@>", obj], block);
-}
+SPEC_BEGIN(HaveReceivedARCSpec)
 
-void expectNotHaveReceivedFailureWithHistory(id obj, SEL selector, NSString *history, void (^block)()) {
-    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@>, but received:\n%@",
-                              obj, NSStringFromSelector(selector), history], block);
-}
-
-void expectNotHaveReceivedFailureWithHistory(id obj, SEL selector, NSArray *arguments, NSString *history, void (^block)()) {
-    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not have received message <%@> with arguments <%@>, but received:\n%@",
-                              obj, NSStringFromSelector(selector), argumentsString(arguments), history], block);
-}
-
-void expectHaveReceivedFailureWithHistory(id obj, SEL selector, NSString *history, void (^block)()) {
-    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, but received:\n%@",
-                              obj, NSStringFromSelector(selector), history], block);
-}
-
-void expectHaveReceivedFailureWithHistory(id obj, SEL selector, NSArray *arguments, NSString *history, void (^block)()) {
-    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@> with arguments <%@>, but received:\n%@",
-                              obj, NSStringFromSelector(selector), argumentsString(arguments), history], block);
-}
-
-void expectHaveReceivedFailureWithoutHistory(id obj, SEL selector, void(^block)()) {
-    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>",
-                              obj, NSStringFromSelector(selector)], block);
-}
-
-void expectHaveReceivedFailureWithoutHistory(id obj, SEL selector, NSArray *arguments, void(^block)()) {
-    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@> with arguments <%@>",
-                              obj, NSStringFromSelector(selector), argumentsString(arguments)], block);
-}
-
-void expectArgumentMismatchFailure(SEL selector, int expectedCount, int actualCount, void(^block)()) {
-    NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: %d, actual: %d",
-                        NSStringFromSelector(selector), expectedCount, actualCount];
-    block should raise_exception.with_reason(reason);
-}
-
-SPEC_BEGIN(HaveReceivedSpec)
-
-describe(@"have_received matcher", ^{
+describe(@"have_received matcher (ARC)", ^{
     __block SimpleIncrementer *incrementer;
 
     beforeEach(^{
-        incrementer = [[[SimpleIncrementer alloc] init] autorelease];
+        incrementer = [[SimpleIncrementer alloc] init];
         spy_on(incrementer);
     });
 
     context(@"with an actual value that is not a spy", ^{
         beforeEach(^{
-            incrementer = [[[SimpleIncrementer alloc] init] autorelease];
+            incrementer = [[SimpleIncrementer alloc] init];
         });
 
         it(@"should raise a descriptive exception", ^{

@@ -21,6 +21,8 @@ namespace Cedar { namespace Doubles {
 
 namespace Cedar { namespace Doubles {
 
+    bool isCedarDouble(id);
+
     struct MethodStubbingMarker {
         const char *fileName;
         int lineNumber;

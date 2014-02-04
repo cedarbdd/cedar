@@ -24,6 +24,7 @@ namespace Cedar { namespace Doubles {
 
     protected:
         virtual NSString * failure_message_end() const;
+        virtual NSString * failure_message_end(id<CedarDouble> cedarDouble) const;
 
     private:
         void verify_object_is_a_double(id) const;
