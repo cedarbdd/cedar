@@ -1,9 +1,5 @@
 #import "CDRBufferedDefaultReporter.h"
 
-@interface CDRBufferedDefaultReporter ()
-@property (retain, nonatomic) NSMutableString *buffer;
-@end
-
 @implementation CDRBufferedDefaultReporter
 
 - (void)dealloc {
@@ -17,8 +13,8 @@
     [super runWillStartWithGroups:groups andRandomSeed:seed];
 }
 
-- (void)printStats {
-    [super printStats];
+- (void)runDidComplete {
+    [super runDidComplete];
 
     printf("%s", [self.buffer UTF8String]);
 }

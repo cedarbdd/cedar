@@ -1,12 +1,10 @@
 #import "CDRDefaultReporter.h"
 
-@class CDRExample;
-
 @interface CDRBufferedDefaultReporter : CDRDefaultReporter
+@property (retain, nonatomic) NSMutableString *buffer;
 
 #pragma mark Overrides
 - (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed;
-- (void)printStats;
+- (void)runDidComplete;
 - (void)logText:(NSString *)linePartial;
-
 @end
