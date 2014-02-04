@@ -9,7 +9,7 @@ int runSpecsWithinUIApplication() {
 
     BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
 
-    char *defaultReporterClassName = isTestBundle ? "CDROTestReporter" : "CDRDefaultReporter";
+    char *defaultReporterClassName = isTestBundle ? "CDROTestReporter,CDRBufferedDefaultReporter" : "CDRDefaultReporter";
     @autoreleasepool {
         NSArray *reporters = CDRReportersFromEnv(defaultReporterClassName);
 

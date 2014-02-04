@@ -12,7 +12,7 @@ void CDRRunTests(id self, SEL _cmd, id ignored) {
     // Since we want to have integration with XCode when running tests from inside the IDE
     // CDROTestReporter needs to be default reporter; however, we can use any other reporter
     // when running from the command line (e.g. CDRColorizedReporter).
-    NSArray *reporters = CDRReportersFromEnv("CDROTestReporter");
+    NSArray *reporters = CDRReportersFromEnv("CDROTestReporter,CDRBufferedDefaultReporter");
     if (![reporters count]) {
         exit(-999);
     }
