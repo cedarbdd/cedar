@@ -21,7 +21,7 @@ namespace Cedar { namespace Doubles {
     };
 
     namespace Arguments {
-        static const Argument::shared_ptr_t anything = Argument::shared_ptr_t(new Doubles::AnyArgument());
+        extern const Argument::shared_ptr_t anything;
     }
 
 }}
