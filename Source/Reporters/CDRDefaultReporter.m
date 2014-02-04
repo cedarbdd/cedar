@@ -130,7 +130,7 @@
             [self logText:[NSString stringWithFormat:
                            @"Exception symbolication was not successful.\n"
                            @"To turn it off remove CEDAR_SYMBOLICATE_EXCEPTIONS.\n"
-                           @"Details:\n%s\n", details.UTF8String]];
+                           @"Details:\n%@\n", details]];
         }
     }
     return callStackSymbols;
@@ -142,7 +142,7 @@
     [self logText:@"\n"];
 
     for (NSString *message in messages) {
-        [self logText:[NSString stringWithFormat:@"%s\n", [message UTF8String]]];
+        [self logText:[NSString stringWithFormat:@"%@\n", message]];
     }
 }
 
@@ -182,9 +182,9 @@
         onPreviousBranch &= (previousBranchLength > i && [[exampleBranch objectAtIndex:i] isEqualToString:[previousBranch objectAtIndex:i]]);
 
         if (!onPreviousBranch) {
-            const char *indicator = (exampleBranchLength - i) == 1 ? [token UTF8String] : " ";
-            [self logText:[NSString stringWithFormat:@"%s  %*s%s\n",
-                           indicator, 2*i, "", [[exampleBranch objectAtIndex:i] UTF8String]]];
+            NSString *indicator = (exampleBranchLength - i) == 1 ? token : @" ";
+            [self logText:[NSString stringWithFormat:@"%@  %*s%@\n",
+                           indicator, 2*i, "", [exampleBranch objectAtIndex:i]]];
         }
     }
 
@@ -237,8 +237,7 @@
 }
 
 - (void)printStats {
-    [self logText:[NSString stringWithFormat:@"\nFinished in %.4f seconds\n\n",
-                   [endTime_ timeIntervalSinceDate:startTime_]]];
+    [self logText:[NSString stringWithFormat:@"\nFinished in %.4f seconds\n\n", [endTime_ timeIntervalSinceDate:startTime_]]];
     [self logText:[NSString stringWithFormat:@"%u examples, %u failures", exampleCount_, (unsigned int)failureMessages_.count]];
 
     if (pendingMessages_.count) {
