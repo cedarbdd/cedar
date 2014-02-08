@@ -29,4 +29,6 @@
 
 @interface SimpleIncrementer : IncrementerBase<SimpleIncrementer>
 
+@property (nonatomic, copy) NSString *string;
+
 @end

@@ -167,6 +167,14 @@ describe(@"spy_on", ^{
         incrementer should have_received("increment");
     });
 
+    it(@"should support key-value coding", ^{
+        [incrementer setValue:@"42" forKey:@"string"];
+
+        incrementer should have_received(@selector(setValue:forKey:)).with(@"42", @"string");
+
+        incrementer.string should equal(@"42");
+    });
+
     describe(@"spying on an object with a forwarding target", ^{
         __block ObjectWithForwardingTarget *forwardingObject;
         beforeEach(^{
