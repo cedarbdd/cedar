@@ -167,12 +167,22 @@ describe(@"spy_on", ^{
         incrementer should have_received("increment");
     });
 
-    it(@"should support key-value coding", ^{
-        [incrementer setValue:@"42" forKey:@"string"];
+    describe(@"spying on an object that supports KVC", ^{
+        it(@"should forward setValue:forKey:", ^{
+            [incrementer setValue:@"42" forKey:@"string"];
 
-        incrementer should have_received(@selector(setValue:forKey:)).with(@"42", @"string");
+            incrementer should have_received(@selector(setValue:forKey:)).with(@"42", @"string");
 
-        incrementer.string should equal(@"42");
+            incrementer.string should equal(@"42");
+        });
+
+        it(@"should forward valueForKey:", ^{
+            incrementer.string = @"42";
+
+            [incrementer valueForKey:@"string"] should equal(@"42");
+
+            incrementer should have_received(@selector(valueForKey:)).with(@"string");
+        });
     });
 
     describe(@"spying on an object with a forwarding target", ^{

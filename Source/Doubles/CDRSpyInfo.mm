@@ -59,19 +59,24 @@ static NSMutableSet *currentSpies__;
 }
 
 - (IMP)impForSelector:(SEL)selector {
-    BOOL yieldToKVO = (sel_isEqual(selector, @selector(addObserver:forKeyPath:options:context:)) ||
-            sel_isEqual(selector, @selector(removeObserver:forKeyPath:)) ||
-            sel_isEqual(selector, @selector(removeObserver:forKeyPath:context:)) ||
-            sel_isEqual(selector, @selector(mutableArrayValueForKey:)) ||
-            sel_isEqual(selector, @selector(mutableSetValueForKey:)) ||
-            sel_isEqual(selector, @selector(mutableOrderedSetValueForKey:)) ||
-            sel_isEqual(selector, @selector(willChange:valuesAtIndexes:forKey:)) ||
-            sel_isEqual(selector, @selector(didChange:valuesAtIndexes:forKey:)) ||
-            sel_isEqual(selector, @selector(setValue:forKey:)) ||
-            strcmp(class_getName(self.publicClass), class_getName(self.spiedClass)));
-    if (yieldToKVO) {
+    BOOL yieldToSpiedClass = (
+        sel_isEqual(selector, @selector(addObserver:forKeyPath:options:context:)) ||
+        sel_isEqual(selector, @selector(didChange:valuesAtIndexes:forKey:)) ||
+        sel_isEqual(selector, @selector(mutableArrayValueForKey:)) ||
+        sel_isEqual(selector, @selector(mutableOrderedSetValueForKey:)) ||
+        sel_isEqual(selector, @selector(mutableSetValueForKey:)) ||
+        sel_isEqual(selector, @selector(removeObserver:forKeyPath:)) ||
+        sel_isEqual(selector, @selector(removeObserver:forKeyPath:context:)) ||
+        sel_isEqual(selector, @selector(setValue:forKey:)) ||
+        sel_isEqual(selector, @selector(valueForKey:)) ||
+        sel_isEqual(selector, @selector(willChange:valuesAtIndexes:forKey:)) ||
+        strcmp(class_getName(self.publicClass), class_getName(self.spiedClass))
+    );
+
+    if (yieldToSpiedClass) {
         return NULL;
     }
+
     Method originalMethod = class_getInstanceMethod(self.spiedClass, selector);
     return method_getImplementation(originalMethod);
 }
