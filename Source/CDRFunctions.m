@@ -180,22 +180,24 @@ void CDRMarkXcodeFocusedExamplesInSpecs(NSArray *specs, NSArray *arguments) {
     }
 
     // TODO: should we handle the InvertScope + All case?
-    if ([@"All" isEqual:examplesArgument]) {
+    if ([@[@"Self", @"All"] containsObject:examplesArgument]) {
         return;
     }
 
     NSMutableDictionary *testMethodNamesBySpecClass = [NSMutableDictionary dictionary];
     for (NSString *testName in [examplesArgument componentsSeparatedByString:@","]) {
         NSArray *components = [testName componentsSeparatedByString:@"/"];
-        NSString *specClass = [components objectAtIndex:0];
-        NSString *testMethod = [components objectAtIndex:1];
+        if (components.count > 1) {
+            NSString *specClass = [components objectAtIndex:0];
+            NSString *testMethod = [components objectAtIndex:1];
 
-        NSMutableSet *testMethods = [testMethodNamesBySpecClass objectForKey:specClass];
-        if (!testMethods) {
-            testMethods = [NSMutableSet set];
-            [testMethodNamesBySpecClass setObject:testMethods forKey:specClass];
+            NSMutableSet *testMethods = [testMethodNamesBySpecClass objectForKey:specClass];
+            if (!testMethods) {
+                testMethods = [NSMutableSet set];
+                [testMethodNamesBySpecClass setObject:testMethods forKey:specClass];
+            }
+            [testMethods addObject:testMethod];
         }
-        [testMethods addObject:testMethod];
     }
 
     CDROTestNamer *testNamer = [[CDROTestNamer alloc] init];
