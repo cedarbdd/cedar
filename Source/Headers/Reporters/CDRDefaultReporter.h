@@ -29,4 +29,5 @@
 
 - (void)reportOnExample:(CDRExample *)example;
 - (void)printStats;
+- (void)logText:(NSString *)linePartial;
 @end

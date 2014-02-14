@@ -40,14 +40,14 @@
     rootGroups_ = [groups retain];
     [self startObservingExamples:rootGroups_];
     startTime_ = [[NSDate alloc] init];
-    printf("Running With Random Seed: %i\n\n", seed);
+    [self logText:[NSString stringWithFormat:@"Running With Random Seed: %i\n\n", seed]];
 }
 
 - (void)runDidComplete {
     endTime_ = [[NSDate alloc] init];
     [self stopObservingExamples:rootGroups_];
 
-    printf("\n");
+    [self logText:@"\n"];
     if ([pendingMessages_ count]) {
         [self printMessages:pendingMessages_];
     }
@@ -68,6 +68,10 @@
 }
 
 #pragma mark Protected interface
+- (void)logText:(NSString *)linePartial {
+    printf("%s", [linePartial UTF8String]);
+}
+
 - (unsigned int)exampleCount {
     return exampleCount_;
 }
@@ -123,9 +127,10 @@
     if (error.domain == kCDRSymbolicatorErrorDomain) {
         if (error.code == kCDRSymbolicatorErrorNotSuccessful) {
             NSString *details = [error.userInfo objectForKey:kCDRSymbolicatorErrorMessageKey];
-            printf("Exception symbolication was not successful.\n"
-                   "To turn it off remove CEDAR_SYMBOLICATE_EXCEPTIONS.\n"
-                   "Details:\n%s\n", details.UTF8String);
+            [self logText:[NSString stringWithFormat:
+                           @"Exception symbolication was not successful.\n"
+                           @"To turn it off remove CEDAR_SYMBOLICATE_EXCEPTIONS.\n"
+                           @"Details:\n%@\n", details]];
         }
     }
     return callStackSymbols;
@@ -134,10 +139,10 @@
 #pragma mark Private interface
 
 - (void)printMessages:(NSArray *)messages {
-    printf("\n");
+    [self logText:@"\n"];
 
     for (NSString *message in messages) {
-        printf("%s\n", [message cStringUsingEncoding:NSUTF8StringEncoding]);
+        [self logText:[NSString stringWithFormat:@"%@\n", message]];
     }
 }
 
@@ -177,8 +182,9 @@
         onPreviousBranch &= (previousBranchLength > i && [[exampleBranch objectAtIndex:i] isEqualToString:[previousBranch objectAtIndex:i]]);
 
         if (!onPreviousBranch) {
-            const char *indicator = (exampleBranchLength - i) == 1 ? [token UTF8String] : " ";
-            printf("%s  %*s%s\n", indicator, 2*i, "", [[exampleBranch objectAtIndex:i] UTF8String]);
+            NSString *indicator = (exampleBranchLength - i) == 1 ? token : @" ";
+            [self logText:[NSString stringWithFormat:@"%@  %*s%@\n",
+                           indicator, 2*i, "", [exampleBranch objectAtIndex:i]]];
         }
     }
 
@@ -220,29 +226,29 @@
     if (reporterOpts && strcmp(reporterOpts, "nested") == 0) {
         [self printNestedFullTextForExample:example stateToken:stateToken];
     } else {
-        printf("%s", [stateToken cStringUsingEncoding:NSUTF8StringEncoding]);
+        [self logText:stateToken];
     }
 
     if (getenv("CEDAR_REPORT_FAILURES_IMMEDIATELY")) {
         if (example.state == CDRExampleStateFailed || example.state == CDRExampleStateError) {
-            printf("\n%s", [[failureMessages_ lastObject] cStringUsingEncoding:NSUTF8StringEncoding]);
+            [self logText:[NSString stringWithFormat:@"\n%@", [failureMessages_ lastObject]]];
         }
     }
 }
 
 - (void)printStats {
-    printf("\nFinished in %.4f seconds\n\n", [endTime_ timeIntervalSinceDate:startTime_]);
-    printf("%u examples, %u failures", exampleCount_, (unsigned int)failureMessages_.count);
+    [self logText:[NSString stringWithFormat:@"\nFinished in %.4f seconds\n\n", [endTime_ timeIntervalSinceDate:startTime_]]];
+    [self logText:[NSString stringWithFormat:@"%u examples, %u failures", exampleCount_, (unsigned int)failureMessages_.count]];
 
     if (pendingMessages_.count) {
-        printf(", %u pending", (unsigned int)pendingMessages_.count);
+        [self logText:[NSString stringWithFormat:@", %u pending", (unsigned int)pendingMessages_.count]];
     }
 
     if (skippedMessages_.count) {
-        printf(", %u skipped", (unsigned int)skippedMessages_.count);
+        [self logText:[NSString stringWithFormat:@", %u skipped", (unsigned int)skippedMessages_.count]];
     }
 
-    printf("\n");
+    [self logText:@"\n"];
 
     if (getenv("CEDAR_REPORT_SLOW_TESTS")) {
         CDRSlowTestStatistics *slowTestStats = [[[CDRSlowTestStatistics alloc] init] autorelease];
