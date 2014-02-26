@@ -2,19 +2,19 @@
 
 [![Build Status](https://travis-ci.org/pivotal/cedar.png?branch=master)](https://travis-ci.org/pivotal/cedar)
 
-Cedar is a BDD-style Objective-C testing framework.  It relies only on Foundation and C++11 features, thus it's not just suited for iOS and OSX codebases but other environments where these are available.
+Cedar is a BDD-style Objective-C testing framework with an expressive matcher DSL and convenient test doubles.
 
 # Quick start
 
 * Install the Xcode command line tools package (Under the Preferences tab 'Downloads') if you haven't already done so
-* Run the following in a terminal:
+* Run the following in a terminal to install Xcode templates for ease of use:
 
 ```
     $ curl -L https://raw.github.com/pivotal/cedar/master/install.sh | bash
 ```
 
 * Restart Xcode
-* Add Cedar target(s) to your app
+* Add new targets or files to your project using the Xcode templates, or create a new project to test-drive from scratch
 * Start writing specs!
 
 # Documentation
