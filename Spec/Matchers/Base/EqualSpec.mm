@@ -844,7 +844,6 @@ describe(@"equal matcher", ^{
         });
     });
 
-
     describe(@"when the actual value is declared as char array", ^{
         // char[] cannot be copied through blocks
         describe(@"and the expected value is declared as a C string", ^{
@@ -2502,6 +2501,74 @@ describe(@"equal matcher", ^{
                 describe(@"negative match", ^{
                     it(@"should pass", ^{
                         expect(actualArray).to_not(equal(expectedArray));
+                    });
+                });
+            });
+        });
+    });
+
+    describe(@"when the actual value is declared as an NSRange", ^{
+        NSRange actualValue = NSMakeRange(42, 56);
+
+        describe(@"and the expected value is declared as an NSRange", ^{
+            __block NSRange expectedValue;
+
+            describe(@"and the values are equal", ^{
+                beforeEach(^{
+                    expectedValue = NSMakeRange(42, 56);
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to(equal(expectedValue));
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <{42, 56}> to not equal <{42, 56}>", ^{
+                            expect(actualValue).to_not(equal(expectedValue));
+                        });
+                    });
+                });
+            });
+
+            describe(@"and the locations are not equal", ^{
+                beforeEach(^{
+                    expectedValue = NSMakeRange(0, 56);
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <{42, 56}> to equal <{0, 56}>", ^{
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(equal(expectedValue));
+                    });
+                });
+            });
+
+            describe(@"and the lengths are not equal", ^{
+                beforeEach(^{
+                    expectedValue = NSMakeRange(42, 0);
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <{42, 56}> to equal <{42, 0}>", ^{
+                            expect(actualValue).to(equal(expectedValue));
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        expect(actualValue).to_not(equal(expectedValue));
                     });
                 });
             });

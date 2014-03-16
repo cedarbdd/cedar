@@ -147,4 +147,10 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     bool compare_equal(const char *actualValue, const U & expectedValue) {
         return strcmp(actualValue, expectedValue) == 0;
     }
+
+#pragma mark NSRange
+    template<typename U>
+    bool compare_equal(NSRange const actualValue, const U & expectedValue) {
+        return NSEqualRanges(actualValue, expectedValue);
+    }
 }}}
