@@ -7,4 +7,5 @@ then
   echo "\n*** Restart Xcode/AppCode to load the new code snippets and templates.  The templates are available under the Cedar section. ***\n"
 else
   echo "\n*** It seems something went wrong installing the code snippets and templates.  Check the build output for errors. ***\n"
+  exit 1
 fi
