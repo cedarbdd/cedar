@@ -87,7 +87,7 @@ end
 desc "Build ___PACKAGENAMEASIDENTIFIER___"
 task :build____PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
   CedarTarget___PACKAGENAMEASIDENTIFIER___.kill_simulator
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator build ARCHS=i386 && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___")
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator clean build ARCHS=i386 && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___")
 end
 
 desc "Run ___PACKAGENAMEASIDENTIFIER___"

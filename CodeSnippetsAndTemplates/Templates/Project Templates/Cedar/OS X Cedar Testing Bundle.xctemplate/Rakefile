@@ -76,7 +76,7 @@ desc "Build and run ___PACKAGENAMEASIDENTIFIER___ OCUnit logic specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
   CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
     build_and_test_command = <<END_SHELL_CMD
-      xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -arch x86_64 build SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' ; 
+      xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -arch x86_64 clean build SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' ; 
       xcodebuild -scheme #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration Debug -arch x86_64 test SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}'
 END_SHELL_CMD
     Dir.chdir(CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT) do
