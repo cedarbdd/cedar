@@ -134,7 +134,7 @@
 			<key>SharedSettings</key>
 			<dict>
 				<key>OTHER_LDFLAGS</key>
-				<string>-ObjC -all_load -lstdc++</string>
+				<string>$(inherited) -ObjC -all_load -lstdc++</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
 				<string>iPhone Developer</string>
 			</dict>
