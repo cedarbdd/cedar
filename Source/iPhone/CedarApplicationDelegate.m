@@ -25,9 +25,13 @@ int runSpecsWithinUIApplication() {
 
 void exitWithStatusFromUIApplication(int status) {
     UIApplication *application = [UIApplication sharedApplication];
-    SEL _terminateWithStatusSelector = NSSelectorFromString(@"_terminateWithStatus:");
-    if ([application respondsToSelector:_terminateWithStatusSelector]) {
-        [application performSelector:_terminateWithStatusSelector withObject:(id)status];
+    SEL terminateWithStatusSelector = NSSelectorFromString(@"_terminateWithStatus:");
+    if ([application respondsToSelector:terminateWithStatusSelector]) {
+        NSMethodSignature *signature = [application methodSignatureForSelector:terminateWithStatusSelector];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+        invocation.selector = terminateWithStatusSelector;
+        [invocation setArgument:&status atIndex:2];
+        [invocation invokeWithTarget:application];
     } else {
         exit(status);
     }
