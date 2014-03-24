@@ -83,7 +83,10 @@ namespace Cedar { namespace Matchers {
 
     template<typename T> template<typename U>
     bool BeSameInstanceAs<T>::matches(U * const & actualValue) const {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wcompare-distinct-pointer-types"
         return actualValue == expectedValue_;
+#pragma clang diagnostic pop
     }
 
 }}
