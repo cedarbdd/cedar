@@ -4,6 +4,10 @@
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
 
+@interface UIApplication (PrivateAppleMethods)
+- (void)_terminateWithStatus:(int)status;
+@end
+
 int runSpecsWithinUIApplication() {
     int exitStatus;
 
@@ -25,9 +29,8 @@ int runSpecsWithinUIApplication() {
 
 void exitWithStatusFromUIApplication(int status) {
     UIApplication *application = [UIApplication sharedApplication];
-    SEL _terminateWithStatusSelector = NSSelectorFromString(@"_terminateWithStatus:");
-    if ([application respondsToSelector:_terminateWithStatusSelector]) {
-        [application performSelector:_terminateWithStatusSelector withObject:(id)status];
+    if ([application respondsToSelector:@selector(_terminateWithStatus:)]) {
+        [application _terminateWithStatus:status];
     } else {
         exit(status);
     }
