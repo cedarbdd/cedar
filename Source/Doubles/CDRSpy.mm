@@ -75,6 +75,26 @@
     return description;
 }
 
+- (BOOL)isEqual:(id)object {
+    __block id that = self;
+    __block BOOL isEqual = NO;
+    [self as_spied_class:^{
+        isEqual = [that isEqual:object];
+    }];
+
+    return isEqual;
+}
+
+- (NSUInteger)hash {
+    __block id that = self;
+    __block NSUInteger hash = 0;
+    [self as_spied_class:^{
+        hash = [that hash];
+    }];
+
+    return hash;
+}
+
 - (Class)class {
     return [CDRSpyInfo publicClassForObject:self];
 }

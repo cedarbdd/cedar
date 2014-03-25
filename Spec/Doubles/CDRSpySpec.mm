@@ -5,6 +5,7 @@
 #import "ObjectWithProperty.h"
 #import "SimpleKeyValueObserver.h"
 #import "ArgumentReleaser.h"
+#import "ObjectWithValueEquality.h"
 #import <objc/runtime.h>
 
 extern "C" {
@@ -159,6 +160,28 @@ describe(@"spy_on", ^{
 
     it(@"should return the description of the spied-upon object", ^{
         incrementer.description should contain(@"SimpleIncrementer");
+    });
+
+    describe(@"spying on an object that uses value-based equality checking", ^{
+        __block ObjectWithValueEquality *ordinaryObject, *spiedObject, *anotherSpiedObject;
+
+        beforeEach(^{
+            ordinaryObject = [[ObjectWithValueEquality alloc] initWithInteger:42];
+            spiedObject = [[ObjectWithValueEquality alloc] initWithInteger:42];
+            anotherSpiedObject = [[ObjectWithValueEquality alloc] initWithInteger:42];
+            spy_on(spiedObject);
+            spy_on(anotherSpiedObject);
+        });
+
+        it(@"should report equality correctly", ^{
+            [spiedObject isEqual:ordinaryObject] should be_truthy;
+            [ordinaryObject isEqual:spiedObject] should be_truthy;
+            [spiedObject isEqual:anotherSpiedObject] should be_truthy;
+        });
+
+        it(@"should return the same hash as the ordinary object", ^{
+            [ordinaryObject hash] should equal([spiedObject hash]);
+        });
     });
 
     it(@"should only spy on a given object once" , ^{
