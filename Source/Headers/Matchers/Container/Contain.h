@@ -1,5 +1,9 @@
 #import "Base.h"
 
+#if TARGET_OS_IPHONE
+#import "ContainNestedSubview.h"
+#endif
+
 namespace Cedar { namespace Matchers {
     template<typename T>
     class Contain : public Base<> {
