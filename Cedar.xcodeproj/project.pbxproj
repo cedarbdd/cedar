@@ -1197,7 +1197,7 @@
 				AEF72FF913ECC16400786282 /* Container */,
 				AEF7302E13ECC6EE00786282 /* Stringifiers */,
 				AE18A7D113F45BBE00C8872C /* Comparators */,
-				AEC40C4D174AC4C000474D2D /* UIGeometry */,
+				AEC40C4D174AC4C000474D2D /* UIKit */,
 				AE0AF58413E9E87E00029396 /* ActualValue.h */,
 				AE0AF55E13E9C0E300029396 /* CedarMatchers.h */,
 				AEF72F7713EC730700786282 /* CedarComparators.h */,
@@ -1260,7 +1260,7 @@
 			children = (
 				AEF7301313ECC4AE00786282 /* Base */,
 				AEF7302913ECC4C100786282 /* Container */,
-				AEC40C52174AC51800474D2D /* UI */,
+				AEC40C52174AC51800474D2D /* UIKit */,
 				966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
@@ -1277,22 +1277,23 @@
 			path = Arguments;
 			sourceTree = "<group>";
 		};
-		AEC40C4D174AC4C000474D2D /* UIGeometry */ = {
+		AEC40C4D174AC4C000474D2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				AEC3AE6318E46A9600402863 /* ContainNestedSubview.h */,
 				AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */,
 				AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */,
 			);
-			name = UIGeometry;
 			path = UIKit;
 			sourceTree = "<group>";
 		};
-		AEC40C52174AC51800474D2D /* UI */ = {
+		AEC40C52174AC51800474D2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				AE41DF8018E4665200B8DD94 /* ContainNestedSubviewSpec.mm */,
 				AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */,
 			);
-			path = UI;
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		AECF135E15D1421A003AAB9C /* Arguments */ = {
@@ -1485,7 +1486,6 @@
 			children = (
 				AEF7301013ECC25000786282 /* BeEmpty.h */,
 				AE18A7FA13F4601400C8872C /* Contain.h */,
-				AEC3AE6318E46A9600402863 /* ContainNestedSubview.h */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -1543,7 +1543,6 @@
 			children = (
 				AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */,
 				AE18A80913F4640600C8872C /* ContainSpec.mm */,
-				AE41DF8018E4665200B8DD94 /* ContainNestedSubviewSpec.mm */,
 			);
 			path = Container;
 			sourceTree = "<group>";
