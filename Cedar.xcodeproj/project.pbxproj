@@ -211,7 +211,6 @@
 		AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE368FCA18E47B38003EFF96 /* ContainNestedSubview.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC3AE6318E46A9600402863 /* ContainNestedSubview.h */; };
-		AE368FCB18E47B39003EFF96 /* ContainNestedSubview.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC3AE6318E46A9600402863 /* ContainNestedSubview.h */; };
 		AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */ = {isa = PBXBuildFile; fileRef = AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */; };
@@ -1660,7 +1659,6 @@
 				AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */,
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
 				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
-				AE368FCB18E47B39003EFF96 /* ContainNestedSubview.h in Headers */,
 				9637852E1491D84F0059C9F6 /* CDROTestHelper.h in Headers */,
 				AEB45A911496C8D800845D09 /* RaiseException.h in Headers */,
 				AEC9DEED12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
