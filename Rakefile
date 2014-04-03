@@ -123,7 +123,7 @@ end
 desc "Build iOS static framework specs"
 task :build_iosframeworkspecs do
   kill_simulator
-  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{IOS_FRAMEWORK_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 SYMROOT='#{BUILD_DIR}'", output_file("iosframeworkspecs")
+  system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{IOS_FRAMEWORK_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build SYMROOT='#{BUILD_DIR}'", output_file("iosframeworkspecs")
 end
 
 desc "Build Cedar and Cedar-iOS frameworks, and verify built Cedar-iOS.framework"
