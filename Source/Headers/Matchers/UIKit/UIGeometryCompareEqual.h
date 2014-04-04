@@ -20,6 +20,13 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     }
 
     template<typename U>
+    bool compare_equal(CGVector const actualValue, const U & expectedValue) {
+        CGPoint pointActualValue = CGPointMake(actualValue.dx, actualValue.dy);
+        CGPoint pointExpectedValue = CGPointMake(expectedValue.dx, expectedValue.dy);
+        return CGPointEqualToPoint(pointActualValue, pointExpectedValue);
+    }
+
+    template<typename U>
     bool compare_equal(UIEdgeInsets const actualValue, const U & expectedValue) {
         return UIEdgeInsetsEqualToEdgeInsets(actualValue, expectedValue);
     }

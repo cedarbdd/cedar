@@ -67,6 +67,24 @@ describe(@"CoreGraphics and UIGeometry struct comparisons", ^{
         });
     });
 
+    describe(@"comparing CGVectors", ^{
+        it(@"should be possible", ^{
+            CGVector thisVector = CGVectorMake(10, 20);
+            CGVector thatVector = CGVectorMake(10, 20);
+
+            thisVector should equal(thatVector);
+        });
+
+        it(@"should fail with a reasonable message", ^{
+            expectFailureWithMessage(@"Expected <{10, 20}> to equal <{11, 22}>", ^{
+                CGVector thisVector = CGVectorMake(10, 20);
+                CGVector thatVector = CGVectorMake(11, 22);
+
+                thisVector should equal(thatVector);
+            });
+        });
+    });
+
     describe(@"comparing UIEdgeInsets", ^{
         it(@"should be possible", ^{
             UIEdgeInsets theseInsets = UIEdgeInsetsMake(10, 20, 30, 40);
