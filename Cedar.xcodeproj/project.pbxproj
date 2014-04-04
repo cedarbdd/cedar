@@ -2016,7 +2016,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build ARCHS=\"i386 x86_64\" SYMROOT=\"${SYMROOT}\"\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build ARCHS=\"armv7s arm64\" SYMROOT=\"${SYMROOT}\"";
+			shellScript = "xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build ARCHS=\"i386 x86_64\" SYMROOT=\"${SYMROOT}\"\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME}-StaticLib -configuration ${CONFIGURATION} clean build ARCHS=\"armv7 armv7s arm64\" SYMROOT=\"${SYMROOT}\"";
 		};
 		AEEE225A11DC2C0200029872 /* Build universal static lib */ = {
 			isa = PBXShellScriptBuildPhase;
