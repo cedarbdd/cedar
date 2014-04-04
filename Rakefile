@@ -18,6 +18,7 @@ SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Preferences/appCode20/templates"
+XCODE_PLUGINS_DIR = "#{ENV['HOME']}/Library/Application Support/Developer/Shared/Xcode/Plug-ins/"
 
 SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "7.1"
 SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || "7.0"
@@ -29,6 +30,7 @@ SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets
 APPCODE_SNIPPETS_FILENAME = "Cedar.xml"
 APPCODE_SNIPPETS_FILE = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "AppCodeSnippets", APPCODE_SNIPPETS_FILENAME)
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
+PLUGIN_DIR = File.join(PROJECT_ROOT, "CedarPlugin.xcplugin")
 
 def sdk_dir(version)
   "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{version}.sdk"
@@ -287,9 +289,15 @@ namespace :dist do
 end
 
 desc "Build frameworks and install templates and code snippets"
-task :install => [:clean, :uninstall, "dist:prepare"] do
+task :install => [:clean, :uninstall, "dist:prepare", :install_plugin] do
   puts "\nInstalling templates...\n"
   system_or_exit %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
+end
+
+desc "Install the CedarPlugin into Xcode (restart required)"
+task :install_plugin do
+  puts "\nInstalling the CedarPlugin...\n"
+  system_or_exit %{cp -rv "#{PLUGIN_DIR}" "#{XCODE_PLUGINS_DIR}"}
 end
 
 desc "Build the frameworks and upgrade the target"
