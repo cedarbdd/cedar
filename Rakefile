@@ -31,7 +31,9 @@ APPCODE_SNIPPETS_FILE = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "App
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 
 def sdk_dir(version)
-  "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{version}.sdk"
+  "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{version}.sdk".tap do |sdk_dir|
+    raise("iPhone Simulator SDK version #{version} not installed") unless File.exist?(sdk_dir)
+  end
 end
 
 # Xcode 4.3 stores its /Developer inside /Applications/Xcode.app, Xcode 4.2 stored it in /Developer
