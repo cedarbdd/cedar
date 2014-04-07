@@ -35,7 +35,9 @@ NSArray *CDRSelectClasses(BOOL (^classSelectionPredicate)(Class class)) {
         Class class = classes[i];
 
         if (classSelectionPredicate(class)) {
+            [class retain];
             [selectedClasses addObject:class];
+            [class release];
         }
     }
     return selectedClasses;
@@ -85,12 +87,13 @@ NSArray *CDRReporterClassesFromEnv(const char *defaultReporterClassName) {
 
     NSMutableArray *reporterClasses = [NSMutableArray arrayWithCapacity:[reporterClassNames count]];
     for (NSString *reporterClassName in reporterClassNames) {
-        Class reporterClass = NSClassFromString(reporterClassName);
+        Class reporterClass = [NSClassFromString(reporterClassName) retain];
         if (!reporterClass) {
             printf("***** The specified reporter class \"%s\" does not exist. *****\n", [reporterClassName cStringUsingEncoding:NSUTF8StringEncoding]);
             return nil;
         }
         [reporterClasses addObject:reporterClass];
+        [reporterClass release];
     }
     return reporterClasses;
 }
