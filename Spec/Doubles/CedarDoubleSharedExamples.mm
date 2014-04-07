@@ -777,6 +777,43 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
             });
         });
+
+        context(@"when the method has been stubbed with Arguments::any()", ^{
+            __block void(^stubMethodAgainWithAnyArgumentBlock)();
+            __block void(^stubMethodAgainWithNoArgumentsBlock)();
+
+            beforeEach(^{
+                myDouble stub_method("methodWithString:").with(@"a specific string").and_return(@"foo");
+                stubMethodAgainWithAnyArgumentBlock = [^{ myDouble stub_method("methodWithString:").with(Arguments::any([NSString class])).and_return(@"bar"); } copy];
+                stubMethodAgainWithNoArgumentsBlock = [^{ myDouble stub_method("methodWithString:").and_return(@"baz"); } copy];
+            });
+
+            afterEach(^{
+                [stubMethodAgainWithAnyArgumentBlock release];
+                [stubMethodAgainWithNoArgumentsBlock release];
+            });
+
+            it(@"should not raise an exception", ^{
+                stubMethodAgainWithAnyArgumentBlock should_not raise_exception;
+                stubMethodAgainWithNoArgumentsBlock should_not raise_exception;
+            });
+
+            context(@"when invoked", ^{
+                beforeEach(^{
+                    stubMethodAgainWithAnyArgumentBlock();
+                    stubMethodAgainWithNoArgumentsBlock();
+                });
+
+                it(@"should return the value associatied with the corresponding stub", ^{
+                    [myDouble methodWithString:@"a specific string"] should equal(@"foo");
+                    [myDouble methodWithString:@"any old string"] should equal(@"bar");
+                    [myDouble methodWithString:nil] should equal(@"baz");
+
+                    NSMutableString *mutableString = [NSMutableString stringWithFormat:@"a mutable string"];
+                    [myDouble methodWithString:mutableString] should equal(@"baz");
+                });
+            });
+        });
     });
 });
 

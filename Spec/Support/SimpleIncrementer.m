@@ -46,6 +46,10 @@
 - (void)methodWithCString:(char *)string {
 }
 
+- (NSString *)methodWithString:(NSString *)string {
+    return string;
+}
+
 - (NSNumber *)methodWithNumber1:(NSNumber *)arg1 andNumber2:(NSNumber *)arg2 {
     return @([arg1 floatValue] * [arg2 floatValue]);
 }
