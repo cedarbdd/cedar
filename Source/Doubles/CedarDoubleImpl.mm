@@ -74,11 +74,16 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 
     if (it != stubbed_methods_.end()) {
         Cedar::Doubles::StubbedMethod::stubbed_method_vector_t stubbed_methods = it->second;
-        if (stubbed_method.contains_anything_argument()) {
+        if (stubbed_method.contains_anything_argument() || stubbed_method.contains_no_arguments()) {
             Cedar::Doubles::StubbedMethod::shared_ptr_t first_stubbed_method = stubbed_methods.front();
             if (first_stubbed_method->contains_anything_argument()) {
                 [[NSException exceptionWithName:NSInternalInconsistencyException
                                          reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with an 'anything' argument", sel_getName(selector)]
+                                       userInfo:nil]
+                 raise];
+            } else if (first_stubbed_method->contains_no_arguments()) {
+                [[NSException exceptionWithName:NSInternalInconsistencyException
+                                         reason:[NSString stringWithFormat:@"The method <%s> is already stubbed without arguments", sel_getName(selector)]
                                        userInfo:nil]
                  raise];
             } else {
@@ -87,14 +92,14 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
         } else {
             Cedar::Doubles::StubbedMethod::stubbed_method_vector_t::iterator stubbed_method_it = stubbed_methods.begin();
             Cedar::Doubles::StubbedMethod::shared_ptr_t first_stubbed_method = stubbed_methods.front();
-            if (first_stubbed_method->contains_anything_argument()) {
+            if (first_stubbed_method->contains_anything_argument() || first_stubbed_method->contains_no_arguments()) {
                 // don't match stubbed_method against the first existing stubbed method, because the first one contains an 'anything' argument
                 ++stubbed_method_it;
             }
             for (; stubbed_method_it != stubbed_methods.end(); ++stubbed_method_it) {
                 if ((**stubbed_method_it).matches_arguments(stubbed_method)) {
                     [[NSException exceptionWithName:NSInternalInconsistencyException
-                                             reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with arguments %@", sel_getName(selector), stubbed_method.arguments_string()]
+                                             reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with arguments %@", sel_getName(selector), (**stubbed_method_it).arguments_string()]
                                            userInfo:nil]
                      raise];
                 }

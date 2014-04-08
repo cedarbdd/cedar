@@ -97,6 +97,10 @@ namespace Cedar { namespace Doubles {
         return false;
     }
 
+    bool StubbedMethod::contains_no_arguments() const {
+        return this->arguments().size() == 0;
+    }
+
     void StubbedMethod::verify_return_value_type(id instance) const {
         if (this->has_return_value()) {
             const char * const methodReturnType = [[instance methodSignatureForSelector:this->selector()] methodReturnType];

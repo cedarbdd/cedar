@@ -134,7 +134,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             context(@"when stubbed twice", ^{
                 it(@"should raise an exception", ^{
                     myDouble stub_method("value");
-                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed with arguments ()");
+                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed without arguments");
                 });
             });
 
@@ -781,6 +781,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
         context(@"when the method has been stubbed with Arguments::any()", ^{
             __block void(^stubMethodAgainWithAnyArgumentBlock)();
+            __block void(^stubMethodAgainWithNoArgumentsBlock)();
             __block FooSuperclass *specificInstance;
 
             beforeEach(^{
@@ -788,24 +789,30 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 myDouble stub_method("methodWithFooSuperclass:").with(specificInstance).and_return(@"foo");
 
                 stubMethodAgainWithAnyArgumentBlock = [^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([BarSubclass class])).and_return(@"bar"); } copy];
+                stubMethodAgainWithNoArgumentsBlock = [^{ myDouble stub_method("methodWithFooSuperclass:").and_return(@"quux"); } copy];
             });
 
             afterEach(^{
                 [stubMethodAgainWithAnyArgumentBlock release];
+                [stubMethodAgainWithNoArgumentsBlock release];
             });
 
             it(@"should not raise an exception", ^{
                 stubMethodAgainWithAnyArgumentBlock should_not raise_exception;
+                stubMethodAgainWithNoArgumentsBlock should_not raise_exception;
             });
 
             context(@"when invoked", ^{
                 beforeEach(^{
                     stubMethodAgainWithAnyArgumentBlock();
+                    stubMethodAgainWithNoArgumentsBlock();
                 });
 
                 it(@"should return the value associatied with the corresponding stub", ^{
                     [myDouble methodWithFooSuperclass:specificInstance] should equal(@"foo");
                     [myDouble methodWithFooSuperclass:[[[BarSubclass alloc] init] autorelease]] should equal(@"bar");
+                    [myDouble methodWithFooSuperclass:[[[QuuxSubclass alloc] init] autorelease]] should equal(@"quux");
+                    [myDouble methodWithFooSuperclass:nil] should equal(@"quux");
                 });
             });
         });

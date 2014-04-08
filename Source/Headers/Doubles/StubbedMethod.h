@@ -56,6 +56,7 @@ namespace Cedar { namespace Doubles {
         bool matches_arguments(const StubbedMethod &) const;
         bool matches(NSInvocation * const invocation) const;
         bool contains_anything_argument() const;
+        bool contains_no_arguments() const;
         bool invoke(NSInvocation * invocation) const;
         void validate_against_instance(id instance) const;
         NSString *arguments_string() const;
