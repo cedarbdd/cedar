@@ -14,6 +14,11 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         return NSStringFromCGPoint(value);
     }
 
+    inline NSString * string_for(const CGVector value) {
+        CGPoint pointValue = CGPointMake(value.dx, value.dy);
+        return NSStringFromCGPoint(pointValue);
+    }
+
     inline NSString * string_for(const UIEdgeInsets value) {
         return NSStringFromUIEdgeInsets(value);
     }
