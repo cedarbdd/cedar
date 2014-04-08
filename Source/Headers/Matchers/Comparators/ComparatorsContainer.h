@@ -32,18 +32,23 @@ namespace Cedar { namespace Matchers { namespace Comparators {
 
 #pragma mark compare_contains
     template<typename T, typename U>
-    bool compare_contains(const T & container, const U & element, bool nested) {
-        if ([container containsObject:element]) {
-            return YES;
-        }
-        if (nested) {
-            for (T object in container) {
-                if ([object respondsToSelector:@selector(containsObject:)] && compare_contains(object, element, nested)) {
-                    return YES;
-                }
+    bool compare_contains(const T & container, const U & element, NSString *elementsKeyPath, bool nested) {
+        for (id object in elementsKeyPath ? [container valueForKeyPath:elementsKeyPath] : container) {
+            if ([object isEqual:element]) {
+                return YES;
+            }
+
+            if (nested && compare_contains(object, element, elementsKeyPath, nested)) {
+                return YES;
             }
         }
+
         return NO;
+    }
+
+    template<typename T, typename U>
+    bool compare_contains(const T & container, const U & element, bool nested) {
+        return compare_contains(container, element, nil, nested);
     }
 
     template<typename U>
