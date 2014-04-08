@@ -155,6 +155,24 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"which contains the element nested", ^{
+            NSArray *container = [NSArray arrayWithObject:[NSArray arrayWithObject:elementCopy]];
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(container).to(contain(element).nested());
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
+                        expect(container).to_not(contain(element).nested());
+                    });
+                });
+            });
+        });
     });
 
     describe(@"when the container is an NSMutableArray", ^{
@@ -207,6 +225,23 @@ describe(@"contain matcher", ^{
             });
         });
 
+        describe(@"which contains the element nested", ^{
+            NSMutableArray *container = [NSMutableArray arrayWithObject:[NSMutableArray arrayWithObject:elementCopy]];
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(container).to(contain(element).nested());
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
+                        expect(container).to_not(contain(element).nested());
+                    });
+                });
+            });
+        });
     });
 
     describe(@"when the container is an NSDictionary", ^{
@@ -278,6 +313,24 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"which contains the element nested", ^{
+            NSSet *container = [NSSet setWithObject:[NSSet setWithObject:elementCopy]];
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(container).to(contain(element).nested());
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
+                        expect(container).to_not(contain(element).nested());
+                    });
+                });
+            });
+        });
     });
 
     describe(@"when the container is an NSMutableSet", ^{
@@ -326,6 +379,24 @@ describe(@"contain matcher", ^{
             describe(@"negative match", ^{
                 it(@"should pass", ^{
                     expect(container).to_not(contain(element));
+                });
+            });
+        });
+
+        describe(@"which contains the element nested", ^{
+            NSSet *container = [NSMutableSet setWithObject:[NSMutableSet setWithObject:elementCopy]];
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(container).to(contain(element).nested());
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
+                        expect(container).to_not(contain(element).nested());
+                    });
                 });
             });
         });
@@ -383,6 +454,17 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"with the 'nested' modifier", ^{
+            char *container = (char *)"tom and jerry";
+            char *element = (char *)"tom";
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
+                    expect(container).to(contain(element).nested());
+                });
+            });
+        });
     });
 
     describe(@"when the container is a const C string", ^{
@@ -420,6 +502,17 @@ describe(@"contain matcher", ^{
             describe(@"negative match", ^{
                 it(@"should pass", ^{
                     expect(container).to_not(contain(element));
+                });
+            });
+        });
+
+        describe(@"with the 'nested' modifier", ^{
+            const char *container = "tom and jerry";
+            const char *element = "tom";
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
+                    expect(container).to(contain(element).nested());
                 });
             });
         });
@@ -474,6 +567,17 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"with the 'nested' modifier", ^{
+            NSString *container = @"tom and jerry";
+            NSString *element = @"tom";
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
+                    expect(container).to(contain(element).nested());
+                });
+            });
+        });
     });
 
     describe(@"when the container is an NSMutableString", ^{
@@ -509,7 +613,7 @@ describe(@"contain matcher", ^{
         });
 
         describe(@"which does not contain the substring", ^{
-            NSString *container = @"I contain nothing!";
+            NSMutableString *container = [[@"I contain nothing!" mutableCopy] autorelease];
 
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
@@ -525,6 +629,17 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"with the 'nested' modifier", ^{
+            NSMutableString *container = [[@"A string that contains element" mutableCopy] autorelease];
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
+                    expect(container).to(contain(element).nested());
+                });
+            });
+        });
+
     });
 });
 

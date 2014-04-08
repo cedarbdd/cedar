@@ -32,30 +32,43 @@ namespace Cedar { namespace Matchers { namespace Comparators {
 
 #pragma mark compare_contains
     template<typename T, typename U>
-    bool compare_contains(const T & container, const U & element) {
-        return [container containsObject:element];
+    bool compare_contains(const T & container, const U & element, bool nested) {
+        if ([container containsObject:element]) {
+            return YES;
+        }
+        if (nested) {
+            for (T object in container) {
+                if ([object respondsToSelector:@selector(containsObject:)] && compare_contains(object, element, nested)) {
+                    return YES;
+                }
+            }
+        }
+        return NO;
     }
 
     template<typename U>
-    bool compare_contains(NSString * const container, const U & element) {
+    bool compare_contains(NSString * const container, const U & element, bool nested) {
+        if (nested) {
+            [[NSException exceptionWithName:NSInternalInconsistencyException reason:@"Unexpected use of 'nested' modifier on 'contain' matcher with string" userInfo:nil] raise];
+        }
         NSRange range = [container rangeOfString:element];
         return container && range.location != NSNotFound;
     }
 
     template<typename U>
-    bool compare_contains(NSMutableString * const container, const U & element) {
-        return compare_contains(static_cast<NSString * const>(container), element);
+    bool compare_contains(NSMutableString * const container, const U & element, bool nested) {
+        return compare_contains(static_cast<NSString * const>(container), element, nested);
     }
 
     template<typename U>
-    bool compare_contains(NSDictionary * const container, const U & element) {
+    bool compare_contains(NSDictionary * const container, const U & element, bool nested) {
         [[NSException exceptionWithName:NSInternalInconsistencyException reason:@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value" userInfo:nil] raise];
         return false;
     }
 
     template<typename U>
-    bool compare_contains(NSMutableDictionary * const container, const U & element) {
-        return compare_contains(static_cast<NSDictionary * const>(container), element);
+    bool compare_contains(NSMutableDictionary * const container, const U & element, bool nested) {
+        return compare_contains(static_cast<NSDictionary * const>(container), element, nested);
     }
 
     namespace {
@@ -78,27 +91,30 @@ namespace Cedar { namespace Matchers { namespace Comparators {
     }
 
     template<typename U>
-    bool compare_contains(const typename std::vector<U> & container, const U & element) {
+    bool compare_contains(const typename std::vector<U> & container, const U & element, bool nested) {
         return container.end() != std::find_if(container.begin(), container.end(), CompareEqualTo<U>(element));
     }
 
     template<typename T, typename U, typename V>
-    bool compare_contains(const typename std::map<T, U> & container, const V & element) {
-        return compare_contains(static_cast<NSDictionary * const>(nil), element);
+    bool compare_contains(const typename std::map<T, U> & container, const V & element, bool nested) {
+        return compare_contains(static_cast<NSDictionary * const>(nil), element, nested);
     }
 
     template<typename U>
-    bool compare_contains(const typename std::set<U> & container, const U & element) {
+    bool compare_contains(const typename std::set<U> & container, const U & element, bool nested) {
         return container.end() != std::find_if(container.begin(), container.end(), CompareEqualTo<U>(element));
     }
 
     template<typename U>
-    bool compare_contains(char *actualValue, const U & expectedContains) {
+    bool compare_contains(char *actualValue, const U & expectedContains, bool nested) {
+        if (nested) {
+            [[NSException exceptionWithName:NSInternalInconsistencyException reason:@"Unexpected use of 'nested' modifier on 'contain' matcher with string" userInfo:nil] raise];
+        }
         return actualValue != NULL && strstr(actualValue, expectedContains) != NULL;
     }
 
     template<typename U>
-    bool compare_contains(const char *actualValue, const U & expectedContains) {
-        return compare_contains((char *)actualValue, expectedContains);
+    bool compare_contains(const char *actualValue, const U & expectedContains, bool nested) {
+        return compare_contains((char *)actualValue, expectedContains, nested);
     }
 }}}
