@@ -19,7 +19,7 @@ namespace Cedar { namespace Doubles {
     }
 
     /* virtual */ bool AnyInstanceArgument::matches_bytes(void * actual_argument_bytes) const {
-        return [*(static_cast<id *>(actual_argument_bytes)) isKindOfClass:class_];
+        return actual_argument_bytes ? [*(static_cast<id *>(actual_argument_bytes)) isKindOfClass:class_] : false;
     }
 
     namespace Arguments {

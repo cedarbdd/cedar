@@ -65,4 +65,8 @@
 - (void)methodWithNumber:(NSNumber *)number complexBlock:(ComplexIncrementerBlock)block {
 }
 
+- (NSString *)methodWithFooSuperclass:(FooSuperclass *)fooInstance {
+    return @"";
+}
+
 @end

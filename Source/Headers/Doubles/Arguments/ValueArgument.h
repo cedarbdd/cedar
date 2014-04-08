@@ -61,7 +61,7 @@ namespace Cedar { namespace Doubles {
 
     template<typename T>
     /* virtual */ bool ValueArgument<T>::matches_bytes(void * actual_argument_bytes) const {
-        return Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(actual_argument_bytes)));
+        return actual_argument_bytes ? Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(actual_argument_bytes))) : false;
     }
 
 #pragma mark - Protected interface

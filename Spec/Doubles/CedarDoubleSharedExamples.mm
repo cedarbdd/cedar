@@ -2,6 +2,7 @@
 #import "SimpleIncrementer.h"
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
+#import "FooSuperclass.h"
 
 SHARED_EXAMPLE_GROUPS_BEGIN(CedarDoubleSharedExamples)
 
@@ -780,37 +781,31 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
         context(@"when the method has been stubbed with Arguments::any()", ^{
             __block void(^stubMethodAgainWithAnyArgumentBlock)();
-            __block void(^stubMethodAgainWithNoArgumentsBlock)();
+            __block FooSuperclass *specificInstance;
 
             beforeEach(^{
-                myDouble stub_method("methodWithString:").with(@"a specific string").and_return(@"foo");
-                stubMethodAgainWithAnyArgumentBlock = [^{ myDouble stub_method("methodWithString:").with(Arguments::any([NSString class])).and_return(@"bar"); } copy];
-                stubMethodAgainWithNoArgumentsBlock = [^{ myDouble stub_method("methodWithString:").and_return(@"baz"); } copy];
+                specificInstance = [[[FooSuperclass alloc] init] autorelease];
+                myDouble stub_method("methodWithFooSuperclass:").with(specificInstance).and_return(@"foo");
+
+                stubMethodAgainWithAnyArgumentBlock = [^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([BarSubclass class])).and_return(@"bar"); } copy];
             });
 
             afterEach(^{
                 [stubMethodAgainWithAnyArgumentBlock release];
-                [stubMethodAgainWithNoArgumentsBlock release];
             });
 
             it(@"should not raise an exception", ^{
                 stubMethodAgainWithAnyArgumentBlock should_not raise_exception;
-                stubMethodAgainWithNoArgumentsBlock should_not raise_exception;
             });
 
             context(@"when invoked", ^{
                 beforeEach(^{
                     stubMethodAgainWithAnyArgumentBlock();
-                    stubMethodAgainWithNoArgumentsBlock();
                 });
 
                 it(@"should return the value associatied with the corresponding stub", ^{
-                    [myDouble methodWithString:@"a specific string"] should equal(@"foo");
-                    [myDouble methodWithString:@"any old string"] should equal(@"bar");
-                    [myDouble methodWithString:nil] should equal(@"baz");
-
-                    NSMutableString *mutableString = [NSMutableString stringWithFormat:@"a mutable string"];
-                    [myDouble methodWithString:mutableString] should equal(@"baz");
+                    [myDouble methodWithFooSuperclass:specificInstance] should equal(@"foo");
+                    [myDouble methodWithFooSuperclass:[[[BarSubclass alloc] init] autorelease]] should equal(@"bar");
                 });
             });
         });
