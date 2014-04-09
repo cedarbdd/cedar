@@ -38,7 +38,7 @@ namespace Cedar { namespace Matchers { namespace Comparators {
                 return YES;
             }
 
-            if (nested && compare_contains(object, element, elementsKeyPath, nested)) {
+            if (nested && [(elementsKeyPath ? [object valueForKeyPath:elementsKeyPath] : object) respondsToSelector:@selector(containsObject:)] && compare_contains(object, element, elementsKeyPath, nested)) {
                 return YES;
             }
         }

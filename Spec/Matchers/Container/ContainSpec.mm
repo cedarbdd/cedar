@@ -107,141 +107,139 @@ describe(@"contain matcher", ^{
         });
     });
 
-    describe(@"when the container is an NSArray", ^{
-        describe(@"which is nil", ^{
-            NSArray *container = nil;
+    sharedExamplesFor(@"nil container", ^(NSDictionary *sharedContext) {
+        id container = nil;
 
-            describe(@"positive match", ^{
-                it(@"should should fail", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
-            });
-        });
-
-        describe(@"which contains the element", ^{
-            NSArray *container = [NSArray arrayWithObject:elementCopy];
-
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
+        describe(@"positive match", ^{
+            it(@"should should fail", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
                     expect(container).to(contain(element));
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
-                        expect(container).to_not(contain(element));
-                    });
-                });
-            });
-        });
-
-        describe(@"which does not contain the element", ^{
-            NSArray *container = [NSArray array];
-
-            describe(@"positive match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should pass", ^{
-                    expect(container).to_not(contain(element));
-                });
-            });
-        });
-
-        describe(@"which contains the element nested", ^{
-            NSArray *container = [NSArray arrayWithObject:[NSArray arrayWithObject:elementCopy]];
-
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
-                    expect(container).to(contain(element).nested());
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
-                        expect(container).to_not(contain(element).nested());
-                    });
                 });
             });
         });
     });
 
-    describe(@"when the container is an NSMutableArray", ^{
-        describe(@"which is nil", ^{
-            NSMutableArray *container = nil;
+    sharedExamplesFor(@"containing the element", ^(NSDictionary *sharedContext) {
+        __block id container;
+        beforeEach(^{
+            container = [sharedContext objectForKey:@"container"];
+        });
 
-            describe(@"positive match", ^{
-                it(@"should should fail", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
+        describe(@"positive match", ^{
+            it(@"should should pass", ^{
+                expect(container).to(contain(element));
             });
         });
 
-
-        describe(@"which contains the element", ^{
-            NSMutableArray *container = [NSMutableArray arrayWithObject:elementCopy];
-
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
-                    expect(container).to(contain(element));
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
-                        expect(container).to_not(contain(element));
-                    });
-                });
-            });
-        });
-
-        describe(@"which does not contain the element", ^{
-            NSMutableArray *container = [NSMutableArray array];
-
-            describe(@"positive match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should pass", ^{
+        describe(@"negative match", ^{
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
                     expect(container).to_not(contain(element));
                 });
             });
         });
+    });
 
-        describe(@"which contains the element nested", ^{
-            NSMutableArray *container = [NSMutableArray arrayWithObject:[NSMutableArray arrayWithObject:elementCopy]];
+    sharedExamplesFor(@"not containing the element", ^(NSDictionary *sharedContext) {
+        __block id container;
+        beforeEach(^{
+            container = [sharedContext objectForKey:@"container_empty"];
+        });
 
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
-                    expect(container).to(contain(element).nested());
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
-                        expect(container).to_not(contain(element).nested());
-                    });
+        describe(@"positive match", ^{
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                    expect(container).to(contain(element));
                 });
             });
         });
+
+        describe(@"negative match", ^{
+            it(@"should pass", ^{
+                expect(container).to_not(contain(element));
+            });
+        });
+    });
+
+    sharedExamplesFor(@"containing the element nested", ^(NSDictionary *sharedContext) {
+        __block id container;
+        beforeEach(^{
+            container = [sharedContext objectForKey:@"container_nested"];
+        });
+
+        describe(@"positive match", ^{
+            it(@"should should pass", ^{
+                expect(container).to(contain(element).nested());
+            });
+        });
+
+        describe(@"negative match", ^{
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
+                    expect(container).to_not(contain(element).nested());
+                });
+            });
+        });
+
+        describe(@"without the 'nested' modifier", ^{
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
+                    expect(container).to(contain(element));
+                });
+            });
+        });
+    });
+
+    describe(@"when the container is an NSArray", ^{
+        beforeEach(^{
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSArray arrayWithObject:elementCopy] forKey:@"container"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSArray array] forKey:@"container_empty"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSArray arrayWithObject:[NSArray arrayWithObject:elementCopy]] forKey:@"container_nested"];
+        });
+
+        itShouldBehaveLike(@"nil container");
+        itShouldBehaveLike(@"containing the element");
+        itShouldBehaveLike(@"not containing the element");
+        itShouldBehaveLike(@"containing the element nested");
+    });
+
+    describe(@"when the container is an NSMutableArray", ^{
+        beforeEach(^{
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray arrayWithObject:elementCopy] forKey:@"container"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray array] forKey:@"container_empty"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray arrayWithObject:[NSMutableArray arrayWithObject:elementCopy]] forKey:@"container_nested"];
+        });
+
+        itShouldBehaveLike(@"nil container");
+        itShouldBehaveLike(@"containing the element");
+        itShouldBehaveLike(@"not containing the element");
+        itShouldBehaveLike(@"containing the element nested");
+    });
+
+    describe(@"when the container is an NSSet", ^{
+        beforeEach(^{
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSSet setWithObject:elementCopy] forKey:@"container"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSSet set] forKey:@"container_empty"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSSet setWithObject:[NSSet setWithObject:elementCopy]] forKey:@"container_nested"];
+        });
+
+        itShouldBehaveLike(@"nil container");
+        itShouldBehaveLike(@"containing the element");
+        itShouldBehaveLike(@"not containing the element");
+        itShouldBehaveLike(@"containing the element nested");
+    });
+
+    describe(@"when the container is an NSMutableSet", ^{
+        beforeEach(^{
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet setWithObject:elementCopy] forKey:@"container"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet set] forKey:@"container_empty"];
+            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet setWithObject:[NSSet setWithObject:elementCopy]] forKey:@"container_nested"];
+        });
+
+        itShouldBehaveLike(@"nil container");
+        itShouldBehaveLike(@"containing the element");
+        itShouldBehaveLike(@"not containing the element");
+        itShouldBehaveLike(@"containing the element nested");
     });
 
     describe(@"when the container is an NSDictionary", ^{
@@ -260,144 +258,6 @@ describe(@"contain matcher", ^{
         it(@"should explode", ^{
             expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
                 expect(container).to(contain(element));
-            });
-        });
-    });
-
-    describe(@"when the container is an NSSet", ^{
-        describe(@"which is nil", ^{
-            NSSet *container = nil;
-
-            describe(@"positive match", ^{
-                it(@"should should fail", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
-            });
-        });
-
-
-        describe(@"which contains the element", ^{
-            NSSet *container = [NSSet setWithObject:elementCopy];
-
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
-                    expect(container).to(contain(element));
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
-                        expect(container).to_not(contain(element));
-                    });
-                });
-            });
-        });
-
-        describe(@"which does not contain the element", ^{
-            NSSet *container = [NSSet set];
-
-            describe(@"positive match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should pass", ^{
-                    expect(container).to_not(contain(element));
-                });
-            });
-        });
-
-        describe(@"which contains the element nested", ^{
-            NSSet *container = [NSSet setWithObject:[NSSet setWithObject:elementCopy]];
-
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
-                    expect(container).to(contain(element).nested());
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
-                        expect(container).to_not(contain(element).nested());
-                    });
-                });
-            });
-        });
-    });
-
-    describe(@"when the container is an NSMutableSet", ^{
-        describe(@"which is nil", ^{
-            NSMutableSet *container = nil;
-
-            describe(@"positive match", ^{
-                it(@"should should fail", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
-            });
-        });
-
-
-        describe(@"which contains the element", ^{
-            NSMutableSet *container = [NSMutableSet setWithObject:elementCopy];
-
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
-                    expect(container).to(contain(element));
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
-                        expect(container).to_not(contain(element));
-                    });
-                });
-            });
-        });
-
-        describe(@"which does not contain the element", ^{
-            NSMutableSet *container = [NSMutableSet set];
-
-            describe(@"positive match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <%@>", container, element], ^{
-                        expect(container).to(contain(element));
-                    });
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should pass", ^{
-                    expect(container).to_not(contain(element));
-                });
-            });
-        });
-
-        describe(@"which contains the element nested", ^{
-            NSSet *container = [NSMutableSet setWithObject:[NSMutableSet setWithObject:elementCopy]];
-
-            describe(@"positive match", ^{
-                it(@"should should pass", ^{
-                    expect(container).to(contain(element).nested());
-                });
-            });
-
-            describe(@"negative match", ^{
-                it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", container, element], ^{
-                        expect(container).to_not(contain(element).nested());
-                    });
-                });
             });
         });
     });
