@@ -18,6 +18,7 @@ namespace Cedar { namespace Doubles {
 
         virtual bool matches_encoding(const char *) const;
         virtual bool matches_bytes(void *) const;
+        virtual unsigned int specificity_ranking() const;
 
     protected:
         bool both_are_objects(const char *) const;
@@ -63,6 +64,9 @@ namespace Cedar { namespace Doubles {
     /* virtual */ bool ValueArgument<T>::matches_bytes(void * actual_argument_bytes) const {
         return actual_argument_bytes ? Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(actual_argument_bytes))) : false;
     }
+
+    template<typename T>
+    /* virtual */ unsigned int ValueArgument<T>::specificity_ranking() const { return 1000; }
 
 #pragma mark - Protected interface
     template<typename T>

@@ -70,43 +70,25 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
          raise];
     }
 
-    Cedar::Doubles::StubbedMethod::selector_map_t::iterator it = stubbed_methods_.find(selector);
+    stubbed_method.validate_against_instance(self.parent_double);
 
-    if (it != stubbed_methods_.end()) {
-        Cedar::Doubles::StubbedMethod::stubbed_method_vector_t stubbed_methods = it->second;
-        if (stubbed_method.contains_anything_argument() || stubbed_method.contains_no_arguments()) {
-            Cedar::Doubles::StubbedMethod::shared_ptr_t first_stubbed_method = stubbed_methods.front();
-            if (first_stubbed_method->contains_anything_argument()) {
-                [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with an 'anything' argument", sel_getName(selector)]
-                                       userInfo:nil]
-                 raise];
-            } else if (first_stubbed_method->contains_no_arguments()) {
-                [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:[NSString stringWithFormat:@"The method <%s> is already stubbed without arguments", sel_getName(selector)]
-                                       userInfo:nil]
-                 raise];
-            } else {
-                return [self add_stubbed_method:stubbed_method at_vector_location:stubbed_methods_[selector].begin()];
-            }
-        } else {
-            Cedar::Doubles::StubbedMethod::stubbed_method_vector_t::iterator stubbed_method_it = stubbed_methods.begin();
-            Cedar::Doubles::StubbedMethod::shared_ptr_t first_stubbed_method = stubbed_methods.front();
-            if (first_stubbed_method->contains_anything_argument() || first_stubbed_method->contains_no_arguments()) {
-                // don't match stubbed_method against the first existing stubbed method, because the first one contains an 'anything' argument
-                ++stubbed_method_it;
-            }
-            for (; stubbed_method_it != stubbed_methods.end(); ++stubbed_method_it) {
-                if ((**stubbed_method_it).matches_arguments(stubbed_method)) {
-                    [[NSException exceptionWithName:NSInternalInconsistencyException
-                                             reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with arguments %@", sel_getName(selector), (**stubbed_method_it).arguments_string()]
-                                           userInfo:nil]
-                     raise];
-                }
-            }
+    Cedar::Doubles::StubbedMethod::stubbed_method_vector_t &stubbed_methods = stubbed_methods_[selector];
+    for (auto stubbed_method_ptr : stubbed_methods) {
+        if (stubbed_method_ptr->arguments_equal(stubbed_method) ) {
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                     reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with arguments (%@)", sel_getName(selector), stubbed_method_ptr->arguments_string()]
+                                   userInfo:nil]
+             raise];
         }
     }
-    return [self add_stubbed_method:stubbed_method at_vector_location:stubbed_methods_[selector].end()];
+
+    Cedar::Doubles::StubbedMethod::shared_ptr_t stubbed_method_ptr = Cedar::Doubles::StubbedMethod::shared_ptr_t(new Cedar::Doubles::StubbedMethod(stubbed_method));
+    stubbed_methods.insert(stubbed_methods.begin(), stubbed_method_ptr);
+    std::stable_sort(stubbed_methods.begin(), stubbed_methods.end(), [](Cedar::Doubles::StubbedMethod::shared_ptr_t lhs, Cedar::Doubles::StubbedMethod::shared_ptr_t rhs) {
+        return lhs->arguments_specificity_ranking() > rhs->arguments_specificity_ranking();
+    });
+
+    return *stubbed_method_ptr;
 }
 
 - (BOOL)can_stub:(SEL)selector {
@@ -120,10 +102,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     }
 
     Cedar::Doubles::StubbedMethod::stubbed_method_vector_t stubbed_methods = it->second;
-
-    Cedar::Doubles::StubbedMethod::stubbed_method_vector_t::reverse_iterator stubbed_method_it;
-    for (stubbed_method_it = stubbed_methods.rbegin(); stubbed_method_it != stubbed_methods.rend(); ++stubbed_method_it) {
-        Cedar::Doubles::StubbedMethod::shared_ptr_t stubbed_method_ptr = *stubbed_method_it;
+    for (auto stubbed_method_ptr : stubbed_methods) {
         if (stubbed_method_ptr->matches(invocation)) {
             stubbed_method_ptr->invoke(invocation);
             return CDRStubMethodInvoked;
@@ -146,14 +125,6 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
 }
 
 #pragma mark - Private interface
-
-- (Cedar::Doubles::StubbedMethod &)add_stubbed_method:(const Cedar::Doubles::StubbedMethod &)stubbed_method at_vector_location:(Cedar::Doubles::StubbedMethod::stubbed_method_vector_t::iterator)iterator {
-    const SEL & selector = stubbed_method.selector();
-    stubbed_method.validate_against_instance(self.parent_double);
-    Cedar::Doubles::StubbedMethod::shared_ptr_t stubbed_method_ptr = Cedar::Doubles::StubbedMethod::shared_ptr_t(new Cedar::Doubles::StubbedMethod(stubbed_method));
-    stubbed_methods_[selector].insert(iterator, stubbed_method_ptr);
-    return *stubbed_method_ptr;
-}
 
 + (void)releaseRecordedInvocations {
     [registeredDoubleImpls__ makeObjectsPerformSelector:@selector(reset_sent_messages)];

@@ -3,6 +3,7 @@
 #import "NSInvocation+Cedar.h"
 #import "NSMethodSignature+Cedar.h"
 #import <objc/runtime.h>
+#import <numeric>
 
 namespace Cedar { namespace Doubles {
 
@@ -76,6 +77,25 @@ namespace Cedar { namespace Doubles {
             Cedar::Doubles::Argument::shared_ptr_t argument_ptr = *argument_it;
             Cedar::Doubles::Argument::shared_ptr_t other_argument_ptr = *other_argument_it;
 
+            if (!argument_ptr->matches(*other_argument_ptr)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool StubbedMethod::arguments_equal(const StubbedMethod &other_stubbed_method) const {
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t arguments = this->arguments();
+        Cedar::Doubles::InvocationMatcher::arguments_vector_t other_arguments = other_stubbed_method.arguments();
+
+        auto arguments_size = std::max(arguments.size(), other_arguments.size());
+        arguments.resize(arguments_size, Arguments::anything);
+        other_arguments.resize(arguments_size, Arguments::anything);
+
+        for (auto argument_it = arguments.begin(), other_argument_it = other_arguments.begin(); (argument_it != arguments.end() && other_argument_it != other_arguments.end()); ++argument_it, ++other_argument_it) {
+            Cedar::Doubles::Argument::shared_ptr_t argument_ptr = (argument_it!=arguments.end()) ? *argument_it : Arguments::anything;
+            Cedar::Doubles::Argument::shared_ptr_t other_argument_ptr = (other_argument_it!=other_arguments.end()) ? *other_argument_it : Arguments::anything;
+
             if ((*argument_ptr) != (*other_argument_ptr)) {
                 return false;
             }
@@ -83,22 +103,11 @@ namespace Cedar { namespace Doubles {
         return true;
     }
 
-    bool StubbedMethod::contains_anything_argument() const {
+    unsigned int StubbedMethod::arguments_specificity_ranking() const {
         Cedar::Doubles::InvocationMatcher::arguments_vector_t arguments = this->arguments();
-
-        Cedar::Doubles::InvocationMatcher::arguments_vector_t::iterator argument_it;
-        for (argument_it = arguments.begin(); argument_it != arguments.end(); ++argument_it) {
-            Cedar::Doubles::Argument::shared_ptr_t argument_ptr = *argument_it;
-
-            if (strcmp(typeid(*argument_ptr).name(), typeid(*Arguments::anything).name()) == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool StubbedMethod::contains_no_arguments() const {
-        return this->arguments().size() == 0;
+        return std::accumulate(arguments.begin(), arguments.end(), 0, [](unsigned int sum, Cedar::Doubles::Argument::shared_ptr_t arg_ptr) {
+            return sum+arg_ptr->specificity_ranking();
+        });
     }
 
     void StubbedMethod::verify_return_value_type(id instance) const {
@@ -163,13 +172,13 @@ namespace Cedar { namespace Doubles {
     }
 
     NSString * StubbedMethod::arguments_string() const {
-        NSMutableString *argumentsString = [NSMutableString stringWithString:@"("];
+        NSMutableString *argumentsString = [NSMutableString string];
         Cedar::Doubles::InvocationMatcher::arguments_vector_t arguments = this->arguments();
         Cedar::Doubles::InvocationMatcher::arguments_vector_t::iterator argument_it;
         for (argument_it = arguments.begin(); argument_it != arguments.end(); ++argument_it) {
             [argumentsString appendFormat:@"<%@>", (*argument_it)->value_string()];
         }
-        return [argumentsString stringByAppendingString:@")"];
+        return argumentsString;
     }
 
     void StubbedMethod::raise_for_multiple_return_values() const {

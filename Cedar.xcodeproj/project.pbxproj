@@ -227,6 +227,7 @@
 		AE4A946218807DA6008566F5 /* RejectedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A946018807DA6008566F5 /* RejectedMethod.mm */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
+		AE52405818F5D604003AB816 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
 		AE53B67F17E7BCAA00D83D5E /* CDRProtocolFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE74903015B45E9D008EA127 /* CDRProtocolFakeSpec.mm */; };
 		AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
@@ -2100,6 +2101,7 @@
 			files = (
 				9D28051B18E2324300887CC4 /* ObjectWithValueEquality.m in Sources */,
 				1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */,
+				AE52405818F5D604003AB816 /* FooSuperclass.m in Sources */,
 				1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */,
 				1FB4F27F188919A200227772 /* ARCViewController.m in Sources */,
 				1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */,
