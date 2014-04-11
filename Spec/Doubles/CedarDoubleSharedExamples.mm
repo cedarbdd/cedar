@@ -203,7 +203,184 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             });
         });
 
-        context(@"with a replacement implementation (and_do)", ^{
+        context(@"with a replacement implementation receiving the method's arguments (and_do_block)", ^{
+            context(@"with a valid block that only has a return value", ^{
+                __block BOOL implementation_block_called;
+                size_t return_value = 123;
+
+                beforeEach(^{
+                    implementation_block_called = NO;
+
+                    myDouble stub_method("value").and_do_block(^size_t {
+                        implementation_block_called = YES;
+                        return return_value;
+                    });
+                });
+
+                it(@"should invoke the block", ^{
+                    [myDouble value];
+                    implementation_block_called should be_truthy;
+                });
+
+                it(@"should return the value returned from the block", ^{
+                    [myDouble value] should equal(return_value);
+                });
+
+                context(@"when combined with an explicit return value", ^{
+                    it(@"should raise an exception", ^{
+                        ^{
+                            myDouble stub_method("value").and_do_block(^size_t{ return 0; }).and_return(2);
+                        } should raise_exception.with_reason(@"Multiple return values specified for <value>");
+                    });
+                });
+
+                context(@"when added after an explicit return value", ^{
+                    it(@"should raise an exception", ^{
+                        ^{
+                            myDouble stub_method("value").and_return(2).and_do_block(^size_t{ return 0; });
+                        } should raise_exception.with_reason(@"Multiple return values specified for <value>");
+                    });
+                });
+
+                context(@"when combined with an invocation block", ^{
+                    it(@"should raise an exception", ^{
+                        ^{
+                            myDouble stub_method("value").and_do_block(^size_t{ return 0; }).and_do(^(NSInvocation *invocation) {});
+                        } should raise_exception.with_reason(@"Multiple blocks specified for <value>");
+                    });
+                });
+
+                context(@"when added after an invocation block", ^{
+                    it(@"should raise an exception", ^{
+                        ^{
+                            myDouble stub_method("value").and_do(^(NSInvocation *invocation) {}).and_do_block(^size_t{ return 0; });
+                        } should raise_exception.with_reason(@"Multiple blocks specified for <value>");
+                    });
+                });
+            });
+
+            context(@"with a valid block that has primitive integer arguments", ^{
+                size_t sent_argument = 2;
+                __block size_t received_argument;
+
+                beforeEach(^{
+                    received_argument = 0;
+
+                    myDouble stub_method("incrementBy:").and_do_block(^(size_t arg) {
+                        received_argument = arg;
+                    });
+                    [myDouble incrementBy:sent_argument];
+                });
+
+                it(@"should be passed the correct arguments", ^{
+                    received_argument should equal(sent_argument);
+                });
+            });
+
+            context(@"with a valid block that has primitive floating point arguments", ^{
+                double sent_argument = 9876.54321;
+                __block double received_argument1, received_argument2;
+                double return_value = 192837.465;
+
+                beforeEach(^{
+                    received_argument1 = received_argument2 = 0;
+
+                    myDouble stub_method("methodWithDouble1:andDouble2:").and_do_block(^double(double double1, double double2) {
+                        received_argument1 = double1;
+                        received_argument2 = double2;
+                        return return_value;
+                    });
+                    [myDouble methodWithDouble1:sent_argument andDouble2:sent_argument];
+                });
+
+                it(@"should be passed the correct arguments", ^{
+                    received_argument1 should equal(sent_argument);
+                    received_argument2 should equal(sent_argument);
+                });
+
+                it(@"should return the value returned from the block", ^{
+                    [myDouble methodWithDouble1:0 andDouble2:0] should equal(return_value);
+                });
+            });
+
+            context(@"with a valid block that uses large structs", ^{
+                LargeIncrementerStruct sent_argument = { 1234567, 98765432, 42, SIZE_T_MAX };
+                __block LargeIncrementerStruct received_argument;
+                LargeIncrementerStruct return_value = { 123, 456, 789, SIZE_T_MAX };
+
+                beforeEach(^{
+                    received_argument = {};
+
+                    myDouble stub_method("methodWithLargeStruct1:andLargeStruct2:").and_do_block(^LargeIncrementerStruct(LargeIncrementerStruct struct1, LargeIncrementerStruct struct2) {
+                        received_argument = struct2;
+                        return return_value;
+                    });
+                    [myDouble methodWithLargeStruct1:sent_argument andLargeStruct2:sent_argument];
+                });
+
+                it(@"should be passed the correct struct arguments", ^{
+                    memcmp(&received_argument, &sent_argument, sizeof(sent_argument)) should equal(0);
+                });
+
+                it(@"should return the struct value returned from the block", ^{
+                    LargeIncrementerStruct returned_value = [myDouble methodWithLargeStruct1:sent_argument andLargeStruct2:sent_argument];
+                    memcmp(&return_value, &returned_value, sizeof(return_value)) should equal(0);
+                });
+            });
+
+            context(@"with a valid block that uses objects", ^{
+                NSNumber *sent_argument = @(M_PI);
+                __block NSNumber *received_argument;
+                NSNumber *return_value = @(42);
+
+                beforeEach(^{
+                    received_argument = nil;
+
+                    myDouble stub_method("methodWithNumber1:andNumber2:").and_do_block(^NSNumber *(NSNumber *num1, NSNumber *num2) {
+                        received_argument = num1;
+                        return return_value;
+                    });
+                    [myDouble methodWithNumber1:sent_argument andNumber2:sent_argument];
+                });
+
+                it(@"should be passed the correct object arguments", ^{
+                    received_argument should be_same_instance_as(sent_argument);
+                });
+
+                it(@"should return the object value returned from the block", ^{
+                    [myDouble methodWithNumber1:@(1) andNumber2:@(2)] should be_same_instance_as(return_value);
+                });
+            });
+
+            context(@"with something not a block", ^{
+                it(@"should raise an exception", ^{
+                    ^{ myDouble stub_method("value").and_do_block(@(2)); } should raise_exception.with_reason([NSString stringWithFormat:@"Attempted to stub and do a block that isn't a block for <value>"]);
+                });
+            });
+
+            context(@"with a block that does not match the method's return type", ^{
+                void (^invalidBlock)(void) = ^{};
+                it(@"should raise an exception", ^{
+                    ^{ myDouble stub_method("value").and_do_block(invalidBlock); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return type '%s' instead of '%s' for <value>", @encode(void), @encode(size_t)]);
+                });
+            });
+
+            context(@"with a block that has a different number of arguments than the method", ^{
+                void (^invalidBlock)(void) = ^{};
+                it(@"should raise an exception", ^{
+                    ^{ myDouble stub_method("incrementBy:").and_do_block(invalidBlock); } should raise_exception.with_reason(@"Wrong number of parameters for <incrementBy:>; expected: 1; actual: 0 (not counting the special first parameter, `id self`)");
+                });
+            });
+
+            context(@"with a block that has a different argument type than the method", ^{
+                void (^invalidBlock)(float) = ^(float){};
+                it(@"should raise an exception", ^{
+                    ^{ myDouble stub_method("incrementBy:").and_do_block(invalidBlock); } should raise_exception.with_reason([NSString stringWithFormat:@"Found argument type '%s', expected '%s'; argument #1 for <incrementBy:>", @encode(float), @encode(size_t)]);
+                });
+            });
+        });
+
+        context(@"with a replacement implementation receiving an invocation (and_do)", ^{
             __block BOOL replacement_invocation_called;
             __block size_t sent_argument = 2, received_argument;
             __block size_t return_value;
@@ -247,6 +424,22 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     ^{
                         myDouble stub_method("value").and_return(2).and_do(^(NSInvocation *invocation) {});
                     } should raise_exception.with_reason(@"Multiple return values specified for <value>");
+                });
+            });
+
+            context(@"when combined with an implementation block", ^{
+                it(@"should raise an exception", ^{
+                    ^{
+                        myDouble stub_method("value").and_do(^(NSInvocation *invocation) {}).and_do_block(^size_t{ return 0; });
+                    } should raise_exception.with_reason(@"Multiple blocks specified for <value>");
+                });
+            });
+
+            context(@"when added after an implementation block", ^{
+                it(@"should raise an exception", ^{
+                    ^{
+                        myDouble stub_method("value").and_do_block(^size_t{ return 0; }).and_do(^(NSInvocation *invocation) {});
+                    } should raise_exception.with_reason(@"Multiple blocks specified for <value>");
                 });
             });
         });
@@ -517,7 +710,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 unsigned int invalidReturnValue = 3;
 
                 it(@"should raise an exception", ^{
-                    ^{ myDouble stub_method("value").and_return(invalidReturnValue); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return value type (%s) for value", @encode(unsigned int)]);
+                    ^{ myDouble stub_method("value").and_return(invalidReturnValue); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return value type '%s' instead of '%s' for <value>", @encode(unsigned int), @encode(size_t)]);
                 });
             });
         });

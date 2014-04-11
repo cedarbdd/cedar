@@ -50,4 +50,12 @@
     return @([arg1 floatValue] * [arg2 floatValue]);
 }
 
+- (double)methodWithDouble1:(double)double1 andDouble2:(double)double2 {
+    return double1*double2;
+}
+
+- (LargeIncrementerStruct)methodWithLargeStruct1:(LargeIncrementerStruct)struct1 andLargeStruct2:(LargeIncrementerStruct)struct2 {
+    return (LargeIncrementerStruct){};
+}
+
 @end

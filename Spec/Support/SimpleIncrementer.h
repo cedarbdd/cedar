@@ -1,5 +1,9 @@
 #import <Foundation/Foundation.h>
 
+typedef struct {
+    size_t a, b, c, d;
+} LargeIncrementerStruct;
+
 @protocol InheritedProtocol<NSObject>
 @end
 
@@ -17,7 +21,8 @@
 - (void)methodWithBlock:(void(^)())blockArgument;
 - (void)methodWithCString:(char *)string;
 - (NSNumber *)methodWithNumber1:(NSNumber *)arg1 andNumber2:(NSNumber *)arg2;
-
+- (double)methodWithDouble1:(double)double1 andDouble2:(double)double2;
+- (LargeIncrementerStruct)methodWithLargeStruct1:(LargeIncrementerStruct)struct1 andLargeStruct2:(LargeIncrementerStruct)struct2;
 @optional
 - (size_t)whatIfIIncrementedBy:(size_t)amount;
 
