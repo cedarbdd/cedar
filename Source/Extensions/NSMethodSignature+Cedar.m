@@ -19,7 +19,7 @@ static const char *Block_signature(id blockObj) {
     NSString *signatureTypesString = [NSString stringWithUTF8String:signatureTypes];
 
     NSRegularExpression *quotedSubstringsRegex = [NSRegularExpression
-                                                  regularExpressionWithPattern:@"(\".*?\")"
+                                                  regularExpressionWithPattern:@"(\".*?\")|(<.*?>)"
                                                   options:NSRegularExpressionCaseInsensitive
                                                   error:NULL];
 

@@ -352,6 +352,24 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 });
             });
 
+            context(@"with a valid block that takes a complex block as a parameter", ^{
+                ComplexIncrementerBlock sent_argument = ^LargeIncrementerStruct(NSNumber *, LargeIncrementerStruct, NSError *){ return (LargeIncrementerStruct){}; };
+                __block ComplexIncrementerBlock received_argument;
+
+                beforeEach(^{
+                    received_argument = nil;
+
+                    myDouble stub_method("methodWithNumber:complexBlock:").and_do_block(^(NSNumber *, ComplexIncrementerBlock block) {
+                        received_argument = block;
+                    });
+                    [myDouble methodWithNumber:@(1) complexBlock:sent_argument];
+                });
+
+                it(@"should be passed the correct block argument", ^{
+                    received_argument should equal(sent_argument);
+                });
+            });
+
             context(@"with something not a block", ^{
                 it(@"should raise an exception", ^{
                     ^{ myDouble stub_method("value").and_do_block(@(2)); } should raise_exception.with_reason([NSString stringWithFormat:@"Attempted to stub and do a block that isn't a block for <value>"]);
