@@ -58,4 +58,7 @@
     return (LargeIncrementerStruct){};
 }
 
+- (void)methodWithNumber:(NSNumber *)number complexBlock:(ComplexIncrementerBlock)block {
+}
+
 @end
