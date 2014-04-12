@@ -71,6 +71,34 @@ describe(@"UIKit contain matcher", ^{
                 });
             });
         });
+
+        describe(@"matching based on object class", ^{
+            describe(@"positive match", ^{
+                it(@"should pass when checking for an instance of the exact class", ^{
+                    parentView should contain(an_instance_of([UIView class]));
+                });
+
+                it(@"should not pass when checking for an instance of a superclass", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <an instance of UIResponder>", parentView], ^{
+                        parentView should contain(an_instance_of([UIResponder class]));
+                    });
+                });
+
+                context(@"when including subclasses", ^{
+                    it(@"should pass when checking for an instance of a superclass", ^{
+                         parentView should contain(an_instance_of([UIResponder class]).or_any_subclass());
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <an instance of UIView>", parentView], ^{
+                        parentView should_not contain(an_instance_of([UIView class]));
+                    });
+                });
+            });
+        });
     });
 
     describe(@"when the container is a CALayer", ^{
@@ -126,6 +154,34 @@ describe(@"UIKit contain matcher", ^{
                 it(@"should fail for layers that are nested sublayers of the layer", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested", parentLayer, grandchildLayer], ^{
                         parentLayer should_not contain(grandchildLayer).nested();
+                    });
+                });
+            });
+        });
+
+        describe(@"matching based on object class", ^{
+            describe(@"positive match", ^{
+                it(@"should pass when checking for an instance of the exact class", ^{
+                    parentLayer should contain(an_instance_of([CALayer class]));
+                });
+
+                it(@"should not pass when checking for an instance of a superclass", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <an instance of NSObject>", parentLayer], ^{
+                        parentLayer should contain(an_instance_of([NSObject class]));
+                    });
+                });
+
+                context(@"when including subclasses", ^{
+                    it(@"should pass when checking for an instance of a superclass", ^{
+                        parentLayer should contain(an_instance_of([NSObject class]).or_any_subclass());
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <an instance of CALayer>", parentLayer], ^{
+                        parentLayer should_not contain(an_instance_of([CALayer class]));
                     });
                 });
             });

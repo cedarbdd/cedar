@@ -20,6 +20,9 @@ namespace Cedar { namespace Matchers {
         virtual NSString * failure_message_end() const;
 
     private:
+        NSString *string_for_element() const;
+
+    private:
         const T & element_;
         bool nested_;
     };
@@ -46,13 +49,27 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     inline /*virtual*/ NSString * Contain<T>::failure_message_end() const {
-        NSString * elementString = Stringifiers::string_for(element_);
-        return [NSString stringWithFormat:@"contain <%@>%@", elementString, nested_ ? @" nested" : @""];
+        return [NSString stringWithFormat:@"contain <%@>%@", string_for_element(), nested_ ? @" nested" : @""];
+    }
+
+    template<typename T>
+    inline NSString * Contain<T>::string_for_element() const {
+        return Stringifiers::string_for(element_);
+    }
+
+    template<>
+    inline NSString * Contain<AnInstanceOf>::string_for_element() const {
+        return element_.expected_class_string();
     }
 
 #pragma mark Generic
-    template <typename T> template<typename U>
-    bool Contain<T>::matches(const U & actualValue) const {
-        return Comparators::compare_contains(actualValue, element_, nested_);
+    template<typename T> template<typename U>
+    bool Contain<T>::matches(const U & container) const {
+        return Comparators::compare_contains(container, element_, nested_);
+    }
+
+    template<> template<typename U>
+    bool Contain<AnInstanceOf>::matches(const U & container) const {
+        return element_.matches(container, nested_);
     }
 }}
