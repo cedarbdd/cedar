@@ -16,6 +16,7 @@
 
 // Container
 #import "BeEmpty.h"
+#import "AnInstanceOf.h"
 #import "Contain.h"
 
 // Verifiers

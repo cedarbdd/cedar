@@ -56,14 +56,54 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"matching based on object class", ^{
+            std::vector<NSString *> container(1, elementCopy);
+
+            describe(@"positive match", ^{
+                it(@"should pass when checking for an instance of the exact class", ^{
+                    expect(container).to(contain(an_instance_of([elementCopy class])));
+                });
+
+                it(@"should not pass when checking for an instance of a superclass", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <(\n    %@\n)> to contain <an instance of NSObject>", element], ^{
+                        expect(container).to(contain(an_instance_of([NSObject class])));
+                    });
+                });
+
+                context(@"when including subclasses", ^{
+                    it(@"should pass when checking for an instance of a superclass", ^{
+                        expect(container).to(contain(an_instance_of([NSObject class]).or_any_subclass()));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <(\n    %@\n)> to not contain <an instance of %@>", element, [elementCopy class]], ^{
+                        expect(container).to_not(contain(an_instance_of([elementCopy class])));
+                    });
+                });
+            });
+        });
     });
 
     describe(@"when the container is an STL map", ^{
         std::map<NSString *, NSString *> container;
 
-        it(@"should explode", ^{
-            expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                expect(container).to(contain(element));
+        context(@"when matching a specific object", ^{
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
+                    expect(container).to(contain(element));
+                });
+            });
+        });
+
+        context(@"when matching a class", ^{
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
+                    expect(container).to(contain(an_instance_of(element)));
+                });
             });
         });
     });
@@ -105,6 +145,38 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"matching based on object class", ^{
+            std::set<NSString *> container;
+            container.insert(elementCopy);
+
+            describe(@"positive match", ^{
+                it(@"should pass when checking for an instance of the exact class", ^{
+                    expect(container).to(contain(an_instance_of([elementCopy class])));
+                });
+
+                it(@"should not pass when checking for an instance of a superclass", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <{(\n    %@\n)}> to contain <an instance of NSObject>", element], ^{
+                        expect(container).to(contain(an_instance_of([NSObject class])));
+                    });
+                });
+
+                context(@"when including subclasses", ^{
+                    it(@"should pass when checking for an instance of a superclass", ^{
+                        expect(container).to(contain(an_instance_of([NSObject class]).or_any_subclass()));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <{(\n    %@\n)}> to not contain <an instance of %@>", element, [elementCopy class]], ^{
+                        expect(container).to_not(contain(an_instance_of([elementCopy class])));
+                    });
+                });
+            });
+        });
+
     });
 
     sharedExamplesFor(@"nil container", ^(NSDictionary *sharedContext) {
@@ -190,6 +262,45 @@ describe(@"contain matcher", ^{
         });
     });
 
+    sharedExamplesFor(@"matching based on object class", ^(NSDictionary *sharedContext) {
+        __block id container;
+        beforeEach(^{
+            container = sharedContext[@"container"];
+        });
+
+        describe(@"positive match", ^{
+            it(@"should pass when checking for an instance of the exact class", ^{
+                expect(container).to(contain(an_instance_of([elementCopy class])));
+            });
+
+            it(@"should not pass when checking for an instance of a superclass", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <an instance of NSObject>", container], ^{
+                    expect(container).to(contain(an_instance_of([NSObject class])));
+                });
+            });
+
+            context(@"when including subclasses", ^{
+                it(@"should pass when checking for an instance of a superclass", ^{
+                    expect(container).to(contain(an_instance_of([NSObject class]).or_any_subclass()));
+                });
+
+                it(@"should not pass when checking for a different class", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to contain <an instance of NSNumber or any subclass>", container], ^{
+                        expect(container).to(contain(an_instance_of([NSNumber class]).or_any_subclass()));
+                    });
+                });
+            });
+        });
+
+        describe(@"negative match", ^{
+            it(@"should fail with a sensible failure message", ^{
+                expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <an instance of %@>", container, [elementCopy class]], ^{
+                    expect(container).to_not(contain(an_instance_of([elementCopy class])));
+                });
+            });
+        });
+    });
+
     describe(@"when the container is an NSArray", ^{
         beforeEach(^{
             [[SpecHelper specHelper].sharedExampleContext setObject:[NSArray arrayWithObject:elementCopy] forKey:@"container"];
@@ -201,6 +312,7 @@ describe(@"contain matcher", ^{
         itShouldBehaveLike(@"containing the element");
         itShouldBehaveLike(@"not containing the element");
         itShouldBehaveLike(@"containing the element nested");
+        itShouldBehaveLike(@"matching based on object class");
     });
 
     describe(@"when the container is an NSMutableArray", ^{
@@ -214,6 +326,7 @@ describe(@"contain matcher", ^{
         itShouldBehaveLike(@"containing the element");
         itShouldBehaveLike(@"not containing the element");
         itShouldBehaveLike(@"containing the element nested");
+        itShouldBehaveLike(@"matching based on object class");
     });
 
     describe(@"when the container is an NSSet", ^{
@@ -227,6 +340,7 @@ describe(@"contain matcher", ^{
         itShouldBehaveLike(@"containing the element");
         itShouldBehaveLike(@"not containing the element");
         itShouldBehaveLike(@"containing the element nested");
+        itShouldBehaveLike(@"matching based on object class");
     });
 
     describe(@"when the container is an NSMutableSet", ^{
@@ -240,14 +354,25 @@ describe(@"contain matcher", ^{
         itShouldBehaveLike(@"containing the element");
         itShouldBehaveLike(@"not containing the element");
         itShouldBehaveLike(@"containing the element nested");
+        itShouldBehaveLike(@"matching based on object class");
     });
 
     describe(@"when the container is an NSDictionary", ^{
         NSDictionary *container = [NSDictionary dictionary];
 
-        it(@"should explode", ^{
-            expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                expect(container).to(contain(element));
+        context(@"when matching a specific object", ^{
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
+                    expect(container).to(contain(element));
+                });
+            });
+        });
+
+        context(@"when matching a class", ^{
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
+                    expect(container).to(contain(an_instance_of(element)));
+                });
             });
         });
     });
@@ -255,9 +380,19 @@ describe(@"contain matcher", ^{
     describe(@"when the container is an NSMutableDictionary", ^{
         NSMutableDictionary *container = [NSMutableDictionary dictionary];
 
-        it(@"should explode", ^{
-            expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                expect(container).to(contain(element));
+        context(@"when matching a specific object", ^{
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
+                    expect(container).to(contain(element));
+                });
+            });
+        });
+
+        context(@"when matching a class", ^{
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
+                    expect(container).to(contain(an_instance_of(element)));
+                });
             });
         });
     });
@@ -325,6 +460,16 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"matching based on object class", ^{
+            char *container = (char *)"foo";
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher to check for an object in a string", ^{
+                    expect(container).to(contain(an_instance_of([NSObject class])));
+                });
+            });
+        });
     });
 
     describe(@"when the container is a const C string", ^{
@@ -373,6 +518,16 @@ describe(@"contain matcher", ^{
             it(@"should explode", ^{
                 expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
                     expect(container).to(contain(element).nested());
+                });
+            });
+        });
+
+        describe(@"matching based on object class", ^{
+            const char *container = "foo";
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher to check for an object in a string", ^{
+                    expect(container).to(contain(an_instance_of([NSObject class])));
                 });
             });
         });
@@ -438,6 +593,16 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"matching based on object class", ^{
+            NSString *container = @"foo";
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher to check for an object in a string", ^{
+                    expect(container).to(contain(an_instance_of([NSObject class])));
+                });
+            });
+        });
     });
 
     describe(@"when the container is an NSMutableString", ^{
@@ -500,6 +665,15 @@ describe(@"contain matcher", ^{
             });
         });
 
+        describe(@"matching based on object class", ^{
+            NSMutableString *container = [@"foo" mutableCopy];
+
+            it(@"should explode", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher to check for an object in a string", ^{
+                    expect(container).to(contain(an_instance_of([NSObject class])));
+                });
+            });
+        });
     });
 });
 
