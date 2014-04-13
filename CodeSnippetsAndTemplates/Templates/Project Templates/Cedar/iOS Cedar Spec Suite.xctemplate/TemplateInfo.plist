@@ -103,6 +103,16 @@
 #warning &quot;This project uses features only available in iOS SDK ___*___.0 and later.&quot;
 #endif
 </string>
+		<key>main.m:main</key>
+		<dict>
+			<key>Beginning</key>
+			<string>int main(int argc, char * argv[])
+{</string>
+			<key>End</key>
+			<string>}</string>
+			<key>Indent</key>
+			<integer>1</integer>
+		</dict>
 		<key>main.m:main:UIApplicationMain</key>
 		<string>@autoreleasepool {
     return UIApplicationMain(argc, argv, nil, @&quot;CedarApplicationDelegate&quot;);
@@ -127,6 +137,7 @@
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
 		<string>___PACKAGENAME___-Prefix.pch:Availability:iPhoneAvailability</string>
 		<string>Frameworks/Cedar-iOS.framework</string>
+		<string>Default-568h@2x.png</string>
 	</array>
 	<key>Targets</key>
 	<array>
