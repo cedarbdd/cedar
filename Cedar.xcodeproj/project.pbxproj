@@ -214,11 +214,13 @@
 		AE18A7FC13F4601400C8872C /* Contain.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE18A7FA13F4601400C8872C /* Contain.h */; };
 		AE18A80A13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
 		AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; };
+		AE368FCA18E47B38003EFF96 /* ContainNestedSubview.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC3AE6318E46A9600402863 /* ContainNestedSubview.h */; };
 		AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */; };
 		AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */ = {isa = PBXBuildFile; fileRef = AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */; };
 		AE3E8F39184FEEE900633740 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
 		AE3E8F3A184FEEEB00633740 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
+		AE41DF8218E4672600B8DD94 /* ContainNestedSubviewSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE41DF8018E4665200B8DD94 /* ContainNestedSubviewSpec.mm */; };
 		AE4A9458187F7D8F008566F5 /* BeFalsy.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4A9457187F7D8F008566F5 /* BeFalsy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4A9459187F7D8F008566F5 /* BeFalsy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4A9457187F7D8F008566F5 /* BeFalsy.h */; };
 		AE4A945B187F7E52008566F5 /* BeFalsySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */; };
@@ -531,6 +533,7 @@
 				AE18A7C113F450BD00C8872C /* StringifiersContainer.h in Copy headers to framework */,
 				AEF72F7C13EC735400786282 /* CedarStringifiers.h in Copy headers to framework */,
 				AEF72F7913EC732000786282 /* CedarComparators.h in Copy headers to framework */,
+				AE368FCA18E47B38003EFF96 /* ContainNestedSubview.h in Copy headers to framework */,
 				AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */,
 				AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */,
 				AEFD163211DCFDC800F4448A /* CDRExampleDetailsViewController.h in Copy headers to framework */,
@@ -715,6 +718,7 @@
 		AE36AC6415B5CA6E00EB6C51 /* CedarDouble.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CedarDouble.mm; sourceTree = "<group>"; };
 		AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithCollections.h; sourceTree = "<group>"; };
 		AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollections.m; sourceTree = "<group>"; };
+		AE41DF8018E4665200B8DD94 /* ContainNestedSubviewSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainNestedSubviewSpec.mm; sourceTree = "<group>"; };
 		AE4A9457187F7D8F008566F5 /* BeFalsy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeFalsy.h; sourceTree = "<group>"; };
 		AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeFalsySpec.mm; sourceTree = "<group>"; };
 		AE4A945D1880792E008566F5 /* RejectedMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectedMethod.h; sourceTree = "<group>"; };
@@ -760,6 +764,7 @@
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
 		AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseExceptionSpec.mm; sourceTree = "<group>"; };
 		AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRDefaultReporterSpec.mm; sourceTree = "<group>"; };
+		AEC3AE6318E46A9600402863 /* ContainNestedSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainNestedSubview.h; sourceTree = "<group>"; };
 		AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGeometryCompareEqual.h; sourceTree = "<group>"; };
 		AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGeometryStringifiers.h; sourceTree = "<group>"; };
 		AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UIKitEqualSpec.mm; sourceTree = "<group>"; };
@@ -1292,6 +1297,7 @@
 		AEC40C4D174AC4C000474D2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				AEC3AE6318E46A9600402863 /* ContainNestedSubview.h */,
 				AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */,
 				AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */,
 				34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */,
@@ -1302,6 +1308,7 @@
 		AEC40C52174AC51800474D2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				AE41DF8018E4665200B8DD94 /* ContainNestedSubviewSpec.mm */,
 				AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */,
 				34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */,
 			);
@@ -2354,6 +2361,7 @@
 				AE3E8F3A184FEEEB00633740 /* ObjectWithCollections.m in Sources */,
 				AE53B68317E7BDA900D83D5E /* HaveReceivedSpec.mm in Sources */,
 				AE06D88117AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */,
+				AE41DF8218E4672600B8DD94 /* ContainNestedSubviewSpec.mm in Sources */,
 				9672F0A71615C1C10012ED58 /* CDRSymbolicatorSpec.mm in Sources */,
 				9672F0AA1615C3F40012ED58 /* CDRSpecSpec.mm in Sources */,
 				E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */,

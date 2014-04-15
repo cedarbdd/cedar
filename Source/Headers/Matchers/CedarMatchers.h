@@ -18,6 +18,11 @@
 #import "BeEmpty.h"
 #import "Contain.h"
 
+// UIView
+#if TARGET_OS_IPHONE
+#import "ContainNestedSubview.h"
+#endif
+
 // Verifiers
 #import "Exist.h"
 
