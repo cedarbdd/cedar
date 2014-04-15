@@ -6,6 +6,8 @@ typedef struct {
 
 typedef LargeIncrementerStruct (^ComplexIncrementerBlock)(NSNumber *, LargeIncrementerStruct, NSError *);
 
+@class FooSuperclass;
+
 @protocol InheritedProtocol<NSObject>
 @end
 
@@ -22,10 +24,13 @@ typedef LargeIncrementerStruct (^ComplexIncrementerBlock)(NSNumber *, LargeIncre
 - (void)incrementWithException;
 - (void)methodWithBlock:(void(^)())blockArgument;
 - (void)methodWithCString:(char *)string;
+- (NSString *)methodWithString:(NSString *)string;
 - (NSNumber *)methodWithNumber1:(NSNumber *)arg1 andNumber2:(NSNumber *)arg2;
 - (double)methodWithDouble1:(double)double1 andDouble2:(double)double2;
 - (LargeIncrementerStruct)methodWithLargeStruct1:(LargeIncrementerStruct)struct1 andLargeStruct2:(LargeIncrementerStruct)struct2;
 - (void)methodWithNumber:(NSNumber *)number complexBlock:(ComplexIncrementerBlock)block;
+- (NSString *)methodWithFooSuperclass:(FooSuperclass *)fooInstance;
+
 @optional
 - (size_t)whatIfIIncrementedBy:(size_t)amount;
 @end
