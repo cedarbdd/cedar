@@ -86,23 +86,90 @@ describe(@"contain matcher", ^{
                 });
             });
         });
+
+        describe(@"with modifiers", ^{
+            std::vector<NSString *> container;
+
+            it(@"should not allow the as_a_key() modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_key() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_key());
+                });
+            });
+
+            it(@"should not allow the as_a_value() modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_value() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_value());
+                });
+            });
+        });
     });
 
     describe(@"when the container is an STL map", ^{
         std::map<NSString *, NSString *> container;
+        container[@"aKey"] = elementCopy;
 
-        context(@"when matching a specific object", ^{
-            it(@"should explode", ^{
-                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                    expect(container).to(contain(element));
+        context(@"plain containment", ^{
+            context(@"when matching a specific object", ^{
+                it(@"should explode", ^{
+                    expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use the .as_a_key() or .as_a_value() modifiers", ^{
+                        expect(container).to(contain(element));
+                    });
                 });
             });
         });
 
-        context(@"when matching a class", ^{
-            it(@"should explode", ^{
-                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                    expect(container).to(contain(an_instance_of(element)));
+        context(@"matching key containment", ^{
+            context(@"when matching a specific object", ^{
+                context(@"positive match", ^{
+                    it(@"should find the specified key", ^{
+                        expect(container).to(contain(@"aKey").as_a_key());
+                    });
+                });
+
+                context(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <{\n    aKey = element;\n}> to not contain <aKey> nested as a key", ^{
+                            expect(container).to_not(contain(@"aKey").nested().as_a_key());
+                        });
+                    });
+                });
+            });
+
+            context(@"when matching a class", ^{
+                it(@"should find the matching class within the keys", ^{
+                    expect(container).to(contain(an_instance_of([@"aKey" class])).as_a_key());
+                });
+            });
+        });
+
+        context(@"matching value containment", ^{
+            context(@"when matching a specific object", ^{
+                context(@"positive match", ^{
+                    it(@"should find the specified key", ^{
+                        expect(container).to(contain(elementCopy).as_a_value());
+                    });
+                });
+
+                context(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <{\n    aKey = element;\n}> to not contain <%@> nested as a value", element], ^{
+                            expect(container).to_not(contain(element).nested().as_a_value());
+                        });
+                    });
+                });
+            });
+
+            context(@"when matching a class", ^{
+                it(@"should find the matching class within the keys", ^{
+                    expect(container).to(contain(an_instance_of([elementCopy class])).as_a_value());
+                });
+            });
+        });
+
+        context(@"with invalid modifiers", ^{
+            it(@"should not allow both the as_a_key() and as_a_value() modifiers together", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher; use the .as_a_key() or .as_a_value() modifiers, but not both", ^{
+                    expect(container).to(contain(@"aKey").as_a_key().as_a_value());
                 });
             });
         });
@@ -124,6 +191,18 @@ describe(@"contain matcher", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <{(\n    %@\n)}> to not contain <%@>", element, element], ^{
                         expect(container).to_not(contain(element));
                     });
+                });
+            });
+
+            it(@"should not allow the as_a_key() modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_key() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_key());
+                });
+            });
+
+            it(@"should not allow the as_a_value() modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_value() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_value());
                 });
             });
         });
@@ -208,6 +287,18 @@ describe(@"contain matcher", ^{
                 expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@>", container, element], ^{
                     expect(container).to_not(contain(element));
                 });
+            });
+        });
+
+        it(@"should not allow the as_a_key() modifier", ^{
+            expectExceptionWithReason(@"Unexpected use of the .as_a_key() modifier on the 'contain' matcher without a dictionary", ^{
+                expect(container).to(contain(element).as_a_key());
+            });
+        });
+
+        it(@"should not allow the as_a_value() modifier", ^{
+            expectExceptionWithReason(@"Unexpected use of the .as_a_value() modifier on the 'contain' matcher without a dictionary", ^{
+                expect(container).to(contain(element).as_a_value());
             });
         });
     });
@@ -358,40 +449,152 @@ describe(@"contain matcher", ^{
     });
 
     describe(@"when the container is an NSDictionary", ^{
-        NSDictionary *container = [NSDictionary dictionary];
+        context(@"plain containment", ^{
+            NSDictionary *container = [NSDictionary dictionary];
 
-        context(@"when matching a specific object", ^{
-            it(@"should explode", ^{
-                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                    expect(container).to(contain(element));
+            context(@"when matching a specific object", ^{
+                it(@"should explode", ^{
+                    expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use the .as_a_key() or .as_a_value() modifiers", ^{
+                        expect(container).to(contain(element));
+                    });
                 });
             });
         });
 
-        context(@"when matching a class", ^{
-            it(@"should explode", ^{
-                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                    expect(container).to(contain(an_instance_of(element)));
+        context(@"matching key containment", ^{
+            NSDictionary *container = [NSDictionary dictionaryWithObject:elementCopy forKey:@"aKey"];
+
+            context(@"when matching a specific object", ^{
+                context(@"positive match", ^{
+                    it(@"should find the specified key", ^{
+                        expect(container).to(contain(@"aKey").as_a_key());
+                    });
+                });
+
+                context(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <aKey> nested as a key", container], ^{
+                            expect(container).to_not(contain(@"aKey").nested().as_a_key());
+                        });
+                    });
+                });
+            });
+
+            context(@"when matching a class", ^{
+                it(@"should find the matching class within the keys", ^{
+                    expect(container).to(contain(an_instance_of([@"aKey" class])).as_a_key());
+                });
+            });
+        });
+
+        context(@"matching value containment", ^{
+            NSDictionary *container = [NSDictionary dictionaryWithObject:elementCopy forKey:@"aKey"];
+
+            context(@"when matching a specific object", ^{
+                context(@"positive match", ^{
+                    it(@"should find the specified key", ^{
+                        expect(container).to(contain(elementCopy).as_a_value());
+                    });
+                });
+
+                context(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested as a value", container, element], ^{
+                            expect(container).to_not(contain(element).nested().as_a_value());
+                        });
+                    });
+                });
+            });
+
+            context(@"when matching a class", ^{
+                it(@"should find the matching class within the keys", ^{
+                    expect(container).to(contain(an_instance_of([elementCopy class])).as_a_value());
+                });
+            });
+        });
+
+        context(@"with invalid modifiers", ^{
+            NSDictionary *container = [NSDictionary dictionary];
+
+            it(@"should not allow both the as_a_key() and as_a_value() modifiers together", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher; use the .as_a_key() or .as_a_value() modifiers, but not both", ^{
+                    expect(container).to(contain(@"aKey").as_a_key().as_a_value());
                 });
             });
         });
     });
 
     describe(@"when the container is an NSMutableDictionary", ^{
-        NSMutableDictionary *container = [NSMutableDictionary dictionary];
+        context(@"plain containment", ^{
+            NSMutableDictionary *container = [NSMutableDictionary dictionary];
 
-        context(@"when matching a specific object", ^{
-            it(@"should explode", ^{
-                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                    expect(container).to(contain(element));
+            context(@"when matching a specific object", ^{
+                it(@"should explode", ^{
+                    expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use the .as_a_key() or .as_a_value() modifiers", ^{
+                        expect(container).to(contain(element));
+                    });
                 });
             });
         });
 
-        context(@"when matching a class", ^{
-            it(@"should explode", ^{
-                expectExceptionWithReason(@"Unexpected use of 'contain' matcher with dictionary; use contain_key or contain_value", ^{
-                    expect(container).to(contain(an_instance_of(element)));
+        context(@"matching key containment", ^{
+            NSDictionary *container = [NSDictionary dictionaryWithObject:elementCopy forKey:@"aKey"];
+
+            context(@"when matching a specific object", ^{
+                context(@"positive match", ^{
+                    it(@"should find the specified key", ^{
+                        expect(container).to(contain(@"aKey").as_a_key());
+                    });
+                });
+
+                context(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <aKey> nested as a key", container], ^{
+                            expect(container).to_not(contain(@"aKey").nested().as_a_key());
+                        });
+                    });
+                });
+            });
+
+            context(@"when matching a class", ^{
+                it(@"should find the matching class within the keys", ^{
+                    expect(container).to(contain(an_instance_of([@"aKey" class])).as_a_key());
+                });
+            });
+        });
+
+        context(@"matching value containment", ^{
+            NSDictionary *container = [NSDictionary dictionaryWithObject:elementCopy forKey:@"aKey"];
+
+            context(@"when matching a specific object", ^{
+                context(@"positive match", ^{
+                    it(@"should find the specified key", ^{
+                        expect(container).to(contain(elementCopy).as_a_value());
+                    });
+                });
+
+                context(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not contain <%@> nested as a value", container, element], ^{
+                            expect(container).to_not(contain(element).nested().as_a_value());
+                        });
+                    });
+                });
+            });
+
+            context(@"when matching a class", ^{
+                it(@"should find the matching class within the keys", ^{
+                    expect(container).to(contain(an_instance_of([elementCopy class])).as_a_value());
+                });
+            });
+        });
+
+        context(@"with invalid modifiers", ^{
+            NSMutableDictionary *container = [NSMutableDictionary dictionary];
+
+            it(@"should not allow both the as_a_key() and as_a_value() modifiers together", ^{
+                expectExceptionWithReason(@"Unexpected use of 'contain' matcher; use the .as_a_key() or .as_a_value() modifiers, but not both", ^{
+                    expect(container).to(contain(@"aKey").as_a_key().as_a_value());
                 });
             });
         });
@@ -450,13 +653,25 @@ describe(@"contain matcher", ^{
             });
         });
 
-        describe(@"with the 'nested' modifier", ^{
+        describe(@"with modifiers", ^{
             char *container = (char *)"tom and jerry";
             char *element = (char *)"tom";
 
-            it(@"should explode", ^{
+            it(@"should explode with the 'nested' modifier", ^{
                 expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
                     expect(container).to(contain(element).nested());
+                });
+            });
+
+            it(@"should explode with the 'as_a_key' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_key() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_key());
+                });
+            });
+
+            it(@"should explode with the 'as_a_value' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_value() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_value());
                 });
             });
         });
@@ -511,13 +726,25 @@ describe(@"contain matcher", ^{
             });
         });
 
-        describe(@"with the 'nested' modifier", ^{
+        describe(@"with modifiers", ^{
             const char *container = "tom and jerry";
             const char *element = "tom";
 
-            it(@"should explode", ^{
+            it(@"should explode with the 'nested' modifier", ^{
                 expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
                     expect(container).to(contain(element).nested());
+                });
+            });
+
+            it(@"should explode with the 'as_a_key' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_key() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_key());
+                });
+            });
+
+            it(@"should explode with the 'as_a_value' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_value() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_value());
                 });
             });
         });
@@ -583,13 +810,25 @@ describe(@"contain matcher", ^{
             });
         });
 
-        describe(@"with the 'nested' modifier", ^{
+        describe(@"with modifiers", ^{
             NSString *container = @"tom and jerry";
             NSString *element = @"tom";
 
-            it(@"should explode", ^{
+            it(@"should explode with the 'nested' modifier", ^{
                 expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
                     expect(container).to(contain(element).nested());
+                });
+            });
+
+            it(@"should explode with the 'as_a_key' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_key() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_key());
+                });
+            });
+
+            it(@"should explode with the 'as_a_value' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_value() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_value());
                 });
             });
         });
@@ -617,7 +856,6 @@ describe(@"contain matcher", ^{
                 });
             });
         });
-
 
         describe(@"which contains the substring", ^{
             NSMutableString *container = [[@"A string that contains element" mutableCopy] autorelease];
@@ -655,12 +893,24 @@ describe(@"contain matcher", ^{
             });
         });
 
-        describe(@"with the 'nested' modifier", ^{
+        describe(@"with modifiers", ^{
             NSMutableString *container = [[@"A string that contains element" mutableCopy] autorelease];
 
-            it(@"should explode", ^{
+            it(@"should explode with the 'nested' modifier", ^{
                 expectExceptionWithReason(@"Unexpected use of 'nested' modifier on 'contain' matcher with string", ^{
                     expect(container).to(contain(element).nested());
+                });
+            });
+
+            it(@"should explode with the 'as_a_key' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_key() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_key());
+                });
+            });
+
+            it(@"should explode with the 'as_a_value' modifier", ^{
+                expectExceptionWithReason(@"Unexpected use of the .as_a_value() modifier on the 'contain' matcher without a dictionary", ^{
+                    expect(container).to(contain(element).as_a_value());
                 });
             });
         });
