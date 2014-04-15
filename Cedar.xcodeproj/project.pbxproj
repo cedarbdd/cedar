@@ -76,6 +76,8 @@
 		22FB7B4416ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */; };
 		34ADE41818F23C8E00BD1E99 /* NSMethodSignature+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */; };
 		34ADE41918F23E6B00BD1E99 /* NSMethodSignature+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */; };
+		342F5D0B18F430DB00F38E35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 342F5D0A18F430DB00F38E35 /* QuartzCore.framework */; };
+		34D4B5C318F3AE0400FB2C3B /* UIKitContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */; };
 		42064466139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
@@ -617,6 +619,9 @@
 		3460488818F26F5400BC93B6 /* NSMethodSignature+Cedar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMethodSignature+Cedar.h"; sourceTree = "<group>"; };
 		3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRBlockHelper.h; sourceTree = "<group>"; };
 		34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+Cedar.m"; sourceTree = "<group>"; };
+		342F5D0A18F430DB00F38E35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIKitContainSpec.mm; sourceTree = "<group>"; };
+		34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIKitComparatorsContainer.h; sourceTree = "<group>"; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
 		4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWithPublicRunDates.h; sourceTree = "<group>"; };
@@ -947,6 +952,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				342F5D0B18F430DB00F38E35 /* QuartzCore.framework in Frameworks */,
 				AEC54009185E90E900B0D41D /* CoreGraphics.framework in Frameworks */,
 				AEC54007185E90D900B0D41D /* UIKit.framework in Frameworks */,
 				AEEE227E11DC2D3A00029872 /* libCedar-StaticLib.a in Frameworks */,
@@ -1196,7 +1202,7 @@
 				AEF72FF913ECC16400786282 /* Container */,
 				AEF7302E13ECC6EE00786282 /* Stringifiers */,
 				AE18A7D113F45BBE00C8872C /* Comparators */,
-				AEC40C4D174AC4C000474D2D /* UIGeometry */,
+				AEC40C4D174AC4C000474D2D /* UIKit */,
 				AE0AF58413E9E87E00029396 /* ActualValue.h */,
 				AE0AF55E13E9C0E300029396 /* CedarMatchers.h */,
 				AEF72F7713EC730700786282 /* CedarComparators.h */,
@@ -1261,7 +1267,7 @@
 			children = (
 				AEF7301313ECC4AE00786282 /* Base */,
 				AEF7302913ECC4C100786282 /* Container */,
-				AEC40C52174AC51800474D2D /* UI */,
+				AEC40C52174AC51800474D2D /* UIKit */,
 				966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.m */,
@@ -1278,22 +1284,23 @@
 			path = Arguments;
 			sourceTree = "<group>";
 		};
-		AEC40C4D174AC4C000474D2D /* UIGeometry */ = {
+		AEC40C4D174AC4C000474D2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
 				AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */,
 				AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */,
+				34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */,
 			);
-			name = UIGeometry;
 			path = UIKit;
 			sourceTree = "<group>";
 		};
-		AEC40C52174AC51800474D2D /* UI */ = {
+		AEC40C52174AC51800474D2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
 				AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */,
+				34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */,
 			);
-			path = UI;
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		AECF135E15D1421A003AAB9C /* Arguments */ = {
@@ -1465,6 +1472,7 @@
 		AEEE202611DC286500029872 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				342F5D0A18F430DB00F38E35 /* QuartzCore.framework */,
 				AEC54008185E90E900B0D41D /* CoreGraphics.framework */,
 				AEC54006185E90D900B0D41D /* UIKit.framework */,
 				1F4251DC180E0CA200FC578B /* SenTestingKit.framework */,
@@ -2301,6 +2309,7 @@
 				AE807895183C71950078C608 /* SimpleKeyValueObserver.m in Sources */,
 				1F47B9A8186D69CD005A8CE1 /* CDROTestReporterSpec.mm in Sources */,
 				AE53B68117E7BCD300D83D5E /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
+				34D4B5C318F3AE0400FB2C3B /* UIKitContainSpec.mm in Sources */,
 				9D28051A18E2324200887CC4 /* ObjectWithValueEquality.m in Sources */,
 				AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.m in Sources */,
 				96EA1CBB142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */,
