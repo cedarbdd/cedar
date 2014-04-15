@@ -12,6 +12,8 @@ namespace Cedar { namespace Matchers {
         // Allow default copy ctor.
 
         Contain<T> & nested();
+        Contain<T> & as_a_key();
+        Contain<T> & as_a_value();
 
         template<typename U>
         bool matches(const U &) const;
@@ -21,10 +23,12 @@ namespace Cedar { namespace Matchers {
 
     private:
         NSString *string_for_element() const;
+        void validate_options() const;
 
     private:
         const T & element_;
-        bool nested_;
+        Comparators::contains_options options_;
+        NSString *elementKeyPath_;
     };
 
     template<typename T>
@@ -34,7 +38,7 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     inline Contain<T>::Contain(const T & element)
-    : Base<>(), element_(element), nested_(false) {
+    : Base<>(), element_(element), options_({}) {
     }
 
     template<typename T>
@@ -43,13 +47,27 @@ namespace Cedar { namespace Matchers {
 
     template<typename T>
     Contain<T> & Contain<T>::nested() {
-        nested_ = true;
+        options_.nested = true;
+        return *this;
+    }
+
+    template<typename T>
+    Contain<T> & Contain<T>::as_a_key() {
+        options_.as_key = true;
+        validate_options();
+        return *this;
+    }
+
+    template<typename T>
+    Contain<T> & Contain<T>::as_a_value() {
+        options_.as_value = true;
+        validate_options();
         return *this;
     }
 
     template<typename T>
     inline /*virtual*/ NSString * Contain<T>::failure_message_end() const {
-        return [NSString stringWithFormat:@"contain <%@>%@", string_for_element(), nested_ ? @" nested" : @""];
+        return [NSString stringWithFormat:@"contain <%@>%@%@", string_for_element(), options_.nested ? @" nested" : @"", options_.as_key ? @" as a key" : options_.as_value ? @" as a value" : @""];
     }
 
     template<typename T>
@@ -62,14 +80,21 @@ namespace Cedar { namespace Matchers {
         return element_.expected_class_string();
     }
 
+    template <typename T>
+    void Contain<T>::validate_options() const {
+        if (options_.as_key && options_.as_value) {
+            [[NSException exceptionWithName:NSInternalInconsistencyException reason:@"Unexpected use of 'contain' matcher; use the .as_a_key() or .as_a_value() modifiers, but not both" userInfo:nil] raise];
+        }
+    }
+
 #pragma mark Generic
     template<typename T> template<typename U>
     bool Contain<T>::matches(const U & container) const {
-        return Comparators::compare_contains(container, element_, nested_);
+        return Comparators::compare_contains(container, element_, options_);
     }
 
     template<> template<typename U>
     bool Contain<AnInstanceOf>::matches(const U & container) const {
-        return element_.matches(container, nested_);
+        return element_.matches(container, options_);
     }
 }}
