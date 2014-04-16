@@ -1,5 +1,6 @@
 #import "StubbedMethod.h"
 #import "AnyArgument.h"
+#import "CDRTypeUtilities.h"
 #import "NSInvocation+Cedar.h"
 #import "NSMethodSignature+Cedar.h"
 #import <objc/runtime.h>
@@ -115,7 +116,7 @@ namespace Cedar { namespace Doubles {
             const char * const methodReturnType = [[instance methodSignatureForSelector:this->selector()] methodReturnType];
             if (!this->return_value().matches_encoding(methodReturnType)) {
                 [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:[NSString stringWithFormat:@"Invalid return value type '%s' instead of '%s' for <%@>", this->return_value().value_encoding(), methodReturnType, NSStringFromSelector(this->selector())]
+                                         reason:[NSString stringWithFormat:@"Invalid return value type '%@' instead of '%@' for <%@>", [CDRTypeUtilities typeNameForEncoding:this->return_value().value_encoding()], [CDRTypeUtilities typeNameForEncoding:methodReturnType], NSStringFromSelector(this->selector())]
                                        userInfo:nil] raise];
             }
         }
@@ -131,7 +132,7 @@ namespace Cedar { namespace Doubles {
         const char * const implementationBlockReturnType = [implementationBlockMethodSignature methodReturnType];
         if (0 != strcmp(implementationBlockReturnType, methodReturnType)) {
             [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"Invalid return type '%s' instead of '%s' for <%@>", implementationBlockReturnType, methodReturnType, NSStringFromSelector(this->selector())]
+                                     reason:[NSString stringWithFormat:@"Invalid return type '%@' instead of '%@' for <%@>", [CDRTypeUtilities typeNameForEncoding:implementationBlockReturnType], [CDRTypeUtilities typeNameForEncoding:methodReturnType], NSStringFromSelector(this->selector())]
                                    userInfo:nil] raise];
         }
     }
@@ -158,7 +159,7 @@ namespace Cedar { namespace Doubles {
             if (0 != strcmp(instanceMethodArgumentType, implementationBlockArgumentType)) {
                 NSString * selectorString = NSStringFromSelector(this->selector());
                 [[NSException exceptionWithName:NSInternalInconsistencyException
-                                         reason:[NSString stringWithFormat:@"Found argument type '%s', expected '%s'; argument #%lu for <%@>", implementationBlockArgumentType, instanceMethodArgumentType, (unsigned long)argIndex-1, selectorString]
+                                         reason:[NSString stringWithFormat:@"Found argument type '%@', expected '%@'; argument #%lu for <%@>", [CDRTypeUtilities typeNameForEncoding:implementationBlockArgumentType], [CDRTypeUtilities typeNameForEncoding:instanceMethodArgumentType], (unsigned long)argIndex-1, selectorString]
                                        userInfo:nil] raise];
             }
         }

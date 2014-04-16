@@ -1,5 +1,6 @@
 #import "InvocationMatcher.h"
 #import <objc/runtime.h>
+#import "CDRTypeUtilities.h"
 
 namespace Cedar { namespace Doubles {
 
@@ -73,9 +74,10 @@ namespace Cedar { namespace Doubles {
             const char * actual_argument_encoding = [methodSignature getArgumentTypeAtIndex:index];
             if (!(*cit)->matches_encoding(actual_argument_encoding)) {
                 NSString * selectorString = NSStringFromSelector(this->selector());
-                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #%lu for <%@>",
+                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> of type '%@' with actual argument type '%@'; argument #%lu for <%@>",
                                     (*cit)->value_string(),
-                                    actual_argument_encoding,
+                                    [CDRTypeUtilities typeNameForEncoding:(*cit)->value_encoding()],
+                                    [CDRTypeUtilities typeNameForEncoding:actual_argument_encoding],
                                     (unsigned long)(index - OBJC_DEFAULT_ARGUMENT_COUNT + 1),
                                     selectorString];
                 [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise];

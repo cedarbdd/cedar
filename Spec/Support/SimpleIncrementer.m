@@ -32,7 +32,7 @@
     self.value += integer;
 }
 
-- (void)incrementByABit:(size_t)aBit andABitMore:(NSNumber *)aBitMore {
+- (void)incrementByABit:(unsigned int)aBit andABitMore:(NSNumber *)aBitMore {
     self.value += aBit + [aBitMore intValue];
 }
 
