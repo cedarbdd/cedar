@@ -1,8 +1,6 @@
 language: objective-c
 
 rvm:
-  - "system; export CEDAR_SDK_VERSION=5.0 #"
-  - "system; export CEDAR_SDK_VERSION=5.1 #"
   - "system; export CEDAR_SDK_VERSION=6.0 #"
   - "system; export CEDAR_SDK_VERSION=6.1 #"
   - "system; export CEDAR_SDK_VERSION=7.0 #"
