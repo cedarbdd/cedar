@@ -36,5 +36,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>isCedarTemplate</key>
+	<true/>
 </dict>
 </plist>

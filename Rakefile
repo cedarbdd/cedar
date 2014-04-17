@@ -13,6 +13,8 @@ XCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitApp + XCTest"
 
 CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
 CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
+TEMPLATE_IDENTIFIER_PREFIX = "com.pivotallabs.cedar."
+TEMPLATE_SENTINEL_KEY = "isCedarTemplate"
 SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 
 XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
@@ -31,6 +33,7 @@ APPCODE_SNIPPETS_FILENAME = "Cedar.xml"
 APPCODE_SNIPPETS_FILE = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "AppCodeSnippets", APPCODE_SNIPPETS_FILENAME)
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 PLUGIN_DIR = File.join(PROJECT_ROOT, "CedarPlugin.xcplugin")
+PLISTBUDDY = "/usr/libexec/PlistBuddy"
 
 def sdk_dir(version)
   "#{xcode_developer_dir}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator#{version}.sdk".tap do |sdk_dir|
@@ -91,6 +94,22 @@ def output_file(target)
   output_file = File.join(output_dir, "#{target}.output")
   puts "Output: #{output_file}"
   "'#{output_file}'"
+end
+
+def remove_templates_from_directory(templates_directory)
+  return unless File.directory?(templates_directory)
+
+  Dir.foreach(templates_directory) do |template|
+    next if template == '.' or template == '..'
+
+    template_plist = "#{templates_directory}/#{template}/TemplateInfo.plist"
+    next unless File.exists?(template_plist)
+
+    if `#{PLISTBUDDY} -c "Print :Identifier" "#{template_plist}"`.start_with?(TEMPLATE_IDENTIFIER_PREFIX) or
+      `#{PLISTBUDDY} -c "Print :#{TEMPLATE_SENTINEL_KEY}" "#{template_plist}"`.start_with?("true")
+      system_or_exit "rm -rf \"#{templates_directory}/#{template}\""
+    end
+  end
 end
 
 def kill_simulator
@@ -249,8 +268,8 @@ end
 desc "Remove code snippets and templates"
 task :uninstall do
   puts "\nRemoving old templates...\n"
-  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/File Templates/Cedar\""
-  system_or_exit "rm -rf \"#{XCODE_TEMPLATES_DIR}/Project Templates/Cedar\""
+  remove_templates_from_directory("#{XCODE_TEMPLATES_DIR}/File Templates/Cedar")
+  remove_templates_from_directory("#{XCODE_TEMPLATES_DIR}/Project Templates/Cedar")
   system_or_exit "rm -f \"#{APPCODE_SNIPPETS_DIR}/#{APPCODE_SNIPPETS_FILENAME}\""
   system_or_exit "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_DIR} | xargs -I{} rm -f \"{}\""
 end

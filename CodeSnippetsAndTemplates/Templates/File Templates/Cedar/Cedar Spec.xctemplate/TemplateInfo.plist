@@ -40,5 +40,7 @@
 	<string>1</string>
 	<key>Summary</key>
 	<string>A Cedar Spec</string>
+	<key>isCedarTemplate</key>
+	<true/>
 </dict>
 </plist>
