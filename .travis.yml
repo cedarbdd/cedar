@@ -1,9 +1,11 @@
 language: objective-c
 
+before_install: rvm use ruby-2.0.0-p353 --default
+
 rvm:
-  - "2.1.1; export CEDAR_SDK_VERSION=6.0 #"
-  - "2.1.1; export CEDAR_SDK_VERSION=6.1 #"
-  - "2.1.1; export CEDAR_SDK_VERSION=7.0 #"
+  - "2.0.0; export CEDAR_SDK_VERSION=6.0 #"
+  - "2.0.0; export CEDAR_SDK_VERSION=6.1 #"
+  - "2.0.0; export CEDAR_SDK_VERSION=7.0 #"
 
 env:
   matrix:
