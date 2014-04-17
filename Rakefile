@@ -193,6 +193,8 @@ end
 
 desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_TARGET_NAME})"
 task :xcunit do
+  kill_simulator
+
   with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
     if is_run_unit_tests_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
       system_or_exit "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{XCUNIT_APPLICATION_SPECS_TARGET_NAME.inspect} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination 'OS=#{SDK_VERSION},name=iPhone Retina (3.5-inch)'"
@@ -200,6 +202,8 @@ task :xcunit do
       puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
     end
   end
+
+  kill_simulator
 end
 
 desc "Build and run OCUnit logic and application specs"
@@ -222,7 +226,9 @@ namespace :ocunit do
     kill_simulator
 
     if is_run_unit_tests_deprecated?
-      system_or_exit "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_IOS_NAME} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination 'OS=#{SDK_VERSION},name=iPhone Retina (3.5-inch)'"
+      with_env_vars("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+        system_or_exit "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_IOS_NAME} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination 'OS=#{SDK_VERSION},name=iPhone Retina (3.5-inch)'"
+      end
     else
       system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", output_file("ocunit_application_specs")
 
@@ -243,6 +249,8 @@ namespace :ocunit do
         system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{APP_IOS_NAME}.app/#{APP_IOS_NAME}")} -RegisterForSystemEvents -SenTest All"
       end
     end
+
+    kill_simulator
   end
 end
 
