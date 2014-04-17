@@ -1,15 +1,12 @@
 language: objective-c
 
 rvm:
-  - "system; export CEDAR_SDK_VERSION=6.0 #"
-  - "system; export CEDAR_SDK_VERSION=6.1 #"
-  - "system; export CEDAR_SDK_VERSION=7.0 #"
+  - "2.1.1; export CEDAR_SDK_VERSION=6.1 #"
+  - "2.1.1; export CEDAR_SDK_VERSION=7.0 #"
+  - "2.1.1; export CEDAR_SDK_VERSION=7.1 #"
 
 env:
   matrix:
-    - CEDAR_SDK_RUNTIME_VERSION="5.0"
-    - CEDAR_SDK_RUNTIME_VERSION="5.1"
-    - CEDAR_SDK_RUNTIME_VERSION="6.0"
     - CEDAR_SDK_RUNTIME_VERSION="6.1"
     - CEDAR_SDK_RUNTIME_VERSION="7.0"
 
