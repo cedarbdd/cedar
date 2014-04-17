@@ -303,19 +303,26 @@ task :install_plugin do
 end
 
 desc "Build the frameworks and upgrade the target"
-task :upgrade, [:path_to_framework] => [:build_frameworks] do |task, args|
-  framework_folder = args.path_to_framework.split("/").last
+task :upgrade, [:path_to_framework] do |task, args|
+  usage_string = 'Usage: rake upgrade["/path/to/Cedar.framework"]'
+  path_to_framework = args.path_to_framework
+  raise "*** Missing path to the framework to be upgraded. ***\n#{usage_string}" unless path_to_framework
 
-  case framework_folder
-    when "Cedar-iOS.framework"
-      cedar_name = "Cedar-iOS"
-      cedar_path = "#{CONFIGURATION}-iphoneuniversal"
-    when "Cedar.framework"
-      cedar_name = "Cedar"
-      cedar_path = "#{CONFIGURATION}"
-    else
-      raise "*** No framework found. ***"
+  if File.directory?(path_to_framework)
+    framework_folder = args.path_to_framework.split("/").last
+    case framework_folder
+      when "Cedar-iOS.framework"
+        cedar_name = "Cedar-iOS"
+        cedar_path = "#{CONFIGURATION}-iphoneuniversal"
+      when "Cedar.framework"
+        cedar_name = "Cedar"
+        cedar_path = "#{CONFIGURATION}"
+      end
   end
+
+  raise "*** No framework found. ***\n#{usage_string}" unless cedar_path
+
+  Rake::Task[:build_frameworks].invoke
 
   puts "\nUpgrading #{cedar_name} framework...\n"
 
