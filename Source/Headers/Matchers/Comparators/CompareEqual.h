@@ -14,7 +14,7 @@ namespace Cedar { namespace Matchers { namespace Comparators {
 
 #pragma mark NSNumber
     inline bool compare_equal(NSNumber * const actualValue, NSNumber * const expectedValue) {
-        return [actualValue isEqualToNumber:expectedValue];
+        return expectedValue ? [actualValue isEqualToNumber:expectedValue] : false;
     }
 
     inline bool compare_equal(NSNumber * const actualValue, const id expectedValue) {

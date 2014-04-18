@@ -28,6 +28,9 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     }
 
     inline NSString * string_for(NSNumber * const value) {
+        if (!value) {
+            return [NSString stringWithFormat:@"%@", value];
+        }
         return string_for([value floatValue]);
     }
 

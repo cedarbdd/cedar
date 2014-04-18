@@ -103,6 +103,50 @@ describe(@"be_nil matcher", ^{
         });
     });
 
+    describe(@"when the value is a block", ^{
+        __block void(^value)(void);
+
+        describe(@"which is nil", ^{
+            beforeEach(^{
+                value = nil;
+            });
+
+            describe(@"positive match", ^{
+                it(@"should should pass", ^{
+                    expect(value).to(be_nil());
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage(@"Expected <nil> to not be nil", ^{
+                        expect(value).to_not(be_nil());
+                    });
+                });
+            });
+        });
+
+        describe(@"which is not nil", ^{
+            beforeEach(^{
+                value = ^{};
+            });
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible failure message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%p> to be nil", value], ^{
+                        expect(value).to(be_nil());
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should should pass", ^{
+                    expect(value).to_not(be_nil());
+                });
+            });
+        });
+    });
+
     describe(@"when the value is not a pointer", ^{
         int value = 7;
 

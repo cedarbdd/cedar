@@ -20,6 +20,9 @@ namespace Cedar { namespace Matchers {
         virtual NSString * failure_message_end() const;
 
     private:
+        void validate_not_nil() const;
+
+    private:
         const T & expectedValue_;
     };
 
@@ -45,7 +48,16 @@ namespace Cedar { namespace Matchers {
 
     template<typename T> template<typename U>
     bool Equal<T>::matches(const U & actualValue) const {
+        this->validate_not_nil();
         return Comparators::compare_equal(actualValue, expectedValue_);
+    }
+
+#pragma mark - Private interface
+    template<typename T>
+    void Equal<T>::validate_not_nil() const {
+        if (0 == strncmp(@encode(T), "@", 1) && [[NSValue value:&expectedValue_ withObjCType:@encode(T)] nonretainedObjectValue] == nil) {
+            [[CDRSpecFailure specFailureWithReason:@"Unexpected use of equal matcher to check for nil; use the be_nil matcher to match nil values"] raise];
+        }
     }
 
 #pragma mark equality operators
