@@ -21,5 +21,6 @@ Pod::Spec.new do |s|
     'CLANG_CXX_LANGUAGE_STANDARD' => 'c++0x',
     'CLANG_CXX_LIBRARY' => 'libc++'
   }
+  s.libraries = 'c++'
 
 end
