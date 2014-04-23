@@ -852,6 +852,18 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     ^{ myDouble stub_method("value").and_return(invalidReturnValue); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return value type '%s' instead of '%s' for <value>", @encode(unsigned int), @encode(size_t)]);
                 });
             });
+
+            context(@"with an arbitrary struct value", ^{
+                LargeIncrementerStruct returnValue = {99, 88, 77, 66};
+                beforeEach(^{
+                    myDouble stub_method("methodWithLargeStruct1:andLargeStruct2:").and_return(returnValue);
+                });
+
+                it(@"should return the expected value", ^{
+                    LargeIncrementerStruct returnedValue = [myDouble methodWithLargeStruct1:{} andLargeStruct2:{}];
+                    memcmp(&returnValue, &returnedValue, sizeof(LargeIncrementerStruct)) should equal(0);
+                });
+            });
         });
     });
 });

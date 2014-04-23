@@ -41,7 +41,7 @@ namespace Cedar { namespace Doubles {
         StubbedMethod & and_raise_exception();
         StubbedMethod & and_raise_exception(NSObject * exception);
 
-        Argument & return_value() const { return *return_value_argument_; };
+        ReturnValue & return_value() const { return *return_value_; };
 
         struct SelCompare {
             bool operator() (const SEL& lhs, const SEL& rhs) const {
@@ -62,7 +62,7 @@ namespace Cedar { namespace Doubles {
         unsigned int arguments_specificity_ranking() const;
 
     private:
-        bool has_return_value() const { return return_value_argument_.get(); };
+        bool has_return_value() const { return return_value_.get(); };
         bool has_invocation_block() const { return invocation_block_; }
         bool has_implementation_block() const { return implementation_block_; }
 
@@ -73,7 +73,7 @@ namespace Cedar { namespace Doubles {
         void raise_for_multiple_return_values() const;
         void raise_for_multiple_blocks() const;
     private:
-        Argument::shared_ptr_t return_value_argument_;
+        ReturnValue::shared_ptr_t return_value_;
         invocation_block_t invocation_block_;
         implementation_block_t implementation_block_;
         NSObject * exception_to_raise_;
@@ -87,7 +87,7 @@ namespace Cedar { namespace Doubles {
             this->raise_for_multiple_return_values();
         }
 
-        return_value_argument_ = Argument::shared_ptr_t(new ReturnValue<T>(return_value));
+        return_value_ = ReturnValue::shared_ptr_t(new TypedReturnValue<T>(return_value));
         return *this;
     }
 

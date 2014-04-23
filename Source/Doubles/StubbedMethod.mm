@@ -11,7 +11,7 @@ namespace Cedar { namespace Doubles {
     StubbedMethod::StubbedMethod(const char * method_name) : InvocationMatcher(sel_registerName(method_name)), exception_to_raise_(0), invocation_block_(0), implementation_block_(0) {}
     StubbedMethod::StubbedMethod(const StubbedMethod &rhs)
     : InvocationMatcher(rhs)
-    , return_value_argument_(rhs.return_value_argument_)
+    , return_value_(rhs.return_value_)
     , invocation_block_([rhs.invocation_block_ retain])
     , implementation_block_([rhs.implementation_block_ retain])
     , exception_to_raise_(rhs.exception_to_raise_) {}
