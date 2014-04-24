@@ -2,37 +2,62 @@
 #import "CDROTestHelper.h"
 #import "CDRFunctions.h"
 
+@interface CDROTestRunner ()
+@property (nonatomic) int exitStatus;
+@end
+
 @implementation CDROTestRunner
 
-void CDRRunTests(id self, SEL _cmd, id ignored) {
-    int exitStatus = CDRRunOCUnitTests(self, _cmd, ignored);
+#if !TARGET_OS_IPHONE
+void CDRRunTests(id self, SEL _cmd, id object) {
+    CDROTestRunner *runner = [[CDROTestRunner alloc] init];
+    [runner runAllTestsWithTestProbe:self];
+}
 
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
++ (void)load {
+    CDRHijackOCUnitRun((IMP)CDRRunTests);
+}
+#endif
 
-    // Since we want to have integration with XCode when running tests from inside the IDE
-    // CDROTestReporter needs to be default reporter; however, we can use any other reporter
-    // when running from the command line (e.g. CDRColorizedReporter).
-    NSArray *reporters = CDRReportersFromEnv("CDROTestReporter,CDRBufferedDefaultReporter");
-    if (![reporters count]) {
-        exit(-999);
-    }
-
-    exitStatus |= runSpecsWithCustomExampleReporters(reporters);
+- (void)runAllTestsWithTestProbe:(id)testProbe {
+    [self runStandardTestsWithTestProbe:testProbe];
+    [self runSpecs];
 
     // otest always returns 0 as its exit code even if any test fails;
     // we need to forcibly exit with correct exit code to make CI happy.
-    [pool drain];
+    [self exitWithAggregateStatus];
+}
 
+- (void)runStandardTestsWithTestProbe:(id)testProbe {
+    int exitStatus;
+    if (CDRIsXCTest()) {
+        exitStatus = CDRRunXCUnitTests(testProbe);
+    } else {
+        exitStatus = CDRRunOCUnitTests(testProbe);
+    }
+    [self recordExitStatus:exitStatus];
+}
+
+- (void)runSpecs {
+    int exitStatus = runSpecs();
+    [self recordExitStatus:exitStatus];
+}
+
+- (void)recordExitStatus:(int)status {
+    self.exitStatus |= status;
+}
+
+- (void)exitWithAggregateStatus {
+    [self exitWithStatus:self.exitStatus];
+}
+
+- (void)exitWithStatus:(int)status {
     fflush(stdout);
     fflush(stderr);
     fclose(stdout);
     fclose(stderr);
 
-    exit(exitStatus);
-}
-
-+ (void)load {
-    CDRHijackOCUnitRun((IMP)CDRRunTests);
+    exit(status);
 }
 
 @end
