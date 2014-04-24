@@ -93,6 +93,21 @@ def output_file(target)
   "'#{output_file}'"
 end
 
+def execute_iosframeworkspecs
+  sdk_path = sdk_dir(SDK_RUNTIME_VERSION)
+  env_vars = {
+    "DYLD_ROOT_PATH" => sdk_path,
+    "IPHONE_SIMULATOR_ROOT" => sdk_path,
+    "CFFIXED_USER_HOME" => Dir.tmpdir,
+    "CEDAR_HEADLESS_SPECS" => "1",
+    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+  }
+
+  with_env_vars(env_vars) do
+    system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{IOS_FRAMEWORK_SPECS_TARGET_NAME}.app", IOS_FRAMEWORK_SPECS_TARGET_NAME)} -RegisterForSystemEvents"
+  end
+end
+
 def kill_simulator
   system %Q[killall -m -KILL "gdb"]
   system %Q[killall -m -KILL "otest"]
@@ -131,7 +146,13 @@ task :build_iosframeworkspecs do
 end
 
 desc "Build Cedar and Cedar-iOS frameworks, and verify built Cedar-iOS.framework"
-task :build_frameworks => :iosframeworkspecs do
+task :build_frameworks => :build_iosframeworkspecs do
+  begin
+    execute_iosframeworkspecs
+  rescue Exception => e
+    puts "Unable to run iOS static framework specs. Skipping validation of Cedar-iOS.framework (#{e})"
+  end
+  
   system_or_exit "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{CEDAR_FRAMEWORK_TARGET_NAME} -configuration #{CONFIGURATION} build SYMROOT='#{BUILD_DIR}'", output_file("build_cedar")
 end
 
@@ -177,18 +198,7 @@ end
 
 desc "Run iOS static framework specs"
 task :iosframeworkspecs => :build_iosframeworkspecs do
-  sdk_path = sdk_dir(SDK_RUNTIME_VERSION)
-  env_vars = {
-    "DYLD_ROOT_PATH" => sdk_path,
-    "IPHONE_SIMULATOR_ROOT" => sdk_path,
-    "CFFIXED_USER_HOME" => Dir.tmpdir,
-    "CEDAR_HEADLESS_SPECS" => "1",
-    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-  }
-
-  with_env_vars(env_vars) do
-    system_or_exit "#{File.join(build_dir("-iphonesimulator"), "#{IOS_FRAMEWORK_SPECS_TARGET_NAME}.app", IOS_FRAMEWORK_SPECS_TARGET_NAME)} -RegisterForSystemEvents"
-  end
+  execute_iosframeworkspecs
 end
 
 desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_TARGET_NAME})"
