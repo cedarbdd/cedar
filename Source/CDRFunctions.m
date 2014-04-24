@@ -4,7 +4,7 @@
 #import "CDRExampleGroup.h"
 #import "CDRExampleReporter.h"
 #import "CDRDefaultReporter.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRFunctions.h"
 #import "CDRReportDispatcher.h"
 #import "CDROTestNamer.h"
@@ -65,11 +65,11 @@ BOOL CDRClassHasClassMethod(Class class, SEL selector) {
 }
 
 void CDRDefineGlobalBeforeAndAfterEachBlocks() {
-    [SpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) {
+    [CDRSpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) {
         return CDRClassHasClassMethod(class, @selector(beforeEach));
     });
 
-    [SpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) {
+    [CDRSpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) {
         return CDRClassHasClassMethod(class, @selector(afterEach));
     });
 }
@@ -156,7 +156,7 @@ void CDRMarkFocusedExamplesInSpecs(NSArray *specs) {
     }
 
     for (CDRSpec *spec in specs) {
-        SpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
+        CDRSpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
     }
 }
 
@@ -220,7 +220,7 @@ void CDRMarkXcodeFocusedExamplesInSpecs(NSArray *specs, NSArray *arguments) {
     [testNamer release];
 
     for (CDRSpec *spec in specs) {
-        SpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
+        CDRSpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
     }
 }
 

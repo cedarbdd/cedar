@@ -1,4 +1,4 @@
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSymbolicator.h"

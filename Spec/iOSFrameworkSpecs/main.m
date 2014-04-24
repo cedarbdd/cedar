@@ -1,4 +1,4 @@
-#import <Cedar-iOS/SpecHelper.h>
+#import <Cedar-iOS/CDRSpecHelper.h>
 
 int main(int argc, char *argv[]) {
     @autoreleasepool {
