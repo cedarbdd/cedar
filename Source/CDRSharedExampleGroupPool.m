@@ -1,21 +1,21 @@
 #import "CDRSharedExampleGroupPool.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRSpec.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
 
 extern CDRSpec *currentSpec;
 
-@interface SpecHelper (CDRSharedExampleGroupPoolFriend)
+@interface CDRSpecHelper (CDRSharedExampleGroupPoolFriend)
 @property (nonatomic, retain, readonly) NSMutableDictionary *sharedExampleGroups;
 @end
 
 void sharedExamplesFor(NSString *groupName, CDRSharedExampleGroupBlock block) {
-    [[[SpecHelper specHelper] sharedExampleGroups] setObject:[[block copy] autorelease] forKey:groupName];
+    [[[CDRSpecHelper specHelper] sharedExampleGroups] setObject:[[block copy] autorelease] forKey:groupName];
 }
 
 void itShouldBehaveLike(NSString *groupName) {
-    CDRSharedExampleGroupBlock sharedExampleGroupBlock = [[[SpecHelper specHelper] sharedExampleGroups] objectForKey:groupName];
+    CDRSharedExampleGroupBlock sharedExampleGroupBlock = [[[CDRSpecHelper specHelper] sharedExampleGroups] objectForKey:groupName];
     if (!sharedExampleGroupBlock) {
         NSString *message = [NSString stringWithFormat:@"Unknown shared example group with description: '%@'", groupName];
         [[NSException exceptionWithName:NSInternalInconsistencyException reason:message userInfo:nil] raise];
@@ -25,7 +25,7 @@ void itShouldBehaveLike(NSString *groupName) {
     currentSpec.currentGroup = [CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]];
     [parentGroup add:currentSpec.currentGroup];
 
-    sharedExampleGroupBlock([SpecHelper specHelper].sharedExampleContext);
+    sharedExampleGroupBlock([CDRSpecHelper specHelper].sharedExampleContext);
     currentSpec.currentGroup = parentGroup;
 }
 

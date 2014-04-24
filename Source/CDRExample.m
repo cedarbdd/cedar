@@ -1,6 +1,6 @@
 #import "CDRExample.h"
 #import "CDRSpecFailure.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRReportDispatcher.h"
 
 const CDRSpecBlock PENDING = nil;

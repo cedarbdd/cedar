@@ -1,4 +1,4 @@
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "DummyModel.h" // should be included in OCUnitAppLogicTests target
 
 using namespace Cedar::Matchers;

@@ -1,7 +1,7 @@
 #if TARGET_OS_IPHONE
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #else
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #endif
 
 #include <vector>

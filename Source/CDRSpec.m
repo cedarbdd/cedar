@@ -2,7 +2,7 @@
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRSymbolicator.h"
 
 CDRSpec *currentSpec;
@@ -98,7 +98,7 @@ void fail(NSString *reason) {
 - (id)init {
     if (self = [super init]) {
         self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
-        self.rootGroup.parent = [SpecHelper specHelper];
+        self.rootGroup.parent = [CDRSpecHelper specHelper];
         self.currentGroup = self.rootGroup;
         self.symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
     }

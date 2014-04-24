@@ -1,7 +1,7 @@
 #if TARGET_OS_IPHONE
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #else
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #endif
 
 extern "C" {
@@ -192,9 +192,9 @@ describe(@"contain matcher", ^{
 
     describe(@"when the container is an NSArray", ^{
         beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSArray arrayWithObject:elementCopy] forKey:@"container"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSArray array] forKey:@"container_empty"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSArray arrayWithObject:[NSArray arrayWithObject:elementCopy]] forKey:@"container_nested"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSArray arrayWithObject:elementCopy] forKey:@"container"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSArray array] forKey:@"container_empty"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSArray arrayWithObject:[NSArray arrayWithObject:elementCopy]] forKey:@"container_nested"];
         });
 
         itShouldBehaveLike(@"nil container");
@@ -205,9 +205,9 @@ describe(@"contain matcher", ^{
 
     describe(@"when the container is an NSMutableArray", ^{
         beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray arrayWithObject:elementCopy] forKey:@"container"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray array] forKey:@"container_empty"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray arrayWithObject:[NSMutableArray arrayWithObject:elementCopy]] forKey:@"container_nested"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray arrayWithObject:elementCopy] forKey:@"container"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray array] forKey:@"container_empty"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSMutableArray arrayWithObject:[NSMutableArray arrayWithObject:elementCopy]] forKey:@"container_nested"];
         });
 
         itShouldBehaveLike(@"nil container");
@@ -218,9 +218,9 @@ describe(@"contain matcher", ^{
 
     describe(@"when the container is an NSSet", ^{
         beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSSet setWithObject:elementCopy] forKey:@"container"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSSet set] forKey:@"container_empty"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSSet setWithObject:[NSSet setWithObject:elementCopy]] forKey:@"container_nested"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSSet setWithObject:elementCopy] forKey:@"container"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSSet set] forKey:@"container_empty"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSSet setWithObject:[NSSet setWithObject:elementCopy]] forKey:@"container_nested"];
         });
 
         itShouldBehaveLike(@"nil container");
@@ -231,9 +231,9 @@ describe(@"contain matcher", ^{
 
     describe(@"when the container is an NSMutableSet", ^{
         beforeEach(^{
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet setWithObject:elementCopy] forKey:@"container"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet set] forKey:@"container_empty"];
-            [[SpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet setWithObject:[NSSet setWithObject:elementCopy]] forKey:@"container_nested"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet setWithObject:elementCopy] forKey:@"container"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet set] forKey:@"container_empty"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:[NSMutableSet setWithObject:[NSSet setWithObject:elementCopy]] forKey:@"container_nested"];
         });
 
         itShouldBehaveLike(@"nil container");

@@ -2,7 +2,7 @@
 #import "CDRFunctions.h"
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRSpec.h"
 #import "CDROTestNamer.h"
 
@@ -120,7 +120,7 @@
 #pragma mark - Private
 
 - (BOOL)isFocused {
-    return [SpecHelper specHelper].shouldOnlyRunFocused;
+    return [CDRSpecHelper specHelper].shouldOnlyRunFocused;
 }
 
 - (NSString *)rootSuiteName {

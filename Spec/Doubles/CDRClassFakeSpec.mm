@@ -1,4 +1,4 @@
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ObjectWithWeakDelegate.h"
@@ -78,7 +78,7 @@ describe(@"CDRClassFake", ^{
         beforeEach(^{
             fake = fake_for([SimpleIncrementer class]);
 
-            [[SpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");
@@ -99,7 +99,7 @@ describe(@"CDRClassFake", ^{
         beforeEach(^{
             niceFake = nice_fake_for([SimpleIncrementer class]);
 
-            [[SpecHelper specHelper].sharedExampleContext setObject:niceFake forKey:@"double"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:niceFake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");

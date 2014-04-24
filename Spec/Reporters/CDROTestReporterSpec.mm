@@ -2,9 +2,9 @@
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #else
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #endif
 
 #import "CDROTestReporter.h"
@@ -117,14 +117,14 @@ describe(@"CDROTestReporter", ^{
             __block BOOL originalState;
 
             beforeEach(^{
-                originalState = [SpecHelper specHelper].shouldOnlyRunFocused;
-                [SpecHelper specHelper].shouldOnlyRunFocused = YES;
+                originalState = [CDRSpecHelper specHelper].shouldOnlyRunFocused;
+                [CDRSpecHelper specHelper].shouldOnlyRunFocused = YES;
 
                 [dispatcher runWillStartWithGroups:@[focusedGroup] andRandomSeed:34];
             });
 
             afterEach(^{
-                [SpecHelper specHelper].shouldOnlyRunFocused = originalState;
+                [CDRSpecHelper specHelper].shouldOnlyRunFocused = originalState;
             });
 
             it(@"should report the random seed", ^{
@@ -161,8 +161,8 @@ describe(@"CDROTestReporter", ^{
         context(@"when focused", ^{
             __block BOOL originalState;
             beforeEach(^{
-                originalState = [SpecHelper specHelper].shouldOnlyRunFocused;
-                [SpecHelper specHelper].shouldOnlyRunFocused = YES;
+                originalState = [CDRSpecHelper specHelper].shouldOnlyRunFocused;
+                [CDRSpecHelper specHelper].shouldOnlyRunFocused = YES;
 
                 [dispatcher runWillStartWithGroups:@[focusedGroup] andRandomSeed:42];
                 reporter.reporter_output = [NSMutableString string];
@@ -170,7 +170,7 @@ describe(@"CDROTestReporter", ^{
             });
 
             afterEach(^{
-                [SpecHelper specHelper].shouldOnlyRunFocused = originalState;
+                [CDRSpecHelper specHelper].shouldOnlyRunFocused = originalState;
             });
 
             it(@"should report the end of all the tests", ^{

@@ -2,7 +2,7 @@
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSymbolicator.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRSlowTestStatistics.h"
 
 @interface CDRDefaultReporter (private)
@@ -60,7 +60,7 @@
 }
 
 - (int)result {
-    if ([SpecHelper specHelper].shouldOnlyRunFocused || [failureMessages_ count]) {
+    if ([CDRSpecHelper specHelper].shouldOnlyRunFocused || [failureMessages_ count]) {
         return 1;
     } else {
         return 0;
