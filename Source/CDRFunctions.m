@@ -9,6 +9,8 @@
 #import "CDRReportDispatcher.h"
 #import "CDROTestNamer.h"
 
+static NSString * const CDRBuildVersionKey = @"CDRBuildVersionSHA";
+
 #pragma mark - Helpers
 
 BOOL CDRClassIsOfType(Class class, const char * const className) {
@@ -41,6 +43,31 @@ NSArray *CDRSelectClasses(BOOL (^classSelectionPredicate)(Class class)) {
         }
     }
     return selectedClasses;
+}
+
+NSString *CDRVersionString() {
+    NSString *releaseVersion = nil, *versionDetails = nil;
+
+#if COCOAPODS
+    releaseVersion = [NSString stringWithFormat:@"%d.%d.%d", COCOAPODS_VERSION_MAJOR_Cedar, COCOAPODS_VERSION_MINOR_Cedar, COCOAPODS_VERSION_PATCH_Cedar];
+    versionDetails = @"from CocoaPods";
+#endif
+
+    if (!releaseVersion) {
+        NSBundle *cedarFrameworkBundle = [NSBundle bundleForClass:[CDRSpec class]];
+        releaseVersion = [cedarFrameworkBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        versionDetails = [cedarFrameworkBundle objectForInfoDictionaryKey:CDRBuildVersionKey];
+    }
+
+    if (releaseVersion) {
+        NSString *versionString = [NSString stringWithFormat:@"Cedar Version: %@", releaseVersion];
+        if (versionDetails) {
+            versionString = [versionString stringByAppendingFormat:@" (%@)", versionDetails];
+        }
+        return versionString;
+    } else {
+        return @"unknown";
+    }
 }
 
 #pragma mark - Globals
@@ -103,7 +130,13 @@ NSArray *CDRReportersFromEnv(const char *defaultReporterClassName) {
 
     NSMutableArray *reporters = [NSMutableArray arrayWithCapacity:reporterClasses.count];
     for (Class reporterClass in reporterClasses) {
-        [reporters addObject:[[[reporterClass alloc] init] autorelease]];
+        id<CDRExampleReporter> reporter = nil;
+        if ([reporterClass instancesRespondToSelector:@selector(initWithCedarVersion:)]) {
+            reporter = [[[reporterClass alloc] initWithCedarVersion:CDRVersionString()] autorelease];
+        } else {
+            reporter = [[[reporterClass alloc] init] autorelease];
+        }
+        [reporters addObject:reporter];
     }
     return reporters;
 }

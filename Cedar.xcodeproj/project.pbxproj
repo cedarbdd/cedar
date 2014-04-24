@@ -14,6 +14,8 @@
 				AEEE225511DC2BD700029872 /* Build architecture-specific static libs */,
 				AEEE225A11DC2C0200029872 /* Build universal static lib */,
 				AEEE225E11DC2C5E00029872 /* Copy headers to framework */,
+				3444602A190CC3320076655A /* Copy Info.plist to framework */,
+				34446027190CAA930076655A /* Update version info */,
 			);
 			dependencies = (
 			);
@@ -1862,6 +1864,7 @@
 				AEEE1FB211DC271300029872 /* Resources */,
 				AEEE1FB311DC271300029872 /* Sources */,
 				AEEE1FB411DC271300029872 /* Frameworks */,
+				3468B7AA1909595200203B87 /* Update Version Info */,
 			);
 			buildRules = (
 			);
@@ -2025,6 +2028,48 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		34446027190CAA930076655A /* Update version info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update version info";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "key = \"CDRBuildVersionSHA\"\nver = `git rev-parse HEAD`.strip\nputs \"Git commit SHA is #{ver}\"\npath = \"#{ENV['BUILD_DIR']}/#{ENV['CONFIGURATION']}-iphoneuniversal/#{ENV['PRODUCT_NAME']}.framework/Resources/Info.plist\"\n`/usr/libexec/PlistBuddy -c \"Add :#{key} string #{ver}\" \"#{path}\"`";
+		};
+		3444602A190CC3320076655A /* Copy Info.plist to framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Info.plist to framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"${SRCROOT}/Cedar-Info.plist\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Resources/Info.plist\"";
+		};
+		3468B7AA1909595200203B87 /* Update Version Info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version Info";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "key = \"CDRBuildVersionSHA\"\nver = `git rev-parse HEAD`.strip\nputs \"Git commit SHA is #{ver}\"\npath = \"#{ENV['BUILT_PRODUCTS_DIR']}/#{ENV['INFOPLIST_PATH']}\"\nputs \"Updating #{path}\"\n`/usr/libexec/PlistBuddy -c \"Add :#{key} string #{ver}\" \"#{path}\"`";
+		};
 		96158A84144A915E005895CE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

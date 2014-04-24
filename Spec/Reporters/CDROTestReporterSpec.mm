@@ -57,6 +57,7 @@ describe(@"CDROTestReporter", ^{
     __block CDRExample *passingExample, *failingExample, *focusedExample;
     __block NSString *bundleName;
     __block CDRReportDispatcher *dispatcher;
+    NSString *cedarVersionString = @"0.1.2 (a71e8f)";
 
     beforeEach(^{
         bundleName = [NSBundle mainBundle].bundleURL.pathComponents.lastObject;
@@ -68,7 +69,7 @@ describe(@"CDROTestReporter", ^{
             bundleName = @"Cedar.framework";
         }
 
-        reporter = [[[CDROTestReporter alloc] init] autorelease];
+        reporter = [[[CDROTestReporter alloc] initWithCedarVersion:cedarVersionString] autorelease];
         reporter.reporter_output = [NSMutableString string];
         dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:@[reporter]] autorelease];
 
@@ -100,6 +101,10 @@ describe(@"CDROTestReporter", ^{
                 [dispatcher runWillStartWithGroups:@[group1] andRandomSeed:1337];
             });
 
+            it(@"should report the Cedar version", ^{
+                reporter.reporter_output should contain([NSString stringWithFormat:@"Cedar Version: %@", cedarVersionString]);
+            });
+
             it(@"should report the random seed", ^{
                 reporter.reporter_output should contain(@"Cedar Random Seed: 1337");
             });
@@ -125,6 +130,10 @@ describe(@"CDROTestReporter", ^{
 
             afterEach(^{
                 [SpecHelper specHelper].shouldOnlyRunFocused = originalState;
+            });
+
+            it(@"should report the Cedar version", ^{
+                reporter.reporter_output should contain([NSString stringWithFormat:@"Cedar Version: %@", cedarVersionString]);
             });
 
             it(@"should report the random seed", ^{

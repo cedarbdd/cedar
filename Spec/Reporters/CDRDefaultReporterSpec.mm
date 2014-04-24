@@ -16,43 +16,51 @@ using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
 @interface TestCDRDefaultReporter : CDRDefaultReporter
+@property (nonatomic, retain) NSMutableString *reporter_output;
 @end
 
 @implementation TestCDRDefaultReporter
-- (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed {
-    FILE *realStdout = stdout;
-    stdout = fopen("/dev/null", "w");
 
-    @try {
-        [super runWillStartWithGroups:groups andRandomSeed:seed];
+- (instancetype)initWithCedarVersion:(NSString *)cedarVersionString {
+    if (self = [super initWithCedarVersion:cedarVersionString]) {
+        self.reporter_output = [NSMutableString string];
     }
-    @finally {
-        fclose(stdout);
-        stdout = realStdout;
-    }
+    return self;
 }
 
-- (void)runDidComplete {
-    FILE *realStdout = stdout;
-    stdout = fopen("/dev/null", "w");
-
-    @try {
-        [super runDidComplete];
-    }
-    @finally {
-        fclose(stdout);
-        stdout = realStdout;
-    }
+- (void)dealloc {
+    self.reporter_output = nil;
+    [super dealloc];
 }
+
+- (void)logText:(NSString *)linePartial {
+    [self.reporter_output appendString:linePartial];
+}
+
 @end
 
 SPEC_BEGIN(CDRDefaultReporterSpec)
 
 describe(@"CDRDefaultReporter", ^{
     __block TestCDRDefaultReporter *reporter;
+    NSString *cedarVersionString = @"0.1.2 (a71e8f)";
 
     beforeEach(^{
-        reporter = [[[TestCDRDefaultReporter alloc] init] autorelease];
+        reporter = [[[TestCDRDefaultReporter alloc] initWithCedarVersion:cedarVersionString] autorelease];
+    });
+
+    describe(@"starting the test run", ^{
+        beforeEach(^{
+            [reporter runWillStartWithGroups:@[] andRandomSeed:1234];
+        });
+
+        it(@"should report the Cedar version", ^{
+            reporter.reporter_output should contain([NSString stringWithFormat:@"Cedar Version: %@", cedarVersionString]);
+        });
+
+        it(@"should report the random seed", ^{
+            reporter.reporter_output should contain(@"Running With Random Seed: 1234");
+        });
     });
 
     context(@"when adding one group", ^{

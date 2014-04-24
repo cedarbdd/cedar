@@ -3,6 +3,8 @@
 @class CDRExample;
 
 @interface CDRDefaultReporter : NSObject <CDRExampleReporter> {
+    NSString *cedarVersionString_;
+
     NSArray *rootGroups_;
 
     NSMutableArray *pendingMessages_;
@@ -13,6 +15,9 @@
     NSDate *endTime_;
     unsigned int exampleCount_;
 }
+
+- (instancetype)initWithCedarVersion:(NSString *)cedarVersionString;
+
 @end
 
 @interface CDRDefaultReporter (Protected)
