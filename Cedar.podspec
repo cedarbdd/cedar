@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '5.0'
   s.source_files = 'Source/**/*.{h,m,mm}'
   s.osx.exclude_files = '**/iPhone/**'
-  s.ios.header_dir = 'Cedar-iOS'
 
   # Versions of this pod >= 0.9.0 require C++11.
   #   https://github.com/pivotal/cedar/issues/47
