@@ -4,7 +4,7 @@
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
 
-extern CDRSpec *currentSpec;
+extern CDRSpec *CDR_currentSpec;
 
 @interface CDRSpecHelper (CDRSharedExampleGroupPoolFriend)
 @property (nonatomic, retain, readonly) NSMutableDictionary *sharedExampleGroups;
@@ -21,12 +21,12 @@ void itShouldBehaveLike(NSString *groupName) {
         [[NSException exceptionWithName:NSInternalInconsistencyException reason:message userInfo:nil] raise];
     }
 
-    CDRExampleGroup *parentGroup = currentSpec.currentGroup;
-    currentSpec.currentGroup = [CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]];
-    [parentGroup add:currentSpec.currentGroup];
+    CDRExampleGroup *parentGroup = CDR_currentSpec.currentGroup;
+    CDR_currentSpec.currentGroup = [CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]];
+    [parentGroup add:CDR_currentSpec.currentGroup];
 
     sharedExampleGroupBlock([CDRSpecHelper specHelper].sharedExampleContext);
-    currentSpec.currentGroup = parentGroup;
+    CDR_currentSpec.currentGroup = parentGroup;
 }
 
 @implementation CDRSharedExampleGroupPool
