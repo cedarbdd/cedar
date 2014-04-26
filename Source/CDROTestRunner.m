@@ -39,7 +39,7 @@ void CDRRunTests(id self, SEL _cmd, id object) {
 }
 
 - (void)runSpecs {
-    int exitStatus = runSpecs();
+    int exitStatus = CDRRunSpecs();
     [self recordExitStatus:exitStatus];
 }
 

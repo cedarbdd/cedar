@@ -259,7 +259,7 @@ unsigned int CDRGetRandomSeed() {
 void __attribute__((weak)) __gcov_flush(void) {
 }
 
-int runSpecsWithCustomExampleReporters(NSArray *reporters) {
+int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters) {
     @autoreleasepool {
         CDRDefineSharedExampleGroups();
         CDRDefineGlobalBeforeAndAfterEachBlocks();
@@ -290,7 +290,7 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
     }
 }
 
-int runSpecs() {
+int CDRRunSpecs() {
     BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
     const char *defaultReporterClassName = isTestBundle ? "CDROTestReporter,CDRBufferedDefaultReporter" : "CDRDefaultReporter";
 
@@ -299,11 +299,21 @@ int runSpecs() {
         if (![reporters count]) {
             return -999;
         } else {
-            return runSpecsWithCustomExampleReporters(reporters);
+            return CDRRunSpecsWithCustomExampleReporters(reporters);
         }
     }
 }
 
+#pragma mark - Deprecated
+
+int runSpecs() {
+    return CDRRunSpecs();
+}
+
 int runAllSpecs() {
-    return runSpecs();
+    return CDRRunSpecs();
+}
+
+int runSpecsWithCustomExampleReporters(NSArray *reporters) {
+    return CDRRunSpecsWithCustomExampleReporters(reporters);
 }
