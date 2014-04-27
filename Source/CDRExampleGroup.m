@@ -101,6 +101,12 @@
 
 
 - (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher {
+    if (startDate_) {
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempt to run example group twice: %@", [self fullText]]
+                               userInfo:nil] raise];
+    }
+
     [dispatcher runWillStartExampleGroup:self];
     [startDate_ release];
     startDate_ = [[NSDate alloc] init];

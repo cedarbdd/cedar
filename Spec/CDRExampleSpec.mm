@@ -185,6 +185,12 @@ describe(@"CDRExample", ^{
         it(@"should have its start date less than its end date", ^{
             [example.endDate timeIntervalSinceDate:example.startDate] should be_greater_than(0);
         });
+
+        describe(@"running it a second time", ^{
+            it(@"should fail", ^{
+                ^{ [example runWithDispatcher:dispatcher]; } should raise_exception.with_reason([NSString stringWithFormat:@"Attempt to run example twice: %@", [example fullText]]);
+            });
+        });
     });
 
     describe(@"hasChildren", ^{

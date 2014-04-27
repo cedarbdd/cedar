@@ -56,6 +56,12 @@ const CDRSpecBlock PENDING = nil;
 }
 
 - (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher {
+    if (self.state != CDRExampleStateIncomplete) {
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempt to run example twice: %@", [self fullText]]
+                               userInfo:nil] raise];
+    }
+
     [startDate_ release];
     startDate_ = [[NSDate alloc] init];
     [dispatcher runWillStartExample:self];

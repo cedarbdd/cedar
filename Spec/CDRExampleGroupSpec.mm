@@ -57,6 +57,12 @@ describe(@"CDRExampleGroup", ^{
         it(@"should tell the reporter when the group has finished", ^{
             dispatcher should have_received(@selector(runDidFinishExampleGroup:)).with(group);
         });
+
+        describe(@"running it a second time", ^{
+            it(@"should fail", ^{
+                ^{ [group runWithDispatcher:dispatcher]; } should raise_exception.with_reason([NSString stringWithFormat:@"Attempt to run example group twice: %@", [group fullText]]);
+            });
+        });
     });
 
     describe(@"hasChildren", ^{
