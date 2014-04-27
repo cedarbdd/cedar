@@ -118,6 +118,10 @@
     [endDate_ release];
     endDate_ = [[NSDate alloc] init];
     [dispatcher runDidFinishExampleGroup:self];
+
+    [beforeBlocks_ release]; beforeBlocks_ = nil;
+    [afterBlocks_ release]; afterBlocks_ = nil;
+    self.subjectActionBlock = nil;
 }
 
 - (BOOL)hasFocusedExamples {

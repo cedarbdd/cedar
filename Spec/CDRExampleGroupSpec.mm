@@ -14,6 +14,7 @@
 #import "SimpleKeyValueObserver.h"
 #import "FibonacciCalculator.h"
 #import "CDRReportDispatcher.h"
+#import <objc/runtime.h>
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -61,6 +62,38 @@ describe(@"CDRExampleGroup", ^{
         describe(@"running it a second time", ^{
             it(@"should fail", ^{
                 ^{ [group runWithDispatcher:dispatcher]; } should raise_exception.with_reason([NSString stringWithFormat:@"Attempt to run example group twice: %@", [group fullText]]);
+            });
+        });
+
+        describe(@"releasing objects captured in spec blocks", ^{
+            __block __weak id weakCapturedObject;
+
+            beforeEach(^{
+                group = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+
+                NSString *capturedObject = [@"abc" mutableCopy];
+                objc_storeWeak(&weakCapturedObject, capturedObject);
+
+                [group addBefore:^{
+                    [capturedObject length];
+                }];
+                [group addAfter:^{
+                    [capturedObject length];
+                }];
+                group.subjectActionBlock = ^{
+                    [capturedObject length];
+                };
+
+                [capturedObject release]; capturedObject = nil;
+                @autoreleasepool {
+                    objc_loadWeak(&weakCapturedObject) should_not be_nil;
+                }
+
+                [group runWithDispatcher:dispatcher];
+            });
+
+            it(@"should allow captured objects to be deallocated once it has finished running", ^{
+                objc_loadWeak(&weakCapturedObject) should be_nil;
             });
         });
     });
