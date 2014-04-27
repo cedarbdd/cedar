@@ -470,25 +470,6 @@ describe(@"CDRExampleGroup", ^{
                     mockObserver should have_received("observeValueForKeyPath:ofObject:change:context:");
                 });
             });
-
-            describe(@"when a child example changes state, but the group state does not change", ^{
-                beforeEach(^{
-                    [group add:failingExample];
-                    [failingExample runWithDispatcher:dispatcher];
-
-                    [group add:passingExample];
-                    CDRExampleState state = group.state;
-                    expect(state).to(equal(CDRExampleStateFailed));
-
-                    mockObserver stub_method("observeValueForKeyPath:ofObject:change:context:").and_raise_exception();
-                });
-
-                it(@"should not report that the state has changed", ^{
-                    [group runWithDispatcher:dispatcher];
-                    CDRExampleState state = group.state;
-                    expect(state).to(equal(CDRExampleStateFailed));
-                });
-            });
         });
     });
 
