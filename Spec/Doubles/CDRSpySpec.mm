@@ -6,6 +6,7 @@
 #import "SimpleKeyValueObserver.h"
 #import "ArgumentReleaser.h"
 #import "ObjectWithValueEquality.h"
+#import "DeallocNotifier.h"
 #import <objc/runtime.h>
 
 extern "C" {
@@ -378,6 +379,17 @@ describe(@"spy_on", ^{
 
             itShouldPlayNiceWithKVO();
         });
+    });
+
+    it(@"should allow spied upon objects to deallocate normally", ^{
+        __block BOOL wasCalled = NO;
+        DeallocNotifier *notifier = [[DeallocNotifier alloc] initWithNotificationBlock:^{
+            wasCalled = YES;
+        }];
+        spy_on(notifier);
+        [notifier release];
+
+        wasCalled should be_truthy;
     });
 });
 
