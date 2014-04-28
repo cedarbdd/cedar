@@ -62,7 +62,7 @@
 			<string>Rakefile</string>
 		</dict>
 		<key>___PACKAGENAME___-Prefix.pch:objC:importCedar</key>
-		<string>#import &lt;Cedar-iOS/SpecHelper.h&gt;</string>
+		<string>#import &lt;Cedar-iOS/Cedar.h&gt;</string>
 		<key>Frameworks/Cedar-iOS.framework</key>
 		<dict>
 			<key>Path</key>
