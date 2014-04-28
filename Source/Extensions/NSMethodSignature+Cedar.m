@@ -31,7 +31,7 @@ static const char *Block_signature(id blockObj) {
 - (NSMethodSignature *)signatureWithoutSelectorArgument {
     NSAssert([self numberOfArguments]>1 && strcmp([self getArgumentTypeAtIndex:1], ":")==0, @"Unable to remove _cmd from a method signature without a _cmd argument");
 
-    NSMutableString *modifiedTypesString = [[NSMutableString alloc] initWithUTF8String:[self methodReturnType]];
+    NSMutableString *modifiedTypesString = [[[NSMutableString alloc] initWithUTF8String:[self methodReturnType]] autorelease];
     for (NSInteger argIndex=0; argIndex<[self numberOfArguments]; argIndex++) {
         if (argIndex==1) { continue; }
         [modifiedTypesString appendFormat:@"%s", [self getArgumentTypeAtIndex:argIndex]];
