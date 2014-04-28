@@ -1,10 +1,18 @@
 #import "CDRSpyInfo.h"
+#import "CDRSpy.h"
 #import "CedarDoubleImpl.h"
 #import <objc/runtime.h>
 
 static NSMutableSet *currentSpies__;
 
-@implementation CDRSpyInfo
+@interface CDRSpyInfo ()
+@property (nonatomic, assign) id originalObject;
+@property (nonatomic, weak) id weakOriginalObject;
+@end
+
+@implementation CDRSpyInfo {
+    __weak id _weakOriginalObject;
+}
 
 + (void)initialize {
     currentSpies__ = [[NSMutableSet alloc] init];
@@ -13,9 +21,11 @@ static NSMutableSet *currentSpies__;
 + (void)storeSpyInfoForObject:(id)object {
     CDRSpyInfo *spyInfo = [[[CDRSpyInfo alloc] init] autorelease];
     spyInfo.originalObject = object;
+    spyInfo.weakOriginalObject = object;
     spyInfo.publicClass = [object class];
     spyInfo.spiedClass = object_getClass(object);
     spyInfo.cedarDouble = [[[CedarDoubleImpl alloc] initWithDouble:object] autorelease];
+
     [currentSpies__ addObject:spyInfo];
 }
 
@@ -23,6 +33,7 @@ static NSMutableSet *currentSpies__;
     CDRSpyInfo *spyInfo = [CDRSpyInfo spyInfoForObject:object];
     if (spyInfo) {
         spyInfo.originalObject = nil;
+        spyInfo.weakOriginalObject = nil;
         [currentSpies__ removeObject:spyInfo];
         return YES;
     }
@@ -30,12 +41,10 @@ static NSMutableSet *currentSpies__;
 }
 
 - (void)dealloc {
-    if (self.originalObject) {
-        object_setClass(self.originalObject, self.spiedClass);
-    }
     self.publicClass = nil;
     self.spiedClass = nil;
     self.originalObject = nil;
+    self.weakOriginalObject = nil;
     self.cedarDouble = nil;
     [super dealloc];
 }
@@ -49,13 +58,12 @@ static NSMutableSet *currentSpies__;
 }
 
 + (CDRSpyInfo *)spyInfoForObject:(id)object {
-    return [currentSpies__ objectsPassingTest:^BOOL(CDRSpyInfo *spyInfo, BOOL *stop) {
+    for (CDRSpyInfo *spyInfo in currentSpies__) {
         if (spyInfo.originalObject == object) {
-            *stop = YES;
-            return YES;
+            return spyInfo;
         }
-        return NO;
-    }].anyObject;
+    }
+    return nil;
 }
 
 - (IMP)impForSelector:(SEL)selector {
@@ -82,7 +90,22 @@ static NSMutableSet *currentSpies__;
 }
 
 + (void)afterEach {
-    [currentSpies__ removeAllObjects];
+    for (CDRSpyInfo *spyInfo in [[currentSpies__ copy] autorelease]) {
+        id originalObject = spyInfo.weakOriginalObject;
+        if (originalObject) {
+            Cedar::Doubles::CDR_stop_spying_on(originalObject);
+        }
+    }
+}
+
+#pragma mark - Accessors
+
+- (id)weakOriginalObject {
+    return objc_loadWeak(&_weakOriginalObject);
+}
+
+- (void)setWeakOriginalObject:(id)originalObject {
+    objc_storeWeak(&_weakOriginalObject, originalObject);
 }
 
 @end
