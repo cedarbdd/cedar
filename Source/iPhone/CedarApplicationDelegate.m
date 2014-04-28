@@ -20,7 +20,7 @@ int runSpecsWithinUIApplication() {
         if (![reporters count]) {
             exitStatus = -999;
         } else {
-            exitStatus = runSpecsWithCustomExampleReporters(reporters);
+            exitStatus = CDRRunSpecsWithCustomExampleReporters(reporters);
         }
     }
 

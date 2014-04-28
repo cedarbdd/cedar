@@ -1,5 +1,5 @@
 #import "CDRExampleBase.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRReportDispatcher.h"
 
 @implementation CDRExampleBase
@@ -34,7 +34,7 @@
 }
 
 - (BOOL)shouldRun {
-    BOOL shouldOnlyRunFocused = [SpecHelper specHelper].shouldOnlyRunFocused;
+    BOOL shouldOnlyRunFocused = [CDRSpecHelper specHelper].shouldOnlyRunFocused;
     return !shouldOnlyRunFocused || (shouldOnlyRunFocused && (self.isFocused || parent_.shouldRun));
 }
 

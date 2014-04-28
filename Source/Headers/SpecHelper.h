@@ -1,19 +1,4 @@
-#import "CDRSpec.h"
-#import "CDRHooks.h"
-#import "CDRSharedExampleGroupPool.h"
-#import "CDRExampleParent.h"
+#import "CDRSpecHelper.h"
 
-@interface SpecHelper : NSObject <CDRExampleParent> {
-    NSMutableDictionary *sharedExampleContext_, *sharedExampleGroups_;
-    NSArray *globalBeforeEachClasses_, *globalAfterEachClasses_;
-    BOOL shouldOnlyRunFocused_;
-}
-
-@property (nonatomic, retain, readonly) NSMutableDictionary *sharedExampleContext;
-@property (nonatomic, retain) NSArray *globalBeforeEachClasses, *globalAfterEachClasses;
-
-@property (nonatomic, assign) BOOL shouldOnlyRunFocused;
-
-+ (SpecHelper *)specHelper;
-
-@end
+#warning SpecHelper is deprecated. Please use CDRSpecHelper instead.
+@compatibility_alias SpecHelper CDRSpecHelper;

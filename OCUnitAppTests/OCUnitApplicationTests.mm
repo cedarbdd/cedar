@@ -1,4 +1,4 @@
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "OCUnitAppAppDelegate.h" // should NOT be included in OCUnitAppTests target
 
 using namespace Cedar::Matchers;

@@ -1,4 +1,4 @@
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ArgumentReleaser.h"
@@ -27,7 +27,7 @@ describe(@"spy_on", ^{
         incrementer = [[[SimpleIncrementer alloc] init] autorelease];
         spy_on(incrementer);
 
-        [[SpecHelper specHelper].sharedExampleContext setObject:incrementer forKey:@"double"];
+        [[CDRSpecHelper specHelper].sharedExampleContext setObject:incrementer forKey:@"double"];
     });
 
     describe(@"method stubbing", ^{

@@ -2,19 +2,19 @@
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecFailure.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRSymbolicator.h"
 
-CDRSpec *currentSpec;
+CDRSpec *CDR_currentSpec;
 
 static void(^placeholderPendingTestBlock)() = ^{ it(@"is pending", PENDING); };
 
 void beforeEach(CDRSpecBlock block) {
-    [currentSpec.currentGroup addBefore:block];
+    [CDR_currentSpec.currentGroup addBefore:block];
 }
 
 void afterEach(CDRSpecBlock block) {
-    [currentSpec.currentGroup addAfter:block];
+    [CDR_currentSpec.currentGroup addAfter:block];
 }
 
 #define with_stack_address(b) \
@@ -23,16 +23,16 @@ void afterEach(CDRSpecBlock block) {
 CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
     CDRExampleGroup *group = nil;
     if (block) {
-        CDRExampleGroup *parentGroup = currentSpec.currentGroup;
+        CDRExampleGroup *parentGroup = CDR_currentSpec.currentGroup;
         group = [CDRExampleGroup groupWithText:text];
         [parentGroup add:group];
-        currentSpec.currentGroup = group;
+        CDR_currentSpec.currentGroup = group;
         block();
         if ([group.examples count] == 0) {
             block = placeholderPendingTestBlock;
             block();
         }
-        currentSpec.currentGroup = parentGroup;
+        CDR_currentSpec.currentGroup = parentGroup;
     } else {
         group = describe(text, placeholderPendingTestBlock);
     }
@@ -42,12 +42,12 @@ CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
 CDRExampleGroup* (*context)(NSString *, CDRSpecBlock) = &describe;
 
 void subjectAction(CDRSpecBlock block) {
-    currentSpec.currentGroup.subjectActionBlock = block;
+    CDR_currentSpec.currentGroup.subjectActionBlock = block;
 }
 
 CDRExample * it(NSString *text, CDRSpecBlock block) {
     CDRExample *example = [CDRExample exampleWithText:text andBlock:block];
-    [currentSpec.currentGroup add:example];
+    [CDR_currentSpec.currentGroup add:example];
     return with_stack_address(example);
 }
 
@@ -98,7 +98,7 @@ void fail(NSString *reason) {
 - (id)init {
     if (self = [super init]) {
         self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
-        self.rootGroup.parent = [SpecHelper specHelper];
+        self.rootGroup.parent = [CDRSpecHelper specHelper];
         self.currentGroup = self.rootGroup;
         self.symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
     }
@@ -114,9 +114,9 @@ void fail(NSString *reason) {
 }
 
 - (void)defineBehaviors {
-    currentSpec = self;
+    CDR_currentSpec = self;
     [self declareBehaviors];
-    currentSpec = nil;
+    CDR_currentSpec = nil;
     [self markSpecClassForExampleBase:self.rootGroup];
 }
 
