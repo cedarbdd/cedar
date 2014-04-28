@@ -291,12 +291,16 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
 }
 
 int runSpecs() {
+    BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
+    const char *defaultReporterClassName = isTestBundle ? "CDROTestReporter,CDRBufferedDefaultReporter" : "CDRDefaultReporter";
+
     @autoreleasepool {
-        NSArray *reporters = CDRReportersFromEnv("CDRDefaultReporter");
+        NSArray *reporters = CDRReportersFromEnv(defaultReporterClassName);
         if (![reporters count]) {
-            @throw @"No reporters?  WTF?";
+            return -999;
+        } else {
+            return runSpecsWithCustomExampleReporters(reporters);
         }
-        return runSpecsWithCustomExampleReporters(reporters);
     }
 }
 

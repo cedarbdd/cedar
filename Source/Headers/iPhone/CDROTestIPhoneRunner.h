@@ -1,4 +1,6 @@
 #import <Foundation/Foundation.h>
+#import "CDROTestRunner.h"
 
-@interface CDROTestIPhoneRunner : NSObject
+@interface CDROTestIPhoneRunner : CDROTestRunner
+- (void)runSpecsAndExit;
 @end
