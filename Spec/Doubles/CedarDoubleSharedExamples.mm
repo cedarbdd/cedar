@@ -378,9 +378,9 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             });
 
             context(@"with a block that does not match the method's return type", ^{
-                void (^invalidBlock)(void) = ^{};
+                void (^invalidBlock)(NSString *) = ^(NSString *){};
                 it(@"should raise an exception", ^{
-                    ^{ myDouble stub_method("value").and_do_block(invalidBlock); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return type '%s' instead of '%s' for <value>", @encode(void), @encode(size_t)]);
+                    ^{ myDouble stub_method("methodWithString:").and_do_block(invalidBlock); } should raise_exception.with_reason(@"Invalid return type 'void' instead of 'id' for <methodWithString:>");
                 });
             });
 
@@ -394,7 +394,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             context(@"with a block that has a different argument type than the method", ^{
                 void (^invalidBlock)(float) = ^(float){};
                 it(@"should raise an exception", ^{
-                    ^{ myDouble stub_method("incrementBy:").and_do_block(invalidBlock); } should raise_exception.with_reason([NSString stringWithFormat:@"Found argument type '%s', expected '%s'; argument #1 for <incrementBy:>", @encode(float), @encode(size_t)]);
+                    ^{ myDouble stub_method("incrementByNumber:").and_do_block(invalidBlock); } should raise_exception.with_reason(@"Found argument type 'float', expected 'id'; argument #1 for <incrementByNumber:>");
                 });
             });
         });
@@ -651,7 +651,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     });
 
                     context(@"of incorrect types", ^{
-                        NSString *reason = @"Attempt to compare expected argument <10> with actual argument type @; argument #2 for <methodWithNumber1:andNumber2:>";
+                        NSString *reason = @"Attempt to compare expected argument <10> of type 'int' with actual argument type 'id'; argument #2 for <methodWithNumber1:andNumber2:>";
                         it(@"should raise an exception", ^{
                             int invalidInt = 10;
                             ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, invalidInt); } should raise_exception.with_reason(reason);
@@ -662,7 +662,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
             context(@"when specified with .with().and_with()", ^{
                 context(@"with too few", ^{
-                    size_t expectedIncrementValue = 1;
+                    unsigned int expectedIncrementValue = 1;
                     NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <incrementByABit:andABitMore:>; expected: 1, actual: 2"];
 
                     it(@"should raise an exception", ^{
@@ -681,7 +681,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 context(@"with the correct number", ^{
                     NSNumber *expectedBitMoreValue = @10;
                     context(@"of the correct types", ^{
-                        size_t expectedIncrementValue = 1;
+                        unsigned int expectedIncrementValue = 1;
 
                         beforeEach(^{
                             myDouble stub_method("incrementByABit:andABitMore:").with(expectedIncrementValue).and_with(expectedBitMoreValue);
@@ -698,14 +698,14 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         context(@"where the incorrect type is an object", ^{
                             it(@"should raise an exception", ^{
                                 NSString *incorrectType = @"your mom";
-                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", @"your mom", @encode(size_t)];
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%@> of type 'id' with actual argument type 'unsigned int'; argument #1 for <incrementByABit:andABitMore:>", incorrectType];
                                 ^{ myDouble stub_method("incrementByABit:andABitMore:").with(incorrectType).and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
                             });
                         });
 
                         context(@"where the incorrect type is a char *", ^{
                             it(@"should raise an exception", ^{
-                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <cstring(%s)> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", "your mom", @encode(size_t)];
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <cstring(%s)> of type 'char *' with actual argument type 'unsigned int'; argument #1 for <incrementByABit:andABitMore:>", "your mom"];
                                 ^{ myDouble stub_method("incrementByABit:andABitMore:").with((char *)"your mom").and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
                             });
                         });
@@ -714,7 +714,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                             it(@"should raise an exception", ^{
                                 int anInt = 1;
                                 int *ptr = &anInt;
-                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%p> with actual argument type %s; argument #1 for <incrementByABit:andABitMore:>", ptr, @encode(size_t)];
+                                NSString *reason = [NSString stringWithFormat:@"Attempt to compare expected argument <%p> of type 'int *' with actual argument type 'unsigned int'; argument #1 for <incrementByABit:andABitMore:>", ptr];
                                 ^{ myDouble stub_method("incrementByABit:andABitMore:").with(ptr).and_with(expectedBitMoreValue); } should raise_exception.with_reason(reason);
                             });
                         });
@@ -849,7 +849,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                 unsigned int invalidReturnValue = 3;
 
                 it(@"should raise an exception", ^{
-                    ^{ myDouble stub_method("value").and_return(invalidReturnValue); } should raise_exception.with_reason([NSString stringWithFormat:@"Invalid return value type '%s' instead of '%s' for <value>", @encode(unsigned int), @encode(size_t)]);
+                    ^{ myDouble stub_method("methodWithString:").and_return(invalidReturnValue); } should raise_exception.with_reason(@"Invalid return value type 'unsigned int' instead of 'id' for <methodWithString:>");
                 });
             });
         });
