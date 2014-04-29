@@ -326,7 +326,7 @@ end
 desc "Install the CedarPlugin into Xcode (restart required)"
 task :install_plugin do
   puts "\nInstalling the CedarPlugin...\n"
-  system_or_exit %{cp -rv "#{PLUGIN_DIR}" "#{XCODE_PLUGINS_DIR}"}
+  system_or_exit %{mkdir -p "#{XCODE_PLUGINS_DIR}" && cp -rv "#{PLUGIN_DIR}" "#{XCODE_PLUGINS_DIR}"}
 end
 
 desc "Build the frameworks and upgrade the target"
