@@ -167,5 +167,7 @@
 	</array>
 	<key>Description</key>
 	<string>Creates an iOS application which runs Cedar specs.</string>
+	<key>isCedarTemplate</key>
+	<true/>
 </dict>
 </plist>

@@ -60,5 +60,7 @@
 &lt;string&gt;????&lt;/string&gt;
 </string>
 	</dict>
+	<key>isCedarTemplate</key>
+	<true/>
 </dict>
 </plist>

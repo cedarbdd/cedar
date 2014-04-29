@@ -89,5 +89,7 @@
 		<string>#import &lt;Foundation/Foundation.h&gt;
 </string>
 	</dict>
+	<key>isCedarTemplate</key>
+	<true/>
 </dict>
 </plist>

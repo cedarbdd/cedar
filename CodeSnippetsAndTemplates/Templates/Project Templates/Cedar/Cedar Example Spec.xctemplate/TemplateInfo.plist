@@ -24,5 +24,7 @@
 			<string>ExampleSpec.mm</string>
 		</dict>
 	</dict>
+	<key>isCedarTemplate</key>
+	<true/>
 </dict>
 </plist>

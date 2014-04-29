@@ -90,5 +90,7 @@
 		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
 		<string>Frameworks/Cedar.framework</string>
 	</array>
+	<key>isCedarTemplate</key>
+	<true/>
 </dict>
 </plist>
