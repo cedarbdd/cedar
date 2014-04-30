@@ -166,9 +166,9 @@ describe(@"spy_on", ^{
         __block ObjectWithValueEquality *ordinaryObject, *spiedObject, *anotherSpiedObject;
 
         beforeEach(^{
-            ordinaryObject = [[ObjectWithValueEquality alloc] initWithInteger:42];
-            spiedObject = [[ObjectWithValueEquality alloc] initWithInteger:42];
-            anotherSpiedObject = [[ObjectWithValueEquality alloc] initWithInteger:42];
+            ordinaryObject = [[[ObjectWithValueEquality alloc] initWithInteger:42] autorelease];
+            spiedObject = [[[ObjectWithValueEquality alloc] initWithInteger:42] autorelease];
+            anotherSpiedObject = [[[ObjectWithValueEquality alloc] initWithInteger:42] autorelease];
             spy_on(spiedObject);
             spy_on(anotherSpiedObject);
         });
