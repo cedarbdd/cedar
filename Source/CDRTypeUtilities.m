@@ -70,7 +70,7 @@ static NSCharacterSet *typeEncodingModifiersCharacterSet;
     }
 
     if (typeName) {
-        NSMutableString *fullTypeName = [typeName mutableCopy];
+        NSMutableString *fullTypeName = [[typeName mutableCopy] autorelease];
 
         if (modifiers) {
             [fullTypeName insertString:[modifiers stringByAppendingString:@" "] atIndex:0];
