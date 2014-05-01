@@ -21,10 +21,10 @@ describe(@"UIKit contain matcher", ^{
         __block UIView *orphanView;
 
         beforeEach(^{
-            parentView = [[UIView alloc] init];
-            childView = [[UIView alloc] init];
-            grandchildView = [[UIView alloc] init];
-            orphanView = [[UIView alloc] init];
+            parentView = [[[UIView alloc] init] autorelease];
+            childView = [[[UIView alloc] init] autorelease];
+            grandchildView = [[[UIView alloc] init] autorelease];
+            orphanView = [[[UIView alloc] init] autorelease];
 
             [parentView addSubview:childView];
             [childView addSubview:grandchildView];
@@ -80,10 +80,10 @@ describe(@"UIKit contain matcher", ^{
         __block CALayer *orphanLayer;
 
         beforeEach(^{
-            parentLayer = [[CALayer alloc] init];
-            childLayer = [[CALayer alloc] init];
-            grandchildLayer = [[CALayer alloc] init];
-            orphanLayer = [[CALayer alloc] init];
+            parentLayer = [[[CALayer alloc] init] autorelease];
+            childLayer = [[[CALayer alloc] init] autorelease];
+            grandchildLayer = [[[CALayer alloc] init] autorelease];
+            orphanLayer = [[[CALayer alloc] init] autorelease];
 
             [parentLayer addSublayer:childLayer];
             [childLayer addSublayer:grandchildLayer];
