@@ -68,18 +68,11 @@ void CDRRunTests(id self, SEL _cmd, id ignored) {
 - (void)runAllTestsWithTestProbe:(id)testProbe {
     [self runStandardTestsWithTestProbe:testProbe];
 
-    if ([UIApplication sharedApplication]) {
-        BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
-        BOOL isCedarDelegate = [[[UIApplication sharedApplication] delegate] isKindOfClass:[CedarApplicationDelegate class]];
+    BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
+    BOOL isCedarDelegate = [[[UIApplication sharedApplication] delegate] isKindOfClass:[CedarApplicationDelegate class]];
 
-        if (!isCedarApp && !isCedarDelegate) {
-            [self runSpecsAndExit];
-        }
-    } else {
-        @autoreleasepool {
-            const char* argv[] = { "executable", "-RegisterForSystemEvents" };
-            UIApplicationMain(2, (char **)argv, @"CedarApplication", nil);
-        }
+    if (!isCedarApp && !isCedarDelegate) {
+        [self runSpecsAndExit];
     }
 }
 
