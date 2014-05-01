@@ -2,11 +2,15 @@
 #import <objc/runtime.h>
 
 void CDRSimulatorWorkaround_CreateFakePurpleWorkspacePort() {
-    if (CFMessagePortCreateRemote(NULL, (CFStringRef)@"PurpleWorkspacePort") == NULL) {
+    CFMessagePortRef remotePort = CFMessagePortCreateRemote(NULL, (CFStringRef)@"PurpleWorkspacePort");
+    if (remotePort == NULL) {
         NSLog(@"No workspace port detected, creating one and disabling -[UIWindow _createContext]...");
-        CFMessagePortCreateLocal(NULL, (CFStringRef)@"PurpleWorkspacePort", NULL, NULL, NULL);
+        static CFMessagePortRef localPort;
+        localPort = CFMessagePortCreateLocal(NULL, (CFStringRef)@"PurpleWorkspacePort", NULL, NULL, NULL);
         SEL _createContextSelector = NSSelectorFromString(@"_createContext");
         class_replaceMethod([UIWindow class], _createContextSelector, imp_implementationWithBlock(^{}), "v@:");
+    } else {
+        CFRelease(remotePort);
     }
 }
 
