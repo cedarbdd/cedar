@@ -15,7 +15,7 @@ void CDRRunTests(id self, SEL _cmd, id object) {
 }
 
 + (void)load {
-    CDRHijackOCUnitRun((IMP)CDRRunTests);
+    CDRHijackOCUnitAndXCTestRun((IMP)CDRRunTests);
 }
 #endif
 

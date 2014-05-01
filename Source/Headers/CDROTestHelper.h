@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+void CDRHijackOCUnitAndXCTestRun(IMP newImplementation);
+
 int CDRRunOCUnitTests(id testProbe);
 void CDRHijackOCUnitRun(IMP newImplementation);
 

@@ -8,6 +8,11 @@ id CDRPerformSelector(id obj, NSString *selectorString) {
     return [obj performSelector:selector];
 }
 
+void CDRHijackOCUnitAndXCTestRun(IMP newImplementation) {
+    CDRHijackOCUnitRun(newImplementation);
+    CDRHijackXCUnitRun(newImplementation);
+}
+
 // This is exact copy of SenTestProbe +runTests: (https://github.com/jy/SenTestingKit/blob/master/SenTestProbe.m)
 // except that it does not call exit() at the end.
 int CDRRunOCUnitTests(id testProbe) {
