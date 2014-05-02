@@ -74,6 +74,10 @@
 		228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */; };
 		22B6A22715B7ACF800960ADE /* InvocationMatcher.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		22FB7B4416ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FB7B4316ACBB3A00012D69 /* HeadlessSimulatorWorkaround.m */; };
+		3414776E191406E700CBA385 /* ComparatorsContainerConvenience.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFF375718FC452E002DA993 /* ComparatorsContainerConvenience.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3414776F191406FC00CBA385 /* ComparatorsContainerConvenience.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEFF375718FC452E002DA993 /* ComparatorsContainerConvenience.h */; };
+		34147770191408C900CBA385 /* AnInstanceOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 34D1E67A18F7A2E6005161AD /* AnInstanceOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		341477711914090000CBA385 /* AnInstanceOf.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34D1E67A18F7A2E6005161AD /* AnInstanceOf.h */; };
 		342F5D0B18F430DB00F38E35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 342F5D0A18F430DB00F38E35 /* QuartzCore.framework */; };
 		34681C2C18FE451E009D38AC /* CDRTypeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */; };
 		34681C2E18FE4884009D38AC /* CDRTypeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */; };
@@ -528,6 +532,8 @@
 			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Headers";
 			dstSubfolderSpec = 0;
 			files = (
+				341477711914090000CBA385 /* AnInstanceOf.h in Copy headers to framework */,
+				3414776F191406FC00CBA385 /* ComparatorsContainerConvenience.h in Copy headers to framework */,
 				34EBFD0F18FF505F005392AB /* UIKitComparatorsContainer.h in Copy headers to framework */,
 				1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */,
 				1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */,
@@ -1693,6 +1699,7 @@
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
 				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
 				9637852E1491D84F0059C9F6 /* CDROTestHelper.h in Headers */,
+				34147770191408C900CBA385 /* AnInstanceOf.h in Headers */,
 				AEB45A911496C8D800845D09 /* RaiseException.h in Headers */,
 				AEC9DEED12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
 				96EA1CAE142C6449001A78E0 /* CDROTestReporter.h in Headers */,
@@ -1701,6 +1708,7 @@
 				1F483E32187D39D000521F81 /* CDROTestNamer.h in Headers */,
 				492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */,
 				5898A1BAE1D014B764946811 /* ConformTo.h in Headers */,
+				3414776E191406E700CBA385 /* ComparatorsContainerConvenience.h in Headers */,
 				AE9AA6D415AE087D00617E1A /* StubbedMethod.h in Headers */,
 				AE9AA6DB15AE0B0400617E1A /* CedarDoubleImpl.h in Headers */,
 				AECF136115D1425C003AAB9C /* Argument.h in Headers */,
