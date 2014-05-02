@@ -345,6 +345,7 @@ task :upgrade, [:path_to_framework] do |task, args|
   path_to_framework = args.path_to_framework
   raise "*** Missing path to the framework to be upgraded. ***\n#{usage_string}" unless path_to_framework
 
+  path_to_framework = File.expand_path(path_to_framework)
   if File.directory?(path_to_framework)
     framework_folder = args.path_to_framework.split("/").last
     case framework_folder
