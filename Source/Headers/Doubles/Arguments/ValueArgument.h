@@ -27,6 +27,7 @@ namespace Cedar { namespace Doubles {
         bool both_are_not_cstrings(const char *) const;
         bool both_are_not_objects_pointers_nor_cstrings(const char *) const;
         bool nil_argument(const char *) const;
+        bool both_are_nil(void *) const;
 
     private:
         const T value_;
@@ -62,7 +63,12 @@ namespace Cedar { namespace Doubles {
 
     template<typename T>
     /* virtual */ bool ValueArgument<T>::matches_bytes(void * actual_argument_bytes) const {
-        return actual_argument_bytes ? Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(actual_argument_bytes))) : false;
+        if (actual_argument_bytes) {
+            return (Matchers::Comparators::compare_equal(value_, *(static_cast<T *>(actual_argument_bytes))) ||
+                    this->both_are_nil(actual_argument_bytes));
+        } else {
+            return false;
+        }
     }
 
     template<typename T>
@@ -100,6 +106,13 @@ namespace Cedar { namespace Doubles {
     bool ValueArgument<T>::nil_argument(const char * actual_argument_encoding) const {
         void *nil_pointer = 0;
         return 0 == strncmp(actual_argument_encoding, "@", 1) && this->matches_bytes(&nil_pointer);
+    }
+
+    template<typename T>
+    bool ValueArgument<T>::both_are_nil(void * actual_argument_bytes) const {
+        return (0 == strncmp(@encode(T), "@", 1) &&
+                [[NSValue value:&value_ withObjCType:@encode(T)] nonretainedObjectValue] == nil &&
+                [[NSValue value:actual_argument_bytes withObjCType:@encode(id)] nonretainedObjectValue] == nil);
     }
 
 #pragma mark - CharValueArgument

@@ -286,6 +286,54 @@ describe(@"have_received matcher", ^{
                     });
                 });
             });
+
+            context(@"with an incorrect expected parameter that is nil", ^{
+                context(@"that is typed as a number", ^{
+                    NSNumber *expectedParameter = nil;
+
+                    describe(@"positive match", ^{
+                        it(@"should fail with a sensible failure message", ^{
+                            expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                                expect(incrementer).to(have_received(method).with(expectedParameter));
+                            });
+
+                            expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                                expect(incrementer).to(have_received("incrementByNumber:").with(expectedParameter));
+                            });
+                        });
+                    });
+
+                    describe(@"negative match", ^{
+                        it(@"should pass", ^{
+                            expect(incrementer).to_not(have_received(method).with(expectedParameter));
+                            expect(incrementer).to_not(have_received("incrementByNumber:").with(expectedParameter));
+                        });
+                    });
+                });
+
+                context(@"that is typed as id", ^{
+                    id expectedParameter = nil;
+
+                    describe(@"positive match", ^{
+                        it(@"should fail with a sensible failure message", ^{
+                            expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                                expect(incrementer).to(have_received(method).with(expectedParameter));
+                            });
+
+                            expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%@>", incrementer, NSStringFromSelector(method), expectedParameter], ^{
+                                expect(incrementer).to(have_received("incrementByNumber:").with(expectedParameter));
+                            });
+                        });
+                    });
+
+                    describe(@"negative match", ^{
+                        it(@"should pass", ^{
+                            expect(incrementer).to_not(have_received(method).with(expectedParameter));
+                            expect(incrementer).to_not(have_received("incrementByNumber:").with(expectedParameter));
+                        });
+                    });
+                });
+            });
         });
 
         context(@"which has not been called", ^{

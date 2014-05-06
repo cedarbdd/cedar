@@ -9,7 +9,7 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         if (object && class_getInstanceMethod(klass, @selector(description)) == NULL) {
             return [NSString stringWithFormat:@"%@ %p", NSStringFromClass(klass), object];
         } else {
-            return [[valueId nonretainedObjectValue] description];
+            return [NSString stringWithFormat:@"%@", [[valueId nonretainedObjectValue] description]];
         }
     }
 }}}

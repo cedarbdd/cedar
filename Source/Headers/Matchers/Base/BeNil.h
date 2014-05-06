@@ -9,13 +9,13 @@ namespace Cedar { namespace Matchers {
         template<typename U>
         static NSString * string_for_actual_value(const U & value) {
             // ARC bug: http://lists.apple.com/archives/objc-language/2012/Feb/msg00078.html
-#if __has_feature(objc_arc)
-            if (strcmp(@encode(U), @encode(id)) == 0) {
+            // Also blocks aren't considered a pointer type under both ARC and MRC
+            if (strcmp(@encode(U), @encode(id)) == 0 || strcmp(@encode(U), @encode(void(^)(void))) == 0) {
                 void *ptrOfPtr = (void *)&value;
                 void *ptr = *(reinterpret_cast<void **>(ptrOfPtr));
                 return ptr ? [NSString stringWithFormat:@"%p", ptr] : @"nil";
             }
-#endif
+
             throw std::logic_error("Should never generate a failure message for a nil comparison to non-pointer type.");
         }
 
@@ -52,13 +52,12 @@ namespace Cedar { namespace Matchers {
     template<typename U>
     bool BeNil::matches(const U & actualValue) const {
         // ARC bug: http://lists.apple.com/archives/objc-language/2012/Feb/msg00078.html
-#if __has_feature(objc_arc)
-        if (strcmp(@encode(U), @encode(id)) == 0) {
+        // Also blocks aren't considered a pointer type under both ARC and MRC
+        if (strcmp(@encode(U), @encode(id)) == 0 || strcmp(@encode(U), @encode(void(^)(void))) == 0) {
             void *ptrOfPtr = (void *)&actualValue;
             void *ptr = *(reinterpret_cast<void **>(ptrOfPtr));
             return !ptr;
         }
-#endif
 
         [[CDRSpecFailure specFailureWithReason:@"Attempt to compare non-pointer type to nil"] raise];
         return NO;

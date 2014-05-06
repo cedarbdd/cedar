@@ -760,6 +760,30 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     });
                 });
 
+                context(@"with id-typed nil", ^{
+                    __block BOOL stubbedBehaviorWasInvoked;
+                    beforeEach(^{
+                        stubbedBehaviorWasInvoked = NO;
+                        myDouble stub_method("incrementByNumber:").with((id)nil).and_do(^(NSInvocation *) {
+                            stubbedBehaviorWasInvoked = YES;
+                        });
+                    });
+
+                    context(@"when invoked with a nil argument", ^{
+                        beforeEach(^{
+                            [myDouble incrementByNumber:nil];
+                        });
+
+                        it(@"should record the invocation", ^{
+                            myDouble should have_received("incrementByNumber:").with((id)nil);
+                        });
+
+                        it(@"should invoke the stubbed behavior", ^{
+                            stubbedBehaviorWasInvoked should be_truthy;
+                        });
+                    });
+                });
+
                 context(@"with an argument specified as anything", ^{
                     NSNumber *arg1 = @3;
                     NSNumber *arg2 = @123;
