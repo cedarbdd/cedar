@@ -2,26 +2,54 @@
 
 namespace Cedar { namespace Doubles {
 
+    class ReturnValue {
+    public:
+        virtual ~ReturnValue() = 0;
+
+        virtual const char * const value_encoding() const = 0;
+        virtual void * value_bytes() const = 0;
+        virtual bool matches_encoding(const char *) const = 0;
+
+        typedef std::shared_ptr<ReturnValue> shared_ptr_t;
+    };
+
+    inline /* virtual */ ReturnValue::~ReturnValue() {}
+
     template<typename T>
-    class ReturnValue : public ValueArgument<T> {
+    class TypedReturnValue : public ReturnValue {
     private:
-        ReturnValue & operator=(const ReturnValue &);
+        TypedReturnValue<T> & operator=(const TypedReturnValue<T> &);
 
     public:
-        explicit ReturnValue(const T &);
-        virtual ~ReturnValue();
+        explicit TypedReturnValue(const T &);
+        virtual ~TypedReturnValue();
 
+        virtual const char * const value_encoding() const;
+        virtual void * value_bytes() const;
         virtual bool matches_encoding(const char *) const;
+
+    private:
+        const T value_;
     };
 
     template<typename T>
-    ReturnValue<T>::ReturnValue(const T & value) : ValueArgument<T>(value) {}
+    TypedReturnValue<T>::TypedReturnValue(const T & value) : value_(value) {}
 
     template<typename T>
-    /* virtual */ ReturnValue<T>::~ReturnValue() {}
+    /* virtual */ TypedReturnValue<T>::~TypedReturnValue() {}
 
     template<typename T>
-    /* virtual */ bool ReturnValue<T>::matches_encoding(const char * actual_argument_encoding) const {
+    /* virtual */ const char * const TypedReturnValue<T>::value_encoding() const {
+        return @encode(T);
+    }
+
+    template<typename T>
+    /* virtual */ void * TypedReturnValue<T>::value_bytes() const {
+        return (const_cast<T *>(&value_));
+    }
+
+    template<typename T>
+    /* virtual */ bool TypedReturnValue<T>::matches_encoding(const char * actual_argument_encoding) const {
         return 0 == strcmp(@encode(T), actual_argument_encoding);
     }
 
