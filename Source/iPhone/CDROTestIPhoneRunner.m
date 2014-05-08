@@ -4,17 +4,12 @@
 #import "CedarApplicationDelegate.h"
 #import "HeadlessSimulatorWorkaround.h"
 #import "CDRFunctions.h"
+#import "CDRExampleReporterViewController.h"
 #import <objc/runtime.h>
 
-extern int *_NSGetArgc(void);
-extern char ***_NSGetArgv(void);
-
-bool CDRIsXCTest() {
-    return objc_getClass("XCTestProbe");
-}
-bool CDRIsOCTest() {
-    return objc_getClass("SenTestProbe");
-}
+@interface UIApplication (PrivateAppleMethods)
+- (void)_terminateWithStatus:(int)status;
+@end
 
 @implementation NSBundle (MainBundleHijack)
 static NSBundle *mainBundle__ = nil;
@@ -55,38 +50,52 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 
 @end
 
-@implementation CDROTestIPhoneRunner
+@implementation CDROTestIPhoneRunner {
+    UIWindow *window_;
+    CDRExampleReporterViewController *viewController_;
+}
 
 void CDRRunTests(id self, SEL _cmd, id ignored) {
-    int exitStatus = 0;
-    if (CDRIsXCTest()) {
-        exitStatus = CDRRunXCUnitTests(self, _cmd, ignored);
-    } else {
-        exitStatus = CDRRunOCUnitTests(self, _cmd, ignored);
-    }
-
-    if ([UIApplication sharedApplication]) {
-        BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
-        BOOL isCedarDelegate = [[[UIApplication sharedApplication] delegate] isKindOfClass:[CedarApplicationDelegate class]];
-
-        if (!isCedarApp && !isCedarDelegate) {
-            exitStatus |= runSpecsWithinUIApplication();
-            exitWithStatusFromUIApplication(exitStatus);
-        }
-    } else {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-        const char* argv[] = { "executable", "-RegisterForSystemEvents" };
-        exitStatus |= UIApplicationMain(2, (char **)argv, @"CedarApplication", nil);
-
-        [pool release];
-        exit(exitStatus);
-    }
+    CDROTestIPhoneRunner *runner = [[CDROTestIPhoneRunner alloc] init];
+    [runner runAllTestsWithTestProbe:self];
 }
 
 + (void)load {
-    CDRHijackOCUnitRun((IMP)CDRRunTests);
-    CDRHijackXCUnitRun((IMP)CDRRunTests);
+    CDRHijackOCUnitAndXCTestRun((IMP)CDRRunTests);
+}
+
+- (void)runAllTestsWithTestProbe:(id)testProbe {
+    [self runStandardTestsWithTestProbe:testProbe];
+
+    BOOL isCedarApp = [[UIApplication sharedApplication] isKindOfClass:[CedarApplication class]];
+    BOOL isCedarDelegate = [[[UIApplication sharedApplication] delegate] isKindOfClass:[CedarApplicationDelegate class]];
+
+    if (!isCedarApp && !isCedarDelegate) {
+        [self runSpecsAndExit];
+    }
+}
+
+- (void)runSpecsAndExit {
+    if (getenv("CEDAR_GUI_SPECS")) {
+        window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+        viewController_ = [[CDRExampleReporterViewController alloc] init];
+        [window_ addSubview:viewController_.view];
+
+        [window_ makeKeyAndVisible];
+    } else {
+        [self runSpecs];
+        [self exitWithAggregateStatus];
+    }
+}
+
+- (void)exitWithStatus:(int)status {
+    UIApplication *application = [UIApplication sharedApplication];
+    if ([application respondsToSelector:@selector(_terminateWithStatus:)]) {
+        [application _terminateWithStatus:status];
+    } else {
+        [super exitWithStatus:status];
+    }
 }
 
 @end

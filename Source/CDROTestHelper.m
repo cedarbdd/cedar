@@ -8,9 +8,14 @@ id CDRPerformSelector(id obj, NSString *selectorString) {
     return [obj performSelector:selector];
 }
 
+void CDRHijackOCUnitAndXCTestRun(IMP newImplementation) {
+    CDRHijackOCUnitRun(newImplementation);
+    CDRHijackXCUnitRun(newImplementation);
+}
+
 // This is exact copy of SenTestProbe +runTests: (https://github.com/jy/SenTestingKit/blob/master/SenTestProbe.m)
 // except that it does not call exit() at the end.
-int CDRRunOCUnitTests(id self, SEL _cmd, id ignored) {
+int CDRRunOCUnitTests(id testProbe) {
     BOOL hasFailed = NO;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
@@ -18,7 +23,7 @@ int CDRRunOCUnitTests(id self, SEL _cmd, id ignored) {
     // ensure observers are loaded
     [NSClassFromString(@"SenTestObserver") class];
 
-    id testSuite = CDRPerformSelector(self, @"specifiedTestSuite");
+    id testSuite = CDRPerformSelector(testProbe, @"specifiedTestSuite");
     id runResult = [testSuite performSelector:@selector(run)];
     hasFailed = !(BOOL)CDRPerformSelector(runResult, @"hasSucceeded");
 
@@ -39,7 +44,7 @@ void CDRHijackOCUnitRun(IMP newImplementation) {
 }
 
 // Replicates the code in +[XCTestProbe runTests:]
-int CDRRunXCUnitTests(id self, SEL _cmd, id ignored) {
+int CDRRunXCUnitTests(id testProbe) {
     BOOL hasFailed = NO;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
@@ -51,7 +56,7 @@ int CDRRunXCUnitTests(id self, SEL _cmd, id ignored) {
     CDRPerformSelector(xcTestObserverClass, @"setUpTestObservers");
     CDRPerformSelector(xcTestObserverClass, @"resumeObservation");
 
-    id testSuite = CDRPerformSelector(self, @"specifiedTestSuite");
+    id testSuite = CDRPerformSelector(testProbe, @"specifiedTestSuite");
     id runResult = [testSuite performSelector:@selector(run)];
     hasFailed = !(BOOL)CDRPerformSelector(runResult, @"hasSucceeded");
 
@@ -70,4 +75,11 @@ void CDRHijackXCUnitRun(IMP newImplementation) {
         Class xcTestProbeMetaClass = objc_getMetaClass("XCTestProbe");
         class_replaceMethod(xcTestProbeMetaClass, runTestsSelector, newImplementation, "v@:@");
     }
+}
+
+bool CDRIsXCTest() {
+    return objc_getClass("XCTestProbe");
+}
+bool CDRIsOCTest() {
+    return objc_getClass("SenTestProbe");
 }

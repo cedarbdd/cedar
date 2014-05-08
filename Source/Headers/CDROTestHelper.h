@@ -1,7 +1,12 @@
 #import <Foundation/Foundation.h>
 
-int CDRRunOCUnitTests(id self, SEL _cmd, id ignored);
+void CDRHijackOCUnitAndXCTestRun(IMP newImplementation);
+
+int CDRRunOCUnitTests(id testProbe);
 void CDRHijackOCUnitRun(IMP newImplementation);
 
-int CDRRunXCUnitTests(id self, SEL _cmd, id ignored);
+int CDRRunXCUnitTests(id testProbe);
 void CDRHijackXCUnitRun(IMP newImplementation);
+
+bool CDRIsXCTest();
+bool CDRIsOCTest();
