@@ -14,7 +14,11 @@ void sharedExamplesFor(NSString *groupName, CDRSharedExampleGroupBlock block) {
     [[[SpecHelper specHelper] sharedExampleGroups] setObject:[[block copy] autorelease] forKey:groupName];
 }
 
-void itShouldBehaveLike(NSString *groupName) {
+CDR_OVERLOADABLE void itShouldBehaveLike(NSString *groupName) {
+    itShouldBehaveLike(groupName, (CDRSharedExampleContextProviderBlock)NULL);
+}
+
+CDR_OVERLOADABLE void itShouldBehaveLike(NSString *groupName, CDRSharedExampleContextProviderBlock contextBlock) {
     CDRSharedExampleGroupBlock sharedExampleGroupBlock = [[[SpecHelper specHelper] sharedExampleGroups] objectForKey:groupName];
     if (!sharedExampleGroupBlock) {
         NSString *message = [NSString stringWithFormat:@"Unknown shared example group with description: '%@'", groupName];
@@ -24,6 +28,12 @@ void itShouldBehaveLike(NSString *groupName) {
     CDRExampleGroup *parentGroup = currentSpec.currentGroup;
     currentSpec.currentGroup = [CDRExampleGroup groupWithText:[NSString stringWithFormat:@"(as %@)", groupName]];
     [parentGroup add:currentSpec.currentGroup];
+
+    if (contextBlock) {
+        [currentSpec.currentGroup addBefore:^{
+            contextBlock([SpecHelper specHelper].sharedExampleContext);
+        }];
+    }
 
     sharedExampleGroupBlock([SpecHelper specHelper].sharedExampleContext);
     currentSpec.currentGroup = parentGroup;
