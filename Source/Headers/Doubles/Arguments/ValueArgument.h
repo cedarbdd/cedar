@@ -1,4 +1,6 @@
 #import "Argument.h"
+#import "CedarStringifiers.h"
+#import "CedarComparators.h"
 
 namespace Cedar { namespace Doubles {
 

@@ -1,5 +1,4 @@
 #import "Base.h"
-#import "Argument.h"
 #import "InvocationMatcher.h"
 
 namespace Cedar { namespace Doubles {

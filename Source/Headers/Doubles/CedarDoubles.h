@@ -9,4 +9,5 @@
 #import "Argument.h"
 #import "AnyArgument.h"
 #import "ValueArgument.h"
-#import "AnyInstanceArgument.h"
+#import "AnyInstanceOfClassArgument.h"
+#import "AnyInstanceConformingToProtocolArgument.h"
