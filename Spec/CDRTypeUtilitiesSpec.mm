@@ -25,7 +25,9 @@ describe(@"CDRTypeUtilities", ^{
         });
 
         it(@"should return the type name for 'q'", ^{
-            [CDRTypeUtilities typeNameForEncoding:"q"] should equal(@"long long");
+            BOOL longMatchesLongLong = (sizeof(long)==sizeof(long long));
+            NSString *typeName = longMatchesLongLong ? @"long" : @"long long";
+            [CDRTypeUtilities typeNameForEncoding:"q"] should equal(typeName);
         });
 
         it(@"should return the type name for 'C'", ^{
@@ -45,7 +47,9 @@ describe(@"CDRTypeUtilities", ^{
         });
 
         it(@"should return the type name for 'Q'", ^{
-            [CDRTypeUtilities typeNameForEncoding:"Q"] should equal(@"unsigned long long");
+            BOOL longMatchesLongLong = (sizeof(long)==sizeof(long long));
+            NSString *typeName = longMatchesLongLong ? @"unsigned long" : @"unsigned long long";
+            [CDRTypeUtilities typeNameForEncoding:"Q"] should equal(typeName);
         });
 
         it(@"should return the type name for 'f'", ^{

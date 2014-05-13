@@ -8,17 +8,19 @@ static NSCharacterSet *typeEncodingStringsCharacterSet;
 static NSCharacterSet *typeEncodingModifiersCharacterSet;
 
 + (void)initialize {
+    BOOL longIsInt = (sizeof(int)==sizeof(long));
+
     // See: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html
     typeEncodingMapping = [@{ @"c": @"char",
                               @"i": @"int",
                               @"s": @"short",
                               @"l": @"long",
-                              @"q": @"long long",
+                              @"q": longIsInt ? @"long long" : @"long",
                               @"C": @"unsigned char",
                               @"I": @"unsigned int",
                               @"S": @"unsigned short",
                               @"L": @"unsigned long",
-                              @"Q": @"unsigned long long",
+                              @"Q": longIsInt ? @"unsigned long long" : @"unsigned long",
                               @"f": @"float",
                               @"d": @"double",
                               @"B": @"bool",
