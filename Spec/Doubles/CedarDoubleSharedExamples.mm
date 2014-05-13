@@ -570,7 +570,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     });
                 });
 
-                context(@"with Arguments::any()", ^{
+                context(@"with an 'any instance of' argument", ^{
                     __block void(^stubMethodAgainWithNoArgumentsBlock)();
                     __block void(^stubMethodAgainWithAnyArgumentBlock)();
                     __block FooSuperclass *specificInstance;
@@ -594,6 +594,30 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     it(@"should not raise an exception", ^{
                         stubMethodAgainWithNoArgumentsBlock should_not raise_exception;
                         stubMethodAgainWithAnyArgumentBlock should_not raise_exception;
+                    });
+
+                    context(@"with another 'any instance of' argument", ^{
+                        beforeEach(^{
+                            stubMethodAgainWithAnyArgumentBlock();
+                        });
+
+                        context(@"of the same class", ^{
+                            it(@"should raise an exception", ^{
+                                ^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([BarSubclass class])).and_return(@"bar2"); } should raise_exception.with_reason(@"The method <methodWithFooSuperclass:> is already stubbed with arguments (<Any instance of BarSubclass>)");
+                            });
+                        });
+
+                        context(@"of a different class", ^{
+                            beforeEach(^{
+                                myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([QuuxSubclass class])).and_return(@"any_quux");
+                            });
+
+                            context(@"when invoked", ^{
+                                it(@"should match the stub for the correct 'any instance of' class", ^{
+                                    [myDouble methodWithFooSuperclass:[[[QuuxSubclass alloc] init] autorelease]] should equal(@"any_quux");
+                                });
+                            });
+                        });
                     });
 
                     context(@"when invoked", ^{
