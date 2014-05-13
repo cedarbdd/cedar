@@ -8,7 +8,7 @@ namespace Cedar { namespace Doubles {
 
         virtual const char * const value_encoding() const = 0;
         virtual void * value_bytes() const = 0;
-        virtual bool matches_encoding(const char *) const = 0;
+        virtual bool compatible_with_encoding(const char *) const = 0;
 
         typedef std::shared_ptr<ReturnValue> shared_ptr_t;
     };
@@ -26,7 +26,10 @@ namespace Cedar { namespace Doubles {
 
         virtual const char * const value_encoding() const;
         virtual void * value_bytes() const;
-        virtual bool matches_encoding(const char *) const;
+        virtual bool compatible_with_encoding(const char *) const;
+
+    private:
+        bool matches_encoding(const char *)const;
 
     private:
         const T value_;
@@ -49,8 +52,17 @@ namespace Cedar { namespace Doubles {
     }
 
     template<typename T>
-    /* virtual */ bool TypedReturnValue<T>::matches_encoding(const char * actual_argument_encoding) const {
-        return 0 == strcmp(@encode(T), actual_argument_encoding);
+    /* virtual */ bool TypedReturnValue<T>::compatible_with_encoding(const char * actual_argument_encoding) const {
+        return matches_encoding(actual_argument_encoding);
     }
 
+    template<>
+    /* virtual */ inline bool TypedReturnValue<NSInteger>::compatible_with_encoding(const char * actual_argument_encoding) const {
+        return (value_ == (NSInteger)nil && 0 == strcmp(@encode(id), actual_argument_encoding)) || this->matches_encoding(actual_argument_encoding);
+    }
+
+    template<typename T>
+    bool TypedReturnValue<T>::matches_encoding(const char * actual_argument_encoding) const {
+        return 0 == strcmp(@encode(T), actual_argument_encoding);
+    }
 }}

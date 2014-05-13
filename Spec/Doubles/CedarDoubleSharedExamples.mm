@@ -912,6 +912,16 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     memcmp(&returnValue, &returnedValue, sizeof(LargeIncrementerStruct)) should equal(0);
                 });
             });
+
+            context(@"with `nil`", ^{
+                beforeEach(^{
+                    myDouble stub_method("valueAsNumber").and_return(nil);
+                });
+
+                it(@"should return the expected value", ^{
+                    [myDouble valueAsNumber] should be_nil;
+                });
+            });
         });
     });
 });
