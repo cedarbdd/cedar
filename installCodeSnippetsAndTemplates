@@ -2,7 +2,7 @@
 
 echo "\n===== Installing Code Snippets and Templates =====\n"
 
-if rake clean uninstall install
+if NOEXEC_DISABLE=1 rake clean uninstall install
 then
   echo "\n*** Restart Xcode/AppCode to load the new code snippets and templates.  The templates are available under the Cedar section. ***\n"
 else
