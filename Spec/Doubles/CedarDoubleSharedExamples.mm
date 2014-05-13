@@ -572,7 +572,8 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                 context(@"with an 'any instance of' argument", ^{
                     __block void(^stubMethodAgainWithNoArgumentsBlock)();
-                    __block void(^stubMethodAgainWithAnyArgumentBlock)();
+                    __block void(^stubMethodAgainWithAnyInstanceOfClassArgumentBlock)();
+                    __block void(^stubMethodAgainWithAnyInstanceConformingToProtocolArgumentBlock)();
                     __block FooSuperclass *specificInstance;
                     __block BarSubclass *specificBarInstance;
 
@@ -583,22 +584,25 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         myDouble stub_method("methodWithFooSuperclass:").with(specificBarInstance).and_return(@"bar_specific");
 
                         stubMethodAgainWithNoArgumentsBlock = [^{ myDouble stub_method("methodWithFooSuperclass:").and_return(@"quux"); } copy];
-                        stubMethodAgainWithAnyArgumentBlock = [^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([BarSubclass class])).and_return(@"bar"); } copy];
+                        stubMethodAgainWithAnyInstanceOfClassArgumentBlock = [^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([BarSubclass class])).and_return(@"bar"); } copy];
+                        stubMethodAgainWithAnyInstanceConformingToProtocolArgumentBlock = [^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any(@protocol(BazProtocol))).and_return(@"baz"); } copy];
                     });
 
                     afterEach(^{
                         [stubMethodAgainWithNoArgumentsBlock release];
-                        [stubMethodAgainWithAnyArgumentBlock release];
+                        [stubMethodAgainWithAnyInstanceOfClassArgumentBlock release];
+                        [stubMethodAgainWithAnyInstanceConformingToProtocolArgumentBlock release];
                     });
 
                     it(@"should not raise an exception", ^{
                         stubMethodAgainWithNoArgumentsBlock should_not raise_exception;
-                        stubMethodAgainWithAnyArgumentBlock should_not raise_exception;
+                        stubMethodAgainWithAnyInstanceOfClassArgumentBlock should_not raise_exception;
+                        stubMethodAgainWithAnyInstanceConformingToProtocolArgumentBlock should_not raise_exception;
                     });
 
-                    context(@"with another 'any instance of' argument", ^{
+                    context(@"with another 'any instance of class' argument", ^{
                         beforeEach(^{
-                            stubMethodAgainWithAnyArgumentBlock();
+                            stubMethodAgainWithAnyInstanceOfClassArgumentBlock();
                         });
 
                         context(@"of the same class", ^{
@@ -620,10 +624,35 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         });
                     });
 
+                    context(@"with another 'any instance conforming to protocol' argument", ^{
+                        beforeEach(^{
+                            stubMethodAgainWithAnyInstanceConformingToProtocolArgumentBlock();
+                        });
+
+                        context(@"with the same protocol", ^{
+                            it(@"should raise an exception", ^{
+                                ^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any(@protocol(BazProtocol))).and_return(@"baz2"); } should raise_exception.with_reason(@"The method <methodWithFooSuperclass:> is already stubbed with arguments (<Any instance conforming to BazProtocol>)");
+                            });
+                        });
+
+                        context(@"with a different protocol", ^{
+                            beforeEach(^{
+                                myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any(@protocol(NSObject))).and_return(@"any_object");
+                            });
+
+                            context(@"when invoked", ^{
+                                it(@"should match the stub for the correct protocol", ^{
+                                    [myDouble methodWithFooSuperclass:[[[QuuxSubclass alloc] init] autorelease]] should equal(@"any_object");
+                                });
+                            });
+                        });
+                    });
+
                     context(@"when invoked", ^{
                         beforeEach(^{
                             stubMethodAgainWithNoArgumentsBlock();
-                            stubMethodAgainWithAnyArgumentBlock();
+                            stubMethodAgainWithAnyInstanceOfClassArgumentBlock();
+                            stubMethodAgainWithAnyInstanceConformingToProtocolArgumentBlock();
                         });
 
                         it(@"should match the stub for specific instances", ^{
@@ -633,7 +662,8 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                         it(@"should match the stub for Arguments::any()", ^{
                             [myDouble methodWithFooSuperclass:[[[BarSubclass alloc] init] autorelease]] should equal(@"bar");
-                            [myDouble methodWithFooSuperclass:[[[QuuxSubclass alloc] init] autorelease]] should equal(@"quux");
+                            [myDouble methodWithFooSuperclass:[[[FooSuperclass alloc] init] autorelease]] should equal(@"quux");
+                            [myDouble methodWithFooSuperclass:[[[QuuxSubclass alloc] init] autorelease]] should equal(@"baz");
                         });
 
                         it(@"should match the unqualified stub", ^{
@@ -869,6 +899,21 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                     beforeEach(^{
                         myDouble stub_method("methodWithNumber1:andNumber2:").with(any([NSDecimalNumber class]), arg).and_return(returnValue);
+                    });
+
+                    context(@"when invoked with the correct class", ^{
+                        it(@"should return the expected value", ^{
+                            [myDouble methodWithNumber1:[NSDecimalNumber decimalNumberWithDecimal:[@3.14159265359 decimalValue]] andNumber2:arg] should equal(returnValue);
+                        });
+                    });
+                });
+
+                context(@"with an argument specified as any instance conforming to a specified protocol", ^{
+                    NSNumber *arg = @123;
+                    NSNumber *returnValue = @99;
+
+                    beforeEach(^{
+                        myDouble stub_method("methodWithNumber1:andNumber2:").with(any(@protocol(NSObject)), arg).and_return(returnValue);
                     });
 
                     context(@"when invoked with the correct class", ^{

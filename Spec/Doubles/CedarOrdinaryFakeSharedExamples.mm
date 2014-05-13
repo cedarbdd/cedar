@@ -63,6 +63,26 @@ sharedExamplesFor(@"a Cedar ordinary fake", ^(NSDictionary *sharedContext) {
                 });
             });
         });
+
+        context(@"with an argument specified as any instance conforming to a specified protocol", ^{
+            NSNumber *arg = @123;
+
+            beforeEach(^{
+                myOrdinaryFake stub_method("methodWithNumber1:andNumber2:").with(any(@protocol(InheritedProtocol)), arg).and_return(@99);
+            });
+
+            context(@"when invoked with the incorrect class", ^{
+                it(@"should return 0", ^{
+                    ^{ [myOrdinaryFake methodWithNumber1:@3.14159265359 andNumber2:arg]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
+                });
+            });
+
+            context(@"when invoked with nil", ^{
+                it(@"should return 0", ^{
+                    ^{ [myOrdinaryFake methodWithNumber1:nil andNumber2:arg]; } should raise_exception.with_reason(@"Wrong arguments supplied to stub");
+                });
+            });
+        });
     });
 });
 
