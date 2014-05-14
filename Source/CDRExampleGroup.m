@@ -101,6 +101,12 @@
 
 
 - (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher {
+    if (startDate_) {
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempt to run example group twice: %@", [self fullText]]
+                               userInfo:nil] raise];
+    }
+
     [dispatcher runWillStartExampleGroup:self];
     [startDate_ release];
     startDate_ = [[NSDate alloc] init];
@@ -112,6 +118,10 @@
     [endDate_ release];
     endDate_ = [[NSDate alloc] init];
     [dispatcher runDidFinishExampleGroup:self];
+
+    [beforeBlocks_ release]; beforeBlocks_ = nil;
+    [afterBlocks_ release]; afterBlocks_ = nil;
+    self.subjectActionBlock = nil;
 }
 
 - (BOOL)hasFocusedExamples {

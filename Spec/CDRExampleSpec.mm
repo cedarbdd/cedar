@@ -14,6 +14,7 @@
 #import "SimpleKeyValueObserver.h"
 #import "FibonacciCalculator.h"
 #import "CDRReportDispatcher.h"
+#import <objc/runtime.h>
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -151,15 +152,26 @@ describe(@"CDRExample", ^{
 
     describe(@"runWithDispatcher:", ^{
         __block CDRReportDispatcher *dispatcher;
+        __block __weak id weakCapturedObject;
+
         beforeEach(^{
             dispatcher = nice_fake_for([CDRReportDispatcher class]);
         });
 
         beforeEach(^{
+            NSString *capturedObject = [@"abc" mutableCopy];
+            objc_storeWeak(&weakCapturedObject, capturedObject);
+
             example = [[[CDRExample alloc] initWithText:exampleText andBlock:^{
                 // so we don't get a zero-value for runTime
                 [NSThread sleepForTimeInterval:0.01];
+                [capturedObject length];
             }] autorelease];
+
+            [capturedObject release]; capturedObject = nil;
+            @autoreleasepool {
+                objc_loadWeak(&weakCapturedObject) should_not be_nil;
+            }
 
             // assert example is populated at the appropriate times
             dispatcher stub_method(@selector(runWillStartExample:)).and_do(^(NSInvocation *invocation) {
@@ -184,6 +196,16 @@ describe(@"CDRExample", ^{
 
         it(@"should have its start date less than its end date", ^{
             [example.endDate timeIntervalSinceDate:example.startDate] should be_greater_than(0);
+        });
+
+        describe(@"running it a second time", ^{
+            it(@"should fail", ^{
+                ^{ [example runWithDispatcher:dispatcher]; } should raise_exception.with_reason([NSString stringWithFormat:@"Attempt to run example twice: %@", [example fullText]]);
+            });
+        });
+
+        it(@"should allow captured objects to be deallocated once it has finished running", ^{
+            objc_loadWeak(&weakCapturedObject) should be_nil;
         });
     });
 
@@ -499,6 +521,45 @@ describe(@"CDRExample", ^{
             it(@"should return the description of whatever was thrown", ^{
                 NSString *message = example.message;
                 expect(message).to(equal(failureMessage));
+            });
+        });
+    });
+
+    describe(@"isPending", ^{
+        context(@"for an example with a block", ^{
+            it(@"should not report itself as pending", ^{
+                [example isPending] should be_falsy;
+            });
+
+            context(@"after it has run", ^{
+                beforeEach(^{
+                    [example runWithDispatcher:dispatcher];
+                });
+
+                it(@"should not report itself as pending", ^{
+                    [example isPending] should be_falsy;
+                });
+            });
+
+        });
+
+        context(@"for a pending example", ^{
+            beforeEach(^{
+                example = [[[CDRExample alloc] initWithText:@"I should be pending" andBlock:PENDING] autorelease];
+            });
+
+            it(@"should report itself as pending", ^{
+                [example isPending] should be_truthy;
+            });
+
+            context(@"after it has run", ^{
+                beforeEach(^{
+                    [example runWithDispatcher:dispatcher];
+                });
+
+                it(@"should report itself as pending", ^{
+                    [example isPending] should be_truthy;
+                });
             });
         });
     });
