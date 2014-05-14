@@ -1,4 +1,4 @@
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "ObjectWithWeakDelegate.h"
 #import "ARCViewController.h"
 

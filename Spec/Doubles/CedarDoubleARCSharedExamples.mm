@@ -1,4 +1,4 @@
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #import "SimpleIncrementer.h"
 
 #if !__has_feature(objc_arc)

@@ -1,5 +1,5 @@
-// SpecHelper.h should only be imported into this target from the iOS framework
-#import <Cedar-iOS/SpecHelper.h>
+// CDRSpecHelper.h should only be imported into this target from the iOS framework
+#import <Cedar-iOS/CDRSpecHelper.h>
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

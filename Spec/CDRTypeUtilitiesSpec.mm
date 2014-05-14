@@ -1,4 +1,4 @@
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #import "CDRTypeUtilities.h"
 
 using namespace Cedar::Matchers;

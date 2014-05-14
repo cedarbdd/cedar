@@ -2,9 +2,9 @@
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #else
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #endif
 
 #import "CDRExample.h"
@@ -19,12 +19,12 @@ using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
 void (^runInFocusedSpecsMode)(CDRExampleBase *, CDRReportDispatcher *) = ^(CDRExampleBase *example, CDRReportDispatcher *dispatcher) {
-    BOOL before = [SpecHelper specHelper].shouldOnlyRunFocused;
-    [SpecHelper specHelper].shouldOnlyRunFocused = YES;
+    BOOL before = [CDRSpecHelper specHelper].shouldOnlyRunFocused;
+    [CDRSpecHelper specHelper].shouldOnlyRunFocused = YES;
     @try {
         [example runWithDispatcher:dispatcher];
     } @finally {
-        [SpecHelper specHelper].shouldOnlyRunFocused = before;
+        [CDRSpecHelper specHelper].shouldOnlyRunFocused = before;
     }
 };
 
@@ -140,13 +140,13 @@ describe(@"CDRExample", ^{
         example = [[[CDRExample alloc] initWithText:exampleText andBlock:^{}] autorelease];
 
         // if you focus any of these specs, they will fail without this
-        beforeFocused = [SpecHelper specHelper].shouldOnlyRunFocused;
-        [SpecHelper specHelper].shouldOnlyRunFocused = NO;
+        beforeFocused = [CDRSpecHelper specHelper].shouldOnlyRunFocused;
+        [CDRSpecHelper specHelper].shouldOnlyRunFocused = NO;
         // end
     });
 
     afterEach(^{
-        [SpecHelper specHelper].shouldOnlyRunFocused = beforeFocused;
+        [CDRSpecHelper specHelper].shouldOnlyRunFocused = beforeFocused;
     });
 
     describe(@"runWithDispatcher:", ^{

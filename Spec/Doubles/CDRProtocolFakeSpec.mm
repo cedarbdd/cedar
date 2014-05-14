@@ -1,4 +1,4 @@
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #import <objc/runtime.h>
 #import "SimpleIncrementer.h"
 #import "SimpleMultiplier.h"
@@ -65,7 +65,7 @@ describe(@"fake (protocol)", ^{
         beforeEach(^{
             fake = fake_for(@protocol(SimpleIncrementer));
 
-            [[SpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");
@@ -118,7 +118,7 @@ describe(@"fake (protocol)", ^{
         beforeEach(^{
             nice_fake = nice_fake_for(@protocol(SimpleIncrementer));
 
-            [[SpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");
@@ -172,7 +172,7 @@ describe(@"fake (protocol)", ^{
         beforeEach(^{
             fake = fake_for(@protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
 
-            [[SpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");
@@ -223,7 +223,7 @@ describe(@"fake (protocol)", ^{
         beforeEach(^{
             nice_fake = nice_fake_for(@protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
 
-            [[SpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
+            [[CDRSpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
         });
 
         itShouldBehaveLike(@"a Cedar double");

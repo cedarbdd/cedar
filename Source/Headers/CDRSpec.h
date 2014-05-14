@@ -2,7 +2,7 @@
 #import "CDRExampleBase.h"
 
 @protocol CDRExampleReporter;
-@class CDRExampleGroup, CDRExample, SpecHelper, CDRSymbolicator;
+@class CDRExampleGroup, CDRExample, CDRSpecHelper, CDRSymbolicator;
 
 @protocol CDRSpec
 @end

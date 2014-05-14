@@ -1,4 +1,4 @@
-#import <Cedar/SpecHelper.h>
+#import <Cedar/CDRSpecHelper.h>
 #import "SimpleIncrementer.h"
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"

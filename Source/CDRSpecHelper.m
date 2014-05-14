@@ -1,12 +1,12 @@
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 
-static SpecHelper *specHelper__;
+static CDRSpecHelper *specHelper__;
 
-@interface SpecHelper ()
+@interface CDRSpecHelper ()
 @property (nonatomic, retain, readwrite) NSMutableDictionary *sharedExampleGroups, *sharedExampleContext;
 @end
 
-@implementation SpecHelper
+@implementation CDRSpecHelper
 
 @synthesize
     sharedExampleGroups = sharedExampleGroups_,
@@ -17,7 +17,7 @@ static SpecHelper *specHelper__;
 
 + (id)specHelper {
     if (!specHelper__) {
-        specHelper__ = [[SpecHelper alloc] init];
+        specHelper__ = [[CDRSpecHelper alloc] init];
     }
     return specHelper__;
 }

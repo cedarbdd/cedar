@@ -4,7 +4,7 @@
 #import "CDRExampleGroup.h"
 #import "CDRExampleReporter.h"
 #import "CDRDefaultReporter.h"
-#import "SpecHelper.h"
+#import "CDRSpecHelper.h"
 #import "CDRFunctions.h"
 #import "CDRReportDispatcher.h"
 #import "CDROTestNamer.h"
@@ -65,11 +65,11 @@ BOOL CDRClassHasClassMethod(Class class, SEL selector) {
 }
 
 void CDRDefineGlobalBeforeAndAfterEachBlocks() {
-    [SpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) {
+    [CDRSpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) {
         return CDRClassHasClassMethod(class, @selector(beforeEach));
     });
 
-    [SpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) {
+    [CDRSpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) {
         return CDRClassHasClassMethod(class, @selector(afterEach));
     });
 }
@@ -156,7 +156,7 @@ void CDRMarkFocusedExamplesInSpecs(NSArray *specs) {
     }
 
     for (CDRSpec *spec in specs) {
-        SpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
+        CDRSpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
     }
 }
 
@@ -220,7 +220,7 @@ void CDRMarkXcodeFocusedExamplesInSpecs(NSArray *specs, NSArray *arguments) {
     [testNamer release];
 
     for (CDRSpec *spec in specs) {
-        SpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
+        CDRSpecHelper.specHelper.shouldOnlyRunFocused |= spec.rootGroup.hasFocusedExamples;
     }
 }
 
@@ -259,7 +259,7 @@ unsigned int CDRGetRandomSeed() {
 void __attribute__((weak)) __gcov_flush(void) {
 }
 
-int runSpecsWithCustomExampleReporters(NSArray *reporters) {
+int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters) {
     @autoreleasepool {
         CDRDefineSharedExampleGroups();
         CDRDefineGlobalBeforeAndAfterEachBlocks();
@@ -290,7 +290,7 @@ int runSpecsWithCustomExampleReporters(NSArray *reporters) {
     }
 }
 
-int runSpecs() {
+int CDRRunSpecs() {
     BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
     const char *defaultReporterClassName = isTestBundle ? "CDROTestReporter,CDRBufferedDefaultReporter" : "CDRDefaultReporter";
 
@@ -299,11 +299,21 @@ int runSpecs() {
         if (![reporters count]) {
             return -999;
         } else {
-            return runSpecsWithCustomExampleReporters(reporters);
+            return CDRRunSpecsWithCustomExampleReporters(reporters);
         }
     }
 }
 
+#pragma mark - Deprecated
+
+int runSpecs() {
+    return CDRRunSpecs();
+}
+
 int runAllSpecs() {
-    return runSpecs();
+    return CDRRunSpecs();
+}
+
+int runSpecsWithCustomExampleReporters(NSArray *reporters) {
+    return CDRRunSpecsWithCustomExampleReporters(reporters);
 }

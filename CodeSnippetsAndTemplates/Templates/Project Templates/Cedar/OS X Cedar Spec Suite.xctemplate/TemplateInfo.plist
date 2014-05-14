@@ -72,13 +72,13 @@
 			<string>Rakefile</string>
 		</dict>
 		<key>*:*:importCedar</key>
-		<string>#import &lt;Cedar/SpecHelper.h&gt;</string>
+		<string>#import &lt;Cedar/Cedar.h&gt;</string>
 		<key>main.m:include</key>
 		<string>#import &lt;Cedar/Cedar.h&gt;
 </string>
 		<key>main.m:main:content</key>
 		<string>int main (int argc, const char *argv[]) {
-    return runSpecs();
+    return CDRRunSpecs();
 }</string>
 		<key>Frameworks/Cedar.framework</key>
 		<dict>
