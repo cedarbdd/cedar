@@ -41,6 +41,15 @@
     return self;
 }
 
+- (BOOL)retainWeakReference {
+    __block id that = self;
+    __block BOOL res;
+    [self as_spied_class:^{
+        res = [that retainWeakReference];
+    }];
+    return res;
+}
+
 - (oneway void)release {
     __block id that = self;
     [self as_spied_class:^{
