@@ -114,7 +114,7 @@ namespace Cedar { namespace Doubles {
     void StubbedMethod::verify_return_value_type(id instance) const {
         if (this->has_return_value()) {
             const char * const methodReturnType = [[instance methodSignatureForSelector:this->selector()] methodReturnType];
-            if (!this->return_value().matches_encoding(methodReturnType)) {
+            if (!this->return_value().compatible_with_encoding(methodReturnType)) {
                 [[NSException exceptionWithName:NSInternalInconsistencyException
                                          reason:[NSString stringWithFormat:@"Invalid return value type '%@' instead of '%@' for <%@>", [CDRTypeUtilities typeNameForEncoding:this->return_value().value_encoding()], [CDRTypeUtilities typeNameForEncoding:methodReturnType], NSStringFromSelector(this->selector())]
                                        userInfo:nil] raise];

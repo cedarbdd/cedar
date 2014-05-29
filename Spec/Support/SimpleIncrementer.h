@@ -16,6 +16,7 @@ typedef LargeIncrementerStruct (^ComplexIncrementerBlock)(NSNumber *, LargeIncre
 @required
 - (size_t)value;
 - (size_t)aVeryLargeNumber;
+- (NSNumber *)valueAsNumber;
 - (void)increment;
 - (void)incrementBy:(size_t)amount;
 - (void)incrementByNumber:(NSNumber *)number;

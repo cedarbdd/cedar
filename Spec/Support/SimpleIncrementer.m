@@ -20,6 +20,10 @@
     return 0x7fffffff;
 }
 
+- (NSNumber *)valueAsNumber {
+    return @(self.value);
+}
+
 - (void)incrementBy:(size_t)amount {
     self.value += amount;
 }
