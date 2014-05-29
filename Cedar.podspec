@@ -20,5 +20,6 @@ Pod::Spec.new do |s|
     'CLANG_CXX_LIBRARY' => 'libc++'
   }
   s.libraries = 'c++'
+  s.requires_arc = false
 
 end
