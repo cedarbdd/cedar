@@ -8,7 +8,7 @@
 
 @property (nonatomic, retain, readonly) NSString *fileName;
 @property (nonatomic, assign, readonly) int lineNumber;
-@property (nonatomic, retain, readonly) NSArray *callStackReturnAddresses;
+@property (copy, readonly) NSArray *callStackReturnAddresses;
 
 + (id)specFailureWithReason:(NSString *)reason;
 + (id)specFailureWithReason:(NSString *)reason fileName:(NSString *)fileName lineNumber:(int)lineNumber;
