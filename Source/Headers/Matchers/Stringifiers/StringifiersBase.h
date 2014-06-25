@@ -15,6 +15,10 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         }
     }
 
+    inline NSString * string_for(std::nullptr_t value) {
+        return @"nil";
+    }
+
     inline NSString * string_for(const char value) {
         return string_for(static_cast<const int>(value));
     }
