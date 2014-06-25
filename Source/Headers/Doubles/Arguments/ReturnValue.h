@@ -57,6 +57,11 @@ namespace Cedar { namespace Doubles {
     }
 
     template<>
+    /* virtual */ inline bool TypedReturnValue<std::nullptr_t>::compatible_with_encoding(const char * actual_argument_encoding) const {
+        return 0 == strcmp(@encode(id), actual_argument_encoding);
+    }
+
+    template<>
     /* virtual */ inline bool TypedReturnValue<NSInteger>::compatible_with_encoding(const char * actual_argument_encoding) const {
         return (value_ == (NSInteger)nil && 0 == strcmp(@encode(id), actual_argument_encoding)) || this->matches_encoding(actual_argument_encoding);
     }
