@@ -16,8 +16,9 @@
 @implementation CDRDefaultReporter
 
 #pragma mark Memory
-- (id)init {
+- (instancetype)initWithCedarVersion:(NSString *)cedarVersionString {
     if (self = [super init]) {
+        cedarVersionString_ = [cedarVersionString retain];
         pendingMessages_ = [[NSMutableArray alloc] init];
         skippedMessages_ = [[NSMutableArray alloc] init];
         failureMessages_ = [[NSMutableArray alloc] init];
@@ -26,6 +27,7 @@
 }
 
 - (void)dealloc {
+    [cedarVersionString_ release];
     [rootGroups_ release];
     [startTime_ release];
     [endTime_ release];
@@ -40,6 +42,7 @@
     rootGroups_ = [groups retain];
     [self startObservingExamples:rootGroups_];
     startTime_ = [[NSDate alloc] init];
+    [self logText:[NSString stringWithFormat:@"Cedar Version: %@\n", cedarVersionString_]];
     [self logText:[NSString stringWithFormat:@"Running With Random Seed: %i\n\n", seed]];
 }
 

@@ -7,6 +7,8 @@
 #import "CDROTestNamer.h"
 
 @interface CDROTestReporter ()
+@property (retain, nonatomic) NSString *cedarVersionString;
+
 @property (retain, nonatomic) NSDate *startTime;
 @property (retain, nonatomic) NSDate *endTime;
 @property (retain, nonatomic) NSDateFormatter *formatter;
@@ -22,6 +24,7 @@
 @implementation CDROTestReporter
 
 - (void)dealloc {
+    self.cedarVersionString = nil;
     self.startTime = nil;
     self.endTime = nil;
     self.formatter = nil;
@@ -32,12 +35,13 @@
     [super dealloc];
 }
 
-- (id)init {
+- (instancetype)initWithCedarVersion:(NSString *)cedarVersionString {
     self = [super init];
     if (self) {
         self.formatter = [[[NSDateFormatter alloc] init] autorelease];
         [self.formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
         self.namer = [[[CDROTestNamer alloc] init] autorelease];
+        self.cedarVersionString = cedarVersionString;
     }
     return self;
 }
@@ -48,6 +52,7 @@
     self.startTime = [NSDate date];
     self.rootGroups = groups;
 
+    [self logMessage:[NSString stringWithFormat:@"Cedar Version: %@", self.cedarVersionString]];
     [self logMessage:[NSString stringWithFormat:@"Cedar Random Seed: %d", seed]];
 
     [self startSuite:[self rootSuiteName] atDate:self.startTime];
