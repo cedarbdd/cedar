@@ -191,6 +191,17 @@ describe(@"a describe block", ^{
         itShouldBehaveLike(@"a shared example group that receives a value in the context");
     });
 
+    describe(@"that passes a value in-line to the shared example context", ^{
+        beforeEach(^{
+            globalValue__ = @"something";
+        });
+
+        expect(globalValue__).to(be_nil);
+        itShouldBehaveLike(@"a shared example group that receives a value in the context", ^(NSMutableDictionary *context) {
+            context[@"value"] = globalValue__;
+        });
+    });
+
     itShouldBehaveLike(@"a shared example group that contains a failing spec");
 });
 
