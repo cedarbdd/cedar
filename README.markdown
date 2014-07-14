@@ -34,9 +34,9 @@ Please read the [Contributor Guide](https://github.com/pivotal/cedar/wiki/Contri
 
 # Maintainers
 
-* [Andrew Kitchen](mailto:akitchen@pivotallabs.com) ([akitchen](https://github.com/akitchen)), Pivotal Labs
-* [Dmitriy Kalinin](mailto:dmitriy@pivotallabs.com) ([cppforlife](http://github.com/cppforlife)), Pivotal Labs
-* [Jeff Hui](mailto:jhui@pivotallabs.com) ([jeffh](http://github.com/jeffh)), Pivotal Labs
-* [Sam Coward](mailto:scoward@pivotallabs.com) ([idoru](http://github.com/idoru)), Pivotal Labs
+* [Andrew Kitchen](mailto:akitchen@pivotallabs.com) ([akitchen](https://github.com/akitchen)), Pivotal Labs, San Francisco
+* [Brian Croom](mailto: bcroom@pivotallabs.com) ([pivotal-brian-croom](https://github.com/pivotal-brian-croom)), Pivotal Labs, Toronto
+* [Jeff Hui](mailto:jhui@pivotallabs.com) ([jeffh](http://github.com/jeffh)), Pivotal Labs, San Francisco
+* [Sam Coward](mailto:scoward@pivotallabs.com) ([idoru](http://github.com/idoru)), Pivotal Labs, New York
 
 Copyright (c) 2010-2014 Pivotal Labs. This software is licensed under the MIT License. [![Mixpanel](https://api.mixpanel.com/track/?data=CXsiZXZlbnQiOiAiSG9tZSBWaXNpdCIsIA0KICAgIAkJInByb3BlcnRpZXMiOiB7ICAJDQogICAgICAgIAkidG9rZW4iOiAiNmJjZmE3MmQ5OGU2ZjdhZjFkNjQ3YWNmY2Q2NjMwNTEiICAgDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICB9&ip=1&img=1)](http://mixpanel.com)
