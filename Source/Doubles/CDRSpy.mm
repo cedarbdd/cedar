@@ -43,7 +43,7 @@
 
 - (BOOL)retainWeakReference {
     __block id that = self;
-    __block BOOL res;
+    __block BOOL res = NO;
     [self unsafe_as_spied_class:^{
         res = [that retainWeakReference];
     }];
@@ -67,7 +67,7 @@
 
 - (NSUInteger)retainCount {
     __block id that = self;
-    __block NSUInteger count;
+    __block NSUInteger count = 0;
     [self as_spied_class:^{
         count = [that retainCount];
     }];
