@@ -1,3 +1,4 @@
+#define SENTEST_IGNORE_DEPRECATION_WARNING
 #import <SenTestingKit/SenTestingKit.h>
 #import "OCUnitAppAppDelegate.h" // should NOT be included in OCUnitAppTests target
 
