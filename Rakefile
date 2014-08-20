@@ -241,10 +241,9 @@ class Simulator
   end
 
   def self.launch_bundle(app_dir, app_name, test_bundle, logfile)
-    sdk_path = Xcode.sdk_dir_for_version(SDK_RUNTIME_VERSION)
     env_vars = {
       "DYLD_INSERT_LIBRARIES" => "#{Xcode.developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-      "XCInjectBundle" => "#{}",
+      "XCInjectBundle" => test_bundle,
       "XCInjectBundleInto" => "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{APP_IOS_NAME}.app/#{APP_IOS_NAME}")}",
     }
     Shell.with_env(env_vars) do
