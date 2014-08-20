@@ -236,7 +236,7 @@ class Simulator
 
     Shell.with_env(env_vars) do
       # Shell.run "#{File.join(app_dir, "#{app_name}.app", app_name)} -RegisterForSystemEvents", logfile
-      Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} | tee /dev/stderr | grep -q ', 0 failures'", logfile
+      Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
     end
   end
 
