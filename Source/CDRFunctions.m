@@ -60,7 +60,7 @@ NSString *CDRVersionString() {
     }
 
     if (releaseVersion) {
-        NSString *versionString = [NSString stringWithFormat:@"Cedar Version: %@", releaseVersion];
+        NSString *versionString = releaseVersion;
         if (versionDetails) {
             versionString = [versionString stringByAppendingFormat:@" (%@)", versionDetails];
         }
