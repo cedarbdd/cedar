@@ -459,6 +459,13 @@ namespace :testbundles do
   end
 end
 
+desc 'Runs integration tests of the templates'
+task :test_templates do
+  terminal_id = `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' /Applications/Utilities/Terminal.app/Contents/Info.plist`.strip
+  Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{terminal_id}',0,1,1,NULL);"}
+  Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
+  Shell.run "cucumber"
+end
 
 desc "Remove code snippets and templates"
 task :uninstall do
