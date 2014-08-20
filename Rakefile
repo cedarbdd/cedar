@@ -47,13 +47,16 @@ class Shell
     original_cmd = cmd
     if logfile
       logfile = output_file(logfile)
-      cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[1]} -eq 0"
+      if ENV['TRAVIS']
+        cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
+      else
+        cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
+      end
     end
     system(cmd) or begin
+      system("cat '#{logfile}'") if ENV['TRAVIS']
       log_msg = ""
-      if logfile
-        log_msg = "[#{red}Failed#{clear}] Logged to: #{logfile}"
-      end
+      log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
       raise <<EOF
 #{`cat #{logfile}`}
 [#{red}Failed#{clear}] Command: #{original_cmd}
@@ -80,11 +83,11 @@ EOF
   end
 
   def self.fold_start(name)
-    puts "travis_fold:start:#{name}\\r" if ENV['TRAVIS']
+    puts "travis_fold:start:#{name}" if ENV['TRAVIS']
   end
 
   def self.fold_end(name)
-    puts "travis_fold:end:#{name}\\r" if ENV['TRAVIS']
+    puts "travis_fold:end:#{name}" if ENV['TRAVIS']
   end
 
   def self.fold(name)
@@ -143,7 +146,7 @@ class Xcode
     args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
-    Shell.fold "Build #{options[:scheme] || options[:target]}" do
+    Shell.fold "build" do
       Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' build #{args}], logfile)
     end
   end
@@ -157,9 +160,15 @@ class Xcode
     args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
-    Shell.fold "Analyze #{options[:scheme] || options[:target]}" do
+    Shell.fold "analyze" do
       Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} analyze #{args} SYMROOT='#{BUILD_DIR}' | tee /dev/stderr | grep -q -v 'The following commands produced analyzer issues:'], logfile)
     end
+  end
+
+  def self.sed_project(search, replace)
+    pbxproj = "#{PROJECT_NAME}.xcodeproj/project.pbxproj"
+    contents = File.read(pbxproj)
+    File.write(pbxproj, contents.gsub(search, replace))
   end
 end
 
@@ -209,16 +218,50 @@ class Simulator
   end
 end
 
-def kill_simulator
-  Shell.fold "Kill Simulator" do
-    system %Q[killall -m -KILL "gdb"]
-    system %Q[killall -m -KILL "otest"]
-    system %Q[killall -m -KILL "iPhone Simulator"]
+class Simulator
+  def self.launch(app_dir, app_name, logfile)
+    kill
+    # These comments represent the prior method of bootstrapping iOS apps without using the simulator.
+    # It was more reliable, but 7.1+ SDKs fail with "The iOS Simulator libSystem was initialized out of order"
+    #
+    # sdk_path = Xcode.sdk_dir_for_version(SDK_RUNTIME_VERSION)
+    env_vars = {
+      # "DYLD_ROOT_PATH" => sdk_path,
+      # "DYLD_FALLBACK_LIBRARY_PATH" => sdk_path,
+      # "IPHONE_SIMULATOR_ROOT" => sdk_path,
+      # "CFFIXED_USER_HOME" => Dir.tmpdir,
+      "CEDAR_HEADLESS_SPECS" => "1",
+      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+    }
+
+    Shell.with_env(env_vars) do
+      # Shell.run "#{File.join(app_dir, "#{app_name}.app", app_name)} -RegisterForSystemEvents", logfile
+      Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
+    end
+  end
+
+  def self.launch_bundle(app_dir, app_name, test_bundle, logfile)
+    env_vars = {
+      "DYLD_INSERT_LIBRARIES" => "#{Xcode.developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
+      "XCInjectBundle" => test_bundle,
+      "XCInjectBundleInto" => "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{APP_IOS_NAME}.app/#{APP_IOS_NAME}")}",
+    }
+    Shell.with_env(env_vars) do
+      launch(app_dir, app_name, logfile)
+    end
+  end
+
+  def self.kill
+    Shell.fold "kill-simulator" do
+      system %Q[killall -m -KILL "gdb"]
+      system %Q[killall -m -KILL "otest"]
+      system %Q[killall -m -KILL "iPhone Simulator"]
+    end
   end
 end
 
-task :default => [:trim_whitespace, "suites:run", "frameworks:ios:specs:run", "testbundles:run"]
-task :cruise => [:clean, "testbundles:run", :suites, "frameworks:ios:specs:run"]
+task :default => [:trim_whitespace, "suites:run", "suites:iosframeworkspecs:run", "testbundles:run"]
+task :cruise => [:clean, "testbundles:run", :suites, "suites:iosframeworkspecs"]
 
 desc "Trim whitespace"
 task :trim_whitespace do
@@ -276,18 +319,14 @@ namespace :suites do
 
     desc "Run UI specs"
     task run: :build do
-      kill_simulator
-      sdk_path = Xcode.sdk_dir_for_version(SDK_RUNTIME_VERSION)
+      Simulator.kill
       env_vars = {
-        "DYLD_ROOT_PATH" => sdk_path,
-        "IPHONE_SIMULATOR_ROOT" => sdk_path,
-        "CFFIXED_USER_HOME" => Dir.tmpdir,
         "CEDAR_HEADLESS_SPECS" => "1",
         "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
       }
 
       Shell.with_env(env_vars) do
-        Shell.run "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{UI_SPECS_TARGET_NAME}.app", UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents", "uispecs.run.log"
+        Simulator.launch(Xcode.build_dir("-iphonesimulator"), UI_SPECS_TARGET_NAME, "uispecs.run.log")
       end
     end
   end
@@ -309,13 +348,41 @@ namespace :suites do
     end
 
     desc "Run Cedar's specs for verifying focused test behavior"
-    task run: :build do
+    task run: [:build, 'frameworks:build'] do
       env_vars = {
-        "DYLD_FRAMEWORK_PATH" => BUILD_DIR,
+        "DYLD_FRAMEWORK_PATH" => Xcode.build_dir,
         "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
       }
       Shell.with_env(env_vars) do
-        Shell.run File.join(Xcode.build_dir, FOCUSED_SPECS_TARGET_NAME), "focused_specs.run.log"
+        Shell.run(File.join(Xcode.build_dir, FOCUSED_SPECS_TARGET_NAME), "focused_specs.run.log")
+      end
+    end
+  end
+
+  desc "Analyzes and runs ios framework specs"
+  task iosframeworkspecs: ['specs:analyze', 'specs:run']
+
+  namespace :iosframeworkspecs do
+    desc "Analyzes ios framework specs"
+    task :analyze do
+      Xcode.analyze(target: IOS_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.specs.analyze.log")
+    end
+
+    desc "Build iOS static framework specs"
+    task :build do
+      Xcode.build(target: IOS_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.specs.build.log")
+    end
+
+    desc "Runs iOS static framework specs"
+    task run: :build do
+      Simulator.kill
+      env_vars = {
+        "CEDAR_HEADLESS_SPECS" => "1",
+        "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+      }
+
+      Shell.with_env(env_vars) do
+        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_FRAMEWORK_SPECS_TARGET_NAME, "frameworks.ios.specs.run.log")
       end
     end
   end
@@ -323,46 +390,23 @@ end
 
 namespace :frameworks do
   desc "Build Cedar and Cedar-iOS frameworks, and verify built Cedar-iOS.framework"
-  task build: 'ios:build' do
+  task build: ['frameworks:ios:build', 'frameworks:osx:build'] do
     begin
       Rake::Task['frameworks:ios:specs:run'].execute
     rescue Exception => e
       puts "Unable to run iOS static framework specs. Skipping validation of Cedar-iOS.framework (#{e})"
     end
-    Xcode.build(target: CEDAR_FRAMEWORK_TARGET_NAME, logfile: "framework.log")
+  end
+
+  namespace :osx do
+    task :build do
+      Xcode.build(target: CEDAR_FRAMEWORK_TARGET_NAME, logfile: "frameworks.osx.build.log")
+    end
   end
 
   namespace :ios do
-    desc "Analyzes and runs ios framework specs"
-    task specs: [:analyze, :run]
-
-    namespace :specs do
-      desc "Analyzes ios framework specs"
-      task :analyze do
-        Xcode.analyze(target: IOS_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.specs.analyze.log")
-      end
-
-      desc "Build iOS static framework specs"
-      task :build do
-        Xcode.build(target: IOS_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.specs.build.log")
-      end
-
-      desc "Runs iOS static framework specs"
-      task run: :build do
-        kill_simulator
-        sdk_path = Xcode.sdk_dir_for_version(SDK_RUNTIME_VERSION)
-        env_vars = {
-          "DYLD_ROOT_PATH" => sdk_path,
-          "IPHONE_SIMULATOR_ROOT" => sdk_path,
-          "CFFIXED_USER_HOME" => Dir.tmpdir,
-          "CEDAR_HEADLESS_SPECS" => "1",
-          "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-        }
-
-        Shell.with_env(env_vars) do
-          Shell.run("#{File.join(Xcode.build_dir("-iphonesimulator"), "#{IOS_FRAMEWORK_SPECS_TARGET_NAME}.app", IOS_FRAMEWORK_SPECS_TARGET_NAME)} -RegisterForSystemEvents", "frameworks.ios.specs.run.log")
-        end
-      end
+    task :build do
+      Xcode.build(target: CEDAR_IOS_FRAMEWORK_TARGET_NAME, logfile: "frameworks.ios.build.log")
     end
   end
 end
@@ -371,11 +415,16 @@ namespace :testbundles do
   desc "Runs all test bundle test suites (xcunit, ocunit:logic, ocunit:application)"
   task run: ['testbundles:xcunit', 'testbundles:ocunit']
 
-  desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_TARGET_NAME})"
-  task :xcunit do
-    kill_simulator
+  desc "Converts the test bundle identifier to ones Xcode 5- recognizes (Xcode 6 postfixes the original bundler identifier)"
+  task :convert_to_xcode5 do
+    Xcode.sed_project(%r{com\.apple\.product-type\.bundle\.(oc)?unit-test}, 'com.apple.product-type.bundle')
+  end
 
-    Shell.fold "Running xcunit bundle #{XCUNIT_APPLICATION_SPECS_TARGET_NAME}" do
+  desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_TARGET_NAME})"
+  task xcunit: :convert_to_xcode5 do
+    Simulator.kill
+
+    Shell.fold "run-xcunit" do
       Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
         if Xcode.is_octest_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
           Shell.run "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{XCUNIT_APPLICATION_SPECS_TARGET_NAME.inspect} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_VERSION)}' -destination-timeout 9", "xcunit.run.log"
@@ -391,8 +440,8 @@ namespace :testbundles do
 
   namespace :ocunit do
     desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
-    task :logic do
-      Shell.fold "Running ocunit logic bundle #{OCUNIT_LOGIC_SPECS_TARGET_NAME}" do
+    task logic: :convert_to_xcode5 do
+      Shell.fold "running-ocunit-logic" do
         Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
           if Xcode.is_octest_deprecated?
             Shell.run "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_NAME} -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' -destination 'arch=x86_64'", "ocunit-logic-specs.log"
@@ -404,10 +453,10 @@ namespace :testbundles do
     end
 
     desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_TARGET_NAME})"
-    task :application do
-      kill_simulator
+    task application: :convert_to_xcode5 do
+      Simulator.kill
 
-      Shell.fold "Running ocunit application bundle #{OCUNIT_LOGIC_SPECS_TARGET_NAME}" do
+      Shell.fold "running-ocunit-application" do
         if Xcode.is_octest_deprecated?
           Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
             Shell.run "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_IOS_NAME} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_VERSION)}' -destination-timeout 9", "ocunit-application-specs.log"
@@ -415,28 +464,21 @@ namespace :testbundles do
         else
           Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", "ocunit-application-build.log"
 
-          sdk_path = Xcode.sdk_dir_for_version(SDK_RUNTIME_VERSION)
-          env_vars = {
-            "DYLD_ROOT_PATH" => sdk_path,
-            "DYLD_INSERT_LIBRARIES" => "#{Xcode.developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-            "DYLD_FALLBACK_LIBRARY_PATH" => sdk_path,
-            "XCInjectBundle" => "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")}",
-            "XCInjectBundleInto" => "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{APP_IOS_NAME}.app/#{APP_IOS_NAME}")}",
-            "IPHONE_SIMULATOR_ROOT" => sdk_path,
-            "CFFIXED_USER_HOME" => Dir.tmpdir,
-            "CEDAR_HEADLESS_SPECS" => "1",
-            "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-          }
-
-          Shell.with_env(env_vars) do
-            Shell.run "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{APP_IOS_NAME}.app/#{APP_IOS_NAME}")} -RegisterForSystemEvents -SenTest All", "ocunit-application-specs.log"
-          end
+          test_bundle = File.join(Xcode.build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")
+          Simulator.launch_bundle(Xcode.build_dir("-iphonesimulator"), APP_IOS_NAME, test_bundle, "ocunit.application.specs.log")
         end
       end
     end
   end
 end
 
+desc 'Runs integration tests of the templates'
+task :test_templates do
+  terminal_id = `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' /Applications/Utilities/Terminal.app/Contents/Info.plist`.strip
+  Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{terminal_id}',0,1,1,NULL);"}
+  Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
+  Shell.run "cucumber"
+end
 
 desc "Remove code snippets and templates"
 task :uninstall do
@@ -451,7 +493,7 @@ desc "Build a distribution of the templates and code snippets"
 task :dist => ["dist:prepare", "dist:package"]
 
 namespace :dist do
-  task :prepare => :build_frameworks do
+  task :prepare => 'frameworks:build' do
     Dir.mkdir(DIST_STAGING_DIR) unless File.exists?(DIST_STAGING_DIR)
     cedar_project_templates_dir = %{#{DIST_STAGING_DIR}/Library/Developer/Xcode/Templates/Project Templates/Cedar}
 

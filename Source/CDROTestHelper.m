@@ -9,8 +9,8 @@ id CDRPerformSelector(id obj, NSString *selectorString) {
         return [obj performSelector:selector];
     } else {
         fprintf(stderr, "%s",
-                [NSString stringWithFormat:@"[CEDAR] Internal Warning: %@ does not support selector(%@)\n",
-                 obj, NSStringFromSelector(selector)].UTF8String);
+                [[NSString stringWithFormat:@"[CEDAR] Internal Warning: %@ does not support selector(%@)\n",
+                 obj, NSStringFromSelector(selector)] UTF8String]);
         return nil;
     }
 }

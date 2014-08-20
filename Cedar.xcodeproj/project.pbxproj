@@ -1500,7 +1500,6 @@
 				AE8C879F1362068A006C9305 /* Matchers */,
 				66F00B5014C4D92500146D88 /* Doubles */,
 				9672F0A81615C3F40012ED58 /* CDRSpecSpec.mm */,
-				AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */,
 				AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */,
 				AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */,
 				96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */,
@@ -2105,7 +2104,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /usr/bin/ruby;
+			shellPath = "/usr/bin/env ruby";
 			shellScript = "key = \"CDRBuildVersionSHA\"\nver = `git rev-parse HEAD`.strip\nputs \"Git commit SHA is #{ver}\"\npath = \"#{ENV['BUILT_PRODUCTS_DIR']}/#{ENV['INFOPLIST_PATH']}\"\nputs \"Updating #{path}\"\n`/usr/libexec/PlistBuddy -c \"Add :#{key} string #{ver}\" \"#{path}\"`";
 		};
 		96158A84144A915E005895CE /* ShellScript */ = {
