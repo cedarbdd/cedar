@@ -47,13 +47,16 @@ class Shell
     original_cmd = cmd
     if logfile
       logfile = output_file(logfile)
-      cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
+      if ENV['TRAVIS']
+        cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
+      else
+        cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
+      end
     end
     system(cmd) or begin
+      system("cat '#{logfile}'") if ENV['TRAVIS']
       log_msg = ""
-      if logfile
-        log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}"
-      end
+      log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
       raise <<EOF
 #{`cat #{logfile}`}
 [#{red}Failed#{clear}] Command: #{original_cmd}
