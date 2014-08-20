@@ -161,6 +161,12 @@ class Xcode
       Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} analyze #{args} SYMROOT='#{BUILD_DIR}' | tee /dev/stderr | grep -q -v 'The following commands produced analyzer issues:'], logfile)
     end
   end
+
+  def self.sed_project(search, replace)
+    pbxproj = "#{PROJECT_NAME}.xcodeproj/project.pbxproj"
+    contents = File.read(pbxproj)
+    File.write(pbxproj, contents.gsub(search, replace))
+  end
 end
 
 def remove_templates_from_directory(templates_directory)
@@ -407,8 +413,13 @@ namespace :testbundles do
   desc "Runs all test bundle test suites (xcunit, ocunit:logic, ocunit:application)"
   task run: ['testbundles:xcunit', 'testbundles:ocunit']
 
+  desc "Converts the test bundle identifier to ones Xcode 5- recognizes (Xcode 6 postfixes the original bundler identifier)"
+  task :convert_to_xcode5 do
+    Xcode.sed_project(%r{com\.apple\.product-type\.bundle\.(oc)?unit-test}, 'com.apple.product-type.bundle')
+  end
+
   desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_TARGET_NAME})"
-  task :xcunit do
+  task xcunit: :convert_to_xcode5 do
     Simulator.kill
 
     Shell.fold "run-xcunit" do
@@ -427,7 +438,7 @@ namespace :testbundles do
 
   namespace :ocunit do
     desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
-    task :logic do
+    task logic: :convert_to_xcode5 do
       Shell.fold "running-ocunit-logic" do
         Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
           if Xcode.is_octest_deprecated?
@@ -440,7 +451,7 @@ namespace :testbundles do
     end
 
     desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_TARGET_NAME})"
-    task :application do
+    task application: :convert_to_xcode5 do
       Simulator.kill
 
       Shell.fold "running-ocunit-application" do
