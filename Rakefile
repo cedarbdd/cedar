@@ -52,7 +52,7 @@ class Shell
     system(cmd) or begin
       log_msg = ""
       if logfile
-        log_msg = "[#{red}Failed#{clear}] Logged to: #{logfile}"
+        log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}"
       end
       raise <<EOF
 #{`cat #{logfile}`}
