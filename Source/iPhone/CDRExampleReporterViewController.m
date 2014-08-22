@@ -1,9 +1,6 @@
 #import "CDRExampleReporterViewController.h"
 #import "CDRFunctions.h"
-#import "CedarApplicationDelegate.h"
 #import "CDRSpecStatusViewController.h"
-#import "CDRDefaultReporter.h"
-#import <objc/runtime.h>
 
 @implementation CDRExampleReporterViewController
 

@@ -43,9 +43,9 @@
 }
 
 - (CDRSpecBlock)subjectActionBlock {
-    CDRSpecBlock parentsubjectActionBlock = self.parent.subjectActionBlock;
+    CDRSpecBlock parentSubjectActionBlock = self.parent.subjectActionBlock;
     if (subjectActionBlock_) {
-        if (parentsubjectActionBlock) {
+        if (parentSubjectActionBlock) {
             @throw([NSException exceptionWithName:NSInternalInconsistencyException
                                            reason:[NSString stringWithFormat:@"%@ has more than one subject action block", self]
                                          userInfo:nil]);
@@ -53,7 +53,7 @@
             return subjectActionBlock_;
         }
     } else {
-        return parentsubjectActionBlock;
+        return parentSubjectActionBlock;
     }
 }
 

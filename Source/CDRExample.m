@@ -1,15 +1,8 @@
 #import "CDRExample.h"
-#import "CDRSpecFailure.h"
 #import "CDRSpecHelper.h"
 #import "CDRReportDispatcher.h"
 
 const CDRSpecBlock PENDING = nil;
-
-@interface XCTestRun : NSObject
-- (id)testRunWithTest:(id)test;
-- (void)start;
-- (void)stop;
-@end
 
 @interface CDRExample (Private)
 - (void)setState:(CDRExampleState)state;
