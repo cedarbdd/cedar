@@ -5,6 +5,12 @@
 
 const CDRSpecBlock PENDING = nil;
 
+@interface XCTestRun : NSObject
+- (id)testRunWithTest:(id)test;
+- (void)start;
+- (void)stop;
+@end
+
 @interface CDRExample (Private)
 - (void)setState:(CDRExampleState)state;
 @end
@@ -110,3 +116,4 @@ const CDRSpecBlock PENDING = nil;
 }
 
 @end
+

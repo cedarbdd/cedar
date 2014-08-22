@@ -24,9 +24,9 @@
     return [self sanitizeNameFromString:className];
 }
 
-- (NSString *)methodNameForExample:(CDRExampleBase *)example {
+- (NSString *)methodNameForExample:(CDRExampleBase *)example withClassName:(NSString *)className {
     NSMutableArray *fullTextPieces = [example.fullTextInPieces mutableCopy];
-    NSString *specClassName = [self classNameForExample:example];
+    NSString *specClassName = [self sanitizeNameFromString:className];
     NSString *firstPieceWithSpecPostfix = [NSString stringWithFormat:@"%@Spec", [fullTextPieces objectAtIndex:0]];
     if ([firstPieceWithSpecPostfix isEqual:specClassName]) {
         [fullTextPieces removeObjectAtIndex:0];
@@ -35,6 +35,10 @@
     NSString *methodName = [fullTextPieces componentsJoinedByString:@"_"];
     [fullTextPieces release];
     return [self sanitizeNameFromString:methodName];
+}
+
+- (NSString *)methodNameForExample:(CDRExampleBase *)example {
+    return [self methodNameForExample:example withClassName:[self classNameForExample:example]];
 }
 
 #pragma mark - Private

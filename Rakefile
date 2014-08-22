@@ -35,6 +35,7 @@ APPCODE_SNIPPETS_FILE = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "App
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 PLUGIN_DIR = File.join(PROJECT_ROOT, "CedarPlugin.xcplugin")
 PLISTBUDDY = "/usr/libexec/PlistBuddy"
+USE_XCPRETTY = true
 
 require 'tmpdir'
 
@@ -47,14 +48,9 @@ class Shell
     original_cmd = cmd
     if logfile
       logfile = output_file(logfile)
-      if ENV['TRAVIS']
-        cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
-      else
-        cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
-      end
+      cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
     end
     system(cmd) or begin
-      system("cat '#{logfile}'") if ENV['TRAVIS']
       log_msg = ""
       log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
       raise <<EOF
@@ -68,16 +64,19 @@ EOF
 
   def self.with_env(env_vars)
     old_values = {}
-    env_vars.each do |key,new_value|
+    env_vars.each do |key, new_value|
       old_values[key] = ENV[key]
       ENV[key] = new_value
     end
 
-    begin
-      yield
-    ensure
-      env_vars.each_key do |key|
-        ENV[key] = old_values[key]
+    fold "env" do
+      env_vars.each { |key, new_value| puts "#{key}=#{new_value}" }
+      begin
+        yield
+      ensure
+        env_vars.each_key do |key|
+          ENV[key] = old_values[key]
+        end
       end
     end
   end
@@ -136,6 +135,14 @@ class Xcode
     end
   end
 
+  def self.pretty_command
+    if USE_XCPRETTY && system("which xcpretty")
+      "xcpretty -c"
+    else
+      "cat"
+    end
+  end
+
   def self.build(options = nil)
     raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
 
@@ -147,7 +154,22 @@ class Xcode
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
     Shell.fold "build" do
-      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' build #{args}], logfile)
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' build #{args} | #{pretty_command}; test ${PIPESTATUS[0]} -eq 0), logfile)
+    end
+  end
+
+  def self.test(options = nil)
+    raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
+
+    logfile = options.fetch(:logfile)
+    args = options[:args] || ""
+
+    args += " -target #{options[:target].inspect}" if options[:target]
+    args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
+    args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
+
+    Shell.fold "test" do
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' test #{args} | #{pretty_command}; test ${PIPESTATUS[0]} -eq 0), logfile)
     end
   end
 
@@ -427,7 +449,12 @@ namespace :testbundles do
     Shell.fold "run-xcunit" do
       Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
         if Xcode.is_octest_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
-          Shell.run "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{XCUNIT_APPLICATION_SPECS_TARGET_NAME.inspect} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_VERSION)}' -destination-timeout 9", "xcunit.run.log"
+          Xcode.test(
+            scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
+            sdk: "iphonesimulator#{SDK_VERSION}",
+            args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+            logfile: "xcunit.run.log",
+          )
         else
           puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
         end

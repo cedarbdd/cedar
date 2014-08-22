@@ -6,5 +6,6 @@
 
 - (NSString *)classNameForExample:(CDRExampleBase *)example;
 - (NSString *)methodNameForExample:(CDRExampleBase *)example;
+- (NSString *)methodNameForExample:(CDRExampleBase *)example withClassName:(NSString *)className;
 
 @end

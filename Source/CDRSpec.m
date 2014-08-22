@@ -4,6 +4,7 @@
 #import "CDRSpecFailure.h"
 #import "CDRSpecHelper.h"
 #import "CDRSymbolicator.h"
+#import <objc/runtime.h>
 
 CDRSpec *CDR_currentSpec;
 
@@ -84,6 +85,48 @@ CDRExample * fit(NSString *text, CDRSpecBlock block) {
 void fail(NSString *reason) {
     [[CDRSpecFailure specFailureWithReason:[NSString stringWithFormat:@"Failure: %@", reason]] raise];
 }
+
+
+#pragma mark - Experimental XCTest Support
+
+@interface CDRXCTestSupport : NSObject
+- (id)testSuiteWithName:(NSString *)name;
+- (id)defaultTestSuite;
+- (id)testSuiteForBundlePath:(NSString *)bundlePath;
+- (id)testSuiteForTestCaseWithName:(NSString *)name;
+- (id)testSuiteForTestCaseClass:(Class)testCaseClass;
+
+- (void)addTest:(id)test;
+- (NSArray *)tests;
+
++ (id)testCaseWithInvocation:(NSInvocation *)invocation;
+- (id)initWithInvocation:(NSInvocation *)invocation;
+
+
++ (id)testRunWithTest:(id)test;
+
+
+@property (readonly) NSUInteger testCaseCount;
+@property (readonly, copy) NSString *name;
+@property (readonly) Class testRunClass;
+- (void)performTest:(id)run;
+- (id)run;
+- (void)setUp;
+- (void)tearDown;
+
+
+- (void)start;
+- (void)stop;
+@end
+
+#import "CDRReportDispatcher.h"
+#import "CDRSpec.h"
+#import "CDRExampleGroup.h"
+#import "CDROTestNamer.h"
+
+@interface CDRSpec ()
+@property (strong) NSInvocation *invocation; // defined by XCTestCase
+@end
 
 @implementation CDRSpec
 
@@ -192,6 +235,168 @@ void fail(NSString *reason) {
         [seenChildren addObject:child];
     }
     return seenChildren;
+}
+
+- (NSArray *)allExamples {
+    NSMutableArray *examples = [NSMutableArray array];
+    NSMutableArray *groupsQueue = [NSMutableArray arrayWithArray:self.rootGroup.examples];
+    while (groupsQueue.count) {
+        CDRExampleBase *exampleBase = [groupsQueue firstObject];
+        if (exampleBase.hasChildren) {
+            [groupsQueue addObjectsFromArray:[(CDRExampleGroup *)exampleBase examples]];
+        } else {
+            [examples addObject:exampleBase];
+        }
+        [groupsQueue removeObjectAtIndex:0];
+    }
+    return examples;
+}
+
+@end
+
+@implementation CDRSpec (XCTestSupport)
+
+- (instancetype)initWithInvocation:(NSInvocation *)invocation {
+    self = [self init];
+    if (self) {
+        self.invocation = invocation;
+        [self defineBehaviors];
+    }
+    return self;
+}
+
+- (NSString *)name {
+    return [NSString stringWithFormat:@"-[%@ %@]",
+            [NSStringFromClass([self class]) substringFromIndex:1],
+            NSStringFromSelector([[self invocation] selector])];
+}
+
+- (void)invokeTest {
+    NSInvocation *invocation = [self invocation];
+    invocation.target = self;
+    [invocation invoke];
+}
+
++ (NSArray *)testInvocations {
+    NSMutableArray *invocations = [NSMutableArray array];
+    CDRSpec *spec = [[self new] autorelease];
+    [spec defineBehaviors];
+
+    CDROTestNamer *namer = [[CDROTestNamer new] autorelease];
+    for (CDRExample *example in [spec allExamples]) {
+        SEL selector = NSSelectorFromString([namer methodNameForExample:example withClassName:[NSStringFromClass([self class]) substringFromIndex:1]]);
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:selector]];
+        invocation.selector = selector;
+        [invocations addObject:invocation];
+    };
+
+    return invocations;
+}
+
+- (void)placeholderWithSpec:(CDRSpec *)spec
+                 dispatcher:(CDRReportDispatcher *)dispatcher
+                    example:(CDRExample *)example
+{}
+
+static void CDRCopyMethodsAndIvarsFromClass(Class sourceClass, Class destinationClass, NSSet *exclude) {
+    unsigned int count = 0;
+    Method *instanceMethods = class_copyMethodList(sourceClass, &count);
+    for (unsigned int i = 0; i < count; i++) {
+        Method m = instanceMethods[i];
+        if ([exclude containsObject:NSStringFromSelector(method_getName(m))]) {
+            continue;
+        }
+        if (class_respondsToSelector(destinationClass, method_getName(m))) {
+            class_replaceMethod(destinationClass,
+                                method_getName(m),
+                                method_getImplementation(m),
+                                method_getTypeEncoding(m));
+        } else {
+            class_addMethod(destinationClass,
+                            method_getName(m),
+                            method_getImplementation(m),
+                            method_getTypeEncoding(m));
+        }
+    }
+
+    count = 0;
+    Ivar *instanceVars = class_copyIvarList(sourceClass, &count);
+    for (unsigned int i = 0; i < count; i++) {
+        Ivar v = instanceVars[i];
+        if ([exclude containsObject:[NSString stringWithUTF8String:ivar_getName(v)]]) {
+            continue;
+        }
+
+        NSUInteger size = 0, align = 0;
+        NSGetSizeAndAlignment(ivar_getTypeEncoding(v), &size, &align);
+        class_addIvar(destinationClass,
+                      ivar_getName(v),
+                      size,
+                      align,
+                      ivar_getTypeEncoding(v));
+    }
+    free(instanceVars);
+
+    count = 0;
+    objc_property_t *properties = class_copyPropertyList(sourceClass, &count);
+    for (unsigned int i = 0; i < count; i++) {
+        objc_property_t property = properties[i];
+
+        if ([exclude containsObject:[NSString stringWithUTF8String:property_getName(property)]]) {
+            continue;
+        }
+
+        unsigned int attrCount = 0;
+        objc_property_attribute_t *attributes = property_copyAttributeList(property, &attrCount);
+        class_addProperty(destinationClass,
+                          property_getName(property),
+                          attributes,
+                          attrCount);
+        free(attributes);
+    }
+    free(properties);
+}
+
+- (id)testSuite {
+    NSString *className = NSStringFromClass([self class]);
+    id testSuite = [(id)NSClassFromString(@"XCTestSuite") testSuiteWithName:className];
+
+
+    size_t size = class_getInstanceSize([self class]) - class_getInstanceSize([NSObject class]);
+    NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
+    Class newXCTestSubclass = objc_allocateClassPair(NSClassFromString(@"XCTestCase"), [newClassName UTF8String], size);
+
+    NSSet *excludes = [NSSet setWithObject:@"testSuite"];
+    CDRCopyMethodsAndIvarsFromClass([self superclass], newXCTestSubclass, excludes);
+    CDRCopyMethodsAndIvarsFromClass([self class], newXCTestSubclass, excludes);
+    CDRCopyMethodsAndIvarsFromClass(object_getClass([self superclass]), object_getClass(newXCTestSubclass), excludes);
+
+    objc_registerClassPair(newXCTestSubclass);
+
+    CDRSpec *spec = [[[newXCTestSubclass alloc] init] autorelease];
+    [spec defineBehaviors];
+
+    CDROTestNamer *namer = [[CDROTestNamer new] autorelease];
+    Method m = class_getInstanceMethod([self class], @selector(defineBehaviors));
+    NSArray *examples = [spec allExamples];
+    NSUInteger i = 0;
+    for (CDRExample *example in examples) {
+        IMP imp = imp_implementationWithBlock(^(id instance){
+            CDRExample *theExample = [instance allExamples][i];
+            [theExample runWithDispatcher:nil];
+        });
+        class_addMethod([spec class],
+                        NSSelectorFromString([namer methodNameForExample:example withClassName:NSStringFromClass([self class])]),
+                        imp,
+                        method_getTypeEncoding(m));
+        i++;
+    }
+
+    for (id test in [[(id)[spec class] defaultTestSuite] tests]) {
+        [testSuite addTest:test];
+    }
+
+    return testSuite;
 }
 
 @end
