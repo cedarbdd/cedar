@@ -47,14 +47,9 @@ class Shell
     original_cmd = cmd
     if logfile
       logfile = output_file(logfile)
-      if ENV['TRAVIS']
-        cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
-      else
-        cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
-      end
+      cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
     end
     system(cmd) or begin
-      system("cat '#{logfile}'") if ENV['TRAVIS']
       log_msg = ""
       log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
       raise <<EOF
@@ -68,11 +63,12 @@ EOF
 
   def self.with_env(env_vars)
     old_values = {}
-    env_vars.each do |key,new_value|
+    env_vars.each do |key, new_value|
       old_values[key] = ENV[key]
       ENV[key] = new_value
     end
 
+    env_vars.each { |key, new_value| puts "#{key}=#{new_value}" }
     begin
       yield
     ensure
@@ -82,18 +78,11 @@ EOF
     end
   end
 
-  def self.fold_start(name)
-    puts "travis_fold:start:#{name}" if ENV['TRAVIS']
-  end
-
-  def self.fold_end(name)
-    puts "travis_fold:end:#{name}" if ENV['TRAVIS']
-  end
-
   def self.fold(name)
-    fold_start(name)
+    name = name.gsub(/[^A-Za-z0-9.-]/, '')
+    puts "travis_fold:start:#{name}" if ENV['TRAVIS']
     result = yield(self)
-    fold_end(name)
+    puts "travis_fold:end:#{name}" if ENV['TRAVIS']
     result
   end
 
@@ -147,7 +136,22 @@ class Xcode
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
     Shell.fold "build" do
-      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' build #{args}], logfile)
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' build #{args}), logfile)
+    end
+  end
+
+  def self.test(options = nil)
+    raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
+
+    logfile = options.fetch(:logfile)
+    args = options[:args] || ""
+
+    args += " -target #{options[:target].inspect}" if options[:target]
+    args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
+    args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
+
+    Shell.fold "test.#{options[:scheme] || options[:target]}" do
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' test #{args}), logfile)
     end
   end
 
@@ -160,8 +164,8 @@ class Xcode
     args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
-    Shell.fold "analyze" do
-      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} analyze #{args} SYMROOT='#{BUILD_DIR}' | tee /dev/stderr | grep -q -v 'The following commands produced analyzer issues:'], logfile)
+    Shell.fold "analyze.#{options[:scheme] || options[:target]}" do
+      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} analyze #{args} SYMROOT='#{BUILD_DIR}'], logfile)
     end
   end
 
@@ -252,11 +256,9 @@ class Simulator
   end
 
   def self.kill
-    Shell.fold "kill-simulator" do
-      system %Q[killall -m -KILL "gdb"]
-      system %Q[killall -m -KILL "otest"]
-      system %Q[killall -m -KILL "iPhone Simulator"]
-    end
+    system %Q[killall -m -KILL "gdb"]
+    system %Q[killall -m -KILL "otest"]
+    system %Q[killall -m -KILL "iPhone Simulator"]
   end
 end
 
@@ -424,13 +426,16 @@ namespace :testbundles do
   task xcunit: :convert_to_xcode5 do
     Simulator.kill
 
-    Shell.fold "run-xcunit" do
-      Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-        if Xcode.is_octest_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
-          Shell.run "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{XCUNIT_APPLICATION_SPECS_TARGET_NAME.inspect} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_VERSION)}' -destination-timeout 9", "xcunit.run.log"
-        else
-          puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
-        end
+    Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+      if Xcode.is_octest_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
+        Xcode.test(
+          scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
+          sdk: "iphonesimulator#{SDK_VERSION}",
+          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+          logfile: "xcunit.run.log",
+        )
+      else
+        puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
       end
     end
   end
@@ -441,13 +446,15 @@ namespace :testbundles do
   namespace :ocunit do
     desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
     task logic: :convert_to_xcode5 do
-      Shell.fold "running-ocunit-logic" do
-        Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-          if Xcode.is_octest_deprecated?
-            Shell.run "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_NAME} -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' -destination 'arch=x86_64'", "ocunit-logic-specs.log"
-          else
-            Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{BUILD_DIR}'", "ocunit-logic-specs.log"
-          end
+      Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+        if Xcode.is_octest_deprecated?
+          Xcode.test(
+            scheme: APP_NAME,
+            args: "SYMROOT='#{BUILD_DIR}' -destination 'arch=x86_64'",
+            logfile: "ocunit-logic-specs.log",
+          )
+        else
+          Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{BUILD_DIR}'", "ocunit-logic-specs.log"
         end
       end
     end
@@ -456,17 +463,20 @@ namespace :testbundles do
     task application: :convert_to_xcode5 do
       Simulator.kill
 
-      Shell.fold "running-ocunit-application" do
-        if Xcode.is_octest_deprecated?
-          Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-            Shell.run "xcodebuild test -project #{PROJECT_NAME}.xcodeproj -scheme #{APP_IOS_NAME} -configuration #{CONFIGURATION} ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_VERSION)}' -destination-timeout 9", "ocunit-application-specs.log"
-          end
-        else
-          Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", "ocunit-application-build.log"
-
-          test_bundle = File.join(Xcode.build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")
-          Simulator.launch_bundle(Xcode.build_dir("-iphonesimulator"), APP_IOS_NAME, test_bundle, "ocunit.application.specs.log")
+      if Xcode.is_octest_deprecated?
+        Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
+          Xcode.test(
+            scheme: APP_IOS_NAME,
+            sdk: "iphonesimulator#{SDK_VERSION}",
+            args: "ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+            logfile: "ocunit-application-specs.log",
+          )
         end
+      else
+        Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", "ocunit-application-build.log"
+
+        test_bundle = File.join(Xcode.build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")
+        Simulator.launch_bundle(Xcode.build_dir("-iphonesimulator"), APP_IOS_NAME, test_bundle, "ocunit.application.specs.log")
       end
     end
   end

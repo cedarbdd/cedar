@@ -29,7 +29,7 @@ void CDRRunTests(id self, SEL _cmd, id object) {
 }
 
 - (void)runStandardTestsWithTestProbe:(id)testProbe {
-    int exitStatus;
+    int exitStatus = 0;
     if (CDRIsXCTest()) {
         exitStatus = CDRRunXCUnitTests(testProbe);
     } else {

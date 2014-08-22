@@ -1,5 +1,4 @@
 #import "CDRExample.h"
-#import "CDRSpecFailure.h"
 #import "CDRSpecHelper.h"
 #import "CDRReportDispatcher.h"
 
@@ -110,3 +109,4 @@ const CDRSpecBlock PENDING = nil;
 }
 
 @end
+

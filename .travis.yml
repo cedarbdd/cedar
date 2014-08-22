@@ -11,8 +11,9 @@ env:
     - CEDAR_SDK_RUNTIME_VERSION="7.0"
     - CEDAR_SDK_RUNTIME_VERSION="7.1"
 
+before_install: brew update
 install:
   - bundle install
   - brew install ios-sim
 
-script: rake
+script: rake cruise
