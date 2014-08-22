@@ -242,7 +242,7 @@ void fail(NSString *reason) {
     NSMutableArray *examples = [NSMutableArray array];
     NSMutableArray *groupsQueue = [NSMutableArray arrayWithArray:self.rootGroup.examples];
     while (groupsQueue.count) {
-        CDRExampleBase *exampleBase = [groupsQueue firstObject];
+        CDRExampleBase *exampleBase = [groupsQueue objectAtIndex:0];
         if (exampleBase.hasChildren) {
             [groupsQueue addObjectsFromArray:[(CDRExampleGroup *)exampleBase examples]];
         } else {
