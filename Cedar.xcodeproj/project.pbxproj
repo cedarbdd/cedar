@@ -263,6 +263,9 @@
 		AE53B68217E7BCE700D83D5E /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
 		AE53B68317E7BDA900D83D5E /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
 		AE53B68417E7CD8D00D83D5E /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		AE55BF1B19A7CF58005948E6 /* CDRRuntimeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = AE55BF1A19A7CF58005948E6 /* CDRRuntimeUtilities.m */; };
+		AE55BF1C19A7CF58005948E6 /* CDRRuntimeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = AE55BF1A19A7CF58005948E6 /* CDRRuntimeUtilities.m */; };
+		AE55BF1E19A7CFAB005948E6 /* CDRRuntimeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */; };
 		AE597B4115B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE597B4215B0638B00EEF305 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		AE6F3F341458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; };
@@ -765,6 +768,8 @@
 		AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithWeakDelegate.h; sourceTree = "<group>"; };
 		AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithWeakDelegate.m; sourceTree = "<group>"; };
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
+		AE55BF1A19A7CF58005948E6 /* CDRRuntimeUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRRuntimeUtilities.m; sourceTree = "<group>"; };
+		AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRRuntimeUtilities.h; sourceTree = "<group>"; };
 		AE597B4015B0638B00EEF305 /* InvocationMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvocationMatcher.h; sourceTree = "<group>"; };
 		AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BeGreaterThanSpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE71E7CA175E958F002A54D5 /* ARCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCViewController.h; sourceTree = "<group>"; };
@@ -1425,6 +1430,7 @@
 				AEEE1FC811DC27B800029872 /* CDRFunctions.m */,
 				969B6F82160C61E000C7C792 /* CDRSymbolicator.m */,
 				34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */,
+				AE55BF1A19A7CF58005948E6 /* CDRRuntimeUtilities.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1454,6 +1460,7 @@
 				34446020190A7EB00076655A /* SpecHelper.h */,
 				3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */,
 				34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */,
+				AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -1753,6 +1760,7 @@
 				AECF136415D14274003AAB9C /* ValueArgument.h in Headers */,
 				AECF136715D142E3003AAB9C /* ReturnValue.h in Headers */,
 				AECF136A15D1439B003AAB9C /* AnyArgument.h in Headers */,
+				AE55BF1E19A7CFAB005948E6 /* CDRRuntimeUtilities.h in Headers */,
 				AE94D03F15F341B200A0C2B7 /* AnyInstanceArgument.h in Headers */,
 				AEE8DBD4175FFCF3008AF18A /* CDRSpyInfo.h in Headers */,
 				CA17998D17F89C4B00C38060 /* RespondTo.h in Headers */,
@@ -2283,6 +2291,7 @@
 				AE36AC6515B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				AEB1A74215F304A9002E4167 /* StubbedMethod.mm in Sources */,
 				AE94D04515F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
+				AE55BF1B19A7CF58005948E6 /* CDRRuntimeUtilities.m in Sources */,
 				AEC7873915F440980058A27B /* InvocationMatcher.mm in Sources */,
 				AEC7874D15F444A50058A27B /* HaveReceived.mm in Sources */,
 				969B6F84160C61E000C7C792 /* CDRSymbolicator.m in Sources */,
@@ -2377,6 +2386,7 @@
 				AEEE223B11DC2B6D00029872 /* CDRSpecStatusCell.m in Sources */,
 				AEEE223C11DC2B6D00029872 /* CDRSpecStatusViewController.m in Sources */,
 				AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */,
+				AE55BF1C19A7CF58005948E6 /* CDRRuntimeUtilities.m in Sources */,
 				1FF4497E18A0B37A00AF94B0 /* AnyArgument.mm in Sources */,
 				AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */,
 				AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */,

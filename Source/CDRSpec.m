@@ -123,6 +123,7 @@ void fail(NSString *reason) {
 #import "CDRSpec.h"
 #import "CDRExampleGroup.h"
 #import "CDROTestNamer.h"
+#import "CDRRuntimeUtilities.h"
 
 @interface CDRSpec ()
 @property (strong) NSInvocation *invocation; // defined by XCTestCase
@@ -298,78 +299,20 @@ void fail(NSString *reason) {
                     example:(CDRExample *)example
 {}
 
-static void CDRCopyMethodsAndIvarsFromClass(Class sourceClass, Class destinationClass, NSSet *exclude) {
-    unsigned int count = 0;
-    Method *instanceMethods = class_copyMethodList(sourceClass, &count);
-    for (unsigned int i = 0; i < count; i++) {
-        Method m = instanceMethods[i];
-        if ([exclude containsObject:NSStringFromSelector(method_getName(m))]) {
-            continue;
-        }
-        if (class_respondsToSelector(destinationClass, method_getName(m))) {
-            class_replaceMethod(destinationClass,
-                                method_getName(m),
-                                method_getImplementation(m),
-                                method_getTypeEncoding(m));
-        } else {
-            class_addMethod(destinationClass,
-                            method_getName(m),
-                            method_getImplementation(m),
-                            method_getTypeEncoding(m));
-        }
-    }
-
-    count = 0;
-    Ivar *instanceVars = class_copyIvarList(sourceClass, &count);
-    for (unsigned int i = 0; i < count; i++) {
-        Ivar v = instanceVars[i];
-        if ([exclude containsObject:[NSString stringWithUTF8String:ivar_getName(v)]]) {
-            continue;
-        }
-
-        NSUInteger size = 0, align = 0;
-        NSGetSizeAndAlignment(ivar_getTypeEncoding(v), &size, &align);
-        class_addIvar(destinationClass,
-                      ivar_getName(v),
-                      size,
-                      align,
-                      ivar_getTypeEncoding(v));
-    }
-    free(instanceVars);
-
-    count = 0;
-    objc_property_t *properties = class_copyPropertyList(sourceClass, &count);
-    for (unsigned int i = 0; i < count; i++) {
-        objc_property_t property = properties[i];
-
-        if ([exclude containsObject:[NSString stringWithUTF8String:property_getName(property)]]) {
-            continue;
-        }
-
-        unsigned int attrCount = 0;
-        objc_property_attribute_t *attributes = property_copyAttributeList(property, &attrCount);
-        class_addProperty(destinationClass,
-                          property_getName(property),
-                          attributes,
-                          attrCount);
-        free(attributes);
-    }
-    free(properties);
-}
 
 - (id)testSuite {
     NSString *className = NSStringFromClass([self class]);
     id testSuite = [(id)NSClassFromString(@"XCTestSuite") testSuiteWithName:className];
 
 
-    size_t size = class_getInstanceSize([self class]) - class_getInstanceSize([NSObject class]);
     NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
+    size_t size = class_getInstanceSize([self class]) - class_getInstanceSize([NSObject class]);
     Class newXCTestSubclass = objc_allocateClassPair(NSClassFromString(@"XCTestCase"), [newClassName UTF8String], size);
 
     NSSet *excludes = [NSSet setWithObject:@"testSuite"];
-    CDRCopyMethodsAndIvarsFromClass([self superclass], newXCTestSubclass, excludes);
-    CDRCopyMethodsAndIvarsFromClass([self class], newXCTestSubclass, excludes);
-    CDRCopyMethodsAndIvarsFromClass(object_getClass([self superclass]), object_getClass(newXCTestSubclass), excludes);
+    CDRCopyClassInternalsFromClass([self superclass], newXCTestSubclass, excludes);
+    CDRCopyClassInternalsFromClass([self class], newXCTestSubclass, excludes);
+    CDRCopyClassInternalsFromClass(object_getClass([self superclass]), object_getClass(newXCTestSubclass), excludes);
 
     objc_registerClassPair(newXCTestSubclass);
 
