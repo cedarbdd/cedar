@@ -85,14 +85,3 @@ void CDRCopyClassInternalsFromClass(Class sourceClass, Class destinationClass, N
     CDRCopyInstanceMethodsFromClass(sourceClass, destinationClass, exclude);
 }
 
-Class CDRCreateClassByMergingClassInternalsIntoClass(NSString *newClassName, Class sourceClass, Class parentClass, NSSet *excludes) {
-    size_t size = class_getInstanceSize(sourceClass) - class_getInstanceSize([NSObject class]);
-    Class newSubclass = objc_allocateClassPair(parentClass, [newClassName UTF8String], size);
-
-    CDRCopyClassInternalsFromClass([sourceClass superclass], newSubclass, excludes);
-    CDRCopyClassInternalsFromClass(sourceClass, newSubclass, excludes);
-    CDRCopyClassInternalsFromClass(object_getClass(sourceClass), object_getClass(newSubclass), excludes);
-
-    objc_registerClassPair(newSubclass);
-    return newSubclass;
-}

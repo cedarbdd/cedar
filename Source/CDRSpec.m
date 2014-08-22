@@ -294,12 +294,6 @@ void fail(NSString *reason) {
     return invocations;
 }
 
-- (void)placeholderWithSpec:(CDRSpec *)spec
-                 dispatcher:(CDRReportDispatcher *)dispatcher
-                    example:(CDRExample *)example
-{}
-
-
 - (id)testSuite {
     NSString *className = NSStringFromClass([self class]);
     id testSuite = [(id)NSClassFromString(@"XCTestSuite") testSuiteWithName:className];
@@ -313,7 +307,6 @@ void fail(NSString *reason) {
     CDRCopyClassInternalsFromClass([self superclass], newXCTestSubclass, excludes);
     CDRCopyClassInternalsFromClass([self class], newXCTestSubclass, excludes);
     CDRCopyClassInternalsFromClass(object_getClass([self superclass]), object_getClass(newXCTestSubclass), excludes);
-
     objc_registerClassPair(newXCTestSubclass);
 
     CDRSpec *spec = [[[newXCTestSubclass alloc] init] autorelease];
