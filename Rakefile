@@ -112,7 +112,7 @@ class Xcode
   end
 
   def self.sdk_dir_for_version(version)
-    path = %x[ xcrun -sdk "iphonesimulator#{version}" -show-sdk-path 2>/dev/null ].strip
+    path = %x[xcrun -sdk "iphonesimulator#{version}" -show-sdk-path 2>/dev/null ].strip
     raise("iPhone Simulator SDK version #{version} not installed") if $?.exitstatus != 0
     path
   end
@@ -173,6 +173,42 @@ class Xcode
     pbxproj = "#{PROJECT_NAME}.xcodeproj/project.pbxproj"
     contents = File.read(pbxproj)
     File.write(pbxproj, contents.gsub(search, replace))
+  end
+end
+
+class Accessibility
+  def self.enable
+    Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
+  end
+
+  def self.bundle_identifier(app_path)
+    `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' #{File.join(app_path, 'Contents', 'Info.plist').inspect}`.strip
+  end
+
+  def self.poll
+    system <<EOF
+      osascript -e '
+tell application "System Events" to tell process "SystemUIServer"
+  tell (menu bar item 1 of menu bar 1 where description is "clock")
+    click
+    click menu item "Open Date & Time Preferences…" of menu 1
+  end tell
+end tell'
+EOF
+  end
+
+  def self.add_allow_accessibility_control(bundle_id, client_type=1)
+    system %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT INTO access VALUES('kTCCServiceAccessibility','#{bundle_id}',#{client_type},1,1,NULL);"}
+    kill
+  end
+
+  def self.set_allow_accessibility_control(bundle_id)
+    system %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "UPDATE access SET allowed = 1 where client = '#{bundle_id}';"}
+    kill
+  end
+
+  def self.kill
+    system "sudo killall -9 tccd"
   end
 end
 
@@ -489,11 +525,16 @@ namespace :testbundles do
   end
 end
 
+task :enable_accessibility do
+  puts "Require sudo access to enable accessibility for AppleScript tests."
+  Accessibility.enable
+  Accessibility.add_allow_accessibility_control('/usr/sbin/sshd')
+  Accessibility.add_allow_accessibility_control('/usr/libexec/sshd-keygen-wrapper')
+end
+
 desc 'Runs integration tests of the templates'
 task :test_templates do
-  terminal_id = `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' /Applications/Utilities/Terminal.app/Contents/Info.plist`.strip
-  Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{terminal_id}',0,1,1,NULL);"}
-  Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
+  puts "Require sudo access to enable accessibility for AppleScript tests."
   Shell.run "cucumber"
 end
 

@@ -1,6 +1,7 @@
 When(/^I add an (iOS|OS X) Spec (suite|bundle) target$/) do |os, target_type|
-  `open -a Xcode template-project/template-project.xcodeproj`
-  `osascript features/support/scripts/#{os.downcase.gsub(/\s+/, '')}_add_spec_#{target_type.downcase.gsub(/\s+/, '')}.scpt`
+  xcode = File.absolute_path(File.join(`xcode-select -p`.strip, '../..'))
+  `open -a #{xcode.inspect} template-project/template-project.xcodeproj`
+  `osascript features/support/scripts/#{os.downcase.gsub(/\s+/, '')}_add_spec_#{target_type.downcase.gsub(/\s+/, '')}.applescript`
   File.exist?("template-project/Specs").should be_true
 end
 
