@@ -14,6 +14,8 @@ env:
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
+    # Verifies templates
+    - TASK="test_templates"
     # Analyze takes too long -- vary on runtime SDK
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:iosframeworkspecs:analyze"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:specs:analyze"

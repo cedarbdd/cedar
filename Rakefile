@@ -112,7 +112,7 @@ class Xcode
   end
 
   def self.sdk_dir_for_version(version)
-    path = %x[ xcrun -sdk "iphonesimulator#{version}" -show-sdk-path 2>/dev/null ].strip
+    path = %x[xcrun -sdk "iphonesimulator#{version}" -show-sdk-path 2>/dev/null ].strip
     raise("iPhone Simulator SDK version #{version} not installed") if $?.exitstatus != 0
     path
   end
