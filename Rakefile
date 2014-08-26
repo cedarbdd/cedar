@@ -176,6 +176,20 @@ class Xcode
   end
 end
 
+class Accessibility
+  def self.enable
+    Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
+  end
+
+  def self.bundle_identifier(app_path)
+    `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' #{File.join(app_path, 'Contents', 'Info.plist').inspect}`.strip
+  end
+
+  def self.allow_accessibility_control(bundle_id)
+    Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{bundle_id}',0,1,1,NULL);"}
+  end
+end
+
 def remove_templates_from_directory(templates_directory)
   return unless File.directory?(templates_directory)
 
@@ -491,11 +505,14 @@ end
 
 desc 'Runs integration tests of the templates'
 task :test_templates do
-  terminal_id = `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' /Applications/Utilities/Terminal.app/Contents/Info.plist`.strip
-  applescript_id = `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' '/Applications/Utilities/AppleScript Editor.app/Contents/Info.plist'`.strip
-  Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{terminal_id}',0,1,1,NULL);"}
-  Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{applescript_id}',0,1,1,NULL);"}
-  Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
+  puts "Require sudo access to enable accessibility for AppleScript tests."
+  terminal_id = Accessibility.bundle_identifier('/Applications/Utilities/Terminal.app')
+  applescript_id = Accessibility.bundle_identifier('/Applications/Utilities/AppleScript Editor.app')
+  Accessibility.allow_accessibility_control(terminal_id)
+  Accessibility.allow_accessibility_control(applescript_id)
+  Accessibility.allow_accessibility_control('/usr/bin/osascript')
+  Accessibility.allow_accessibility_control('com.apple.systemevents')
+  Accessibility.enable
   Shell.run "cucumber"
 end
 
