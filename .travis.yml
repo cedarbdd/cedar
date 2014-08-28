@@ -2,6 +2,8 @@ language: objective-c
 
 env:
   matrix:
+    # Verifies templates
+    - TASK="test_templates" PRETASK="rake enable_accessibility"
     # built on SDK 6.1
     - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
     - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
@@ -14,8 +16,6 @@ env:
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
-    # Verifies templates
-    - TASK="test_templates"
     # Analyze takes too long -- vary on runtime SDK
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:iosframeworkspecs:analyze"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:specs:analyze"
@@ -25,6 +25,8 @@ before_install: brew update
 install:
   - bundle install
   - brew install ios-sim
+after_install:
+  - $PRETASK
 
 script:
     # run a printer task to keep travis from terminating static analysis

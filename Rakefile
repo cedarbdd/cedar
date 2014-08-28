@@ -185,8 +185,30 @@ class Accessibility
     `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' #{File.join(app_path, 'Contents', 'Info.plist').inspect}`.strip
   end
 
-  def self.allow_accessibility_control(bundle_id)
-    Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{bundle_id}',0,1,1,NULL);"}
+  def self.poll
+    system <<EOF
+      osascript -e '
+tell application "System Events" to tell process "SystemUIServer"
+  tell (menu bar item 1 of menu bar 1 where description is "clock")
+    click
+    click menu item "Open Date & Time Preferences…" of menu 1
+  end tell
+end tell'
+EOF
+  end
+
+  def self.add_allow_accessibility_control(bundle_id, client_type=1)
+    system %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT INTO access VALUES('kTCCServiceAccessibility','#{bundle_id}',#{client_type},1,1,NULL);"}
+    kill
+  end
+
+  def self.set_allow_accessibility_control(bundle_id)
+    system %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "UPDATE access SET allowed = 1 where client = '#{bundle_id}';"}
+    kill
+  end
+
+  def self.kill
+    system "sudo killall -9 tccd"
   end
 end
 
@@ -503,16 +525,16 @@ namespace :testbundles do
   end
 end
 
+task :enable_accessibility do
+  puts "Require sudo access to enable accessibility for AppleScript tests."
+  Accessibility.enable
+  Accessibility.add_allow_accessibility_control('/usr/sbin/sshd')
+  Accessibility.add_allow_accessibility_control('/usr/libexec/sshd-keygen-wrapper')
+end
+
 desc 'Runs integration tests of the templates'
 task :test_templates do
   puts "Require sudo access to enable accessibility for AppleScript tests."
-  terminal_id = Accessibility.bundle_identifier('/Applications/Utilities/Terminal.app')
-  applescript_id = Accessibility.bundle_identifier('/Applications/Utilities/AppleScript Editor.app')
-  Accessibility.allow_accessibility_control(terminal_id)
-  Accessibility.allow_accessibility_control(applescript_id)
-  Accessibility.allow_accessibility_control('/usr/bin/osascript')
-  Accessibility.allow_accessibility_control('com.apple.systemevents')
-  Accessibility.enable
   Shell.run "cucumber"
 end
 
