@@ -1,6 +1,6 @@
 #import "RaiseException.h"
 
-namespace Cedar { namespace Matchers {
+namespace Cedar { namespace Matchers { namespace Private {
 
 #pragma mark - RaiseException
     RaiseException::RaiseException(NSObject *expectedExceptionInstance /*= nil */,
@@ -114,4 +114,4 @@ namespace Cedar { namespace Matchers {
         return RaiseException();
     }
 
-}}
+}}}
