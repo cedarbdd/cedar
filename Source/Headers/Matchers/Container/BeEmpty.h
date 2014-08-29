@@ -1,6 +1,7 @@
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     class BeEmpty : public Base<> {
     private:
         BeEmpty & operator=(const BeEmpty &);
@@ -19,11 +20,15 @@ namespace Cedar { namespace Matchers {
         inline /*virtual*/ NSString * failure_message_end() const { return @"be empty"; }
     };
 
-    static const BeEmpty be_empty = BeEmpty();
-
 #pragma mark Generic
     template<typename U>
     bool BeEmpty::matches(const U & actualValue) const {
         return Comparators::compare_empty(actualValue);
     }
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarBeEmpty = Cedar::Matchers::Private::BeEmpty;
+    static const CedarBeEmpty be_empty = CedarBeEmpty();
 }}
