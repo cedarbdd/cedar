@@ -57,6 +57,7 @@ namespace Cedar { namespace Matchers { namespace Private {
 
 #pragma mark - Public interface
 namespace Cedar { namespace Matchers {
+    
     template<typename T>
     using CedarEqual = Cedar::Matchers::Private::Equal<T>;
 
