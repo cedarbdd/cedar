@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+namespace Cedar { namespace Matchers { namespace Private  {
 
     template<typename T>
     class BeGreaterThan : public Base<> {
@@ -24,11 +24,6 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    BeGreaterThan<T> be_greater_than(const T & expectedValue) {
-        return BeGreaterThan<T>(expectedValue);
-    }
-
-    template<typename T>
     BeGreaterThan<T>::BeGreaterThan(const T & expectedValue)
     : Base<>(), expectedValue_(expectedValue) {
     }
@@ -46,6 +41,17 @@ namespace Cedar { namespace Matchers {
     template<typename T> template<typename U>
     bool BeGreaterThan<T>::matches(const U & actualValue) const {
         return Comparators::compare_greater_than(actualValue, expectedValue_);
+    }
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    template<typename T>
+    using CedarBeGreaterThan = Cedar::Matchers::Private::BeGreaterThan<T>;
+
+    template<typename T>
+    CedarBeGreaterThan<T> be_greater_than(const T & expectedValue) {
+        return CedarBeGreaterThan<T>(expectedValue);
     }
 
 #pragma mark operators
