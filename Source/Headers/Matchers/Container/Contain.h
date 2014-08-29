@@ -1,6 +1,7 @@
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     template<typename T>
     class Contain : public Base<> {
     private:
@@ -30,11 +31,6 @@ namespace Cedar { namespace Matchers {
         Comparators::contains_options options_;
         NSString *elementKeyPath_;
     };
-
-    template<typename T>
-    inline Contain<T> contain(const T & element) {
-        return Contain<T>(element);
-    }
 
     template<typename T>
     inline Contain<T>::Contain(const T & element)
@@ -96,5 +92,16 @@ namespace Cedar { namespace Matchers {
     template<> template<typename U>
     bool Contain<AnInstanceOf>::matches(const U & container) const {
         return element_.matches(container, options_);
+    }
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    template<typename T>
+    using CedarContain = Cedar::Matchers::Private::Contain<T>;
+
+    template<typename T>
+    inline CedarContain<T> contain(const T & element) {
+        return CedarContain<T>(element);
     }
 }}

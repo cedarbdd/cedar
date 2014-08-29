@@ -1,6 +1,7 @@
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
 
     class ConformTo : public Base<> {
     private:
@@ -20,12 +21,16 @@ namespace Cedar { namespace Matchers {
     private:
         const char *expectedProtocolName_;
     };
+}}}
 
-    inline ConformTo conform_to(Protocol *protocol) {
-        return ConformTo(protocol);
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarConformTo = Cedar::Matchers::Private::ConformTo;
+    inline CedarConformTo conform_to(Protocol *protocol) {
+        return CedarConformTo(protocol);
     }
 
-    inline ConformTo conform_to(const char *protocolName) {
-        return ConformTo(protocolName);
+    inline CedarConformTo conform_to(const char *protocolName) {
+        return CedarConformTo(protocolName);
     }
 }}

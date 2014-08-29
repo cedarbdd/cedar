@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
-
+#pragma mark - Private interface
+namespace Cedar { namespace Matchers { namespace Private {
     template<typename T>
     class Equal : public Base<> {
     private:
@@ -27,11 +27,6 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    Equal<T> equal(const T & expectedValue) {
-        return Equal<T>(expectedValue);
-    }
-
-    template<typename T>
     Equal<T>::Equal(const T & expectedValue)
     : Base<>(), expectedValue_(expectedValue) {
     }
@@ -52,12 +47,22 @@ namespace Cedar { namespace Matchers {
         return Comparators::compare_equal(actualValue, expectedValue_);
     }
 
-#pragma mark - Private interface
     template<typename T>
     void Equal<T>::validate_not_nil() const {
         if (0 == strncmp(@encode(T), "@", 1) && [[NSValue value:&expectedValue_ withObjCType:@encode(T)] nonretainedObjectValue] == nil) {
             [[CDRSpecFailure specFailureWithReason:@"Unexpected use of equal matcher to check for nil; use the be_nil matcher to match nil values"] raise];
         }
+    }
+}}}
+
+#pragma mark - Public interface
+namespace Cedar { namespace Matchers {
+    template<typename T>
+    using CedarEqual = Cedar::Matchers::Private::Equal<T>;
+
+    template<typename T>
+    CedarEqual<T> equal(const T &expectedValue) {
+        return CedarEqual<T>(expectedValue);
     }
 
 #pragma mark equality operators
