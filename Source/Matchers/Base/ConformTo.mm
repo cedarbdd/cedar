@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "ConformTo.h"
 
-namespace Cedar { namespace Matchers {
+namespace Cedar { namespace Matchers { namespace Private {
 
     ConformTo::ConformTo(Protocol *protocol)
     : expectedProtocolName_([NSStringFromProtocol(protocol) UTF8String]) {}
@@ -19,4 +19,4 @@ namespace Cedar { namespace Matchers {
     /*virtual*/ bool ConformTo::matches(const id subject) const {
         return [subject conformsToProtocol:NSProtocolFromString(@(expectedProtocolName_))];
     }
-}}
+}}}
