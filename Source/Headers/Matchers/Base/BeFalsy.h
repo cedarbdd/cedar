@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     class BeFalsy : public Base<> {
     private:
         BeFalsy & operator=(const BeFalsy &);
@@ -28,4 +29,10 @@ namespace Cedar { namespace Matchers {
         return !actualValue;
     }
 
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarBeFalsy = Cedar::Matchers::Private::BeFalsy;
+    static const CedarBeFalsy be_falsy = CedarBeFalsy();
 }}
