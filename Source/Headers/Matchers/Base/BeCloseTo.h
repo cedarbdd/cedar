@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark private interface
+namespace Cedar { namespace Matchers { namespace Private {
     template<typename T>
     class BeCloseTo : public Base<> {
     private:
@@ -33,11 +34,6 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    BeCloseTo<T> be_close_to(const T & expectedValue) {
-        return BeCloseTo<T>(expectedValue);
-    }
-
-    template<typename T>
     BeCloseTo<T>::BeCloseTo(const T & expectedValue)
     : Base<>(), expectedValue_(expectedValue), threshold_(0.01) {
     }
@@ -64,6 +60,30 @@ namespace Cedar { namespace Matchers {
         return actualValue > expectedValue - threshold_ && actualValue < expectedValue + threshold_;
     }
 
+    template<>
+    bool BeCloseTo<NSNumber *>::matches(NSDecimalNumber * const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimalNumber *>::matches(NSDecimalNumber * const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimalNumber *>::matches(NSNumber * const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSNumber *>::matches(NSDecimal const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimal>::matches(NSDecimal const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimalNumber *>::matches(NSDecimal const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimal>::matches(NSDecimalNumber * const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDecimal>::matches(NSNumber * const & actualValue) const;
+
 #pragma mark Generic
     template<typename T> template<typename U>
     bool BeCloseTo<T>::matches(const U & actualValue) const {
@@ -89,7 +109,6 @@ namespace Cedar { namespace Matchers {
         NSDecimalNumber *maxExpectedValue = [expectedDecimalNumber decimalNumberByAdding:decimalThreshold];
         NSDecimalNumber *minExpectedValue = [expectedDecimalNumber decimalNumberBySubtracting:decimalThreshold];
         return [actualValue compare:minExpectedValue] != NSOrderedAscending && [actualValue compare:maxExpectedValue] != NSOrderedDescending;
-
     }
 
     template<> template<typename U>
@@ -100,15 +119,6 @@ namespace Cedar { namespace Matchers {
         NSDecimalNumber *minExpectedValue = [expectedValue_ decimalNumberBySubtracting:decimalThreshold];
         return [actualDecimalNumber compare:minExpectedValue] != NSOrderedAscending && [actualDecimalNumber compare:maxExpectedValue] != NSOrderedDescending;
     }
-
-    template<>
-    bool BeCloseTo<NSNumber *>::matches(NSDecimalNumber * const & actualValue) const;
-
-    template<>
-    bool BeCloseTo<NSDecimalNumber *>::matches(NSDecimalNumber * const & actualValue) const;
-
-    template<>
-    bool BeCloseTo<NSDecimalNumber *>::matches(NSNumber * const & actualValue) const;
 
 #pragma mark NSDecimal
     template<typename T>
@@ -132,19 +142,15 @@ namespace Cedar { namespace Matchers {
         NSDecimalSubtract(&minExpectedValue, &expectedValue_, &decimalThreshold, NSRoundPlain);
         return NSDecimalCompare(&actualDecimal, &minExpectedValue) != NSOrderedAscending && NSDecimalCompare(&actualDecimal, &maxExpectedValue) != NSOrderedDescending;
     }
+}}}
 
-    template<>
-    bool BeCloseTo<NSNumber *>::matches(NSDecimal const & actualValue) const;
+#pragma mark public interface
+namespace Cedar { namespace Matchers {
+    template<typename T>
+    using CedarBeCloseTo = Cedar::Matchers::Private::BeCloseTo<T>;
 
-    template<>
-    bool BeCloseTo<NSDecimal>::matches(NSDecimal const & actualValue) const;
-
-    template<>
-    bool BeCloseTo<NSDecimalNumber *>::matches(NSDecimal const & actualValue) const;
-
-    template<>
-    bool BeCloseTo<NSDecimal>::matches(NSDecimalNumber * const & actualValue) const;
-
-    template<>
-    bool BeCloseTo<NSDecimal>::matches(NSNumber * const & actualValue) const;
+    template<typename T>
+    CedarBeCloseTo<T> be_close_to(const T & expectedValue) {
+        return CedarBeCloseTo<T>(expectedValue);
+    }
 }}
