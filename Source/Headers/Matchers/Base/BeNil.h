@@ -4,7 +4,8 @@
 
 #include <stdexcept>
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     struct BeNilMessageBuilder {
         template<typename U>
         static NSString * string_for_actual_value(const U & value) {
@@ -67,5 +68,11 @@ namespace Cedar { namespace Matchers {
     bool BeNil::matches(U * const & actualValue) const {
         return !actualValue;
     }
+}}}
 
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarBeNil = Cedar::Matchers::Private::BeNil;
+
+    static const CedarBeNil be_nil = CedarBeNil();
 }}
