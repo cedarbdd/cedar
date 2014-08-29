@@ -1,4 +1,5 @@
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
 
     class AnInstanceOf {
     private:
@@ -19,10 +20,6 @@ namespace Cedar { namespace Matchers {
         const Class class_;
         bool includesSubclasses_;
     };
-
-    inline AnInstanceOf an_instance_of(Class klass) {
-        return AnInstanceOf(klass);
-    }
 
     inline AnInstanceOf::AnInstanceOf(const Class klass)
     : class_(klass), includesSubclasses_(false) {
@@ -69,5 +66,13 @@ namespace Cedar { namespace Matchers {
     template<>
     inline bool AnInstanceOf::matches(NSMutableString * const & container, Comparators::contains_options options) const {
         return matches((char *)nil, options);
+    }
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarAnInstanceOf = Cedar::Matchers::Private::AnInstanceOf;
+    inline CedarAnInstanceOf an_instance_of(Class klass) {
+        return CedarAnInstanceOf(klass);
     }
 }}
