@@ -356,7 +356,6 @@
 		AED10EBD18F46C0E00950904 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		AED23E6C173D5545003D7A41 /* BeCloseTo.mm in Sources */ = {isa = PBXBuildFile; fileRef = AED23E69173D5545003D7A41 /* BeCloseTo.mm */; };
 		AED23E6D173D5545003D7A41 /* BeCloseTo.mm in Sources */ = {isa = PBXBuildFile; fileRef = AED23E69173D5545003D7A41 /* BeCloseTo.mm */; };
-		AED7FC0C19BE2A6000595D92 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED7FC0B19BE2A6000595D92 /* CoreLocation.framework */; };
 		AEE0665617315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
 		AEE0665717315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
 		AEE0665917315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
@@ -1003,7 +1002,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AED7FC0C19BE2A6000595D92 /* CoreLocation.framework in Frameworks */,
 				342F5D0B18F430DB00F38E35 /* QuartzCore.framework in Frameworks */,
 				AEC54009185E90E900B0D41D /* CoreGraphics.framework in Frameworks */,
 				AEC54007185E90D900B0D41D /* UIKit.framework in Frameworks */,
