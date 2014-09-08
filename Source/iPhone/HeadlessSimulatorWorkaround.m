@@ -15,7 +15,6 @@ void CDRSimulatorWorkaround_CreateFakePurpleWorkspacePort() {
 }
 
 void CDRSimulatorWorkaround_HideBKSetAccelerometerClientEventsEnabled() {
-    NSLog(@"Hiding 'BKSetAccelerometerClientEventsEnabled failed: (ipc/send) invalid destination port'");
     SEL _serverWasRestartedSelector = NSSelectorFromString(@"_serverWasRestarted");
     // Found out via `sudo dtruss -p PID -s`
     class_replaceMethod(
