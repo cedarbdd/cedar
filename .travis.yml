@@ -1,13 +1,27 @@
 language: objective-c
 
-rvm:
-  - "2.1.1; export CEDAR_SDK_VERSION=6.1 #"
-  - "2.1.1; export CEDAR_SDK_VERSION=7.0 #"
-  - "2.1.1; export CEDAR_SDK_VERSION=7.1 #"
-
 env:
   matrix:
-    - CEDAR_SDK_RUNTIME_VERSION="6.1"
-    - CEDAR_SDK_RUNTIME_VERSION="7.0"
+    # built on SDK 6.1
+    - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
+    - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
+    - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
+    # built on SDK 7.0
+    - CEDAR_SDK_VERSION="7.0" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
+    - CEDAR_SDK_VERSION="7.0" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
+    - CEDAR_SDK_VERSION="7.0" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
+    # built on SDK 7.1
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
+    # Analyze takes too long -- vary on runtime SDK
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="analyze"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="analyze"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="analyze"
 
-script: rake
+before_install: brew update
+install:
+  - bundle install
+  - brew install ios-sim
+
+script: rake $TASK
