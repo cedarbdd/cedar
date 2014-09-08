@@ -19,7 +19,7 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 }
 
 + (void)load {
-    setUpFakeWorkspaceIfRequired();
+    suppressStandardPipesWhileLoadingClasses();
 
     NSString *extension = nil;;
 
