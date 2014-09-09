@@ -36,7 +36,8 @@ extern void CDRMarkXcodeFocusedExamplesInSpecs(NSArray *specs, NSArray *argument
 extern NSArray *CDRRootGroupsFromSpecs(NSArray *specs);
 
 static id CDRCreateXCTestSuite() {
-    id testSuite = [(id)NSClassFromString(@"XCTestSuite") testSuiteWithName:@"Cedar"];
+    Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
+    id testSuite = [(id)testSuiteClass testSuiteWithName:@"Cedar"];
     BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
     const char *defaultReporterClassName = isTestBundle ? "CDROTestReporter,CDRBufferedDefaultReporter" : "CDRDefaultReporter";
 
@@ -64,7 +65,7 @@ static id CDRCreateXCTestSuite() {
 }
 
 static void CDRInjectIntoXCTestRunner() {
-    Class testSuiteClass = NSClassFromString(@"XCTestSuite");
+    Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
     Class testSuiteMetaClass = object_getClass(testSuiteClass);
     Method m = class_getClassMethod(testSuiteClass, @selector(defaultTestSuite));
     class_addMethod(testSuiteMetaClass, @selector(CDR_original_defaultTestSuite), method_getImplementation(m), method_getTypeEncoding(m));

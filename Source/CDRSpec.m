@@ -98,6 +98,7 @@ void fail(NSString *reason) {
 
 - (void)addTest:(id)test;
 - (NSArray *)tests;
+- (NSArray *)allTests; // SenTestingKit
 
 + (id)testCaseWithInvocation:(NSInvocation *)invocation;
 - (id)initWithInvocation:(NSInvocation *)invocation;
@@ -131,23 +132,53 @@ void fail(NSString *reason) {
 
 @implementation CDRSpec
 
-@synthesize
-    currentGroup = currentGroup_,
-    rootGroup = rootGroup_,
-    fileName = fileName_,
-    symbolicator = symbolicator_;
+- (CDRExampleGroup *)currentGroup {
+    Ivar ivar = object_getInstanceVariable(self, "currentGroup_", NULL);
+    return object_getIvar(self, ivar);
+}
+
+- (void)setCurrentGroup:(CDRExampleGroup *)currentGroup {
+    CDRExampleGroup *oldGroup = [self currentGroup];
+    Ivar ivar = object_getInstanceVariable(self, "currentGroup_", NULL);
+    object_setIvar(self, ivar, [currentGroup retain]);
+    [oldGroup release];
+}
+
+- (CDRExampleGroup *)rootGroup {
+    Ivar ivar = object_getInstanceVariable(self, "rootGroup_", NULL);
+    return object_getIvar(self, ivar);
+}
+
+- (void)setRootGroup:(CDRExampleGroup *)rootGroup {
+    CDRExampleGroup *oldGroup = [self rootGroup];
+    Ivar ivar = object_getInstanceVariable(self, "rootGroup_", NULL);
+    object_setIvar(self, ivar, [rootGroup retain]);
+    [oldGroup release];
+}
+
+- (NSString *)fileName {
+    Ivar ivar = object_getInstanceVariable(self, "fileName_", NULL);
+    return object_getIvar(self, ivar);
+}
+
+- (void)setFileName:(NSString *)fileName {
+    NSString *oldFileName = [self fileName];
+    object_setInstanceVariable(self, "fileName_", [fileName retain]);
+    [oldFileName release];
+}
+
+- (CDRSymbolicator *)symbolicator {
+    Ivar ivar = object_getInstanceVariable(self, "symbolicator_", NULL);
+    return object_getIvar(self, ivar);
+}
+
+- (void)setSymbolicator:(CDRSymbolicator *)symbolicator {
+    CDRSymbolicator *oldSymbolicator = [self symbolicator];
+    object_setInstanceVariable(self, "symbolicator_", [symbolicator retain]);
+    [oldSymbolicator release];
+}
 
 #pragma mark Memory
-
-- (id)init {
-    if (self = [super init]) {
-        self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
-        self.rootGroup.parent = [CDRSpecHelper specHelper];
-        self.currentGroup = self.rootGroup;
-        self.symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
-    }
-    return self;
-}
 
 - (void)dealloc {
     self.rootGroup = nil;
@@ -155,6 +186,21 @@ void fail(NSString *reason) {
     self.fileName = nil;
     self.symbolicator = nil;
     [super dealloc];
+}
+
+- (void)commonInit {
+    self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
+    self.rootGroup.parent = [CDRSpecHelper specHelper];
+    self.currentGroup = self.rootGroup;
+    self.symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
 }
 
 - (void)defineBehaviors {
@@ -258,21 +304,32 @@ void fail(NSString *reason) {
 @implementation CDRSpec (XCTestSupport)
 
 - (instancetype)initWithInvocation:(NSInvocation *)invocation {
-    self = [self init];
+    Class parentClass = class_getSuperclass([self class]);
+    IMP constructor = class_getMethodImplementation(parentClass, @selector(initWithInvocation:));
+    self = ((id (*)(id instance, SEL cmd, NSInvocation *))constructor)(self, _cmd, invocation);
     if (self) {
-        self.invocation = invocation;
-        [self defineBehaviors];
+        [self commonInit];
     }
     return self;
 }
 
 - (NSString *)name {
     return [NSString stringWithFormat:@"-[%@ %@]",
-            [NSStringFromClass([self class]) substringFromIndex:1],
-            NSStringFromSelector([[self invocation] selector])];
+            [self testClassName],
+            [self testMethodName]];
+}
+
+- (NSString *)testClassName {
+    return [NSStringFromClass([self class]) substringFromIndex:1];
+}
+
+- (NSString *)testMethodName {
+    return NSStringFromSelector([[self invocation] selector]);
 }
 
 - (void)invokeTest {
+     [self defineBehaviors];
+
     NSInvocation *invocation = [self invocation];
     invocation.target = self;
     [invocation invoke];
@@ -296,12 +353,13 @@ void fail(NSString *reason) {
 
 - (id)testSuite {
     NSString *className = NSStringFromClass([self class]);
-    id testSuite = [(id)NSClassFromString(@"XCTestSuite") testSuiteWithName:className];
-
+    Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
+    id testSuite = [(id)testSuiteClass testSuiteWithName:className];
 
     NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
     size_t size = class_getInstanceSize([self class]) - class_getInstanceSize([NSObject class]);
-    Class newXCTestSubclass = objc_allocateClassPair(NSClassFromString(@"XCTestCase"), [newClassName UTF8String], size);
+    Class testCaseClass = NSClassFromString(@"XCTestCase") ?: NSClassFromString(@"SenTestCase");
+    Class newXCTestSubclass = objc_allocateClassPair(testCaseClass, [newClassName UTF8String], size);
 
     NSSet *excludes = [NSSet setWithObject:@"testSuite"];
     CDRCopyClassInternalsFromClass([self superclass], newXCTestSubclass, excludes);
@@ -310,6 +368,7 @@ void fail(NSString *reason) {
     objc_registerClassPair(newXCTestSubclass);
 
     CDRSpec *spec = [[[newXCTestSubclass alloc] init] autorelease];
+
     [spec defineBehaviors];
 
     CDROTestNamer *namer = [[CDROTestNamer new] autorelease];
@@ -318,6 +377,7 @@ void fail(NSString *reason) {
     NSUInteger i = 0;
     for (CDRExample *example in examples) {
         IMP imp = imp_implementationWithBlock(^(id instance){
+            [instance defineBehaviors];
             CDRExample *theExample = [instance allExamples][i];
             [theExample runWithDispatcher:nil];
         });
@@ -328,7 +388,8 @@ void fail(NSString *reason) {
         i++;
     }
 
-    for (id test in [[(id)[spec class] defaultTestSuite] tests]) {
+    id defaultTestSuite = [(id)[spec class] defaultTestSuite];
+    for (id test in [defaultTestSuite valueForKey:@"tests"]) {
         [testSuite addTest:test];
     }
 
