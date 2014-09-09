@@ -107,22 +107,5 @@ end
 
 desc "Run ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
-  if CedarTarget___PACKAGENAMEASIDENTIFIER___.is_run_unit_tests_deprecated?
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd"
-  else
-    env_vars = {
-      "DYLD_ROOT_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-      "DYLD_INSERT_LIBRARIES" => "#{CedarTarget___PACKAGENAMEASIDENTIFIER___.xcode_developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-      "DYLD_FALLBACK_LIBRARY_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-      "XCInjectBundle" => "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.octest")}",
-      "XCInjectBundleInto" => "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")}",
-      "IPHONE_SIMULATOR_ROOT" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-      "CFFIXED_USER_HOME" => Dir.tmpdir,
-      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-    }
-
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
-      CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")} -RegisterForSystemEvents -SenTest All"
-    end
-  end
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "cd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' | tee /dev/stderr | grep -q ', 0 failures'"
 end

@@ -180,4 +180,5 @@
         [example removeObserver:self forKeyPath:@"state"];
     }
 }
+
 @end
