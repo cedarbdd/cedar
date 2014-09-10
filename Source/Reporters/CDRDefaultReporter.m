@@ -7,8 +7,6 @@
 
 @interface CDRDefaultReporter (private)
 - (void)printMessages:(NSArray *)messages;
-- (void)startObservingExamples:(NSArray *)examples;
-- (void)stopObservingExamples:(NSArray *)examples;
 - (void)reportOnExample:(CDRExample *)example;
 - (void)printStats;
 @end
@@ -22,6 +20,7 @@
         pendingMessages_ = [[NSMutableArray alloc] init];
         skippedMessages_ = [[NSMutableArray alloc] init];
         failureMessages_ = [[NSMutableArray alloc] init];
+        exampleCount_ = 0;
     }
     return self;
 }
@@ -40,7 +39,6 @@
 #pragma mark Public interface
 - (void)runWillStartWithGroups:(NSArray *)groups andRandomSeed:(unsigned int)seed {
     rootGroups_ = [groups retain];
-    [self startObservingExamples:rootGroups_];
     startTime_ = [[NSDate alloc] init];
     [self logText:[NSString stringWithFormat:@"Cedar Version: %@\n", cedarVersionString_]];
     [self logText:[NSString stringWithFormat:@"Running With Random Seed: %i\n\n", seed]];
@@ -48,7 +46,6 @@
 
 - (void)runDidComplete {
     endTime_ = [[NSDate alloc] init];
-    [self stopObservingExamples:rootGroups_];
 
     [self logText:@"\n"];
     if ([pendingMessages_ count]) {
@@ -69,6 +66,31 @@
         return 0;
     }
 }
+
+- (void)runWillStartExample:(CDRExample *)example {
+    exampleCount_++;
+}
+
+- (void)runDidFinishExample:(CDRExample *)example {
+    [self reportOnExample:example];
+}
+
+- (void)runWillStartExampleGroup:(CDRExampleGroup *)exampleGroup {
+
+}
+
+- (void)runDidFinishExampleGroup:(CDRExampleGroup *)exampleGroup {
+
+}
+
+- (void)runWillStartSpec:(CDRSpec *)spec {
+
+}
+
+- (void)runDidFinishSpec:(CDRSpec *)spec {
+
+}
+
 
 #pragma mark Protected interface
 - (void)logText:(NSString *)linePartial {
@@ -146,29 +168,6 @@
 
     for (NSString *message in messages) {
         [self logText:[NSString stringWithFormat:@"%@\n", message]];
-    }
-}
-
-- (void)startObservingExamples:(NSArray *)examples {
-    for (id example in examples) {
-        if (![example hasChildren]) {
-            [example addObserver:self forKeyPath:@"state" options:0 context:NULL];
-            if (![example isKindOfClass:[CDRExampleGroup class]]) {
-                ++exampleCount_;
-            }
-        } else {
-            [self startObservingExamples:[example examples]];
-        }
-    }
-}
-
-- (void)stopObservingExamples:(NSArray *)examples {
-    for (id example in examples) {
-        if (![example hasChildren]) {
-            [example removeObserver:self forKeyPath:@"state"];
-        } else {
-            [self stopObservingExamples:[example examples]];
-        }
     }
 }
 
@@ -259,9 +258,5 @@
     }
 }
 
-#pragma mark KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    [self reportOnExample:object];
-}
 
 @end

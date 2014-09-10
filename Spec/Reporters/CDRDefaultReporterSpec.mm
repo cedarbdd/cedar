@@ -76,6 +76,11 @@ describe(@"CDRDefaultReporter", ^{
                 [group add:example];
 
                 [reporter runWillStartWithGroups:@[group] andRandomSeed:33];
+                [reporter runWillStartExampleGroup:group];
+                [reporter runWillStartExample:example];
+                [example runWithDispatcher:nil];
+                [reporter runDidFinishExample:example];
+                [reporter runDidFinishExampleGroup:group];
                 [reporter runDidComplete];
                 [reporter exampleCount] should equal(1);
             });
