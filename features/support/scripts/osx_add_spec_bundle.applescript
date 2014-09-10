@@ -22,6 +22,7 @@ tell application "System Events" to tell application process "Xcode"
 	keystroke "Specs"
 	delay 1
 	click UI element "Finish" of sheet 1 of projectWindow
+    delay 1
 end tell
 
 tell application "Xcode"

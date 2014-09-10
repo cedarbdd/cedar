@@ -22,7 +22,8 @@
 		</dict>
 	</dict>
 	<key>Identifier</key>
-	<string>com.pivotallabs.cedar.OSXTestingBundle</string>
+  <!-- need the apple id to magically add this bundle to the Test Action -->
+	<string>com.pivotallabs.cedar.OSXTestingBundle.com.apple.dt.unit.cocoaTouchUnitTestBundle</string>
 	<key>Concrete</key>
 	<true/>
 	<key>Description</key>
