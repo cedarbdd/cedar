@@ -107,5 +107,11 @@ end
 
 desc "Run ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "cd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' | tee /dev/stderr | grep -q ', 0 failures'"
+  env_vars = {
+    "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+  }
+
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "cd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' | tee /dev/stderr | grep -q 'with 0 failures'"
+  end
 end

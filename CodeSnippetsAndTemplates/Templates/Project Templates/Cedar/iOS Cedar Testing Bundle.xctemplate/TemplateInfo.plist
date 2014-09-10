@@ -51,7 +51,8 @@
 	<key>Description</key>
 	<string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Touch Unit Testing Bundle.  Make sure you set the Test Target correctly.  After creating this target, add it to the list of tests for your Test Target.</string>
 	<key>Identifier</key>
-	<string>com.pivotallabs.cedar.iOSTestingBundle</string>
+  <!-- need the apple id to magically add this bundle to the Test Action -->
+	<string>com.pivotallabs.cedar.iOSTestingBundle.com.apple.dt.unit.cocoaTouchUnitTestBundle</string>
 	<key>Definitions</key>
 	<dict>
 		<key>Rakefile</key>
