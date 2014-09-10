@@ -3,6 +3,7 @@
 
 @protocol CDRExampleReporter;
 @class CDRExampleGroup, CDRExample, CDRSpecHelper, CDRSymbolicator;
+@class CDRReportDispatcher;
 
 @protocol CDRSpec
 @end
@@ -54,7 +55,7 @@ void fail(NSString *);
 @end
 
 @interface CDRSpec (XCTestSupport)
-- (id)testSuite;
+- (id)testSuiteWithRandomSeed:(unsigned int)seed dispatcher:(CDRReportDispatcher *)dispatcher;
 
 @property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
 @property (nonatomic, retain) NSString *fileName;

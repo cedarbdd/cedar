@@ -323,12 +323,23 @@ int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters) {
     }
 }
 
-int CDRRunSpecs() {
+NSArray *CDRReportersToRun() {
+    const char *defaultReporterClassName = "CDRDefaultReporter";
     BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
-    const char *defaultReporterClassName = isTestBundle ? "CDROTestReporter,CDRBufferedDefaultReporter" : "CDRDefaultReporter";
+    if (isTestBundle) {
+#if TARGET_OS_IPHONE
+        // Cedar for iOS Test Bundles hooks into XCTest's test reporting system.
+        defaultReporterClassName = "CDRBufferedDefaultReporter";
+#else
+        defaultReporterClassName = "CDROTestReporter,CDRBufferedDefaultReporter";
+#endif
+    }
+    return CDRReportersFromEnv(defaultReporterClassName);
+}
 
+int CDRRunSpecs() {
     @autoreleasepool {
-        NSArray *reporters = CDRReportersFromEnv(defaultReporterClassName);
+        NSArray *reporters = CDRReportersToRun();
         if (![reporters count]) {
             return -999;
         } else {

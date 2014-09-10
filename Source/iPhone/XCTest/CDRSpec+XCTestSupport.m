@@ -7,6 +7,7 @@
 #import "CDROTestNamer.h"
 #import "CDRRuntimeUtilities.h"
 #import "CDRSpecFailure.h"
+#import "CDRFunctions.h"
 
 @interface CDR_XCTest : NSObject
 - (id)run;
@@ -175,7 +176,9 @@
     return invocations;
 }
 
-- (id)testSuite {
+#pragma mark - Public
+
+- (id)testSuiteWithRandomSeed:(unsigned int)seed dispatcher:(CDRReportDispatcher *)dispatcher {
     NSString *className = NSStringFromClass([self class]);
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
     id testSuite = [(id)testSuiteClass testSuiteWithName:className];
@@ -185,7 +188,7 @@
     Class testCaseClass = NSClassFromString(@"XCTestCase") ?: NSClassFromString(@"SenTestCase");
     Class newXCTestSubclass = objc_allocateClassPair(testCaseClass, [newClassName UTF8String], size);
 
-    NSSet *excludes = [NSSet setWithObject:@"testSuite"];
+    NSSet *excludes = [NSSet setWithObject:@"testSuiteWithRandomSeed:dispatcher:"];
     CDRCopyClassInternalsFromClass([self superclass], newXCTestSubclass, excludes);
     CDRCopyClassInternalsFromClass([self class], newXCTestSubclass, excludes);
     CDRCopyClassInternalsFromClass(object_getClass([self superclass]), object_getClass(newXCTestSubclass), excludes);
@@ -199,14 +202,21 @@
     Method m = class_getInstanceMethod([self class], @selector(defineBehaviors));
     NSArray *examples = [spec allExamples];
     NSUInteger i = 0;
+
     for (CDRExample *example in examples) {
         if (!example.isPending) {
             IMP imp = imp_implementationWithBlock(^(id instance){
                 CDRExample *theExample = [instance allExamples][i];
-                [theExample runWithDispatcher:nil];
+                CDRExampleGroup *parentGroup = (CDRExampleGroup *)theExample.parent;
+                [dispatcher runWillStartExampleGroup:parentGroup];
+
+                [theExample runWithDispatcher:dispatcher];
                 if (theExample.failure) {
                     [instance recordFailureWithDescription:theExample.failure.reason inFile:theExample.failure.fileName atLine:theExample.failure.lineNumber expected:YES];
+
                 }
+
+                [dispatcher runDidFinishExampleGroup:parentGroup];
             });
             class_addMethod([spec class],
                             NSSelectorFromString([namer methodNameForExample:example withClassName:NSStringFromClass([self class])]),

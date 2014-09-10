@@ -80,7 +80,8 @@
     }
 }
 
-#pragma mark Optional Methods
+- (void)runWillStartExampleGroup:(CDRExampleGroup *)exampleGroup {}
+- (void)runDidFinishExampleGroup:(CDRExampleGroup *)exampleGroup {}
 
 - (void)runWillStartExample:(CDRExample *)example {
     if ([self shouldReportExample:example]) {
