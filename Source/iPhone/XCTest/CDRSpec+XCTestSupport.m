@@ -104,7 +104,6 @@
     [oldSymbolicator release];
 }
 
-
 #pragma mark - Memory
 
 - (instancetype)initWithInvocation:(NSInvocation *)invocation {
@@ -115,6 +114,23 @@
         [self commonInit];
     }
     return self;
+}
+
+#pragma mark - Private
+
+- (NSArray *)allExamples {
+    NSMutableArray *examples = [NSMutableArray array];
+    NSMutableArray *groupsQueue = [NSMutableArray arrayWithArray:self.rootGroup.examples];
+    while (groupsQueue.count) {
+        CDRExampleBase *exampleBase = [groupsQueue objectAtIndex:0];
+        if (exampleBase.hasChildren) {
+            [groupsQueue addObjectsFromArray:[(CDRExampleGroup *)exampleBase examples]];
+        } else if ([exampleBase shouldRun]) {
+            [examples addObject:exampleBase];
+        }
+        [groupsQueue removeObjectAtIndex:0];
+    }
+    return examples;
 }
 
 #pragma mark - XCTestCase Overrides
@@ -148,10 +164,12 @@
 
     CDROTestNamer *namer = [[[CDROTestNamer alloc] init] autorelease];
     for (CDRExample *example in [spec allExamples]) {
-        SEL selector = NSSelectorFromString([namer methodNameForExample:example withClassName:[NSStringFromClass([self class]) substringFromIndex:1]]);
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:selector]];
-        invocation.selector = selector;
-        [invocations addObject:invocation];
+        if (!example.isPending) {
+            SEL selector = NSSelectorFromString([namer methodNameForExample:example withClassName:[NSStringFromClass([self class]) substringFromIndex:1]]);
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:selector]];
+            invocation.selector = selector;
+            [invocations addObject:invocation];
+        }
     };
 
     return invocations;
@@ -182,17 +200,19 @@
     NSArray *examples = [spec allExamples];
     NSUInteger i = 0;
     for (CDRExample *example in examples) {
-        IMP imp = imp_implementationWithBlock(^(id instance){
-            CDRExample *theExample = [instance allExamples][i];
-            [theExample runWithDispatcher:nil];
-            if (theExample.failure) {
-                [instance recordFailureWithDescription:theExample.failure.reason inFile:theExample.failure.fileName atLine:theExample.failure.lineNumber expected:YES];
-            }
-        });
-        class_addMethod([spec class],
-                        NSSelectorFromString([namer methodNameForExample:example withClassName:NSStringFromClass([self class])]),
-                        imp,
-                        method_getTypeEncoding(m));
+        if (!example.isPending) {
+            IMP imp = imp_implementationWithBlock(^(id instance){
+                CDRExample *theExample = [instance allExamples][i];
+                [theExample runWithDispatcher:nil];
+                if (theExample.failure) {
+                    [instance recordFailureWithDescription:theExample.failure.reason inFile:theExample.failure.fileName atLine:theExample.failure.lineNumber expected:YES];
+                }
+            });
+            class_addMethod([spec class],
+                            NSSelectorFromString([namer methodNameForExample:example withClassName:NSStringFromClass([self class])]),
+                            imp,
+                            method_getTypeEncoding(m));
+        }
         i++;
     }
 
