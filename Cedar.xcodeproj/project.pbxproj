@@ -213,6 +213,8 @@
 		AE0AF56C13E9C0FB00029396 /* CedarMatchers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; };
 		AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; };
+		AE0C9D8E19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */; };
+		AE0C9D8F19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */; };
 		AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
@@ -753,6 +755,7 @@
 		AE0AF55E13E9C0E300029396 /* CedarMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarMatchers.h; sourceTree = "<group>"; };
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
+		AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CDRSpec+XCTestSupport.m"; sourceTree = "<group>"; };
 		AE167EF115B216DA005960B9 /* RaiseException.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseException.mm; sourceTree = "<group>"; };
 		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
@@ -1268,6 +1271,14 @@
 			path = Matchers;
 			sourceTree = "<group>";
 		};
+		AE0C9D8919C0C61300B4DD2B /* XCTest */ = {
+			isa = PBXGroup;
+			children = (
+				AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */,
+			);
+			path = XCTest;
+			sourceTree = "<group>";
+		};
 		AE167EEC15B210C9005960B9 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1484,6 +1495,7 @@
 		AEEE1FDC11DC27B800029872 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				AE0C9D8919C0C61300B4DD2B /* XCTest */,
 				AEEE1FDD11DC27B800029872 /* CDRExampleDetailsViewController.m */,
 				AEEE1FDE11DC27B800029872 /* CDRExampleReporterViewController.m */,
 				AEEE1FDF11DC27B800029872 /* CDRExampleStateMap.m */,
@@ -2273,6 +2285,7 @@
 				AE8C881413626FE7006C9305 /* CDRSpecFailure.m in Sources */,
 				4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
 				96EA1CA8142C6425001A78E0 /* CDROTestReporter.m in Sources */,
+				AE0C9D8E19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */,
 				34681C2C18FE451E009D38AC /* CDRTypeUtilities.m in Sources */,
 				96EA1CAA142C6425001A78E0 /* CDROTestRunner.m in Sources */,
 				9637852B1491D6D40059C9F6 /* CDROTestHelper.m in Sources */,
@@ -2382,6 +2395,7 @@
 				AEEE223711DC2B6500029872 /* CDRSpecHelper.m in Sources */,
 				AEEE223811DC2B6D00029872 /* CDRExampleDetailsViewController.m in Sources */,
 				AEEE223911DC2B6D00029872 /* CDRExampleReporterViewController.m in Sources */,
+				AE0C9D8F19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */,
 				AEEE223A11DC2B6D00029872 /* CDRExampleStateMap.m in Sources */,
 				AEEE223B11DC2B6D00029872 /* CDRSpecStatusCell.m in Sources */,
 				AEEE223C11DC2B6D00029872 /* CDRSpecStatusViewController.m in Sources */,

@@ -48,10 +48,6 @@ void fail(NSString *);
     CDRSymbolicator *symbolicator_;
 }
 
-@property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
-@property (nonatomic, retain) NSString *fileName;
-@property (nonatomic, retain) CDRSymbolicator *symbolicator;
-
 - (void)defineBehaviors;
 - (void)markAsFocusedClosestToLineNumber:(NSUInteger)lineNumber;
 - (NSArray *)allChildren;
@@ -60,6 +56,11 @@ void fail(NSString *);
 
 @interface CDRSpec (XCTestSupport)
 - (id)testSuite;
+
+@property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
+@property (nonatomic, retain) NSString *fileName;
+@property (nonatomic, retain) CDRSymbolicator *symbolicator;
+
 @end
 
 @interface CDRSpec (SpecDeclaration)
