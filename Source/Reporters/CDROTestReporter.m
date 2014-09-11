@@ -14,6 +14,7 @@
 @property (retain, nonatomic) NSDateFormatter *formatter;
 @property (retain, nonatomic) CDROTestNamer *namer;
 
+@property (retain, nonatomic) NSString *currentMethodName;
 @property (retain, nonatomic) NSString *currentSuiteName;
 @property (retain, nonatomic) CDRExampleGroup *currentSuite;
 
@@ -87,6 +88,7 @@
     if ([self shouldReportExample:example]) {
         NSString *testSuite = [self.namer classNameForExample:example];
         NSString *methodName = [self.namer methodNameForExample:example];
+        self.currentMethodName = methodName;
         [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' started.", testSuite, methodName]];
     }
 }
@@ -94,13 +96,12 @@
 - (void)runDidFinishExample:(CDRExample *)example {
     if ([self shouldReportExample:example]) {
         NSString *testSuite = [self.namer classNameForExample:example];
-        NSString *methodName = [self.namer methodNameForExample:example];
         NSString *status = [self stateNameForExample:example];
         [self logMessage:[self stringForErrorsForExample:example
                                                suiteName:testSuite
-                                                caseName:methodName]];
+                                                caseName:self.currentMethodName]];
         [self logMessage:[NSString stringWithFormat:@"Test Case '-[%@ %@]' %@ (%.3f seconds).\n",
-                          testSuite, methodName, status, example.runTime]];
+                          testSuite, self.currentMethodName, status, example.runTime]];
     }
 }
 
