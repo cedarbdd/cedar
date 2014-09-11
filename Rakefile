@@ -112,7 +112,7 @@ class Xcode
   end
 
   def self.sdk_dir_for_version(version)
-    path = %x[xcrun -sdk "iphonesimulator#{version}" -show-sdk-path 2>/dev/null ].strip
+    path = %x[ xcrun -sdk "iphonesimulator#{version}" -show-sdk-path 2>/dev/null ].strip
     raise("iPhone Simulator SDK version #{version} not installed") if $?.exitstatus != 0
     path
   end
@@ -176,42 +176,6 @@ class Xcode
   end
 end
 
-class Accessibility
-  def self.enable
-    Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
-  end
-
-  def self.bundle_identifier(app_path)
-    `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' #{File.join(app_path, 'Contents', 'Info.plist').inspect}`.strip
-  end
-
-  def self.poll
-    system <<EOF
-      osascript -e '
-tell application "System Events" to tell process "SystemUIServer"
-  tell (menu bar item 1 of menu bar 1 where description is "clock")
-    click
-    click menu item "Open Date & Time Preferences…" of menu 1
-  end tell
-end tell'
-EOF
-  end
-
-  def self.add_allow_accessibility_control(bundle_id, client_type=1)
-    system %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT INTO access VALUES('kTCCServiceAccessibility','#{bundle_id}',#{client_type},1,1,NULL);"}
-    kill
-  end
-
-  def self.set_allow_accessibility_control(bundle_id)
-    system %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "UPDATE access SET allowed = 1 where client = '#{bundle_id}';"}
-    kill
-  end
-
-  def self.kill
-    system "sudo killall -9 tccd"
-  end
-end
-
 def remove_templates_from_directory(templates_directory)
   return unless File.directory?(templates_directory)
 
@@ -270,7 +234,6 @@ class Simulator
       # "DYLD_FALLBACK_LIBRARY_PATH" => sdk_path,
       # "IPHONE_SIMULATOR_ROOT" => sdk_path,
       # "CFFIXED_USER_HOME" => Dir.tmpdir,
-      "CEDAR_HEADLESS_SPECS" => "1",
       "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
     }
 
@@ -366,7 +329,6 @@ namespace :suites do
     task run: :build do
       Simulator.kill
       env_vars = {
-        "CEDAR_HEADLESS_SPECS" => "1",
         "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
       }
 
@@ -422,7 +384,6 @@ namespace :suites do
     task run: :build do
       Simulator.kill
       env_vars = {
-        "CEDAR_HEADLESS_SPECS" => "1",
         "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
       }
 
@@ -469,17 +430,15 @@ namespace :testbundles do
   task xcunit: :convert_to_xcode5 do
     Simulator.kill
 
-    Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-      if Xcode.is_octest_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
-        Xcode.test(
-          scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
-          sdk: "iphonesimulator#{SDK_VERSION}",
-          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
-          logfile: "xcunit.run.log",
-        )
-      else
-        puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
-      end
+    if Xcode.is_octest_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
+      Xcode.test(
+        scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
+        sdk: "iphonesimulator#{SDK_VERSION}",
+        args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+        logfile: "xcunit.run.log",
+      )
+    else
+      puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
     end
   end
 
@@ -489,16 +448,13 @@ namespace :testbundles do
   namespace :ocunit do
     desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
     task logic: :convert_to_xcode5 do
-      Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-        if Xcode.is_octest_deprecated?
-          Xcode.test(
-            scheme: APP_NAME,
-            args: "SYMROOT='#{BUILD_DIR}' -destination 'arch=x86_64'",
-            logfile: "ocunit-logic-specs.log",
-          )
-        else
-          Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{BUILD_DIR}'", "ocunit-logic-specs.log"
-        end
+      if Xcode.is_octest_deprecated?
+        Xcode.test(
+          scheme: APP_NAME,
+          logfile: "ocunit-logic-specs.log",
+        )
+      else
+        Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{BUILD_DIR}'", "ocunit-logic-specs.log"
       end
     end
 
@@ -507,14 +463,12 @@ namespace :testbundles do
       Simulator.kill
 
       if Xcode.is_octest_deprecated?
-        Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-          Xcode.test(
-            scheme: APP_IOS_NAME,
-            sdk: "iphonesimulator#{SDK_VERSION}",
-            args: "ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
-            logfile: "ocunit-application-specs.log",
-          )
-        end
+        Xcode.test(
+          scheme: APP_IOS_NAME,
+          sdk: "iphonesimulator#{SDK_VERSION}",
+          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+          logfile: "ocunit-application-specs.log",
+        )
       else
         Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", "ocunit-application-build.log"
 
@@ -525,16 +479,11 @@ namespace :testbundles do
   end
 end
 
-task :enable_accessibility do
-  puts "Require sudo access to enable accessibility for AppleScript tests."
-  Accessibility.enable
-  Accessibility.add_allow_accessibility_control('/usr/sbin/sshd')
-  Accessibility.add_allow_accessibility_control('/usr/libexec/sshd-keygen-wrapper')
-end
-
 desc 'Runs integration tests of the templates'
 task :test_templates do
-  puts "Require sudo access to enable accessibility for AppleScript tests."
+  terminal_id = `/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' /Applications/Utilities/Terminal.app/Contents/Info.plist`.strip
+  Shell.run %{sudo sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' "INSERT OR REPLACE INTO access VALUES('kTCCServiceAccessibility','#{terminal_id}',0,1,1,NULL);"}
+  Shell.run "sudo touch /private/var/db/.AccessibilityAPIEnabled"
   Shell.run "cucumber"
 end
 
