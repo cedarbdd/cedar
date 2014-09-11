@@ -47,12 +47,13 @@ class Shell
     original_cmd = cmd
     if logfile
       logfile = output_file(logfile)
-      cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
+      cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
     end
     system(cmd) or begin
       log_msg = ""
       log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
       raise <<EOF
+#{`cat #{logfile}`}
 [#{red}Failed#{clear}] Command: #{original_cmd}
 #{log_msg}
 
