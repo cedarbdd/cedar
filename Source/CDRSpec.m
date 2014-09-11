@@ -121,10 +121,6 @@ void fail(NSString *reason) {
     [self markSpecClassForExampleBase:self.rootGroup];
 }
 
-- (void)failWithException:(NSException *)exception {
-    [[CDRSpecFailure specFailureWithReason:exception.reason] raise];
-}
-
 - (void)markSpecClassForExampleBase:(CDRExampleBase *)example {
     example.spec = self;
     if (example.hasChildren) {

@@ -8,12 +8,10 @@
 #import "CDRRuntimeUtilities.h"
 #import "CDRSpecFailure.h"
 #import "CDRFunctions.h"
+#import "CDRSymbolicator.h"
 
 @interface CDR_XCTest : NSObject
 - (id)run;
-- (void)setUp;
-- (void)tearDown;
-- (void)performTest:(id)run;
 @end
 
 @interface CDR_XCTestSuite : NSObject
@@ -21,20 +19,11 @@
 - (id)defaultTestSuite;
 
 - (void)addTest:(id)test;
-- (NSArray *)tests;
-- (NSArray *)allTests; // SenTestingKit
 @end
 
 @interface CDR_XCTestCase : NSObject
-+ (id)testRunWithTest:(id)test;
-+ (id)testCaseWithInvocation:(NSInvocation *)invocation;
 - (id)initWithInvocation:(NSInvocation *)invocation;
 
-@end
-
-@interface CDR_XCTestRunner : NSObject
-- (void)start;
-- (void)stop;
 @end
 
 @interface CDRSpec ()
