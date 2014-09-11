@@ -36,6 +36,10 @@
 - (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filename atLine:(NSUInteger)lineNumber expected:(BOOL)expected;
 @end
 
+const char *CDRXSeedKey;
+const char *CDRXRootGroupKey;
+const char *CDRXFullExampleNamesKey;
+
 /*! Under iOS XCTest, CDRSpec's ivars, properties, and methods get transferred
  *  over to a dynamically generated subclass of XCTestCase. This allows us to control
  *  the behavior of the tests running, while allowing for XCTest case to communicate
@@ -123,6 +127,20 @@
     return examples;
 }
 
+- (Class)createMixinSubclassOf:(Class)parentClass excluding:(NSSet *)excludedMethods {
+    NSString *className = NSStringFromClass([self class]);
+    NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
+    size_t size = class_getInstanceSize([self class]) - class_getInstanceSize([NSObject class]);
+    Class newSubclass = objc_allocateClassPair(parentClass, [newClassName UTF8String], size);
+
+    CDRCopyClassInternalsFromClass([self superclass], newSubclass, excludedMethods);
+    CDRCopyClassInternalsFromClass([self class], newSubclass, excludedMethods);
+    CDRCopyClassInternalsFromClass(object_getClass([self superclass]), object_getClass(newSubclass), excludedMethods);
+    objc_registerClassPair(newSubclass);
+
+    return newSubclass;
+}
+
 #pragma mark - XCTestCase Overrides
 
 - (NSString *)name {
@@ -164,25 +182,14 @@
 
 #pragma mark - Public
 
-const char *CDRXSeedKey;
-const char *CDRXRootGroupKey;
-const char *CDRXFullExampleNamesKey;
-
 - (id)testSuiteWithRandomSeed:(unsigned int)seed dispatcher:(CDRReportDispatcher *)dispatcher {
     NSString *className = NSStringFromClass([self class]);
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
+    Class testCaseClass = NSClassFromString(@"XCTestCase") ?: NSClassFromString(@"SenTestCase");
     id testSuite = [(id)testSuiteClass testSuiteWithName:className];
 
-    NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
-    size_t size = class_getInstanceSize([self class]) - class_getInstanceSize([NSObject class]);
-    Class testCaseClass = NSClassFromString(@"XCTestCase") ?: NSClassFromString(@"SenTestCase");
-    Class newXCTestSubclass = objc_allocateClassPair(testCaseClass, [newClassName UTF8String], size);
-
     NSSet *excludes = [NSSet setWithObject:@"testSuiteWithRandomSeed:dispatcher:"];
-    CDRCopyClassInternalsFromClass([self superclass], newXCTestSubclass, excludes);
-    CDRCopyClassInternalsFromClass([self class], newXCTestSubclass, excludes);
-    CDRCopyClassInternalsFromClass(object_getClass([self superclass]), object_getClass(newXCTestSubclass), excludes);
-    objc_registerClassPair(newXCTestSubclass);
+    Class newXCTestSubclass = [self createMixinSubclassOf:testCaseClass excluding:excludes];
 
     CDRSpec *spec = [[[newXCTestSubclass alloc] init] autorelease];
     objc_setAssociatedObject([spec class], &CDRXSeedKey, [NSNumber numberWithUnsignedInt:seed], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -198,33 +205,29 @@ const char *CDRXFullExampleNamesKey;
     CDROTestNamer *namer = [[[CDROTestNamer alloc] init] autorelease];
     Method m = class_getInstanceMethod([self class], @selector(defineBehaviors));
     NSArray *examples = [spec allExamples];
-    NSUInteger i = 0;
 
     NSMutableArray *fullExampleNames = [NSMutableArray array];
     for (CDRExample *example in examples) {
         if (!example.isPending) {
             IMP imp = imp_implementationWithBlock(^(id instance){
-                CDRExample *theExample = [instance allExamples][i];
-                CDRExampleGroup *parentGroup = (CDRExampleGroup *)theExample.parent;
+                CDRExampleGroup *parentGroup = (CDRExampleGroup *)example.parent;
                 [dispatcher runWillStartExampleGroup:parentGroup];
 
-                [theExample runWithDispatcher:dispatcher];
-                if (theExample.failure) {
-                    [instance recordFailureWithDescription:theExample.failure.reason inFile:theExample.failure.fileName atLine:theExample.failure.lineNumber expected:YES];
-
+                [example runWithDispatcher:dispatcher];
+                if (example.failure) {
+                    [instance recordFailureWithDescription:example.failure.reason
+                                                    inFile:example.failure.fileName
+                                                    atLine:example.failure.lineNumber
+                                                  expected:YES];
                 }
 
                 [dispatcher runDidFinishExampleGroup:parentGroup];
             });
             NSString *methodName = [namer methodNameForExample:example withClassName:NSStringFromClass([self class])];
-            BOOL succeeded = class_addMethod([spec class],
-                                             NSSelectorFromString(methodName),
-                                             imp,
-                                             method_getTypeEncoding(m));
+            BOOL succeeded = class_addMethod([spec class], NSSelectorFromString(methodName), imp, method_getTypeEncoding(m));
             [fullExampleNames addObject:methodName];
             NSAssert(succeeded, @"Example name already exists: '%@' as method '%@'", [example fullText], methodName);
         }
-        i++;
     }
     objc_setAssociatedObject([spec class], &CDRXFullExampleNamesKey, fullExampleNames, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 

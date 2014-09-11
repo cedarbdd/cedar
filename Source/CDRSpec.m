@@ -87,6 +87,11 @@ void fail(NSString *reason) {
 }
 
 
+/* Please be aware that CDRSpec+XCTestSupport does dynamic subclassing using this class as a mixin.
+ * All ivars must be dynamically looked up. See that category for examples.
+ *
+ * DO NOT use synthesized properties - they will crash when running inside a test bundle.
+ */
 @implementation CDRSpec
 
 #pragma mark Memory
