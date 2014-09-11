@@ -265,20 +265,25 @@ NSArray *CDRRootGroupsFromSpecs(NSArray *specs) {
     return groups;
 }
 
-NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed) {
-    NSMutableArray *permutedSpecClasses = unsortedSpecClasses.mutableCopy;
+NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed) {
+    NSMutableArray *shuffledItems = [sortedItems mutableCopy];
+    srand(seed);
 
-    [permutedSpecClasses sortUsingComparator:^NSComparisonResult(Class class1, Class class2) {
+    for (int i=0; i < shuffledItems.count; i++) {
+        NSUInteger idx = rand() % shuffledItems.count;
+        [shuffledItems exchangeObjectAtIndex:i withObjectAtIndex:idx];
+    }
+    return shuffledItems;
+}
+
+NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed) {
+    NSMutableArray *sortedSpecClasses = unsortedSpecClasses.mutableCopy;
+
+    [sortedSpecClasses sortUsingComparator:^NSComparisonResult(Class class1, Class class2) {
         return [NSStringFromClass(class1) compare:NSStringFromClass(class2)];
     }];
 
-    srand(seed);
-
-    for (int i=0; i < permutedSpecClasses.count; i++) {
-        NSUInteger idx = rand() % permutedSpecClasses.count;
-        [permutedSpecClasses exchangeObjectAtIndex:i withObjectAtIndex:idx];
-    }
-    return [permutedSpecClasses autorelease];
+    return CDRShuffleItemsInArrayWithSeed(sortedSpecClasses, seed);
 }
 
 unsigned int CDRGetRandomSeed() {

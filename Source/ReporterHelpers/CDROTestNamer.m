@@ -4,6 +4,7 @@
 
 @interface CDROTestNamer ()
 @property (nonatomic, retain) NSMutableCharacterSet *allowedCharacterSet;
+@property (nonatomic, retain) NSMutableSet *unavailableNamesForClasses;
 @end
 
 
@@ -12,6 +13,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        self.unavailableNamesForClasses = [NSMutableSet set];
         self.allowedCharacterSet = [[[NSCharacterSet alphanumericCharacterSet] mutableCopy] autorelease];
         [self.allowedCharacterSet addCharactersInString:@"_"];
     }
@@ -34,7 +36,17 @@
 
     NSString *methodName = [fullTextPieces componentsJoinedByString:@"_"];
     [fullTextPieces release];
-    return [self sanitizeNameFromString:methodName];
+    NSString *sanitizedPotentialName = [self sanitizeNameFromString:methodName];
+
+    NSString *sanitizedName = sanitizedPotentialName;
+    NSUInteger i = 0;
+    while ([self.unavailableNamesForClasses containsObject:[self fullNameWithClassName:className methodName:sanitizedName]]) {
+        i++;
+        sanitizedName = [sanitizedPotentialName stringByAppendingFormat:@"_%lu", (unsigned long)i];
+    }
+    [self.unavailableNamesForClasses addObject:[self fullNameWithClassName:className methodName:sanitizedName]];
+
+    return sanitizedName;
 }
 
 - (NSString *)methodNameForExample:(CDRExampleBase *)example {
@@ -42,6 +54,10 @@
 }
 
 #pragma mark - Private
+
+- (NSString *)fullNameWithClassName:(NSString *)className methodName:(NSString *)methodName {
+    return [NSString stringWithFormat:@"%@ %@", className, methodName];
+}
 
 - (NSString *)sanitizeNameFromString:(NSString *)string {
     NSMutableString *mutableString = [string mutableCopy];

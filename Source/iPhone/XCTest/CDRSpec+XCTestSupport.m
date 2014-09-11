@@ -124,12 +124,12 @@
     NSMutableArray *groupsQueue = [NSMutableArray arrayWithArray:self.rootGroup.examples];
     while (groupsQueue.count) {
         CDRExampleBase *exampleBase = [groupsQueue objectAtIndex:0];
+        [groupsQueue removeObjectAtIndex:0];
         if (exampleBase.hasChildren) {
             [groupsQueue addObjectsFromArray:[(CDRExampleGroup *)exampleBase examples]];
         } else if ([exampleBase shouldRun]) {
             [examples addObject:exampleBase];
         }
-        [groupsQueue removeObjectAtIndex:0];
     }
     return examples;
 }
@@ -151,8 +151,7 @@
 }
 
 - (void)invokeTest {
-    [self defineBehaviors];
-
+    self.rootGroup = objc_getAssociatedObject([self class], &CDRXRootGroupKey);
     NSInvocation *invocation = [self invocation];
     invocation.target = self;
     [invocation invoke];
@@ -160,23 +159,25 @@
 
 + (NSArray *)testInvocations {
     NSMutableArray *invocations = [NSMutableArray array];
-    CDRSpec *spec = [[[self alloc] init] autorelease];
-    [spec defineBehaviors];
+    NSArray *methodNames = objc_getAssociatedObject(self, &CDRXFullExampleNamesKey);
 
-    CDROTestNamer *namer = [[[CDROTestNamer alloc] init] autorelease];
-    for (CDRExample *example in [spec allExamples]) {
-        if (!example.isPending) {
-            SEL selector = NSSelectorFromString([namer methodNameForExample:example withClassName:[NSStringFromClass([self class]) substringFromIndex:1]]);
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:selector]];
-            invocation.selector = selector;
-            [invocations addObject:invocation];
-        }
+    NSNumber *seed = objc_getAssociatedObject(self, &CDRXSeedKey);
+    NSArray *shuffledMethodNames = CDRShuffleItemsInArrayWithSeed(methodNames, [seed unsignedIntValue]);
+    for (NSString *methodName in shuffledMethodNames) {
+        SEL selector = NSSelectorFromString(methodName);
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:selector]];
+        invocation.selector = selector;
+        [invocations addObject:invocation];
     };
 
     return invocations;
 }
 
 #pragma mark - Public
+
+const char *CDRXSeedKey;
+const char *CDRXRootGroupKey;
+const char *CDRXFullExampleNamesKey;
 
 - (id)testSuiteWithRandomSeed:(unsigned int)seed dispatcher:(CDRReportDispatcher *)dispatcher {
     NSString *className = NSStringFromClass([self class]);
@@ -195,14 +196,22 @@
     objc_registerClassPair(newXCTestSubclass);
 
     CDRSpec *spec = [[[newXCTestSubclass alloc] init] autorelease];
+    objc_setAssociatedObject([spec class], &CDRXSeedKey, [NSNumber numberWithUnsignedInt:seed], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
+    /*
+     *  XCTest copies our spec instances (by calling the constructor again), so we can't use properties or ivars
+     *  We're effectively stashing information about the spec instance on the class.
+     *  But since each spec instance is a separate class, this should be fine.
+     */
     [spec defineBehaviors];
+    objc_setAssociatedObject([spec class], &CDRXRootGroupKey, spec.rootGroup, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
     CDROTestNamer *namer = [[[CDROTestNamer alloc] init] autorelease];
     Method m = class_getInstanceMethod([self class], @selector(defineBehaviors));
     NSArray *examples = [spec allExamples];
     NSUInteger i = 0;
 
+    NSMutableArray *fullExampleNames = [NSMutableArray array];
     for (CDRExample *example in examples) {
         if (!example.isPending) {
             IMP imp = imp_implementationWithBlock(^(id instance){
@@ -218,13 +227,17 @@
 
                 [dispatcher runDidFinishExampleGroup:parentGroup];
             });
-            class_addMethod([spec class],
-                            NSSelectorFromString([namer methodNameForExample:example withClassName:NSStringFromClass([self class])]),
-                            imp,
-                            method_getTypeEncoding(m));
+            NSString *methodName = [namer methodNameForExample:example withClassName:NSStringFromClass([self class])];
+            BOOL succeeded = class_addMethod([spec class],
+                                             NSSelectorFromString(methodName),
+                                             imp,
+                                             method_getTypeEncoding(m));
+            [fullExampleNames addObject:methodName];
+            NSAssert(succeeded, @"Example name already exists: '%@' as method '%@'", [example fullText], methodName);
         }
         i++;
     }
+    objc_setAssociatedObject([spec class], &CDRXFullExampleNamesKey, fullExampleNames, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
     id defaultTestSuite = [(id)[spec class] defaultTestSuite];
     for (id test in [defaultTestSuite valueForKey:@"tests"]) {
