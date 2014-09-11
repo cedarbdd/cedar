@@ -39,10 +39,14 @@ extern NSArray *CDRRootGroupsFromSpecs(NSArray *specs);
 
 static id CDRCreateXCTestSuite() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
-    size_t size = class_getInstanceSize([CDRXTestSuite class]) - class_getInstanceSize([NSObject class]);
-    Class testSuiteSubclass = objc_allocateClassPair(testSuiteClass, "_CDRXTestSuite", size);
-    CDRCopyClassInternalsFromClass([CDRXTestSuite class], testSuiteSubclass, [NSSet set]);
-    objc_registerClassPair(testSuiteClass);
+
+    Class testSuiteSubclass = NSClassFromString(@"_CDRXTestSuite");
+    if (testSuiteSubclass == nil) {
+        size_t size = class_getInstanceSize([CDRXTestSuite class]) - class_getInstanceSize([NSObject class]);
+        testSuiteSubclass = objc_allocateClassPair(testSuiteClass, "_CDRXTestSuite", size);
+        CDRCopyClassInternalsFromClass([CDRXTestSuite class], testSuiteSubclass, [NSSet set]);
+        objc_registerClassPair(testSuiteClass);
+    }
 
     id testSuite = [[(id)testSuiteSubclass alloc] initWithName:@"Cedar"];
     CDRDefineSharedExampleGroups();

@@ -2,14 +2,18 @@
 #import "CDRReportDispatcher.h"
 #import <objc/runtime.h>
 
-static CDRReportDispatcher *CDR_XCTestSuiteDispatcher;
+static CDRReportDispatcher *__CDR_XCTestSuiteDispatcher;
 
 @implementation CDRXTestSuite
 
 + (void)setDispatcher:(CDRReportDispatcher *)dispatcher {
-    CDRReportDispatcher *oldValue = CDR_XCTestSuiteDispatcher;
-    CDR_XCTestSuiteDispatcher = [dispatcher retain];
+    CDRReportDispatcher *oldValue = __CDR_XCTestSuiteDispatcher;
+    __CDR_XCTestSuiteDispatcher = [dispatcher retain];
     [oldValue release];
+}
+
++ (CDRReportDispatcher *)dispatcher {
+    return __CDR_XCTestSuiteDispatcher;
 }
 
 - (void)performTest:(id)aRun {
@@ -17,7 +21,7 @@ static CDRReportDispatcher *CDR_XCTestSuiteDispatcher;
     IMP superPerformTest = class_getMethodImplementation(parentClass, @selector(performTest:));
     ((void (*)(id instance, SEL cmd, id run))superPerformTest)(self, _cmd, aRun);
 
-    [CDR_XCTestSuiteDispatcher runDidComplete];
+    [__CDR_XCTestSuiteDispatcher runDidComplete];
 }
 
 @end
