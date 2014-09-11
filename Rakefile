@@ -410,7 +410,7 @@ namespace :testbundles do
         Xcode.test(
           scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
           sdk: "iphonesimulator#{SDK_VERSION}",
-          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
           logfile: "xcunit.run.log",
         )
       else
@@ -447,7 +447,7 @@ namespace :testbundles do
           Xcode.test(
             scheme: APP_IOS_NAME,
             sdk: "iphonesimulator#{SDK_VERSION}",
-            args: "ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+            args: "ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
             logfile: "ocunit-application-specs.log",
           )
         end
