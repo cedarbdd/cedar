@@ -41,8 +41,4 @@ CDR_OVERLOADABLE void itShouldBehaveLike(NSString *groupName, CDRSharedExampleCo
 
 @implementation CDRSharedExampleGroupPool
 
-- (void)failWithException:(NSException *)exception {
-    [[CDRSpecFailure specFailureWithReason:[exception reason]] raise];
-}
-
 @end
