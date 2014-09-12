@@ -367,7 +367,7 @@ namespace :frameworks do
   desc "Build Cedar and Cedar-iOS frameworks, and verify built Cedar-iOS.framework"
   task build: ['frameworks:ios:build', 'frameworks:osx:build'] do
     begin
-      Rake::Task['frameworks:ios:specs:run'].execute
+      Rake::Task['iosframeworksspecs:run'].execute
     rescue Exception => e
       puts "Unable to run iOS static framework specs. Skipping validation of Cedar-iOS.framework (#{e})"
     end
