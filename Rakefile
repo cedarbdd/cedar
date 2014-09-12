@@ -191,20 +191,11 @@ end
 class Simulator
   def self.launch(app_dir, app_name, logfile)
     kill
-    # These comments represent the prior method of bootstrapping iOS apps without using the simulator.
-    # It was more reliable, but 7.1+ SDKs fail with "The iOS Simulator libSystem was initialized out of order"
-    #
-    # sdk_path = Xcode.sdk_dir_for_version(SDK_RUNTIME_VERSION)
     env_vars = {
-      # "DYLD_ROOT_PATH" => sdk_path,
-      # "DYLD_FALLBACK_LIBRARY_PATH" => sdk_path,
-      # "IPHONE_SIMULATOR_ROOT" => sdk_path,
-      # "CFFIXED_USER_HOME" => Dir.tmpdir,
       "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
     }
 
     Shell.with_env(env_vars) do
-      # Shell.run "#{File.join(app_dir, "#{app_name}.app", app_name)} -RegisterForSystemEvents", logfile
       Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
     end
   end
@@ -396,17 +387,15 @@ namespace :testbundles do
   task xcunit: :convert_to_xcode5 do
     Simulator.kill
 
-    Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-      if SDK_VERSION.split('.')[0].to_i >= 7
-        Xcode.test(
-          scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
-          sdk: "iphonesimulator#{SDK_VERSION}",
-          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
-          logfile: "xcunit.run.log",
-        )
-      else
-        puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
-      end
+    if SDK_VERSION.split('.')[0].to_i >= 7
+      Xcode.test(
+        scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
+        sdk: "iphonesimulator#{SDK_VERSION}",
+        args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
+        logfile: "xcunit.run.log",
+      )
+    else
+      puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
     end
   end
 
@@ -416,27 +405,23 @@ namespace :testbundles do
   namespace :ocunit do
     desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
     task logic: :convert_to_xcode5 do
-      Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-        Xcode.test(
-          scheme: APP_NAME,
-          args: "-destination 'arch=x86_64'",
-          logfile: "ocunit-logic-specs.log",
-        )
-      end
+      Xcode.test(
+        scheme: APP_NAME,
+        args: "-destination 'arch=x86_64'",
+        logfile: "ocunit-logic-specs.log",
+      )
     end
 
     desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_TARGET_NAME})"
     task application: :convert_to_xcode5 do
       Simulator.kill
 
-      Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-        Xcode.test(
-          scheme: APP_IOS_NAME,
-          sdk: "iphonesimulator#{SDK_VERSION}",
-          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
-          logfile: "ocunit-application-specs.log",
-        )
-      end
+      Xcode.test(
+        scheme: APP_IOS_NAME,
+        sdk: "iphonesimulator#{SDK_VERSION}",
+        args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
+        logfile: "ocunit-application-specs.log",
+      )
     end
   end
 end
