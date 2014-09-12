@@ -419,7 +419,7 @@ namespace :testbundles do
       Shell.with_env("CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
         Xcode.test(
           scheme: APP_NAME,
-          args: "SYMROOT='#{BUILD_DIR}' -destination 'arch=x86_64'",
+          args: "-destination 'arch=x86_64'",
           logfile: "ocunit-logic-specs.log",
         )
       end
@@ -433,7 +433,7 @@ namespace :testbundles do
         Xcode.test(
           scheme: APP_IOS_NAME,
           sdk: "iphonesimulator#{SDK_VERSION}",
-          args: "ARCHS=i386 SYMROOT='#{BUILD_DIR}' -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
+          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 60",
           logfile: "ocunit-application-specs.log",
         )
       end
