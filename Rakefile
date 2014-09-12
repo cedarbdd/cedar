@@ -161,9 +161,7 @@ class Xcode
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
     Shell.fold "analyze.#{options[:scheme] || options[:target]}" do
-      travis_wait = ""
-      travis_wait = "travis_wait " if ENV['TRAVIS']
-      Shell.run(%Q[#{travis_wait}xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} analyze #{args} SYMROOT='#{BUILD_DIR}'], logfile)
+      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} analyze #{args} SYMROOT='#{BUILD_DIR}'], logfile)
     end
   end
 
