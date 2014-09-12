@@ -32,16 +32,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96B5FA10144A81A8000A6A5D"
-               BuildableName = "OCUnitAppTests.octest"
-               BlueprintName = "OCUnitAppTests"
-               ReferencedContainer = "container:Cedar.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F45A3C8180E4796003C1E36"
                BuildableName = "XCUnitAppTests.xctest"
                BlueprintName = "XCUnitAppTests"
