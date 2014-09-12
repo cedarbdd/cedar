@@ -6,7 +6,6 @@
 #import "CDRExample.h"
 #import "CDROTestNamer.h"
 #import "CDRRuntimeUtilities.h"
-#import "CDRSpecFailure.h"
 #import "CDRFunctions.h"
 #import "CDRSymbolicator.h"
 
@@ -38,7 +37,10 @@
 
 const char *CDRXSeedKey;
 const char *CDRXRootGroupKey;
-const char *CDRXFullExampleNamesKey;
+const char *CDRXTestInvocationsKey;
+const char *CDRXSpecKey;
+const char *CDRXDispatcherKey;
+const char *CDRXExampleKey;
 
 /*! Under iOS XCTest, CDRSpec's ivars, properties, and methods get transferred
  *  over to a dynamically generated subclass of XCTestCase. This allows us to control
@@ -127,9 +129,7 @@ const char *CDRXFullExampleNamesKey;
     return examples;
 }
 
-- (Class)createMixinSubclassOf:(Class)parentClass excluding:(NSSet *)excludedMethods {
-    NSString *className = NSStringFromClass([self class]);
-    NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
+- (Class)createMixinSubclassOf:(Class)parentClass excluding:(NSSet *)excludedMethods newClassName:(NSString *)newClassName {
     size_t size = class_getInstanceSize([self class]) - class_getInstanceSize([NSObject class]);
     Class newSubclass = objc_allocateClassPair(parentClass, [newClassName UTF8String], size);
 
@@ -165,19 +165,7 @@ const char *CDRXFullExampleNamesKey;
 }
 
 + (NSArray *)testInvocations {
-    NSMutableArray *invocations = [NSMutableArray array];
-    NSArray *methodNames = objc_getAssociatedObject(self, &CDRXFullExampleNamesKey);
-
-    NSNumber *seed = objc_getAssociatedObject(self, &CDRXSeedKey);
-    NSArray *shuffledMethodNames = CDRShuffleItemsInArrayWithSeed(methodNames, [seed unsignedIntValue]);
-    for (NSString *methodName in shuffledMethodNames) {
-        SEL selector = NSSelectorFromString(methodName);
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:selector]];
-        invocation.selector = selector;
-        [invocations addObject:invocation];
-    };
-
-    return invocations;
+    return objc_getAssociatedObject(self, &CDRXTestInvocationsKey);
 }
 
 #pragma mark - Public
@@ -188,11 +176,15 @@ const char *CDRXFullExampleNamesKey;
     Class testCaseClass = NSClassFromString(@"XCTestCase") ?: NSClassFromString(@"SenTestCase");
     id testSuite = [(id)testSuiteClass testSuiteWithName:className];
 
-    NSSet *excludes = [NSSet setWithObject:@"testSuiteWithRandomSeed:dispatcher:"];
-    Class newXCTestSubclass = [self createMixinSubclassOf:testCaseClass excluding:excludes];
+    NSSet *excludes = [NSSet setWithArray:@[@"testSuiteWithRandomSeed:dispatcher:", @"CDRSpec"]];
+    NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
+    Class newXCTestSubclass = NSClassFromString(newClassName);
+    BOOL isCreatingSubclass = !newXCTestSubclass;
+    if (isCreatingSubclass) {
+        newXCTestSubclass = [self createMixinSubclassOf:testCaseClass excluding:excludes newClassName:newClassName];
+    }
 
     CDRSpec *spec = [[[newXCTestSubclass alloc] init] autorelease];
-    objc_setAssociatedObject([spec class], &CDRXSeedKey, [NSNumber numberWithUnsignedInt:seed], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
     /*
      *  XCTest copies our spec instances (by calling the constructor again), so we can't use properties or ivars
@@ -200,36 +192,64 @@ const char *CDRXFullExampleNamesKey;
      *  But since each spec instance is a separate class, this should be fine.
      */
     [spec defineBehaviors];
-    objc_setAssociatedObject([spec class], &CDRXRootGroupKey, spec.rootGroup, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(newXCTestSubclass, &CDRXRootGroupKey, spec.rootGroup, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
     CDROTestNamer *namer = [[[CDROTestNamer alloc] init] autorelease];
     Method m = class_getInstanceMethod([self class], @selector(defineBehaviors));
     NSArray *examples = [spec allExamples];
 
-    NSMutableArray *fullExampleNames = [NSMutableArray array];
+    NSMutableArray *testInvocations = [NSMutableArray array];
     for (CDRExample *example in examples) {
         if (!example.isPending) {
-            IMP imp = imp_implementationWithBlock(^(id instance){
-                CDRExampleGroup *parentGroup = (CDRExampleGroup *)example.parent;
-                [dispatcher runWillStartExampleGroup:parentGroup];
-
-                [example runWithDispatcher:dispatcher];
-                if (example.failure) {
-                    [instance recordFailureWithDescription:example.failure.reason
-                                                    inFile:example.failure.fileName
-                                                    atLine:example.failure.lineNumber
-                                                  expected:YES];
-                }
-
-                [dispatcher runDidFinishExampleGroup:parentGroup];
-            });
             NSString *methodName = [namer methodNameForExample:example withClassName:NSStringFromClass([self class])];
-            BOOL succeeded = class_addMethod([spec class], NSSelectorFromString(methodName), imp, method_getTypeEncoding(m));
-            [fullExampleNames addObject:methodName];
-            NSAssert(succeeded, @"Example name already exists: '%@' as method '%@'", [example fullText], methodName);
+            SEL selector = NSSelectorFromString(methodName);
+            NSMethodSignature *methodSignature = [newXCTestSubclass instanceMethodSignatureForSelector:selector];
+
+            if (!methodSignature) {
+                IMP imp = imp_implementationWithBlock(^(id instance){
+                    CDRExample *example = objc_getAssociatedObject([instance invocation], &CDRXExampleKey);
+                    CDRExampleGroup *parentGroup = (CDRExampleGroup *)example.parent;
+                    CDRReportDispatcher *theDispatcher = objc_getAssociatedObject([instance invocation], &CDRXDispatcherKey);
+                    while (![parentGroup isEqual:example.spec.rootGroup]) {
+                        [theDispatcher runWillStartExampleGroup:parentGroup];
+                        parentGroup = (CDRExampleGroup *)[parentGroup parent];
+                    }
+
+                    [example runWithDispatcher:theDispatcher];
+                    if (example.failure) {
+                        [instance recordFailureWithDescription:example.failure.reason
+                                                        inFile:example.failure.fileName
+                                                        atLine:example.failure.lineNumber
+                                                      expected:YES];
+                    }
+
+                    parentGroup = (CDRExampleGroup *)example.parent;
+                    while (![parentGroup isEqual:example.spec.rootGroup]) {
+                        [theDispatcher runDidFinishExampleGroup:parentGroup];
+                        parentGroup = (CDRExampleGroup *)[parentGroup parent];
+                    }
+                });
+
+                const char *encoding = method_getTypeEncoding(m);
+
+                BOOL succeeded = class_addMethod(newXCTestSubclass, selector, imp, encoding);
+                NSAssert(succeeded, @"Example name already exists: '%@' as method '%@'", [example fullText], methodName);
+                methodSignature = [newXCTestSubclass instanceMethodSignatureForSelector:selector];
+            }
+
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+            invocation.selector = selector;
+            [testInvocations addObject:invocation];
+
+            objc_setAssociatedObject(invocation, &CDRXDispatcherKey, dispatcher, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            objc_setAssociatedObject(invocation, &CDRXExampleKey, example, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
     }
-    objc_setAssociatedObject([spec class], &CDRXFullExampleNamesKey, fullExampleNames, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+    // save the spec to prevent premature deallocation
+    objc_setAssociatedObject(testSuite, &CDRXSpecKey, spec, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    // save for +[testInvocations]
+    objc_setAssociatedObject(newXCTestSubclass, &CDRXTestInvocationsKey, CDRShuffleItemsInArrayWithSeed(testInvocations, seed), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
     id defaultTestSuite = [(id)[spec class] defaultTestSuite];
     for (id test in [defaultTestSuite valueForKey:@"tests"]) {
