@@ -94,6 +94,8 @@ void fail(NSString *reason) {
  */
 @implementation CDRSpec
 
+@synthesize rootGroup = rootGroup_, currentGroup = currentGroup_, symbolicator = symbolicator_, fileName = fileName_;
+
 #pragma mark Memory
 
 - (void)dealloc {

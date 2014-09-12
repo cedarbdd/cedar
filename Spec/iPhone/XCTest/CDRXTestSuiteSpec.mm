@@ -11,6 +11,10 @@
 #import "CDRXTestSuite.h"
 #import "CDRReportDispatcher.h"
 
+@interface CDR_XCTest : NSObject
+- (void)performTest:(id)aRun;
+@end
+
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
@@ -38,7 +42,7 @@ describe(@"CDRXTestSuite", ^{
         CDRSpec *simulatedSpec = [[[NSClassFromString(@"CDRXSimulatedTestSuiteSpec") alloc] init] autorelease];
         [simulatedSpec defineBehaviors];
         subject = [simulatedSpec testSuiteWithRandomSeed:0 dispatcher:dispatcher];
-        [subject run];
+        [subject performTest:nil];
 
         willStartExampleGroupCount should equal(4);
         didFinishExampleGroupCount should equal(4);

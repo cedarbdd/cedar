@@ -39,12 +39,12 @@ extern NSArray *CDRRootGroupsFromSpecs(NSArray *specs);
 
 static id CDRCreateXCTestSuite() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
-
     Class testSuiteSubclass = NSClassFromString(@"_CDRXTestSuite");
+
     if (testSuiteSubclass == nil) {
         size_t size = class_getInstanceSize([CDRXTestSuite class]) - class_getInstanceSize([NSObject class]);
         testSuiteSubclass = objc_allocateClassPair(testSuiteClass, "_CDRXTestSuite", size);
-        CDRCopyClassInternalsFromClass([CDRXTestSuite class], testSuiteSubclass, [NSSet set]);
+        CDRCopyClassInternalsFromClass([CDRXTestSuite class], testSuiteSubclass);
         objc_registerClassPair(testSuiteClass);
     }
 
