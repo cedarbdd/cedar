@@ -19,7 +19,7 @@ tell application "System Events" to tell application process "Xcode"
 		keystroke "Cedar"
 		click UI element "iOS Cedar Spec Suite" of group 1 of scroll area 1 of group 1 of sheet 1 of projectWindow
 		click UI element "Next" of sheet 1 of projectWindow
-		keystroke "Specs			template-project"
+		keystroke "Specs	Pivotal	com.pivotal.cedar	template-project"
 		delay 1
 		click UI element "Finish" of sheet 1 of projectWindow
 		delay 1
