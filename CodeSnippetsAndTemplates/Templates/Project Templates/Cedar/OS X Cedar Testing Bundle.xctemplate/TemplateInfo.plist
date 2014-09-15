@@ -23,7 +23,7 @@
 	</dict>
 	<key>Identifier</key>
   <!-- need the apple id to magically add this bundle to the Test Action -->
-	<string>com.pivotallabs.cedar.OSXTestingBundle.com.apple.dt.unit.cocoaTouchUnitTestBundle</string>
+	<string>com.pivotallabs.cedar.OSXTestingBundle.com.apple.dt.unit.cocoaUnitTestBundle</string>
 	<key>Concrete</key>
 	<true/>
 	<key>Description</key>
@@ -35,6 +35,7 @@
 		<string>com.pivotallabs.cedar.testingBundle</string>
 		<string>com.apple.dt.unit.macBase</string>
 		<string>com.apple.dt.unit.macReferenceCounting</string>
+    <string>com.apple.dt.unit.osxUnitTestBundleBase</string>
 	</array>
 	<key>Targets</key>
 	<array>
@@ -87,8 +88,6 @@
 	<key>Nodes</key>
 	<array>
 		<string>Rakefile</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importCocoa</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
 		<string>Frameworks/Cedar.framework</string>
 	</array>
 	<key>isCedarTemplate</key>

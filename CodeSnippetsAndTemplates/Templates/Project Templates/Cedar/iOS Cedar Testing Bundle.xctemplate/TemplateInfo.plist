@@ -62,8 +62,6 @@
 			<key>Path</key>
 			<string>Rakefile</string>
 		</dict>
-		<key>___PACKAGENAME___-Prefix.pch:objC:importCedar</key>
-		<string>#import &lt;Cedar-iOS/Cedar.h&gt;</string>
 		<key>Frameworks/Cedar-iOS.framework</key>
 		<dict>
 			<key>Path</key>
@@ -76,9 +74,6 @@
 	<array>
 		<string>Rakefile</string>
 		<string>Frameworks/Cedar-iOS.framework</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importCocoa</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importFoundation</string>
-		<string>___PACKAGENAME___-Prefix.pch:objC:importCedar</string>
 	</array>
 	<key>SortOrder</key>
 	<integer>1</integer>
