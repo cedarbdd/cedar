@@ -38,16 +38,6 @@
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1F45A3C8180E4796003C1E36"
-               BuildableName = "XCUnitAppTests.xctest"
-               BlueprintName = "XCUnitAppTests"
-               ReferencedContainer = "container:Cedar.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
