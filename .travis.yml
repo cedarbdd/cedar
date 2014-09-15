@@ -24,4 +24,4 @@ install:
   - bundle install
   - brew install ios-sim
 
-script: rake $TASK
+script: travis_wait rake $TASK
