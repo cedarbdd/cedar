@@ -1,3 +1,4 @@
+#import <Cedar-iOS/Cedar-iOS.h>
 #import "AppDelegate.h"
 
 using namespace Cedar::Matchers;
