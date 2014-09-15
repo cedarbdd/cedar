@@ -3,7 +3,13 @@ tell application "Xcode"
 end tell
 
 tell application "System Events" to tell application process "Xcode"
-	click menu item 5 of menu 1 of menu item "New" of menu 1 of menu bar item "File" of menu bar 1
+    delay 5
+    keystroke "?" using command down
+    delay 1
+    keystroke "new target"
+    delay 1
+    key code 125
+    keystroke return
 	
 	set projectWindow to "UNKNOWN"
 	repeat with windowCount from 0 to count of windows
