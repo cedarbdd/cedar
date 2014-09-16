@@ -2,7 +2,7 @@
 #import "CDRExampleGroup.h"
 
 @interface CDRReportDispatcher ()
-@property (assign, nonatomic) CDRSpec *currentSpec;
+@property (strong, nonatomic) CDRSpec *currentSpec;
 @end
 
 @implementation CDRReportDispatcher
@@ -15,6 +15,8 @@
 
 - (void)dealloc {
     [reporters_ release];
+    reporters_ = nil;
+    self.currentSpec = nil;
     [super dealloc];
 }
 
@@ -40,7 +42,7 @@
 }
 
 - (void)runDidComplete {
-    self.currentSpec = nil;
+    [self setCurrentSpecAndNotifyIfNeeded:nil];
     for (id<CDRExampleReporter> reporter in reporters_) {
         [reporter runDidComplete];
     }
@@ -55,7 +57,7 @@
 }
 
 - (void)runWillStartExampleGroup:(CDRExampleGroup *)exampleGroup {
-    self.currentSpec = exampleGroup.spec;
+    [self setCurrentSpecAndNotifyIfNeeded:exampleGroup.spec];
     for (id<CDRExampleReporter> reporter in reporters_) {
         if ([reporter respondsToSelector:@selector(runWillStartExampleGroup:)]) {
             [reporter runWillStartExampleGroup:exampleGroup];
@@ -64,7 +66,7 @@
 }
 
 - (void)runDidFinishExampleGroup:(CDRExampleGroup *)exampleGroup {
-    self.currentSpec = exampleGroup.spec;
+    [self setCurrentSpecAndNotifyIfNeeded:exampleGroup.spec];
     for (id<CDRExampleReporter> reporter in reporters_) {
         if ([reporter respondsToSelector:@selector(runDidFinishExampleGroup:)]) {
             [reporter runDidFinishExampleGroup:exampleGroup];
@@ -106,17 +108,17 @@
 
 #pragma mark - Private Properties
 
-- (void)setCurrentSpec:(CDRSpec *)currentSpec {
-    if (currentSpec == currentSpec_) {
+- (void)setCurrentSpecAndNotifyIfNeeded:(CDRSpec *)currentSpec {
+    if (currentSpec == self.currentSpec) {
         return;
     }
-    if (currentSpec_) {
-        [self runDidFinishSpec:currentSpec_];
+    if (self.currentSpec) {
+        [self runDidFinishSpec:self.currentSpec];
     }
+    self.currentSpec = currentSpec;
     if (currentSpec) {
-        [self runWillStartSpec:currentSpec];
+        [self runWillStartSpec:self.currentSpec];
     }
-    currentSpec_ = currentSpec;
 }
 
 @end
