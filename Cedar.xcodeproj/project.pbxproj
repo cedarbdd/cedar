@@ -288,6 +288,10 @@
 		AE4A945F1880792E008566F5 /* RejectedMethod.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4A945D1880792E008566F5 /* RejectedMethod.h */; };
 		AE4A946118807DA6008566F5 /* RejectedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A946018807DA6008566F5 /* RejectedMethod.mm */; };
 		AE4A946218807DA6008566F5 /* RejectedMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A946018807DA6008566F5 /* RejectedMethod.mm */; };
+		AE4E9B9219C8B44700D794CE /* NSInvocation+CDRXExample.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4E9B9019C8B44700D794CE /* NSInvocation+CDRXExample.h */; };
+		AE4E9B9319C8B44700D794CE /* NSInvocation+CDRXExample.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4E9B9019C8B44700D794CE /* NSInvocation+CDRXExample.h */; };
+		AE4E9B9419C8B44700D794CE /* NSInvocation+CDRXExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */; };
+		AE4E9B9519C8B44700D794CE /* NSInvocation+CDRXExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		AE52405818F5D604003AB816 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
@@ -796,6 +800,8 @@
 		AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BeFalsySpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE4A945D1880792E008566F5 /* RejectedMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectedMethod.h; sourceTree = "<group>"; };
 		AE4A946018807DA6008566F5 /* RejectedMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RejectedMethod.mm; sourceTree = "<group>"; };
+		AE4E9B9019C8B44700D794CE /* NSInvocation+CDRXExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+CDRXExample.h"; sourceTree = "<group>"; };
+		AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+CDRXExample.m"; sourceTree = "<group>"; };
 		AE5218D1175979CA00A656BC /* ObjectWithWeakDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithWeakDelegate.h; sourceTree = "<group>"; };
 		AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithWeakDelegate.m; sourceTree = "<group>"; };
 		AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeakReferenceCompatibilitySpec.mm; sourceTree = "<group>"; };
@@ -1296,6 +1302,8 @@
 				AE31A29E19C0F23F00C438C1 /* CDRXTestSuite.m */,
 				AE34724919C37ECF005CA6F1 /* CDRXCTestCase.h */,
 				AE34724A19C37ECF005CA6F1 /* CDRXCTestCase.m */,
+				AE4E9B9019C8B44700D794CE /* NSInvocation+CDRXExample.h */,
+				AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */,
 			);
 			path = XCTest;
 			sourceTree = "<group>";
@@ -1734,6 +1742,7 @@
 				AEF72F7813EC730700786282 /* CedarComparators.h in Headers */,
 				AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */,
 				96EA1CB0142C6449001A78E0 /* CDROTestRunner.h in Headers */,
+				AE4E9B9219C8B44700D794CE /* NSInvocation+CDRXExample.h in Headers */,
 				AEF7301113ECC25000786282 /* BeEmpty.h in Headers */,
 				AEF7303A13ECCB7B00786282 /* StringifiersBase.h in Headers */,
 				AEF7303B13ECCB7B00786282 /* StringifiersContainer.h in Headers */,
@@ -1808,6 +1817,7 @@
 				1FF449B618A0C24600AF94B0 /* CDRBufferedDefaultReporter.h in Headers */,
 				AE31A2A019C0F23F00C438C1 /* CDRXTestSuite.h in Headers */,
 				AEC9DEEF12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
+				AE4E9B9319C8B44700D794CE /* NSInvocation+CDRXExample.h in Headers */,
 				42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */,
 				AE34724C19C37ECF005CA6F1 /* CDRXCTestCase.h in Headers */,
 				96EA1CAF142C6449001A78E0 /* CDROTestReporter.h in Headers */,
@@ -2342,6 +2352,7 @@
 				6628FC9C14C4DEC50016652A /* CDRSpy.mm in Sources */,
 				34ADE41818F23C8E00BD1E99 /* NSMethodSignature+Cedar.m in Sources */,
 				1FF4497D18A0B37A00AF94B0 /* AnyArgument.mm in Sources */,
+				AE4E9B9419C8B44700D794CE /* NSInvocation+CDRXExample.m in Sources */,
 				AE9AA68715AB7E0900617E1A /* CDRClassFake.mm in Sources */,
 				AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
 				1FE15C1D1869091900207F0C /* CDRReportDispatcher.m in Sources */,
@@ -2448,6 +2459,7 @@
 				AEEE223D11DC2B6D00029872 /* CedarApplicationDelegate.m in Sources */,
 				AE55BF1C19A7CF58005948E6 /* CDRRuntimeUtilities.m in Sources */,
 				1FF4497E18A0B37A00AF94B0 /* AnyArgument.mm in Sources */,
+				AE4E9B9519C8B44700D794CE /* NSInvocation+CDRXExample.m in Sources */,
 				AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */,
 				AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */,
 				AE8C881513626FE7006C9305 /* CDRSpecFailure.m in Sources */,

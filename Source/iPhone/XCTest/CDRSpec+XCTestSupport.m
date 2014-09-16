@@ -9,6 +9,10 @@
 #import "CDRFunctions.h"
 #import "CDRSymbolicator.h"
 #import "CDRXCTestCase.h"
+#import "NSInvocation+CDRXExample.h"
+
+
+const char *CDRXSpecKey;
 
 
 @interface CDR_XCTestSuite : NSObject
@@ -25,17 +29,8 @@
 - (id)testSuiteWithRandomSeed:(unsigned int)seed dispatcher:(CDRReportDispatcher *)dispatcher {
     NSString *className = NSStringFromClass([self class]);
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
-    Class testCaseClass = NSClassFromString(@"XCTestCase") ?: NSClassFromString(@"SenTestCase");
     id testSuite = [(id)testSuiteClass testSuiteWithName:className];
-
-    NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
-    Class newXCTestSubclass = NSClassFromString(newClassName);
-    BOOL isCreatingSubclass = !newXCTestSubclass;
-    if (isCreatingSubclass) {
-        newXCTestSubclass = [self createMixinSubclassOf:testCaseClass
-                                           newClassName:newClassName
-                                          templateClass:[CDRXCTestCase class]];
-    }
+    Class newXCTestSubclass = [self createTestCaseSubclass];
 
     CDROTestNamer *namer = [[[CDROTestNamer alloc] init] autorelease];
     NSArray *examples = [self allExamples];
@@ -54,18 +49,16 @@
 
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
             invocation.selector = selector;
+            invocation.dispatcher = dispatcher;
+            invocation.example = example;
+            invocation.specClassName = className;
             [testInvocations addObject:invocation];
-
-            objc_setAssociatedObject(invocation, &CDRXDispatcherKey, dispatcher, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            objc_setAssociatedObject(invocation, &CDRXExampleKey, example, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            objc_setAssociatedObject(invocation, &CDRXSpecClassNameKey, className, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
     }
 
     // save the spec to prevent premature deallocation
     objc_setAssociatedObject(testSuite, &CDRXSpecKey, self, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    // save for +[testInvocations]
-    objc_setAssociatedObject(newXCTestSubclass, &CDRXTestInvocationsKey, CDRShuffleItemsInArrayWithSeed(testInvocations, seed), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [(id)newXCTestSubclass setTestInvocations:CDRShuffleItemsInArrayWithSeed(testInvocations, seed)];
 
     id defaultTestSuite = [(id)newXCTestSubclass defaultTestSuite];
     for (id test in [defaultTestSuite valueForKey:@"tests"]) {
@@ -76,6 +69,20 @@
 }
 
 #pragma mark - Private
+
+- (Class)createTestCaseSubclass {
+    NSString *className = NSStringFromClass([self class]);
+    Class testCaseClass = NSClassFromString(@"XCTestCase") ?: NSClassFromString(@"SenTestCase");
+    NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
+    Class newXCTestSubclass = NSClassFromString(newClassName);
+    if (!newXCTestSubclass) {
+        newXCTestSubclass = [self createMixinSubclassOf:testCaseClass
+                                           newClassName:newClassName
+                                          templateClass:[CDRXCTestCase class]];
+    }
+
+    return newXCTestSubclass;
+}
 
 - (NSArray *)allExamples {
     NSMutableArray *examples = [NSMutableArray array];
@@ -97,7 +104,6 @@
     Class newSubclass = objc_allocateClassPair(parentClass, [newClassName UTF8String], size);
 
     CDRCopyClassInternalsFromClass(templateClass, newSubclass);
-    CDRCopyClassMethodsFromClass(templateClass, newSubclass);
     objc_registerClassPair(newSubclass);
 
     return newSubclass;
@@ -105,9 +111,9 @@
 
 - (void)createTestMethodForSelector:(SEL)selector onClass:(Class)aClass {
     IMP imp = imp_implementationWithBlock(^(id instance){
-        CDRExample *example = objc_getAssociatedObject([instance invocation], &CDRXExampleKey);
+        CDRExample *example = [[instance invocation] example];
         CDRExampleGroup *parentGroup = (CDRExampleGroup *)example.parent;
-        CDRReportDispatcher *theDispatcher = objc_getAssociatedObject([instance invocation], &CDRXDispatcherKey);
+        CDRReportDispatcher *theDispatcher = [[instance invocation] dispatcher];
         while (![parentGroup isEqual:example.spec.rootGroup]) {
             [theDispatcher runWillStartExampleGroup:parentGroup];
             parentGroup = (CDRExampleGroup *)[parentGroup parent];
