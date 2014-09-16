@@ -1,96 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Kind</key>
-	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
-	<key>Definitions</key>
-	<dict>
-		<key>Rakefile</key>
-		<dict>
-			<key>TargetIndices</key>
-			<array/>
-			<key>Path</key>
-			<string>Rakefile</string>
-		</dict>
-		<key>*:*:importCedar</key>
-		<string>#import &lt;Cedar/Cedar.h&gt;</string>
-		<key>Frameworks/Cedar.framework</key>
-		<dict>
-			<key>Path</key>
-			<string>Cedar.framework</string>
-		</dict>
-	</dict>
-	<key>Identifier</key>
-  <!-- need the apple id to magically add this bundle to the Test Action -->
-	<string>com.pivotallabs.cedar.OSXTestingBundle.com.apple.dt.unit.cocoaUnitTestBundle</string>
-	<key>Concrete</key>
-	<true/>
-	<key>Description</key>
-	<string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Unit Testing Bundle.  After creating this target, add it to the list of tests for your app.</string>
-	<key>SortOrder</key>
-	<integer>1</integer>
-	<key>Ancestors</key>
-	<array>
-		<string>com.pivotallabs.cedar.testingBundle</string>
-		<string>com.apple.dt.unit.macBase</string>
-		<string>com.apple.dt.unit.macReferenceCounting</string>
-    <string>com.apple.dt.unit.osxUnitTestBundleBase</string>
-	</array>
-	<key>Targets</key>
-	<array>
-		<dict>
-			<key>BuildPhases</key>
-			<array>
-				<dict>
-					<key>Class</key>
-					<string>Sources</string>
-				</dict>
-				<dict>
-					<key>Class</key>
-					<string>Frameworks</string>
-				</dict>
-				<dict>
-					<key>Class</key>
-					<string>Resources</string>
-				</dict>
-				<dict>
-					<key>ShellScript</key>
-					<string>cp -R &quot;${TARGET_NAME}&quot;/Frameworks/Cedar.framework &quot;${BUILT_PRODUCTS_DIR}&quot;</string>
-					<key>ShellPath</key>
-					<string>/bin/sh</string>
-					<key>Class</key>
-					<string>ShellScript</string>
-				</dict>
-				<dict>
-					<key>Class</key>
-					<string>ShellScript</string>
-					<key>ShellPath</key>
-					<string>/bin/sh</string>
-					<key>ShellScript</key>
-					<string># Run the unit tests in this test bundle.
-&quot;${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests&quot;
-</string>
-				</dict>
-			</array>
-			<key>Frameworks</key>
-			<array>
-				<string>Cocoa</string>
-			</array>
-			<key>OtherFrameworks</key>
-			<array>
-				<string>AppKit</string>
-				<string>CoreData</string>
-				<string>Foundation</string>
-			</array>
-		</dict>
-	</array>
-	<key>Nodes</key>
-	<array>
-		<string>Rakefile</string>
-		<string>Frameworks/Cedar.framework</string>
-	</array>
-	<key>isCedarTemplate</key>
-	<true/>
-</dict>
+  <dict>
+    <key>Kind</key>
+    <string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+    <key>Definitions</key>
+    <dict>
+      <key>Rakefile</key>
+      <dict>
+        <key>TargetIndices</key>
+        <array/>
+        <key>Path</key>
+        <string>Rakefile</string>
+      </dict>
+      <key>*:*:importCedar</key>
+      <string>#import &lt;Cedar/Cedar.h&gt;</string>
+      <key>Frameworks/Cedar.framework</key>
+      <dict>
+        <key>Path</key>
+        <string>Cedar.framework</string>
+      </dict>
+    </dict>
+    <key>Macros</key>
+    <dict>
+      <key>CEDAR_SPEC_IMPORTS</key>
+      <string>#import &lt;XCTest/XCTest.h&gt;
+      #import &lt;Cedar/Cedar.h&gt;
+      </string>
+    </dict>
+    <key>Identifier</key>
+    <!-- need the apple id to magically add this bundle to the Test Action -->
+    <string>com.pivotallabs.cedar.OSXTestingBundle.com.apple.dt.unit.cocoaUnitTestBundle</string>
+    <key>Concrete</key>
+    <true/>
+    <key>Description</key>
+    <string>This target builds a unit test bundle that uses Cedar which is run like a Cocoa Unit Testing Bundle.  After creating this target, add it to the list of tests for your app.</string>
+    <key>SortOrder</key>
+    <integer>1</integer>
+    <key>Ancestors</key>
+    <array>
+      <string>com.pivotallabs.cedar.testingBundle</string>
+      <string>com.apple.dt.unit.macBase</string>
+      <string>com.apple.dt.unit.macReferenceCounting</string>
+      <string>com.apple.dt.unit.osxUnitTestBundleBase</string>
+    </array>
+    <key>Targets</key>
+    <array>
+      <dict>
+        <key>SharedSettings</key>
+        <dict>
+          <key>GCC_PREFIX_HEADER</key>
+          <string></string>
+        </dict>
+        <key>BuildPhases</key>
+        <array>
+          <dict>
+            <key>Class</key>
+            <string>Sources</string>
+          </dict>
+          <dict>
+            <key>Class</key>
+            <string>Frameworks</string>
+          </dict>
+          <dict>
+            <key>Class</key>
+            <string>Resources</string>
+          </dict>
+          <dict>
+            <key>ShellScript</key>
+            <string>cp -R &quot;${TARGET_NAME}&quot;/Frameworks/Cedar.framework &quot;${BUILT_PRODUCTS_DIR}&quot;</string>
+            <key>ShellPath</key>
+            <string>/bin/sh</string>
+            <key>Class</key>
+            <string>ShellScript</string>
+          </dict>
+        </array>
+        <key>Frameworks</key>
+        <array>
+          <string>Cocoa</string>
+        </array>
+        <key>OtherFrameworks</key>
+        <array>
+          <string>AppKit</string>
+          <string>CoreData</string>
+          <string>Foundation</string>
+        </array>
+      </dict>
+    </array>
+    <key>Nodes</key>
+    <array>
+      <string>Rakefile</string>
+      <string>Frameworks/Cedar.framework</string>
+    </array>
+    <key>isCedarTemplate</key>
+    <true/>
+  </dict>
 </plist>
