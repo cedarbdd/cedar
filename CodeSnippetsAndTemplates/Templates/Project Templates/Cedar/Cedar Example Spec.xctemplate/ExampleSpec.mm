@@ -1,4 +1,4 @@
-#import <Cedar/Cedar.h>
+___CEDAR_SPEC_IMPORTS___
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
