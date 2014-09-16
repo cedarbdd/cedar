@@ -1,12 +1,11 @@
 #import "CDRXCTestCase.h"
+#import "NSInvocation+CDRXExample.h"
 #import <objc/runtime.h>
 
-const char *CDRXSeedKey;
+
 const char *CDRXTestInvocationsKey;
 const char *CDRXSpecKey;
-const char *CDRXDispatcherKey;
-const char *CDRXExampleKey;
-const char *CDRXSpecClassNameKey;
+
 
 @interface CDRXCTestCase (XCTestCaseMethods)
 
@@ -25,7 +24,7 @@ const char *CDRXSpecClassNameKey;
 }
 
 - (NSString *)testClassName {
-    return objc_getAssociatedObject([self invocation], &CDRXSpecClassNameKey);
+    return [[self invocation] specClassName];
 }
 
 - (NSString *)testMethodName {
@@ -40,6 +39,10 @@ const char *CDRXSpecClassNameKey;
 
 + (NSArray *)testInvocations {
     return objc_getAssociatedObject(self, &CDRXTestInvocationsKey);
+}
+
++ (void)setTestInvocations:(NSArray *)array {
+    objc_setAssociatedObject(self, &CDRXTestInvocationsKey, array, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

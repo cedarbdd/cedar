@@ -16,16 +16,15 @@ static void CDRCopyInstanceMethodsFromClass(Class sourceClass, Class destination
     Method *instanceMethods = class_copyMethodList(sourceClass, &count);
     for (unsigned int i = 0; i < count; i++) {
         Method m = instanceMethods[i];
-        if (class_respondsToSelector(destinationClass, method_getName(m))) {
+        BOOL wasAdded = class_addMethod(destinationClass,
+                                        method_getName(m),
+                                        method_getImplementation(m),
+                                        method_getTypeEncoding(m));
+        if (!wasAdded) {
             class_replaceMethod(destinationClass,
                                 method_getName(m),
                                 method_getImplementation(m),
                                 method_getTypeEncoding(m));
-        } else {
-            class_addMethod(destinationClass,
-                            method_getName(m),
-                            method_getImplementation(m),
-                            method_getTypeEncoding(m));
         }
     }
     free(instanceMethods);
@@ -74,5 +73,6 @@ void CDRCopyClassInternalsFromClass(Class sourceClass, Class destinationClass) {
     CDRCopyPropertiesFromClass(sourceClass, destinationClass);
     CDRCopyInstanceVariablesFromClass(sourceClass, destinationClass);
     CDRCopyInstanceMethodsFromClass(sourceClass, destinationClass);
+    CDRCopyClassMethodsFromClass(sourceClass, destinationClass);
 }
 
