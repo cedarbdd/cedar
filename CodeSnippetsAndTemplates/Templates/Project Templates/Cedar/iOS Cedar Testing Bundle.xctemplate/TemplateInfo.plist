@@ -118,7 +118,7 @@
 				  <key>LD_RUNPATH_SEARCH_PATHS</key>
 				  <string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
 				  <key>OTHER_LDFLAGS</key>
-				  <string>-bundle_loader $(BUILT_PRODUCTS_DIR)/___VARIABLE_testSchemeName___.app/___VARIABLE_testSchemeName___ -ObjC -all_load -lstdc++ $(inherited)</string>
+				  <string>-ObjC -all_load -lstdc++ $(inherited)</string>
 				  <key>GCC_PREFIX_HEADER</key>
 				  <string></string>
 			  </dict>
