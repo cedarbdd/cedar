@@ -1,7 +1,7 @@
 require 'pathname'
 
 module CedarTarget___PACKAGENAMEASIDENTIFIER___
-  SPECS_TARGET_NAME = "___PACKAGENAME___"
+  SPECS_TARGET_NAME = "___VARIABLE_testSchemeName___"
   CONFIGURATION = "Release"
 
   PROJECT_ROOT = Pathname.new(File.dirname(__FILE__)).parent.to_s
@@ -75,10 +75,9 @@ end
 desc "Build and run ___PACKAGENAMEASIDENTIFIER___ OCUnit logic specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
   build_and_test_command = <<END_SHELL_CMD
-      xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -arch x86_64 clean build SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' ;
-      xcodebuild -scheme #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration Debug -arch x86_64 test SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}'
+      xcodebuild -scheme #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration Debug -arch x86_64 clean test SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}'
 END_SHELL_CMD
-  Dir.chdir(CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT) do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.in_project_dir do
     CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure build_and_test_command
   end
 end

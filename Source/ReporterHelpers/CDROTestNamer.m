@@ -10,6 +10,12 @@
 
 @implementation CDROTestNamer
 
+- (void)dealloc {
+    self.unavailableNamesForClasses = nil;
+    self.allowedCharacterSet = nil;
+    [super dealloc];
+}
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -71,11 +77,6 @@
     }
 
     return [mutableString autorelease];
-}
-
-- (void)dealloc {
-    self.allowedCharacterSet = nil;
-    [super dealloc];
 }
 
 @end

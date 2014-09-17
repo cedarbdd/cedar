@@ -273,7 +273,7 @@ NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed)
         NSUInteger idx = rand() % shuffledItems.count;
         [shuffledItems exchangeObjectAtIndex:i withObjectAtIndex:idx];
     }
-    return shuffledItems;
+    return [shuffledItems autorelease];
 }
 
 NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed) {
@@ -332,12 +332,8 @@ NSArray *CDRReportersToRun() {
     const char *defaultReporterClassName = "CDRDefaultReporter";
     BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
     if (isTestBundle) {
-#if TARGET_OS_IPHONE
-        // Cedar for iOS Test Bundles hooks into XCTest's test reporting system.
+        // Cedar for Test Bundles hooks into XCTest's test reporting system.
         defaultReporterClassName = "CDRBufferedDefaultReporter";
-#else
-        defaultReporterClassName = "CDROTestReporter,CDRBufferedDefaultReporter";
-#endif
     }
     return CDRReportersFromEnv(defaultReporterClassName);
 }
