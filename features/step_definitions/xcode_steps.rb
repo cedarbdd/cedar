@@ -8,6 +8,7 @@ end
 
 Given(/^an Xcode (iOS|OS X) project$/) do |os|
   `rm -rf template-project`
+  `find features/support/#{os.downcase.gsub(/\s+/, '')}-project-template -name "xcuserdata" | rm -rf`
   `cp -pr features/support/#{os.downcase.gsub(/\s+/, '')}-project-template template-project`
   expect($?.exitstatus).to eq(0)
   expect(File.exist?("template-project")).to be_truthy
