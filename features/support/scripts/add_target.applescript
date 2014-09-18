@@ -49,8 +49,13 @@ on run argv
         delay 1
         click UI element "Finish" of sheet 1 of projectWindow
         delay 1
+
         -- check box to allow bundles to run app code. Not accessible to templates
-        set checkboxContainer to scroll area 2 of splitter group 1 of group 1 of splitter group 1 of group 2 of splitter group 1 of group 1 of window 1
+        keystroke "1" using command down
+        keystroke up
+
+        set contentPane to group 2 of splitter group 1 of group 1 of projectWindow
+        set checkboxContainer to scroll area 2 of splitter group 1 of group 1 of splitter group 1 of contentPane
         if exists checkbox "Allow testing Host Application APIs" of checkboxContainer then
             click checkbox "Allow testing Host Application APIs" of checkboxContainer
             delay 1
