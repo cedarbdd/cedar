@@ -52,8 +52,9 @@ class Shell
     system(cmd) or begin
       log_msg = ""
       log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
+      log_contents = File.read(logfile)
       raise <<EOF
-#{`cat #{logfile}`}
+#{log_contents}
 [#{red}Failed#{clear}] Command: #{original_cmd}
 #{log_msg}
 
@@ -224,21 +225,8 @@ end
 
 class Simulator
   def self.launch(app_dir, app_name, logfile)
-    kill
-    # These comments represent the prior method of bootstrapping iOS apps without using the simulator.
-    # It was more reliable, but 7.1+ SDKs fail with "The iOS Simulator libSystem was initialized out of order"
-    #
-    # sdk_path = Xcode.sdk_dir_for_version(SDK_RUNTIME_VERSION)
-    env_vars = {
-      # "DYLD_ROOT_PATH" => sdk_path,
-      # "DYLD_FALLBACK_LIBRARY_PATH" => sdk_path,
-      # "IPHONE_SIMULATOR_ROOT" => sdk_path,
-      # "CFFIXED_USER_HOME" => Dir.tmpdir,
-      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-    }
-
-    Shell.with_env(env_vars) do
-      # Shell.run "#{File.join(app_dir, "#{app_name}.app", app_name)} -RegisterForSystemEvents", logfile
+    kill # ensure simulator is not currently running
+    Shell.with_env({"CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"}) do
       Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
     end
   end
