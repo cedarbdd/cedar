@@ -61,6 +61,7 @@ on run argv
         keystroke "template-project.xcodeproj"
         delay 1
         keystroke return
+        delay 3
 
         set contentPane to group 2 of splitter group 1 of group 1 of projectWindow
 
