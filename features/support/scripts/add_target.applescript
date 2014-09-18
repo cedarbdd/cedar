@@ -57,11 +57,14 @@ on run argv
 
         -- Xcode 6: check box to allow bundles to run app code. Not accessible to templates
         keystroke "O" using command down
-        delay 1
+        repeat until (exists window "Open Quickly")
+        end repeat
+
         keystroke "template-project.xcodeproj"
-        delay 1
         keystroke return
-        delay 3
+
+        repeat until not (exists window "Open Quickly")
+        end repeat
 
         set contentPane to group 2 of splitter group 1 of group 1 of projectWindow
 
