@@ -226,9 +226,21 @@ end
 class Simulator
   def self.launch(app_dir, app_name, logfile)
     kill # ensure simulator is not currently running
+
+    retry_count = 0
     Shell.with_env({"CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"}) do
-      Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
-    end
+      begin
+        Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
+      rescue
+        retry_count += 1
+
+        if retry_count == 3
+          raise
+        else
+          retry
+        end
+      end
+      end
   end
 
   def self.launch_bundle(app_dir, app_name, test_bundle, logfile)
