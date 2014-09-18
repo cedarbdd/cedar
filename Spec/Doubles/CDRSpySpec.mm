@@ -411,6 +411,24 @@ describe(@"spy_on", ^{
 
         wasCalled should be_truthy;
     });
+
+    describe(@"spying on a class", ^{
+        __block NSFileManager *fileManager;
+
+        beforeEach(^{
+            fileManager = nice_fake_for([NSFileManager class]);
+            spy_on([NSFileManager class]);
+            [NSFileManager class] stub_method(@selector(defaultManager)).and_return(fileManager);
+        });
+
+        it(@"should work for stubbing methods", ^{
+            [NSFileManager defaultManager] should be_same_instance_as(fileManager);
+        });
+
+        it(@"should reset state between tests", ^{
+            [(id<CedarDouble>)[NSFileManager defaultManager] sent_messages] should be_empty;
+        });
+    });
 });
 
 describe(@"stop_spying_on", ^{

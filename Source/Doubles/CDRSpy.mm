@@ -25,7 +25,7 @@
     if (!instance) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot stop spying on nil" userInfo:nil];
     }
-    Class originalClass = [instance class];
+    Class originalClass = [CDRSpyInfo spyInfoForObject:instance].spiedClass;
     if ([CDRSpyInfo clearSpyInfoForObject:instance]) {
         object_setClass(instance, originalClass);
     }
