@@ -152,7 +152,7 @@ class Xcode
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
     Shell.fold "test.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' clean test #{args}), logfile)
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' clean build test #{args}), logfile)
     end
   end
 
@@ -166,7 +166,7 @@ class Xcode
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
     Shell.fold "analyze.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} analyze #{args} SYMROOT='#{BUILD_DIR}'], logfile)
+      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} clean analyze #{args} SYMROOT='#{BUILD_DIR}'], logfile)
     end
   end
 
@@ -354,7 +354,7 @@ namespace :suites do
     end
 
     desc "Run Cedar's specs for verifying focused test behavior"
-    task run: [:build, 'frameworks:build'] do
+    task run: :build do
       env_vars = {
         "DYLD_FRAMEWORK_PATH" => Xcode.build_dir,
         "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
