@@ -4,8 +4,6 @@
 <dict>
 	<key>Ancestors</key>
 	<array>
-		<string>com.apple.dt.unit.applicationBase</string>
-		<string>com.apple.dt.unit.iosBase</string>
 		<string>com.apple.dt.unit.objectiveCApplication</string>
 		<string>com.apple.dt.unit.iPhoneBase</string>
 		<string>com.apple.dt.unit.prefixable</string>
