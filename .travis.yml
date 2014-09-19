@@ -2,8 +2,6 @@ language: objective-c
 
 env:
   matrix:
-    # Verifies templates
-    - TASK="test_templates" PRETASK="rake enable_accessibility"
     # built on SDK 6.1
     - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
     - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
