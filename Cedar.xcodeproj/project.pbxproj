@@ -400,6 +400,8 @@
 		AEE0665717315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
 		AEE0665917315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
 		AEE0665A17315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
+		AEE2649319CCFADA00819B72 /* DummyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96158AA1144A91DC005895CE /* DummyModel.m */; };
+		AEE2649419CCFB0200819B72 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4251DC180E0CA200FC578B /* SenTestingKit.framework */; };
 		AEE8DBD4175FFCF3008AF18A /* CDRSpyInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEE8DBD2175FFCF3008AF18A /* CDRSpyInfo.h */; };
 		AEE8DBD7175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE8DBD3175FFCF3008AF18A /* CDRSpyInfo.mm */; };
 		AEE8DBD8175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE8DBD3175FFCF3008AF18A /* CDRSpyInfo.mm */; };
@@ -971,6 +973,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEE2649419CCFB0200819B72 /* SenTestingKit.framework in Frameworks */,
 				96158A88144A915E005895CE /* Cocoa.framework in Frameworks */,
 				96158A9D144A91B3005895CE /* Cedar.framework in Frameworks */,
 			);
@@ -2318,8 +2321,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEE2649319CCFADA00819B72 /* DummyModel.m in Sources */,
 				96158A9F144A91C4005895CE /* OCUnitAppLogicTests.mm in Sources */,
-				96158AA3144A9210005895CE /* DummyModel.m in Sources */,
 				96E807BD1491C6D200388D9D /* OCUnitAppLogicTestsWithSenTestingKit.m in Sources */,
 				AE34723219C124CE005CA6F1 /* CDRExampleGroupSpec.mm in Sources */,
 				AE34723819C12534005CA6F1 /* FibonacciCalculator.m in Sources */,
@@ -2554,7 +2557,6 @@
 				AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */,
 				34ADD2E81921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm in Sources */,
 				AE74907215B486CD008EA127 /* CDRFake.mm in Sources */,
-				34832FDA1908C996008A52DE /* CDROTestRunner.m in Sources */,
 				AE74907715B493C4008EA127 /* CDRProtocolFake.mm in Sources */,
 				AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				34ADE41918F23E6B00BD1E99 /* NSMethodSignature+Cedar.m in Sources */,
