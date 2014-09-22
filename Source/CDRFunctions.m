@@ -393,7 +393,7 @@ static id CDRCreateXCTestSuite() {
 
     CDRReportDispatcher *dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:CDRReportersToRun()] autorelease];
 
-    [CDRXTestSuite setDispatcher:dispatcher];
+    [testSuite setDispatcher:dispatcher];
 
     NSArray *groups = CDRRootGroupsFromSpecs(specs);
     [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];

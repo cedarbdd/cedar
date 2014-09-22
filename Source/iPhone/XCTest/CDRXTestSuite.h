@@ -4,7 +4,7 @@
 
 @interface CDRXTestSuite : NSObject
 
-+ (void)setDispatcher:(CDRReportDispatcher *)dispatcher;
-+ (CDRReportDispatcher *)dispatcher;
+- (void)setDispatcher:(CDRReportDispatcher *)dispatcher;
+- (CDRReportDispatcher *)dispatcher;
 
 @end

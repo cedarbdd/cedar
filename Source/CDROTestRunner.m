@@ -8,10 +8,8 @@
 
 @implementation CDROTestRunner
 
-#if !TARGET_OS_IPHONE
 + (void)load {
     CDRHijackOCUnitAndXCTestRun((IMP)CDRRunTests);
 }
-#endif
 
 @end

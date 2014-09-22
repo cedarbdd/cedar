@@ -2,18 +2,16 @@
 #import "CDRReportDispatcher.h"
 #import <objc/runtime.h>
 
-static CDRReportDispatcher *__CDR_XCTestSuiteDispatcher;
+const char *CDRXDispatcherKey;
 
 @implementation CDRXTestSuite
 
-+ (void)setDispatcher:(CDRReportDispatcher *)dispatcher {
-    CDRReportDispatcher *oldValue = __CDR_XCTestSuiteDispatcher;
-    __CDR_XCTestSuiteDispatcher = [dispatcher retain];
-    [oldValue release];
+- (void)setDispatcher:(CDRReportDispatcher *)dispatcher {
+    objc_setAssociatedObject(self, &CDRXDispatcherKey, dispatcher, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-+ (CDRReportDispatcher *)dispatcher {
-    return __CDR_XCTestSuiteDispatcher;
+- (CDRReportDispatcher *)dispatcher {
+    return objc_getAssociatedObject(self, &CDRXDispatcherKey);
 }
 
 - (void)performTest:(id)aRun {
@@ -21,7 +19,7 @@ static CDRReportDispatcher *__CDR_XCTestSuiteDispatcher;
     IMP superPerformTest = class_getMethodImplementation(parentClass, @selector(performTest:));
     ((void (*)(id instance, SEL cmd, id run))superPerformTest)(self, _cmd, aRun);
 
-    [__CDR_XCTestSuiteDispatcher runDidComplete];
+    [[self dispatcher] runDidComplete];
 }
 
 @end

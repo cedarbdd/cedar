@@ -33,7 +33,7 @@ const char *CDRXSpecKey;
     Class newXCTestSubclass = [self createTestCaseSubclass];
 
     CDROTestNamer *namer = [[[CDROTestNamer alloc] init] autorelease];
-    NSArray *examples = [self allExamples];
+    NSArray *examples = [self allExamplesToRun];
 
     NSMutableArray *testInvocations = [NSMutableArray array];
     for (CDRExample *example in examples) {
@@ -84,7 +84,7 @@ const char *CDRXSpecKey;
     return newXCTestSubclass;
 }
 
-- (NSArray *)allExamples {
+- (NSArray *)allExamplesToRun {
     NSMutableArray *examples = [NSMutableArray array];
     NSMutableArray *groupsQueue = [NSMutableArray arrayWithArray:self.rootGroup.examples];
     while (groupsQueue.count) {
