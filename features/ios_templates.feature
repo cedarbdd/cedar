@@ -30,8 +30,12 @@ Feature:
 
   Scenario: Failing spec bundle tests
     Given an Xcode iOS project
-  
+
     When I add an iOS Testing Bundle target
     And I add a failing test
     Then running the specs from the rake task should fail
 
+  Scenario: Showing only iOS Templates
+    Given an Xcode iOS project
+
+    Then I should only see the iOS Targets

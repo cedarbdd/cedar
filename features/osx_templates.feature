@@ -28,3 +28,7 @@ Feature:
     And I add a failing test
     Then running the specs from the rake task should fail
 
+  Scenario: Showing only OS X Templates
+    Given an Xcode OS X project
+
+    Then I should only see the OS X Targets
