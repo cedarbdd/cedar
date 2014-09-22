@@ -88,7 +88,9 @@
       <string>com.apple.dt.unit.macBase</string>
       <string>com.apple.dt.unit.macReferenceCounting</string>
       <!-- Xcode 6 -->
-      <string>com.apple.dt.unit.osxUnitTestBundleBase</string>
+      <string>com.apple.dt.unit.unitTestBundleBase</string>
+      <string>com.apple.dt.unit.noLanguageChoice</string>
+      <string>com.apple.dt.unit.osxBase</string>
     </array>
     <key>Targets</key>
     <array>
@@ -97,6 +99,12 @@
         <dict>
           <key>GCC_PREFIX_HEADER</key>
           <string></string>
+          <key>COMBINE_HIDPI_IMAGES</key>
+          <string>YES</string>
+          <key>FRAMEWORK_SEARCH_PATHS</key>
+          <string>$(DEVELOPER_FRAMEWORKS_DIR) $(inherited)</string>
+          <key>LD_RUNPATH_SEARCH_PATHS</key>
+          <string>$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks</string>
         </dict>
         <key>BuildPhases</key>
         <array>
