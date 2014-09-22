@@ -24,4 +24,9 @@
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"DummyView" owner:nil options:nil];
     STAssertEquals([[views lastObject] class], [UIView class], @"expected last view of DummyView nib to be UIView kind");
 }
+
+- (void)testRunningCedarExamples {
+    SenTestSuite *defaultSuite = [SenTestSuite defaultTestSuite];
+    STAssertTrue([[defaultSuite valueForKeyPath:@"tests.name"] containsObject:@"Cedar"], @"should contain a Cedar test suite");
+}
 @end
