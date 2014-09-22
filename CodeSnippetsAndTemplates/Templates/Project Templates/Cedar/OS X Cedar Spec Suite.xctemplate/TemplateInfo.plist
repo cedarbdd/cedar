@@ -13,6 +13,10 @@
 		<string>main.m:include</string>
 		<string>main.m:main:content</string>
 	</array>
+    <key>Platforms</key>
+    <array>
+        <string>com.apple.platform.macosx</string>
+    </array>
 	<key>Identifier</key>
 	<string>com.pivotallabs.cedar.OSXSpecSuite</string>
 	<key>Concrete</key>

@@ -5,11 +5,17 @@
 	<key>Ancestors</key>
 	<array>
 		<string>com.apple.dt.unit.objectiveCApplication</string>
+		<!-- Xcode 5 -->
 		<string>com.apple.dt.unit.iPhoneBase</string>
 		<string>com.apple.dt.unit.prefixable</string>
+		<!-- Xcode 6 -->
 		<string>com.apple.dt.unit.applicationBase</string>
 		<string>com.apple.dt.unit.iosBase</string>
 	</array>
+    <key>Platforms</key>
+    <array>
+        <string>com.apple.platform.iphoneos</string>
+    </array>
 	<key>Concrete</key>
 	<true/>
 	<key>Definitions</key>

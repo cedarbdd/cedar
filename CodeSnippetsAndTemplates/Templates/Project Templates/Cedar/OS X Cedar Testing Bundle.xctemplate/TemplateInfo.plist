@@ -4,6 +4,10 @@
   <dict>
     <key>Kind</key>
     <string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+    <key>Platforms</key>
+    <array>
+        <string>com.apple.platform.macosx</string>
+    </array>
     <key>Definitions</key>
     <dict>
       <key>Rakefile</key>
