@@ -1,6 +1,7 @@
 #define SENTEST_IGNORE_DEPRECATION_WARNING
 #import <SenTestingKit/SenTestingKit.h>
 #import "OCUnitAppAppDelegate.h" // should NOT be included in OCUnitAppTests target
+#import "CDRXTestSuite.h"
 
 @interface ExampleApplicationTestsWithSenTestingKit : SenTestCase
 @end
@@ -28,5 +29,14 @@
 - (void)testRunningCedarExamples {
     SenTestSuite *defaultSuite = [SenTestSuite defaultTestSuite];
     STAssertTrue([[defaultSuite valueForKeyPath:@"tests.name"] containsObject:@"Cedar"], @"should contain a Cedar test suite");
+}
+
+- (void)testCallingDefaultTestSuiteMultipleTimesShouldHaveDifferentReporters {
+    SenTestSuite *defaultSuite1 = [SenTestSuite defaultTestSuite];
+    SenTestSuite *defaultSuite2 = [SenTestSuite defaultTestSuite];
+
+    CDRXTestSuite *suite1 = [[defaultSuite1 valueForKey:@"tests"] lastObject];
+    CDRXTestSuite *suite2 = [[defaultSuite2 valueForKey:@"tests"] lastObject];
+    STAssertTrue(suite1.dispatcher != suite2.dispatcher, @"Each test suite should have its own dispatcher");
 }
 @end
