@@ -14,14 +14,24 @@
 
 const char *CDRXSpecKey;
 
-
+#pragma mark - XCTest forward declarations
 @interface CDR_XCTestSuite : NSObject
 - (id)testSuiteWithName:(NSString *)name;
 - (id)defaultTestSuite;
 - (void)addTest:(id)test;
 @end
 
+#pragma mark - SenTestingKit forward declarations
+@interface CDR_SenTestSuite : NSObject
+- (void)failWithException:(NSException *)anException;
+@end
 
+@interface NSException (SenTestFailure)
++ (NSException *) failureInFile:(NSString *) filename atLine:(int) lineNumber withDescription:(NSString *) formatString, ...;
+@end
+
+
+#pragma mark - CDRSpec XCTest support
 @implementation CDRSpec (XCTestSupport)
 
 #pragma mark - Public
@@ -121,10 +131,14 @@ const char *CDRXSpecKey;
 
         [example runWithDispatcher:theDispatcher];
         if (example.failure) {
-            [instance recordFailureWithDescription:example.failure.reason
-                                            inFile:example.failure.fileName
-                                            atLine:example.failure.lineNumber
-                                          expected:YES];
+            if ([instance respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)]) {
+                [instance recordFailureWithDescription:example.failure.reason
+                                                inFile:example.failure.fileName
+                                                atLine:example.failure.lineNumber
+                                              expected:YES];
+            } else {
+                [instance failWithException:[NSException failureInFile:example.failure.fileName atLine:example.failure.lineNumber withDescription:example.failure.description]];
+            }
         }
 
         parentGroup = (CDRExampleGroup *)example.parent;
