@@ -172,7 +172,7 @@
 		96D34482144A82DB00352C4A /* DummyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96D3447F144A82D100352C4A /* DummyView.xib */; };
 		96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96D34483144A845100352C4A /* OCUnitApplicationTests.mm */; };
 		96D3448A144A85A500352C4A /* libCedar-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */; };
-		96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m */; };
+		96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm */; };
 		96E807BD1491C6D200388D9D /* OCUnitAppLogicTestsWithSenTestingKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E807BC1491C6D200388D9D /* OCUnitAppLogicTestsWithSenTestingKit.m */; };
 		96EA1CA8142C6425001A78E0 /* CDROTestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */; };
 		96EA1CA9142C6425001A78E0 /* CDROTestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */; };
@@ -759,7 +759,7 @@
 		96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CDRSymbolicatorSpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		96D34480144A82D100352C4A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DummyView.xib; sourceTree = "<group>"; };
 		96D34483144A845100352C4A /* OCUnitApplicationTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OCUnitApplicationTests.mm; sourceTree = "<group>"; };
-		96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUnitApplicationTestsWithSenTestingKit.m; sourceTree = "<group>"; };
+		96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OCUnitApplicationTestsWithSenTestingKit.mm; sourceTree = "<group>"; };
 		96E807BC1491C6D200388D9D /* OCUnitAppLogicTestsWithSenTestingKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUnitAppLogicTestsWithSenTestingKit.m; sourceTree = "<group>"; };
 		96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDROTestReporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDROTestRunner.m; sourceTree = "<group>"; };
@@ -1261,7 +1261,7 @@
 			isa = PBXGroup;
 			children = (
 				96D34483144A845100352C4A /* OCUnitApplicationTests.mm */,
-				96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m */,
+				96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm */,
 				96B5FA18144A81A8000A6A5D /* Supporting Files */,
 			);
 			path = OCUnitAppTests;
@@ -2378,7 +2378,7 @@
 				1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */,
 				96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */,
 				1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */,
-				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.m in Sources */,
+				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm in Sources */,
 				1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */,
 				AE34723319C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */,
 				1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */,
