@@ -24,8 +24,6 @@ before_install: brew update
 install:
   - bundle install
   - brew install ios-sim
-after_install:
-  - $PRETASK
 
 script:
     # run a printer task to keep travis from terminating static analysis
