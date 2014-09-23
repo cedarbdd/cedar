@@ -297,7 +297,7 @@ namespace :suites do
     end
 
     desc "Build specs"
-    task :build do
+    task build: 'frameworks:osx:build' do
       Xcode.build(target: SPECS_TARGET_NAME, logfile: "specs.build.log")
     end
 
@@ -404,12 +404,14 @@ namespace :frameworks do
   end
 
   namespace :osx do
+    desc "Builds and installs the Cedar OS X framework"
     task :build do
-      Xcode.build(target: CEDAR_FRAMEWORK_TARGET_NAME, logfile: "frameworks.osx.build.log")
+      Xcode.build(target: CEDAR_FRAMEWORK_TARGET_NAME, logfile: "frameworks.osx.build.log", args: "install DSTROOT=/")
     end
   end
 
   namespace :ios do
+    desc "Builds the Cedar iOS framework"
     task :build do
       Xcode.build(target: CEDAR_IOS_FRAMEWORK_TARGET_NAME, logfile: "frameworks.ios.build.log")
     end
