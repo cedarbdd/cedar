@@ -44,7 +44,7 @@
 - (BOOL)retainWeakReference {
     __block id that = self;
     __block BOOL res;
-    [self as_spied_class:^{
+    [self unsafe_as_spied_class:^{
         res = [that retainWeakReference];
     }];
     return res;
@@ -197,22 +197,35 @@
     return [CDRSpyInfo cedarDoubleForObject:self];
 }
 
-- (void)as_class:(Class)klass :(void(^)())block {
-    Class spyClass = object_getClass(self);
-    object_setClass(self, klass);
-
-    @try {
-        block();
-    } @finally {
-        object_setClass(self, spyClass);
-    }
-}
-
 - (void)as_spied_class:(void(^)())block {
     CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
     Class originalClass = info.spiedClass;
     if (originalClass != Nil) {
-        [self as_class:originalClass :block];
+        Class spyClass = object_getClass(self);
+        object_setClass(self, originalClass);
+
+        @try {
+            block();
+        } @finally {
+            if ([CDRSpyInfo spyInfoForObject:self]) {
+                object_setClass(self, spyClass);
+            }
+        }
+    }
+}
+
+- (void)unsafe_as_spied_class:(void(^)())block {
+    CDRSpyInfo *info = [CDRSpyInfo spyInfoForObject:self];
+    Class originalClass = info.spiedClass;
+    if (originalClass != Nil) {
+        Class spyClass = object_getClass(self);
+        object_setClass(self, originalClass);
+
+        @try {
+            block();
+        } @finally {
+            object_setClass(self, spyClass);
+        }
     }
 }
 

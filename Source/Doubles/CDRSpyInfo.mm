@@ -3,7 +3,7 @@
 #import "CedarDoubleImpl.h"
 #import <objc/runtime.h>
 
-static NSMutableSet *currentSpies__;
+static NSHashTable *currentSpies__;
 
 @interface CDRSpyInfo ()
 @property (nonatomic, assign) id originalObject;
@@ -14,8 +14,10 @@ static NSMutableSet *currentSpies__;
     __weak id _weakOriginalObject;
 }
 
+static char *CDRSpyKey;
+
 + (void)initialize {
-    currentSpies__ = [[NSMutableSet alloc] init];
+    currentSpies__ = [[NSHashTable weakObjectsHashTable] retain];
 }
 
 + (void)storeSpyInfoForObject:(id)object {
@@ -27,6 +29,7 @@ static NSMutableSet *currentSpies__;
     spyInfo.cedarDouble = [[[CedarDoubleImpl alloc] initWithDouble:object] autorelease];
 
     [currentSpies__ addObject:spyInfo];
+    objc_setAssociatedObject(object, &CDRSpyKey, spyInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 + (BOOL)clearSpyInfoForObject:(id)object {
@@ -35,6 +38,7 @@ static NSMutableSet *currentSpies__;
         spyInfo.originalObject = nil;
         spyInfo.weakOriginalObject = nil;
         [currentSpies__ removeObject:spyInfo];
+        objc_setAssociatedObject(object, &CDRSpyKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         return YES;
     }
     return NO;
@@ -58,12 +62,7 @@ static NSMutableSet *currentSpies__;
 }
 
 + (CDRSpyInfo *)spyInfoForObject:(id)object {
-    for (CDRSpyInfo *spyInfo in currentSpies__) {
-        if (spyInfo.originalObject == object) {
-            return spyInfo;
-        }
-    }
-    return nil;
+    return objc_getAssociatedObject(object, &CDRSpyKey);
 }
 
 - (IMP)impForSelector:(SEL)selector {
@@ -90,7 +89,7 @@ static NSMutableSet *currentSpies__;
 }
 
 + (void)afterEach {
-    for (CDRSpyInfo *spyInfo in [[currentSpies__ copy] autorelease]) {
+    for (CDRSpyInfo *spyInfo in [currentSpies__ allObjects]) {
         id originalObject = spyInfo.weakOriginalObject;
         if (originalObject) {
             Cedar::Doubles::CDR_stop_spying_on(originalObject);
