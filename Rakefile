@@ -47,7 +47,7 @@ class Shell
     original_cmd = cmd
     if logfile
       logfile = output_file(logfile)
-      cmd = "export > #{logfile}; (#{cmd}) 2>&1 | tee /dev/stderr >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
+      cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
     end
     system(cmd) or begin
       log_msg = ""
@@ -190,36 +190,6 @@ def remove_templates_from_directory(templates_directory)
       `#{PLISTBUDDY} -c "Print :#{TEMPLATE_SENTINEL_KEY}" "#{template_plist}"`.start_with?("true")
       Shell.run "rm -rf \"#{templates_directory}/#{template}\""
     end
-  end
-end
-
-class Simulator
-  def self.launch(app_dir, app_name, logfile)
-    kill
-    env_vars = {
-      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-    }
-
-    Shell.with_env(env_vars) do
-      Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
-    end
-  end
-
-  def self.launch_bundle(app_dir, app_name, test_bundle, logfile)
-    env_vars = {
-      "DYLD_INSERT_LIBRARIES" => "#{Xcode.developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-      "XCInjectBundle" => test_bundle,
-      "XCInjectBundleInto" => "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{APP_IOS_NAME}.app/#{APP_IOS_NAME}")}",
-    }
-    Shell.with_env(env_vars) do
-      launch(app_dir, app_name, logfile)
-    end
-  end
-
-  def self.kill
-    system %Q[killall -m -KILL "gdb"]
-    system %Q[killall -m -KILL "otest"]
-    system %Q[killall -m -KILL "iPhone Simulator"]
   end
 end
 
@@ -397,7 +367,7 @@ namespace :frameworks do
   desc "Build Cedar and Cedar-iOS frameworks, and verify built Cedar-iOS.framework"
   task build: ['frameworks:ios:build', 'frameworks:osx:build'] do
     begin
-      Rake::Task['frameworks:ios:specs:run'].execute
+      Rake::Task['iosframeworkspecs:run'].execute
     rescue Exception => e
       puts "Unable to run iOS static framework specs. Skipping validation of Cedar-iOS.framework (#{e})"
     end
