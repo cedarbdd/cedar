@@ -9,7 +9,7 @@
 @implementation CDROTestRunner
 
 + (void)load {
-    CDRHijackOCUnitAndXCTestRun((IMP)CDRRunTests);
+    CDRInjectIntoXCTestRunner();
 }
 
 @end
