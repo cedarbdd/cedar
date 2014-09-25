@@ -7,7 +7,10 @@
 @implementation CDROTestRunner
 
 + (void)load {
-    CDRInjectIntoXCTestRunner();
+    if (!CDRGetTestBundleExtension()) {
+        return; // we're not in a test bundle
+    }
+   CDRInjectIntoXCTestRunner();
 }
 
 @end

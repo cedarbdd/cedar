@@ -12,6 +12,8 @@ OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
 OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
 XCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitApp + XCTest"
 
+OSX_FAILING_SPEC_TARGET_NAME = "Failing OS X Host App"
+
 CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
 CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
 TEMPLATE_IDENTIFIER_PREFIX = "com.pivotallabs.cedar."
@@ -23,8 +25,9 @@ XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippe
 APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Preferences/appCode20/templates"
 XCODE_PLUGINS_DIR = "#{ENV['HOME']}/Library/Application Support/Developer/Shared/Xcode/Plug-ins/"
 
-SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || "7.1"
-SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || "7.1"
+LATEST_SDK_VERSION = `xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4`.chomp.split("\n").last
+SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || LATEST_SDK_VERSION
+SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || LATEST_SDK_VERSION
 
 PROJECT_ROOT = File.dirname(__FILE__)
 BUILD_DIR = File.join(PROJECT_ROOT, "build")
@@ -53,7 +56,7 @@ class Shell
       log_msg = ""
       log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
       log_contents = File.read(logfile)
-      raise <<EOF
+      raise Exception.new <<EOF
 #{log_contents}
 [#{red}Failed#{clear}] Command: #{original_cmd}
 #{log_msg}
@@ -224,9 +227,9 @@ class Simulator
   end
 
   def self.kill
-    system %Q[killall -m -KILL "gdb"]
-    system %Q[killall -m -KILL "otest"]
-    system %Q[killall -m -KILL "iPhone Simulator"]
+    system %Q[killall -m -KILL "gdb" 2>&1 > /dev/null]
+    system %Q[killall -m -KILL "otest" 2>&1 > /dev/null]
+    system %Q[killall -m -KILL "iPhone Simulator" 2>&1 > /dev/null]
   end
 end
 
@@ -390,7 +393,7 @@ end
 
 namespace :testbundles do
   desc "Runs all test bundle test suites (xcunit, ocunit:logic, ocunit:application)"
-  task run: ['testbundles:xcunit', 'testbundles:ocunit']
+  task run: ['testbundles:xcunit', 'testbundles:ocunit', 'testbundles:failing_test_bundle']
 
   desc "Converts the test bundle identifier to ones Xcode 5- recognizes (Xcode 6 postfixes the original bundler identifier)"
   task :convert_to_xcode5 do
@@ -405,7 +408,7 @@ namespace :testbundles do
       Xcode.test(
         scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
         sdk: "iphonesimulator#{SDK_VERSION}",
-        args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+        args: "ARCHS=x86_64 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
         logfile: "xcunit.run.log",
       )
     else
@@ -446,6 +449,24 @@ namespace :testbundles do
         test_bundle = File.join(Xcode.build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")
         Simulator.launch_bundle(Xcode.build_dir("-iphonesimulator"), APP_IOS_NAME, test_bundle, "ocunit.application.specs.log")
       end
+    end
+  end
+  desc 'A target that does not have XCTest or SenTestingKit linked should alert the user'
+  task :failing_test_bundle do
+    the_exception = nil
+
+    begin
+      Xcode.test(
+        scheme: OSX_FAILING_SPEC_TARGET_NAME,
+        logfile: "failing.osx.specs.log",
+        args: "2>&1",
+      )
+    rescue Exception => e
+      the_exception = e
+    end
+
+    unless the_exception && the_exception.to_s =~ /CedarNoTestFrameworkAvailable/
+        raise the_exception
     end
   end
 end

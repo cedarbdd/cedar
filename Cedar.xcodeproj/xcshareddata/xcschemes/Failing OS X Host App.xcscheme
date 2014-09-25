@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AEEE218511DC28E200029872"
-               BuildableName = "Specs"
-               BlueprintName = "Specs"
-               ReferencedContainer = "container:Cedar.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96158A85144A915E005895CE"
-               BuildableName = "OCUnitAppLogicTests.octest"
-               BlueprintName = "OCUnitAppLogicTests"
+               BlueprintIdentifier = "AE248F9719DCD52500092C14"
+               BuildableName = "OS X Host App.app"
+               BlueprintName = "OS X Host App"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96158A85144A915E005895CE"
-               BuildableName = "OCUnitAppLogicTests.octest"
-               BlueprintName = "OCUnitAppLogicTests"
+               BlueprintIdentifier = "AEB8818619DCD62D00F081BA"
+               BuildableName = "OS X Failing Test Bundle.octest"
+               BlueprintName = "OS X Failing Test Bundle"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AEEE218511DC28E200029872"
-            BuildableName = "Specs"
-            BlueprintName = "Specs"
+            BlueprintIdentifier = "AE248F9719DCD52500092C14"
+            BuildableName = "OS X Host App.app"
+            BlueprintName = "OS X Host App"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -75,9 +61,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AEEE218511DC28E200029872"
-            BuildableName = "Specs"
-            BlueprintName = "Specs"
+            BlueprintIdentifier = "AE248F9719DCD52500092C14"
+            BuildableName = "OS X Host App.app"
+            BlueprintName = "OS X Host App"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -100,9 +86,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AEEE218511DC28E200029872"
-            BuildableName = "Specs"
-            BlueprintName = "Specs"
+            BlueprintIdentifier = "AE248F9719DCD52500092C14"
+            BuildableName = "OS X Host App.app"
+            BlueprintName = "OS X Host App"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

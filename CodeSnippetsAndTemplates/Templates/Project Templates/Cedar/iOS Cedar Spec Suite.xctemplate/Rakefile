@@ -92,6 +92,14 @@ end
 
 desc "Run ___PACKAGENAMEASIDENTIFIER___"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
+  system "which ios-sim" or raise <<EOF
+
+
+[Error] No ios-sim found. Use 'brew install ios-sim'.
+
+
+EOF
+
   env_vars = {
     "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"
   }

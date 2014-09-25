@@ -39,3 +39,8 @@ Feature:
     Given an Xcode iOS project
 
     Then I should only see the iOS Targets
+
+  Scenario: I do not have ios-sim installed
+    Given an Xcode iOS project
+    When I add an iOS Spec Suite target
+    Then I should see an error telling me to install ios-sim since I do not have it installed

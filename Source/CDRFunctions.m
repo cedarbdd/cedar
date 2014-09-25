@@ -422,6 +422,11 @@ static id CDRCreateXCTestSuite() {
 
 void CDRInjectIntoXCTestRunner() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
+
+    if (!testSuiteClass) {
+        [[NSException exceptionWithName:@"CedarNoTestFrameworkAvailable" reason:@"You must link against either XCTest or SenTestingKit frameworks." userInfo:nil] raise];
+    }
+
     Class testSuiteMetaClass = object_getClass(testSuiteClass);
     Method m = class_getClassMethod(testSuiteClass, @selector(defaultTestSuite));
     class_addMethod(testSuiteMetaClass, @selector(CDR_original_defaultTestSuite), method_getImplementation(m), method_getTypeEncoding(m));
@@ -431,6 +436,19 @@ void CDRInjectIntoXCTestRunner() {
         return defaultSuite;
     });
     class_replaceMethod(testSuiteMetaClass, @selector(defaultTestSuite), newImp, method_getTypeEncoding(m));
+}
+
+NSString *CDRGetTestBundleExtension() {
+    NSString *extension = nil;;
+
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    if ([arguments containsObject:@"-XCTest"]) {
+        extension = @".xctest";
+    } else if ([arguments containsObject:@"-SenTest"]) {
+        extension = @".octest";
+    }
+
+    return extension;
 }
 
 #pragma mark - Deprecated

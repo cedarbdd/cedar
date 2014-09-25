@@ -3,10 +3,11 @@
 NSArray *CDRReportersFromEnv(const char*defaultReporterClassName);
 
 int CDRRunSpecs();
-void CDRInjectIntoXCTestRunner();
+OBJC_EXPORT void CDRInjectIntoXCTestRunner();
 int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters);
 NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed);
 NSArray *CDRReportersToRun();
+NSString *CDRGetTestBundleExtension();
 void CDRSuppressStandardPipesWhileLoadingClasses();
 
 int runSpecs() __attribute__((deprecated("Please use CDRRunSpecs()")));

@@ -1,3 +1,15 @@
+on focusElementNamed(title_name, element_search_space)
+    tell application "System Events" to tell application process "Xcode"
+          set elements to entire contents of element_search_space
+          repeat with element in elements
+            if title of element is title_name then
+              set element's focused to true
+              exit repeat
+            end if
+          end repeat
+    end tell
+end focusedElementNamed
+
 on run argv
     set template_category_name to item 1 of argv
     set template_name to item 2 of argv
@@ -38,10 +50,14 @@ on run argv
         key code 125
         delay 1
         keystroke return
-        delay 1
 
         -- pick the template from the sheet
         repeat until sheet 1 of projectWindow
+        end repeat
+
+        repeat until (exists sheet 1 of projectWindow)
+        end repeat
+        repeat until (exists scroll area 1 of sheet 1 of projectWindow)
         end repeat
 
         set focused of scroll area 1 of sheet 1 of projectWindow to true
@@ -62,16 +78,13 @@ on run argv
         keystroke "com.pivotallabs.cedar"
         keystroke tab
 
-        -- Xcode 6 has the "Languages:" option before the test scheme text field
-        if exists pop up button "Language:" of form
-            keystroke tab
-        end if
-
-        -- Test Bundles require a scheme to be specified
         if exists text field "Test Scheme" of form
-            keystroke "template-project"
+          -- change focus to element labeled 'Test Scheme'
+          -- reminder : non-textfield controls can optionally receive focus on OS X
+          my focusElementNamed("Test Scheme", form)
+          keystroke "template-project"
+          delay 1
         end if
-        delay 1
 
         click UI element "Finish" of sheet 1 of projectWindow
         delay 2
