@@ -3,7 +3,7 @@
 echo "\n===== Upgrading framework =====\n"
 
 TARGET_PATH=$1
-if rake upgrade[$TARGET_PATH]
+if rake upgrade["$TARGET_PATH"]
 then
   echo "\n*** Finished upgrading the framework ***\n"
 else
