@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
 
     template<typename T>
     class BeLessThan : public Base<> {
@@ -24,11 +25,6 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    BeLessThan<T> be_less_than(const T & expectedValue) {
-        return BeLessThan<T>(expectedValue);
-    }
-
-    template<typename T>
     BeLessThan<T>::BeLessThan(const T & expectedValue)
     : Base<>(), expectedValue_(expectedValue) {
     }
@@ -46,6 +42,18 @@ namespace Cedar { namespace Matchers {
     template<typename T> template<typename U>
     bool BeLessThan<T>::matches(const U & actualValue) const {
         return !Comparators::compare_greater_than(actualValue, expectedValue_) && !Comparators::compare_equal(actualValue, expectedValue_);
+    }
+
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    template<typename T>
+    using CedarBeLessThan = Cedar::Matchers::Private::BeLessThan<T>;
+
+    template<typename T>
+    CedarBeLessThan<T> be_less_than(const T & expectedValue) {
+        return CedarBeLessThan<T>(expectedValue);
     }
 
 #pragma mark operators

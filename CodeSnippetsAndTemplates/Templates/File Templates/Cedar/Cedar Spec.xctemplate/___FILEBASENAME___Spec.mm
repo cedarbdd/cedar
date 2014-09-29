@@ -1,3 +1,4 @@
+#import <Cedar/Cedar.h>
 #import "___FILEBASENAME___.h"
 
 using namespace Cedar::Matchers;

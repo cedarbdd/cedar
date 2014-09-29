@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "RespondTo.h"
 
-namespace Cedar { namespace Matchers {
+namespace Cedar { namespace Matchers { namespace Private {
 
     RespondTo::RespondTo(SEL selector)
     : expectedSelectorName_([NSStringFromSelector(selector) UTF8String]) {}
@@ -19,4 +19,4 @@ namespace Cedar { namespace Matchers {
     /*virtual*/ bool RespondTo::matches(const id subject) const {
         return [subject respondsToSelector:NSSelectorFromString(@(expectedSelectorName_))];
     }
-}}
+}}}

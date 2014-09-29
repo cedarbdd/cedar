@@ -3,6 +3,7 @@
 
 @protocol CDRExampleReporter;
 @class CDRExampleGroup, CDRExample, CDRSpecHelper, CDRSymbolicator;
+@class CDRReportDispatcher;
 
 @protocol CDRSpec
 @end
@@ -55,6 +56,10 @@ void fail(NSString *);
 - (void)defineBehaviors;
 - (void)markAsFocusedClosestToLineNumber:(NSUInteger)lineNumber;
 - (NSArray *)allChildren;
+@end
+
+@interface CDRSpec (XCTestSupport)
+- (id)testSuiteWithRandomSeed:(unsigned int)seed dispatcher:(CDRReportDispatcher *)dispatcher;
 @end
 
 @interface CDRSpec (SpecDeclaration)

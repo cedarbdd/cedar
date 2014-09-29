@@ -15,7 +15,7 @@
 
 - (void)dealloc {
     self.notificationBlock();
-    self.notificationBlock = nil;
+    self.notificationBlock = (id)[NSNull null];
     [super dealloc];
 }
 

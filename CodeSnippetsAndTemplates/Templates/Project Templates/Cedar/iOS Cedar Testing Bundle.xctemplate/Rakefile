@@ -19,6 +19,14 @@ module CedarTarget___PACKAGENAMEASIDENTIFIER___
       Dir.chdir(original_dir)
     end
 
+    def destination_for_ios_sdk(version)
+      if `xcodebuild -showsdks`.include? "iphonesimulator8.0"
+        "OS=#{version},name=iPhone 5s"
+      else
+        "OS=#{version},name=iPhone Retina (3.5-inch)"
+      end
+    end
+
     def deployment_target_sdk_version
       in_project_dir do
         `xcodebuild -showBuildSettings -target #{UI_SPECS_TARGET_NAME} | grep IPHONEOS_DEPLOYMENT_TARGET | awk '{print $3 }'`.strip
@@ -56,7 +64,7 @@ module CedarTarget___PACKAGENAMEASIDENTIFIER___
       else
         exit(0)
       end
-    end 
+    end
 
     def with_env_vars(env_vars)
       old_values = {}
@@ -101,28 +109,11 @@ end
 desc "Build ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
 task :build____PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
   CedarTarget___PACKAGENAMEASIDENTIFIER___.kill_simulator
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version} clean build ARCHS=i386 TEST_AFTER_BUILD=NO GCC_SYMBOLS_PRIVATE_EXTERN=NO SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___-AppBuild")
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target '___PACKAGENAME___' -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version} clean build ARCHS=i386 TEST_AFTER_BUILD=NO GCC_SYMBOLS_PRIVATE_EXTERN=NO SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___-AppBuild")
   CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version} build ARCHS=i386 GCC_SYMBOLS_PRIVATE_EXTERN=NO TEST_AFTER_BUILD=NO SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___-SpecBuild")
 end
 
 desc "Run ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
-  if CedarTarget___PACKAGENAMEASIDENTIFIER___.is_run_unit_tests_deprecated?
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testTargetName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination 'OS=#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version},name=iPhone Retina (3.5-inch)' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd"
-  else
-    env_vars = {
-      "DYLD_ROOT_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-      "DYLD_INSERT_LIBRARIES" => "#{CedarTarget___PACKAGENAMEASIDENTIFIER___.xcode_developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-      "DYLD_FALLBACK_LIBRARY_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-      "XCInjectBundle" => "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.octest")}",
-      "XCInjectBundleInto" => "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")}",
-      "IPHONE_SIMULATOR_ROOT" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-      "CFFIXED_USER_HOME" => Dir.tmpdir,
-      "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
-    }
-
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
-      CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "___VARIABLE_testTargetName___.app/___VARIABLE_testTargetName___")} -RegisterForSystemEvents -SenTest All"
-    end
-  end
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "cd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testSchemeName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination '#{CedarTarget___PACKAGENAMEASIDENTIFIER___.destination_for_ios_sdk(CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version)}' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' | tee /dev/stderr | grep -q 'with 0 failures'"
 end

@@ -2,9 +2,9 @@
 // Normally you would include this file out of the framework.  However, we're
 // testing the framework here, so including the file from the framework will
 // conflict with the compiler attempting to include the file from the project.
-#import "CDRSpecHelper.h"
+#import "Cedar-iOS.h"
 #else
-#import <Cedar/CDRSpecHelper.h>
+#import <Cedar/Cedar.h>
 #endif
 
 // https://github.com/pivotal/cedar/issues/53 sums things up nicely

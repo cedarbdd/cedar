@@ -2,26 +2,22 @@ language: objective-c
 
 env:
   matrix:
-    # built on SDK 6.1
-    - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
-    - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
-    - CEDAR_SDK_VERSION="6.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
-    # built on SDK 7.0
-    - CEDAR_SDK_VERSION="7.0" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
-    - CEDAR_SDK_VERSION="7.0" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
-    - CEDAR_SDK_VERSION="7.0" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
-    # built on SDK 7.1
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="ci"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="ci"
     - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
     # Analyze takes too long -- vary on runtime SDK
-    # - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="6.1" TASK="analyze"
-    # - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.0" TASK="analyze"
-    # - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="analyze"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:iosframeworkspecs:analyze"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:specs:analyze"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:uispecs:analyze"
+    - CEDAR_SDK_VERSION="7.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="suites:focused_specs:analyze"
 
 before_install: brew update
 install:
   - bundle install
   - brew install ios-sim
 
-script: rake $TASK
+script:
+    # run a printer task to keep travis from terminating static analysis
+    - 'while true; do echo "(waiting)"; sleep 60; done &'
+    - rake $TASK
+    - kill %1

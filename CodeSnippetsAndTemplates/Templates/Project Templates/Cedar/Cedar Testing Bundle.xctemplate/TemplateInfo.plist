@@ -20,7 +20,7 @@
 			<key>SharedSettings</key>
 			<dict>
 				<key>WRAPPER_EXTENSION</key>
-				<string>octest</string>
+				<string>xctest</string>
 				<key>FRAMEWORK_SEARCH_PATHS</key>
 				<string>$(DEVELOPER_LIBRARY_DIR)/Frameworks</string>
 			</dict>
@@ -33,7 +33,7 @@
 			</dict>
 			<key>Frameworks</key>
 			<array>
-				<string>SenTestingKit</string>
+				<string>XCTest</string>
 			</array>
 		</dict>
 	</array>

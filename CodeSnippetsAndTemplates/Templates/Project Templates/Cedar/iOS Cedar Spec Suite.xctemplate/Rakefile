@@ -93,15 +93,10 @@ end
 desc "Run ___PACKAGENAMEASIDENTIFIER___"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
   env_vars = {
-    "DYLD_ROOT_PATH" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-    "IPHONE_SIMULATOR_ROOT" => CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_dir,
-    "CFFIXED_USER_HOME" => Dir.tmpdir,
     "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"
   }
 
-  app_path = File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.app")
-
   CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "#{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.app", CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME)} -RegisterForSystemEvents";
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "ios-sim launch #{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.app")} --tall --retina | tee /dev/stderr | grep -q ', 0 failures'";
   end
 end

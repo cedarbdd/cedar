@@ -5,7 +5,14 @@ FOUNDATION_EXPORT int XCTSelfTestMain(void);
 
 id CDRPerformSelector(id obj, NSString *selectorString) {
     SEL selector = NSSelectorFromString(selectorString);
-    return [obj performSelector:selector];
+    if ([obj respondsToSelector:selector]) {
+        return [obj performSelector:selector];
+    } else {
+        fprintf(stderr, "%s",
+                [[NSString stringWithFormat:@"[CEDAR] Internal Warning: %@ does not support selector(%@)\n",
+                 obj, NSStringFromSelector(selector)] UTF8String]);
+        return nil;
+    }
 }
 
 void CDRHijackOCUnitAndXCTestRun(IMP newImplementation) {

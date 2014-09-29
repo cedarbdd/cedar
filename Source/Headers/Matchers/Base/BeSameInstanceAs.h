@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     struct BeSameInstanceAsMessageBuilder {
         template<typename U>
         static NSString * string_for_actual_value(const U & value) {
@@ -46,11 +47,6 @@ namespace Cedar { namespace Matchers {
     };
 
     template<typename T>
-    BeSameInstanceAs<T> be_same_instance_as(T * const expectedValue) {
-        return BeSameInstanceAs<T>(expectedValue);
-    }
-
-    template<typename T>
     BeSameInstanceAs<T>::BeSameInstanceAs(T * const expectedValue)
     : Base<BeSameInstanceAsMessageBuilder>(), expectedValue_(expectedValue) {
     }
@@ -89,4 +85,15 @@ namespace Cedar { namespace Matchers {
 #pragma clang diagnostic pop
     }
 
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    template<typename T>
+    using CedarBeSameInstanceAs = Cedar::Matchers::Private::BeSameInstanceAs<T>;
+
+    template<typename T>
+    CedarBeSameInstanceAs<T> be_same_instance_as(T * const expectedValue) {
+        return CedarBeSameInstanceAs<T>(expectedValue);
+    }
 }}

@@ -1,6 +1,7 @@
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     struct BeInstanceOfMessageBuilder {
         template<typename U>
         static NSString * string_for_actual_value(const U & value) {
@@ -31,10 +32,6 @@ namespace Cedar { namespace Matchers {
         bool includeSubclasses_;
     };
 
-    inline BeInstanceOf be_instance_of(const Class expectedValue) {
-        return BeInstanceOf(expectedValue);
-    }
-
     inline BeInstanceOf::BeInstanceOf(const Class expectedClass)
     : Base<BeInstanceOfMessageBuilder>(), expectedClass_(expectedClass), includeSubclasses_(false) {}
 
@@ -61,5 +58,14 @@ namespace Cedar { namespace Matchers {
         } else {
             return [actualValue isMemberOfClass:expectedClass_];
         }
+    }
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarBeInstanceOf = Cedar::Matchers::Private::BeInstanceOf;
+
+    inline CedarBeInstanceOf be_instance_of(const Class expectedValue) {
+        return CedarBeInstanceOf(expectedValue);
     }
 }}

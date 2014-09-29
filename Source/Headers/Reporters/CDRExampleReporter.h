@@ -9,7 +9,7 @@
 - (int)result;
 
 // new methods to use instead of KVO
-@optional
+@required
 - (void)runWillStartExample:(CDRExample *)example;
 - (void)runDidFinishExample:(CDRExample *)example;
 
