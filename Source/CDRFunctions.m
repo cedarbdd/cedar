@@ -143,6 +143,27 @@ NSArray *CDRReportersFromEnv(const char *defaultReporterClassName) {
 
 #pragma mark - Spec running
 
+void CDRSuppressStandardPipesWhileLoadingClasses() {
+    if (getenv("CEDAR_VERBOSE")) {
+        int saved_stdout = dup(STDOUT_FILENO);
+        int saved_stderr = dup(STDERR_FILENO);
+        freopen("/dev/null", "w", stdout);
+        freopen("/dev/null", "w", stderr);
+
+        unsigned int count = 0;
+        Class *classes = objc_copyClassList(&count);
+        for (int i = 0; i < count; i++) {
+            if (class_respondsToSelector(classes[i], @selector(initialize))) {
+                [classes[i] class];
+            }
+        }
+        free(classes);
+
+        dup2(saved_stdout, STDOUT_FILENO);
+        dup2(saved_stderr, STDERR_FILENO);
+    }
+}
+
 NSArray *CDRSpecClassesToRun() {
     char *envSpecClassNames = getenv("CEDAR_SPEC_CLASSES");
     if (envSpecClassNames) {
@@ -356,16 +377,11 @@ int CDRRunSpecs() {
 @interface CDRXCTestSupport : NSObject
 - (id)testSuiteWithName:(NSString *)name;
 - (id)defaultTestSuite;
-- (id)testSuiteForBundlePath:(NSString *)bundlePath;
-- (id)testSuiteForTestCaseWithName:(NSString *)name;
-- (id)testSuiteForTestCaseClass:(Class)testCaseClass;
 - (id)initWithName:(NSString *)aName;
 
 - (id)CDR_original_defaultTestSuite;
 
 - (void)addTest:(id)test;
-
-- (id)initWithInvocation:(NSInvocation *)invocation;
 @end
 
 static id CDRCreateXCTestSuite() {

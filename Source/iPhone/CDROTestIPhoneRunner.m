@@ -101,7 +101,7 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 }
 
 + (void)load {
-    suppressStandardPipesWhileLoadingClasses();
+    CDRSuppressStandardPipesWhileLoadingClasses();
 
     NSString *extension = nil;;
 

@@ -1,7 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "CDROTestHelper.h"
 #import "CedarApplicationDelegate.h"
-#import "HeadlessSimulatorWorkaround.h"
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
 
@@ -14,13 +12,13 @@ NSBundle *CDRMainBundle(id self, SEL _cmd) {
 }
 
 + (void)load {
-    suppressStandardPipesWhileLoadingClasses();
+    CDRSuppressStandardPipesWhileLoadingClasses();
 
     NSString *extension = nil;;
 
-    if (CDRIsXCTest()) {
+    if (objc_getClass("XCTestProbe")) {
         extension = @".xctest";
-    } else if (CDRIsOCTest()) {
+    } else if (objc_getClass("SenTestProbe")) {
         extension = @".octest";
     }
 

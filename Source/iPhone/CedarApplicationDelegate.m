@@ -1,6 +1,5 @@
 #import "CedarApplicationDelegate.h"
 #import "CDRFunctions.h"
-#import "HeadlessSimulatorWorkaround.h"
 
 @implementation CedarApplication
 
@@ -15,7 +14,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        suppressStandardPipesWhileLoadingClasses();
+        CDRSuppressStandardPipesWhileLoadingClasses();
     }
     return self;
 }

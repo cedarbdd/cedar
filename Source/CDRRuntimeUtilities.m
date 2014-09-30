@@ -62,7 +62,7 @@ static void CDRCopyPropertiesFromClass(Class sourceClass, Class destinationClass
     free(properties);
 }
 
-void CDRCopyClassMethodsFromClass(Class sourceClass, Class destinationClass) {
+static void CDRCopyClassMethodsFromClass(Class sourceClass, Class destinationClass) {
     Class metaSourceClass = object_getClass(sourceClass);
     Class metaDestinationClass = object_getClass(destinationClass);
     CDRCopyInstanceMethodsFromClass(metaSourceClass, metaDestinationClass);

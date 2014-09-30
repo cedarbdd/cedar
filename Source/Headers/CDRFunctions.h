@@ -7,6 +7,7 @@ void CDRInjectIntoXCTestRunner();
 int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters);
 NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed);
 NSArray *CDRReportersToRun();
+void CDRSuppressStandardPipesWhileLoadingClasses();
 
 int runSpecs() __attribute__((deprecated("Please use CDRRunSpecs()")));
 int runAllSpecs() __attribute__((deprecated("Please use CDRRunSpecs()")));
