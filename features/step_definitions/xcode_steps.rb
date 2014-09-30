@@ -14,7 +14,10 @@ Given(/^an Xcode (iOS|OS X) project$/) do |os|
   expect(File.exist?("template-project")).to be_truthy
 
   xcode = File.absolute_path(File.join(`xcode-select -p`.strip, '../..'))
-  `open -a #{xcode.inspect} template-project/template-project.xcodeproj`
+  while true
+    out = `open -a #{xcode.inspect} template-project/template-project.xcodeproj 2>&1`
+    break unless out.include? 'LSOpenURLsWithRole'
+  end
 end
 
 Then(/^I should only see the (iOS|OS X) Targets$/) do |os|
