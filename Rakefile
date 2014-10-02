@@ -31,6 +31,7 @@ SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || LATEST_SDK_VERSION
 
 PROJECT_ROOT = File.dirname(__FILE__)
 BUILD_DIR = File.join(PROJECT_ROOT, "build")
+DERIVED_DATA_DIR = File.join(PROJECT_ROOT, "derivedData")
 TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
 SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets")
 APPCODE_SNIPPETS_FILENAME = "Cedar.xml"
@@ -53,15 +54,20 @@ class Shell
       cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
     end
     system(cmd) or begin
-      log_msg = ""
-      log_msg = "[#{red}Failed#{clear}] Also logged to: #{logfile}" if logfile
-      log_contents = File.read(logfile)
-      raise Exception.new <<EOF
-#{log_contents}
-[#{red}Failed#{clear}] Command: #{original_cmd}
-#{log_msg}
+      cmd_msg = "[#{red}Failed#{clear}] Command: #{original_cmd}"
+      if logfile
+        raise Exception.new <<EOF
+#{File.read(logfile)}
+#{cmd_msg}
+[#{red}Failed#{clear}] Also logged to: #{logfile}
 
 EOF
+      else
+        raise Exception.new <<EOF
+#{cmd_msg}
+
+EOF
+      end
     end
   end
 
@@ -129,6 +135,11 @@ class Xcode
     end
   end
 
+  def self.clean
+    Shell.run "rm -rf '#{BUILD_DIR}'; true", "clean.build.log"
+    Shell.run "rm -rf '#{DERIVED_DATA_DIR}'; true", "clean.derivedData.log"
+  end
+
   def self.build(options = nil)
     raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
 
@@ -140,7 +151,7 @@ class Xcode
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
     Shell.fold "build.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' clean build #{args}), logfile)
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT=#{BUILD_DIR.inspect} clean build #{args}), logfile)
     end
   end
 
@@ -155,7 +166,7 @@ class Xcode
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
     Shell.fold "test.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT='#{BUILD_DIR}' clean build test #{args}), logfile)
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} -derivedDataPath #{DERIVED_DATA_DIR.inspect} SYMROOT=#{BUILD_DIR.inspect} clean build test #{args}), logfile)
     end
   end
 
@@ -250,7 +261,7 @@ end
 
 desc "Clean all targets"
 task :clean do
-  Shell.run "rm -rf '#{BUILD_DIR}'/*", "clean.log"
+  Xcode.clean
 end
 
 desc 'Analyzes and runs specs, uispecs, and focused spec suites'
