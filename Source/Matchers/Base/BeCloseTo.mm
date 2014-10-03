@@ -1,6 +1,6 @@
 #import "BeCloseTo.h"
 
-namespace Cedar { namespace Matchers {
+namespace Cedar { namespace Matchers { namespace Private {
 
 #pragma mark NSDecimalNumber
     template<>
@@ -60,4 +60,4 @@ namespace Cedar { namespace Matchers {
     bool BeCloseTo<NSDecimal>::matches(NSNumber * const & actualValue) const {
         return this->matches([actualValue decimalValue]);
     }
-}}
+}}}

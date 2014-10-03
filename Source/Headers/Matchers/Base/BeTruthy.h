@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     class BeTruthy : public Base<> {
     private:
         BeTruthy & operator=(const BeTruthy &);
@@ -27,5 +28,10 @@ namespace Cedar { namespace Matchers {
     bool BeTruthy::matches(const U & actualValue) const {
         return !!actualValue;
     }
+}}}
 
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarBeTruthy = Cedar::Matchers::Private::BeTruthy;
+    static const CedarBeTruthy be_truthy = CedarBeTruthy();
 }}

@@ -1,6 +1,7 @@
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
 
     class RespondTo : public Base<> {
     private:
@@ -20,12 +21,17 @@ namespace Cedar { namespace Matchers {
     private:
         const char *expectedSelectorName_;
     };
+}}}
 
-    inline RespondTo respond_to(const SEL selector) {
-        return RespondTo(selector);
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    using CedarRespondTo = Cedar::Matchers::Private::RespondTo;
+
+    inline CedarRespondTo respond_to(const SEL selector) {
+        return CedarRespondTo(selector);
     }
 
-    inline RespondTo respond_to(const char *selectorName) {
-        return RespondTo(selectorName);
+    inline CedarRespondTo respond_to(const char *selectorName) {
+        return CedarRespondTo(selectorName);
     }
 }}

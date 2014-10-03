@@ -4,6 +4,7 @@
 #import "CDRSpecFailure.h"
 #import "CDRSpecHelper.h"
 #import "CDRSymbolicator.h"
+#import <objc/runtime.h>
 
 CDRSpec *CDR_currentSpec;
 
@@ -85,25 +86,17 @@ void fail(NSString *reason) {
     [[CDRSpecFailure specFailureWithReason:[NSString stringWithFormat:@"Failure: %@", reason]] raise];
 }
 
+
+/* Please be aware that CDRSpec+XCTestSupport does dynamic subclassing using this class as a mixin.
+ * All ivars must be dynamically looked up. See that category for examples.
+ *
+ * DO NOT use synthesized properties - they will crash when running inside a test bundle.
+ */
 @implementation CDRSpec
 
-@synthesize
-    currentGroup = currentGroup_,
-    rootGroup = rootGroup_,
-    fileName = fileName_,
-    symbolicator = symbolicator_;
+@synthesize rootGroup = rootGroup_, currentGroup = currentGroup_, symbolicator = symbolicator_, fileName = fileName_;
 
 #pragma mark Memory
-
-- (id)init {
-    if (self = [super init]) {
-        self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
-        self.rootGroup.parent = [CDRSpecHelper specHelper];
-        self.currentGroup = self.rootGroup;
-        self.symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
-    }
-    return self;
-}
 
 - (void)dealloc {
     self.rootGroup = nil;
@@ -113,15 +106,26 @@ void fail(NSString *reason) {
     [super dealloc];
 }
 
+- (void)commonInit {
+    self.rootGroup = [[[CDRExampleGroup alloc] initWithText:[[self class] description] isRoot:YES] autorelease];
+    self.rootGroup.parent = [CDRSpecHelper specHelper];
+    self.currentGroup = self.rootGroup;
+    self.symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
 - (void)defineBehaviors {
     CDR_currentSpec = self;
     [self declareBehaviors];
     CDR_currentSpec = nil;
     [self markSpecClassForExampleBase:self.rootGroup];
-}
-
-- (void)failWithException:(NSException *)exception {
-    [[CDRSpecFailure specFailureWithReason:exception.reason] raise];
 }
 
 - (void)markSpecClassForExampleBase:(CDRExampleBase *)example {

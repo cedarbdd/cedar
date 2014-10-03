@@ -1,33 +1,26 @@
 #import "CedarApplicationDelegate.h"
-#import "HeadlessSimulatorWorkaround.h"
-#import "CDROTestIPhoneRunner.h"
+#import "CDRFunctions.h"
 
-@implementation CedarApplication {
-    CDROTestIPhoneRunner *_runner;
-}
+@implementation CedarApplication
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    _runner = [[CDROTestIPhoneRunner alloc] init];
-    [_runner runSpecsAndExit];
+    exit(CDRRunSpecs());
     return NO;
 }
 
 @end
 
-@implementation CedarApplicationDelegate {
-    CDROTestIPhoneRunner *_runner;
-}
+@implementation CedarApplicationDelegate
 
 - (id)init {
     if (self = [super init]) {
-        setUpFakeWorkspaceIfRequired();
+        CDRSuppressStandardPipesWhileLoadingClasses();
     }
     return self;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    _runner = [[CDROTestIPhoneRunner alloc] init];
-    [_runner runSpecsAndExit];
+    exit(CDRRunSpecs());
     return NO;
 }
 

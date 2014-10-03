@@ -60,7 +60,7 @@ NSString *CDRVersionString() {
     }
 
     if (releaseVersion) {
-        NSString *versionString = [NSString stringWithFormat:@"Cedar Version: %@", releaseVersion];
+        NSString *versionString = releaseVersion;
         if (versionDetails) {
             versionString = [versionString stringByAppendingFormat:@" (%@)", versionDetails];
         }
@@ -142,6 +142,27 @@ NSArray *CDRReportersFromEnv(const char *defaultReporterClassName) {
 }
 
 #pragma mark - Spec running
+
+void CDRSuppressStandardPipesWhileLoadingClasses() {
+    if (getenv("CEDAR_VERBOSE")) {
+        int saved_stdout = dup(STDOUT_FILENO);
+        int saved_stderr = dup(STDERR_FILENO);
+        freopen("/dev/null", "w", stdout);
+        freopen("/dev/null", "w", stderr);
+
+        unsigned int count = 0;
+        Class *classes = objc_copyClassList(&count);
+        for (int i = 0; i < count; i++) {
+            if (class_respondsToSelector(classes[i], @selector(initialize))) {
+                [classes[i] class];
+            }
+        }
+        free(classes);
+
+        dup2(saved_stdout, STDOUT_FILENO);
+        dup2(saved_stderr, STDERR_FILENO);
+    }
+}
 
 NSArray *CDRSpecClassesToRun() {
     char *envSpecClassNames = getenv("CEDAR_SPEC_CLASSES");
@@ -265,20 +286,25 @@ NSArray *CDRRootGroupsFromSpecs(NSArray *specs) {
     return groups;
 }
 
-NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed) {
-    NSMutableArray *permutedSpecClasses = unsortedSpecClasses.mutableCopy;
+NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed) {
+    NSMutableArray *shuffledItems = [sortedItems mutableCopy];
+    srand(seed);
 
-    [permutedSpecClasses sortUsingComparator:^NSComparisonResult(Class class1, Class class2) {
+    for (int i=0; i < shuffledItems.count; i++) {
+        NSUInteger idx = rand() % shuffledItems.count;
+        [shuffledItems exchangeObjectAtIndex:i withObjectAtIndex:idx];
+    }
+    return [shuffledItems autorelease];
+}
+
+NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed) {
+    NSMutableArray *sortedSpecClasses = unsortedSpecClasses.mutableCopy;
+
+    [sortedSpecClasses sortUsingComparator:^NSComparisonResult(Class class1, Class class2) {
         return [NSStringFromClass(class1) compare:NSStringFromClass(class2)];
     }];
 
-    srand(seed);
-
-    for (int i=0; i < permutedSpecClasses.count; i++) {
-        NSUInteger idx = rand() % permutedSpecClasses.count;
-        [permutedSpecClasses exchangeObjectAtIndex:i withObjectAtIndex:idx];
-    }
-    return [permutedSpecClasses autorelease];
+    return CDRShuffleItemsInArrayWithSeed(sortedSpecClasses, seed);
 }
 
 unsigned int CDRGetRandomSeed() {
@@ -323,18 +349,106 @@ int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters) {
     }
 }
 
-int CDRRunSpecs() {
+NSArray *CDRReportersToRun() {
+    const char *defaultReporterClassName = "CDRDefaultReporter";
     BOOL isTestBundle = objc_getClass("SenTestProbe") || objc_getClass("XCTestProbe");
-    const char *defaultReporterClassName = isTestBundle ? "CDROTestReporter,CDRBufferedDefaultReporter" : "CDRDefaultReporter";
+    if (isTestBundle) {
+        // Cedar for Test Bundles hooks into XCTest's test reporting system.
+        defaultReporterClassName = "CDRBufferedDefaultReporter";
+    }
+    return CDRReportersFromEnv(defaultReporterClassName);
+}
 
+int CDRRunSpecs() {
     @autoreleasepool {
-        NSArray *reporters = CDRReportersFromEnv(defaultReporterClassName);
+        NSArray *reporters = CDRReportersToRun();
         if (![reporters count]) {
             return -999;
         } else {
             return CDRRunSpecsWithCustomExampleReporters(reporters);
         }
     }
+}
+
+#pragma mark - Running Test Bundles
+#import "CDRXTestSuite.h"
+#import "CDRRuntimeUtilities.h"
+
+@interface CDRXCTestSupport : NSObject
+- (id)testSuiteWithName:(NSString *)name;
+- (id)defaultTestSuite;
+- (id)initWithName:(NSString *)aName;
+
+- (id)CDR_original_defaultTestSuite;
+
+- (void)addTest:(id)test;
+@end
+
+static id CDRCreateXCTestSuite() {
+    Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
+    Class testSuiteSubclass = NSClassFromString(@"_CDRXTestSuite");
+
+    if (testSuiteSubclass == nil) {
+        size_t size = class_getInstanceSize([CDRXTestSuite class]) - class_getInstanceSize([NSObject class]);
+        testSuiteSubclass = objc_allocateClassPair(testSuiteClass, "_CDRXTestSuite", size);
+        CDRCopyClassInternalsFromClass([CDRXTestSuite class], testSuiteSubclass);
+        objc_registerClassPair(testSuiteSubclass);
+    }
+
+    id testSuite = [[(id)testSuiteSubclass alloc] initWithName:@"Cedar"];
+    CDRDefineSharedExampleGroups();
+    CDRDefineGlobalBeforeAndAfterEachBlocks();
+
+    unsigned int seed = CDRGetRandomSeed();
+
+    NSArray *specClasses = CDRSpecClassesToRun();
+    NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
+    NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
+    CDRMarkFocusedExamplesInSpecs(specs);
+    CDRMarkXcodeFocusedExamplesInSpecs(specs, [[NSProcessInfo processInfo] arguments]);
+
+    CDRReportDispatcher *dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:CDRReportersToRun()] autorelease];
+
+    [testSuite setDispatcher:dispatcher];
+
+    NSArray *groups = CDRRootGroupsFromSpecs(specs);
+    [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];
+
+    for (CDRSpec *spec in specs) {
+        [testSuite addTest:[spec testSuiteWithRandomSeed:seed dispatcher:dispatcher]];
+    }
+    return testSuite;
+}
+
+void CDRInjectIntoXCTestRunner() {
+    Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
+
+    if (!testSuiteClass) {
+        [[NSException exceptionWithName:@"CedarNoTestFrameworkAvailable" reason:@"You must link against either XCTest or SenTestingKit frameworks." userInfo:nil] raise];
+    }
+
+    Class testSuiteMetaClass = object_getClass(testSuiteClass);
+    Method m = class_getClassMethod(testSuiteClass, @selector(defaultTestSuite));
+    class_addMethod(testSuiteMetaClass, @selector(CDR_original_defaultTestSuite), method_getImplementation(m), method_getTypeEncoding(m));
+    IMP newImp = imp_implementationWithBlock(^id(id self){
+        id defaultSuite = [self CDR_original_defaultTestSuite];
+        [defaultSuite addTest:CDRCreateXCTestSuite()];
+        return defaultSuite;
+    });
+    class_replaceMethod(testSuiteMetaClass, @selector(defaultTestSuite), newImp, method_getTypeEncoding(m));
+}
+
+NSString *CDRGetTestBundleExtension() {
+    NSString *extension = nil;;
+
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    if ([arguments containsObject:@"-XCTest"]) {
+        extension = @".xctest";
+    } else if ([arguments containsObject:@"-SenTest"]) {
+        extension = @".octest";
+    }
+
+    return extension;
 }
 
 #pragma mark - Deprecated

@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
-namespace Cedar { namespace Matchers {
-
+#pragma mark - private interface
+namespace Cedar { namespace Matchers { namespace Private {
     template<typename T>
     class BeGTE : public Base<> {
     private:
@@ -23,15 +23,6 @@ namespace Cedar { namespace Matchers {
         const T & expectedValue_;
     };
 
-    template<typename T>
-    BeGTE<T> be_gte(const T & expectedValue) {
-        return BeGTE<T>(expectedValue);
-    }
-
-    template<typename T>
-    BeGTE<T> be_greater_than_or_equal_to(const T & expectedValue) {
-        return be_gte(expectedValue);
-    }
 
     template<typename T>
     BeGTE<T>::BeGTE(const T & expectedValue)
@@ -51,6 +42,22 @@ namespace Cedar { namespace Matchers {
     template<typename T> template<typename U>
     bool BeGTE<T>::matches(const U & actualValue) const {
         return Comparators::compare_greater_than(actualValue, expectedValue_) || Comparators::compare_equal(actualValue, expectedValue_);
+    }
+}}}
+
+#pragma mark - public interface
+namespace Cedar { namespace Matchers {
+    template<typename T>
+    using CedarBeGTE  = Cedar::Matchers::Private::BeGTE<T>;
+
+    template<typename T>
+    CedarBeGTE<T> be_gte(const T & expectedValue) {
+        return CedarBeGTE<T>(expectedValue);
+    }
+
+    template<typename T>
+    CedarBeGTE<T> be_greater_than_or_equal_to(const T & expectedValue) {
+        return be_gte(expectedValue);
     }
 
 #pragma mark operators

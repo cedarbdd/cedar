@@ -23,4 +23,9 @@
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"DummyView" owner:nil options:nil];
     XCTAssertEqual([[views lastObject] class], [UIView class], @"expected last view of DummyView nib to be UIView kind");
 }
+
+- (void)testRunningCedarExamples {
+    XCTestSuite *defaultSuite = [XCTestSuite defaultTestSuite];
+    XCTAssert([[defaultSuite valueForKeyPath:@"tests.name"] containsObject:@"Cedar"]);
+}
 @end
