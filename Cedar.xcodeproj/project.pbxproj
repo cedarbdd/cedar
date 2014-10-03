@@ -452,6 +452,8 @@
 		AEEE228411DC2D5200029872 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; };
 		AEEE228511DC2D5200029872 /* SpecSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF211DC27B800029872 /* SpecSpec2.m */; };
 		AEEE228711DC2D5800029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FED11DC27B800029872 /* main.m */; };
+		AEEF360719DE21DB00794484 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEF360619DE21DB00794484 /* CDRSpecFailure.m */; };
+		AEEF360819DE21ED00794484 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEF360619DE21DB00794484 /* CDRSpecFailure.m */; };
 		AEF32FF2145A2D79002F93BB /* BeGreaterThan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF32FF4145A2E91002F93BB /* CompareEqual.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF3145A2E91002F93BB /* CompareEqual.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF32FF5145A2EAC002F93BB /* BeGreaterThan.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */; };
@@ -503,8 +505,6 @@
 		CA17998E17F89C4B00C38060 /* RespondTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = CA17998C17F89C4B00C38060 /* RespondTo.h */; };
 		CA17999017F89C9700C38060 /* RespondTo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA17998F17F89C9700C38060 /* RespondTo.mm */; };
 		CA17999117F89C9700C38060 /* RespondTo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA17998F17F89C9700C38060 /* RespondTo.mm */; };
-		DE99C06FF512DC5D6A12A297 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = DE99C0BB3F08BB59B1159AA2 /* CDRSpecFailure.m */; };
-		DE99C79C60B634A62E7769D0 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = DE99C0BB3F08BB59B1159AA2 /* CDRSpecFailure.m */; };
 		E31179D2161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E31179D3161FD937007D3CDE /* CDRSlowTestStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; };
 		E31179D4161FD937007D3CDE /* CDRSlowTestStatistics.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; };
@@ -940,6 +940,7 @@
 		AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227611DC2CF900029872 /* iOSSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOSSpecs-Info.plist"; sourceTree = "<group>"; };
+		AEEF360619DE21DB00794484 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
 		AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGreaterThan.h; sourceTree = "<group>"; };
 		AEF32FF3145A2E91002F93BB /* CompareEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareEqual.h; sourceTree = "<group>"; };
 		AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareGreaterThan.h; sourceTree = "<group>"; };
@@ -976,7 +977,6 @@
 		CA17998C17F89C4B00C38060 /* RespondTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespondTo.h; sourceTree = "<group>"; };
 		CA17998F17F89C9700C38060 /* RespondTo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RespondTo.mm; sourceTree = "<group>"; };
 		CA17999217F8A0EE00C38060 /* RespondToSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RespondToSpec.mm; sourceTree = "<group>"; };
-		DE99C0BB3F08BB59B1159AA2 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = SOURCE_ROOT; };
 		E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSlowTestStatistics.h; sourceTree = "<group>"; };
 		E31179D1161FD937007D3CDE /* CDRSlowTestStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSlowTestStatistics.m; sourceTree = "<group>"; };
 		E32861301604F287001FA77E /* FibonacciCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FibonacciCalculator.h; sourceTree = "<group>"; };
@@ -1582,24 +1582,25 @@
 		AEEE1FC311DC27B800029872 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				6628FC8414C4DAB90016652A /* Doubles */,
 				AE7F170317272FB000E1146D /* Extensions */,
 				AEEE1FCA11DC27B800029872 /* Headers */,
 				AEEE1FDC11DC27B800029872 /* iPhone */,
-				1FE15C171869071B00207F0C /* Reporters */,
-				E31179CE161FD90C007D3CDE /* ReporterHelpers */,
 				AE167EEC15B210C9005960B9 /* Matchers */,
-				6628FC8414C4DAB90016652A /* Doubles */,
+				E31179CE161FD90C007D3CDE /* ReporterHelpers */,
+				1FE15C171869071B00207F0C /* Reporters */,
 				AEEE1FC511DC27B800029872 /* CDRExample.m */,
 				AEEE1FC611DC27B800029872 /* CDRExampleBase.m */,
 				AEEE1FC711DC27B800029872 /* CDRExampleGroup.m */,
-				AEEE1FC911DC27B800029872 /* CDRSpec.m */,
-				AEEE1FE611DC27B800029872 /* CDRSpecHelper.m */,
-				AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */,
-				96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */,
 				AEEE1FC811DC27B800029872 /* CDRFunctions.m */,
+				96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */,
+				AE55BF1A19A7CF58005948E6 /* CDRRuntimeUtilities.m */,
+				AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */,
+				AEEE1FC911DC27B800029872 /* CDRSpec.m */,
+				AEEF360619DE21DB00794484 /* CDRSpecFailure.m */,
+				AEEE1FE611DC27B800029872 /* CDRSpecHelper.m */,
 				969B6F82160C61E000C7C792 /* CDRSymbolicator.m */,
 				34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */,
-				AE55BF1A19A7CF58005948E6 /* CDRRuntimeUtilities.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -2583,6 +2584,7 @@
 				34ADE41818F23C8E00BD1E99 /* NSMethodSignature+Cedar.m in Sources */,
 				1FF4497D18A0B37A00AF94B0 /* AnyArgument.mm in Sources */,
 				AE4E9B9419C8B44700D794CE /* NSInvocation+CDRXExample.m in Sources */,
+				AEEF360719DE21DB00794484 /* CDRSpecFailure.m in Sources */,
 				AE9AA68715AB7E0900617E1A /* CDRClassFake.mm in Sources */,
 				AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
 				1FE15C1D1869091900207F0C /* CDRReportDispatcher.m in Sources */,
@@ -2606,7 +2608,6 @@
 				AEE8DBD7175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */,
 				CA17999017F89C9700C38060 /* RespondTo.mm in Sources */,
 				5898ACDB8101DA643EDCCD5B /* ConformTo.mm in Sources */,
-				DE99C06FF512DC5D6A12A297 /* CDRSpecFailure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2683,6 +2684,7 @@
 				AE34724E19C37ECF005CA6F1 /* CDRXCTestCase.m in Sources */,
 				AEEE223311DC2B6500029872 /* CDRExampleBase.m in Sources */,
 				AEEE223411DC2B6500029872 /* CDRExampleGroup.m in Sources */,
+				AEEF360819DE21ED00794484 /* CDRSpecFailure.m in Sources */,
 				AEEE223511DC2B6500029872 /* CDRFunctions.m in Sources */,
 				AEEE223611DC2B6500029872 /* CDRSpec.m in Sources */,
 				AEEE223711DC2B6500029872 /* CDRSpecHelper.m in Sources */,
@@ -2726,7 +2728,6 @@
 				AEE8DBD8175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */,
 				CA17999117F89C9700C38060 /* RespondTo.mm in Sources */,
 				5898AF335BC09A1CD5B011C6 /* ConformTo.mm in Sources */,
-				DE99C79C60B634A62E7769D0 /* CDRSpecFailure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
