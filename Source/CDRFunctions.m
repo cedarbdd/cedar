@@ -48,8 +48,10 @@ NSArray *CDRSelectClasses(BOOL (^classSelectionPredicate)(Class class)) {
 NSString *CDRVersionString() {
     NSString *releaseVersion = nil, *versionDetails = nil;
 
-#if COCOAPODS
+#if COCOAPODS_VERSION_MAJOR_Cedar
     releaseVersion = [NSString stringWithFormat:@"%d.%d.%d", COCOAPODS_VERSION_MAJOR_Cedar, COCOAPODS_VERSION_MINOR_Cedar, COCOAPODS_VERSION_PATCH_Cedar];
+#endif
+#if COCOAPODS
     versionDetails = @"from CocoaPods";
 #endif
 
@@ -59,15 +61,15 @@ NSString *CDRVersionString() {
         versionDetails = [cedarFrameworkBundle objectForInfoDictionaryKey:CDRBuildVersionKey];
     }
 
-    if (releaseVersion) {
-        NSString *versionString = releaseVersion;
-        if (versionDetails) {
-            versionString = [versionString stringByAppendingFormat:@" (%@)", versionDetails];
-        }
-        return versionString;
-    } else {
-        return @"unknown";
+    if (!releaseVersion) {
+        releaseVersion = @"unknown";
     }
+
+    NSString *versionString = releaseVersion;
+    if (versionDetails) {
+        versionString = [versionString stringByAppendingFormat:@" (%@)", versionDetails];
+    }
+    return versionString;
 }
 
 #pragma mark - Globals
