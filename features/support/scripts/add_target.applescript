@@ -50,6 +50,7 @@ on run argv
         key code 125
         delay 1
         keystroke return
+        delay 1
 
         -- pick the template from the sheet
         repeat until sheet 1 of projectWindow
