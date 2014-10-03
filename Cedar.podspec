@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary  = 'BDD-style testing using Objective-C.'
   s.homepage = 'https://github.com/pivotal/cedar'
   s.author   = { 'Pivotal Labs' => 'http://pivotallabs.com' }
-  s.license  = { :type => 'MIT', :file => 'MIT.LICENSE' }
+  s.license  = { :type => 'MIT', :file => 'MIT.LICENSE.txt' }
   s.source   = { :git => 'https://github.com/pivotal/cedar.git', :tag => 'v0.10.0' }
 
   s.osx.deployment_target = '10.7'
