@@ -20,6 +20,7 @@ namespace Cedar { namespace Matchers { namespace Private {
         bool matches(NSNumber * const &) const;
         bool matches(NSDecimalNumber * const &) const;
         bool matches(NSDecimal const &) const;
+        bool matches(NSDate * const &) const;
 
     protected:
         virtual NSString * failure_message_end() const;
@@ -83,6 +84,9 @@ namespace Cedar { namespace Matchers { namespace Private {
 
     template<>
     bool BeCloseTo<NSDecimal>::matches(NSNumber * const & actualValue) const;
+
+    template<>
+    bool BeCloseTo<NSDate *>::matches(NSDate * const & actualValue) const;
 
 #pragma mark Generic
     template<typename T> template<typename U>

@@ -56,4 +56,8 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
     inline NSString * string_for(NSRange value) {
         return NSStringFromRange(value);
     }
+
+    inline NSString * string_for(NSDate *date) {
+        return [NSString stringWithFormat:@"%@ (%f)", date, [date timeIntervalSince1970]];
+    }
 }}}

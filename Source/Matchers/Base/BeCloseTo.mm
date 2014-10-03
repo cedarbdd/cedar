@@ -60,4 +60,13 @@ namespace Cedar { namespace Matchers { namespace Private {
     bool BeCloseTo<NSDecimal>::matches(NSNumber * const & actualValue) const {
         return this->matches([actualValue decimalValue]);
     }
+
+#pragma mark NSDate
+
+    template<>
+    bool BeCloseTo<NSDate *>::matches(NSDate * const & actualValue) const {
+        NSTimeInterval expectedTimeInterval = [expectedValue_ timeIntervalSince1970];
+        NSTimeInterval actualTimeInterval = [actualValue timeIntervalSince1970];
+        return this->subtractable_types_match(actualTimeInterval, expectedTimeInterval);
+    }
 }}}
