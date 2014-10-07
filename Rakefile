@@ -383,7 +383,8 @@ namespace :frameworks do
     begin
       Rake::Task['suites:iosframeworkspecs:run'].invoke
     rescue Exception => e
-      puts "Unable to run iOS static framework specs. Skipping validation of Cedar-iOS.framework (#{e})"
+      puts "Unable to run iOS static framework specs. Xcode may have implicitly failed to build the framework. Please try again. (#{e})"
+      exit 1
     end
   end
 
