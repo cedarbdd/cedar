@@ -1,7 +1,7 @@
 require 'pathname'
 require 'tmpdir'
 
-module CedarTarget___PACKAGENAMEASIDENTIFIER___
+module CedarTarget
   UI_SPECS_TARGET_NAME = "___PACKAGENAME___"
   CONFIGURATION = "Release"
 
@@ -103,17 +103,17 @@ end
 
 desc "Clean build directory"
 task :clean____PACKAGENAMEASIDENTIFIER___ do
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("clean")
+  CedarTarget.system_or_exit "rm -rf #{CedarTarget::BUILD_DIR}/*", CedarTarget.output_file("clean")
 end
 
 desc "Build ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
 task :build____PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.kill_simulator
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target '___PACKAGENAME___' -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version} clean build ARCHS=i386 TEST_AFTER_BUILD=NO GCC_SYMBOLS_PRIVATE_EXTERN=NO SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___-AppBuild")
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator#{CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version} build ARCHS=i386 GCC_SYMBOLS_PRIVATE_EXTERN=NO TEST_AFTER_BUILD=NO SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___-SpecBuild")
+  CedarTarget.kill_simulator
+  CedarTarget.system_or_exit "pushd #{CedarTarget::PROJECT_ROOT} && xcodebuild -target '___PACKAGENAME___' -configuration #{CedarTarget::CONFIGURATION} -sdk iphonesimulator#{CedarTarget.deployment_target_sdk_version} clean build ARCHS=i386 TEST_AFTER_BUILD=NO GCC_SYMBOLS_PRIVATE_EXTERN=NO SYMROOT='#{CedarTarget::BUILD_DIR}' && popd", CedarTarget.output_file("___PACKAGENAME___-AppBuild")
+  CedarTarget.system_or_exit "pushd #{CedarTarget::PROJECT_ROOT} && xcodebuild -target #{CedarTarget::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget::CONFIGURATION} -sdk iphonesimulator#{CedarTarget.deployment_target_sdk_version} build ARCHS=i386 GCC_SYMBOLS_PRIVATE_EXTERN=NO TEST_AFTER_BUILD=NO SYMROOT='#{CedarTarget::BUILD_DIR}' && popd", CedarTarget.output_file("___PACKAGENAME___-SpecBuild")
 end
 
 desc "Run ___PACKAGENAMEASIDENTIFIER___ OCUnit application specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "cd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testSchemeName___ -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -destination '#{CedarTarget___PACKAGENAMEASIDENTIFIER___.destination_for_ios_sdk(CedarTarget___PACKAGENAMEASIDENTIFIER___.deployment_target_sdk_version)}' ARCHS=i386 SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}' | tee /dev/stderr | grep -q 'with 0 failures'"
+  CedarTarget.system_or_exit "cd #{CedarTarget::PROJECT_ROOT} && xcodebuild test -scheme ___VARIABLE_testSchemeName___ -configuration #{CedarTarget::CONFIGURATION} -destination '#{CedarTarget.destination_for_ios_sdk(CedarTarget.deployment_target_sdk_version)}' ARCHS=i386 SYMROOT='#{CedarTarget::BUILD_DIR}' | tee /dev/stderr | grep -q 'with 0 failures'"
 end
