@@ -454,6 +454,8 @@
 		AEEE228711DC2D5800029872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FED11DC27B800029872 /* main.m */; };
 		AEEF360719DE21DB00794484 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEF360619DE21DB00794484 /* CDRSpecFailure.m */; };
 		AEEF360819DE21ED00794484 /* CDRSpecFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEF360619DE21DB00794484 /* CDRSpecFailure.m */; };
+		AEEF360E19DF24AB00794484 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF360D19DF24AB00794484 /* image.png */; };
+		AEEF361019DF27E400794484 /* edward.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEF360F19DF27E400794484 /* edward.jpg */; };
 		AEF32FF2145A2D79002F93BB /* BeGreaterThan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF32FF4145A2E91002F93BB /* CompareEqual.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF32FF3145A2E91002F93BB /* CompareEqual.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF32FF5145A2EAC002F93BB /* BeGreaterThan.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */; };
@@ -941,6 +943,8 @@
 		AEEE227611DC2CF900029872 /* iOSSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOSSpecs-Info.plist"; sourceTree = "<group>"; };
 		AEEF360619DE21DB00794484 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
+		AEEF360D19DF24AB00794484 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		AEEF360F19DF27E400794484 /* edward.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edward.jpg; sourceTree = "<group>"; };
 		AEF32FF1145A2D79002F93BB /* BeGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeGreaterThan.h; sourceTree = "<group>"; };
 		AEF32FF3145A2E91002F93BB /* CompareEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareEqual.h; sourceTree = "<group>"; };
 		AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareGreaterThan.h; sourceTree = "<group>"; };
@@ -1656,6 +1660,7 @@
 		AEEE1FE711DC27B800029872 /* Spec */ = {
 			isa = PBXGroup;
 			children = (
+				AEEF360C19DF248F00794484 /* Resources */,
 				1FE15C25186919F400207F0C /* Reporters */,
 				E328612E1604F254001FA77E /* Support */,
 				96A07F0D13F27ED70021974D /* Focused */,
@@ -1710,6 +1715,15 @@
 				1F956B95180E07CE00E603A9 /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AEEF360C19DF248F00794484 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AEEF360F19DF27E400794484 /* edward.jpg */,
+				AEEF360D19DF24AB00794484 /* image.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		AEF72FF913ECC16400786282 /* Container */ = {
@@ -2320,6 +2334,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEC5400E185E998D00B0D41D /* Images.xcassets in Resources */,
+				AEEF361019DF27E400794484 /* edward.jpg in Resources */,
+				AEEF360E19DF24AB00794484 /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

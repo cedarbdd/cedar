@@ -13,6 +13,31 @@ using namespace Cedar::Matchers;
 SPEC_BEGIN(UIKitEqualSpec)
 
 describe(@"CoreGraphics and UIGeometry struct comparisons", ^{
+    describe(@"comparing UIImages", ^{
+        it(@"should equal if they are the same instances", ^{
+            [UIImage imageNamed:@"image"] should equal([UIImage imageNamed:@"image"]);
+        });
+
+        it(@"should equal if they are the same binary data", ^{
+            UIImage *image = [UIImage imageNamed:@"image"];
+            UIImage *binaryEquivalentImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(1, 1, 1, 1) resizingMode:UIImageResizingModeTile];
+            image should equal(binaryEquivalentImage);
+        });
+
+        it(@"should not equal if they are different instances with different binary data", ^{
+            UIImage *image = [UIImage imageNamed:@"image"];
+            UIImage *differentImage = [UIImage imageNamed:@"edward.jpg"];
+            image should_not equal(differentImage);
+        });
+
+        it(@"should fail with a reasonable message", ^{
+            UIImage *image = [UIImage imageNamed:@"image"];
+            expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not equal <%@>", image, image], ^{
+                image should_not equal(image);
+            });
+        });
+    });
+
     describe(@"comparing CGRects", ^{
         it(@"should be possible", ^{
             CGRect thisRect = CGRectMake(10, 20, 30, 40);
