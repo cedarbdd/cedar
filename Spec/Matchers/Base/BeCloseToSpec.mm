@@ -18,7 +18,7 @@ describe(@"be_close_to matcher", ^{
         NSDate *actualValue = [NSDate dateWithTimeIntervalSince1970:1];
 
         describe(@"with an explicit threshold", ^{
-            float threshold = 0.1;
+            NSTimeInterval threshold = 0.1;
 
             describe(@"and the values are within a given threshold", ^{
                 beforeEach(^{
