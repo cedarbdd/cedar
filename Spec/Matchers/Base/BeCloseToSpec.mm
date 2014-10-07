@@ -13,6 +13,97 @@ using namespace Cedar::Matchers;
 SPEC_BEGIN(BeCloseToSpec)
 
 describe(@"be_close_to matcher", ^{
+    describe(@"when the actual value and expected value are declared as NSDates", ^{
+        __block NSDate *expectedValue;
+        NSDate *actualValue = [NSDate dateWithTimeIntervalSince1970:1];
+
+        describe(@"with an explicit threshold", ^{
+            NSTimeInterval threshold = 0.1;
+
+            describe(@"and the values are within a given threshold", ^{
+                beforeEach(^{
+                    expectedValue = [NSDate dateWithTimeIntervalSince1970:1.09];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        actualValue should be_close_to(expectedValue).within(threshold);
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <1970-01-01 00:00:01 +0000 (1.000000)> to not be close to <1970-01-01 00:00:01 +0000 (1.090000)> (within 0.1)", ^{
+                            actualValue should_not be_close_to(expectedValue).within(threshold);
+                        });
+                    });
+                });
+            });
+
+            context(@"and the values are not within the given threshold", ^{
+                beforeEach(^{
+                    expectedValue = [NSDate dateWithTimeIntervalSince1970:2];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <1970-01-01 00:00:01 +0000 (1.000000)> to be close to <1970-01-01 00:00:02 +0000 (2.000000)> (within 0.1)", ^{
+                            actualValue should be_close_to(expectedValue).within(threshold);
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        actualValue should_not be_close_to(expectedValue).within(threshold);
+                    });
+                });
+            });
+        });
+
+        describe(@"without an explicit threshold", ^{
+            describe(@"and the values are within the default threshold", ^{
+                beforeEach(^{
+                    expectedValue = [NSDate dateWithTimeIntervalSince1970:1.009];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should pass", ^{
+                        actualValue should be_close_to(expectedValue);
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <1970-01-01 00:00:01 +0000 (1.000000)> to not be close to <1970-01-01 00:00:01 +0000 (1.009000)> (within 0.01)", ^{
+                            actualValue should_not be_close_to(expectedValue);
+                        });
+                    });
+                });
+            });
+
+            context(@"and the values are not within the default threshold", ^{
+                beforeEach(^{
+                    expectedValue = [NSDate dateWithTimeIntervalSince1970:2];
+                });
+
+                describe(@"positive match", ^{
+                    it(@"should fail with a sensible failure message", ^{
+                        expectFailureWithMessage(@"Expected <1970-01-01 00:00:01 +0000 (1.000000)> to be close to <1970-01-01 00:00:02 +0000 (2.000000)> (within 0.01)", ^{
+                            actualValue should be_close_to(expectedValue);
+                        });
+                    });
+                });
+
+                describe(@"negative match", ^{
+                    it(@"should pass", ^{
+                        actualValue should_not be_close_to(expectedValue);
+                    });
+                });
+            });
+        });
+    });
+
     describe(@"when the actual value is declared as a float", ^{
         float actualValue = 2.0 / 3.0;
 
