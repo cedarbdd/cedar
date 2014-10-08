@@ -105,7 +105,7 @@ describe(@"CDRTypeUtilities", ^{
 
         it(@"should return an NSValue for other Types", ^{
             CGRect r = CGRectMake(1, 2, 3, 4);
-            (id)[CDRTypeUtilities boxedObjectOfBytes:(const char *)&r ofObjCType:@encode(CGRect)] should equal([NSValue valueWithRect:r]);
+            (id)[CDRTypeUtilities boxedObjectOfBytes:(const char *)&r ofObjCType:@encode(CGRect)] should equal([NSValue valueWithBytes:&r objCType:@encode(CGRect)]);
         });
     });
 
