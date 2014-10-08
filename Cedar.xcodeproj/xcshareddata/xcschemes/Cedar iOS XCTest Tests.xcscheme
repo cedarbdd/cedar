@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "96B5F9F5144A81A7000A6A5D"
-               BuildableName = "OCUnitApp.app"
-               BlueprintName = "OCUnitApp"
+               BuildableName = "Cedar iOS Host App.app"
+               BlueprintName = "Cedar iOS Host App"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F45A3C8180E4796003C1E36"
                BuildableName = "XCUnitAppTests.xctest"
-               BlueprintName = "XCUnitAppTests"
+               BlueprintName = "Cedar iOS XCTest Tests"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96B5F9F5144A81A7000A6A5D"
-            BuildableName = "OCUnitApp.app"
-            BlueprintName = "OCUnitApp"
+            BuildableName = "Cedar iOS Host App.app"
+            BlueprintName = "Cedar iOS Host App"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96B5F9F5144A81A7000A6A5D"
-            BuildableName = "OCUnitApp.app"
-            BlueprintName = "OCUnitApp"
+            BuildableName = "Cedar iOS Host App.app"
+            BlueprintName = "Cedar iOS Host App"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -80,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96B5F9F5144A81A7000A6A5D"
-            BuildableName = "OCUnitApp.app"
-            BlueprintName = "OCUnitApp"
+            BuildableName = "Cedar iOS Host App.app"
+            BlueprintName = "Cedar iOS Host App"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
