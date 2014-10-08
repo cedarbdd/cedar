@@ -15,7 +15,7 @@
 				AEEE225A11DC2C0200029872 /* Build universal static lib */,
 				AEEE225E11DC2C5E00029872 /* Copy headers to framework */,
 				3444602A190CC3320076655A /* Copy Info.plist to framework */,
-				34446027190CAA930076655A /* Update version info */,
+				34446027190CAA930076655A /* Set Git SHA on Framework */,
 			);
 			dependencies = (
 			);
@@ -497,6 +497,8 @@
 		AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */; };
 		AEF7303A13ECCB7B00786282 /* StringifiersBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7303813ECCB7B00786282 /* StringifiersBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEF7303B13ECCB7B00786282 /* StringifiersContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF7303913ECCB7B00786282 /* StringifiersContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF8FB0719E6000E00DD4FE4 /* CDRVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF8FB0619E6000E00DD4FE4 /* CDRVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEF8FB0819E6000E00DD4FE4 /* CDRVersion.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF8FB0619E6000E00DD4FE4 /* CDRVersion.h */; };
 		AEFD163411DCFDC800F4448A /* CedarApplicationDelegate.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */; };
 		AEFD166111DCFEC900F4448A /* CDRExampleReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD011DC27B800029872 /* CDRExampleReporter.h */; };
 		AEFD167A11DCFF1700F4448A /* CDRSpec.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FD211DC27B800029872 /* CDRSpec.h */; };
@@ -681,6 +683,7 @@
 				AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */,
 				AE94D04015F341B200A0C2B7 /* AnyInstanceArgument.h in Copy headers to framework */,
 				E31179D4161FD937007D3CDE /* CDRSlowTestStatistics.h in Copy headers to framework */,
+				AEF8FB0819E6000E00DD4FE4 /* CDRVersion.h in Copy headers to framework */,
 				AEC40C50174AC4C700474D2D /* UIGeometryCompareEqual.h in Copy headers to framework */,
 				AEC40C51174AC4C700474D2D /* UIGeometryStringifiers.h in Copy headers to framework */,
 				AEE8DBDA176000D7008AF18A /* CDRSpyInfo.h in Copy headers to framework */,
@@ -975,6 +978,7 @@
 		AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BeEmptySpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEF7303813ECCB7B00786282 /* StringifiersBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringifiersBase.h; sourceTree = "<group>"; };
 		AEF7303913ECCB7B00786282 /* StringifiersContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringifiersContainer.h; sourceTree = "<group>"; };
+		AEF8FB0619E6000E00DD4FE4 /* CDRVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRVersion.h; sourceTree = "<group>"; };
 		AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDRSharedExampleGroupPool.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSharedExampleGroupPool.h; sourceTree = "<group>"; };
 		AEFF375718FC452E002DA993 /* ComparatorsContainerConvenience.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainerConvenience.h; sourceTree = "<group>"; };
@@ -1617,6 +1621,7 @@
 				AEEE1FD411DC27B800029872 /* iPhone */,
 				AE0AF55D13E9C06900029396 /* Matchers */,
 				1FE15C241869092300207F0C /* Reporters */,
+				AEF8FB0619E6000E00DD4FE4 /* CDRVersion.h */,
 				AEEE1FCC11DC27B800029872 /* CDRExample.h */,
 				AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */,
 				AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */,
@@ -1883,6 +1888,7 @@
 				AE18A7CD13F453CC00C8872C /* BeNil.h in Headers */,
 				AE4A9458187F7D8F008566F5 /* BeFalsy.h in Headers */,
 				AE18A7CE13F453CC00C8872C /* BeSameInstanceAs.h in Headers */,
+				AEF8FB0719E6000E00DD4FE4 /* CDRVersion.h in Headers */,
 				2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */,
 				AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */,
 				AEAA191219DCC5A900194E95 /* NSInvocation+Cedar.h in Headers */,
@@ -2138,7 +2144,7 @@
 				AEEE1FB211DC271300029872 /* Resources */,
 				AEEE1FB311DC271300029872 /* Sources */,
 				AEEE1FB411DC271300029872 /* Frameworks */,
-				3468B7AA1909595200203B87 /* Update Version Info */,
+				3468B7AA1909595200203B87 /* Set Git SHA on Framework */,
 			);
 			buildRules = (
 			);
@@ -2342,14 +2348,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		34446027190CAA930076655A /* Update version info */ = {
+		34446027190CAA930076655A /* Set Git SHA on Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Update version info";
+			name = "Set Git SHA on Framework";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2370,18 +2376,18 @@
 			shellPath = /bin/sh;
 			shellScript = "cp \"${SRCROOT}/Cedar-Info.plist\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Resources/Info.plist\"";
 		};
-		3468B7AA1909595200203B87 /* Update Version Info */ = {
+		3468B7AA1909595200203B87 /* Set Git SHA on Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Update Version Info";
+			name = "Set Git SHA on Framework";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/usr/bin/env ruby";
+			shellPath = /usr/bin/ruby;
 			shellScript = "key = \"CDRBuildVersionSHA\"\nver = `git rev-parse HEAD`.strip\nputs \"Git commit SHA is #{ver}\"\npath = \"#{ENV['BUILT_PRODUCTS_DIR']}/#{ENV['INFOPLIST_PATH']}\"\nputs \"Updating #{path}\"\n`/usr/libexec/PlistBuddy -c \"Add :#{key} string #{ver}\" \"#{path}\"`";
 		};
 		96158A84144A915E005895CE /* ShellScript */ = {

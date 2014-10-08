@@ -264,6 +264,13 @@ task :clean do
   Xcode.clean
 end
 
+task :set_version, [:version_number] do |t, args|
+  File.open("Source/Headers/CDRVersion.h", "w") do |f|
+    f.puts "extern NSString *CDRVersion = @\"#{args[:version_number]}\";"
+  end
+  Shell.run "/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString #{args[:version_number]}\" Cedar-Info.plist"
+end
+
 desc 'Analyzes and runs specs, uispecs, and focused spec suites'
 task suites: ['suites:analyze', 'suites:run']
 namespace :suites do
