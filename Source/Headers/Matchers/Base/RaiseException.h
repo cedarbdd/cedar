@@ -51,9 +51,6 @@ namespace Cedar { namespace Matchers { namespace Private {
         NSString *expectedReason_;
         NSString *expectedName_;
     };
-
-    RaiseException raise() __attribute__((deprecated("Please use raise_exception")));
-    RaiseException raise();
 }}}
 
 #pragma mark - public interface

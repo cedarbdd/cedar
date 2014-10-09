@@ -109,9 +109,4 @@ namespace Cedar { namespace Matchers { namespace Private {
         return !expectedName_ || ([exception isKindOfClass:[NSException class]] && [expectedName_ isEqualToString:[id(exception) name]]);
     }
 
-    // Deprecated
-    RaiseException raise() {
-        return RaiseException();
-    }
-
 }}}
