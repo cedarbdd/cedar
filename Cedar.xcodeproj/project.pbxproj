@@ -82,8 +82,6 @@
 		342F5D0B18F430DB00F38E35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 342F5D0A18F430DB00F38E35 /* QuartzCore.framework */; };
 		343FAFEA190FDAEC0085AFEC /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		343FAFEB190FDAEC0085AFEC /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
-		34446021190A7EFD0076655A /* SpecHelper.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34446020190A7EB00076655A /* SpecHelper.h */; };
-		34446022190A7F0D0076655A /* SpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 34446020190A7EB00076655A /* SpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34681C2C18FE451E009D38AC /* CDRTypeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */; };
 		34681C2E18FE4884009D38AC /* CDRTypeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */; };
 		34681C3018FE4B68009D38AC /* CDRTypeUtilitiesSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34681C2F18FE4B68009D38AC /* CDRTypeUtilitiesSpec.mm */; };
@@ -597,7 +595,6 @@
 				341477711914090000CBA385 /* AnInstanceOf.h in Copy headers to framework */,
 				AE0F354F19E87D6F00B9F116 /* CompareCloseTo.h in Copy headers to framework */,
 				3414776F191406FC00CBA385 /* ComparatorsContainerConvenience.h in Copy headers to framework */,
-				34446021190A7EFD0076655A /* SpecHelper.h in Copy headers to framework */,
 				34EBFD0F18FF505F005392AB /* UIKitComparatorsContainer.h in Copy headers to framework */,
 				1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */,
 				1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */,
@@ -696,7 +693,6 @@
 		342F5D0A18F430DB00F38E35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		343FAFE8190FDAEC0085AFEC /* DeallocNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeallocNotifier.h; sourceTree = "<group>"; };
 		343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeallocNotifier.m; sourceTree = "<group>"; };
-		34446020190A7EB00076655A /* SpecHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpecHelper.h; sourceTree = "<group>"; };
 		3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRBlockHelper.h; sourceTree = "<group>"; };
 		34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTypeUtilities.m; sourceTree = "<group>"; };
 		34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRTypeUtilities.h; sourceTree = "<group>"; };
@@ -1601,7 +1597,6 @@
 				969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */,
 				AEEE1FD311DC27B800029872 /* Cedar.h */,
 				AEEE1FDB11DC27B800029872 /* CDRSpecHelper.h */,
-				34446020190A7EB00076655A /* SpecHelper.h */,
 				3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */,
 				34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */,
 				AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */,
@@ -1828,7 +1823,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEEE1FFB11DC27B800029872 /* CDRExampleBase.h in Headers */,
-				34446022190A7F0D0076655A /* SpecHelper.h in Headers */,
 				AEEE1FFD11DC27B800029872 /* CDRExampleParent.h in Headers */,
 				AEEE1FFE11DC27B800029872 /* CDRExampleReporter.h in Headers */,
 				AEEE1FFF11DC27B800029872 /* CDRFunctions.h in Headers */,

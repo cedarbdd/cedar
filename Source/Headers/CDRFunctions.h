@@ -9,7 +9,3 @@ NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed)
 NSArray *CDRReportersToRun();
 NSString *CDRGetTestBundleExtension();
 void CDRSuppressStandardPipesWhileLoadingClasses();
-
-int runSpecs() __attribute__((deprecated("Please use CDRRunSpecs()")));
-int runAllSpecs() __attribute__((deprecated("Please use CDRRunSpecs()")));
-int runSpecsWithCustomExampleReporters(NSArray *reporters) __attribute__((deprecated("Please use CDRRunSpecsWithCustomExampleReporters()")));
