@@ -22,7 +22,7 @@ usage() {
 }
 
 switch_to_latest_tag() {
-  LATEST_VERSION_TAG=$(git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\+\\.\\d\\+\\.\\d\\+ | head -n1)
+  LATEST_VERSION_TAG=$(git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\+\\.\\d\\+\\.\\d\\+ | ruby -e 'puts STDIN.read.split("\n").sort { |a,b| a.gsub("v", "").split(".").map(&:to_i) <=> b.gsub("v", "").split(".").map(&:to_i) }.last')
 
   git checkout ${LATEST_VERSION_TAG} > /dev/null 2>&1
   if [[ $? != 0 ]]; then
