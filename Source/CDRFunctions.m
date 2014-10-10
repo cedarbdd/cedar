@@ -8,6 +8,7 @@
 #import "CDRFunctions.h"
 #import "CDRReportDispatcher.h"
 #import "CDROTestNamer.h"
+#import "CDRVersion.h"
 
 static NSString * const CDRBuildVersionKey = @"CDRBuildVersionSHA";
 
@@ -48,28 +49,17 @@ NSArray *CDRSelectClasses(BOOL (^classSelectionPredicate)(Class class)) {
 NSString *CDRVersionString() {
     NSString *releaseVersion = nil, *versionDetails = nil;
 
-#if COCOAPODS_VERSION_MAJOR_Cedar
-    releaseVersion = [NSString stringWithFormat:@"%d.%d.%d", COCOAPODS_VERSION_MAJOR_Cedar, COCOAPODS_VERSION_MINOR_Cedar, COCOAPODS_VERSION_PATCH_Cedar];
-#endif
+    releaseVersion = CDRVersion;
 #if COCOAPODS
     versionDetails = @"from CocoaPods";
 #endif
 
-    if (!releaseVersion) {
+    if (!versionDetails) {
         NSBundle *cedarFrameworkBundle = [NSBundle bundleForClass:[CDRSpec class]];
-        releaseVersion = [cedarFrameworkBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         versionDetails = [cedarFrameworkBundle objectForInfoDictionaryKey:CDRBuildVersionKey];
     }
 
-    if (!releaseVersion) {
-        releaseVersion = @"unknown";
-    }
-
-    NSString *versionString = releaseVersion;
-    if (versionDetails) {
-        versionString = [versionString stringByAppendingFormat:@" (%@)", versionDetails];
-    }
-    return versionString;
+    return [releaseVersion stringByAppendingFormat:@" (%@)", versionDetails];
 }
 
 #pragma mark - Globals
