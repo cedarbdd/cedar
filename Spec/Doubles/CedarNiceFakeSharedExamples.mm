@@ -55,35 +55,47 @@ sharedExamplesFor(@"a Cedar nice fake", ^(NSDictionary *sharedContext) {
                 myNiceFake stub_method("methodWithNumber1:andNumber2:").with(any([NSDecimalNumber class]), arg).and_return(@99);
             });
 
+            context(@"when invoked with the correct arguments", ^{
+                it(@"should return the stubbed value", ^{
+                    [myNiceFake methodWithNumber1:[NSDecimalNumber decimalNumberWithString:@"1.0"] andNumber2:arg] should equal(@99);
+                });
+            });
+
             context(@"when invoked with the incorrect class", ^{
-                it(@"should return 0", ^{
-                    [myNiceFake methodWithNumber1:@3.14159265359 andNumber2:arg] should equal(0);
+                it(@"should return nil", ^{
+                    [myNiceFake methodWithNumber1:@1 andNumber2:arg] should be_nil;
                 });
             });
 
             context(@"when invoked with nil", ^{
-                it(@"should return 0", ^{
-                    [myNiceFake methodWithNumber1:nil andNumber2:arg] should equal(0);
+                it(@"should return nil", ^{
+                    [myNiceFake methodWithNumber1:nil andNumber2:arg] should be_nil;
                 });
             });
         });
 
         context(@"with an argument specified as any instance conforming to a specified protocol", ^{
-            NSNumber *arg = @123;
-
             beforeEach(^{
-                myNiceFake stub_method("methodWithNumber1:andNumber2:").with(any(@protocol(InheritedProtocol)), arg).and_return(@99);
+                myNiceFake stub_method("methodWithInheritedProtocol:").with(any(@protocol(InheritedProtocol))).and_return(@99);
+            });
+
+            context(@"when invoked with the correct arguments", ^{
+                it(@"should return the stubbed value", ^{
+                    SimpleIncrementer *incrementer = [[[SimpleIncrementer alloc] init] autorelease];
+                    [myNiceFake methodWithInheritedProtocol:incrementer] should equal(@99);
+                });
             });
 
             context(@"when invoked with the incorrect class", ^{
-                it(@"should return 0", ^{
-                    [myNiceFake methodWithNumber1:@3.14159265359 andNumber2:arg] should equal(0);
+                it(@"should return nil", ^{
+                    NSArray *items = @[@1];
+                    [myNiceFake methodWithInheritedProtocol:[items firstObject]] should be_nil;
                 });
             });
 
             context(@"when invoked with nil", ^{
-                it(@"should return 0", ^{
-                    [myNiceFake methodWithNumber1:nil andNumber2:arg] should equal(0);
+                it(@"should return nil", ^{
+                    [myNiceFake methodWithInheritedProtocol:nil] should be_nil;
                 });
             });
         });

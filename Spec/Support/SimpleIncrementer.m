@@ -50,6 +50,10 @@
 - (void)methodWithCString:(char *)string {
 }
 
+- (id)methodWithInheritedProtocol:(id<InheritedProtocol>)protocol {
+    return @1;
+}
+
 - (NSString *)methodWithString:(NSString *)string {
     return string;
 }
