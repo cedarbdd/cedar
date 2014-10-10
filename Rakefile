@@ -1,18 +1,17 @@
 PROJECT_NAME = "Cedar"
-APP_NAME = "Specs"
-APP_IOS_NAME = "OCUnitApp"
+APP_NAME = "Cedar OS X Specs"
+APP_IOS_NAME = "Cedar iOS Specs"
 CONFIGURATION = "Release"
 
-SPECS_TARGET_NAME = "Specs"
-UI_SPECS_TARGET_NAME = "iOSSpecs"
-FOCUSED_SPECS_TARGET_NAME = "FocusedSpecs"
-IOS_FRAMEWORK_SPECS_TARGET_NAME = "iOSFrameworkSpecs"
+SPECS_TARGET_NAME = "Cedar OS X Specs"
+UI_SPECS_TARGET_NAME = "Cedar iOS Specs"
+FOCUSED_SPECS_TARGET_NAME = "Cedar OS X FocusedSpecs"
+IOS_FRAMEWORK_SPECS_TARGET_NAME = "Cedar iOS FrameworkSpecs"
 
-OCUNIT_LOGIC_SPECS_TARGET_NAME = "OCUnitAppLogicTests"
-OCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitAppTests"
-XCUNIT_APPLICATION_SPECS_TARGET_NAME = "OCUnitApp + XCTest"
+OCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS SenTestingKit Tests"
+XCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS XCTest Tests"
 
-OSX_FAILING_SPEC_TARGET_NAME = "Failing OS X Host App"
+OSX_FAILING_SPEC_SCHEME_NAME = "Cedar OS X Failing Test Bundle"
 
 CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
 CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
@@ -111,10 +110,6 @@ end
 class Xcode
   def self.developer_dir
     `xcode-select -print-path`.strip
-  end
-
-  def self.is_octest_deprecated?
-    system("cat #{Xcode.developer_dir}/Tools/RunUnitTests | grep -q 'RunUnitTests is obsolete.'")
   end
 
   def self.build_dir(effective_platform_name = "")
@@ -289,7 +284,7 @@ namespace :suites do
     task run: :build do
       build_dir = Xcode.build_dir("")
       Shell.with_env("DYLD_FRAMEWORK_PATH" => build_dir, "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter") do
-        Shell.run(File.join(build_dir, SPECS_TARGET_NAME), "Specs.log")
+        Shell.run(File.join(build_dir, SPECS_TARGET_NAME).inspect, "Specs.log")
       end
     end
   end
@@ -344,7 +339,7 @@ namespace :suites do
         "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
       }
       Shell.with_env(env_vars) do
-        Shell.run(File.join(Xcode.build_dir, FOCUSED_SPECS_TARGET_NAME), "focused_specs.run.log")
+        Shell.run(File.join(Xcode.build_dir, FOCUSED_SPECS_TARGET_NAME).inspect, "focused_specs.run.log")
       end
     end
   end
@@ -404,7 +399,7 @@ namespace :frameworks do
 end
 
 namespace :testbundles do
-  desc "Runs all test bundle test suites (xcunit, ocunit:logic, ocunit:application)"
+  desc "Runs all test bundle test suites (xcunit, ocunit:application)"
   task run: ['testbundles:xcunit', 'testbundles:ocunit', 'testbundles:failing_test_bundle']
 
   desc "Converts the test bundle identifier to ones Xcode 5- recognizes (Xcode 6 postfixes the original bundler identifier)"
@@ -412,55 +407,32 @@ namespace :testbundles do
     Xcode.sed_project(%r{com\.apple\.product-type\.bundle\.(oc)?unit-test}, 'com.apple.product-type.bundle')
   end
 
-  desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_TARGET_NAME})"
+  desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
   task xcunit: :convert_to_xcode5 do
     Simulator.kill
 
-    if Xcode.is_octest_deprecated? and SDK_VERSION.split('.')[0].to_i >= 7
-      Xcode.test(
-        scheme: XCUNIT_APPLICATION_SPECS_TARGET_NAME,
-        sdk: "iphonesimulator#{SDK_VERSION}",
-        args: "ARCHS=x86_64 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
-        logfile: "xcunit.run.log",
-      )
-    else
-      puts "Running SDK #{SDK_VERSION}, which predates XCTest. Skipping."
-    end
+    Xcode.test(
+      scheme: XCUNIT_APPLICATION_SPECS_SCHEME_NAME,
+      sdk: "iphonesimulator#{SDK_VERSION}",
+      args: "ARCHS=x86_64 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+      logfile: "xcunit.run.log",
+    )
   end
 
   desc "Build and run OCUnit logic and application specs"
-  task ocunit: ["ocunit:logic", "ocunit:application"]
+  task ocunit: ["ocunit:application"]
 
   namespace :ocunit do
-    desc "Build and run OCUnit logic specs (#{OCUNIT_LOGIC_SPECS_TARGET_NAME})"
-    task logic: :convert_to_xcode5 do
-      if Xcode.is_octest_deprecated?
-        Xcode.test(
-          scheme: APP_NAME,
-          logfile: "ocunit-logic-specs.log",
-        )
-      else
-        Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_LOGIC_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -arch x86_64 build TEST_AFTER_BUILD=YES SYMROOT='#{BUILD_DIR}'", "ocunit-logic-specs.log"
-      end
-    end
-
-    desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_TARGET_NAME})"
+    desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
     task application: :convert_to_xcode5 do
       Simulator.kill
 
-      if Xcode.is_octest_deprecated?
-        Xcode.test(
-          scheme: APP_IOS_NAME,
-          sdk: "iphonesimulator#{SDK_VERSION}",
-          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
-          logfile: "ocunit-application-specs.log",
-        )
-      else
-        Shell.run "xcodebuild -project #{PROJECT_NAME}.xcodeproj -target #{OCUNIT_APPLICATION_SPECS_TARGET_NAME} -configuration #{CONFIGURATION} -sdk iphonesimulator#{SDK_VERSION} build ARCHS=i386 TEST_AFTER_BUILD=NO SYMROOT='#{BUILD_DIR}'", "ocunit-application-build.log"
-
-        test_bundle = File.join(Xcode.build_dir("-iphonesimulator"), "#{OCUNIT_APPLICATION_SPECS_TARGET_NAME}.octest")
-        Simulator.launch_bundle(Xcode.build_dir("-iphonesimulator"), APP_IOS_NAME, test_bundle, "ocunit.application.specs.log")
-      end
+      Xcode.test(
+        scheme: OCUNIT_APPLICATION_SPECS_SCHEME_NAME,
+        sdk: "iphonesimulator#{SDK_VERSION}",
+        args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+        logfile: "ocunit-application-specs.log",
+      )
     end
   end
   desc 'A target that does not have XCTest or SenTestingKit linked should alert the user'
@@ -469,7 +441,7 @@ namespace :testbundles do
 
     begin
       Xcode.test(
-        scheme: OSX_FAILING_SPEC_TARGET_NAME,
+        scheme: OSX_FAILING_SPEC_SCHEME_NAME,
         logfile: "failing.osx.specs.log",
         args: "2>&1",
       )
