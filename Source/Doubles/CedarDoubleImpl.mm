@@ -73,14 +73,6 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     stubbed_method.validate_against_instance(self.parent_double);
 
     Cedar::Doubles::StubbedMethod::stubbed_method_vector_t &stubbed_methods = stubbed_methods_[selector];
-    for (auto stubbed_method_ptr : stubbed_methods) {
-        if (stubbed_method_ptr->arguments_equal(stubbed_method) ) {
-            [[NSException exceptionWithName:NSInternalInconsistencyException
-                                     reason:[NSString stringWithFormat:@"The method <%s> is already stubbed with arguments (%@)", sel_getName(selector), stubbed_method_ptr->arguments_string()]
-                                   userInfo:nil]
-             raise];
-        }
-    }
 
     Cedar::Doubles::StubbedMethod::shared_ptr_t stubbed_method_ptr = Cedar::Doubles::StubbedMethod::shared_ptr_t(new Cedar::Doubles::StubbedMethod(stubbed_method));
     stubbed_methods.insert(stubbed_methods.begin(), stubbed_method_ptr);
