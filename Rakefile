@@ -124,11 +124,7 @@ class Xcode
   end
 
   def self.destination_for_ios_sdk(version)
-    if `xcodebuild -showsdks`.include? "iphonesimulator8.0"
-      "OS=#{version},name=iPhone 5s"
-    else
-      "OS=#{version},name=iPhone Retina (3.5-inch)"
-    end
+    "OS=#{version},name=iPhone 5s"
   end
 
   def self.clean
