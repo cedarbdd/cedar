@@ -205,7 +205,8 @@ class Simulator
     Shell.with_env({"CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"}) do
       begin
         kill # ensure simulator is not currently running
-        Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --sdk #{SDK_RUNTIME_VERSION} | tee /dev/stderr | grep -q ', 0 failures'", logfile
+        Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --devicetypeid \"com.apple.CoreSimulator.SimDeviceType.iPhone-5s, #{SDK_RUNTIME_VERSION}\" --verbose --stdout build/uispecs.spec.log"
+        Shell.run "grep -q ', 0 failures' build/uispecs.spec.log", logfile
       rescue
         retry_count += 1
 
