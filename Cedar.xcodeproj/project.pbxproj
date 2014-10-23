@@ -746,7 +746,7 @@
 		96A07F0E13F27F2F0021974D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Focused/main.m; sourceTree = "<group>"; };
 		96A07F1013F283E40021974D /* FocusedSpec2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FocusedSpec2.m; path = Focused/FocusedSpec2.m; sourceTree = "<group>"; };
 		96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjCHeadersSpec.mm; sourceTree = "<group>"; };
-		96B5F9F6144A81A7000A6A5D /* OCUnitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = OCUnitApp.app; path = "Cedar iOS Host App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96B5F9F6144A81A7000A6A5D /* Cedar iOS Host App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar iOS Host App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		96B5F9FF144A81A7000A6A5D /* OCUnitApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCUnitApp-Info.plist"; sourceTree = "<group>"; };
 		96B5FA01144A81A8000A6A5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -755,7 +755,7 @@
 		96B5FA06144A81A8000A6A5D /* OCUnitAppAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCUnitAppAppDelegate.h; sourceTree = "<group>"; };
 		96B5FA07144A81A8000A6A5D /* OCUnitAppAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCUnitAppAppDelegate.m; sourceTree = "<group>"; };
 		96B5FA0A144A81A8000A6A5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		96B5FA11144A81A8000A6A5D /* OCUnitAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OCUnitAppTests.octest; path = "Cedar iOS SenTestingKit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar iOS SenTestingKit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B5FA19144A81A8000A6A5D /* OCUnitAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCUnitAppTests-Info.plist"; sourceTree = "<group>"; };
 		96B5FA1B144A81A8000A6A5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		96B5FA1D144A81A8000A6A5D /* OCUnitAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCUnitAppTests-Prefix.pch"; sourceTree = "<group>"; };
@@ -772,7 +772,7 @@
 		9D28051718E2321D00887CC4 /* ObjectWithValueEquality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithValueEquality.h; sourceTree = "<group>"; };
 		9D28051818E2321D00887CC4 /* ObjectWithValueEquality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithValueEquality.m; sourceTree = "<group>"; };
 		AE02021717452006009A7915 /* StringifiersBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StringifiersBase.mm; sourceTree = "<group>"; };
-		AE02E7E4184EABCD00414F19 /* iOSFrameworkSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = iOSFrameworkSpecs.app; path = "Cedar iOS FrameworkSpecs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE02E7E4184EABCD00414F19 /* Cedar iOS FrameworkSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar iOS FrameworkSpecs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE02E7EC184EABCD00414F19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE02E7EE184EABCE00414F19 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AE02E81A184EEF0600414F19 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -791,13 +791,13 @@
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
 		AE18A7FA13F4601400C8872C /* Contain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contain.h; sourceTree = "<group>"; };
 		AE18A80913F4640600C8872C /* ContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ContainSpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		AE248F9819DCD52500092C14 /* OS X Host App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "OS X Host App.app"; path = "Cedar OS X Host App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE248F9819DCD52500092C14 /* Cedar OS X Host App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar OS X Host App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE248F9B19DCD52500092C14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE248F9C19DCD52500092C14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AE248F9E19DCD52500092C14 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE248F9F19DCD52500092C14 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AE248FA419DCD52500092C14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		AE248FAA19DCD52500092C14 /* OS X Host AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OS X Host AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar OS X Host AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE248FAF19DCD52500092C14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE248FB019DCD52500092C14 /* OS_X_Host_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OS_X_Host_AppTests.m; sourceTree = "<group>"; };
 		AE31A29D19C0F23F00C438C1 /* CDRXTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRXTestSuite.h; sourceTree = "<group>"; };
@@ -855,7 +855,7 @@
 		AEAA191119DCC5A900194E95 /* NSMethodSignature+Cedar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMethodSignature+Cedar.h"; sourceTree = "<group>"; };
 		AEB1A74115F304A9002E4167 /* StubbedMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StubbedMethod.mm; sourceTree = "<group>"; };
 		AEB45A901496C8D800845D09 /* RaiseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaiseException.h; sourceTree = "<group>"; };
-		AEB8818719DCD62D00F081BA /* OS X Failing Test Bundle.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OS X Failing Test Bundle.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEB8818719DCD62D00F081BA /* Cedar OS X Failing Test Bundle.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar OS X Failing Test Bundle.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB8818B19DCD62D00F081BA /* OS X Failing Test Bundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OS X Failing Test Bundle-Info.plist"; sourceTree = "<group>"; };
 		AEB8818D19DCD62D00F081BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AEB8818F19DCD62D00F081BA /* ExampleSpec.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ExampleSpec.mm; sourceTree = "<group>"; };
@@ -918,7 +918,7 @@
 		AEEE222211DC2A1400029872 /* Rakefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
 		AEEE222311DC2A1400029872 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCedar-StaticLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEEE227611DC2CF900029872 /* iOSSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = iOSSpecs.app; path = "Cedar iOS Specs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEEE227611DC2CF900029872 /* Cedar iOS Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar iOS Specs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOSSpecs-Info.plist"; sourceTree = "<group>"; };
 		AEEF360619DE21DB00794484 /* CDRSpecFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecFailure.m; sourceTree = "<group>"; };
 		AEEF360D19DF24AB00794484 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
@@ -1538,15 +1538,15 @@
 				AEEE1FB611DC271300029872 /* Cedar.framework */,
 				AEEE218611DC28E200029872 /* Cedar OS X Specs */,
 				AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */,
-				AEEE227611DC2CF900029872 /* iOSSpecs.app */,
+				AEEE227611DC2CF900029872 /* Cedar iOS Specs.app */,
 				96A07F0813F276640021974D /* Cedar OS X FocusedSpecs */,
-				96B5F9F6144A81A7000A6A5D /* OCUnitApp.app */,
-				96B5FA11144A81A8000A6A5D /* OCUnitAppTests.octest */,
+				96B5F9F6144A81A7000A6A5D /* Cedar iOS Host App.app */,
+				96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */,
 				1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */,
-				AE02E7E4184EABCD00414F19 /* iOSFrameworkSpecs.app */,
-				AE248F9819DCD52500092C14 /* OS X Host App.app */,
-				AE248FAA19DCD52500092C14 /* OS X Host AppTests.xctest */,
-				AEB8818719DCD62D00F081BA /* OS X Failing Test Bundle.octest */,
+				AE02E7E4184EABCD00414F19 /* Cedar iOS FrameworkSpecs.app */,
+				AE248F9819DCD52500092C14 /* Cedar OS X Host App.app */,
+				AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */,
+				AEB8818719DCD62D00F081BA /* Cedar OS X Failing Test Bundle.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1986,7 +1986,7 @@
 			);
 			name = "Cedar iOS Host App";
 			productName = OCUnitApp;
-			productReference = 96B5F9F6144A81A7000A6A5D /* OCUnitApp.app */;
+			productReference = 96B5F9F6144A81A7000A6A5D /* Cedar iOS Host App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		96B5FA10144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests */ = {
@@ -2006,7 +2006,7 @@
 			);
 			name = "Cedar iOS SenTestingKit Tests";
 			productName = OCUnitAppTests;
-			productReference = 96B5FA11144A81A8000A6A5D /* OCUnitAppTests.octest */;
+			productReference = 96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		AE02E7E3184EABCD00414F19 /* Cedar iOS FrameworkSpecs */ = {
@@ -2024,7 +2024,7 @@
 			);
 			name = "Cedar iOS FrameworkSpecs";
 			productName = "Cedar-iOS.FrameworkSpecs";
-			productReference = AE02E7E4184EABCD00414F19 /* iOSFrameworkSpecs.app */;
+			productReference = AE02E7E4184EABCD00414F19 /* Cedar iOS FrameworkSpecs.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AE248F9719DCD52500092C14 /* Cedar OS X Host App */ = {
@@ -2041,7 +2041,7 @@
 			);
 			name = "Cedar OS X Host App";
 			productName = "OS X Host App";
-			productReference = AE248F9819DCD52500092C14 /* OS X Host App.app */;
+			productReference = AE248F9819DCD52500092C14 /* Cedar OS X Host App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AE248FA919DCD52500092C14 /* Cedar OS X Host AppTests */ = {
@@ -2060,7 +2060,7 @@
 			);
 			name = "Cedar OS X Host AppTests";
 			productName = "OS X Host AppTests";
-			productReference = AE248FAA19DCD52500092C14 /* OS X Host AppTests.xctest */;
+			productReference = AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		AEB8818619DCD62D00F081BA /* Cedar OS X Failing Test Bundle */ = {
@@ -2078,7 +2078,7 @@
 			);
 			name = "Cedar OS X Failing Test Bundle";
 			productName = "OS X Failing Test Bundle";
-			productReference = AEB8818719DCD62D00F081BA /* OS X Failing Test Bundle.octest */;
+			productReference = AEB8818719DCD62D00F081BA /* Cedar OS X Failing Test Bundle.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		AEEE1FB511DC271300029872 /* Cedar */ = {
@@ -2149,7 +2149,7 @@
 			);
 			name = "Cedar iOS Specs";
 			productName = iPhoneSpecs;
-			productReference = AEEE227611DC2CF900029872 /* iOSSpecs.app */;
+			productReference = AEEE227611DC2CF900029872 /* Cedar iOS Specs.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
