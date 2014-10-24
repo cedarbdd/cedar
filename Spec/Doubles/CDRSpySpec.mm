@@ -48,7 +48,7 @@ describe(@"spy_on", ^{
                 });
 
                 it(@"should invoke the original method", ^{
-                    [incrementer methodWithNumber1:arg1 andNumber2:arg3] should equal([arg1 floatValue] * [arg3 floatValue]);
+                    [incrementer methodWithNumber1:arg1 andNumber2:arg3] should equal(@([arg1 floatValue] * [arg3 floatValue]));
                 });
             });
         });
@@ -78,13 +78,13 @@ describe(@"spy_on", ^{
 
             context(@"when invoked with the incorrect class", ^{
                 it(@"should invoke the original method", ^{
-                    [incrementer methodWithNumber1:@2 andNumber2:arg] should equal(2 * [arg floatValue]);
+                    [incrementer methodWithNumber1:@2 andNumber2:arg] should equal(@(2 * [arg floatValue]));
                 });
             });
 
             context(@"when invoked with nil", ^{
                 it(@"should invoke the original method", ^{
-                    [incrementer methodWithNumber1:nil andNumber2:arg] should equal(0);
+                    [incrementer methodWithNumber1:nil andNumber2:arg] should equal(@0);
                 });
             });
         });
@@ -98,13 +98,13 @@ describe(@"spy_on", ^{
 
             context(@"when invoked with the incorrect class", ^{
                 it(@"should invoke the original method", ^{
-                    [incrementer methodWithNumber1:@2 andNumber2:arg] should equal(2 * [arg floatValue]);
+                    [incrementer methodWithNumber1:@2 andNumber2:arg] should equal(@(2 * [arg floatValue]));
                 });
             });
 
             context(@"when invoked with nil", ^{
                 it(@"should invoke the original method", ^{
-                    [incrementer methodWithNumber1:nil andNumber2:arg] should equal(0);
+                    [incrementer methodWithNumber1:nil andNumber2:arg] should equal(@0);
                 });
             });
         });

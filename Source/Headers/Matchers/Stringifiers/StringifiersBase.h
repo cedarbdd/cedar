@@ -35,6 +35,7 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         if (!value) {
             return [NSString stringWithFormat:@"%@", value];
         }
+
         return string_for([value floatValue]);
     }
 

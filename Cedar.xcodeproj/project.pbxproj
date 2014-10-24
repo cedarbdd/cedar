@@ -200,6 +200,9 @@
 		AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; };
 		AE0C9D8E19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */; };
 		AE0C9D8F19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */; };
+		AE0F354E19E87D6F00B9F116 /* CompareCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE0F354F19E87D6F00B9F116 /* CompareCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */; };
+		AE0F355019E89BC400B9F116 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
 		AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
@@ -384,8 +387,6 @@
 		AECF136B15D1439B003AAB9C /* AnyArgument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AECF136915D1439B003AAB9C /* AnyArgument.h */; };
 		AED10EBC18F46C0E00950904 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		AED10EBD18F46C0E00950904 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
-		AED23E6C173D5545003D7A41 /* BeCloseTo.mm in Sources */ = {isa = PBXBuildFile; fileRef = AED23E69173D5545003D7A41 /* BeCloseTo.mm */; };
-		AED23E6D173D5545003D7A41 /* BeCloseTo.mm in Sources */ = {isa = PBXBuildFile; fileRef = AED23E69173D5545003D7A41 /* BeCloseTo.mm */; };
 		AEE0665617315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
 		AEE0665717315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
 		AEE0665917315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
@@ -594,6 +595,7 @@
 				34ADD2EE19220F9300B057AC /* AnyInstanceConformingToProtocolArgument.h in Copy headers to framework */,
 				AEAA191719DCC5B100194E95 /* NSMethodSignature+Cedar.h in Copy headers to framework */,
 				341477711914090000CBA385 /* AnInstanceOf.h in Copy headers to framework */,
+				AE0F354F19E87D6F00B9F116 /* CompareCloseTo.h in Copy headers to framework */,
 				3414776F191406FC00CBA385 /* ComparatorsContainerConvenience.h in Copy headers to framework */,
 				34446021190A7EFD0076655A /* SpecHelper.h in Copy headers to framework */,
 				34EBFD0F18FF505F005392AB /* UIKitComparatorsContainer.h in Copy headers to framework */,
@@ -786,6 +788,7 @@
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
 		AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CDRSpec+XCTestSupport.m"; sourceTree = "<group>"; };
+		AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareCloseTo.h; sourceTree = "<group>"; };
 		AE167EF115B216DA005960B9 /* RaiseException.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseException.mm; sourceTree = "<group>"; };
 		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
@@ -880,7 +883,6 @@
 		AECF136915D1439B003AAB9C /* AnyArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyArgument.h; sourceTree = "<group>"; };
 		AED10EBA18F46C0E00950904 /* FooSuperclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooSuperclass.h; sourceTree = "<group>"; };
 		AED10EBB18F46C0E00950904 /* FooSuperclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooSuperclass.m; sourceTree = "<group>"; };
-		AED23E69173D5545003D7A41 /* BeCloseTo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeCloseTo.mm; sourceTree = "<group>"; };
 		AED7FC0B19BE2A6000595D92 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarNiceFakeSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarOrdinaryFakeSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1355,7 +1357,6 @@
 			isa = PBXGroup;
 			children = (
 				AE167EF115B216DA005960B9 /* RaiseException.mm */,
-				AED23E69173D5545003D7A41 /* BeCloseTo.mm */,
 				CA17998F17F89C9700C38060 /* RespondTo.mm */,
 				5898AADDDCB0B204C88D1199 /* ConformTo.mm */,
 			);
@@ -1370,6 +1371,7 @@
 				AEF32FF3145A2E91002F93BB /* CompareEqual.h */,
 				AEF32FF7145A2EDF002F93BB /* CompareGreaterThan.h */,
 				AEFF375718FC452E002DA993 /* ComparatorsContainerConvenience.h */,
+				AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */,
 			);
 			path = Comparators;
 			sourceTree = "<group>";
@@ -1864,6 +1866,7 @@
 				AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */,
 				AE18A7FB13F4601400C8872C /* Contain.h in Headers */,
 				AE9AA68915AC729800617E1A /* CedarDouble.h in Headers */,
+				AE0F354E19E87D6F00B9F116 /* CompareCloseTo.h in Headers */,
 				AE0721E3187518FD0031CC42 /* Exist.h in Headers */,
 				AE34724B19C37ECF005CA6F1 /* CDRXCTestCase.h in Headers */,
 				AE74907415B493B5008EA127 /* CDRFake.h in Headers */,
@@ -2396,6 +2399,7 @@
 			files = (
 				96A07F0B13F276B10021974D /* FocusedSpec.m in Sources */,
 				96A07F0F13F27F2F0021974D /* main.m in Sources */,
+				AE0F355019E89BC400B9F116 /* SimpleIncrementer.m in Sources */,
 				96A07F1113F283E40021974D /* FocusedSpec2.m in Sources */,
 				AEE0665717315C20003CA143 /* CedarNiceFakeSharedExamples.mm in Sources */,
 				AEE0665A17315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
@@ -2528,7 +2532,6 @@
 				969B6F84160C61E000C7C792 /* CDRSymbolicator.m in Sources */,
 				E31179D5161FD937007D3CDE /* CDRSlowTestStatistics.m in Sources */,
 				AE7F1708172730B000E1146D /* NSInvocation+Cedar.m in Sources */,
-				AED23E6C173D5545003D7A41 /* BeCloseTo.mm in Sources */,
 				AE02021917452007009A7915 /* StringifiersBase.mm in Sources */,
 				AEE8DBD7175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */,
 				CA17999017F89C9700C38060 /* RespondTo.mm in Sources */,
@@ -2648,7 +2651,6 @@
 				AE7F170B172730B000E1146D /* NSInvocation+Cedar.m in Sources */,
 				AEA8962C19D0C242007D5C08 /* CDROTestRunner.m in Sources */,
 				34ADD2E11921F18100B057AC /* AnyInstanceOfClassArgument.mm in Sources */,
-				AED23E6D173D5545003D7A41 /* BeCloseTo.mm in Sources */,
 				AE02021A17452007009A7915 /* StringifiersBase.mm in Sources */,
 				AEE8DBD8175FFCF3008AF18A /* CDRSpyInfo.mm in Sources */,
 				CA17999117F89C9700C38060 /* RespondTo.mm in Sources */,
