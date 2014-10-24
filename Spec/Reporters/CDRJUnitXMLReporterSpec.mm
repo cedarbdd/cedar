@@ -33,6 +33,13 @@ using namespace Cedar::Matchers;
 @synthesize xmlDocument = xmlDocument_;
 @synthesize xmlRootElement = xmlRootElement_;
 
+- (instancetype)initWithCedarVersion:(NSString *)cedarVersionString {
+    if (self = [super initWithCedarVersion:cedarVersionString]) {
+
+    }
+    return self;
+}
+
 - (void)dealloc {
     self.xml = nil;
     self.xmlRootElement = nil;
@@ -82,9 +89,10 @@ SPEC_BEGIN(CDRJUnitXMLReporterSpec)
 
 describe(@"runDidComplete", ^{
     __block TestCDRJUnitXMLReporter *reporter;
+    NSString *cedarVersionString = @"0.1.2 (a71e8f)";
 
     beforeEach(^{
-        reporter = [[[TestCDRJUnitXMLReporter alloc] init] autorelease];
+        reporter = [[[TestCDRJUnitXMLReporter alloc] initWithCedarVersion:cedarVersionString] autorelease];
     });
 
     context(@"when no specs are run", ^{
