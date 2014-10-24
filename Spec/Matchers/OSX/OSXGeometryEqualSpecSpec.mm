@@ -1,3 +1,4 @@
+#import <CoreGraphics/CoreGraphics.h>
 #import "Cedar.h"
 
 extern "C" {

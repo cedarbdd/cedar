@@ -1,5 +1,3 @@
-#import <CoreGraphics/CoreGraphics.h>
-
 #import "ComparatorsBase.h"
 #import "OSXGeometryStringifiers.h"
 
