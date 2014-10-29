@@ -18,6 +18,11 @@ void afterEach(CDRSpecBlock block) {
     [CDR_currentSpec.currentGroup addAfter:block];
 }
 
+void invariant(NSString *text, CDRSpecBlock block) {
+    NSString * invName = [NSString stringWithFormat:@"%@ (invariant in %@)", text, CDR_currentSpec.rootGroup];
+    [CDR_currentSpec.currentGroup addInvariant:[CDRExample exampleWithText:invName andBlock:block]];
+}
+
 #define with_stack_address(b) \
     ((b.stackAddress = CDRCallerStackAddress()), b)
 
