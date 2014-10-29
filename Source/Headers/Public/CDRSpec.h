@@ -18,6 +18,7 @@ extern "C" {
 #endif
 void beforeEach(CDRSpecBlock);
 void afterEach(CDRSpecBlock);
+void invariant(NSString *, CDRSpecBlock);
 
 CDRExampleGroup * describe(NSString *, __nullable CDRSpecBlock);
 extern CDRExampleGroup* __nonnull (*__nonnull context)(NSString *, __nullable CDRSpecBlock);

@@ -198,6 +198,46 @@ describe(@"CDRExampleGroup", ^{
             blockInvocationCount should equal(3);
         });
     });
+    
+    describe(@"invariant", ^{
+        __block NSInteger blockInvocationCount;
+        
+        beforeEach(^{
+            CDRSpecBlock invariantBlock = ^{ ++blockInvocationCount; };
+            [group addInvariant:[CDRExample exampleWithText:@"inv" andBlock:invariantBlock]];
+        });
+        
+        describe(@"for a single block", ^{
+            beforeEach(^{
+                blockInvocationCount = 0;
+                [group add:errorExample];
+                [group add:failingExample];
+                [group add:passingExample];
+                [group runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should be called once, regardless of failures or errors", ^{
+                blockInvocationCount should equal(1);
+            });
+        });
+        
+        describe(@"for nested block", ^{
+            beforeEach(^{
+                blockInvocationCount = 0;
+                CDRExampleGroup * innerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                [innerGroup add:errorExample];
+                [innerGroup add:failingExample];
+                [group add:passingExample];
+                [group add:innerGroup];
+                
+                [group runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should be called twice, once as it pases through each block", ^{
+                blockInvocationCount should equal(2);
+            });
+        });
+    });
 
     describe(@"state", ^{
         describe(@"for a group containing no examples", ^{

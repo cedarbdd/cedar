@@ -74,6 +74,9 @@
     [blockCopy release];
 }
 
+- (void)addInvariant:(CDRExampleBase *)inv {
+}
+
 #pragma mark CDRExampleBase
 - (CDRExampleState)state {
     if (0 == [examples_ count]) {

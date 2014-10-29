@@ -25,6 +25,10 @@ describe(@"Spec", ^{
     afterEach(^{
         //    NSLog(@"=====================> I should run after all specs.");
     });
+    
+    invariant(@"an invariant run in multiple places", ^{
+        //    NSLog(@"=====================> Invariant was run here.");
+    });
 
     describe(@"a nested spec", ^{
         beforeEach(^{
@@ -41,6 +45,10 @@ describe(@"Spec", ^{
 
         it(@"should also also run", ^{
             //      NSLog(@"=====================> Another nested spec");
+        });
+        
+        it(@"should run the invariant below here", ^{
+            //    NSLog(@"vvvvvvvvvvvvvvvvvvvvvv Invariant below");
         });
     });
 
@@ -60,10 +68,28 @@ describe(@"Spec", ^{
         it(@"should also also run", ^{
           //      NSLog(@"=====================> Another nested spec");
         });
+        
+        context(@"a doubly nested spec", ^{
+            it(@"should also run", ^{
+                //      NSLog(@"=====================> Nested spec");
+            });
+            
+            it(@"should run the invariant below here", ^{
+                //    NSLog(@"vvvvvvvvvvvvvvvvvvvvvv Invariant below");
+            });
+        });
+        
+        it(@"should run the invariant below here", ^{
+            //    NSLog(@"vvvvvvvvvvvvvvvvvvvvvv Invariant below");
+        });
     });
 
     it(@"should run", ^{
         //    NSLog(@"=====================> Spec");
+    });
+    
+    it(@"should run the invariant below here", ^{
+        //    NSLog(@"vvvvvvvvvvvvvvvvvvvvvv Invariant below");
     });
 
     it(@"should be pending", PENDING);
@@ -220,6 +246,55 @@ describe(@"a describe block that tries to include a shared example group that do
         return;
     }
     [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Should have thrown an exception" userInfo:nil];
+});
+
+describe(@"an invariant", ^{
+    __block NSInteger x;
+    __block NSInteger y;
+    __block BOOL ran;
+
+    beforeEach(^{
+        x = 0;
+        y = 0;
+        ran = NO;
+    });
+    
+    invariant(@"invariant equates the two variables", ^{
+        expect(x).to(equal(y));
+        ran = YES;
+    });
+    
+    context(@"in a context block", ^{
+        beforeEach(^{
+            x = 5;
+            y = 5;
+        });
+        
+        context(@"in a nested context block", ^{
+            beforeEach(^{
+                x = -2;
+                y = -2;
+            });
+            
+            afterEach(^{
+                it(@"should run the invariant", ^{
+                    expect(ran).to(be_truthy);
+                });
+            });
+        });
+        
+        afterEach(^{
+            it(@"should run the invariant", ^{
+                expect(ran).to(be_truthy);
+            });
+        });
+    });
+    
+    afterEach(^{
+        it(@"should run the invariant", ^{
+            expect(ran).to(be_truthy);
+        });
+    });
 });
 
 SPEC_END
