@@ -111,6 +111,67 @@ describe(@"CDRExampleGroup", ^{
                 expect(hasChildren).to(be_truthy());
             });
         });
+        
+        describe(@"for a group with an invariant", ^{
+            beforeEach(^{
+                [group addInvariant:incompleteExample];
+                NSUInteger count = group.examples.count;
+                expect(count).to_not(equal(0));
+            });
+            
+            it(@"should return true", ^{
+                BOOL hasChildren = group.hasChildren;
+                expect(hasChildren).to(be_truthy());
+            });
+            
+            describe(@"and a nested group", ^{
+                __block CDRExampleGroup *innerGroup;
+                
+                beforeEach(^{
+                    innerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                    [group add:innerGroup];
+                });
+                
+                it(@"should return true for the inner group", ^{
+                    BOOL hasChildren = innerGroup.hasChildren;
+                    expect(hasChildren).to(be_truthy());
+                });
+            });
+        });
+        
+        describe(@"for a group with a nested group", ^{
+            __block CDRExampleGroup *innerGroup;
+            
+            beforeEach(^{
+                innerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                [group add:innerGroup];
+                NSUInteger count = group.examples.count;
+                expect(count).to_not(equal(0));
+            });
+            
+            it(@"should return true", ^{
+                BOOL hasChildren = group.hasChildren;
+                expect(hasChildren).to(be_truthy());
+            });
+            
+            it(@"should return false for the inner group", ^{
+                BOOL hasChildren = innerGroup.hasChildren;
+                expect(hasChildren).to(be_falsy());
+            });
+            
+            describe(@"and an invariant", ^{
+                __block CDRExampleGroup *innerGroup;
+                
+                beforeEach(^{
+                    [group addInvariant:incompleteExample];
+                });
+                
+                it(@"should return true for the inner group", ^{
+                    BOOL hasChildren = innerGroup.hasChildren;
+                    expect(hasChildren).to(be_truthy());
+                });
+            });
+        });
     });
 
     describe(@"isFocused", ^{
