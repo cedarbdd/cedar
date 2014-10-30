@@ -31,7 +31,7 @@ const CDRSpecBlock PENDING = nil;
 }
 
 - (id)copy {
-    return [[[CDRExample alloc] initWithText:text_ andBlock:block_] autorelease];
+    return [[CDRExample alloc] initWithText:text_ andBlock:block_];
 }
 
 #pragma mark CDRExampleBase
