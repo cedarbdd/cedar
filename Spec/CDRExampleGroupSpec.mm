@@ -296,20 +296,22 @@ describe(@"CDRExampleGroup", ^{
             });
         });
         
-        describe(@"for nested block", ^{
+        describe(@"for nested blocks", ^{
             beforeEach(^{
                 blockInvocationCount = 0;
+                CDRExampleGroup * innerInnerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                [innerInnerGroup add:errorExample];
+                [innerInnerGroup add:failingExample];
                 CDRExampleGroup * innerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
-                [innerGroup add:errorExample];
-                [innerGroup add:failingExample];
+                [innerGroup add:innerInnerGroup];
                 [group add:passingExample];
                 [group add:innerGroup];
                 
                 [group runWithDispatcher:dispatcher];
             });
             
-            it(@"should be called twice, once as it pases through each block", ^{
-                blockInvocationCount should equal(2);
+            it(@"should be called three times, once as it pases through each block", ^{
+                blockInvocationCount should equal(3);
             });
         });
     });
