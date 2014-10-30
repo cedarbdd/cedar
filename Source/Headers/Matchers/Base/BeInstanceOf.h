@@ -24,6 +24,9 @@ namespace Cedar { namespace Matchers { namespace Private {
 
         BeInstanceOf & or_any_subclass();
 
+        template<typename U>
+        NSString * failure_message_for(const U &) const;
+
     protected:
         virtual NSString * failure_message_end() const;
 
@@ -40,6 +43,17 @@ namespace Cedar { namespace Matchers { namespace Private {
     inline BeInstanceOf & BeInstanceOf::or_any_subclass() {
         includeSubclasses_ = true;
         return *this;
+    }
+
+    template<typename U>
+    NSString * BeInstanceOf::failure_message_for(const U & value) const {
+        NSString *failureMessage = Base<BeInstanceOfMessageBuilder>::failure_message_for(value);
+
+        if ([NSStringFromClass(expectedClass_) isEqualToString:NSStringFromClass([value class])]) {
+            failureMessage = [failureMessage stringByAppendingFormat:@". %@", @"Did you accidentally add the class to your specs target also?"];
+        }
+
+        return failureMessage;
     }
 
     inline /*virtual*/ NSString * BeInstanceOf::failure_message_end() const {
