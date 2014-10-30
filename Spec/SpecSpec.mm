@@ -270,21 +270,21 @@ describe(@"an invariant", ^{
             
             afterEach(^{
                 it(@"should run the invariant", ^{
-                    expect(ran).to(be_truthy);
+                    expect(ran).to(be_truthy());
                 });
             });
         });
         
         afterEach(^{
             it(@"should run the invariant", ^{
-                expect(ran).to(be_truthy);
+                expect(ran).to(be_truthy());
             });
         });
     });
     
     afterEach(^{
         it(@"should run the invariant", ^{
-            expect(ran).to(be_truthy);
+            expect(ran).to(be_truthy());
         });
     });
 });
@@ -301,18 +301,18 @@ describe(@"a failing invariant", ^{
     invariant(@"invariant tries to do the impossible", ^{
         expectFailure(^{
             tried = YES;
-            expect(true).to(be_falsy);
+            expect(true).to(be_falsy());
             ran = YES;
         });
     });
     
     afterEach(^{
         it(@"should run the invariant", ^{
-            expect(tried).to(be_truthy);
+            expect(tried).to(be_truthy());
         });
         
         it(@"should not complete running the invariant", ^{
-            expect(ran).to(be_falsy);
+            expect(ran).to(be_falsy());
         });
     });
 });
