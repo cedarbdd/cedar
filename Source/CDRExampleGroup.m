@@ -1,5 +1,6 @@
 #import "CDRExampleGroup.h"
 #import "CDRReportDispatcher.h"
+#import "CDRExample.h"
 
 @interface CDRExampleGroup (Private)
 - (void)startObservingExamples;
@@ -24,6 +25,7 @@
         beforeBlocks_ = [[NSMutableArray alloc] init];
         examples_ = [[NSMutableArray alloc] init];
         afterBlocks_ = [[NSMutableArray alloc] init];
+        invariants_ = [[NSMutableArray alloc] init];
         isRoot_ = isRoot;
     }
     return self;
@@ -33,6 +35,7 @@
     [afterBlocks_ release];
     [examples_ release];
     [beforeBlocks_ release];
+    [invariants_ release];
     self.subjectActionBlock = nil;
     [super dealloc];
 }
@@ -60,6 +63,12 @@
 - (void)add:(CDRExampleBase *)example {
     example.parent = self;
     [examples_ addObject:example];
+    
+    if ([example isKindOfClass:[CDRExampleGroup class]]) {
+        for (id inv in invariants_) {
+            [(CDRExampleGroup*)example addInvariant:[inv copy]];
+        }
+    }
 }
 
 - (void)addBefore:(CDRSpecBlock)block {
@@ -75,6 +84,16 @@
 }
 
 - (void)addInvariant:(CDRExampleBase *)inv {
+    for (id example in examples_) {
+        if ([example isKindOfClass:[CDRExampleGroup class]]) {
+            [example addInvariant:[inv copy]];
+        }
+    }
+    
+    CDRExampleBase * exampleInstance = [inv copy];
+    exampleInstance.parent = self;
+    [examples_ addObject: exampleInstance];
+    [invariants_ addObject: [inv copy]];
 }
 
 #pragma mark CDRExampleBase
@@ -124,6 +143,7 @@
 
     [beforeBlocks_ release]; beforeBlocks_ = nil;
     [afterBlocks_ release]; afterBlocks_ = nil;
+    [invariants_ release]; invariants_ = nil;
     self.subjectActionBlock = nil;
 }
 
