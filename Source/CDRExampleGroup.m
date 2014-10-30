@@ -1,6 +1,5 @@
 #import "CDRExampleGroup.h"
 #import "CDRReportDispatcher.h"
-#import "CDRExample.h"
 
 @interface CDRExampleGroup (Private)
 - (void)startObservingExamples;
@@ -63,12 +62,6 @@
 - (void)add:(CDRExampleBase *)example {
     example.parent = self;
     [examples_ addObject:example];
-    
-    if ([example isKindOfClass:[CDRExampleGroup class]]) {
-        for (id inv in invariants_) {
-            [(CDRExampleGroup*)example addInvariant:[inv copy]];
-        }
-    }
 }
 
 - (void)addBefore:(CDRSpecBlock)block {
@@ -84,16 +77,10 @@
 }
 
 - (void)addInvariant:(CDRExampleBase *)inv {
-    for (id example in examples_) {
-        if ([example isKindOfClass:[CDRExampleGroup class]]) {
-            [example addInvariant:[inv copy]];
-        }
-    }
-    
-    CDRExampleBase * exampleInstance = [inv copy];
-    exampleInstance.parent = self;
-    [examples_ addObject: exampleInstance];
-    [invariants_ addObject: [inv copy]];
+    CDRExampleBase * invCopy = [inv copy];
+    invCopy.parent = self;
+    [invariants_ addObject: invCopy];
+    [invCopy release];
 }
 
 #pragma mark CDRExampleBase
@@ -118,7 +105,10 @@
     for (CDRExampleBase *example in examples_) {
         aggregateProgress += [example progress];
     }
-    return aggregateProgress / [examples_ count];
+    for (CDRExampleBase *example in invariants_) {
+        aggregateProgress += [example progress];
+    }
+    return aggregateProgress / ([examples_ count] + [invariants_ count]);
 }
 
 
@@ -129,12 +119,17 @@
                                userInfo:nil] raise];
     }
 
+    [self collectInvariants];
+    
     [dispatcher runWillStartExampleGroup:self];
     [startDate_ release];
     startDate_ = [[NSDate alloc] init];
 
     [self startObservingExamples];
     [examples_ makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:dispatcher];
+    if ([examples_ count] > 0) {
+        [invariants_ makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:dispatcher];
+    }
     [self stopObservingExamples];
 
     [endDate_ release];
@@ -196,12 +191,29 @@
     for (id example in examples_) {
         [example addObserver:self forKeyPath:@"state" options:0 context:NULL];
     }
+    for (id example in invariants_) {
+        [example addObserver:self forKeyPath:@"state" options:0 context:NULL];
+    }
 }
 
 - (void)stopObservingExamples {
     for (id example in examples_) {
         [example removeObserver:self forKeyPath:@"state"];
     }
+    for (id example in invariants_) {
+        [example removeObserver:self forKeyPath:@"state"];
+    }
+}
+
+- (void)collectInvariants {
+    //Because of recursive call order for runWithDispatcher: all grandparent invariants have been propagated down to parent by the time [self collectInvariants] is called
+    //So no recursive call is necessary
+    if ([self.parent isKindOfClass:[CDRExampleGroup class]]) {
+        for (id inv in ((CDRExampleGroup*)self.parent)->invariants_) {
+            [self addInvariant: ((CDRExampleBase*)inv)];
+        }
+    }
+    
 }
 
 @end

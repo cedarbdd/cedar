@@ -128,12 +128,12 @@ describe(@"CDRExampleGroup", ^{
             beforeEach(^{
                 [group addInvariant:incompleteExample];
                 NSUInteger count = group.examples.count;
-                expect(count).to_not(equal(0));
+                expect(count).to(equal(0));
             });
             
-            it(@"should return true", ^{
+            it(@"should return false", ^{
                 BOOL hasChildren = group.hasChildren;
-                expect(hasChildren).to(be_truthy());
+                expect(hasChildren).to(be_falsy());
             });
             
             describe(@"and a nested group", ^{
@@ -144,9 +144,14 @@ describe(@"CDRExampleGroup", ^{
                     [group add:innerGroup];
                 });
                 
-                it(@"should return true for the inner group", ^{
-                    BOOL hasChildren = innerGroup.hasChildren;
+                it(@"should return true for the group", ^{
+                    BOOL hasChildren = group.hasChildren;
                     expect(hasChildren).to(be_truthy());
+                });
+                
+                it(@"should return false for the inner group", ^{
+                    BOOL hasChildren = innerGroup.hasChildren;
+                    expect(hasChildren).to(be_falsy());
                 });
             });
         });
@@ -172,15 +177,13 @@ describe(@"CDRExampleGroup", ^{
             });
             
             describe(@"and an invariant", ^{
-                __block CDRExampleGroup *innerGroup;
-                
                 beforeEach(^{
                     [group addInvariant:incompleteExample];
                 });
                 
-                it(@"should return true for the inner group", ^{
+                it(@"should return false for the inner group", ^{
                     BOOL hasChildren = innerGroup.hasChildren;
-                    expect(hasChildren).to(be_truthy());
+                    expect(hasChildren).to(be_falsy());
                 });
             });
         });
@@ -291,6 +294,17 @@ describe(@"CDRExampleGroup", ^{
             
             it(@"should be called once, regardless of failures or errors", ^{
                 blockInvocationCount should equal(1);
+            });
+        });
+        
+        describe(@"for a pending block", ^{
+            beforeEach(^{
+                blockInvocationCount = 0;
+                [group runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should not be called", ^{
+                blockInvocationCount should equal(0);
             });
         });
         
@@ -661,6 +675,19 @@ describe(@"CDRExampleGroup", ^{
             it(@"should be the mean of the progress of each child", ^{
                 float progress = group.progress;
                 expect(progress).to(be_close_to(2.0 / 3.0));
+            });
+        });
+        
+        describe(@"when the group contains an invariant", ^{
+            beforeEach(^{
+                [group add:passingExample];
+                [group addInvariant:incompleteExample];
+                [passingExample runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should count the invariant like a regular example", ^{
+                float progress = group.progress;
+                expect(progress).to(be_close_to(1.0 / 2.0));
             });
         });
     });

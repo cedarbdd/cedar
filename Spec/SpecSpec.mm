@@ -268,6 +268,8 @@ describe(@"an invariant", ^{
                 y = -2;
             });
             
+            it(@"force the invariant", ^{expect(true).to(be_truthy());});
+            
             afterEach(^{
                 it(@"should run the invariant", ^{
                     expect(ran).to(be_truthy());
@@ -281,6 +283,8 @@ describe(@"an invariant", ^{
             });
         });
     });
+    
+    context(@"in a pending context block should be pending", ^{});
     
     afterEach(^{
         it(@"should run the invariant", ^{
@@ -305,6 +309,8 @@ describe(@"a failing invariant", ^{
             ran = YES;
         });
     });
+    
+    it(@"force the invariant", ^{expect(true).to(be_truthy());});
     
     afterEach(^{
         it(@"should run the invariant", ^{
