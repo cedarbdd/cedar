@@ -289,6 +289,34 @@ describe(@"an invariant", ^{
     });
 });
 
+describe(@"a failing invariant", ^{
+    __block BOOL tried;
+    __block BOOL ran;
+
+    beforeEach(^{
+        tried = NO;
+        ran = NO;
+    });
+    
+    invariant(@"invariant tries to do the impossible", ^{
+        expectFailure(^{
+            tried = YES;
+            expect(true).to(be_falsy);
+            ran = YES;
+        });
+    });
+    
+    afterEach(^{
+        it(@"should run the invariant", ^{
+            expect(tried).to(be_truthy);
+        });
+        
+        it(@"should not complete running the invariant", ^{
+            expect(ran).to(be_falsy);
+        });
+    });
+});
+
 SPEC_END
 
 
