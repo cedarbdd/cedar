@@ -27,6 +27,11 @@ describe(@"CDRExampleGroup", ^{
         errorExample = [[[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }] autorelease];
         nonFocusedExample = [[[CDRExample alloc] initWithText:@"I should not be focused" andBlock:^{}] autorelease];
     });
+    
+    invariant(@"progress between 0 and 1", ^{
+        group.progress should be_greater_than_or_equal_to(0);
+        group.progress should be_less_than_or_equal_to(1);
+    });
 
     describe(@"runWithDispatcher:", ^{
         beforeEach(^{
