@@ -387,7 +387,7 @@ static id CDRCreateXCTestSuite() {
         objc_registerClassPair(testSuiteSubclass);
     }
 
-    id testSuite = [[(id)testSuiteSubclass alloc] initWithName:@"Cedar"];
+    id testSuite = [[[(id)testSuiteSubclass alloc] initWithName:@"Cedar"] autorelease];
     CDRDefineSharedExampleGroups();
     CDRDefineGlobalBeforeAndAfterEachBlocks();
 
