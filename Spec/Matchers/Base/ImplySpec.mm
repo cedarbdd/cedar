@@ -17,34 +17,34 @@ describe(@"implies matcher", ^{
         describe(@"which evaluates to true", ^{
             describe(@"positive match", ^{
                 it(@"should pass", ^{
-                    expect(true).to(imply(true));
+                    expect(YES).to(imply(YES));
                 });
                 
                 it(@"should pass", ^{
-                    expect(false).to(imply(true));
+                    expect(NO).to(imply(YES));
                 });
                 
                 it(@"should pass", ^{
-                    expect(false).to(imply(false));
+                    expect(NO).to(imply(NO));
                 });
             });
             
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <YES> to not imply <YES>", ^{
-                        expect(true).to_not(imply(true));
+                        expect(YES).to_not(imply(YES));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <NO> to not imply <YES>", ^{
-                        expect(false).to_not(imply(true));
+                        expect(NO).to_not(imply(YES));
                     });
                 });
 
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <NO> to not imply <NO>", ^{
-                        expect(false).to_not(imply(false));
+                        expect(NO).to_not(imply(NO));
                     });
                 });
             });
@@ -54,14 +54,14 @@ describe(@"implies matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <YES> to imply <NO>", ^{
-                        expect(true).to(imply(false));
+                        expect(YES).to(imply(NO));
                     });
                 });
             });
             
             describe(@"negative match", ^{
                 it(@"should should pass", ^{
-                    expect(true).to_not(imply(false));
+                    expect(YES).to_not(imply(NO));
                 });
             });
         });
@@ -75,11 +75,11 @@ describe(@"implies matcher", ^{
                 });
                 
                 it(@"should pass", ^{
-                    expect(nil).to(imply(@"wurble"));
+                    expect((id)nil).to(imply(@"wurble"));
                 });
                 
                 it(@"should pass", ^{
-                    expect(nil).to(imply(nil));
+                    expect((id)nil).to(imply((id)nil));
                 });
             });
             
@@ -91,14 +91,14 @@ describe(@"implies matcher", ^{
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <nil> to not imply <wurble>", ^{
-                        expect(nil).to_not(imply(@"wurble"));
+                    expectFailureWithMessage(@"Expected <(null)> to not imply <wurble>", ^{
+                        expect((id)nil).to_not(imply(@"wurble"));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <nil> to not imply <nil>", ^{
-                        expect(nil).to_not(imply(nil));
+                    expectFailureWithMessage(@"Expected <(null)> to not imply <(null)>", ^{
+                        expect((id)nil).to_not(imply((id)nil));
                     });
                 });
             });
@@ -107,15 +107,15 @@ describe(@"implies matcher", ^{
         describe(@"which evaluates to false", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <wurble> to imply <nil>", ^{
-                        expect(@"wurble").to(imply(nil));
+                    expectFailureWithMessage(@"Expected <wurble> to imply <(null)>", ^{
+                        expect(@"wurble").to(imply((id)nil));
                     });
                 });
             });
             
             describe(@"negative match", ^{
                 it(@"should should pass", ^{
-                    expect(@"wurble").to_not(imply(nil));
+                    expect(@"wurble").to_not(imply((id)nil));
                 });
             });
         });
@@ -125,64 +125,64 @@ describe(@"implies matcher", ^{
         describe(@"which evaluates to true", ^{
             describe(@"positive match", ^{
                 it(@"should pass", ^{
-                    expect(@"wurble").to(imply(true));
+                    expect(@"wurble").to(imply(YES));
                 });
                 
                 it(@"should pass", ^{
-                    expect(nil).to(imply(true));
+                    expect((id)nil).to(imply(YES));
                 });
                 
                 it(@"should pass", ^{
-                    expect(nil).to(imply(false));
+                    expect((id)nil).to(imply(NO));
                 });
                 
                 it(@"should pass", ^{
-                    expect(true).to(imply(@"wurble"));
+                    expect(YES).to(imply(@"wurble"));
                 });
                 
                 it(@"should pass", ^{
-                    expect(false).to(imply(@"wurble"));
+                    expect(NO).to(imply(@"wurble"));
                 });
                 
                 it(@"should pass", ^{
-                    expect(false).to(imply(nil));
+                    expect(NO).to(imply((id)nil));
                 });
             });
             
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <wurble> to not imply <YES>", ^{
-                        expect(@"wurble").to_not(imply(true));
+                        expect(@"wurble").to_not(imply(YES));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <nil> to not imply <YES>", ^{
-                        expect(nil).to_not(imply(true));
+                    expectFailureWithMessage(@"Expected <(null)> to not imply <YES>", ^{
+                        expect((id)nil).to_not(imply(YES));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <nil> to not imply <NO>", ^{
-                        expect(nil).to_not(imply(false));
+                    expectFailureWithMessage(@"Expected <(null)> to not imply <NO>", ^{
+                        expect((id)nil).to_not(imply(NO));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <YES> to not imply <wurble>", ^{
-                        expect(true).to_not(imply(@"wurble"));
+                        expect(YES).to_not(imply(@"wurble"));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <NO> to not imply <wurble>", ^{
-                        expect(false).to_not(imply(@"wurble"));
+                        expect(NO).to_not(imply(@"wurble"));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <NO> to not imply <nil>", ^{
-                        expect(false).to_not(imply(nil));
+                    expectFailureWithMessage(@"Expected <NO> to not imply <(null)>", ^{
+                        expect(NO).to_not(imply((id)nil));
                     });
                 });
             });
@@ -192,24 +192,24 @@ describe(@"implies matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <wurble> to imply <NO>", ^{
-                        expect(@"wurble").to(imply(false));
+                        expect(@"wurble").to(imply(NO));
                     });
                 });
                 
                 it(@"should fail with a sensible failure message", ^{
-                    expectFailureWithMessage(@"Expected <YES> to imply <nil>", ^{
-                        expect(true).to(imply(nil));
+                    expectFailureWithMessage(@"Expected <YES> to imply <(null)>", ^{
+                        expect(YES).to(imply((id)nil));
                     });
                 });
             });
             
             describe(@"negative match", ^{
                 it(@"should should pass", ^{
-                    expect(@"wurble").to_not(imply(false));
+                    expect(@"wurble").to_not(imply(NO));
                 });
                 
                 it(@"should should pass", ^{
-                    expect(true).to_not(imply(nil));
+                    expect(YES).to_not(imply((id)nil));
                 });
             });
         });
