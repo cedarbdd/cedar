@@ -75,6 +75,10 @@
 		2234907F18009DAD001C8E8D /* CDRHooks.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 2234907C18009DA6001C8E8D /* CDRHooks.h */; };
 		228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */; };
 		22B6A22715B7ACF800960ADE /* InvocationMatcher.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
+		268A80C81A036D9000798659 /* Imply.h in Headers */ = {isa = PBXBuildFile; fileRef = 268A80C71A036D8400798659 /* Imply.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		268A80C91A036D9100798659 /* Imply.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 268A80C71A036D8400798659 /* Imply.h */; };
+		26F100531A0378DB00975D83 /* ImplySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F100511A0378CA00975D83 /* ImplySpec.mm */; };
+		26F100541A0378DD00975D83 /* ImplySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F100511A0378CA00975D83 /* ImplySpec.mm */; };
 		3414776E191406E700CBA385 /* ComparatorsContainerConvenience.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFF375718FC452E002DA993 /* ComparatorsContainerConvenience.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3414776F191406FC00CBA385 /* ComparatorsContainerConvenience.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEFF375718FC452E002DA993 /* ComparatorsContainerConvenience.h */; };
 		34147770191408C900CBA385 /* AnInstanceOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 34D1E67A18F7A2E6005161AD /* AnInstanceOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -623,6 +627,7 @@
 				AEEE226211DC2C8300029872 /* CDRSpecHelper.h in Copy headers to framework */,
 				AEC9DEF112C2CC7E0039512D /* CDRColorizedReporter.h in Copy headers to framework */,
 				AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */,
+				268A80C91A036D9100798659 /* Imply.h in Copy headers to framework */,
 				AE18A7B913F450A700C8872C /* BeCloseTo.h in Copy headers to framework */,
 				2234907F18009DAD001C8E8D /* CDRHooks.h in Copy headers to framework */,
 				AE02E814184ECB0F00414F19 /* ShouldSyntax.h in Copy headers to framework */,
@@ -693,6 +698,8 @@
 		1FF449B318A0C04D00AF94B0 /* CDRBufferedDefaultReporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = CDRBufferedDefaultReporter.h; sourceTree = "<group>"; };
 		2234907C18009DA6001C8E8D /* CDRHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRHooks.h; sourceTree = "<group>"; };
 		228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CDRSpyiOSSpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		268A80C71A036D8400798659 /* Imply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Imply.h; sourceTree = "<group>"; };
+		26F100511A0378CA00975D83 /* ImplySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImplySpec.mm; sourceTree = "<group>"; };
 		342F5D0A18F430DB00F38E35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		343FAFE8190FDAEC0085AFEC /* DeallocNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeallocNotifier.h; sourceTree = "<group>"; };
 		343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeallocNotifier.m; sourceTree = "<group>"; };
@@ -1724,6 +1731,7 @@
 				5898AEAF3FE8C683E6F23C1D /* ConformTo.h */,
 				AEF7300113ECC21E00786282 /* Equal.h */,
 				AE0721E2187518FD0031CC42 /* Exist.h */,
+				268A80C71A036D8400798659 /* Imply.h */,
 				AEB45A901496C8D800845D09 /* RaiseException.h */,
 				CA17998C17F89C4B00C38060 /* RespondTo.h */,
 			);
@@ -1748,6 +1756,7 @@
 				5898A53A07BC580786243CD0 /* ConformToSpec.mm */,
 				AEF7301913ECC4AE00786282 /* EqualSpec.mm */,
 				AE0721DF187513870031CC42 /* ExistSpec.mm */,
+				26F100511A0378CA00975D83 /* ImplySpec.mm */,
 				AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */,
 				AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */,
 				CA17999217F8A0EE00C38060 /* RespondToSpec.mm */,
@@ -1886,6 +1895,7 @@
 				AE4A945E1880792E008566F5 /* RejectedMethod.h in Headers */,
 				AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */,
 				AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */,
+				268A80C81A036D9000798659 /* Imply.h in Headers */,
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
 				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
 				34147770191408C900CBA385 /* AnInstanceOf.h in Headers */,
@@ -2582,6 +2592,7 @@
 				AE9AA68015AB748E00617E1A /* CDRClassFakeSpec.mm in Sources */,
 				AE807893183C71950078C608 /* SimpleKeyValueObserver.m in Sources */,
 				AE9AA69715ADB99800617E1A /* CedarDoubleSharedExamples.mm in Sources */,
+				26F100531A0378DB00975D83 /* ImplySpec.mm in Sources */,
 				AE3E8F39184FEEE900633740 /* ObjectWithCollections.m in Sources */,
 				AE74903215B45EBA008EA127 /* CDRProtocolFakeSpec.mm in Sources */,
 				343FAFEA190FDAEC0085AFEC /* DeallocNotifier.m in Sources */,
@@ -2689,6 +2700,7 @@
 				1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */,
 				AEF7302D13ECC4E700786282 /* BeEmptySpec.mm in Sources */,
 				228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */,
+				26F100541A0378DD00975D83 /* ImplySpec.mm in Sources */,
 				44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
 				AED10EBD18F46C0E00950904 /* FooSuperclass.m in Sources */,

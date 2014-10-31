@@ -10,6 +10,7 @@
 #import "BeGTE.h"
 #import "BeLessThan.h"
 #import "BeLTE.h"
+#import "Imply.h"
 #import "RaiseException.h"
 #import "RespondTo.h"
 #import "ConformTo.h"
