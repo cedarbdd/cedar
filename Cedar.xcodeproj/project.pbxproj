@@ -52,6 +52,7 @@
 		1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
 		1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
 		1FB4F28618891F0D00227772 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
+		1FC90AA819FA2AF50082F844 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
 		1FDCD5601821D3BB00B511DB /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FE15C1B1869091900207F0C /* CDRReportDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE15C191869091900207F0C /* CDRReportDispatcher.h */; };
@@ -200,6 +201,8 @@
 		AE0AF58613E9E89D00029396 /* ActualValue.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0AF58413E9E87E00029396 /* ActualValue.h */; };
 		AE0C9D8E19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */; };
 		AE0C9D8F19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */; };
+		AE0F354719E7059D00B9F116 /* OSXGeometryCompareEqual.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0F354619E7059200B9F116 /* OSXGeometryCompareEqual.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE0F354B19E7073B00B9F116 /* OSXGeometryEqualSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0F354A19E7073B00B9F116 /* OSXGeometryEqualSpecSpec.mm */; };
 		AE0F354E19E87D6F00B9F116 /* CompareCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0F354F19E87D6F00B9F116 /* CompareCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */; };
 		AE0F355019E89BC400B9F116 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
@@ -788,6 +791,9 @@
 		AE0AF57913E9C16D00029396 /* MatcherTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatcherTemplate.h; sourceTree = "<group>"; };
 		AE0AF58413E9E87E00029396 /* ActualValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualValue.h; sourceTree = "<group>"; };
 		AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CDRSpec+XCTestSupport.m"; sourceTree = "<group>"; };
+		AE0F354619E7059200B9F116 /* OSXGeometryCompareEqual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXGeometryCompareEqual.h; sourceTree = "<group>"; };
+		AE0F354819E705C700B9F116 /* OSXGeometryStringifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXGeometryStringifiers.h; sourceTree = "<group>"; };
+		AE0F354A19E7073B00B9F116 /* OSXGeometryEqualSpecSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OSXGeometryEqualSpecSpec.mm; sourceTree = "<group>"; };
 		AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareCloseTo.h; sourceTree = "<group>"; };
 		AE167EF115B216DA005960B9 /* RaiseException.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseException.mm; sourceTree = "<group>"; };
 		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
@@ -1054,6 +1060,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FC90AA819FA2AF50082F844 /* CoreGraphics.framework in Frameworks */,
 				AEEE220311DC29AC00029872 /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1315,6 +1322,7 @@
 		AE0AF55D13E9C06900029396 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
+				AE0F354519E7057900B9F116 /* OSX */,
 				AEF72FFA13ECC19200786282 /* Base */,
 				AEF72FF913ECC16400786282 /* Container */,
 				AEF7302E13ECC6EE00786282 /* Stringifiers */,
@@ -1342,6 +1350,23 @@
 				AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */,
 			);
 			path = XCTest;
+			sourceTree = "<group>";
+		};
+		AE0F354519E7057900B9F116 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				AE0F354619E7059200B9F116 /* OSXGeometryCompareEqual.h */,
+				AE0F354819E705C700B9F116 /* OSXGeometryStringifiers.h */,
+			);
+			path = OSX;
+			sourceTree = "<group>";
+		};
+		AE0F354919E7071A00B9F116 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				AE0F354A19E7073B00B9F116 /* OSXGeometryEqualSpecSpec.mm */,
+			);
+			path = OSX;
 			sourceTree = "<group>";
 		};
 		AE167EEC15B210C9005960B9 /* Matchers */ = {
@@ -1433,6 +1458,7 @@
 		AE8C879F1362068A006C9305 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
+				AE0F354919E7071A00B9F116 /* OSX */,
 				AEF7301313ECC4AE00786282 /* Base */,
 				AEF7302913ECC4C100786282 /* Container */,
 				AEC40C52174AC51800474D2D /* UIKit */,
@@ -1861,6 +1887,7 @@
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
+				AE0F354719E7059D00B9F116 /* OSXGeometryCompareEqual.h in Headers */,
 				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
 				AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */,
 				AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */,
@@ -2554,6 +2581,7 @@
 				AEF7301B13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */,
 				34681C3018FE4B68009D38AC /* CDRTypeUtilitiesSpec.mm in Sources */,
 				AE53B68417E7CD8D00D83D5E /* ObjectWithWeakDelegate.m in Sources */,
+				AE0F354B19E7073B00B9F116 /* OSXGeometryEqualSpecSpec.mm in Sources */,
 				AE80788D183C71950078C608 /* ArgumentReleaser.m in Sources */,
 				AE4A945B187F7E52008566F5 /* BeFalsySpec.mm in Sources */,
 				AEF7301D13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */,
