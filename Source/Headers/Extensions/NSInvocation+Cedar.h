@@ -6,4 +6,6 @@
 - (NSInvocation *)invocationWithoutCmdArgument;
 - (void)invokeUsingBlockWithoutSelfArgument:(id)block;
 
+- (NSArray *)arguments;
+
 @end

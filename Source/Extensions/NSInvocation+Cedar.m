@@ -1,6 +1,7 @@
 #import "NSInvocation+Cedar.h"
 #import "NSMethodSignature+Cedar.h"
 #import "CDRBlockHelper.h"
+#import "CDRTypeUtilities.h"
 #import <objc/runtime.h>
 
 static char COPIED_BLOCKS_KEY;
@@ -40,8 +41,8 @@ static char COPIED_BLOCKS_KEY;
     NSInvocation *adjustedInvocation = [NSInvocation invocationWithMethodSignature:adjustedMethodSignature];
 
     NSInteger adjustedArgIndex = 0;
-    for (NSInteger argIndex=0; argIndex<[methodSignature numberOfArguments]; argIndex++) {
-        if (argIndex==1) { continue; }
+    for (NSInteger argIndex = 0; argIndex < [methodSignature numberOfArguments]; argIndex++) {
+        if (argIndex == 1) { continue; }
 
         NSUInteger size;
         NSGetSizeAndAlignment([methodSignature getArgumentTypeAtIndex:argIndex], &size, NULL);
@@ -69,6 +70,22 @@ static char COPIED_BLOCKS_KEY;
         [adjustedInvocation getReturnValue:&returnValueBuffer];
         [self setReturnValue:&returnValueBuffer];
     }
+}
+
+- (NSArray *)arguments {
+    NSMutableArray *args = [NSMutableArray array];
+    NSMethodSignature *methodSignature = [self methodSignature];
+    for (NSInteger argIndex = 2; argIndex < [methodSignature numberOfArguments]; argIndex++) {
+        NSUInteger size;
+        NSGetSizeAndAlignment([methodSignature getArgumentTypeAtIndex:argIndex], &size, NULL);
+        char argBuffer[size];
+        memset(argBuffer, sizeof(argBuffer), sizeof(char));
+        [self getArgument:argBuffer atIndex:argIndex];
+
+        const char *argType = [methodSignature getArgumentTypeAtIndex:argIndex];
+        [args addObject:[CDRTypeUtilities boxedObjectOfBytes:argBuffer ofObjCType:argType]];
+    }
+    return args;
 }
 
 @end

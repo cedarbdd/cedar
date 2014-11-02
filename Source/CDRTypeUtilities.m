@@ -128,4 +128,52 @@ static NSCharacterSet *typeEncodingModifiersCharacterSet;
     return nil;
 }
 
++ (id)boxedObjectOfBytes:(const char *)argBuffer ofObjCType:(const char *)argType {
+#define IS_TYPE(TYPE) (strncmp(argType, @encode(TYPE), sizeof(@encode(TYPE))) == 0)
+#define CONVERT_TYPE(TYPE) ({TYPE i; \
+memcpy(&i, argBuffer, sizeof(TYPE)); \
+i;})
+    if (IS_TYPE(id)) {
+        return (id)*((void **)argBuffer);
+    } else if (IS_TYPE(Class)) {
+        return (id)*((void **)argBuffer);
+    } else if (IS_TYPE(void(^)())) {
+        return (id)*((void **)argBuffer);
+    } else if (IS_TYPE(char *)) {
+        return [NSString stringWithUTF8String:*(char **)argBuffer];
+    } else if (IS_TYPE(const char *)) {
+        return [NSString stringWithUTF8String:*(const char **)argBuffer];
+    } else if (IS_TYPE(SEL)) {
+        return NSStringFromSelector(CONVERT_TYPE(SEL));
+    } else if (IS_TYPE(bool)) {
+        return @(CONVERT_TYPE(bool));
+    } else if (IS_TYPE(char)) {
+        return @(CONVERT_TYPE(char));
+    } else if (IS_TYPE(unsigned char)) {
+        return @(CONVERT_TYPE(unsigned char));
+    } else if (IS_TYPE(short)) {
+        return @(CONVERT_TYPE(short));
+    } else if (IS_TYPE(unsigned short)) {
+        return @(CONVERT_TYPE(unsigned short));
+    } else if (IS_TYPE(int)) {
+        return @(CONVERT_TYPE(int));
+    } else if (IS_TYPE(unsigned int)) {
+        return @(CONVERT_TYPE(unsigned int));
+    } else if (IS_TYPE(long)) {
+        return @(CONVERT_TYPE(long));
+    } else if (IS_TYPE(unsigned long)) {
+        return @(CONVERT_TYPE(unsigned long));
+    } else if (IS_TYPE(unsigned long long)) {
+        return @(CONVERT_TYPE(unsigned long long));
+    } else if (IS_TYPE(double)) {
+        return @(CONVERT_TYPE(double));
+    } else if (IS_TYPE(float)) {
+        return @(CONVERT_TYPE(float));
+    } else {
+        return [NSValue valueWithBytes:argBuffer objCType:argType];
+    }
+#undef RETURN_IF_TYPE
+#undef IS_TYPE
+}
+
 @end
