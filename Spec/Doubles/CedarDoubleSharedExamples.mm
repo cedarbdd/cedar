@@ -132,9 +132,18 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
         context(@"with a method with no arguments", ^{
             context(@"when stubbed twice", ^{
-                it(@"should raise an exception", ^{
+                it(@"should raise an exception with a helpful message", ^{
                     myDouble stub_method("value");
-                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed with arguments ()");
+                    ^{ myDouble stub_method("value"); } should raise_exception.with_reason(@"The method <value> is already stubbed with arguments () - use again() to override");
+                });
+
+                it(@"should allow the method to be stubbed again when again() is called", ^{
+                    myDouble stub_method("value");
+                    myDouble stub_method("value").again();
+                });
+
+                it(@"should blow up when again() is called when not previously stubbed", ^{
+                    ^{ myDouble stub_method("value").again(); } should raise_exception.with_reason(@"The method <value> is not stubbed with arguments () - again() should only be used to override a stubbed method.");
                 });
             });
 
@@ -503,7 +512,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         });
 
                         it(@"should not raise an exception", ^{
-                            stubMethodAgainWithDifferentArugmentsBlock should_not raise_exception();
+                            stubMethodAgainWithDifferentArugmentsBlock should_not raise_exception;
                         });
 
                         context(@"when invoked", ^{
@@ -524,7 +533,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         NSInteger arg1 = 1;
                         it(@"should raise an exception", ^{
                             myDouble stub_method("incrementByInteger:").with(arg1);
-                            ^{ myDouble stub_method("incrementByInteger:").with(arg1); } should raise_exception().with_reason(@"The method <incrementByInteger:> is already stubbed with arguments (<1>)");
+                            ^{ myDouble stub_method("incrementByInteger:").with(arg1); } should raise_exception.with_reason(@"The method <incrementByInteger:> is already stubbed with arguments (<1>) - use again() to override");
                         });
                     });
 
@@ -532,10 +541,18 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         NSNumber *arg1 = @1;
                         NSNumber *arg2 = @2;
                         NSNumber *returnValue1 = @3;
+                        NSNumber *returnValue2 = @4;
 
                         it(@"should raise an exception", ^{
                             myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValue1);
-                            ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(@91); } should raise_exception().with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<1><2>)");
+                            ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(@91); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<1><2>) - use again() to override");
+                        });
+
+                        it(@"should allow re-stubbing with the new return value when again() is called", ^{
+                            myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValue1);
+                            myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).again().and_return(returnValue2);
+
+                            [myDouble methodWithNumber1:arg1 andNumber2:arg2] should equal(returnValue2);
                         });
                     });
                 });
@@ -567,6 +584,14 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                     it(@"should choose the most recent stub if more than one stub matches ", ^{
                         [myDouble methodWithNumber1:@1 andNumber2:@2] should equal(@2);
+                    });
+
+                    it(@"should choose the overridden stub if more than one stub matches", ^{
+                        myDouble stub_method("methodWithNumber1:andNumber2:").with(Arguments::anything, @2).again().and_return(@3);
+                        [myDouble methodWithNumber1:@3 andNumber2:@2] should equal(@3);
+
+                        myDouble stub_method("methodWithNumber1:andNumber2:").with(@1, Arguments::anything).again().and_return(@4);
+                        [myDouble methodWithNumber1:@1 andNumber2:@3] should equal(@4);
                     });
                 });
 
@@ -607,7 +632,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                         context(@"of the same class", ^{
                             it(@"should raise an exception", ^{
-                                ^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([BarSubclass class])).and_return(@"bar2"); } should raise_exception.with_reason(@"The method <methodWithFooSuperclass:> is already stubbed with arguments (<Any instance of BarSubclass>)");
+                                ^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any([BarSubclass class])).and_return(@"bar2"); } should raise_exception.with_reason(@"The method <methodWithFooSuperclass:> is already stubbed with arguments (<Any instance of BarSubclass>) - use again() to override");
                             });
                         });
 
@@ -631,7 +656,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                         context(@"with the same protocol", ^{
                             it(@"should raise an exception", ^{
-                                ^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any(@protocol(BazProtocol))).and_return(@"baz2"); } should raise_exception.with_reason(@"The method <methodWithFooSuperclass:> is already stubbed with arguments (<Any instance conforming to BazProtocol>)");
+                                ^{ myDouble stub_method("methodWithFooSuperclass:").with(Arguments::any(@protocol(BazProtocol))).and_return(@"baz2"); } should raise_exception.with_reason(@"The method <methodWithFooSuperclass:> is already stubbed with arguments (<Any instance conforming to BazProtocol>) - use again() to override");
                             });
                         });
 
@@ -857,7 +882,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                         context(@"and stubbing the method again with anything passed for the same parameter as in the stub", ^{
                             it(@"should raise an exception", ^{
-                                ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg2).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<anything><123>)");
+                                ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg2).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<anything><123>) - use again() to override");
                             });
                         });
 
@@ -881,7 +906,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                         context(@"and stubbing the method again with anything passed for the same parameter as in the stub", ^{
                             it(@"should raise an exception", ^{
-                                ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg2).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<anything><123>)");
+                                ^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(anything).and_with(arg2).and_return(returnValueWithAnythingArg); } should raise_exception.with_reason(@"The method <methodWithNumber1:andNumber2:> is already stubbed with arguments (<anything><123>) - use again() to override");
                             });
                         });
 

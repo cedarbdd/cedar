@@ -8,14 +8,15 @@
 
 namespace Cedar { namespace Doubles {
 
-    StubbedMethod::StubbedMethod(SEL selector) : InvocationMatcher(selector), exception_to_raise_(0), invocation_block_(0), implementation_block_(0) {}
-    StubbedMethod::StubbedMethod(const char * method_name) : InvocationMatcher(sel_registerName(method_name)), exception_to_raise_(0), invocation_block_(0), implementation_block_(0) {}
+    StubbedMethod::StubbedMethod(SEL selector) : InvocationMatcher(selector), exception_to_raise_(0), invocation_block_(0), implementation_block_(0), is_override_(false) {}
+    StubbedMethod::StubbedMethod(const char * method_name) : InvocationMatcher(sel_registerName(method_name)), exception_to_raise_(0), invocation_block_(0), implementation_block_(0), is_override_(false) {}
     StubbedMethod::StubbedMethod(const StubbedMethod &rhs)
     : InvocationMatcher(rhs)
     , return_value_(rhs.return_value_)
     , invocation_block_([rhs.invocation_block_ retain])
     , implementation_block_([rhs.implementation_block_ retain])
-    , exception_to_raise_(rhs.exception_to_raise_) {}
+    , exception_to_raise_(rhs.exception_to_raise_)
+    , is_override_(rhs.is_override_) {}
 
     /*virtual*/ StubbedMethod::~StubbedMethod() {
         [invocation_block_ release];
@@ -57,6 +58,11 @@ namespace Cedar { namespace Doubles {
 
     StubbedMethod & StubbedMethod::and_with(const Argument::shared_ptr_t argument) {
         return with(argument);
+    }
+
+    StubbedMethod & StubbedMethod::again() {
+        this->is_override_ = true;
+        return *this;
     }
 
     StubbedMethod & StubbedMethod::and_raise_exception() {
