@@ -105,6 +105,14 @@ describe(@"Spec", ^{
     it(@"should also be pending", nil);
     xit(@"should also be pending (xit)", ^{});
 
+    describe(@"invariants", ^{
+        it_should_always(@"be pending", PENDING);
+        it_should_always(@"also be pending", nil);
+        xit_should_always(@"also be pending (xit_should_always)", ^{});
+        
+        it(@"should force invariants", ^{});
+    });
+    
     describe(@"described specs should be pending", PENDING);
     describe(@"described specs should also be pending", nil);
     xdescribe(@"xdescribed specs should be pending", ^{});
@@ -319,6 +327,61 @@ describe(@"a failing invariant", ^{
         
         it(@"should not complete running the invariant", ^{
             expect(ran).to(be_falsy());
+        });
+    });
+});
+
+describe(@"an invariant and a subject action block", ^{
+    __block NSInteger x;
+    __block NSInteger y;
+    __block BOOL ran;
+    
+    beforeEach(^{
+        x = 5;
+        y = 0;
+        ran = NO;
+    });
+    
+    invariant(@"invariant equates the two variables", ^{
+        expect(x).to(equal(y));
+        ran = YES;
+    });
+    
+    subjectAction(^{ y = 5; });
+    
+    context(@"in a context block", ^{
+        beforeEach(^{
+            x = 5;
+            y = 0;
+        });
+        
+        context(@"in a nested context block", ^{
+            beforeEach(^{
+                x = 5;
+                y = 0;
+            });
+            
+            it(@"force the invariant", ^{expect(true).to(be_truthy());});
+            
+            afterEach(^{
+                it(@"should run the invariant after the subject action", ^{
+                    expect(ran).to(be_truthy());
+                });
+            });
+        });
+        
+        afterEach(^{
+            it(@"should run the invariant after the subject action", ^{
+                expect(ran).to(be_truthy());
+            });
+        });
+    });
+    
+    context(@"in a pending context block should be pending", ^{});
+    
+    afterEach(^{
+        it(@"should run the invariant after the subject action", ^{
+            expect(ran).to(be_truthy());
         });
     });
 });
