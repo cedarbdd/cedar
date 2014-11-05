@@ -243,14 +243,36 @@ describe(@"CDRExampleGroup", ^{
             });
             
             context(@"and has at least one focused invariant", ^{
+                __block CDRExampleGroup *anotherInnerGroup;
+                __block CDRExampleGroup *innerGroup;
+                
                 beforeEach(^{
-                    [group add:failingExample];
-                    [group addInvariant:passingExample];
                     passingExample.focused = YES;
+                    [group addInvariant:passingExample];
+                    [group add:failingExample];
+
+                    innerGroup = [[CDRExampleGroup alloc] initWithText:@"Inner group"];
+                    [group add:innerGroup];
+                    
+                    anotherInnerGroup = [[CDRExampleGroup alloc] initWithText:@"Another inner group"];
+                    [innerGroup add:anotherInnerGroup];
+                    
+                    [innerGroup release];
+                    [anotherInnerGroup release];
                 });
                 
                 it(@"should return true", ^{
                     expect([group hasFocusedExamples]).to(be_truthy());
+                });
+                
+                it(@"should have a focused inner group", ^{
+                    [group hasFocusedExamples];                    
+                    expect([innerGroup hasFocusedExamples]).to(be_truthy());
+                });
+                
+                it(@"should have a focused inner inner group", ^{
+                    [group hasFocusedExamples];
+                    expect([anotherInnerGroup hasFocusedExamples]).to(be_truthy());
                 });
             });
 

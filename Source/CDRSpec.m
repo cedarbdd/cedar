@@ -19,7 +19,7 @@ void afterEach(CDRSpecBlock block) {
 }
 
 #define with_stack_address(b) \
-((b.stackAddress = CDRCallerStackAddress()), b)
+    ((b.stackAddress = CDRCallerStackAddress()), b)
 
 CDRExample * invariant(NSString *text, CDRSpecBlock block) {
     NSString * invName = [NSString stringWithFormat:@"should always %@", text];

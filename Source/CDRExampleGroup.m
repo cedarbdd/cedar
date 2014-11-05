@@ -145,7 +145,12 @@
 - (BOOL)hasFocusedExamples {
     if (self.isFocused) {
         return YES;
+        
+    } else if ([self hasFocusedInvariant]) {
+        [self forceFocus];
+        return YES;
     }
+
     for (CDRExampleBase *example in examples_) {
         if ([example hasFocusedExamples]) {
             return YES;
@@ -213,7 +218,25 @@
             [self addInvariant: ((CDRExampleBase*)inv)];
         }
     }
-    
+}
+
+- (BOOL)hasFocusedInvariant {
+    for (CDRExampleBase *example in invariants_) {
+        if ([example isFocused]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+//An invariant is focused, so we need to propagate focus *down* the tree
+- (void)forceFocus {
+    self.focused = YES;
+    for (id child in examples_) {
+        if ([child isKindOfClass:[CDRExampleGroup class]]) {
+            [child forceFocus];
+        }
+    }
 }
 
 @end
