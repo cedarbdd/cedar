@@ -18,13 +18,17 @@ void afterEach(CDRSpecBlock block) {
     [CDR_currentSpec.currentGroup addAfter:block];
 }
 
-void invariant(NSString *text, CDRSpecBlock block) {
-    NSString * invName = [NSString stringWithFormat:@"%@ (invariant in %@)", text, CDR_currentSpec.rootGroup];
-    [CDR_currentSpec.currentGroup addInvariant:[CDRExample exampleWithText:invName andBlock:block]];
+#define with_stack_address(b) \
+((b.stackAddress = CDRCallerStackAddress()), b)
+
+CDRExample * invariant(NSString *text, CDRSpecBlock block) {
+    NSString * invName = [NSString stringWithFormat:@"should always %@", text];
+    CDRExample * example = [CDRExample exampleWithText:invName andBlock:block];
+    [CDR_currentSpec.currentGroup addInvariant:example];
+    return with_stack_address(example);
 }
 
-#define with_stack_address(b) \
-    ((b.stackAddress = CDRCallerStackAddress()), b)
+CDRExample* (*it_should_always)(NSString *, CDRSpecBlock) = &invariant;
 
 CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
     CDRExampleGroup *group = nil;
@@ -79,6 +83,14 @@ CDRExample * xit(NSString *text, CDRSpecBlock block) {
     return with_stack_address(example);
 }
 
+CDRExample * xinvariant(NSString *text, CDRSpecBlock block) {
+    NSString * invName = [NSString stringWithFormat:@"should always %@", text];
+    CDRExample *example = [CDRExample exampleWithText:invName andBlock:PENDING];
+    return with_stack_address(example);
+}
+
+CDRExample* (*xit_should_always)(NSString *, CDRSpecBlock) = &xinvariant;
+
 #pragma mark - Focused
 
 CDRExampleGroup * fdescribe(NSString *text, CDRSpecBlock block) {
@@ -94,6 +106,14 @@ CDRExample * fit(NSString *text, CDRSpecBlock block) {
     example.focused = YES;
     return with_stack_address(example);
 }
+
+CDRExample * finvariant(NSString *text, CDRSpecBlock block) {
+    CDRExample *example = invariant(text, block);
+    example.focused = YES;
+    return with_stack_address(example);
+}
+
+CDRExample * (*fit_should_always)(NSString *, CDRSpecBlock) = &finvariant;
 
 void fail(NSString *reason) {
     [[CDRSpecFailure specFailureWithReason:[NSString stringWithFormat:@"Failure: %@", reason]] raise];

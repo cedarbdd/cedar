@@ -229,6 +229,18 @@ describe(@"CDRExampleGroup", ^{
                     expect([group hasFocusedExamples]).to(be_truthy());
                 });
             });
+            
+            context(@"and has at least one focused invariant", ^{
+                beforeEach(^{
+                    [group add:failingExample];
+                    [group addInvariant:passingExample];
+                    passingExample.focused = YES;
+                });
+                
+                it(@"should return true", ^{
+                    expect([group hasFocusedExamples]).to(be_truthy());
+                });
+            });
 
             context(@"and has at least one focused group", ^{
                 beforeEach(^{
