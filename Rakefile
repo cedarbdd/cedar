@@ -162,7 +162,7 @@ class Xcode
     end
   end
 
-  def self.analyze(options = nill)
+  def self.analyze(options = nil)
     raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
     logfile = options.fetch(:logfile)
     args = options[:args] || ""
