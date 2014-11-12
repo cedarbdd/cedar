@@ -443,17 +443,3 @@ NSString *CDRGetTestBundleExtension() {
 
     return extension;
 }
-
-#pragma mark - Deprecated
-
-int runSpecs() {
-    return CDRRunSpecs();
-}
-
-int runAllSpecs() {
-    return CDRRunSpecs();
-}
-
-int runSpecsWithCustomExampleReporters(NSArray *reporters) {
-    return CDRRunSpecsWithCustomExampleReporters(reporters);
-}
