@@ -350,7 +350,7 @@
 		AE9EAAD9178C789800CCF7DA /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
 		AE9EAADA178C789900CCF7DA /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
 		AEA8962C19D0C242007D5C08 /* CDROTestRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */; };
-		AEAA191219DCC5A900194E95 /* NSInvocation+Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEAA191019DCC5A900194E95 /* NSInvocation+Cedar.h */; };
+		AEAA191219DCC5A900194E95 /* NSInvocation+Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEAA191019DCC5A900194E95 /* NSInvocation+Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEAA191419DCC5A900194E95 /* NSMethodSignature+Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEAA191119DCC5A900194E95 /* NSMethodSignature+Cedar.h */; };
 		AEAA191619DCC5B100194E95 /* NSInvocation+Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEAA191019DCC5A900194E95 /* NSInvocation+Cedar.h */; };
 		AEAA191719DCC5B100194E95 /* NSMethodSignature+Cedar.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEAA191119DCC5A900194E95 /* NSMethodSignature+Cedar.h */; };
@@ -492,6 +492,7 @@
 		AEFD168211DCFF3B00F4448A /* CDRExampleBase.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */; };
 		AEFD168D11DCFF8600F4448A /* CDRExampleParent.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */; };
 		AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD17B111DD1E7200F4448A /* CDRSharedExampleGroupPool.m */; };
+		B86B685F1A1326E200F283F7 /* OSXGeometryStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0F354819E705C700B9F116 /* OSXGeometryStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CA17998D17F89C4B00C38060 /* RespondTo.h in Headers */ = {isa = PBXBuildFile; fileRef = CA17998C17F89C4B00C38060 /* RespondTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CA17998E17F89C4B00C38060 /* RespondTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = CA17998C17F89C4B00C38060 /* RespondTo.h */; };
 		CA17999017F89C9700C38060 /* RespondTo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA17998F17F89C9700C38060 /* RespondTo.mm */; };
@@ -1869,6 +1870,7 @@
 				AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */,
 				AEF72F7813EC730700786282 /* CedarComparators.h in Headers */,
 				AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */,
+				AEAA191219DCC5A900194E95 /* NSInvocation+Cedar.h in Headers */,
 				96EA1CB0142C6449001A78E0 /* CDROTestRunner.h in Headers */,
 				AE4E9B9219C8B44700D794CE /* NSInvocation+CDRXExample.h in Headers */,
 				AEF7301113ECC25000786282 /* BeEmpty.h in Headers */,
@@ -1881,9 +1883,9 @@
 				AE4A9458187F7D8F008566F5 /* BeFalsy.h in Headers */,
 				AE18A7CE13F453CC00C8872C /* BeSameInstanceAs.h in Headers */,
 				AEF8FB0719E6000E00DD4FE4 /* CDRVersion.h in Headers */,
+				B86B685F1A1326E200F283F7 /* OSXGeometryStringifiers.h in Headers */,
 				2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */,
 				AE3E8F37184FEEE000633740 /* ObjectWithCollections.h in Headers */,
-				AEAA191219DCC5A900194E95 /* NSInvocation+Cedar.h in Headers */,
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
