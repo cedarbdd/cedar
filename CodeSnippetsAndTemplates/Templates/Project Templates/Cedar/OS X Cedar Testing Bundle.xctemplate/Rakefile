@@ -1,6 +1,6 @@
 require 'pathname'
 
-module CedarTarget___PACKAGENAMEASIDENTIFIER___
+module CedarTarget
   SPECS_TARGET_NAME = "___VARIABLE_testSchemeName___"
   CONFIGURATION = "Release"
 
@@ -69,15 +69,15 @@ end
 
 desc "Clean build directory"
 task :clean____PACKAGENAMEASIDENTIFIER___ do
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("clean")
+  CedarTarget.system_or_exit "rm -rf #{CedarTarget::BUILD_DIR}/*", CedarTarget.output_file("clean")
 end
 
 desc "Build and run ___PACKAGENAMEASIDENTIFIER___ OCUnit logic specs"
 task :___PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
   build_and_test_command = <<END_SHELL_CMD
-      xcodebuild -scheme #{CedarTarget___PACKAGENAMEASIDENTIFIER___::SPECS_TARGET_NAME} -configuration Debug -arch x86_64 clean test SYMROOT='#{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}'
+      xcodebuild -scheme #{CedarTarget::SPECS_TARGET_NAME} -configuration Debug -arch x86_64 clean test SYMROOT='#{CedarTarget::BUILD_DIR}'
 END_SHELL_CMD
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.in_project_dir do
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.run_cmd_and_grep_for_failure build_and_test_command
+  CedarTarget.in_project_dir do
+    CedarTarget.run_cmd_and_grep_for_failure build_and_test_command
   end
 end
