@@ -28,6 +28,7 @@ namespace Cedar { namespace Doubles {
 
         StubbedMethod & with(const Argument::shared_ptr_t argument);
         StubbedMethod & and_with(const Argument::shared_ptr_t argument);
+        StubbedMethod & again();
 
         template<typename T, typename... ArgumentPack>
         StubbedMethod & with(const T &, ArgumentPack... pack);
@@ -42,6 +43,7 @@ namespace Cedar { namespace Doubles {
         StubbedMethod & and_raise_exception(NSObject * exception);
 
         ReturnValue & return_value() const { return *return_value_; };
+        bool is_override() const { return is_override_; };
 
         struct SelCompare {
             bool operator() (const SEL& lhs, const SEL& rhs) const {
@@ -74,6 +76,7 @@ namespace Cedar { namespace Doubles {
         void raise_for_multiple_blocks() const;
     private:
         ReturnValue::shared_ptr_t return_value_;
+        bool is_override_;
         invocation_block_t invocation_block_;
         implementation_block_t implementation_block_;
         NSObject * exception_to_raise_;

@@ -4,8 +4,7 @@
 
 namespace Cedar { namespace Doubles {
 
-    InvocationMatcher::InvocationMatcher(const SEL selector) :
-    expectedSelector_(selector) {
+    InvocationMatcher::InvocationMatcher(const SEL selector) : expectedSelector_(selector) {
     }
 
     void InvocationMatcher::add_argument(const Argument::shared_ptr_t argument) {
