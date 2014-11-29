@@ -2,13 +2,13 @@ language: objective-c
 
 env:
   matrix:
-    - CEDAR_SDK_VERSION="8.0" CEDAR_SDK_RUNTIME_VERSION="7.0.3" TASK="ci"
-    - CEDAR_SDK_VERSION="8.0" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
-    - CEDAR_SDK_VERSION="8.0" CEDAR_SDK_RUNTIME_VERSION="8.0" TASK="ci"
+    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="7.0.3" TASK="ci"
+    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="ci"
+    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="ci"
     # Analyze takes too long -- vary on runtime SDK
-    - CEDAR_SDK_VERSION="8.0" CEDAR_SDK_RUNTIME_VERSION="8.0" TASK="suites:specs:analyze"
-    - CEDAR_SDK_VERSION="8.0" CEDAR_SDK_RUNTIME_VERSION="8.0" TASK="suites:uispecs:analyze"
-    - CEDAR_SDK_VERSION="8.0" CEDAR_SDK_RUNTIME_VERSION="8.0" TASK="suites:focused_specs:analyze"
+    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="suites:specs:analyze"
+    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="suites:uispecs:analyze"
+    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="suites:focused_specs:analyze"
 
 before_install: brew update
 install:
