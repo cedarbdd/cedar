@@ -404,14 +404,7 @@ end
 
 namespace :frameworks do
   desc "Build Cedar and Cedar-iOS frameworks, and verify built Cedar-iOS.framework"
-  task build: ['frameworks:ios:build', 'frameworks:osx:build'] do
-    begin
-      Rake::Task['suites:iosframeworkspecs:run'].invoke
-    rescue Exception => e
-      puts "Unable to run iOS static framework specs. Xcode may have implicitly failed to build the framework. Please try again. (#{e})"
-      exit 1
-    end
-  end
+  task build: ['frameworks:ios:build', 'frameworks:osx:build']
 
   namespace :osx do
     desc "Builds and installs the Cedar OS X framework"
