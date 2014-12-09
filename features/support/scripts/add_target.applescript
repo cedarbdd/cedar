@@ -108,10 +108,16 @@ on run argv
         select specsTarget
 
         set checkboxContainer to scroll area 2 of splitter group 1 of group 1 of splitter group 1 of contentPane
-        if exists checkbox "Allow testing Host Application APIs" of checkboxContainer then
-            click checkbox "Allow testing Host Application APIs" of checkboxContainer
-            delay 1
+		if exists checkbox "Allow testing Host Application APIs" of checkboxContainer then
+			set theCheckbox to checkbox "Allow testing Host Application APIs" of checkboxContainer
+			tell theCheckbox
+				if not (its value as boolean) then
+					click theCheckbox
+				end if
+			end tell
         end if
+
+		delay 1
     end tell
 
     tell application "Xcode"

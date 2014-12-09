@@ -23,7 +23,7 @@ module CedarTarget___PACKAGENAMEASIDENTIFIER___
       if `xcodebuild -showsdks`.include? "iphonesimulator8.0"
         "OS=#{version},name=iPhone 5s"
       else
-        "OS=#{version},name=iPhone Retina (3.5-inch)"
+        "OS=#{version},name=iPhone 4s"
       end
     end
 

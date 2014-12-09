@@ -14,7 +14,7 @@ Feature:
     When I add an iOS Spec Suite target
     Then the `rake Specs` should work
 
-  Scenario: Create new test suite and refererence AppDelegate in test
+  Scenario: Create new Spec Bundle target and reference AppDelegate in test
     Given an Xcode iOS project
 
     When I add an iOS Testing Bundle target

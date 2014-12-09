@@ -84,14 +84,7 @@ task :clean____PACKAGENAMEASIDENTIFIER___ do
   CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "rm -rf #{CedarTarget___PACKAGENAMEASIDENTIFIER___::BUILD_DIR}/*", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("clean")
 end
 
-desc "Build ___PACKAGENAMEASIDENTIFIER___"
-task :build____PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.kill_simulator
-  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator clean build ARCHS=i386 && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___")
-end
-
-desc "Run ___PACKAGENAMEASIDENTIFIER___"
-task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
+task :check_ios_sim_availability do
   system "which ios-sim" or raise <<EOF
 
 
@@ -99,12 +92,32 @@ task :___PACKAGENAMEASIDENTIFIER___ => :build____PACKAGENAMEASIDENTIFIER___ do
 
 
 EOF
+end
+
+task :check_ios_sim_version do
+  system "python -c \"from distutils.version import LooseVersion; exit(not LooseVersion('`ios-sim --version`') >= LooseVersion('3.1.1'))\"" or raise <<EOF
+
+
+[Error] ios-sim version 3.1.1 or greater is required.
+
+
+EOF
+end
+
+desc "Build ___PACKAGENAMEASIDENTIFIER___"
+task :build____PACKAGENAMEASIDENTIFIER___ => :clean____PACKAGENAMEASIDENTIFIER___ do
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.kill_simulator
+  CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "pushd #{CedarTarget___PACKAGENAMEASIDENTIFIER___::PROJECT_ROOT} && xcodebuild -target #{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME} -configuration #{CedarTarget___PACKAGENAMEASIDENTIFIER___::CONFIGURATION} -sdk iphonesimulator clean build ARCHS=i386 && popd", CedarTarget___PACKAGENAMEASIDENTIFIER___.output_file("___PACKAGENAME___")
+end
+
+desc "Run ___PACKAGENAMEASIDENTIFIER___"
+task :___PACKAGENAMEASIDENTIFIER___ => [:check_ios_sim_availability, :check_ios_sim_version, :build____PACKAGENAMEASIDENTIFIER___] do
 
   env_vars = {
     "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"
   }
 
   CedarTarget___PACKAGENAMEASIDENTIFIER___.with_env_vars(env_vars) do
-    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "ios-sim launch #{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.app")} --tall --retina | tee /dev/stderr | grep -q ', 0 failures'";
+    CedarTarget___PACKAGENAMEASIDENTIFIER___.system_or_exit "ios-sim launch #{File.join(CedarTarget___PACKAGENAMEASIDENTIFIER___.build_dir("-iphonesimulator"), "#{CedarTarget___PACKAGENAMEASIDENTIFIER___::UI_SPECS_TARGET_NAME}.app")} --devicetypeid 'com.apple.CoreSimulator.SimDeviceType.iPhone-6, 8.1' | tee /dev/stderr | grep -q ', 0 failures'";
   end
 end

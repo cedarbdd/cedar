@@ -10,8 +10,8 @@ describe(@"Referencing of AppDelegate", ^{
 
     it(@"should not fail", ^{
         AppDelegate *delegate = [[AppDelegate alloc] init];
+        delegate should_not be_nil;
     });
-
 });
 
 SPEC_END
