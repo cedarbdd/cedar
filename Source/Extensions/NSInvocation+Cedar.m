@@ -79,7 +79,7 @@ static char COPIED_BLOCKS_KEY;
         NSUInteger size;
         NSGetSizeAndAlignment([methodSignature getArgumentTypeAtIndex:argIndex], &size, NULL);
         char argBuffer[size];
-        memset(argBuffer, sizeof(argBuffer), sizeof(char));
+        memset(argBuffer, (int)sizeof(argBuffer), sizeof(char));
         [self getArgument:argBuffer atIndex:argIndex];
 
         const char *argType = [methodSignature getArgumentTypeAtIndex:argIndex];
