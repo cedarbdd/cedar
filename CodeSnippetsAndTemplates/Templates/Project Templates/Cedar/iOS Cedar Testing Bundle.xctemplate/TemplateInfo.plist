@@ -111,10 +111,6 @@
 			  </array>
 			  <key>SharedSettings</key>
 			  <dict>
-				  <key>BUNDLE_LOADER</key>
-				  <string>$(BUILT_PRODUCTS_DIR)/___VARIABLE_testSchemeName___.app/___VARIABLE_testSchemeName___</string>
-				  <key>TEST_HOST</key>
-				  <string>$(BUNDLE_LOADER)</string>
 				  <key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				  <string>latest_iphoneos</string>
 				  <key>FRAMEWORK_SEARCH_PATHS</key>
