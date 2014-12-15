@@ -38,7 +38,7 @@ namespace Cedar { namespace Doubles {
     private:
         void verify_object_is_a_double(id instance) const {
             Class clazz = object_getClass(instance);
-            if (![clazz conformsToProtocol:@protocol(CedarDouble)]) {
+            if (![clazz instancesRespondToSelector:@selector(sent_messages)]) {
                 [[NSException exceptionWithName:NSInternalInconsistencyException
                                          reason:[NSString stringWithFormat:@"Received expectation for non-double object <%@>", instance]
                                        userInfo:nil]
