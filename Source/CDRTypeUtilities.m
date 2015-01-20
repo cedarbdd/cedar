@@ -1,4 +1,5 @@
 #import "CDRTypeUtilities.h"
+#import "CDRNil.h"
 
 @implementation CDRTypeUtilities
 
@@ -134,7 +135,7 @@ static NSCharacterSet *typeEncodingModifiersCharacterSet;
 memcpy(&i, argBuffer, sizeof(TYPE)); \
 i;})
     if (IS_TYPE(id)) {
-        return (id)*((void **)argBuffer);
+        return (id)*((void **)argBuffer) ?: [CDRNil nilObject];
     } else if (IS_TYPE(Class)) {
         return (id)*((void **)argBuffer);
     } else if (IS_TYPE(void(^)())) {

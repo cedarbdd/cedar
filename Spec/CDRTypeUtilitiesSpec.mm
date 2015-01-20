@@ -1,5 +1,6 @@
 #import <Cedar/CDRSpecHelper.h>
 #import "CDRTypeUtilities.h"
+#import "CDRNil.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -81,6 +82,11 @@ describe(@"CDRTypeUtilities", ^{
         it(@"should return the objective-c object it was given", ^{
             id foo = @"bar";
             [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foo ofObjCType:@encode(id)] should be_same_instance_as(foo);
+        });
+
+        it(@"should return CDRNil when given nil", ^{
+            id nilParam = nil;
+            [CDRTypeUtilities boxedObjectOfBytes:(const char *)&nilParam ofObjCType:@encode(id)] should equal([CDRNil nilObject]);
         });
 
         it(@"should return the class it was given", ^{

@@ -394,7 +394,7 @@ describe(@"have_received matcher", ^{
         });
     });
 
-    context(@"for a method with multiple parameters, some object, some not", ^{
+    context(@"for a method with multiple parameters (some object, some not)", ^{
         SEL method = @selector(incrementByABit:andABitMore:);
         int actualFirstParameter = 83;
         id actualSecondParameter = [NSNumber numberWithInt:32];
@@ -465,6 +465,33 @@ describe(@"have_received matcher", ^{
                         expect(incrementer).to_not(have_received(method).with(expectedFirstParameter, expectedSecondParameter));
                         expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(expectedFirstParameter, expectedSecondParameter));
                     });
+                });
+            });
+        });
+
+        context(@"which has been called with an incorrect nil parameter", ^{
+            NSObject * expectedSecondParameter = @666;
+
+            beforeEach(^{
+                [incrementer incrementByABit:actualFirstParameter andABitMore:nil];
+            });
+
+            describe(@"positive match", ^{
+                it(@"should fail with a sensible error message", ^{
+                    expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to have received message <%@>, with arguments: <%d, 666> but received messages:\n"
+                                              @"  incrementByABit:andABitMore:<83, %@>\n"
+                                              @"  value\n"
+                                              @"  setValue:<83>\n",
+                                              incrementer, NSStringFromSelector(method), actualFirstParameter, @"<nil>"], ^{
+                        expect(incrementer).to(have_received("incrementByABit:andABitMore:").with(actualFirstParameter, expectedSecondParameter));
+                    });
+                });
+            });
+
+            describe(@"negative match", ^{
+                it(@"should pass", ^{
+                    expect(incrementer).to_not(have_received(method).with(0, nil));
+                    expect(incrementer).to_not(have_received("incrementByABit:andABitMore:").with(actualFirstParameter, expectedSecondParameter));
                 });
             });
         });
