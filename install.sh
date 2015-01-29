@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 INSTALL_UUID=$(uuidgen)
 
@@ -13,21 +13,20 @@ fail() {
 }
 
 usage() {
-  log "$0 [--head]"
+  log "$0 [--head][--version]"
   log ""
   log "Unless otherwise specified, the latest release of Cedar will be installed"
   log ""
   log "Options:"
-  log "  --head   Gets the latest master revision of Cedar from github.com/pivotal/cedar"
+  log "  --head   Gets the latest master revision of Cedar from github.com/pivotal/cedar."
+  log "  --version version_tag           Gets the specified version from the version tag."
 }
 
-switch_to_latest_tag() {
-  LATEST_VERSION_TAG=$(git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\+\\.\\d\\+\\.\\d\\+ | ruby -e 'puts STDIN.read.split("\n").sort { |a,b| a.gsub("v", "").split(".").map(&:to_i) <=> b.gsub("v", "").split(".").map(&:to_i) }.last')
-
-  git checkout ${LATEST_VERSION_TAG} > /dev/null 2>&1
-  if [[ $? != 0 ]]; then
-    fail "Unable to find tag for version ${LATEST_VERSION_TAG}"
-  fi
+switch_to_tag() {
+  # Defaults to latest version if not given
+  VERSION_TAG="$1"
+  [ "$VERSION_TAG" ] || VERSION_TAG=$(git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\+\\.\\d\\+\\.\\d\\+ | ruby -e 'puts STDIN.read.split("\n").sort { |a,b| a.gsub("v", "").split(".").map(&:to_i) <=> b.gsub("v", "").split(".").map(&:to_i) }.last')
+  git checkout "$VERSION_TAG" &>/dev/null || fail "Unable to find tag for version $VERSION_TAG"
 }
 
 log_event() {
@@ -46,11 +45,15 @@ log_event() {
 while (($# > 0))
 do
   TOKEN="$1"
-  shift
   case "$TOKEN" in
     --head|--HEAD|head|HEAD)
       GET_HEAD=1
+      shift
       ;;
+    -version|--version)
+      VERSION_TAG="v${2#v}"
+      shift 2
+	    ;;
     *)
       usage
       exit 1
@@ -66,6 +69,8 @@ fi
 
 if [[ $GET_HEAD == 1 ]] ; then
   echo "Installing Cedar HEAD from master"
+elif [ "$VERSION_TAG" ] ; then
+  echo "Installing Cedar version ${VERSION_TAG}"
 else
   echo "Installing latest Cedar release"
 fi
@@ -79,11 +84,11 @@ fi
 cd ~/.cedar > /dev/null
 
 if [[ $GET_HEAD == 1 ]] ; then
-  LATEST_VERSION_TAG=$(git rev-parse HEAD)
+  VERSION_TAG=$(git rev-parse HEAD)
   log_event "Install Script Run" version HEAD
 else
-  switch_to_latest_tag
-  log_event "Install Script Run" version "${LATEST_VERSION_TAG}"
+  switch_to_tag "$VERSION_TAG"
+  log_event "Install Script Run" version "$VERSION_TAG"
 fi
 
 echo "Initializing Cedar submodules"
@@ -98,6 +103,6 @@ if [[ $? != 0 ]] ; then
     fail "Unable to install Cedar snippets and templates"
 fi
 
-echo "Cedar version ${LATEST_VERSION_TAG} installed to ~/Library"
+echo "Cedar version $VERSION_TAG installed to ~/Library"
 log_event "Successful Install"
 
