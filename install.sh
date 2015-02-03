@@ -13,7 +13,7 @@ fail() {
 }
 
 usage() {
-  log "$0 [--head][--version]"
+  log "$0 [--head] [--version]"
   log ""
   log "Unless otherwise specified, the latest release of Cedar will be installed"
   log ""
