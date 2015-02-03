@@ -35,6 +35,18 @@ describe(@"Example specs on NSString", ^{
     $ curl -L https://raw.github.com/pivotal/cedar/master/install.sh | bash
 ```
 
+* If you wish to specify a version. Run the following command: (version_name is v0.11.0, v0.10.0 etc...)
+
+```
+    $ bash <(echo "set -- --version 'version_name'; $(curl -L https://raw.github.com/pivotal/cedar/master/install.sh)")
+```
+
+* Or if you want to install from HEAD. Run:
+
+```
+    $ bash <(echo "set -- --head; $(curl -L https://raw.github.com/pivotal/cedar/master/install.sh)")
+```
+
 * Restart Xcode
 * Add new targets or files to your project using the Xcode templates, or create a new project to test-drive from scratch
 * Start writing specs!
