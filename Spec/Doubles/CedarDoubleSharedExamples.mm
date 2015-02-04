@@ -863,6 +863,57 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                     });
                 });
 
+                context(@"with a non-object non-char pointer, when invoked with the argument", ^{
+                    __block BOOL stubbedBehaviorWasInvoked;
+                    __block int *pointerToPrimitivePointer;
+
+                    beforeEach(^{
+                        int primitive = 42;
+                        stubbedBehaviorWasInvoked = NO;
+                        myDouble stub_method(@selector(methodWithPrimitivePointerArgument:)).with(&primitive).and_do(^(NSInvocation *) {
+                            stubbedBehaviorWasInvoked = YES;
+                        });
+
+                        [myDouble methodWithPrimitivePointerArgument:&primitive];
+                        pointerToPrimitivePointer = &primitive;
+                    });
+
+                    it(@"should record the invocation", ^{
+                        myDouble should have_received("methodWithPrimitivePointerArgument:").with(pointerToPrimitivePointer);
+                    });
+
+                    it(@"should invoke the stubbed behavior", ^{
+                        stubbedBehaviorWasInvoked should be_truthy;
+                    });
+                });
+
+                context(@"with an object pointer, when invoked with the argument", ^{
+                    __block BOOL stubbedBehaviorWasInvoked;
+                    __block id *pointerToObjectPointer;
+
+                    beforeEach(^{
+                        NSError *error = [NSError errorWithDomain:@"ImTheTester" code:12345 userInfo:nil];
+
+                        stubbedBehaviorWasInvoked = NO;
+                        myDouble stub_method(@selector(methodWithObjectPointerArgument:)).with(&error).and_do(^(NSInvocation *) {
+                            stubbedBehaviorWasInvoked = YES;
+                        });
+
+                        [myDouble methodWithObjectPointerArgument:&error];
+
+                        myDouble should have_received("methodWithObjectPointerArgument:").with(&error);
+                        pointerToObjectPointer = &error;
+                    });
+
+                    it(@"should record the invocation", ^{
+                        myDouble should have_received("methodWithObjectPointerArgument:").with(pointerToObjectPointer);
+                    });
+
+                    it(@"should invoke the stubbed behavior", ^{
+                        stubbedBehaviorWasInvoked should be_truthy;
+                    });
+                });
+
                 context(@"with an argument specified as anything", ^{
                     NSNumber *arg1 = @3;
                     NSNumber *arg2 = @123;
