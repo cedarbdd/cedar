@@ -32,6 +32,8 @@ typedef LargeIncrementerStruct (^ComplexIncrementerBlock)(NSNumber *, LargeIncre
 - (LargeIncrementerStruct)methodWithLargeStruct1:(LargeIncrementerStruct)struct1 andLargeStruct2:(LargeIncrementerStruct)struct2;
 - (void)methodWithNumber:(NSNumber *)number complexBlock:(ComplexIncrementerBlock)block;
 - (NSString *)methodWithFooSuperclass:(FooSuperclass *)fooInstance;
+- (void)methodWithPrimitivePointerArgument:(int *)arg;
+- (void)methodWithObjectPointerArgument:(out id *)anObjectPointer;
 
 @optional
 - (size_t)whatIfIIncrementedBy:(size_t)amount;
