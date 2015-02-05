@@ -77,4 +77,10 @@
     return @"";
 }
 
+- (void)methodWithPrimitivePointerArgument:(int *)arg {
+}
+
+- (void)methodWithObjectPointerArgument:(out id *)anObjectPointer {
+}
+
 @end
