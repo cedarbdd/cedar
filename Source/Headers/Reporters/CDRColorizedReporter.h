@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#import "CDRDefaultReporter.h"
+#import "CDRBufferedDefaultReporter.h"
 
-@interface CDRColorizedReporter : CDRDefaultReporter
+@interface CDRColorizedReporter : CDRBufferedDefaultReporter
 
 @end
