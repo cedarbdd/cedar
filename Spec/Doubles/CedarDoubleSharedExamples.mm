@@ -500,24 +500,24 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
                         NSNumber *returnValue1 = @3;
                         NSNumber *arg3 = @88;
                         NSNumber *returnValue2 = @42;
-                        __block void(^stubMethodAgainWithDifferentArugmentsBlock)();
+                        __block void(^stubMethodAgainWithDifferentArgumentsBlock)();
 
                         beforeEach(^{
                             myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg2).and_return(returnValue1);
-                            stubMethodAgainWithDifferentArugmentsBlock = [^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg3).and_return(returnValue2); } copy];
+                            stubMethodAgainWithDifferentArgumentsBlock = [^{ myDouble stub_method("methodWithNumber1:andNumber2:").with(arg1, arg3).and_return(returnValue2); } copy];
                         });
 
                         afterEach(^{
-                            [stubMethodAgainWithDifferentArugmentsBlock release];
+                            [stubMethodAgainWithDifferentArgumentsBlock release];
                         });
 
                         it(@"should not raise an exception", ^{
-                            stubMethodAgainWithDifferentArugmentsBlock should_not raise_exception;
+                            stubMethodAgainWithDifferentArgumentsBlock should_not raise_exception;
                         });
 
                         context(@"when invoked", ^{
                             beforeEach(^{
-                                stubMethodAgainWithDifferentArugmentsBlock();
+                                stubMethodAgainWithDifferentArgumentsBlock();
                             });
 
                             it(@"should return the value associated with the corresponding arguments", ^{
@@ -615,7 +615,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
                     afterEach(^{
                         [stubMethodAgainWithNoArgumentsBlock release];
-                        [stubMethodAgainWithAnyInstanceOfClassArgumentBlock release];
+//                        [stubMethodAgainWithAnyInstanceOfClassArgumentBlock release];
                         [stubMethodAgainWithAnyInstanceConformingToProtocolArgumentBlock release];
                     });
 

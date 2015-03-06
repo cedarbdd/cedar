@@ -1,19 +1,27 @@
 #import <Cedar/CDRSpecHelper.h>
 #import <objc/runtime.h>
 #import "SimpleIncrementer.h"
+#import "SimpleDecrementer.h"
 #import "SimpleMultiplier.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(CDRProtocolFakeSpec)
+SPEC_BEGIN(CDRClassProtocolFakeSpec)
 
-describe(@"fake (protocol)", ^{
-    describe(@"fake_for(Protocol)", ^{
-        __block id<SimpleIncrementer, CedarDouble> fake;
+describe(@"fake (class, protocol)", ^{
+
+    describe(@"fake_for(Class, Class)", ^{
+        it(@"should blow up", ^{
+            ^ { fake_for([SimpleIncrementer class], [SimpleDecrementer class]); } should raise_exception;
+        });
+    });
+
+    describe(@"fake_for(Class, Protocol)", ^{
+        __block SimpleDecrementer<SimpleIncrementer, CedarDouble> *fake;
 
         beforeEach(^{
-            fake = fake_for(@protocol(SimpleIncrementer));
+            fake = fake_for([SimpleDecrementer class], @protocol(SimpleIncrementer));
 
             [[CDRSpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
         });
@@ -62,11 +70,11 @@ describe(@"fake (protocol)", ^{
         });
     });
 
-    describe(@"nice_fake_for(Protocol)", ^{
-        __block id<SimpleIncrementer, CedarDouble> nice_fake;
+    describe(@"nice_fake_for(Class, Protocol)", ^{
+        __block SimpleDecrementer<SimpleIncrementer, CedarDouble> *nice_fake;
 
         beforeEach(^{
-            nice_fake = nice_fake_for(@protocol(SimpleIncrementer));
+            nice_fake = nice_fake_for([SimpleDecrementer class], @protocol(SimpleIncrementer));
 
             [[CDRSpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
         });
@@ -116,11 +124,11 @@ describe(@"fake (protocol)", ^{
         });
     });
 
-    describe(@"fake_for(Protocol, Protocol, ...)", ^{
-        __block id<SimpleIncrementer, SimpleMultiplier, CedarDouble> fake;
+    describe(@"fake_for(Class, Protocol, Protocol, ...)", ^{
+        __block SimpleDecrementer<SimpleIncrementer, SimpleMultiplier, CedarDouble> *fake;
 
         beforeEach(^{
-            fake = fake_for(@protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
+            fake = fake_for([SimpleDecrementer class], @protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
 
             [[CDRSpecHelper specHelper].sharedExampleContext setObject:fake forKey:@"double"];
         });
@@ -167,11 +175,11 @@ describe(@"fake (protocol)", ^{
         });
     });
 
-    describe(@"nice_fake_for(Protocol, Protocol, ...)", ^{
-        __block id<SimpleIncrementer, SimpleMultiplier, CedarDouble> nice_fake;
+    describe(@"nice_fake_for(Class, Protocol, Protocol, ...)", ^{
+        __block SimpleDecrementer<SimpleIncrementer, SimpleMultiplier, CedarDouble> *nice_fake;
 
         beforeEach(^{
-            nice_fake = nice_fake_for(@protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
+            nice_fake = nice_fake_for([SimpleDecrementer class], @protocol(SimpleIncrementer), @protocol(SimpleMultiplier));
 
             [[CDRSpecHelper specHelper].sharedExampleContext setObject:nice_fake forKey:@"double"];
         });
@@ -199,11 +207,11 @@ describe(@"fake (protocol)", ^{
         it(@"should record invocations of methods from both protocols", ^{
             [nice_fake incrementBy:7];
             nice_fake should have_received(@selector(incrementBy:)).with(7);
-
+            
             [nice_fake multiplyBy:8];
             nice_fake should have_received(@selector(multiplyBy:)).with(8);
         });
-
+        
         describe(@"-description", ^{
             it(@"should return the description of the faked protocols", ^{
                 nice_fake.description should contain(@"Fake implementation of SimpleIncrementer, SimpleMultiplier protocol(s)");

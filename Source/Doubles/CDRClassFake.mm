@@ -32,15 +32,6 @@
     return self.klass;
 }
 
-- (void)handleKVCSelector:(SEL)sel withValue:(id)value forKey:(NSString *)key {
-    NSMethodSignature *signature = [self.klass methodSignatureForSelector:sel];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-    [invocation setSelector:sel];
-    [invocation setArgument:&value atIndex:2];
-    [invocation setArgument:&key atIndex:3];
-    [self.cedar_double_impl record_method_invocation:invocation];
-}
-
 - (void)setValue:(id)value forKey:(NSString *)key {
     if ([self has_stubbed_method_for:_cmd]) {
         [self handleKVCSelector:_cmd withValue:value forKey:key];
@@ -65,17 +56,15 @@
     }
 }
 
-@end
+#pragma mark - private
 
-id CDR_fake_for(BOOL require_explicit_stubs, Class klass, ...) {
-    va_list args;
-    va_start(args, klass);
-    if (va_arg(args, Class)) {
-        [[NSException exceptionWithName:NSInternalInconsistencyException
-                                 reason:@"Can't create a fake for multiple classes."
-                               userInfo:nil] raise];
-    }
-    va_end(args);
-
-    return [[[CDRClassFake alloc] initWithClass:klass requireExplicitStubs:require_explicit_stubs] autorelease];
+- (void)handleKVCSelector:(SEL)sel withValue:(id)value forKey:(NSString *)key {
+    NSMethodSignature *signature = [self.klass methodSignatureForSelector:sel];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    [invocation setSelector:sel];
+    [invocation setArgument:&value atIndex:2];
+    [invocation setArgument:&key atIndex:3];
+    [self.cedar_double_impl record_method_invocation:invocation];
 }
+
+@end

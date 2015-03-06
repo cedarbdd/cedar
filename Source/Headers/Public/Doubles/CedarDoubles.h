@@ -2,6 +2,7 @@
 #import "CDRFake.h"
 #import "CDRClassFake.h"
 #import "CDRProtocolFake.h"
+#import "CDRClassProtocolFake.h"
 #import "HaveReceived.h"
 #import "StubbedMethod.h"
 #import "RejectedMethod.h"
