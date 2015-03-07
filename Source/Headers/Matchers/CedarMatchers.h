@@ -22,6 +22,9 @@
 // Verifiers
 #import "Exist.h"
 
+// Foundation
+#import "BeInstanceOfFoundation.h"
+
 #ifdef CEDAR_CUSTOM_MATCHERS
 #import CEDAR_CUSTOM_MATCHERS
 #endif

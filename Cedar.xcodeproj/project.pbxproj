@@ -105,6 +105,8 @@
 		34F3DF801A6ABA2E003041DA /* CDRNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF7C1A6ABA2E003041DA /* CDRNil.m */; };
 		34F3DF821A6ABB21003041DA /* CDRNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */; };
 		34F3DF831A6ABB21003041DA /* CDRNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */; };
+		378181E6EC40FE79562E04F7 /* BeInstanceOfFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 37818748B3E264F4C28B6270 /* BeInstanceOfFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37818490B1DCEA5F09527FB6 /* BeInstanceOfFoundationSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37818B01F4A3AD723E5E178D /* BeInstanceOfFoundationSpec.mm */; };
 		42064466139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42064467139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
@@ -133,6 +135,8 @@
 		6639A77F14C50D0100B564B7 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
 		6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
 		6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
+		663F98831AA9EC61006DA753 /* BeInstanceOfFoundation.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 37818748B3E264F4C28B6270 /* BeInstanceOfFoundation.h */; };
+		663F98841AA9EC7F006DA753 /* BeInstanceOfFoundationSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37818B01F4A3AD723E5E178D /* BeInstanceOfFoundationSpec.mm */; };
 		66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
 		960118BC1434867E00825FFF /* NSBundle+MainBundleHijack.m in Sources */ = {isa = PBXBuildFile; fileRef = 960118BB1434867E00825FFF /* NSBundle+MainBundleHijack.m */; };
 		96158AA2144A91DC005895CE /* DummyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96158AA1144A91DC005895CE /* DummyModel.m */; };
@@ -649,6 +653,7 @@
 				AE4A9459187F7D8F008566F5 /* BeFalsy.h in Copy headers to framework */,
 				6628FC8914C4DBA70016652A /* CedarDoubles.h in Copy headers to framework */,
 				6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */,
+				663F98831AA9EC61006DA753 /* BeInstanceOfFoundation.h in Copy headers to framework */,
 				6628FCA114C503530016652A /* Cedar-iOS.h in Copy headers to framework */,
 				6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */,
 				AE9AA68215AB76DB00617E1A /* CDRClassFake.h in Copy headers to framework */,
@@ -716,6 +721,8 @@
 		34F3DF7B1A6ABA2E003041DA /* CDRNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRNil.h; sourceTree = "<group>"; };
 		34F3DF7C1A6ABA2E003041DA /* CDRNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRNil.m; sourceTree = "<group>"; };
 		34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRNilSpec.mm; sourceTree = "<group>"; };
+		37818748B3E264F4C28B6270 /* BeInstanceOfFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeInstanceOfFoundation.h; sourceTree = "<group>"; };
+		37818B01F4A3AD723E5E178D /* BeInstanceOfFoundationSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BeInstanceOfFoundationSpec.mm; sourceTree = "<group>"; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
 		4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWithPublicRunDates.h; sourceTree = "<group>"; };
@@ -1148,6 +1155,22 @@
 			path = Reporters;
 			sourceTree = "<group>";
 		};
+		378182E4BE56152787614340 /* NSFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				37818748B3E264F4C28B6270 /* BeInstanceOfFoundation.h */,
+			);
+			path = NSFoundation;
+			sourceTree = "<group>";
+		};
+		37818EC76A31FBC43C77000A /* NSFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				37818B01F4A3AD723E5E178D /* BeInstanceOfFoundationSpec.mm */,
+			);
+			path = NSFoundation;
+			sourceTree = "<group>";
+		};
 		4523FFB9BD607306C7ED94A3 /* GData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1331,6 +1354,7 @@
 				AEF72FF913ECC16400786282 /* Container */,
 				AEF7302E13ECC6EE00786282 /* Stringifiers */,
 				AE18A7D113F45BBE00C8872C /* Comparators */,
+				378182E4BE56152787614340 /* NSFoundation */,
 				AEC40C4D174AC4C000474D2D /* UIKit */,
 				AE0AF58413E9E87E00029396 /* ActualValue.h */,
 				AE0AF55E13E9C0E300029396 /* CedarMatchers.h */,
@@ -1465,6 +1489,7 @@
 				AE0F354919E7071A00B9F116 /* OSX */,
 				AEF7301313ECC4AE00786282 /* Base */,
 				AEF7302913ECC4C100786282 /* Container */,
+				37818EC76A31FBC43C77000A /* NSFoundation */,
 				AEC40C52174AC51800474D2D /* UIKit */,
 				966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
@@ -1944,6 +1969,7 @@
 				AE94D03F15F341B200A0C2B7 /* AnyInstanceArgument.h in Headers */,
 				AEE8DBD4175FFCF3008AF18A /* CDRSpyInfo.h in Headers */,
 				CA17998D17F89C4B00C38060 /* RespondTo.h in Headers */,
+				378181E6EC40FE79562E04F7 /* BeInstanceOfFoundation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2638,6 +2664,7 @@
 				5898A61AAABFE1802E87E6C3 /* ConformToSpec.mm in Sources */,
 				4523F335DBD90BD048BB7397 /* GDataXMLNode.m in Sources */,
 				4523F7CCCA3C9010878941F7 /* ExampleWithPublicRunDates.m in Sources */,
+				37818490B1DCEA5F09527FB6 /* BeInstanceOfFoundationSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2731,6 +2758,7 @@
 				44B9A71F1888661100CBCA1B /* ExampleWithPublicRunDates.m in Sources */,
 				34F3DF831A6ABB21003041DA /* CDRNilSpec.mm in Sources */,
 				AE18A80B13F4640600C8872C /* ContainSpec.mm in Sources */,
+				663F98841AA9EC7F006DA753 /* BeInstanceOfFoundationSpec.mm in Sources */,
 				AED10EBD18F46C0E00950904 /* FooSuperclass.m in Sources */,
 				343FAFEB190FDAEC0085AFEC /* DeallocNotifier.m in Sources */,
 				AE6F3F351458D7C100C98F1E /* BeGreaterThanSpec.mm in Sources */,
