@@ -1989,7 +1989,7 @@
 			name = "Cedar iOS XCTest Tests";
 			productName = OCUnitAppTests;
 			productReference = 1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 		96A07EEE13F276640021974D /* Cedar OS X FocusedSpecs */ = {
 			isa = PBXNativeTarget;
@@ -2043,7 +2043,7 @@
 			name = "Cedar iOS SenTestingKit Tests";
 			productName = OCUnitAppTests;
 			productReference = 96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 		AE02E7E3184EABCD00414F19 /* Cedar iOS FrameworkSpecs */ = {
 			isa = PBXNativeTarget;
@@ -2097,7 +2097,7 @@
 			name = "Cedar OS X Host AppTests";
 			productName = "OS X Host AppTests";
 			productReference = AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 		AEB8818619DCD62D00F081BA /* Cedar OS X Failing Test Bundle */ = {
 			isa = PBXNativeTarget;
@@ -2115,7 +2115,7 @@
 			name = "Cedar OS X Failing Test Bundle";
 			productName = "OS X Failing Test Bundle";
 			productReference = AEB8818719DCD62D00F081BA /* Cedar OS X Failing Test Bundle.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 		AEEE1FB511DC271300029872 /* Cedar */ = {
 			isa = PBXNativeTarget;

@@ -1270,45 +1270,45 @@ describe(@"be_greater_than_or_equal_to matcher", ^{
     });
 });
 
-describe(@">= operator matcher", ^{
-    describe(@"when the actual value is greater than the expected value", ^{
-        it(@"should pass", ^{
-            expect(10) >= 1;
-        });
-    });
-
-    describe(@"when the actual value is less than the expected value", ^{
-        it(@"should fail with a sensible failure message", ^{
-            expectFailureWithMessage(@"Expected <10> to be greater than or equal to <100>", ^{
-                expect(10) >= 100;
-            });
-        });
-    });
-
-    describe(@"when the actual value equals the expected value", ^{
-        it(@"should pass", ^{
-            expect(10) >= 10;
-        });
-    });
-
-    describe(@"with and without 'to'", ^{
-        int actualValue = 10, expectedValue = 1;
-
-        describe(@"positive match", ^{
-            it(@"should pass", ^{
-                expect(actualValue) >= expectedValue;
-                expect(actualValue).to >= expectedValue;
-            });
-        });
-
-        describe(@"negative match", ^{
-            it(@"should fail with a sensible failure message", ^{
-                expectFailureWithMessage(@"Expected <10> to not be greater than or equal to <1>", ^{
-                    expect(actualValue).to_not >= expectedValue;
-                });
-            });
-        });
-    });
-});
+//describe(@">= operator matcher", ^{
+//    describe(@"when the actual value is greater than the expected value", ^{
+//        it(@"should pass", ^{
+//            expect(10) >= 1;
+//        });
+//    });
+//
+//    describe(@"when the actual value is less than the expected value", ^{
+//        it(@"should fail with a sensible failure message", ^{
+//            expectFailureWithMessage(@"Expected <10> to be greater than or equal to <100>", ^{
+//                expect(10) >= 100;
+//            });
+//        });
+//    });
+//
+//    describe(@"when the actual value equals the expected value", ^{
+//        it(@"should pass", ^{
+//            expect(10) >= 10;
+//        });
+//    });
+//
+//    describe(@"with and without 'to'", ^{
+//        int actualValue = 10, expectedValue = 1;
+//
+//        describe(@"positive match", ^{
+//            it(@"should pass", ^{
+//                expect(actualValue) >= expectedValue;
+//                expect(actualValue).to >= expectedValue;
+//            });
+//        });
+//
+//        describe(@"negative match", ^{
+//            it(@"should fail with a sensible failure message", ^{
+//                expectFailureWithMessage(@"Expected <10> to not be greater than or equal to <1>", ^{
+//                    expect(actualValue).to_not >= expectedValue;
+//                });
+//            });
+//        });
+//    });
+//});
 
 SPEC_END
