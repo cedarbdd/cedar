@@ -28,7 +28,15 @@ CDRExampleGroup * describe(NSString *text, CDRSpecBlock block) {
         group = [CDRExampleGroup groupWithText:text];
         [parentGroup add:group];
         CDR_currentSpec.currentGroup = group;
-        block();
+
+        @try {
+            block();
+        }
+        @catch (CDRSpecFailure *failure) {
+            NSString *reason = [NSString stringWithFormat:@"Caught a spec failure before the specs began to run. Did you forget to put your assertion into an `it` block?. The failure was:\n%@", failure];
+            [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise];
+        }
+
         if ([group.examples count] == 0) {
             block = placeholderPendingTestBlock;
             block();

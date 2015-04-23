@@ -167,6 +167,24 @@ describe(@"Matchers", ^{
             });
         });
     });
+
+    describe(@"that fail outside of an `it` block", ^{
+        __block NSException *caughtException = nil;
+
+        @try {
+            describe(@"performing the assertion", ^{
+                1 should equal(2);
+            });
+        }
+        @catch (NSException *exception) {
+            caughtException = [exception retain];
+        }
+
+        it(@"should raise an exception with a helpful message", ^{
+            caughtException.name should equal(NSInternalInconsistencyException);
+            caughtException.reason should contain(@"Caught a spec failure before the specs began to run. Did you forget to put your assertion into an `it` block?. The failure was:");
+        });
+    });
 });
 
 describe(@"a describe block", ^{
