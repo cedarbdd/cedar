@@ -1,6 +1,7 @@
 # Cedar
 
 [![Build Status](https://travis-ci.org/pivotal/cedar.png?branch=master)](https://travis-ci.org/pivotal/cedar)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Cedar is a BDD-style Objective-C testing framework with an expressive matcher DSL and convenient test doubles.
 
