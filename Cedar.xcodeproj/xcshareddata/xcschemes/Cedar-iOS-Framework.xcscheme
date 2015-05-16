@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AE4864F71B067620005DB302"
-               BuildableName = "Cedar-iOS-Framework.framework"
+               BuildableName = "Cedar.framework"
                BlueprintName = "Cedar-iOS-Framework"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AE4864F71B067620005DB302"
-            BuildableName = "Cedar-iOS-Framework.framework"
+            BuildableName = "Cedar.framework"
             BlueprintName = "Cedar-iOS-Framework"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AE4864F71B067620005DB302"
-            BuildableName = "Cedar-iOS-Framework.framework"
+            BuildableName = "Cedar.framework"
             BlueprintName = "Cedar-iOS-Framework"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AE4864F71B067620005DB302"
-            BuildableName = "Cedar-iOS-Framework.framework"
+            BuildableName = "Cedar.framework"
             BlueprintName = "Cedar-iOS-Framework"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
