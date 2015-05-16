@@ -134,6 +134,7 @@
 		6639A78214C50D3000B564B7 /* HaveReceived.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; };
 		6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6628FC9B14C4DEC50016652A /* CDRSpy.mm */; };
 		66F00B5214C4D97C00146D88 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
+		8978D4EB1B06F05C00EDD6D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8978D4EA1B06F05C00EDD6D0 /* UIKit.framework */; };
 		960118BC1434867E00825FFF /* NSBundle+MainBundleHijack.m in Sources */ = {isa = PBXBuildFile; fileRef = 960118BB1434867E00825FFF /* NSBundle+MainBundleHijack.m */; };
 		96158AA2144A91DC005895CE /* DummyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96158AA1144A91DC005895CE /* DummyModel.m */; };
 		966E74ED145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; };
@@ -189,11 +190,11 @@
 		AE02E814184ECB0F00414F19 /* ShouldSyntax.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; };
 		AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AE02E83118526E9F00414F19 /* Cedar-iOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02E83018526E9F00414F19 /* Cedar-iOSSpec.mm */; };
-		AE03FBEE1B06C33B00013784 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE03FBED1B06C33B00013784 /* main.m */; };
+		AE03FBEE1B06C33B00013784 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE03FBED1B06C33B00013784 /* main.mm */; };
 		AE03FBF91B06C33B00013784 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE03FBF81B06C33B00013784 /* Images.xcassets */; };
 		AE03FBFC1B06C33B00013784 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE03FBFA1B06C33B00013784 /* LaunchScreen.xib */; };
 		AE03FC0F1B06C37E00013784 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; };
-		AE03FC131B06C3BA00013784 /* Cedar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AE03FC131B06C3BA00013784 /* Cedar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE0695F417A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE06D88017AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
@@ -383,7 +384,6 @@
 		AE4865D11B0690B1005DB302 /* CedarMatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF55E13E9C0E300029396 /* CedarMatchers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865D21B0690B1005DB302 /* CedarComparators.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7713EC730700786282 /* CedarComparators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865D31B0690B1005DB302 /* CedarStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF72F7A13EC734000786282 /* CedarStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865D41B0690B1005DB302 /* MatcherTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0AF57913E9C16D00029396 /* MatcherTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865D51B0690B1005DB302 /* ShouldSyntax.h in Headers */ = {isa = PBXBuildFile; fileRef = AE84F0DA145B70DD00769F85 /* ShouldSyntax.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865D61B0690B1005DB302 /* CDRVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF8FB0619E6000E00DD4FE4 /* CDRVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865D71B0690B1005DB302 /* CDRExample.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -414,7 +414,6 @@
 		AE4865F01B069353005DB302 /* UIGeometryCompareEqual.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865F11B069353005DB302 /* UIGeometryStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865F21B069353005DB302 /* UIKitComparatorsContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865F31B0693AB005DB302 /* Cedar-iOS-Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4864FC1B067621005DB302 /* Cedar-iOS-Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4A9458187F7D8F008566F5 /* BeFalsy.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4A9457187F7D8F008566F5 /* BeFalsy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4A9459187F7D8F008566F5 /* BeFalsy.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE4A9457187F7D8F008566F5 /* BeFalsy.h */; };
 		AE4A945B187F7E52008566F5 /* BeFalsySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */; };
@@ -898,6 +897,7 @@
 		6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaveReceivedSpec.mm; sourceTree = "<group>"; };
 		6639A78014C50D3000B564B7 /* HaveReceived.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaveReceived.h; sourceTree = "<group>"; };
 		66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CDRSpySpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		8978D4EA1B06F05C00EDD6D0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		960118BB1434867E00825FFF /* NSBundle+MainBundleHijack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+MainBundleHijack.m"; sourceTree = "<group>"; };
 		96158A87144A915E005895CE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		96158A8A144A915E005895CE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -951,7 +951,7 @@
 		AE02E83018526E9F00414F19 /* Cedar-iOSSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = "Cedar-iOSSpec.mm"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE03FBE91B06C33B00013784 /* Cedar-iOS-Framework Spec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar-iOS-Framework Spec.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE03FBEC1B06C33B00013784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AE03FBED1B06C33B00013784 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AE03FBED1B06C33B00013784 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		AE03FBF81B06C33B00013784 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AE03FBFB1B06C33B00013784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarDoubleARCSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -991,7 +991,6 @@
 		AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollections.m; sourceTree = "<group>"; };
 		AE4864F81B067620005DB302 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE4864FB1B067621005DB302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AE4864FC1B067621005DB302 /* Cedar-iOS-Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cedar-iOS-Framework.h"; sourceTree = "<group>"; };
 		AE4A9457187F7D8F008566F5 /* BeFalsy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeFalsy.h; sourceTree = "<group>"; };
 		AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BeFalsySpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE4A945D1880792E008566F5 /* RejectedMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectedMethod.h; sourceTree = "<group>"; };
@@ -1205,6 +1204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8978D4EB1B06F05C00EDD6D0 /* UIKit.framework in Frameworks */,
 				AE03FC0F1B06C37E00013784 /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1523,7 +1523,7 @@
 			isa = PBXGroup;
 			children = (
 				AE03FBEC1B06C33B00013784 /* Info.plist */,
-				AE03FBED1B06C33B00013784 /* main.m */,
+				AE03FBED1B06C33B00013784 /* main.mm */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1658,7 +1658,6 @@
 		AE4864F91B067621005DB302 /* Cedar-iOS-Framework */ = {
 			isa = PBXGroup;
 			children = (
-				AE4864FC1B067621005DB302 /* Cedar-iOS-Framework.h */,
 				AE4864FA1B067621005DB302 /* Supporting Files */,
 			);
 			path = "Cedar-iOS-Framework";
@@ -1927,6 +1926,7 @@
 		AEEE202611DC286500029872 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8978D4EA1B06F05C00EDD6D0 /* UIKit.framework */,
 				AED7FC0B19BE2A6000595D92 /* CoreLocation.framework */,
 				342F5D0A18F430DB00F38E35 /* QuartzCore.framework */,
 				AEC54008185E90E900B0D41D /* CoreGraphics.framework */,
@@ -2085,7 +2085,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE4865F31B0693AB005DB302 /* Cedar-iOS-Framework.h in Headers */,
 				AE4865A41B0690AF005DB302 /* NSInvocation+Cedar.h in Headers */,
 				AE4865A51B0690AF005DB302 /* Argument.h in Headers */,
 				AE4865A61B0690AF005DB302 /* ValueArgument.h in Headers */,
@@ -2133,7 +2132,6 @@
 				AE4865D11B0690B1005DB302 /* CedarMatchers.h in Headers */,
 				AE4865D21B0690B1005DB302 /* CedarComparators.h in Headers */,
 				AE4865D31B0690B1005DB302 /* CedarStringifiers.h in Headers */,
-				AE4865D41B0690B1005DB302 /* MatcherTemplate.h in Headers */,
 				AE4865D51B0690B1005DB302 /* ShouldSyntax.h in Headers */,
 				AE4865D61B0690B1005DB302 /* CDRVersion.h in Headers */,
 				AE4865D71B0690B1005DB302 /* CDRExample.h in Headers */,
@@ -2885,7 +2883,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE03FBEE1B06C33B00013784 /* main.m in Sources */,
+				AE03FBEE1B06C33B00013784 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3696,6 +3694,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -3729,6 +3728,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -3881,6 +3881,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -3921,6 +3922,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -4411,6 +4413,7 @@
 				AE03FC0A1B06C33B00013784 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AE248FB219DCD52500092C14 /* Build configuration list for PBXNativeTarget "Cedar OS X Host App" */ = {
 			isa = XCConfigurationList;
