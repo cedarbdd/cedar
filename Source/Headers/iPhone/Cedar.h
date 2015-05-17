@@ -1,5 +1,6 @@
 #import "CDRFunctions.h"
 #import "CDRSpecHelper.h"
+#import "CedarApplicationDelegate.h"
 
 #import "NSInvocation+Cedar.h"
 #import "Argument.h"
@@ -19,7 +20,6 @@
 #import "StubbedMethod.h"
 #import "CDRFake.h"
 #import "CedarApplicationDelegate.h"
-#import "Cedar-iOS.h"
 #import "Base.h"
 #import "BeCloseTo.h"
 #import "BeFalsy.h"
