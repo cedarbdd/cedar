@@ -195,6 +195,9 @@
 		AE03FBFC1B06C33B00013784 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE03FBFA1B06C33B00013784 /* LaunchScreen.xib */; };
 		AE03FC0F1B06C37E00013784 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; };
 		AE03FC131B06C3BA00013784 /* Cedar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AE03FC551B0A682900013784 /* CDRVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = AE03FC541B0A682900013784 /* CDRVersion.m */; };
+		AE03FC561B0A682900013784 /* CDRVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = AE03FC541B0A682900013784 /* CDRVersion.m */; };
+		AE03FC571B0A682900013784 /* CDRVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = AE03FC541B0A682900013784 /* CDRVersion.m */; };
 		AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE0695F417A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE06D88017AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
@@ -953,6 +956,7 @@
 		AE03FBED1B06C33B00013784 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		AE03FBF81B06C33B00013784 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AE03FBFB1B06C33B00013784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		AE03FC541B0A682900013784 /* CDRVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRVersion.m; sourceTree = "<group>"; };
 		AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarDoubleARCSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithForwardingTarget.h; sourceTree = "<group>"; };
 		AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithForwardingTarget.m; sourceTree = "<group>"; };
@@ -1838,6 +1842,7 @@
 				969B6F82160C61E000C7C792 /* CDRSymbolicator.m */,
 				34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */,
 				34F3DF7C1A6ABA2E003041DA /* CDRNil.m */,
+				AE03FC541B0A682900013784 /* CDRVersion.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -2920,6 +2925,7 @@
 				AE4865721B067953005DB302 /* AnyInstanceConformingToProtocolArgument.mm in Sources */,
 				AE4865731B067953005DB302 /* CDRProtocolFake.mm in Sources */,
 				AE4865741B067953005DB302 /* CDRSpy.mm in Sources */,
+				AE03FC571B0A682900013784 /* CDRVersion.m in Sources */,
 				AE4865751B067953005DB302 /* CDRClassFake.mm in Sources */,
 				AE4865761B067953005DB302 /* CedarDoubleImpl.mm in Sources */,
 				AE4865771B067953005DB302 /* CDRFake.mm in Sources */,
@@ -2984,6 +2990,7 @@
 				AE31A2A119C0F23F00C438C1 /* CDRXTestSuite.m in Sources */,
 				AEEE1FF411DC27B800029872 /* CDRExample.m in Sources */,
 				34F3DF7F1A6ABA2E003041DA /* CDRNil.m in Sources */,
+				AE03FC551B0A682900013784 /* CDRVersion.m in Sources */,
 				AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */,
 				AEEE1FF611DC27B800029872 /* CDRExampleGroup.m in Sources */,
 				AEEE1FF711DC27B800029872 /* CDRFunctions.m in Sources */,
@@ -3104,6 +3111,7 @@
 				AEEE223211DC2B6500029872 /* CDRExample.m in Sources */,
 				AEEE223311DC2B6500029872 /* CDRExampleBase.m in Sources */,
 				AEEE223411DC2B6500029872 /* CDRExampleGroup.m in Sources */,
+				AE03FC561B0A682900013784 /* CDRVersion.m in Sources */,
 				AEEF360819DE21ED00794484 /* CDRSpecFailure.m in Sources */,
 				AEEE223511DC2B6500029872 /* CDRFunctions.m in Sources */,
 				AEEE223611DC2B6500029872 /* CDRSpec.m in Sources */,
