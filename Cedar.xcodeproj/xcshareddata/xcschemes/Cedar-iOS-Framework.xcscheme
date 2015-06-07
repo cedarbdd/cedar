@@ -42,16 +42,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AE4865011B067621005DB302"
-               BuildableName = "Cedar-iOS-FrameworkTests.xctest"
-               BlueprintName = "Cedar-iOS-FrameworkTests"
-               ReferencedContainer = "container:Cedar.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

@@ -1,12 +1,5 @@
-#if TARGET_OS_IPHONE
 #import "CDRSpecHelper.h"
-#else
-#error This spec is only valid for targets which link CoreGraphics
-#endif
-
-extern "C" {
 #import "ExpectFailureWithMessage.h"
-}
 
 using namespace Cedar::Matchers;
 

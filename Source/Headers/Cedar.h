@@ -1,6 +1,11 @@
 #import "CDRFunctions.h"
 #import "CDRSpecHelper.h"
 
+#if TARGET_OS_IPHONE
+#import "CedarApplicationDelegate.h"
+#import "Cedar-iOS.h"
+#endif
+
 #import "NSInvocation+Cedar.h"
 #import "Argument.h"
 #import "ValueArgument.h"
@@ -18,8 +23,6 @@
 #import "RejectedMethod.h"
 #import "StubbedMethod.h"
 #import "CDRFake.h"
-#import "CedarApplicationDelegate.h"
-#import "Cedar-iOS.h"
 #import "Base.h"
 #import "BeCloseTo.h"
 #import "BeFalsy.h"
@@ -63,9 +66,13 @@
 #import "BeEmpty.h"
 #import "Contain.h"
 #import "AnInstanceOf.h"
+
+#if TARGET_OS_IPHONE
 #import "UIGeometryCompareEqual.h"
 #import "UIGeometryStringifiers.h"
 #import "UIKitComparatorsContainer.h"
+#endif
+
 #import "NSMethodSignature+Cedar.h"
 #import "CDRBlockHelper.h"
 #import "CDRNil.h"

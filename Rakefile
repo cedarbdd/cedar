@@ -1,12 +1,13 @@
 PROJECT_NAME = "Cedar"
 APP_NAME = "Cedar OS X Specs"
-APP_IOS_NAME = "Cedar iOS Specs"
+APP_IOS_NAME = "Cedar-StaticLib Specs"
 CONFIGURATION = "Release"
 
 SPECS_TARGET_NAME = "Cedar OS X Specs"
-UI_SPECS_TARGET_NAME = "Cedar iOS Specs"
+UI_SPECS_TARGET_NAME = "Cedar-StaticLib Specs"
 FOCUSED_SPECS_TARGET_NAME = "Cedar OS X FocusedSpecs"
-IOS_FRAMEWORK_SPECS_TARGET_NAME = "Cedar iOS FrameworkSpecs"
+IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS StaticFrameworkSpecs"
+IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS-Framework Specs"
 
 OCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS SenTestingKit Tests"
 XCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS XCTest Tests"
@@ -14,7 +15,8 @@ XCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS XCTest Tests"
 OSX_FAILING_SPEC_SCHEME_NAME = "Cedar OS X Failing Test Bundle"
 
 CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
-CEDAR_IOS_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
+CEDAR_IOS_STATIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
+CEDAR_IOS_DYNAMIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS-Framework"
 TEMPLATE_IDENTIFIER_PREFIX = "com.pivotallabs.cedar."
 TEMPLATE_SENTINEL_KEY = "isCedarTemplate"
 SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
@@ -239,14 +241,14 @@ class Simulator
 end
 
 desc 'Trims whitespace and runs all the tests (suites and bundles)'
-task :default => [:trim_whitespace, "suites:run", "suites:iosframeworkspecs:run", "testbundles:run"]
+task :default => [:trim_whitespace, "suites:run", "suites:iosdynamicframeworkspecs:run", "testbundles:run"]
 
 desc 'Runs static analyzer on suites and the ios framework'
-task :analyze => [:clean, "suites:analyze", "suites:iosframeworkspecs:analyze"]
+task :analyze => [:clean, "suites:analyze", "suites:iosdynamicframeworkspecs:analyze"]
 
 desc 'Cleans, trims whitespace, runs all tests and static analyzer'
 task :full => [:clean, :default, :analyze]
-task :ci => [:clean, "testbundles:run", "suites:run", "suites:iosframeworkspecs:run"]
+task :ci => [:clean, "testbundles:run", "suites:run", "suites:iosdynamicframeworkspecs:run"]
 
 desc "Trim whitespace"
 task :trim_whitespace do
@@ -375,18 +377,18 @@ namespace :suites do
     end
   end
 
-  desc "Analyzes and runs ios framework specs"
-  task iosframeworkspecs: ['iosframeworkspecs:analyze', 'iosframeworkspecs:run']
+  desc "Analyzes and runs ios static framework specs"
+  task iosstaticframeworkspecs: ['iosstaticframeworkspecs:analyze', 'iosstaticframeworkspecs:run']
 
-  namespace :iosframeworkspecs do
-    desc "Analyzes ios framework specs"
+  namespace :iosstaticframeworkspecs do
+    desc "Analyzes ios static framework specs"
     task :analyze do
-      Xcode.analyze(target: IOS_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.specs.analyze.log")
+      Xcode.analyze(target: IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.static.specs.analyze.log")
     end
 
     desc "Build iOS static framework specs"
     task :build do
-      Xcode.build(target: IOS_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.specs.build.log")
+      Xcode.build(target: IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.static.specs.build.log")
     end
 
     desc "Runs iOS static framework specs"
@@ -397,7 +399,34 @@ namespace :suites do
       }
 
       Shell.with_env(env_vars) do
-        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_FRAMEWORK_SPECS_TARGET_NAME, "frameworks.ios.specs.run.log")
+        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME, "frameworks.ios.static.specs.run.log")
+      end
+    end
+  end
+
+  desc "Analyzes and runs ios dynamic framework specs"
+  task iosstaticframeworkspecs: ['iosdynamicframeworkspecs:analyze', 'iosdynamicframeworkspecs:run']
+
+  namespace :iosdynamicframeworkspecs do
+    desc "Analyzes ios dynamic framework specs"
+    task :analyze do
+      Xcode.analyze(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.dynamic.specs.analyze.log")
+    end
+
+    desc "Build iOS dynamic framework specs"
+    task :build do
+      Xcode.build(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.dynamic.specs.build.log")
+    end
+
+    desc "Runs iOS dynamic framework specs"
+    task run: :build do
+      Simulator.kill
+      env_vars = {
+        "CEDAR_REPORTER_CLASS" => "CDRColorizedReporter",
+      }
+
+      Shell.with_env(env_vars) do
+        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, "frameworks.ios.dynamic.specs.run.log")
       end
     end
   end
@@ -415,9 +444,14 @@ namespace :frameworks do
   end
 
   namespace :ios do
-    desc "Builds the Cedar iOS framework"
+    desc "Builds the legacy Cedar iOS static framework"
+    task :build_static do
+      Xcode.build(target: CEDAR_IOS_STATIC_FRAMEWORK_TARGET_NAME, logfile: "frameworks.ios.static.build.log")
+    end
+
+    desc "Builds the Cedar iOS dynamic framework"
     task :build do
-      Xcode.build(target: CEDAR_IOS_FRAMEWORK_TARGET_NAME, logfile: "frameworks.ios.build.log")
+      Xcode.build(target: CEDAR_IOS_DYNAMIC_FRAMEWORK_TARGET_NAME, logfile: "frameworks.ios.dynamic.build.log")
     end
   end
 end

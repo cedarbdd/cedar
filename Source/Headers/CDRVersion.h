@@ -1,1 +1,1 @@
-NSString *CDRVersion = @"0.11.3";
+static NSString *CDRVersion = @"0.11.3";

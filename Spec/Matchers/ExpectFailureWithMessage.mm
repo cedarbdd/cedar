@@ -2,6 +2,8 @@
 #import "CDRSpec.h"
 #import "CDRSpecFailure.h"
 
+using namespace Cedar::Matchers;
+
 void expectFailureWithMessage(NSString *message, CDRSpecBlock block) {
     @try {
         block();
@@ -26,7 +28,8 @@ void expectExceptionWithReason(NSString *reason, CDRSpecBlock block) {
     }
     @catch (NSException *x) {
         if (![reason isEqualToString:x.reason]) {
-            fail([NSString stringWithFormat:@"Expected exception with reason: <%@> but received exception with reason <%@>", reason, x.reason]);
+            NSString *failureReason = [NSString stringWithFormat:@"Expected exception with reason: <%@> but received exception with reason <%@>", reason, x.reason];
+            fail(failureReason);
         }
         return;
     }
