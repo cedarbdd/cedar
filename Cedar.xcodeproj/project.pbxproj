@@ -191,7 +191,6 @@
 		AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AE02E83118526E9F00414F19 /* Cedar-iOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02E83018526E9F00414F19 /* Cedar-iOSSpec.mm */; };
 		AE03FBEE1B06C33B00013784 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE03FBED1B06C33B00013784 /* main.mm */; };
-		AE03FBF91B06C33B00013784 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE03FBF81B06C33B00013784 /* Images.xcassets */; };
 		AE03FBFC1B06C33B00013784 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE03FBFA1B06C33B00013784 /* LaunchScreen.xib */; };
 		AE03FC0F1B06C37E00013784 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; };
 		AE03FC131B06C3BA00013784 /* Cedar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -582,7 +581,6 @@
 		AEC40C59174ACAEE00474D2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC40C57174ACAD900474D2D /* UIKit.framework */; };
 		AEC54007185E90D900B0D41D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC54006185E90D900B0D41D /* UIKit.framework */; };
 		AEC54009185E90E900B0D41D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC54008185E90E900B0D41D /* CoreGraphics.framework */; };
-		AEC5400E185E998D00B0D41D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEC5400D185E998D00B0D41D /* Images.xcassets */; };
 		AEC7873915F440980058A27B /* InvocationMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7873715F440980058A27B /* InvocationMatcher.mm */; };
 		AEC7873A15F440980058A27B /* InvocationMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7873715F440980058A27B /* InvocationMatcher.mm */; };
 		AEC7874D15F444A50058A27B /* HaveReceived.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7874C15F444A50058A27B /* HaveReceived.mm */; };
@@ -1018,7 +1016,6 @@
 		AE03FBE91B06C33B00013784 /* Cedar-iOS-Framework Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar-iOS-Framework Specs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE03FBEC1B06C33B00013784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE03FBED1B06C33B00013784 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		AE03FBF81B06C33B00013784 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AE03FBFB1B06C33B00013784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarDoubleARCSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithForwardingTarget.h; sourceTree = "<group>"; };
@@ -1121,7 +1118,6 @@
 		AEC40C57174ACAD900474D2D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AEC54006185E90D900B0D41D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AEC54008185E90E900B0D41D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		AEC5400D185E998D00B0D41D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = iOSSpecs/Images.xcassets; sourceTree = "<group>"; };
 		AEC7873715F440980058A27B /* InvocationMatcher.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InvocationMatcher.mm; sourceTree = "<group>"; };
 		AEC7874C15F444A50058A27B /* HaveReceived.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HaveReceived.mm; sourceTree = "<group>"; };
 		AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRColorizedReporter.h; sourceTree = "<group>"; };
@@ -1582,7 +1578,6 @@
 		AE03FBEA1B06C33B00013784 /* Cedar-iOS-Framework Spec */ = {
 			isa = PBXGroup;
 			children = (
-				AE03FBF81B06C33B00013784 /* Images.xcassets */,
 				AE03FBFA1B06C33B00013784 /* LaunchScreen.xib */,
 				AE03FBEB1B06C33B00013784 /* Supporting Files */,
 			);
@@ -1849,7 +1844,6 @@
 				AE03FBEA1B06C33B00013784 /* Cedar-iOS-Framework Spec */,
 				AEEE202611DC286500029872 /* Frameworks */,
 				AEEE1FB711DC271300029872 /* Products */,
-				AEC5400D185E998D00B0D41D /* Images.xcassets */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
 				AEEE227811DC2CF900029872 /* iOSSpecs-Info.plist */,
 				AEEE222211DC2A1400029872 /* Rakefile */,
@@ -2385,7 +2379,7 @@
 			name = "Cedar iOS XCTest Tests";
 			productName = OCUnitAppTests;
 			productReference = 1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		96A07EEE13F276640021974D /* Cedar OS X FocusedSpecs */ = {
 			isa = PBXNativeTarget;
@@ -2439,7 +2433,7 @@
 			name = "Cedar iOS SenTestingKit Tests";
 			productName = OCUnitAppTests;
 			productReference = 96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		AE02E7E3184EABCD00414F19 /* Cedar-iOS StaticFrameworkSpecs */ = {
 			isa = PBXNativeTarget;
@@ -2512,7 +2506,7 @@
 			name = "Cedar OS X Host AppTests";
 			productName = "OS X Host AppTests";
 			productReference = AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		AE4864F71B067620005DB302 /* Cedar-iOS-Framework */ = {
 			isa = PBXNativeTarget;
@@ -2548,7 +2542,7 @@
 			name = "Cedar OS X Failing Test Bundle";
 			productName = "OS X Failing Test Bundle";
 			productReference = AEB8818719DCD62D00F081BA /* Cedar OS X Failing Test Bundle.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		AEEE1FB511DC271300029872 /* Cedar */ = {
 			isa = PBXNativeTarget;
@@ -2726,7 +2720,6 @@
 			files = (
 				AEB9B2CC1B23F5FB003E4728 /* edward.jpg in Resources */,
 				AE03FBFC1B06C33B00013784 /* LaunchScreen.xib in Resources */,
-				AE03FBF91B06C33B00013784 /* Images.xcassets in Resources */,
 				AEB9B2CB1B23F5DF003E4728 /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2772,7 +2765,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEC5400E185E998D00B0D41D /* Images.xcassets in Resources */,
 				AEEF361019DF27E400794484 /* edward.jpg in Resources */,
 				AEEF360E19DF24AB00794484 /* image.png in Resources */,
 			);
