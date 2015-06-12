@@ -1,1 +1,2 @@
-NSString *CDRVersion = @"0.11.3";
+#import <Foundation/Foundation.h>
+extern NSString *CDRVersion;
