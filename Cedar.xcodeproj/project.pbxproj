@@ -191,7 +191,6 @@
 		AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AE02E83118526E9F00414F19 /* Cedar-iOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02E83018526E9F00414F19 /* Cedar-iOSSpec.mm */; };
 		AE03FBEE1B06C33B00013784 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE03FBED1B06C33B00013784 /* main.mm */; };
-		AE03FBFC1B06C33B00013784 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE03FBFA1B06C33B00013784 /* LaunchScreen.xib */; };
 		AE03FC0F1B06C37E00013784 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; };
 		AE03FC131B06C3BA00013784 /* Cedar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -306,7 +305,6 @@
 		AE1937A31B1ACC2E008C8CD8 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; };
 		AE248F9D19DCD52500092C14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE248F9C19DCD52500092C14 /* main.m */; };
 		AE248FA019DCD52500092C14 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE248F9F19DCD52500092C14 /* AppDelegate.m */; };
-		AE248FA519DCD52500092C14 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE248FA319DCD52500092C14 /* MainMenu.xib */; };
 		AE248FB119DCD52500092C14 /* OS_X_Host_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE248FB019DCD52500092C14 /* OS_X_Host_AppTests.m */; };
 		AE248FB819DCD54600092C14 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE1FB611DC271300029872 /* Cedar.framework */; };
 		AE31A29F19C0F23F00C438C1 /* CDRXTestSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = AE31A29D19C0F23F00C438C1 /* CDRXTestSuite.h */; };
@@ -1016,7 +1014,6 @@
 		AE03FBE91B06C33B00013784 /* Cedar-iOS-Framework Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar-iOS-Framework Specs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE03FBEC1B06C33B00013784 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE03FBED1B06C33B00013784 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		AE03FBFB1B06C33B00013784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CedarDoubleARCSharedExamples.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE06D87E17AEEE230084D27C /* ObjectWithForwardingTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithForwardingTarget.h; sourceTree = "<group>"; };
 		AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithForwardingTarget.m; sourceTree = "<group>"; };
@@ -1043,7 +1040,6 @@
 		AE248F9C19DCD52500092C14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AE248F9E19DCD52500092C14 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE248F9F19DCD52500092C14 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AE248FA419DCD52500092C14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar OS X Host AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE248FAF19DCD52500092C14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE248FB019DCD52500092C14 /* OS_X_Host_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OS_X_Host_AppTests.m; sourceTree = "<group>"; };
@@ -1578,7 +1574,6 @@
 		AE03FBEA1B06C33B00013784 /* Cedar-iOS-Framework Spec */ = {
 			isa = PBXGroup;
 			children = (
-				AE03FBFA1B06C33B00013784 /* LaunchScreen.xib */,
 				AE03FBEB1B06C33B00013784 /* Supporting Files */,
 			);
 			path = "Cedar-iOS-Framework Spec";
@@ -1680,7 +1675,6 @@
 			children = (
 				AE248F9E19DCD52500092C14 /* AppDelegate.h */,
 				AE248F9F19DCD52500092C14 /* AppDelegate.m */,
-				AE248FA319DCD52500092C14 /* MainMenu.xib */,
 				AE248F9A19DCD52500092C14 /* Supporting Files */,
 			);
 			path = "OS X Host App";
@@ -2719,7 +2713,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB9B2CC1B23F5FB003E4728 /* edward.jpg in Resources */,
-				AE03FBFC1B06C33B00013784 /* LaunchScreen.xib in Resources */,
 				AEB9B2CB1B23F5DF003E4728 /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2728,7 +2721,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE248FA519DCD52500092C14 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3457,22 +3449,6 @@
 				AE02E7EC184EABCD00414F19 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		AE03FBFA1B06C33B00013784 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE03FBFB1B06C33B00013784 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		AE248FA319DCD52500092C14 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE248FA419DCD52500092C14 /* Base */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		AEB8818C19DCD62D00F081BA /* InfoPlist.strings */ = {
