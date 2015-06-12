@@ -79,6 +79,11 @@ namespace Cedar { namespace Matchers { namespace Private {
 
     template<typename T> template<typename U>
     bool BeSameInstanceAs<T>::matches(U * const & actualValue) const {
+        if (actualValue == nil && expectedValue_ == nil) {
+            [[CDRSpecFailure specFailureWithReason:@"Unexpected use of be_same_instance_as matcher to check for nil. Both the actual and given values are nil. This is probably not what you intended to verify."] raise];
+            return NO;
+        }
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wcompare-distinct-pointer-types"
         return actualValue == expectedValue_;

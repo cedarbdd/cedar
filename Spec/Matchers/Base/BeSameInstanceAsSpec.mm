@@ -64,6 +64,20 @@ describe(@"be_same_instance_as matcher", ^{
             });
         });
     });
+
+    describe(@"when the actual value is nil", ^{
+        int *actualValue = nil;
+
+        describe(@"and the values are both nil", ^{
+            int *expectedValue = nil;
+
+            it(@"should not pass", ^{
+                expectFailureWithMessage(@"Unexpected use of be_same_instance_as matcher to check for nil. Both the actual and given values are nil. This is probably not what you intended to verify.", ^{
+                    expect(actualValue).to(be_same_instance_as(expectedValue));
+                });
+            });
+        });
+    });
 });
 
 SPEC_END
