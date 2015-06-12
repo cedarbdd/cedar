@@ -27,6 +27,7 @@ sharedExamplesFor(@"a Cedar double when used with ARC", ^(NSDictionary *sharedCo
                     runBlock();
                     called = true;
                 });
+                myDouble stub_method(@selector(value));
 
                 dispatch_group_t group = dispatch_group_create();
                 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
