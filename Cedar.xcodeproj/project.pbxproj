@@ -81,6 +81,10 @@
 		34157D101B755E21007AD1BA /* CDRTeamCityReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
 		34157D111B755E40007AD1BA /* CDRBufferedDefaultReporter.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 1FF449B318A0C04D00AF94B0 /* CDRBufferedDefaultReporter.h */; };
 		342F5D0B18F430DB00F38E35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 342F5D0A18F430DB00F38E35 /* QuartzCore.framework */; };
+		34322B061BA7405800D0CFBD /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 34322B051BA7405800D0CFBD /* CDRPrivateFunctions.h */; settings = {ASSET_TAGS = (); }; };
+		34322B071BA7406100D0CFBD /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 34322B051BA7405800D0CFBD /* CDRPrivateFunctions.h */; settings = {ASSET_TAGS = (); }; };
+		34322B091BA740B900D0CFBD /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 34322B081BA740B900D0CFBD /* CDRXCTestObserver.h */; settings = {ASSET_TAGS = (); }; };
+		34322B0A1BA740B900D0CFBD /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 34322B081BA740B900D0CFBD /* CDRXCTestObserver.h */; settings = {ASSET_TAGS = (); }; };
 		343FAFEA190FDAEC0085AFEC /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		343FAFEB190FDAEC0085AFEC /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		34640DA71B6964F90083EB01 /* CDRBlockHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */; };
@@ -698,6 +702,12 @@
 		E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		E4BCFDD21817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
 		E4BCFDD31817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
+		F7F409981B2E3C8B001EFA14 /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */; };
+		F7F4099A1B2E3C8B001EFA14 /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */; };
+		F7F4099B1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
+		F7F4099C1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
+		F7F4099D1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
+		F7F4099F1B2E3E46001EFA14 /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F4099E1B2E3E26001EFA14 /* CDRPrivateFunctions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -906,6 +916,8 @@
 		2234907C18009DA6001C8E8D /* CDRHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRHooks.h; sourceTree = "<group>"; };
 		228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CDRSpyiOSSpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		342F5D0A18F430DB00F38E35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		34322B051BA7405800D0CFBD /* CDRPrivateFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRPrivateFunctions.h; sourceTree = "<group>"; };
+		34322B081BA740B900D0CFBD /* CDRXCTestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRXCTestObserver.h; sourceTree = "<group>"; };
 		343FAFE8190FDAEC0085AFEC /* DeallocNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeallocNotifier.h; sourceTree = "<group>"; };
 		343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeallocNotifier.m; sourceTree = "<group>"; };
 		3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRBlockHelper.h; sourceTree = "<group>"; };
@@ -1192,6 +1204,9 @@
 		E32861311604F287001FA77E /* FibonacciCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FibonacciCalculator.m; sourceTree = "<group>"; };
 		E4BCFDD01817FA110083ED98 /* ObjectWithProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithProperty.h; sourceTree = "<group>"; };
 		E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithProperty.m; sourceTree = "<group>"; };
+		F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRXCTestObserver.h; sourceTree = "<group>"; };
+		F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRXCTestObserver.m; sourceTree = "<group>"; };
+		F7F4099E1B2E3E26001EFA14 /* CDRPrivateFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRPrivateFunctions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1412,6 +1427,7 @@
 				3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */,
 				34F3DF7B1A6ABA2E003041DA /* CDRNil.h */,
 				96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */,
+				34322B051BA7405800D0CFBD /* CDRPrivateFunctions.h */,
 				AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */,
 				969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */,
 				34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */,
@@ -1457,8 +1473,9 @@
 		34157D181B75A212007AD1BA /* XCTest */ = {
 			isa = PBXGroup;
 			children = (
-				AE31A29D19C0F23F00C438C1 /* CDRXTestSuite.h */,
 				AE34724919C37ECF005CA6F1 /* CDRXCTestCase.h */,
+				34322B081BA740B900D0CFBD /* CDRXCTestObserver.h */,
+				AE31A29D19C0F23F00C438C1 /* CDRXTestSuite.h */,
 				AE4E9B9019C8B44700D794CE /* NSInvocation+CDRXExample.h */,
 			);
 			path = XCTest;
@@ -1679,6 +1696,7 @@
 				AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */,
 				AE31A29E19C0F23F00C438C1 /* CDRXTestSuite.m */,
 				AE34724A19C37ECF005CA6F1 /* CDRXCTestCase.m */,
+				F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */,
 				AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */,
 			);
 			path = XCTest;
@@ -2183,6 +2201,7 @@
 				AE4865A71B0690AF005DB302 /* AnyInstanceArgument.h in Headers */,
 				AE4865A81B0690AF005DB302 /* ReturnValue.h in Headers */,
 				AE4865A91B0690AF005DB302 /* AnyArgument.h in Headers */,
+				F7F4099A1B2E3C8B001EFA14 /* CDRXCTestObserver.h in Headers */,
 				AE4865AA1B0690AF005DB302 /* AnyInstanceOfClassArgument.h in Headers */,
 				AE4865AB1B0690AF005DB302 /* AnyInstanceConformingToProtocolArgument.h in Headers */,
 				AE4865AC1B0690AF005DB302 /* CDRProtocolFake.h in Headers */,
@@ -2228,6 +2247,7 @@
 				AE4865D91B0690B1005DB302 /* CDRExampleGroup.h in Headers */,
 				AE4865DA1B0690B1005DB302 /* CDRExampleParent.h in Headers */,
 				AE4865DB1B0690B1005DB302 /* CDRFunctions.h in Headers */,
+				34322B0A1BA740B900D0CFBD /* CDRXCTestObserver.h in Headers */,
 				AE4865DC1B0690B1005DB302 /* CDRHooks.h in Headers */,
 				AE4865DD1B0690B1005DB302 /* CDRSharedExampleGroupPool.h in Headers */,
 				AE4865DE1B0690B1005DB302 /* CDRSpec.h in Headers */,
@@ -2242,6 +2262,7 @@
 				AE4865D01B0690B0005DB302 /* ActualValue.h in Headers */,
 				AE4865B41B0690AF005DB302 /* InvocationMatcher.h in Headers */,
 				AE4865E31B0690B2005DB302 /* CDRBlockHelper.h in Headers */,
+				F7F4099F1B2E3E46001EFA14 /* CDRPrivateFunctions.h in Headers */,
 				AE4865E51B0690B2005DB302 /* CDRNil.h in Headers */,
 				AE48655D1B06769E005DB302 /* CDROTestRunner.h in Headers */,
 				AE4865551B06769D005DB302 /* CDRBufferedDefaultReporter.h in Headers */,
@@ -2255,6 +2276,7 @@
 				AE48651D1B06769B005DB302 /* CDRSpyInfo.h in Headers */,
 				AE4865E81B0691EA005DB302 /* CDRTeamCityReporter.h in Headers */,
 				AE4865691B06769F005DB302 /* CDRXCTestCase.h in Headers */,
+				34322B071BA7406100D0CFBD /* CDRPrivateFunctions.h in Headers */,
 				AE4865EC1B069253005DB302 /* CDROTestReporter.h in Headers */,
 				AE4865EA1B069253005DB302 /* CDRExampleReporter.h in Headers */,
 				AE4865531B06769D005DB302 /* CDRReportDispatcher.h in Headers */,
@@ -2302,6 +2324,7 @@
 				AEF8FB0719E6000E00DD4FE4 /* CDRVersion.h in Headers */,
 				34640DA81B6964FE0083EB01 /* CDRTypeUtilities.h in Headers */,
 				B86B685F1A1326E200F283F7 /* OSXGeometryStringifiers.h in Headers */,
+				F7F409981B2E3C8B001EFA14 /* CDRXCTestObserver.h in Headers */,
 				2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */,
 				AE18A7CF13F453CC00C8872C /* BeTruthy.h in Headers */,
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
@@ -2310,6 +2333,7 @@
 				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
 				AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */,
 				AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */,
+				34322B091BA740B900D0CFBD /* CDRXCTestObserver.h in Headers */,
 				AE18A7FB13F4601400C8872C /* Contain.h in Headers */,
 				AE9AA68915AC729800617E1A /* CedarDouble.h in Headers */,
 				AE0F354E19E87D6F00B9F116 /* CompareCloseTo.h in Headers */,
@@ -2336,6 +2360,7 @@
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
 				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
 				34147770191408C900CBA385 /* AnInstanceOf.h in Headers */,
+				34322B061BA7405800D0CFBD /* CDRPrivateFunctions.h in Headers */,
 				AE31A29F19C0F23F00C438C1 /* CDRXTestSuite.h in Headers */,
 				AEB45A911496C8D800845D09 /* RaiseException.h in Headers */,
 				AEC9DEED12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
@@ -2389,7 +2414,7 @@
 			name = "Cedar iOS XCTest Tests";
 			productName = OCUnitAppTests;
 			productReference = 1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		96A07EEE13F276640021974D /* Cedar OS X FocusedSpecs */ = {
 			isa = PBXNativeTarget;
@@ -2443,7 +2468,7 @@
 			name = "Cedar iOS SenTestingKit Tests";
 			productName = OCUnitAppTests;
 			productReference = 96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		AE02E7E3184EABCD00414F19 /* Cedar-iOS StaticFrameworkSpecs */ = {
 			isa = PBXNativeTarget;
@@ -2516,7 +2541,7 @@
 			name = "Cedar OS X Host AppTests";
 			productName = "OS X Host AppTests";
 			productReference = AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		AE4864F71B067620005DB302 /* Cedar-iOS-Framework */ = {
 			isa = PBXNativeTarget;
@@ -2552,7 +2577,7 @@
 			name = "Cedar OS X Failing Test Bundle";
 			productName = "OS X Failing Test Bundle";
 			productReference = AEB8818719DCD62D00F081BA /* Cedar OS X Failing Test Bundle.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		AEEE1FB511DC271300029872 /* Cedar */ = {
 			isa = PBXNativeTarget;
@@ -2631,7 +2656,7 @@
 		AEEE1FA611DC26EA00029872 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0610;
+				LastTestingUpgradeCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Pivotal;
 				TargetAttributes = {
@@ -3062,6 +3087,7 @@
 				AE48657C1B067953005DB302 /* HaveReceived.mm in Sources */,
 				AE48657D1B067953005DB302 /* CDRSpyInfo.mm in Sources */,
 				AE48657E1B067953005DB302 /* NSInvocation+Cedar.m in Sources */,
+				F7F4099D1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */,
 				AE48657F1B067953005DB302 /* NSMethodSignature+Cedar.m in Sources */,
 				AE4865801B067953005DB302 /* CDRSpec+XCTestSupport.m in Sources */,
 				AE4865811B067953005DB302 /* CDRXTestSuite.m in Sources */,
@@ -3120,6 +3146,7 @@
 				AEEE1FF611DC27B800029872 /* CDRExampleGroup.m in Sources */,
 				AEEE1FF711DC27B800029872 /* CDRFunctions.m in Sources */,
 				AEEE1FF811DC27B800029872 /* CDRSpec.m in Sources */,
+				F7F4099B1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */,
 				AEEE201111DC27B800029872 /* CDRSpecHelper.m in Sources */,
 				1FF449B118A0C03800AF94B0 /* CDRBufferedDefaultReporter.m in Sources */,
 				AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */,
@@ -3246,6 +3273,7 @@
 				1FF4497E18A0B37A00AF94B0 /* AnyArgument.mm in Sources */,
 				AE4E9B9519C8B44700D794CE /* NSInvocation+CDRXExample.m in Sources */,
 				AE9855AE1236E7080024094E /* CDRSharedExampleGroupPool.m in Sources */,
+				F7F4099C1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */,
 				AEC9DEF412C2CC8F0039512D /* CDRColorizedReporter.m in Sources */,
 				1F483E34187D3CD200521F81 /* CDROTestNamer.m in Sources */,
 				4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
