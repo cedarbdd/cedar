@@ -93,7 +93,7 @@ describe(@"CDRSpecFailure", ^{
             context(@"when file name and line number are specified in exception's userInfo", ^{
                 beforeEach(^{
                     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"File.m", @"fileName", [NSNumber numberWithInt:123], @"lineNumber", nil];
-                    NSException *exception = [NSException exceptionWithName:nil reason:@"exception reason" userInfo:userInfo];
+                    NSException *exception = [NSException exceptionWithName:@"boo" reason:@"exception reason" userInfo:userInfo];
                     failure = [CDRSpecFailure specFailureWithRaisedObject:exception];
                 });
 
@@ -112,7 +112,7 @@ describe(@"CDRSpecFailure", ^{
 
             context(@"when file name and line number are not specified in userInfo of exception", ^{
                 beforeEach(^{
-                    NSException *exception = [NSException exceptionWithName:nil reason:@"exception reason" userInfo:nil];
+                    NSException *exception = [NSException exceptionWithName:@"boo" reason:@"exception reason" userInfo:nil];
                     failure = [CDRSpecFailure specFailureWithRaisedObject:exception];
                 });
 
