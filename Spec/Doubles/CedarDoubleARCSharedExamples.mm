@@ -43,7 +43,6 @@ sharedExamplesFor(@"a Cedar double when used with ARC", ^(NSDictionary *sharedCo
                 });
 
                 while (!called) {
-                    [[NSRunLoop currentRunLoop] addTimer:[NSTimer timerWithTimeInterval:0.1 invocation:nil repeats:NO] forMode:NSDefaultRunLoopMode];
                     NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:0.1];
                     [[NSRunLoop currentRunLoop] runUntilDate:futureDate];
                 }
