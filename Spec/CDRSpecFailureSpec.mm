@@ -93,12 +93,14 @@ describe(@"CDRSpecFailure", ^{
             context(@"when file name and line number are specified in exception's userInfo", ^{
                 beforeEach(^{
                     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"File.m", @"fileName", [NSNumber numberWithInt:123], @"lineNumber", nil];
-                    NSException *exception = [NSException exceptionWithName:@"boo" reason:@"exception reason" userInfo:userInfo];
+                    NSException *exception = [NSException exceptionWithName:@"name"
+                                                                     reason:@"reason"
+                                                                   userInfo:userInfo];
                     failure = [CDRSpecFailure specFailureWithRaisedObject:exception];
                 });
 
                 it(@"should return exception's reason", ^{
-                    expect([failure reason]).to(equal(@"exception reason"));
+                    expect([failure reason]).to(equal(@"reason"));
                 });
 
                 it(@"should return file name specified in exception's userInfo", ^{
@@ -112,12 +114,14 @@ describe(@"CDRSpecFailure", ^{
 
             context(@"when file name and line number are not specified in userInfo of exception", ^{
                 beforeEach(^{
-                    NSException *exception = [NSException exceptionWithName:@"boo" reason:@"exception reason" userInfo:nil];
+                    NSException *exception = [NSException exceptionWithName:@"name"
+                                                                     reason:@"reason"
+                                                                   userInfo:nil];
                     failure = [CDRSpecFailure specFailureWithRaisedObject:exception];
                 });
 
                 it(@"should return raised object's reason", ^{
-                    expect([failure reason]).to(equal(@"exception reason"));
+                    expect([failure reason]).to(equal(@"reason"));
                 });
 
                 it(@"should return nil for file name", ^{
@@ -193,8 +197,8 @@ describe(@"CDRSpecFailure", ^{
                     it(@"returns string with symbolicated call stack "
                         "showing originating error location closest to the top", ^{
                          symbols should contain(
-                            @"  *CDRSpecFailureSpec.mm:165\n"
-                             "  *CDRSpecFailureSpec.mm:171\n"
+                            @"  *CDRSpecFailureSpec.mm:169\n"
+                             "  *CDRSpecFailureSpec.mm:175\n"
                         );
                     });
 
