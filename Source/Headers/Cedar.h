@@ -76,4 +76,3 @@
 #import "NSMethodSignature+Cedar.h"
 #import "CDRBlockHelper.h"
 #import "CDRNil.h"
-#import "CedarDoubleImpl.h"
