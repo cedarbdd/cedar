@@ -31,6 +31,9 @@
         return;
     }
 
+    CDRDefineSharedExampleGroups();
+    CDRDefineGlobalBeforeAndAfterEachBlocks();
+
     unsigned int seed = CDRGetRandomSeed();
     NSArray *specClasses = CDRSpecClassesToRun();
     NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
