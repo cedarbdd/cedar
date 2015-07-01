@@ -714,6 +714,17 @@
 		E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		E4BCFDD21817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
 		E4BCFDD31817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
+		F78FDA151B43AA8A0054C768 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
+		F78FDA161B43AA8C0054C768 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
+		F78FDA171B43AA8F0054C768 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
+		F78FDA181B43AA8F0054C768 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
+		F78FDA191B43AA930054C768 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
+		F78FDA1A1B43AA930054C768 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
+		F78FDA1B1B43AB540054C768 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
+		F78FDA1C1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
+		F78FDA1D1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
+		F7A225DC1B43A8FB006231CC /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
+		F7BBE7D31B43A852009547F0 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; };
 		F7F409981B2E3C8B001EFA14 /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */; };
 		F7F409991B2E3C8B001EFA14 /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */; };
 		F7F4099A1B2E3C8B001EFA14 /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */; };
@@ -2872,17 +2883,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7BBE7D31B43A852009547F0 /* CedarDoubleSharedExamples.mm in Sources */,
+				F78FDA161B43AA8C0054C768 /* CedarNiceFakeSharedExamples.mm in Sources */,
 				1F45A3CE180E4796003C1E36 /* OCUnitApplicationTests.mm in Sources */,
 				AE34722A19C118C9005CA6F1 /* SpecSpec.mm in Sources */,
+				F78FDA181B43AA8F0054C768 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
+				F78FDA1D1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */,
 				1F45A3E3180E4A1C003C1E36 /* XCUnitApplicationTestsWithXCTest.m in Sources */,
 				AE34723019C124CE005CA6F1 /* CDRExampleGroupSpec.mm in Sources */,
 				AE34723719C12534005CA6F1 /* FibonacciCalculator.m in Sources */,
 				AE34722F19C124CE005CA6F1 /* CDRExampleSpec.mm in Sources */,
+				F7A225DC1B43A8FB006231CC /* FooSuperclass.m in Sources */,
 				1F45A3D0180E4796003C1E36 /* CDRSymbolicatorSpec.mm in Sources */,
 				AE34723919C12588005CA6F1 /* SimpleKeyValueObserver.m in Sources */,
+				F78FDA1B1B43AB540054C768 /* SimpleIncrementer.m in Sources */,
 				AE34723419C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */,
 				AE34723D19C22547005CA6F1 /* CDRDefaultReporterSpec.mm in Sources */,
 				AE34724619C225A1005CA6F1 /* CDRXTestSuiteSpec.mm in Sources */,
+				F78FDA1A1B43AA930054C768 /* HaveReceivedSpec.mm in Sources */,
 				AE34722819C11872005CA6F1 /* GlobalBeforeEachSpec.mm in Sources */,
 				1F45A3D1180E4796003C1E36 /* CDRSpecFailureSpec.mm in Sources */,
 			);
@@ -2918,17 +2936,21 @@
 				AE34722E19C124CE005CA6F1 /* CDRExampleGroupSpec.mm in Sources */,
 				9D28051B18E2324300887CC4 /* ObjectWithValueEquality.m in Sources */,
 				AE34722D19C124CE005CA6F1 /* CDRExampleSpec.mm in Sources */,
+				F78FDA191B43AA930054C768 /* HaveReceivedSpec.mm in Sources */,
 				1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */,
 				AE52405818F5D604003AB816 /* FooSuperclass.m in Sources */,
+				F78FDA171B43AA8F0054C768 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
 				AE34724519C225A0005CA6F1 /* CDRXTestSuiteSpec.mm in Sources */,
 				AE34722919C11876005CA6F1 /* GlobalBeforeEachSpec.mm in Sources */,
 				1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */,
 				1FB4F27F188919A200227772 /* ARCViewController.m in Sources */,
+				F78FDA151B43AA8A0054C768 /* CedarNiceFakeSharedExamples.mm in Sources */,
 				1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */,
 				AE34722B19C118CA005CA6F1 /* SpecSpec.mm in Sources */,
 				1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */,
 				96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */,
 				1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */,
+				F78FDA1C1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */,
 				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm in Sources */,
 				1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */,
 				AE34723319C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */,
