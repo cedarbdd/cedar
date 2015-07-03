@@ -11,6 +11,7 @@ namespace Cedar { namespace Doubles {
 - (void)reject_method:(const Cedar::Doubles::RejectedMethod &)rejected_method;
 
 - (NSArray *)sent_messages;
+- (NSArray *)sent_messages_with_selector:(SEL)selector;
 - (void)reset_sent_messages;
 
 - (BOOL)can_stub:(SEL)selector;
