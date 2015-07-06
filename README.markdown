@@ -77,7 +77,7 @@ Please read the [Contributor Guide](https://github.com/pivotal/cedar/wiki/Contri
 # Maintainers
 
 * [Andrew Kitchen](mailto:akitchen@pivotallabs.com) ([akitchen](https://github.com/akitchen)), Pivotal Labs, San Francisco
-* [Brian Croom](mailto: bcroom@pivotallabs.com) ([pivotal-brian-croom](https://github.com/pivotal-brian-croom)), Pivotal Labs, Toronto
+* [Brian Croom](mailto:bcroom@pivotal.io) ([briancroom](https://github.com/briancroom)), Pivotal Labs, Toronto
 * [Jeff Hui](mailto:jhui@pivotallabs.com) ([jeffh](https://github.com/jeffh)), Pivotal Labs, San Francisco
 * [Sam Coward](mailto:scoward@pivotallabs.com) ([idoru](https://github.com/idoru)), Pivotal Labs, New York
 * [Tim Jarratt](mailto:tjarratt@pivotal.io) ([tjarratt](https://github.com/tjarratt)), Pivotal Labs, San Francisco
