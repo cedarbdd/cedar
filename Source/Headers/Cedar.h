@@ -1,3 +1,7 @@
+#ifndef __cplusplus
+#error Cedar may only be imported from Objective-C++ (.mm) files.
+#endif
+
 #import "CDRFunctions.h"
 #import "CDRSpecHelper.h"
 
