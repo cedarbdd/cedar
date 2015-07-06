@@ -526,7 +526,7 @@ desc "Build a distribution of the templates and code snippets"
 task :dist => ["dist:prepare", "dist:package"]
 
 namespace :dist do
-  task :prepare => 'frameworks:build' do
+  task :prepare do
     Dir.mkdir(DIST_STAGING_DIR) unless File.exists?(DIST_STAGING_DIR)
 
     Shell.run %{rm -rf "#{DIST_STAGING_DIR}"/*}
