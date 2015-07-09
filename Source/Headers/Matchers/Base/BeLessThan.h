@@ -25,8 +25,7 @@ namespace Cedar { namespace Matchers { namespace Private {
     };
 
     template<typename T>
-    BeLessThan<T>::BeLessThan(const T & expectedValue)
-    : Base<>(), expectedValue_(expectedValue) {
+    BeLessThan<T>::BeLessThan(const T & expectedValue) : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>

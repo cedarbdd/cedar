@@ -25,8 +25,7 @@ namespace Cedar { namespace Matchers { namespace Private {
 
 
     template<typename T>
-    BeGTE<T>::BeGTE(const T & expectedValue)
-    : Base<>(), expectedValue_(expectedValue) {
+    BeGTE<T>::BeGTE(const T & expectedValue) : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>

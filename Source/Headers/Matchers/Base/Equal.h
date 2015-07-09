@@ -27,8 +27,7 @@ namespace Cedar { namespace Matchers { namespace Private {
     };
 
     template<typename T>
-    Equal<T>::Equal(const T & expectedValue)
-    : Base<>(), expectedValue_(expectedValue) {
+    Equal<T>::Equal(const T & expectedValue) : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>

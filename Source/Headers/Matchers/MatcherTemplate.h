@@ -34,8 +34,7 @@ namespace Cedar { namespace Matchers {
     }
 
     template<typename T>
-    <#MatcherClassName#><T>::<#MatcherClassName#>(const T & expectedValue)
-    : Base<>(), expectedValue_(expectedValue) {
+    <#MatcherClassName#><T>::<#MatcherClassName#>(const T & expectedValue) : Base<>(), expectedValue_(expectedValue) {
     }
 
     template<typename T>

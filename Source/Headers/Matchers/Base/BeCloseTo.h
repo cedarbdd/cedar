@@ -32,8 +32,7 @@ namespace Cedar { namespace Matchers { namespace Private {
     };
 
     template<typename T>
-    BeCloseTo<T>::BeCloseTo(const T & expectedValue)
-    : Base<>(), expectedValue_(expectedValue), threshold_(0.01) {
+    BeCloseTo<T>::BeCloseTo(const T & expectedValue) : Base<>(), expectedValue_(expectedValue), threshold_(0.01) {
     }
 
     template<typename T>

@@ -33,8 +33,7 @@ namespace Cedar { namespace Matchers { namespace Private {
     };
 
     template<typename T>
-    inline Contain<T>::Contain(const T & element)
-    : Base<>(), element_(element), options_({}) {
+    inline Contain<T>::Contain(const T & element) : Base<>(), element_(element), options_({}) {
     }
 
     template<typename T>
