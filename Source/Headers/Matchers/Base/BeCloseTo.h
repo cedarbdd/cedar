@@ -62,7 +62,7 @@ namespace Cedar { namespace Matchers { namespace Private {
     template<typename T>
     void BeCloseTo<T>::validate_not_nil() const {
         if (0 == strncmp(@encode(T), "@", 1) && [[NSValue value:&expectedValue_ withObjCType:@encode(T)] nonretainedObjectValue] == nil) {
-            [[CDRSpecFailure specFailureWithReason:@"Unexpected use of equal matcher to check for nil; use the be_nil matcher to match nil values"] raise];
+            [[CDRSpecFailure specFailureWithReason:@"Unexpected use of be_close_to matcher to check for nil; use the be_nil matcher to match nil values"] raise];
         }
     }
 }}}

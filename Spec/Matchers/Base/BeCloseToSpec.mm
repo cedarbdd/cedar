@@ -598,6 +598,16 @@ describe(@"be_close_to matcher", ^{
             });
         });
     });
+
+    describe(@"when the expected value is nil", ^{
+        it(@"should alert the user that they probably did not mean to verify the value was close to nil", ^{
+            expectFailureWithMessage(@"Unexpected use of be_close_to matcher to check for nil; use the be_nil matcher to match nil values", ^{
+                NSNumber *value = @1.0f;
+                NSNumber *expectedValue = nil;
+                value should be_close_to(expectedValue);
+            });
+        });
+    });
 });
 
 SPEC_END
