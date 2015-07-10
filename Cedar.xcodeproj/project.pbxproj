@@ -272,7 +272,6 @@
 		AE19377C1B1AC3DC008C8CD8 /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		AE1937801B1AC446008C8CD8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE19377F1B1AC445008C8CD8 /* CoreGraphics.framework */; };
 		AE1937811B1AC4AC008C8CD8 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
-		AE1937821B1AC52F008C8CD8 /* ExpectFailureWithMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */; };
 		AE1937831B1AC90A008C8CD8 /* CedarApplicationDelegateSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE7DD11117296CB20058EB3B /* CedarApplicationDelegateSpec.mm */; };
 		AE1937841B1AC90F008C8CD8 /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		AE1937851B1AC919008C8CD8 /* CDRSpyiOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */; };
@@ -2200,7 +2199,6 @@
 				AE4865D91B0690B1005DB302 /* CDRExampleGroup.h in Headers */,
 				AE4865DA1B0690B1005DB302 /* CDRExampleParent.h in Headers */,
 				AE4865DB1B0690B1005DB302 /* CDRFunctions.h in Headers */,
-				AE1937821B1AC52F008C8CD8 /* ExpectFailureWithMessage.h in Headers */,
 				AE4865DC1B0690B1005DB302 /* CDRHooks.h in Headers */,
 				AE4865DD1B0690B1005DB302 /* CDRSharedExampleGroupPool.h in Headers */,
 				AE4865DE1B0690B1005DB302 /* CDRSpec.h in Headers */,
