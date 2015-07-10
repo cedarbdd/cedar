@@ -83,15 +83,12 @@
 
 #pragma mark - Cedar Doubles
 
-#import "CDRNil.h"
 #import "CDRSpy.h"
 #import "CDRFake.h"
 #import "CDRSpyInfo.h"
 #import "CedarDouble.h"
 #import "CDRClassFake.h"
-#import "CDRBlockHelper.h"
 #import "CDRProtocolFake.h"
-#import "CDRTypeUtilities.h"
 #import "NSMethodSignature+Cedar.h"
 
 

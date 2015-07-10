@@ -338,7 +338,7 @@
 		AE3E8F3A184FEEEB00633740 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
 		AE4865121B06769B005DB302 /* NSMethodSignature+Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEAA191119DCC5A900194E95 /* NSMethodSignature+Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE48651D1B06769B005DB302 /* CDRSpyInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEE8DBD2175FFCF3008AF18A /* CDRSpyInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865231B06769B005DB302 /* CedarDoubleImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE4865231B06769B005DB302 /* CedarDoubleImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; };
 		AE4865531B06769D005DB302 /* CDRReportDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE15C191869091900207F0C /* CDRReportDispatcher.h */; };
 		AE4865551B06769D005DB302 /* CDRBufferedDefaultReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF449B318A0C04D00AF94B0 /* CDRBufferedDefaultReporter.h */; };
 		AE48655D1B06769E005DB302 /* CDROTestRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */; };
@@ -410,9 +410,9 @@
 		AE4865AF1B0690AF005DB302 /* CDRClassFake.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA67915AB72DA00617E1A /* CDRClassFake.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865B01B0690AF005DB302 /* HaveReceived.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639A78014C50D3000B564B7 /* HaveReceived.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865B11B0690AF005DB302 /* CedarDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA68815AC728A00617E1A /* CedarDouble.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865B21B0690AF005DB302 /* RejectedMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4A945D1880792E008566F5 /* RejectedMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865B31B0690AF005DB302 /* StubbedMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA6D115AE082500617E1A /* StubbedMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865B41B0690AF005DB302 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
+		AE4865B21B0690AF005DB302 /* RejectedMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = AE4A945D1880792E008566F5 /* RejectedMethod.h */; };
+		AE4865B31B0690AF005DB302 /* StubbedMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA6D115AE082500617E1A /* StubbedMethod.h */; };
+		AE4865B41B0690AF005DB302 /* InvocationMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865B51B0690B0005DB302 /* CDRFake.h in Headers */ = {isa = PBXBuildFile; fileRef = AE74907315B488BE008EA127 /* CDRFake.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865B61B0690B0005DB302 /* CedarApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865B71B0690B0005DB302 /* Cedar-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 6628FCA014C503530016652A /* Cedar-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -458,9 +458,9 @@
 		AE4865E01B0690B1005DB302 /* CDRSymbolicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
 		AE4865E11B0690B1005DB302 /* Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FD311DC27B800029872 /* Cedar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE4865E21B0690B2005DB302 /* CDRSpecHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = AEEE1FDB11DC27B800029872 /* CDRSpecHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865E31B0690B2005DB302 /* CDRBlockHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865E41B0690B2005DB302 /* CDRTypeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE4865E51B0690B2005DB302 /* CDRNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F3DF7B1A6ABA2E003041DA /* CDRNil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE4865E31B0690B2005DB302 /* CDRBlockHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */; };
+		AE4865E41B0690B2005DB302 /* CDRTypeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */; };
+		AE4865E51B0690B2005DB302 /* CDRNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F3DF7B1A6ABA2E003041DA /* CDRNil.h */; };
 		AE4865E61B0690B2005DB302 /* CDRSlowTestStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */; };
 		AE4865E71B0691C9005DB302 /* CDRColorizedReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC9DEEA12C2CC7E0039512D /* CDRColorizedReporter.h */; };
 		AE4865E81B0691EA005DB302 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; };
@@ -2145,7 +2145,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE4865A41B0690AF005DB302 /* NSInvocation+Cedar.h in Headers */,
+				AE4865E11B0690B1005DB302 /* Cedar.h in Headers */,
 				AE4865A51B0690AF005DB302 /* Argument.h in Headers */,
 				AE4865A61B0690AF005DB302 /* ValueArgument.h in Headers */,
 				AE4865A71B0690AF005DB302 /* AnyInstanceArgument.h in Headers */,
@@ -2159,8 +2159,6 @@
 				AE4865AF1B0690AF005DB302 /* CDRClassFake.h in Headers */,
 				AE4865B01B0690AF005DB302 /* HaveReceived.h in Headers */,
 				AE4865B11B0690AF005DB302 /* CedarDouble.h in Headers */,
-				AE4865B21B0690AF005DB302 /* RejectedMethod.h in Headers */,
-				AE4865B31B0690AF005DB302 /* StubbedMethod.h in Headers */,
 				AE4865B51B0690B0005DB302 /* CDRFake.h in Headers */,
 				AE4865B61B0690B0005DB302 /* CedarApplicationDelegate.h in Headers */,
 				AE4865B71B0690B0005DB302 /* Cedar-iOS.h in Headers */,
@@ -2188,7 +2186,6 @@
 				AE4865CD1B0690B0005DB302 /* CompareGreaterThan.h in Headers */,
 				AE4865CE1B0690B0005DB302 /* ComparatorsContainerConvenience.h in Headers */,
 				AE4865CF1B0690B0005DB302 /* CompareCloseTo.h in Headers */,
-				AE4865D01B0690B0005DB302 /* ActualValue.h in Headers */,
 				AE4865D11B0690B1005DB302 /* CedarMatchers.h in Headers */,
 				AE4865D21B0690B1005DB302 /* CedarComparators.h in Headers */,
 				AE4865D31B0690B1005DB302 /* CedarStringifiers.h in Headers */,
@@ -2203,9 +2200,7 @@
 				AE4865DD1B0690B1005DB302 /* CDRSharedExampleGroupPool.h in Headers */,
 				AE4865DE1B0690B1005DB302 /* CDRSpec.h in Headers */,
 				AE4865DF1B0690B1005DB302 /* CDRSpecFailure.h in Headers */,
-				AE4865E11B0690B1005DB302 /* Cedar.h in Headers */,
 				AE4865E21B0690B2005DB302 /* CDRSpecHelper.h in Headers */,
-				AE4865E41B0690B2005DB302 /* CDRTypeUtilities.h in Headers */,
 				AE48651D1B06769B005DB302 /* CDRSpyInfo.h in Headers */,
 				AE4865ED1B069353005DB302 /* BeEmpty.h in Headers */,
 				AE4865EE1B069353005DB302 /* Contain.h in Headers */,
@@ -2213,27 +2208,32 @@
 				AE4865F01B069353005DB302 /* UIGeometryCompareEqual.h in Headers */,
 				AE4865F11B069353005DB302 /* UIGeometryStringifiers.h in Headers */,
 				AE4865F21B069353005DB302 /* UIKitComparatorsContainer.h in Headers */,
+				AE4865A41B0690AF005DB302 /* NSInvocation+Cedar.h in Headers */,
+				AE4865D01B0690B0005DB302 /* ActualValue.h in Headers */,
 				AE4865121B06769B005DB302 /* NSMethodSignature+Cedar.h in Headers */,
+				AE4865B41B0690AF005DB302 /* InvocationMatcher.h in Headers */,
 				AE4865E31B0690B2005DB302 /* CDRBlockHelper.h in Headers */,
 				AE4865E51B0690B2005DB302 /* CDRNil.h in Headers */,
-				AE4865231B06769B005DB302 /* CedarDoubleImpl.h in Headers */,
 				AE48655D1B06769E005DB302 /* CDROTestRunner.h in Headers */,
 				AE4865551B06769D005DB302 /* CDRBufferedDefaultReporter.h in Headers */,
 				AE4865681B06769F005DB302 /* CDRXTestSuite.h in Headers */,
+				AE4865E41B0690B2005DB302 /* CDRTypeUtilities.h in Headers */,
 				AE4865E71B0691C9005DB302 /* CDRColorizedReporter.h in Headers */,
 				AE48656A1B06769F005DB302 /* NSInvocation+CDRXExample.h in Headers */,
+				AE4865231B06769B005DB302 /* CedarDoubleImpl.h in Headers */,
 				AE4865E81B0691EA005DB302 /* CDRTeamCityReporter.h in Headers */,
 				AE4865691B06769F005DB302 /* CDRXCTestCase.h in Headers */,
 				AE4865EC1B069253005DB302 /* CDROTestReporter.h in Headers */,
 				AE4865EA1B069253005DB302 /* CDRExampleReporter.h in Headers */,
 				AE4865531B06769D005DB302 /* CDRReportDispatcher.h in Headers */,
 				AE4865EB1B069253005DB302 /* CDRJUnitXMLReporter.h in Headers */,
-				AE4865B41B0690AF005DB302 /* InvocationMatcher.h in Headers */,
 				AE4865E01B0690B1005DB302 /* CDRSymbolicator.h in Headers */,
 				AE4865E61B0690B2005DB302 /* CDRSlowTestStatistics.h in Headers */,
 				AE48656B1B06769F005DB302 /* CDROTestNamer.h in Headers */,
 				AE4865E91B069253005DB302 /* CDRDefaultReporter.h in Headers */,
 				AE4865661B06769F005DB302 /* CDRRuntimeUtilities.h in Headers */,
+				AE4865B21B0690AF005DB302 /* RejectedMethod.h in Headers */,
+				AE4865B31B0690AF005DB302 /* StubbedMethod.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
