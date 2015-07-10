@@ -187,8 +187,7 @@
     return self.cedar_double_impl.sent_messages;
 }
 
-- (NSArray *)sent_messages_with_selector:(SEL)selector
-{
+- (NSArray *)sent_messages_with_selector:(SEL)selector {
     return [self.cedar_double_impl sent_messages_with_selector:selector];
 }
 

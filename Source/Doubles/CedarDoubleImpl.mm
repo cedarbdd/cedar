@@ -46,8 +46,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     [super dealloc];
 }
 
-- (NSArray *)sent_messages_with_selector:(SEL)selector
-{
+- (NSArray *)sent_messages_with_selector:(SEL)selector {
     NSMutableArray *sentMessages = [[NSMutableArray alloc] initWithCapacity:self.sent_messages.count];
 
     for(NSInvocation *invocation in self.sent_messages) {
