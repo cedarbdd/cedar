@@ -20,7 +20,9 @@ namespace Cedar { namespace Matchers { namespace Private {
         virtual NSString * failure_message_end() const;
 
     private:
+        void validate_not_nil() const;
         const T & expectedValue_;
+
     };
 
 
@@ -40,7 +42,15 @@ namespace Cedar { namespace Matchers { namespace Private {
 
     template<typename T> template<typename U>
     bool BeGTE<T>::matches(const U & actualValue) const {
+        this->validate_not_nil();
         return Comparators::compare_greater_than(actualValue, expectedValue_) || Comparators::compare_equal(actualValue, expectedValue_);
+    }
+
+    template<typename T>
+    void BeGTE<T>::validate_not_nil() const {
+        if (0 == strncmp(@encode(T), "@", 1) && [[NSValue value:&expectedValue_ withObjCType:@encode(T)] nonretainedObjectValue] == nil) {
+            [[CDRSpecFailure specFailureWithReason:@"Unexpected use of be_greater_than_or_equal_to matcher to check for nil; use the be_nil matcher to match nil values"] raise];
+        }
     }
 }}}
 

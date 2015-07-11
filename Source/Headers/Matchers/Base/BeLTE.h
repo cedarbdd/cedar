@@ -21,6 +21,7 @@ namespace Cedar { namespace Matchers { namespace Private {
 
     private:
         const T & expectedValue_;
+        void validate_not_nil() const;
     };
 
     template<typename T>
@@ -39,8 +40,18 @@ namespace Cedar { namespace Matchers { namespace Private {
 
     template<typename T> template<typename U>
     bool BeLTE<T>::matches(const U & actualValue) const {
+        this->validate_not_nil();
         return !Comparators::compare_greater_than(actualValue, expectedValue_);
     }
+
+    template<typename T>
+    void BeLTE<T>::validate_not_nil() const {
+        if (0 == strncmp(@encode(T), "@", 1) && [[NSValue value:&expectedValue_ withObjCType:@encode(T)] nonretainedObjectValue] == nil) {
+            [[CDRSpecFailure specFailureWithReason:@"Unexpected use of be_less_than_or_equal_to matcher to check for nil; use the be_nil matcher to match nil values"] raise];
+        }
+    }
+
+
 }}}
 
 #pragma mark - public interface

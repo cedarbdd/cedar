@@ -1258,6 +1258,17 @@ describe(@"be_lte matcher", ^{
             });
         });
     });
+
+    describe(@"when the expected value is nil", ^{
+        it(@"should alert the user that they probably did not mean to verify the value was less than or equal to nil", ^{
+            expectFailureWithMessage(@"Unexpected use of be_less_than_or_equal_to matcher to check for nil; use the be_nil matcher to match nil values", ^{
+
+                NSNumber *value = @1.0f;
+                NSNumber *expectedValue = nil;
+                value should be_less_than_or_equal_to(expectedValue);
+            });
+        });
+    });
 });
 
 describe(@"be_less_than_or_equal_to matcher", ^{
