@@ -55,7 +55,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
         }
     }
     
-    return [sentMessages copy];
+    return [sentMessages autorelease];
 }
 
 - (void)reset_sent_messages {
