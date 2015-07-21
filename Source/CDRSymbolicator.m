@@ -208,7 +208,7 @@ NSUInteger CDRCallerStackAddress() {
         [arguments addObject:[NSString stringWithFormat:@"%lx", (long)address.unsignedIntegerValue]];
     }
 
-    NSString *output = [self.class shellOutWithCommand:@"/Applications/Xcode.app/Contents/Developer/usr/bin/atos" arguments:arguments];
+    NSString *output = [self.class shellOutWithCommand:@"/Applications/Xcode-beta.app/Contents/Developer/usr/bin/atos" arguments:arguments];
     self.outputLines = [output componentsSeparatedByString:@"\n"];
 }
 
