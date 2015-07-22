@@ -481,13 +481,12 @@ namespace :testbundles do
     )
   end
 
-  if Xcode.version < 7.0
-    desc "Build and run OCUnit logic and application specs"
-    task ocunit: ["ocunit:application"]
-
-    namespace :ocunit do
-      desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
-      task application: :convert_to_xcode5 do
+  desc "Build and run OCUnit logic and application specs"
+  task ocunit: ["ocunit:application"]
+  namespace :ocunit do
+    desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
+    task application: :convert_to_xcode5 do
+      if Xcode.version < 7.0
         Simulator.kill
 
         Xcode.test(
@@ -496,6 +495,8 @@ namespace :testbundles do
           args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
           logfile: "ocunit-application-specs.log",
         )
+      else
+        puts 'Warning :: Cannot test OCUnit support with Xcode 7.'
       end
     end
   end
