@@ -9,8 +9,12 @@
 #import "CDRXTestSuite.h"
 #import "CDRRuntimeUtilities.h"
 
+void CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite);
+
 @interface CDRXCTestObserver ()
+
 @property (assign) BOOL observedTestSuiteStart;
+
 @end
 
 @interface CDRXCTestSupport : NSObject
@@ -31,17 +35,7 @@
         return;
     }
 
-    CDRDefineSharedExampleGroups();
-    CDRDefineGlobalBeforeAndAfterEachBlocks();
-
-    unsigned int seed = CDRGetRandomSeed();
-    NSArray *specClasses = CDRSpecClassesToRun();
-    NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
-    NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
-    CDRReportDispatcher *dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:CDRReportersToRun()] autorelease];
-    for (CDRSpec *spec in specs) {
-        [testSuite addTest:[spec testSuiteWithRandomSeed:seed dispatcher:dispatcher]];
-    }
+    CDRAddCedarSpecsToXCTestSuite(testSuite);
 
     self.observedTestSuiteStart = YES;
 }
@@ -60,39 +54,21 @@ static id CDRCreateXCTestSuite() {
     }
 
     id testSuite = [[[(id)testSuiteSubclass alloc] initWithName:@"Cedar"] autorelease];
-    CDRDefineSharedExampleGroups();
-    CDRDefineGlobalBeforeAndAfterEachBlocks();
 
-    unsigned int seed = CDRGetRandomSeed();
+    CDRAddCedarSpecsToXCTestSuite(testSuite);
 
-    NSArray *specClasses = CDRSpecClassesToRun();
-    NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
-    NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
-    CDRMarkFocusedExamplesInSpecs(specs);
-    CDRMarkXcodeFocusedExamplesInSpecs(specs, [[NSProcessInfo processInfo] arguments]);
-
-    CDRReportDispatcher *dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:CDRReportersToRun()] autorelease];
-
-    [testSuite setDispatcher:dispatcher];
-
-    NSArray *groups = CDRRootGroupsFromSpecs(specs);
-    [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];
-
-    for (CDRSpec *spec in specs) {
-        [testSuite addTest:[spec testSuiteWithRandomSeed:seed dispatcher:dispatcher]];
-    }
     return testSuite;
 }
 
 void CDRInjectIntoXCTestRunner() {
-    // if possible, use the new XCTestObservation protocol
-    // this is only available starting with iOS 9 and OSX 10.11
+    // if possible, use the new XCTestObservation protocol available in Xcode 7
     Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
     if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
-        id observationCenter = [observationCenterClass performSelector:@selector(sharedTestObservationCenter)];
+        id observationCenter = [observationCenterClass sharedTestObservationCenter];
         static CDRXCTestObserver *xcTestObserver;
         xcTestObserver = [[CDRXCTestObserver alloc] init];
         [observationCenter addTestObserver:xcTestObserver];
+
         return;
     }
 
@@ -111,4 +87,27 @@ void CDRInjectIntoXCTestRunner() {
         return defaultSuite;
     });
     class_replaceMethod(testSuiteMetaClass, @selector(defaultTestSuite), newImp, method_getTypeEncoding(m));
+}
+
+void CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
+    unsigned int seed = CDRGetRandomSeed();
+
+    CDRDefineSharedExampleGroups();
+    CDRDefineGlobalBeforeAndAfterEachBlocks();
+
+    NSArray *specClasses = CDRSpecClassesToRun();
+    NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
+    NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
+
+    CDRMarkFocusedExamplesInSpecs(specs);
+    CDRMarkXcodeFocusedExamplesInSpecs(specs, [[NSProcessInfo processInfo] arguments]);
+
+    CDRReportDispatcher *dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:CDRReportersToRun()] autorelease];
+
+    NSArray *groups = CDRRootGroupsFromSpecs(specs);
+    [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];
+
+    for (CDRSpec *spec in specs) {
+        [testSuite addTest:[spec testSuiteWithRandomSeed:seed dispatcher:dispatcher]];
+    }
 }
