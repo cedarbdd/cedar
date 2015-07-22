@@ -112,6 +112,10 @@ EOF
 end
 
 class Xcode
+  def self.version
+    `xcodebuild -version | grep Xcode`.chomp.split(' ').last.to_f
+  end
+
   def self.developer_dir
     `xcode-select -print-path`.strip
   end
@@ -477,22 +481,25 @@ namespace :testbundles do
     )
   end
 
-  desc "Build and run OCUnit logic and application specs"
-  task ocunit: ["ocunit:application"]
+  if Xcode.version < 7.0
+    desc "Build and run OCUnit logic and application specs"
+    task ocunit: ["ocunit:application"]
 
-  namespace :ocunit do
-    desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
-    task application: :convert_to_xcode5 do
-      Simulator.kill
+    namespace :ocunit do
+      desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
+      task application: :convert_to_xcode5 do
+        Simulator.kill
 
-      Xcode.test(
-        scheme: OCUNIT_APPLICATION_SPECS_SCHEME_NAME,
-        sdk: "iphonesimulator#{SDK_VERSION}",
-        args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
-        logfile: "ocunit-application-specs.log",
-      )
+        Xcode.test(
+          scheme: OCUNIT_APPLICATION_SPECS_SCHEME_NAME,
+          sdk: "iphonesimulator#{SDK_VERSION}",
+          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+          logfile: "ocunit-application-specs.log",
+        )
+      end
     end
   end
+
   desc 'A target that does not have XCTest or SenTestingKit linked should alert the user'
   task :failing_test_bundle do
     the_exception = nil
