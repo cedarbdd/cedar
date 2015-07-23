@@ -91,12 +91,6 @@ else
   log_event "Install Script Run" version "$VERSION_TAG"
 fi
 
-echo "Initializing Cedar submodules"
-git submodule update --init --recursive > /dev/null 2>&1
-if [[ $? != 0 ]] ; then
-    fail "Unable to initialize Cedar Git submodules"
-fi
-
 echo "Installing Cedar snippets and templates"
 ./installCodeSnippetsAndTemplates > /dev/null 2>&1
 if [[ $? != 0 ]] ; then
