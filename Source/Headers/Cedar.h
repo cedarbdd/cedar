@@ -85,7 +85,6 @@
 
 #import "CDRSpy.h"
 #import "CDRFake.h"
-#import "CDRSpyInfo.h"
 #import "CedarDouble.h"
 #import "CDRClassFake.h"
 #import "CDRProtocolFake.h"
