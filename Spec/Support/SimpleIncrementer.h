@@ -4,7 +4,7 @@ typedef struct {
     size_t a, b, c, d;
 } LargeIncrementerStruct;
 
-typedef LargeIncrementerStruct (^ComplexIncrementerBlock)(NSNumber *, LargeIncrementerStruct, NSError *);
+typedef LargeIncrementerStruct (^ComplexIncrementerBlock)(NSNumber *, LargeIncrementerStruct, id<NSCoding>);
 
 @class FooSuperclass;
 

@@ -18,14 +18,16 @@ static const char *Block_signature(id blockObj) {
     const char *signatureTypes = Block_signature(block);
     NSString *signatureTypesString = [NSString stringWithUTF8String:signatureTypes];
 
-    NSRegularExpression *quotedSubstringsRegex = [NSRegularExpression
-                                                  regularExpressionWithPattern:@"(\".*?\")|(<.*?>)"
-                                                  options:NSRegularExpressionCaseInsensitive
-                                                  error:NULL];
+    NSString *quotedSubstringsPattern = @"\".*?\"";
+    NSString *angleBracketedSubstringsPattern = @"<.*?>";
 
-    NSString *strippedSignatureTypesString = [quotedSubstringsRegex stringByReplacingMatchesInString:signatureTypesString options:0 range:NSMakeRange(0, [signatureTypesString length]) withTemplate:@""];
+    NSString *strippedSignatureTypeString = signatureTypesString;
+    for (NSString *pattern in @[quotedSubstringsPattern, angleBracketedSubstringsPattern]) {
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:NULL];
+        strippedSignatureTypeString = [regex stringByReplacingMatchesInString:strippedSignatureTypeString options:0 range:NSMakeRange(0, [strippedSignatureTypeString length]) withTemplate:@""];
+    }
 
-    return [NSMethodSignature signatureWithObjCTypes:[strippedSignatureTypesString UTF8String]];
+    return [NSMethodSignature signatureWithObjCTypes:[strippedSignatureTypeString UTF8String]];
 }
 
 - (NSMethodSignature *)signatureWithoutSelectorArgument {
