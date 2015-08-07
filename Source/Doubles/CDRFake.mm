@@ -66,7 +66,7 @@
         }
 
     } @finally {
-        [invocation copyBlockArguments];
+        [invocation cdr_copyBlockArguments];
         [invocation retainArguments];
     }
 }

@@ -8,7 +8,7 @@ namespace Cedar { namespace Doubles {
 
         for (NSInvocation *invocation in recordedInvocations) {
             [message appendFormat:@"  %@", NSStringFromSelector(invocation.selector)];
-            NSArray *arguments = [invocation arguments];
+            NSArray *arguments = [invocation cdr_arguments];
             if (arguments.count) {
                 [message appendFormat:@"<%@>", [arguments componentsJoinedByString:@", "]];
             }

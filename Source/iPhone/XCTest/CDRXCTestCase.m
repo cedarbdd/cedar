@@ -24,7 +24,7 @@ const char *CDRXSpecKey;
 }
 
 - (NSString *)testClassName {
-    return [[self invocation] specClassName];
+    return [[self invocation] cdr_specClassName];
 }
 
 - (NSString *)testMethodName {

@@ -2,7 +2,7 @@
 
 @interface NSMethodSignature (Cedar)
 
-+ (NSMethodSignature *)signatureFromBlock:(id)block;
-- (NSMethodSignature *)signatureWithoutSelectorArgument;
++ (NSMethodSignature *)cdr_signatureFromBlock:(id)block;
+- (NSMethodSignature *)cdr_signatureWithoutSelectorArgument;
 
 @end

@@ -5,8 +5,8 @@
 
 @interface NSInvocation (CDRXExample)
 
-@property (nonatomic, retain) CDRReportDispatcher *dispatcher;
-@property (nonatomic, retain) CDRExample *example;
-@property (nonatomic, retain) NSString *specClassName;
+@property (nonatomic, retain, setter=cdr_setDispatcher:) CDRReportDispatcher *cdr_dispatcher;
+@property (nonatomic, retain, setter=cdr_setExample:) CDRExample *cdr_example;
+@property (nonatomic, retain, setter=cdr_setSpecClassName:) NSString *cdr_specClassName;
 
 @end

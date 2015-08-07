@@ -59,9 +59,9 @@ const char *CDRXSpecKey;
 
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
             invocation.selector = selector;
-            invocation.dispatcher = dispatcher;
-            invocation.example = example;
-            invocation.specClassName = className;
+            invocation.cdr_dispatcher = dispatcher;
+            invocation.cdr_example = example;
+            invocation.cdr_specClassName = className;
             [testInvocations addObject:invocation];
         }
     }
@@ -121,9 +121,9 @@ const char *CDRXSpecKey;
 
 - (void)createTestMethodForSelector:(SEL)selector onClass:(Class)aClass {
     IMP imp = imp_implementationWithBlock(^(id instance){
-        CDRExample *example = [[instance invocation] example];
+        CDRExample *example = [[instance invocation] cdr_example];
         CDRExampleGroup *parentGroup = (CDRExampleGroup *)example.parent;
-        CDRReportDispatcher *theDispatcher = [[instance invocation] dispatcher];
+        CDRReportDispatcher *theDispatcher = [[instance invocation] cdr_dispatcher];
         while (![parentGroup isEqual:example.spec.rootGroup]) {
             [theDispatcher runWillStartExampleGroup:parentGroup];
             parentGroup = (CDRExampleGroup *)[parentGroup parent];

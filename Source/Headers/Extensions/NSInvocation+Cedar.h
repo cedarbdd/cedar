@@ -2,10 +2,9 @@
 
 @interface NSInvocation (Cedar)
 
-- (void)copyBlockArguments;
-- (NSInvocation *)invocationWithoutCmdArgument;
-- (void)invokeUsingBlockWithoutSelfArgument:(id)block;
+- (void)cdr_copyBlockArguments;
+- (void)cdr_invokeUsingBlockWithoutSelfArgument:(id)block;
 
-- (NSArray *)arguments;
+- (NSArray *)cdr_arguments;
 
 @end

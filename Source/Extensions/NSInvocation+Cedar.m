@@ -12,7 +12,7 @@ static char COPIED_BLOCKS_KEY;
 
 @implementation NSInvocation (Cedar)
 
-- (void)copyBlockArguments {
+- (void)cdr_copyBlockArguments {
     static char *blockTypeEncoding = "@?";
     NSMethodSignature *methodSignature = [self methodSignature];
     NSUInteger numberOfArguments = [methodSignature numberOfArguments];
@@ -35,9 +35,9 @@ static char COPIED_BLOCKS_KEY;
     objc_setAssociatedObject(self, &COPIED_BLOCKS_KEY, copiedBlocks, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (NSInvocation *)invocationWithoutCmdArgument {
+- (NSInvocation *)cdr_invocationWithoutCmdArgument {
     NSMethodSignature *methodSignature = [self methodSignature];
-    NSMethodSignature *adjustedMethodSignature = [methodSignature signatureWithoutSelectorArgument];
+    NSMethodSignature *adjustedMethodSignature = [methodSignature cdr_signatureWithoutSelectorArgument];
     NSInvocation *adjustedInvocation = [NSInvocation invocationWithMethodSignature:adjustedMethodSignature];
 
     NSInteger adjustedArgIndex = 0;
@@ -57,8 +57,8 @@ static char COPIED_BLOCKS_KEY;
     return adjustedInvocation;
 }
 
-- (void)invokeUsingBlockWithoutSelfArgument:(id)block {
-    NSInvocation *adjustedInvocation = [self invocationWithoutCmdArgument];
+- (void)cdr_invokeUsingBlockWithoutSelfArgument:(id)block {
+    NSInvocation *adjustedInvocation = [self cdr_invocationWithoutCmdArgument];
 
     [adjustedInvocation setTarget:block];
     struct Block_literal *blockLiteral = (struct Block_literal *)block;
@@ -72,7 +72,7 @@ static char COPIED_BLOCKS_KEY;
     }
 }
 
-- (NSArray *)arguments {
+- (NSArray *)cdr_arguments {
     NSMutableArray *args = [NSMutableArray array];
     NSMethodSignature *methodSignature = [self methodSignature];
     for (NSInteger argIndex = 2; argIndex < [methodSignature numberOfArguments]; argIndex++) {
