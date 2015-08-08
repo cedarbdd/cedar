@@ -2,6 +2,7 @@
 #import "InvocationMatcher.h"
 #import "CedarDouble.h"
 #import "NSInvocation+Cedar.h"
+#import "CDRTypeUtilities.h"
 
 namespace Cedar { namespace Doubles {
 
@@ -119,9 +120,14 @@ namespace Cedar { namespace Doubles {
         if (this->arguments().size()) {
             [message appendString:@", with arguments: <"];
             arguments_vector_t::const_iterator cit = this->arguments().begin();
-            [message appendString:(*cit++)->value_string()];
+            [message appendString:[NSString stringWithFormat:@"%@(%@)",
+                                   (*cit)->value_string(),
+                                   [CDRTypeUtilities typeNameForEncoding:(*cit)->value_encoding()]]];
+            ++cit;
             for (; cit != this->arguments().end(); ++cit) {
-                [message appendString:[NSString stringWithFormat:@", %@", (*cit)->value_string()]];
+                [message appendString:[NSString stringWithFormat:@", %@(%@)",
+                                       (*cit)->value_string(),
+                                       [CDRTypeUtilities typeNameForEncoding:(*cit)->value_encoding()]]];
             }
             [message appendString:@">"];
             NSArray *recordedInvocations = [(id<CedarDouble>)value sent_messages];

@@ -83,7 +83,9 @@ static char COPIED_BLOCKS_KEY;
         [self getArgument:argBuffer atIndex:argIndex];
 
         const char *argType = [methodSignature getArgumentTypeAtIndex:argIndex];
-        [args addObject:[CDRTypeUtilities boxedObjectOfBytes:argBuffer ofObjCType:argType]];
+        [args addObject:[NSString stringWithFormat:@"%@(%@)",
+                         [CDRTypeUtilities boxedObjectOfBytes:argBuffer ofObjCType:argType],
+                         [CDRTypeUtilities typeNameForEncoding:argType]]];
     }
     return args;
 }
