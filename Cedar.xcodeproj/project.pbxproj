@@ -1362,7 +1362,6 @@
 				AEEE1FD011DC27B800029872 /* CDRExampleReporter.h */,
 				492951DC1481AAB100FA8916 /* CDRJUnitXMLReporter.h */,
 				96EA1CAC142C6449001A78E0 /* CDROTestReporter.h */,
-				1FE15C191869091900207F0C /* CDRReportDispatcher.h */,
 				42064465139B44EC00C85605 /* CDRTeamCityReporter.h */,
 				1FF449B318A0C04D00AF94B0 /* CDRBufferedDefaultReporter.h */,
 			);
@@ -1377,6 +1376,92 @@
 				1F47B9A6186D69CD005A8CE1 /* CDROTestReporterSpec.mm */,
 			);
 			path = Reporters;
+			sourceTree = "<group>";
+		};
+		34157D121B75A1D1007AD1BA /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				66F00B4F14C4D8F600146D88 /* Doubles */,
+				AEEE1FD411DC27B800029872 /* iPhone */,
+				AE0AF55D13E9C06900029396 /* Matchers */,
+				1FE15C241869092300207F0C /* Reporters */,
+				AEEE1FCC11DC27B800029872 /* CDRExample.h */,
+				AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */,
+				AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */,
+				AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */,
+				AEEE1FD111DC27B800029872 /* CDRFunctions.h */,
+				2234907C18009DA6001C8E8D /* CDRHooks.h */,
+				AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */,
+				AEEE1FD211DC27B800029872 /* CDRSpec.h */,
+				AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */,
+				AEEE1FDB11DC27B800029872 /* CDRSpecHelper.h */,
+				AEF8FB0619E6000E00DD4FE4 /* CDRVersion.h */,
+				AEEE1FD311DC27B800029872 /* Cedar.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		34157D131B75A1D7007AD1BA /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				34157D141B75A1EE007AD1BA /* Doubles */,
+				34157D151B75A1F7007AD1BA /* Extensions */,
+				34157D161B75A200007AD1BA /* ReporterHelpers */,
+				34157D171B75A20B007AD1BA /* Reporters */,
+				34157D181B75A212007AD1BA /* XCTest */,
+				3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */,
+				34F3DF7B1A6ABA2E003041DA /* CDRNil.h */,
+				96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */,
+				AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */,
+				969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */,
+				34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		34157D141B75A1EE007AD1BA /* Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				AEE8DBD2175FFCF3008AF18A /* CDRSpyInfo.h */,
+				AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */,
+			);
+			path = Doubles;
+			sourceTree = "<group>";
+		};
+		34157D151B75A1F7007AD1BA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AEAA191019DCC5A900194E95 /* NSInvocation+Cedar.h */,
+				AEAA191119DCC5A900194E95 /* NSMethodSignature+Cedar.h */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		34157D161B75A200007AD1BA /* ReporterHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				1F483E30187D39D000521F81 /* CDROTestNamer.h */,
+				E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */,
+			);
+			path = ReporterHelpers;
+			sourceTree = "<group>";
+		};
+		34157D171B75A20B007AD1BA /* Reporters */ = {
+			isa = PBXGroup;
+			children = (
+				1FE15C191869091900207F0C /* CDRReportDispatcher.h */,
+			);
+			path = Reporters;
+			sourceTree = "<group>";
+		};
+		34157D181B75A212007AD1BA /* XCTest */ = {
+			isa = PBXGroup;
+			children = (
+				AE31A29D19C0F23F00C438C1 /* CDRXTestSuite.h */,
+				AE34724919C37ECF005CA6F1 /* CDRXCTestCase.h */,
+				AE4E9B9019C8B44700D794CE /* NSInvocation+CDRXExample.h */,
+			);
+			path = XCTest;
 			sourceTree = "<group>";
 		};
 		4523FFB9BD607306C7ED94A3 /* GData */ = {
@@ -1414,13 +1499,11 @@
 				AE74902E15B45E80008EA127 /* CDRProtocolFake.h */,
 				6628FC8714C4DBA70016652A /* CedarDoubles.h */,
 				6628FC9814C4DD440016652A /* CDRSpy.h */,
-				AEE8DBD2175FFCF3008AF18A /* CDRSpyInfo.h */,
 				AE9AA67915AB72DA00617E1A /* CDRClassFake.h */,
 				6639A78014C50D3000B564B7 /* HaveReceived.h */,
 				AE9AA68815AC728A00617E1A /* CedarDouble.h */,
 				AE4A945D1880792E008566F5 /* RejectedMethod.h */,
 				AE9AA6D115AE082500617E1A /* StubbedMethod.h */,
-				AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */,
 				AE597B4015B0638B00EEF305 /* InvocationMatcher.h */,
 				AE74907315B488BE008EA127 /* CDRFake.h */,
 			);
@@ -1594,11 +1677,8 @@
 			isa = PBXGroup;
 			children = (
 				AE0C9D8B19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m */,
-				AE31A29D19C0F23F00C438C1 /* CDRXTestSuite.h */,
 				AE31A29E19C0F23F00C438C1 /* CDRXTestSuite.m */,
-				AE34724919C37ECF005CA6F1 /* CDRXCTestCase.h */,
 				AE34724A19C37ECF005CA6F1 /* CDRXCTestCase.m */,
-				AE4E9B9019C8B44700D794CE /* NSInvocation+CDRXExample.h */,
 				AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */,
 			);
 			path = XCTest;
@@ -1747,15 +1827,6 @@
 			path = Arguments;
 			sourceTree = "<group>";
 		};
-		AEAA190F19DCC5A900194E95 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				AEAA191019DCC5A900194E95 /* NSInvocation+Cedar.h */,
-				AEAA191119DCC5A900194E95 /* NSMethodSignature+Cedar.h */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		AEB8818919DCD62D00F081BA /* OS X Failing Test Bundle */ = {
 			isa = PBXGroup;
 			children = (
@@ -1859,6 +1930,7 @@
 				AE167EEC15B210C9005960B9 /* Matchers */,
 				E31179CE161FD90C007D3CDE /* ReporterHelpers */,
 				1FE15C171869071B00207F0C /* Reporters */,
+				AE0C9D8919C0C61300B4DD2B /* XCTest */,
 				AEEE1FC511DC27B800029872 /* CDRExample.m */,
 				AEEE1FC611DC27B800029872 /* CDRExampleBase.m */,
 				AEEE1FC711DC27B800029872 /* CDRExampleGroup.m */,
@@ -1879,29 +1951,8 @@
 		AEEE1FCA11DC27B800029872 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				AEAA190F19DCC5A900194E95 /* Extensions */,
-				66F00B4F14C4D8F600146D88 /* Doubles */,
-				AEEE1FD411DC27B800029872 /* iPhone */,
-				AE0AF55D13E9C06900029396 /* Matchers */,
-				1FE15C241869092300207F0C /* Reporters */,
-				AEF8FB0619E6000E00DD4FE4 /* CDRVersion.h */,
-				AEEE1FCC11DC27B800029872 /* CDRExample.h */,
-				AEEE1FCD11DC27B800029872 /* CDRExampleBase.h */,
-				AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */,
-				AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */,
-				AEEE1FD111DC27B800029872 /* CDRFunctions.h */,
-				2234907C18009DA6001C8E8D /* CDRHooks.h */,
-				96EA1CAD142C6449001A78E0 /* CDROTestRunner.h */,
-				AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */,
-				AEEE1FD211DC27B800029872 /* CDRSpec.h */,
-				AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */,
-				969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */,
-				AEEE1FD311DC27B800029872 /* Cedar.h */,
-				AEEE1FDB11DC27B800029872 /* CDRSpecHelper.h */,
-				3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */,
-				34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */,
-				AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */,
-				34F3DF7B1A6ABA2E003041DA /* CDRNil.h */,
+				34157D131B75A1D7007AD1BA /* Project */,
+				34157D121B75A1D1007AD1BA /* Public */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -1918,7 +1969,6 @@
 		AEEE1FDC11DC27B800029872 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				AE0C9D8919C0C61300B4DD2B /* XCTest */,
 				960118BB1434867E00825FFF /* NSBundle+MainBundleHijack.m */,
 				AEEE1FE211DC27B800029872 /* CedarApplicationDelegate.m */,
 			);
@@ -2078,9 +2128,7 @@
 		E31179CE161FD90C007D3CDE /* ReporterHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				1F483E30187D39D000521F81 /* CDROTestNamer.h */,
 				1F483E31187D39D000521F81 /* CDROTestNamer.m */,
-				E31179D0161FD937007D3CDE /* CDRSlowTestStatistics.h */,
 				E31179D1161FD937007D3CDE /* CDRSlowTestStatistics.m */,
 			);
 			path = ReporterHelpers;
