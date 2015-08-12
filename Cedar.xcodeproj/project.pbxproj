@@ -1099,6 +1099,11 @@
 		F78FDA1D1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
 		F7A225DC1B43A8FB006231CC /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		F7BBE7D31B43A852009547F0 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; };
+		F7C8F3041BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		F7C8F3061BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		F7C8F3071BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		F7C8F30B1BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		F7C8F30C1BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
 		F7F4099B1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099C1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099D1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
@@ -1497,6 +1502,7 @@
 		AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ExpectFailureWithMessage.mm; sourceTree = "<group>"; };
 		AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecFailure.h; sourceTree = "<group>"; };
 		AE8F1D901850F6C00059E840 /* CedarObservedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CedarObservedObject.h; sourceTree = "<group>"; };
+		AE8F9C141B795A7C00B956C5 /* ContainSubset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainSubset.h; sourceTree = "<group>"; };
 		AE94D03E15F341B200A0C2B7 /* AnyInstanceArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyInstanceArgument.h; sourceTree = "<group>"; };
 		AE94D04315F3449500A0C2B7 /* AnyInstanceArgument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnyInstanceArgument.mm; sourceTree = "<group>"; };
 		AE9AA67915AB72DA00617E1A /* CDRClassFake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRClassFake.h; sourceTree = "<group>"; };
@@ -1610,6 +1616,7 @@
 		E32861311604F287001FA77E /* FibonacciCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FibonacciCalculator.m; sourceTree = "<group>"; };
 		E4BCFDD01817FA110083ED98 /* ObjectWithProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithProperty.h; sourceTree = "<group>"; };
 		E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithProperty.m; sourceTree = "<group>"; };
+		F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainSubsetSpec.mm; sourceTree = "<group>"; };
 		F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRXCTestObserver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2094,13 +2101,13 @@
 		AE8C879F1362068A006C9305 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
-				AE0F354919E7071A00B9F116 /* OSX */,
 				AEF7301313ECC4AE00786282 /* Base */,
 				AEF7302913ECC4C100786282 /* Container */,
-				AEC40C52174AC51800474D2D /* UIKit */,
-				966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */,
 				AE8C87AA13624523006C9305 /* ExpectFailureWithMessage.h */,
 				AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */,
+				AE0F354919E7071A00B9F116 /* OSX */,
+				966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */,
+				AEC40C52174AC51800474D2D /* UIKit */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -2315,9 +2322,10 @@
 		AEF72FF913ECC16400786282 /* Container */ = {
 			isa = PBXGroup;
 			children = (
+				34D1E67A18F7A2E6005161AD /* AnInstanceOf.h */,
 				AEF7301013ECC25000786282 /* BeEmpty.h */,
 				AE18A7FA13F4601400C8872C /* Contain.h */,
-				34D1E67A18F7A2E6005161AD /* AnInstanceOf.h */,
+				AE8F9C141B795A7C00B956C5 /* ContainSubset.h */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -2375,6 +2383,7 @@
 			children = (
 				AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */,
 				AE18A80913F4640600C8872C /* ContainSpec.mm */,
+				F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -2845,7 +2854,7 @@
 			name = "Cedar-iOS SpecBundle";
 			productName = OCUnitAppTests;
 			productReference = 1F45A3DD180E4796003C1E36 /* Cedar-iOS SpecBundle.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		346261DE1B995239002CAEBD /* Cedar-watchOS */ = {
 			isa = PBXNativeTarget;
@@ -3055,7 +3064,7 @@
 			name = "Cedar-OSX SpecBundle";
 			productName = "OS X Host AppTests";
 			productReference = AE248FAA19DCD52500092C14 /* Cedar-OSX SpecBundle.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		AE4864F71B067620005DB302 /* Cedar-iOS */ = {
 			isa = PBXNativeTarget;
@@ -3516,6 +3525,7 @@
 				34FD46411B99D2B000257186 /* BeGreaterThanSpec.mm in Sources */,
 				34FD46461B99D2B000257186 /* BeNil_ARCSpec.mm in Sources */,
 				34FD465E1B99D2F200257186 /* CDRSpecSpec.mm in Sources */,
+				F7C8F30B1BC63A000088069D /* ContainSubsetSpec.mm in Sources */,
 				34FD46491B99D2B000257186 /* BeSameInstanceAsSpec.mm in Sources */,
 				34FD46351B99D23300257186 /* ObjectWithWeakDelegate.m in Sources */,
 				34FD46431B99D2B000257186 /* BeInstanceOfSpec.mm in Sources */,
@@ -3629,6 +3639,7 @@
 				34D7C49A1BB9C67C00E8E523 /* RaiseExceptionSpec.mm in Sources */,
 				34D7C4991BB9C67C00E8E523 /* MutableEqualSpec.mm in Sources */,
 				34D7C4981BB9C67C00E8E523 /* ExistSpec.mm in Sources */,
+				F7C8F30C1BC63A000088069D /* ContainSubsetSpec.mm in Sources */,
 				34D7C4841BB9C61E00E8E523 /* FooSuperclass.m in Sources */,
 				34D7C4811BB9C61300E8E523 /* GDataXMLNode.m in Sources */,
 				34D7C4831BB9C61A00E8E523 /* ObjectWithValueEquality.m in Sources */,
@@ -3761,6 +3772,7 @@
 				AE1937961B1AC94D008C8CD8 /* RaiseExceptionSpec.mm in Sources */,
 				AE19378B1B1AC94D008C8CD8 /* BeLessThanSpec.mm in Sources */,
 				AE19377B1B1AC3DC008C8CD8 /* FooSuperclass.m in Sources */,
+				F7C8F3061BC63A000088069D /* ContainSubsetSpec.mm in Sources */,
 				AE1937861B1AC94D008C8CD8 /* BeCloseToSpec.mm in Sources */,
 				AE1937661B1AC22D008C8CD8 /* CDRExampleSpec.mm in Sources */,
 				AE1937701B1AC3DC008C8CD8 /* ARCViewController.m in Sources */,
@@ -3924,6 +3936,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEEE21C411DC290400029872 /* SpecSpec2.m in Sources */,
+				F7C8F3041BC63A000088069D /* ContainSubsetSpec.mm in Sources */,
 				AEEE21BF11DC290400029872 /* CDRExampleSpec.mm in Sources */,
 				AEEE21BE11DC290400029872 /* CDRExampleGroupSpec.mm in Sources */,
 				AEEE21C111DC290400029872 /* main.mm in Sources */,
@@ -4059,6 +4072,7 @@
 				1F47B9A8186D69CD005A8CE1 /* CDROTestReporterSpec.mm in Sources */,
 				AE53B68117E7BCD300D83D5E /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
 				34D4B5C318F3AE0400FB2C3B /* UIKitContainSpec.mm in Sources */,
+				F7C8F3071BC63A000088069D /* ContainSubsetSpec.mm in Sources */,
 				9D28051A18E2324200887CC4 /* ObjectWithValueEquality.m in Sources */,
 				AE8C87AF136245BD006C9305 /* ExpectFailureWithMessage.mm in Sources */,
 				96EA1CBB142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */,
