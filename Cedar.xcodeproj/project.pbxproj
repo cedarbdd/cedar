@@ -25,7 +25,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1F4251DE180E0CB200FC578B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4251DC180E0CA200FC578B /* SenTestingKit.framework */; };
 		1F45A3CE180E4796003C1E36 /* OCUnitApplicationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96D34483144A845100352C4A /* OCUnitApplicationTests.mm */; };
 		1F45A3D0180E4796003C1E36 /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
 		1F45A3D1180E4796003C1E36 /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
@@ -42,16 +41,6 @@
 		1F483E34187D3CD200521F81 /* CDROTestNamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F483E31187D39D000521F81 /* CDROTestNamer.m */; };
 		1F882AAA180F9B6300533238 /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1F882AAC180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
-		1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		1FB4F27F188919A200227772 /* ARCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE71E7CB175E958F002A54D5 /* ARCViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		1FB4F28018891ED400227772 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
-		1FB4F28118891EF200227772 /* ArgumentReleaser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE807888183C71950078C608 /* ArgumentReleaser.m */; };
-		1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; };
-		1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
-		1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
-		1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
-		1FB4F28618891F0D00227772 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
 		1FC90AA819FA2AF50082F844 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
 		1FDCD5601821D3BB00B511DB /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FDCD5611821D3BF00B511DB /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -59,8 +48,6 @@
 		1FE15C1C1869091900207F0C /* CDRReportDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE15C191869091900207F0C /* CDRReportDispatcher.h */; };
 		1FE15C1D1869091900207F0C /* CDRReportDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE15C1A1869091900207F0C /* CDRReportDispatcher.m */; };
 		1FE15C201869091900207F0C /* CDRReportDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE15C1A1869091900207F0C /* CDRReportDispatcher.m */; };
-		1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; };
-		1FE2ACBA18891FE90000C063 /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1FF3591117B6094A00096517 /* CDRExample.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCC11DC27B800029872 /* CDRExample.h */; };
 		1FF3591217B6094A00096517 /* CDRExampleGroup.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEEE1FCE11DC27B800029872 /* CDRExampleGroup.h */; };
 		1FF3591317B6096800096517 /* CDRSymbolicator.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; };
@@ -99,7 +86,6 @@
 		34ADE41818F23C8E00BD1E99 /* NSMethodSignature+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */; };
 		34ADE41918F23E6B00BD1E99 /* NSMethodSignature+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */; };
 		34D4B5C318F3AE0400FB2C3B /* UIKitContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */; };
-		34D93AD51911441300200C71 /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		34EBFD0F18FF505F005392AB /* UIKitComparatorsContainer.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */; };
 		34F3DF7F1A6ABA2E003041DA /* CDRNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF7C1A6ABA2E003041DA /* CDRNil.m */; };
 		34F3DF801A6ABA2E003041DA /* CDRNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF7C1A6ABA2E003041DA /* CDRNil.m */; };
@@ -142,7 +128,6 @@
 		9672F0A71615C1C10012ED58 /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
 		9672F0A91615C3F40012ED58 /* CDRSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9672F0A81615C3F40012ED58 /* CDRSpecSpec.mm */; };
 		9672F0AA1615C3F40012ED58 /* CDRSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9672F0A81615C3F40012ED58 /* CDRSpecSpec.mm */; };
-		968F9582161AC58200A78D36 /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
 		969B6F84160C61E000C7C792 /* CDRSymbolicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 969B6F82160C61E000C7C792 /* CDRSymbolicator.m */; };
 		969B6F86160C678400C7C792 /* CDRSymbolicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 969B6F82160C61E000C7C792 /* CDRSymbolicator.m */; };
 		969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,7 +136,6 @@
 		96A07F0B13F276B10021974D /* FocusedSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0A13F276B10021974D /* FocusedSpec.m */; };
 		96A07F0F13F27F2F0021974D /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F0E13F27F2F0021974D /* main.mm */; };
 		96A07F1113F283E40021974D /* FocusedSpec2.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A07F1013F283E40021974D /* FocusedSpec2.m */; };
-		96A805E416D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
 		96B5918F1630F5840068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
 		96B591911630F5B10068EA5E /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
 		96B5F9FC144A81A7000A6A5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
@@ -159,13 +143,8 @@
 		96B5FA05144A81A8000A6A5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B5FA04144A81A8000A6A5D /* main.m */; };
 		96B5FA08144A81A8000A6A5D /* OCUnitAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B5FA07144A81A8000A6A5D /* OCUnitAppAppDelegate.m */; };
 		96B5FA0B144A81A8000A6A5D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA09144A81A8000A6A5D /* MainWindow.xib */; };
-		96B5FA14144A81A8000A6A5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B5F9FB144A81A7000A6A5D /* CoreGraphics.framework */; };
-		96B5FA1C144A81A8000A6A5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B5FA1A144A81A8000A6A5D /* InfoPlist.strings */; };
 		96C95B7E161339160018606B /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; };
 		96D34482144A82DB00352C4A /* DummyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96D3447F144A82D100352C4A /* DummyView.xib */; };
-		96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96D34483144A845100352C4A /* OCUnitApplicationTests.mm */; };
-		96D3448A144A85A500352C4A /* libCedar-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEE222911DC2B0600029872 /* libCedar-StaticLib.a */; };
-		96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm */; };
 		96EA1CA8142C6425001A78E0 /* CDROTestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */; };
 		96EA1CA9142C6425001A78E0 /* CDROTestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */; };
 		96EA1CAA142C6425001A78E0 /* CDROTestRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */; };
@@ -176,7 +155,6 @@
 		96EA1CBB142C6560001A78E0 /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; };
 		9D28051918E2321D00887CC4 /* ObjectWithValueEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D28051818E2321D00887CC4 /* ObjectWithValueEquality.m */; };
 		9D28051A18E2324200887CC4 /* ObjectWithValueEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D28051818E2321D00887CC4 /* ObjectWithValueEquality.m */; };
-		9D28051B18E2324300887CC4 /* ObjectWithValueEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D28051818E2321D00887CC4 /* ObjectWithValueEquality.m */; };
 		AE02021917452007009A7915 /* StringifiersBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02021717452006009A7915 /* StringifiersBase.mm */; };
 		AE02021A17452007009A7915 /* StringifiersBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02021717452006009A7915 /* StringifiersBase.mm */; };
 		AE02E7E5184EABCD00414F19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96158A8C144A915E005895CE /* Foundation.framework */; };
@@ -312,21 +290,13 @@
 		AE31A2A119C0F23F00C438C1 /* CDRXTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = AE31A29E19C0F23F00C438C1 /* CDRXTestSuite.m */; };
 		AE31A2A219C0F23F00C438C1 /* CDRXTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = AE31A29E19C0F23F00C438C1 /* CDRXTestSuite.m */; };
 		AE34722819C11872005CA6F1 /* GlobalBeforeEachSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */; };
-		AE34722919C11876005CA6F1 /* GlobalBeforeEachSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */; };
 		AE34722A19C118C9005CA6F1 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; };
-		AE34722B19C118CA005CA6F1 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; };
-		AE34722D19C124CE005CA6F1 /* CDRExampleSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */; };
-		AE34722E19C124CE005CA6F1 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AE34722F19C124CE005CA6F1 /* CDRExampleSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */; };
 		AE34723019C124CE005CA6F1 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
-		AE34723319C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
 		AE34723419C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; };
-		AE34723619C12534005CA6F1 /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		AE34723719C12534005CA6F1 /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		AE34723919C12588005CA6F1 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
-		AE34723C19C22547005CA6F1 /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
 		AE34723D19C22547005CA6F1 /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
-		AE34724519C225A0005CA6F1 /* CDRXTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXTestSuiteSpec.mm */; };
 		AE34724619C225A1005CA6F1 /* CDRXTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXTestSuiteSpec.mm */; };
 		AE34724B19C37ECF005CA6F1 /* CDRXCTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE34724919C37ECF005CA6F1 /* CDRXCTestCase.h */; };
 		AE34724C19C37ECF005CA6F1 /* CDRXCTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE34724919C37ECF005CA6F1 /* CDRXCTestCase.h */; };
@@ -489,7 +459,6 @@
 		AE4E9B9519C8B44700D794CE /* NSInvocation+CDRXExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4E9B9119C8B44700D794CE /* NSInvocation+CDRXExample.m */; };
 		AE5218D3175979CA00A656BC /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE5218D5175979D900A656BC /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
-		AE52405818F5D604003AB816 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		AE53B67E17E7BCAA00D83D5E /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; };
 		AE53B67F17E7BCAA00D83D5E /* CDRProtocolFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE74903015B45E9D008EA127 /* CDRProtocolFakeSpec.mm */; };
 		AE53B68017E7BCAA00D83D5E /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; };
@@ -576,7 +545,6 @@
 		AEC40C51174AC4C700474D2D /* UIGeometryStringifiers.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */; };
 		AEC40C54174AC51D00474D2D /* UIKitEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */; };
 		AEC40C58174ACAD900474D2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC40C57174ACAD900474D2D /* UIKit.framework */; };
-		AEC40C59174ACAEE00474D2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC40C57174ACAD900474D2D /* UIKit.framework */; };
 		AEC54007185E90D900B0D41D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC54006185E90D900B0D41D /* UIKit.framework */; };
 		AEC54009185E90E900B0D41D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC54008185E90E900B0D41D /* CoreGraphics.framework */; };
 		AEC7873915F440980058A27B /* InvocationMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC7873715F440980058A27B /* InvocationMatcher.mm */; };
@@ -714,14 +682,10 @@
 		E32861331604F287001FA77E /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		E4BCFDD21817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
 		E4BCFDD31817FA110083ED98 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; };
-		F78FDA151B43AA8A0054C768 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
 		F78FDA161B43AA8C0054C768 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; };
-		F78FDA171B43AA8F0054C768 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
 		F78FDA181B43AA8F0054C768 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; };
-		F78FDA191B43AA930054C768 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
 		F78FDA1A1B43AA930054C768 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; };
 		F78FDA1B1B43AB540054C768 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
-		F78FDA1C1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
 		F78FDA1D1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
 		F7A225DC1B43A8FB006231CC /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		F7BBE7D31B43A852009547F0 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; };
@@ -755,20 +719,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = AEEE1FB511DC271300029872;
 			remoteInfo = Cedar;
-		};
-		96B5FA15144A81A8000A6A5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 96B5F9F5144A81A7000A6A5D;
-			remoteInfo = OCUnitApp;
-		};
-		96D34486144A859200352C4A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AEEE222811DC2B0600029872;
-			remoteInfo = "Cedar-StaticLib";
 		};
 		AE02E80E184EADE100414F19 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -983,10 +933,6 @@
 		96158A8A144A915E005895CE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		96158A8B144A915E005895CE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		96158A8C144A915E005895CE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		96158A8F144A915E005895CE /* OCUnitAppLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCUnitAppLogicTests-Info.plist"; sourceTree = "<group>"; };
-		96158A91144A915E005895CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		96158A93144A915E005895CE /* OCUnitAppLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCUnitAppLogicTests-Prefix.pch"; sourceTree = "<group>"; };
-		96158A9E144A91C4005895CE /* OCUnitAppLogicTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OCUnitAppLogicTests.mm; sourceTree = "<group>"; };
 		96158AA0144A91DC005895CE /* DummyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyModel.h; sourceTree = "<group>"; };
 		96158AA1144A91DC005895CE /* DummyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyModel.m; sourceTree = "<group>"; };
 		966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShouldSyntaxSpec.mm; path = ../ShouldSyntaxSpec.mm; sourceTree = "<group>"; };
@@ -1007,15 +953,12 @@
 		96B5FA06144A81A8000A6A5D /* OCUnitAppAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCUnitAppAppDelegate.h; sourceTree = "<group>"; };
 		96B5FA07144A81A8000A6A5D /* OCUnitAppAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCUnitAppAppDelegate.m; sourceTree = "<group>"; };
 		96B5FA0A144A81A8000A6A5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar iOS SenTestingKit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B5FA19144A81A8000A6A5D /* OCUnitAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCUnitAppTests-Info.plist"; sourceTree = "<group>"; };
 		96B5FA1B144A81A8000A6A5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		96B5FA1D144A81A8000A6A5D /* OCUnitAppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCUnitAppTests-Prefix.pch"; sourceTree = "<group>"; };
 		96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CDRSymbolicatorSpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		96D34480144A82D100352C4A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DummyView.xib; sourceTree = "<group>"; };
 		96D34483144A845100352C4A /* OCUnitApplicationTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OCUnitApplicationTests.mm; sourceTree = "<group>"; };
-		96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OCUnitApplicationTestsWithSenTestingKit.mm; sourceTree = "<group>"; };
-		96E807BC1491C6D200388D9D /* OCUnitAppLogicTestsWithSenTestingKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCUnitAppLogicTestsWithSenTestingKit.m; sourceTree = "<group>"; };
 		96EA1CA6142C6425001A78E0 /* CDROTestReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDROTestReporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		96EA1CA7142C6425001A78E0 /* CDROTestRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDROTestRunner.m; sourceTree = "<group>"; };
 		96EA1CAC142C6449001A78E0 /* CDROTestReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDROTestReporter.h; sourceTree = "<group>"; };
@@ -1261,17 +1204,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		96B5FA0D144A81A8000A6A5D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1F4251DE180E0CB200FC578B /* SenTestingKit.framework in Frameworks */,
-				AEC40C59174ACAEE00474D2D /* UIKit.framework in Frameworks */,
-				96B5FA14144A81A8000A6A5D /* CoreGraphics.framework in Frameworks */,
-				96D3448A144A85A500352C4A /* libCedar-StaticLib.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AE02E7E1184EABCD00414F19 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1480,35 +1412,14 @@
 			path = Doubles;
 			sourceTree = "<group>";
 		};
-		96158A8D144A915E005895CE /* OCUnitAppLogicTests */ = {
-			isa = PBXGroup;
-			children = (
-				96158A9E144A91C4005895CE /* OCUnitAppLogicTests.mm */,
-				96E807BC1491C6D200388D9D /* OCUnitAppLogicTestsWithSenTestingKit.m */,
-				96158A8E144A915E005895CE /* Supporting Files */,
-			);
-			path = OCUnitAppLogicTests;
-			sourceTree = "<group>";
-		};
-		96158A8E144A915E005895CE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				96158A8F144A915E005895CE /* OCUnitAppLogicTests-Info.plist */,
-				96158A90144A915E005895CE /* InfoPlist.strings */,
-				96158A93144A915E005895CE /* OCUnitAppLogicTests-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9668DCDE144A92BA007C7294 /* OCUnit Support */ = {
+		9668DCDE144A92BA007C7294 /* Test Bundle Support */ = {
 			isa = PBXGroup;
 			children = (
 				1F45A3DF180E47AA003C1E36 /* XCUnitAppTests */,
-				96B5F9FD144A81A7000A6A5D /* OCUnitApp */,
+				96B5F9FD144A81A7000A6A5D /* Test Bundle App */,
 				96B5FA17144A81A8000A6A5D /* OCUnitAppTests */,
-				96158A8D144A915E005895CE /* OCUnitAppLogicTests */,
 			);
-			name = "OCUnit Support";
+			name = "Test Bundle Support";
 			sourceTree = "<group>";
 		};
 		96A07F0D13F27ED70021974D /* Focused */ = {
@@ -1521,7 +1432,7 @@
 			name = Focused;
 			sourceTree = "<group>";
 		};
-		96B5F9FD144A81A7000A6A5D /* OCUnitApp */ = {
+		96B5F9FD144A81A7000A6A5D /* Test Bundle App */ = {
 			isa = PBXGroup;
 			children = (
 				96158AA0144A91DC005895CE /* DummyModel.h */,
@@ -1532,6 +1443,7 @@
 				96D3447F144A82D100352C4A /* DummyView.xib */,
 				96B5F9FE144A81A7000A6A5D /* Supporting Files */,
 			);
+			name = "Test Bundle App";
 			path = OCUnitApp;
 			sourceTree = "<group>";
 		};
@@ -1550,7 +1462,6 @@
 			isa = PBXGroup;
 			children = (
 				96D34483144A845100352C4A /* OCUnitApplicationTests.mm */,
-				96E807BA1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm */,
 				96B5FA18144A81A8000A6A5D /* Supporting Files */,
 			);
 			path = OCUnitAppTests;
@@ -1853,7 +1764,7 @@
 			children = (
 				AEEE1FC311DC27B800029872 /* Source */,
 				AEEE1FE711DC27B800029872 /* Spec */,
-				9668DCDE144A92BA007C7294 /* OCUnit Support */,
+				9668DCDE144A92BA007C7294 /* Test Bundle Support */,
 				AE248F9919DCD52500092C14 /* OS X Host App */,
 				AE248FAD19DCD52500092C14 /* OS X Host AppTests */,
 				AEB8818919DCD62D00F081BA /* OS X Failing Test Bundle */,
@@ -1877,7 +1788,6 @@
 				AEEE227611DC2CF900029872 /* Cedar-StaticLib Specs.app */,
 				96A07F0813F276640021974D /* Cedar OS X FocusedSpecs */,
 				96B5F9F6144A81A7000A6A5D /* Cedar iOS Host App.app */,
-				96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */,
 				1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */,
 				AE02E7E4184EABCD00414F19 /* Cedar-iOS StaticFrameworkSpecs.app */,
 				AE248F9819DCD52500092C14 /* Cedar OS X Host App.app */,
@@ -2437,26 +2347,6 @@
 			productReference = 96B5F9F6144A81A7000A6A5D /* Cedar iOS Host App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		96B5FA10144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 96B5FA25144A81A8000A6A5D /* Build configuration list for PBXNativeTarget "Cedar iOS SenTestingKit Tests" */;
-			buildPhases = (
-				96B5FA0C144A81A8000A6A5D /* Sources */,
-				96B5FA0D144A81A8000A6A5D /* Frameworks */,
-				96B5FA0E144A81A8000A6A5D /* Resources */,
-				96B5FA0F144A81A8000A6A5D /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				96D34487144A859200352C4A /* PBXTargetDependency */,
-				96B5FA16144A81A8000A6A5D /* PBXTargetDependency */,
-			);
-			name = "Cedar iOS SenTestingKit Tests";
-			productName = OCUnitAppTests;
-			productReference = 96B5FA11144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
-		};
 		AE02E7E3184EABCD00414F19 /* Cedar-iOS StaticFrameworkSpecs */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE02E808184EABCE00414F19 /* Build configuration list for PBXNativeTarget "Cedar-iOS StaticFrameworkSpecs" */;
@@ -2690,7 +2580,6 @@
 				AEEE227511DC2CF900029872 /* Cedar-StaticLib Specs */,
 				AE02E7E3184EABCD00414F19 /* Cedar-iOS StaticFrameworkSpecs */,
 				96B5F9F5144A81A7000A6A5D /* Cedar iOS Host App */,
-				96B5FA10144A81A8000A6A5D /* Cedar iOS SenTestingKit Tests */,
 				1F45A3C8180E4796003C1E36 /* Cedar iOS XCTest Tests */,
 				AE248F9719DCD52500092C14 /* Cedar OS X Host App */,
 				AE248FA919DCD52500092C14 /* Cedar OS X Host AppTests */,
@@ -2717,14 +2606,6 @@
 				96B5FA02144A81A8000A6A5D /* InfoPlist.strings in Resources */,
 				96B5FA0B144A81A8000A6A5D /* MainWindow.xib in Resources */,
 				96D34482144A82DB00352C4A /* DummyView.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		96B5FA0E144A81A8000A6A5D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				96B5FA1C144A81A8000A6A5D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2835,19 +2716,6 @@
 			shellPath = "/usr/bin/env ruby";
 			shellScript = "key = \"CDRBuildVersionSHA\"\nver = `git rev-parse HEAD`.strip\nputs \"Git commit SHA is #{ver}\"\npath = \"#{ENV['BUILT_PRODUCTS_DIR']}/#{ENV['INFOPLIST_PATH']}\"\nputs \"Updating #{path}\"\n`/usr/libexec/PlistBuddy -c \"Add :#{key} string #{ver}\" \"#{path}\"`";
 		};
-		96B5FA0F144A81A8000A6A5D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
 		AEEE225511DC2BD700029872 /* Build architecture-specific static libs */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2926,44 +2794,6 @@
 				96B5FA05144A81A8000A6A5D /* main.m in Sources */,
 				96B5FA08144A81A8000A6A5D /* OCUnitAppAppDelegate.m in Sources */,
 				96158AA2144A91DC005895CE /* DummyModel.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		96B5FA0C144A81A8000A6A5D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AE34722E19C124CE005CA6F1 /* CDRExampleGroupSpec.mm in Sources */,
-				9D28051B18E2324300887CC4 /* ObjectWithValueEquality.m in Sources */,
-				AE34722D19C124CE005CA6F1 /* CDRExampleSpec.mm in Sources */,
-				F78FDA191B43AA930054C768 /* HaveReceivedSpec.mm in Sources */,
-				1FB4F28318891EFE00227772 /* ObjectWithForwardingTarget.m in Sources */,
-				AE52405818F5D604003AB816 /* FooSuperclass.m in Sources */,
-				F78FDA171B43AA8F0054C768 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
-				AE34724519C225A0005CA6F1 /* CDRXTestSuiteSpec.mm in Sources */,
-				AE34722919C11876005CA6F1 /* GlobalBeforeEachSpec.mm in Sources */,
-				1FB4F27D1889195400227772 /* WeakReferenceCompatibilitySpec.mm in Sources */,
-				1FB4F27F188919A200227772 /* ARCViewController.m in Sources */,
-				F78FDA151B43AA8A0054C768 /* CedarNiceFakeSharedExamples.mm in Sources */,
-				1FE2ACB918891FD70000C063 /* CedarDoubleSharedExamples.mm in Sources */,
-				AE34722B19C118CA005CA6F1 /* SpecSpec.mm in Sources */,
-				1FB4F28218891EF800227772 /* ObjectWithCollections.m in Sources */,
-				96D34485144A845600352C4A /* OCUnitApplicationTests.mm in Sources */,
-				1FB4F28518891F0800227772 /* SimpleIncrementer.m in Sources */,
-				F78FDA1C1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */,
-				96E807BB1491BC7500388D9D /* OCUnitApplicationTestsWithSenTestingKit.mm in Sources */,
-				1FB4F27E1889199900227772 /* ObjectWithWeakDelegate.m in Sources */,
-				AE34723319C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */,
-				1FB4F28418891F0400227772 /* ObjectWithProperty.m in Sources */,
-				1FB4F28118891EF200227772 /* ArgumentReleaser.m in Sources */,
-				1FB4F28018891ED400227772 /* CDRSpySpec.mm in Sources */,
-				AE34723C19C22547005CA6F1 /* CDRDefaultReporterSpec.mm in Sources */,
-				AE34723619C12534005CA6F1 /* FibonacciCalculator.m in Sources */,
-				1FB4F28618891F0D00227772 /* SimpleKeyValueObserver.m in Sources */,
-				1FE2ACBA18891FE90000C063 /* CedarDoubleARCSharedExamples.mm in Sources */,
-				968F9582161AC58200A78D36 /* CDRSymbolicatorSpec.mm in Sources */,
-				96A805E416D9B29C005F87FA /* CDRSpecFailureSpec.mm in Sources */,
-				34D93AD51911441300200C71 /* DeallocNotifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3397,16 +3227,6 @@
 			target = AEEE1FB511DC271300029872 /* Cedar */;
 			targetProxy = 96A07EF013F276640021974D /* PBXContainerItemProxy */;
 		};
-		96B5FA16144A81A8000A6A5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 96B5F9F5144A81A7000A6A5D /* Cedar iOS Host App */;
-			targetProxy = 96B5FA15144A81A8000A6A5D /* PBXContainerItemProxy */;
-		};
-		96D34487144A859200352C4A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AEEE222811DC2B0600029872 /* Cedar-StaticLib */;
-			targetProxy = 96D34486144A859200352C4A /* PBXContainerItemProxy */;
-		};
 		AE02E80F184EADE100414F19 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AEEE224B11DC2BBB00029872 /* Cedar-iOS StaticFramework */;
@@ -3445,14 +3265,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		96158A90144A915E005895CE /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				96158A91144A915E005895CE /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		96B5FA00144A81A8000A6A5D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3679,83 +3491,6 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		96B5FA26144A81A8000A6A5D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cedar iOS Host App.app/Cedar iOS Host App";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OCUnitAppTests/OCUnitAppTests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"/Source/Matchers/UIKit",
-				);
-				INFOPLIST_FILE = "OCUnitAppTests/OCUnitAppTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-lstdc++",
-					"-all_load",
-					"-ObjC",
-					"-framework",
-					Foundation,
-					"-framework",
-					SenTestingKit,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphonesimulator;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		96B5FA27144A81A8000A6A5D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Cedar iOS Host App.app/Cedar iOS Host App";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OCUnitAppTests/OCUnitAppTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"/Source/Matchers/UIKit",
-				);
-				INFOPLIST_FILE = "OCUnitAppTests/OCUnitAppTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-lstdc++",
-					"-all_load",
-					"-ObjC",
-					"-framework",
-					Foundation,
-					"-framework",
-					SenTestingKit,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphonesimulator;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -4569,15 +4304,6 @@
 			buildConfigurations = (
 				96B5FA23144A81A8000A6A5D /* Debug */,
 				96B5FA24144A81A8000A6A5D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		96B5FA25144A81A8000A6A5D /* Build configuration list for PBXNativeTarget "Cedar iOS SenTestingKit Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				96B5FA26144A81A8000A6A5D /* Debug */,
-				96B5FA27144A81A8000A6A5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
