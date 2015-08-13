@@ -393,7 +393,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             });
 
             context(@"with a valid block that takes a complex block as a parameter", ^{
-                ComplexIncrementerBlock sent_argument = ^LargeIncrementerStruct(NSNumber *, LargeIncrementerStruct, NSError *){ return (LargeIncrementerStruct){}; };
+                ComplexIncrementerBlock sent_argument = ^LargeIncrementerStruct(NSNumber *, LargeIncrementerStruct, id<NSCoding>){ return (LargeIncrementerStruct){}; };
                 __block ComplexIncrementerBlock received_argument;
 
                 beforeEach(^{
