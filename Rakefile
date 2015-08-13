@@ -9,7 +9,6 @@ FOCUSED_SPECS_TARGET_NAME = "Cedar OS X FocusedSpecs"
 IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS StaticFrameworkSpecs"
 IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS-Framework Specs"
 
-OCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS SenTestingKit Tests"
 XCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS XCTest Tests"
 
 OSX_FAILING_SPEC_SCHEME_NAME = "Cedar OS X Failing Test Bundle"
@@ -461,8 +460,8 @@ namespace :frameworks do
 end
 
 namespace :testbundles do
-  desc "Runs all test bundle test suites (xcunit, ocunit:application)"
-  task run: ['testbundles:xcunit', 'testbundles:ocunit', 'testbundles:failing_test_bundle']
+  desc "Runs all test bundle test suites (xcunit)"
+  task run: ['testbundles:xcunit', 'testbundles:failing_test_bundle']
 
   desc "Converts the test bundle identifier to ones Xcode 5- recognizes (Xcode 6 postfixes the original bundler identifier)"
   task :convert_to_xcode5 do
@@ -479,26 +478,6 @@ namespace :testbundles do
       args: "ARCHS=x86_64 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
       logfile: "xcunit.run.log",
     )
-  end
-
-  desc "Build and run OCUnit logic and application specs"
-  task ocunit: ["ocunit:application"]
-  namespace :ocunit do
-    desc "Build and run OCUnit application specs (#{OCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
-    task application: :convert_to_xcode5 do
-      if Xcode.version < 7.0
-        Simulator.kill
-
-        Xcode.test(
-          scheme: OCUNIT_APPLICATION_SPECS_SCHEME_NAME,
-          sdk: "iphonesimulator#{SDK_VERSION}",
-          args: "ARCHS=i386 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
-          logfile: "ocunit-application-specs.log",
-        )
-      else
-        puts 'Warning :: Cannot test OCUnit support with Xcode 7.'
-      end
-    end
   end
 
   desc 'A target that does not have XCTest or SenTestingKit linked should alert the user'
