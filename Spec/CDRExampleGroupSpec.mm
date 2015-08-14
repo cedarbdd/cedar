@@ -39,6 +39,11 @@ describe(@"CDRExampleGroup", ^{
         errorExample = [[[CDRExample alloc] initWithText:@"I should raise an error" andBlock:^{ @throw @"wibble"; }] autorelease];
         nonFocusedExample = [[[CDRExample alloc] initWithText:@"I should not be focused" andBlock:^{}] autorelease];
     });
+    
+    invariant(@"progress between 0 and 1", ^{
+        group.progress should be_greater_than_or_equal_to(0);
+        group.progress should be_less_than_or_equal_to(1);
+    });
 
     describe(@"runWithDispatcher:", ^{
         beforeEach(^{
@@ -123,6 +128,70 @@ describe(@"CDRExampleGroup", ^{
                 expect(hasChildren).to(be_truthy());
             });
         });
+        
+        describe(@"for a group with an invariant", ^{
+            beforeEach(^{
+                [group addInvariant:incompleteExample];
+                NSUInteger count = group.examples.count;
+                expect(count).to(equal(0));
+            });
+            
+            it(@"should return false", ^{
+                BOOL hasChildren = group.hasChildren;
+                expect(hasChildren).to(be_falsy());
+            });
+            
+            describe(@"and a nested group", ^{
+                __block CDRExampleGroup *innerGroup;
+                
+                beforeEach(^{
+                    innerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                    [group add:innerGroup];
+                });
+                
+                it(@"should return true for the group", ^{
+                    BOOL hasChildren = group.hasChildren;
+                    expect(hasChildren).to(be_truthy());
+                });
+                
+                it(@"should return false for the inner group", ^{
+                    BOOL hasChildren = innerGroup.hasChildren;
+                    expect(hasChildren).to(be_falsy());
+                });
+            });
+        });
+        
+        describe(@"for a group with a nested group", ^{
+            __block CDRExampleGroup *innerGroup;
+            
+            beforeEach(^{
+                innerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                [group add:innerGroup];
+                NSUInteger count = group.examples.count;
+                expect(count).to_not(equal(0));
+            });
+            
+            it(@"should return true", ^{
+                BOOL hasChildren = group.hasChildren;
+                expect(hasChildren).to(be_truthy());
+            });
+            
+            it(@"should return false for the inner group", ^{
+                BOOL hasChildren = innerGroup.hasChildren;
+                expect(hasChildren).to(be_falsy());
+            });
+            
+            describe(@"and an invariant", ^{
+                beforeEach(^{
+                    [group addInvariant:incompleteExample];
+                });
+                
+                it(@"should return false for the inner group", ^{
+                    BOOL hasChildren = innerGroup.hasChildren;
+                    expect(hasChildren).to(be_falsy());
+                });
+            });
+        });
     });
 
     describe(@"isFocused", ^{
@@ -172,6 +241,40 @@ describe(@"CDRExampleGroup", ^{
                     expect([group hasFocusedExamples]).to(be_truthy());
                 });
             });
+            
+            context(@"and has at least one focused invariant", ^{
+                __block CDRExampleGroup *anotherInnerGroup;
+                __block CDRExampleGroup *innerGroup;
+                
+                beforeEach(^{
+                    passingExample.focused = YES;
+                    [group addInvariant:passingExample];
+                    [group add:failingExample];
+
+                    innerGroup = [[CDRExampleGroup alloc] initWithText:@"Inner group"];
+                    [group add:innerGroup];
+                    
+                    anotherInnerGroup = [[CDRExampleGroup alloc] initWithText:@"Another inner group"];
+                    [innerGroup add:anotherInnerGroup];
+                    
+                    [innerGroup release];
+                    [anotherInnerGroup release];
+                });
+                
+                it(@"should return true", ^{
+                    expect([group hasFocusedExamples]).to(be_truthy());
+                });
+                
+                it(@"should have a focused inner group", ^{
+                    [group hasFocusedExamples];                    
+                    expect([innerGroup hasFocusedExamples]).to(be_truthy());
+                });
+                
+                it(@"should have a focused inner inner group", ^{
+                    [group hasFocusedExamples];
+                    expect([anotherInnerGroup hasFocusedExamples]).to(be_truthy());
+                });
+            });
 
             context(@"and has at least one focused group", ^{
                 beforeEach(^{
@@ -208,6 +311,59 @@ describe(@"CDRExampleGroup", ^{
 
         it(@"should be called after each example runs, regardless of failures or errors", ^{
             blockInvocationCount should equal(3);
+        });
+    });
+    
+    describe(@"invariant", ^{
+        __block NSInteger blockInvocationCount;
+        
+        beforeEach(^{
+            CDRSpecBlock invariantBlock = ^{ ++blockInvocationCount; };
+            [group addInvariant:[CDRExample exampleWithText:@"inv" andBlock:invariantBlock]];
+        });
+        
+        describe(@"for a single block", ^{
+            beforeEach(^{
+                blockInvocationCount = 0;
+                [group add:errorExample];
+                [group add:failingExample];
+                [group add:passingExample];
+                [group runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should be called once, regardless of failures or errors", ^{
+                blockInvocationCount should equal(1);
+            });
+        });
+        
+        describe(@"for a pending block", ^{
+            beforeEach(^{
+                blockInvocationCount = 0;
+                [group runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should not be called", ^{
+                blockInvocationCount should equal(0);
+            });
+        });
+        
+        describe(@"for nested blocks", ^{
+            beforeEach(^{
+                blockInvocationCount = 0;
+                CDRExampleGroup * innerInnerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                [innerInnerGroup add:errorExample];
+                [innerInnerGroup add:failingExample];
+                CDRExampleGroup * innerGroup = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
+                [innerGroup add:innerInnerGroup];
+                [group add:passingExample];
+                [group add:innerGroup];
+                
+                [group runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should be called three times, once as it pases through each block", ^{
+                blockInvocationCount should equal(3);
+            });
         });
     });
 
@@ -560,6 +716,19 @@ describe(@"CDRExampleGroup", ^{
             it(@"should be the mean of the progress of each child", ^{
                 float progress = group.progress;
                 expect(progress).to(be_close_to(2.0 / 3.0));
+            });
+        });
+        
+        describe(@"when the group contains an invariant", ^{
+            beforeEach(^{
+                [group add:passingExample];
+                [group addInvariant:incompleteExample];
+                [passingExample runWithDispatcher:dispatcher];
+            });
+            
+            it(@"should count the invariant like a regular example", ^{
+                float progress = group.progress;
+                expect(progress).to(be_close_to(1.0 / 2.0));
             });
         });
     });

@@ -1,7 +1,7 @@
 #import "CDRExampleBase.h"
 
 @interface CDRExampleGroup : CDRExampleBase <CDRExampleParent> {
-    NSMutableArray *beforeBlocks_, *examples_, *afterBlocks_;
+    NSMutableArray *beforeBlocks_, *examples_, *afterBlocks_, *invariants_;
     BOOL isRoot_;
     CDRSpecBlock subjectActionBlock_;
 }
@@ -15,5 +15,6 @@
 - (void)add:(CDRExampleBase *)example;
 - (void)addBefore:(CDRSpecBlock)block;
 - (void)addAfter:(CDRSpecBlock)block;
+- (void)addInvariant:(CDRExampleBase *)inv;
 
 @end

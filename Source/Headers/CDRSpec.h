@@ -15,21 +15,29 @@ extern "C" {
 #endif
 void beforeEach(CDRSpecBlock);
 void afterEach(CDRSpecBlock);
+    
+CDRExample * invariant(NSString *, CDRSpecBlock);
+extern CDRExample * (*it_should_always)(NSString *, CDRSpecBlock);
 
 CDRExampleGroup * describe(NSString *, CDRSpecBlock);
 extern CDRExampleGroup* (*context)(NSString *, CDRSpecBlock);
 
 CDRExample * it(NSString *, CDRSpecBlock);
 
+void subjectAction(CDRSpecBlock);
+    
 CDRExampleGroup * xdescribe(NSString *, CDRSpecBlock);
 extern CDRExampleGroup* (*xcontext)(NSString *, CDRSpecBlock);
-void subjectAction(CDRSpecBlock);
 CDRExample * xit(NSString *, CDRSpecBlock);
+CDRExample * xinvariant(NSString *, CDRSpecBlock);
+extern CDRExample* (*xit_should_always)(NSString *, CDRSpecBlock);
 
 CDRExampleGroup * fdescribe(NSString *, CDRSpecBlock);
 extern CDRExampleGroup* (*fcontext)(NSString *, CDRSpecBlock);
 CDRExample * fit(NSString *, CDRSpecBlock);
-
+CDRExample * finvariant(NSString *, CDRSpecBlock);
+extern CDRExample* (*fit_should_always)(NSString *, CDRSpecBlock);
+    
 void fail(NSString *);
 #ifdef __cplusplus
 }
