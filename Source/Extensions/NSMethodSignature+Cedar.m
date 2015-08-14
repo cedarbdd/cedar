@@ -14,7 +14,7 @@ static const char *Block_signature(id blockObj) {
 
 @implementation NSMethodSignature (Cedar)
 
-+ (NSMethodSignature *)signatureFromBlock:(id)block {
++ (NSMethodSignature *)cdr_signatureFromBlock:(id)block {
     const char *signatureTypes = Block_signature(block);
     NSString *signatureTypesString = [NSString stringWithUTF8String:signatureTypes];
 
@@ -30,7 +30,7 @@ static const char *Block_signature(id blockObj) {
     return [NSMethodSignature signatureWithObjCTypes:[strippedSignatureTypeString UTF8String]];
 }
 
-- (NSMethodSignature *)signatureWithoutSelectorArgument {
+- (NSMethodSignature *)cdr_signatureWithoutSelectorArgument {
     NSAssert([self numberOfArguments]>1 && strcmp([self getArgumentTypeAtIndex:1], ":")==0, @"Unable to remove _cmd from a method signature without a _cmd argument");
 
     NSMutableString *modifiedTypesString = [[[NSMutableString alloc] initWithUTF8String:[self methodReturnType]] autorelease];

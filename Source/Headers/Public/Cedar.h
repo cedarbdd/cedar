@@ -85,11 +85,9 @@
 
 #import "CDRSpy.h"
 #import "CDRFake.h"
-#import "CDRSpyInfo.h"
 #import "CedarDouble.h"
 #import "CDRClassFake.h"
 #import "CDRProtocolFake.h"
-#import "NSMethodSignature+Cedar.h"
 
 
 #pragma mark - Cedar Doubles/Matchers
@@ -101,7 +99,6 @@
 #import "ValueArgument.h"
 #import "StubbedMethod.h"
 #import "RejectedMethod.h"
-#import "NSInvocation+Cedar.h"
 #import "AnyInstanceArgument.h"
 #import "AnyInstanceOfClassArgument.h"
 #import "AnyInstanceConformingToProtocolArgument.h"

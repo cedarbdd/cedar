@@ -117,7 +117,7 @@
     [self.cedar_double_impl record_method_invocation:invocation];
     int method_invocation_result = [self.cedar_double_impl invoke_stubbed_method:invocation];
 
-    [invocation copyBlockArguments];
+    [invocation cdr_copyBlockArguments];
     [invocation retainArguments];
 
     if (method_invocation_result != CDRStubMethodInvoked) {

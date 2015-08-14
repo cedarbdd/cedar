@@ -1,11 +1,11 @@
 #import "Base.h"
 #import "InvocationMatcher.h"
 #import "CedarDouble.h"
-#import "NSInvocation+Cedar.h"
 
 namespace Cedar { namespace Doubles {
 
     extern "C" Class object_getClass(id);
+    extern NSString * recorded_invocations_message(NSArray *recordedInvocations);
 
     template<typename MessageBuilder_ = Matchers::BaseMessageBuilder>
     class HaveReceived : private InvocationMatcher {
@@ -124,17 +124,11 @@ namespace Cedar { namespace Doubles {
                 [message appendString:[NSString stringWithFormat:@", %@", (*cit)->value_string()]];
             }
             [message appendString:@">"];
+
             NSArray *recordedInvocations = [(id<CedarDouble>)value sent_messages];
             if (recordedInvocations.count > 0 && !negation) {
                 [message appendString:@" but received messages:\n"];
-                for (NSInvocation *invocation in recordedInvocations) {
-                    [message appendFormat:@"  %@", NSStringFromSelector(invocation.selector)];
-                    NSArray *arguments = [invocation arguments];
-                    if (arguments.count) {
-                        [message appendFormat:@"<%@>", [arguments componentsJoinedByString:@", "]];
-                    }
-                    [message appendString:@"\n"];
-                }
+                [message appendString:recorded_invocations_message(recordedInvocations)];
             }
         }
         return message;
