@@ -2,6 +2,7 @@
 
 @class XCTestSuite;
 @protocol XCTestObservation
+- (void)testBundleDidFinish:(NSBundle *)testBundle;
 - (void)testSuiteWillStart:(XCTestSuite *)testSuite;
 @end
 

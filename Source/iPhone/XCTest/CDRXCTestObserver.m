@@ -9,10 +9,11 @@
 #import "CDRXTestSuite.h"
 #import "CDRRuntimeUtilities.h"
 
-void CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite);
+CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite);
 
 @interface CDRXCTestObserver ()
 
+@property (retain) CDRReportDispatcher *dispatcher;
 @property (assign) BOOL observedTestSuiteStart;
 
 @end
@@ -34,10 +35,18 @@ void CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite);
     if (self.observedTestSuiteStart) {
         return;
     }
-
-    CDRAddCedarSpecsToXCTestSuite(testSuite);
-
     self.observedTestSuiteStart = YES;
+
+    self.dispatcher = CDRAddCedarSpecsToXCTestSuite(testSuite);
+}
+
+- (void)testBundleDidFinish:(NSBundle *)testBundle {
+    [self.dispatcher runDidComplete];
+}
+
+- (void)dealloc {
+    self.dispatcher = nil;
+    [super dealloc];
 }
 
 @end
@@ -89,7 +98,7 @@ void CDRInjectIntoXCTestRunner() {
     class_replaceMethod(testSuiteMetaClass, @selector(defaultTestSuite), newImp, method_getTypeEncoding(m));
 }
 
-void CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
+CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
     unsigned int seed = CDRGetRandomSeed();
 
     CDRDefineSharedExampleGroups();
@@ -110,4 +119,6 @@ void CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
     for (CDRSpec *spec in specs) {
         [testSuite addTest:[spec testSuiteWithRandomSeed:seed dispatcher:dispatcher]];
     }
+
+    return dispatcher;
 }
