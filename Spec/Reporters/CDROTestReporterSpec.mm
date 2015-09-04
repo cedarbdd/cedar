@@ -65,7 +65,7 @@ describe(@"CDROTestReporter", ^{
         // Running as the test suite should not really happen for
         // this test reporter, but we'll allow it for our test
         // suite.
-        if ([@[@"Debug", @"Release", @"Cedar-iOS-Framework Specs.app"] containsObject:bundleName]) {
+        if ([@[@"Debug", @"Release", @"Cedar-iOS-Framework Specs.app", @"Cedar-watchOS Specs Extension.appex"] containsObject:bundleName]) {
             bundleName = @"Cedar.framework";
         }
 
