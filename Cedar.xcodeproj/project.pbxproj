@@ -1622,7 +1622,7 @@
 			isa = PBXGroup;
 			children = (
 				66F00B4F14C4D8F600146D88 /* Doubles */,
-				AEEE1FD411DC27B800029872 /* iPhone */,
+				AEEE1FD411DC27B800029872 /* iOS */,
 				AE0AF55D13E9C06900029396 /* Matchers */,
 				1FE15C241869092300207F0C /* Reporters */,
 				AEEE1FCC11DC27B800029872 /* CDRExample.h */,
@@ -1732,6 +1732,14 @@
 			children = (
 			);
 			path = "Cedar-watchOS Specs Extension";
+			sourceTree = "<group>";
+		};
+		34A8485A1B9A4D9800396A09 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		4523FFB9BD607306C7ED94A3 /* GData */ = {
@@ -2099,9 +2107,9 @@
 		AEC40C4D174AC4C000474D2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				34A8485A1B9A4D9800396A09 /* iOS */,
 				AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */,
 				AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */,
-				34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2181,7 +2189,7 @@
 				6628FC8414C4DAB90016652A /* Doubles */,
 				AE7F170317272FB000E1146D /* Extensions */,
 				AEEE1FCA11DC27B800029872 /* Headers */,
-				AEEE1FDC11DC27B800029872 /* iPhone */,
+				AEEE1FDC11DC27B800029872 /* iOS */,
 				AE167EEC15B210C9005960B9 /* Matchers */,
 				E31179CE161FD90C007D3CDE /* ReporterHelpers */,
 				1FE15C171869071B00207F0C /* Reporters */,
@@ -2212,22 +2220,22 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
-		AEEE1FD411DC27B800029872 /* iPhone */ = {
+		AEEE1FD411DC27B800029872 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				AEEE1FDA11DC27B800029872 /* CedarApplicationDelegate.h */,
 				6628FCA014C503530016652A /* Cedar-iOS.h */,
 			);
-			path = iPhone;
+			path = iOS;
 			sourceTree = "<group>";
 		};
-		AEEE1FDC11DC27B800029872 /* iPhone */ = {
+		AEEE1FDC11DC27B800029872 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				960118BB1434867E00825FFF /* NSBundle+MainBundleHijack.m */,
 				AEEE1FE211DC27B800029872 /* CedarApplicationDelegate.m */,
 			);
-			path = iPhone;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		AEEE1FE711DC27B800029872 /* Spec */ = {
@@ -2238,7 +2246,7 @@
 				E328612E1604F254001FA77E /* Support */,
 				96A07F0D13F27ED70021974D /* Focused */,
 				AE02E7E8184EABCD00414F19 /* iOSFrameworkSpecs */,
-				AEEE1FEB11DC27B800029872 /* iPhone */,
+				AEEE1FEB11DC27B800029872 /* iOS */,
 				AE8C879F1362068A006C9305 /* Matchers */,
 				66F00B5014C4D92500146D88 /* Doubles */,
 				9672F0A81615C3F40012ED58 /* CDRSpecSpec.mm */,
@@ -2257,7 +2265,7 @@
 			path = Spec;
 			sourceTree = "<group>";
 		};
-		AEEE1FEB11DC27B800029872 /* iPhone */ = {
+		AEEE1FEB11DC27B800029872 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				AE34723F19C2257A005CA6F1 /* XCTest */,
@@ -2266,7 +2274,7 @@
 				AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */,
 				228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */,
 			);
-			path = iPhone;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		AEEE202611DC286500029872 /* Frameworks */ = {
