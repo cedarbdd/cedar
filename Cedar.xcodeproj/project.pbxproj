@@ -206,6 +206,11 @@
 		346262731B99569B002CAEBD /* CDRNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF7C1A6ABA2E003041DA /* CDRNil.m */; settings = {ASSET_TAGS = (); }; };
 		346262741B99BE9F002CAEBD /* UIGeometryCompareEqual.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC40C4E174AC4C000474D2D /* UIGeometryCompareEqual.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		346262751B99BE9F002CAEBD /* UIGeometryStringifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = AEC40C4F174AC4C000474D2D /* UIGeometryStringifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3462627E1B99C1DB002CAEBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3462627D1B99C1DB002CAEBD /* Assets.xcassets */; };
+		346262851B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 346262841B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3462628E1B99C1DC002CAEBD /* ExtensionDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3462628D1B99C1DC002CAEBD /* ExtensionDelegate.mm */; };
+		346262941B99C1DC002CAEBD /* Cedar-watchOS Specs.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 346262781B99C1DB002CAEBD /* Cedar-watchOS Specs.app */; };
+		346262A01B99D0DD002CAEBD /* Cedar.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 346261DF1B995239002CAEBD /* Cedar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34640DA71B6964F90083EB01 /* CDRBlockHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */; };
 		34640DA81B6964FE0083EB01 /* CDRTypeUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */; };
 		34640DA91B6965060083EB01 /* CDRNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F3DF7B1A6ABA2E003041DA /* CDRNil.h */; };
@@ -215,6 +220,9 @@
 		34681C3118FE4B68009D38AC /* CDRTypeUtilitiesSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34681C2F18FE4B68009D38AC /* CDRTypeUtilitiesSpec.mm */; };
 		34777EB71B99451200A69FCF /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 34777EB61B99451200A69FCF /* CDRPrivateFunctions.h */; };
 		34777EB81B99451200A69FCF /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 34777EB61B99451200A69FCF /* CDRPrivateFunctions.h */; };
+		34A848531B9A100500396A09 /* NSBundle+MainBundleHijack.m in Sources */ = {isa = PBXBuildFile; fileRef = 960118BB1434867E00825FFF /* NSBundle+MainBundleHijack.m */; settings = {ASSET_TAGS = (); }; };
+		34A848581B9A4A0500396A09 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A848571B9A4A0500396A09 /* UIKit.framework */; };
+		34A848591B9A4A2E00396A09 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34A848551B9A491E00396A09 /* Interface.storyboard */; settings = {ASSET_TAGS = (); }; };
 		34ADD2E01921F18100B057AC /* AnyInstanceOfClassArgument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34ADD2DE1921F18100B057AC /* AnyInstanceOfClassArgument.mm */; };
 		34ADD2E11921F18100B057AC /* AnyInstanceOfClassArgument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34ADD2DE1921F18100B057AC /* AnyInstanceOfClassArgument.mm */; };
 		34ADD2E71921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34ADD2E51921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm */; };
@@ -231,6 +239,67 @@
 		34F3DF801A6ABA2E003041DA /* CDRNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF7C1A6ABA2E003041DA /* CDRNil.m */; };
 		34F3DF821A6ABB21003041DA /* CDRNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */; };
 		34F3DF831A6ABB21003041DA /* CDRNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */; };
+		34FD462A1B99D13C00257186 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346261DF1B995239002CAEBD /* Cedar.framework */; };
+		34FD462B1B99D1FD00257186 /* edward.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEF360F19DF27E400794484 /* edward.jpg */; settings = {ASSET_TAGS = (); }; };
+		34FD462C1B99D1FD00257186 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF360D19DF24AB00794484 /* image.png */; settings = {ASSET_TAGS = (); }; };
+		34FD462D1B99D21300257186 /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD462E1B99D21300257186 /* CDRJUnitXMLReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 492951E31482FF6200FA8916 /* CDRJUnitXMLReporterSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD462F1B99D21300257186 /* CDROTestReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F47B9A6186D69CD005A8CE1 /* CDROTestReporterSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46311B99D22700257186 /* ArgumentReleaser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE807888183C71950078C608 /* ArgumentReleaser.m */; settings = {ASSET_TAGS = (); }; };
+		34FD46321B99D22A00257186 /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; settings = {ASSET_TAGS = (); }; };
+		34FD46331B99D22D00257186 /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; settings = {ASSET_TAGS = (); }; };
+		34FD46341B99D23000257186 /* ObjectWithProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */; settings = {ASSET_TAGS = (); }; };
+		34FD46351B99D23300257186 /* ObjectWithWeakDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D2175979CA00A656BC /* ObjectWithWeakDelegate.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		34FD46361B99D23500257186 /* ObjectWithCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */; settings = {ASSET_TAGS = (); }; };
+		34FD46371B99D23800257186 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; settings = {ASSET_TAGS = (); }; };
+		34FD46381B99D23C00257186 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; settings = {ASSET_TAGS = (); }; };
+		34FD46391B99D24400257186 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4523FB751BC9186566CE8E10 /* GDataXMLNode.m */; settings = {ASSET_TAGS = (); }; };
+		34FD463A1B99D24900257186 /* ExampleWithPublicRunDates.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4523F1D0182DEAB34B1E7C83 /* ExampleWithPublicRunDates.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD463B1B99D25000257186 /* ObjectWithValueEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D28051818E2321D00887CC4 /* ObjectWithValueEquality.m */; settings = {ASSET_TAGS = (); }; };
+		34FD463C1B99D25200257186 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; settings = {ASSET_TAGS = (); }; };
+		34FD463D1B99D25600257186 /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; settings = {ASSET_TAGS = (); }; };
+		34FD463F1B99D2B000257186 /* BeCloseToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301413ECC4AE00786282 /* BeCloseToSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46401B99D2B000257186 /* BeFalsySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46411B99D2B000257186 /* BeGreaterThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE6F3F331458D7C100C98F1E /* BeGreaterThanSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46421B99D2B000257186 /* BeGTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33008145B4E3B002F93BB /* BeGTESpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46431B99D2B000257186 /* BeInstanceOfSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301513ECC4AE00786282 /* BeInstanceOfSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46441B99D2B000257186 /* BeLessThanSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF33012145B6188002F93BB /* BeLessThanSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46451B99D2B000257186 /* BeLTESpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF3301D145B68D7002F93BB /* BeLTESpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46461B99D2B000257186 /* BeNil_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AA9180F9B6300533238 /* BeNil_ARCSpec.mm */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		34FD46471B99D2B000257186 /* BeNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301613ECC4AE00786282 /* BeNilSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46481B99D2B000257186 /* BeSameInstanceAs_ARCSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F882AAB180FA8D800533238 /* BeSameInstanceAs_ARCSpec.mm */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		34FD46491B99D2B000257186 /* BeSameInstanceAsSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301713ECC4AE00786282 /* BeSameInstanceAsSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD464A1B99D2B000257186 /* BeTruthySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301813ECC4AE00786282 /* BeTruthySpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD464B1B99D2B000257186 /* ConformToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5898A53A07BC580786243CD0 /* ConformToSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD464C1B99D2B000257186 /* EqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301913ECC4AE00786282 /* EqualSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD464D1B99D2B000257186 /* ExistSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0721DF187513870031CC42 /* ExistSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD464E1B99D2B000257186 /* MutableEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7301A13ECC4AE00786282 /* MutableEqualSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD464F1B99D2B000257186 /* RaiseExceptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBB92601496C1F000EEBD59 /* RaiseExceptionSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46501B99D2B000257186 /* RespondToSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA17999217F8A0EE00C38060 /* RespondToSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46511B99D2B500257186 /* BeEmptySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEF7302B13ECC4E700786282 /* BeEmptySpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46521B99D2B500257186 /* ContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE18A80913F4640600C8872C /* ContainSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46531B99D2B900257186 /* UIKitEqualSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEC40C53174AC51800474D2D /* UIKitEqualSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46541B99D2C100257186 /* ShouldSyntaxSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 966E74EC145A6CA0002E8D49 /* ShouldSyntaxSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46551B99D2CD00257186 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46561B99D2E300257186 /* CDRClassFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA67F15AB748E00617E1A /* CDRClassFakeSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46571B99D2E300257186 /* CDRProtocolFakeSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE74903015B45E9D008EA127 /* CDRProtocolFakeSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46581B99D2E300257186 /* CDRSpySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66F00B5114C4D97C00146D88 /* CDRSpySpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46591B99D2E300257186 /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		34FD465A1B99D2E300257186 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD465B1B99D2E300257186 /* CedarNiceFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665517315C20003CA143 /* CedarNiceFakeSharedExamples.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD465C1B99D2E300257186 /* CedarOrdinaryFakeSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEE0665817315DB8003CA143 /* CedarOrdinaryFakeSharedExamples.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD465D1B99D2E300257186 /* HaveReceivedSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6639A77A14C509FE00B564B7 /* HaveReceivedSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD465E1B99D2F200257186 /* CDRSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9672F0A81615C3F40012ED58 /* CDRSpecSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD465F1B99D2F200257186 /* CDRExampleSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE911DC27B800029872 /* CDRExampleSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46601B99D2F200257186 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46611B99D2F200257186 /* CDRSymbolicatorSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96C95B7D161339160018606B /* CDRSymbolicatorSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46621B99D2F200257186 /* CDRSpecFailureSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96EA1CB9142C6560001A78E0 /* CDRSpecFailureSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46631B99D2F200257186 /* GlobalBeforeEachSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF011DC27B800029872 /* GlobalBeforeEachSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46641B99D2F200257186 /* ObjCHeadersSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 96B5918E1630F5840068EA5E /* ObjCHeadersSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46651B99D2F200257186 /* SpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FF111DC27B800029872 /* SpecSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46661B99D2F900257186 /* CDRTypeUtilitiesSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34681C2F18FE4B68009D38AC /* CDRTypeUtilitiesSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD46671B99D2F900257186 /* CDRNilSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		34FD466A1B99D43F00257186 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD46681B99D43400257186 /* libxml2.tbd */; };
 		42064466139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 42064465139B44EC00C85605 /* CDRTeamCityReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4206446A139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
 		4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42064469139B44F600C85605 /* CDRTeamCityReporter.m */; };
@@ -816,7 +885,6 @@
 		F7F4099B1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099C1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099D1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
-		F7F4099F1B2E3E46001EFA14 /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F4099E1B2E3E26001EFA14 /* CDRPrivateFunctions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -833,6 +901,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 96B5F9F5144A81A7000A6A5D;
 			remoteInfo = OCUnitApp;
+		};
+		346262861B99C1DC002CAEBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 346262831B99C1DC002CAEBD;
+			remoteInfo = "Cedar-watchOS Specs Extension";
+		};
+		346262921B99C1DC002CAEBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 346262771B99C1DB002CAEBD;
+			remoteInfo = "Cedar-watchOS Specs";
+		};
+		3462629D1B99D0BB002CAEBD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEEE1FA611DC26EA00029872 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 346261DE1B995239002CAEBD;
+			remoteInfo = "Cedar-watchOS";
 		};
 		96A07EF013F276640021974D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -893,6 +982,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		346262981B99C1DC002CAEBD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				346262851B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3462629C1B99C1DC002CAEBD /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				346262941B99C1DC002CAEBD /* Cedar-watchOS Specs.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3462629F1B99D0CA002CAEBD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				346262A01B99D0DD002CAEBD /* Cedar.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE03FC121B06C39D00013784 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1016,10 +1137,19 @@
 		3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRBlockHelper.h; sourceTree = "<group>"; };
 		346261DF1B995239002CAEBD /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		346261E31B99523A002CAEBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		346262781B99C1DB002CAEBD /* Cedar-watchOS Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar-watchOS Specs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3462627D1B99C1DB002CAEBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3462627F1B99C1DB002CAEBD /* Specs-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Specs-App-Info.plist"; sourceTree = "<group>"; };
+		346262841B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Cedar-watchOS Specs Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3462628C1B99C1DC002CAEBD /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExtensionDelegate.h; path = "Cedar-watchOS Specs/ExtensionDelegate.h"; sourceTree = SOURCE_ROOT; };
+		3462628D1B99C1DC002CAEBD /* ExtensionDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = ExtensionDelegate.mm; path = "Cedar-watchOS Specs/ExtensionDelegate.mm"; sourceTree = SOURCE_ROOT; };
+		346262911B99C1DC002CAEBD /* Specs-Extension-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Specs-Extension-Info.plist"; path = "Cedar-watchOS Specs/Specs-Extension-Info.plist"; sourceTree = SOURCE_ROOT; };
 		34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTypeUtilities.m; sourceTree = "<group>"; };
 		34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRTypeUtilities.h; sourceTree = "<group>"; };
 		34681C2F18FE4B68009D38AC /* CDRTypeUtilitiesSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRTypeUtilitiesSpec.mm; sourceTree = "<group>"; };
 		34777EB61B99451200A69FCF /* CDRPrivateFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRPrivateFunctions.h; sourceTree = "<group>"; };
+		34A848551B9A491E00396A09 /* Interface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
+		34A848571B9A4A0500396A09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		34ADD2DD1921F0B500B057AC /* AnyInstanceOfClassArgument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyInstanceOfClassArgument.h; sourceTree = "<group>"; };
 		34ADD2DE1921F18100B057AC /* AnyInstanceOfClassArgument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnyInstanceOfClassArgument.mm; sourceTree = "<group>"; };
 		34ADD2E41921F2F600B057AC /* AnyInstanceConformingToProtocolArgument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyInstanceConformingToProtocolArgument.h; sourceTree = "<group>"; };
@@ -1031,6 +1161,7 @@
 		34F3DF7B1A6ABA2E003041DA /* CDRNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRNil.h; sourceTree = "<group>"; };
 		34F3DF7C1A6ABA2E003041DA /* CDRNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRNil.m; sourceTree = "<group>"; };
 		34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRNilSpec.mm; sourceTree = "<group>"; };
+		34FD46681B99D43400257186 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/usr/lib/libxml2.tbd; sourceTree = DEVELOPER_DIR; };
 		42064465139B44EC00C85605 /* CDRTeamCityReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRTeamCityReporter.h; sourceTree = "<group>"; };
 		42064469139B44F600C85605 /* CDRTeamCityReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTeamCityReporter.m; sourceTree = "<group>"; };
 		4523F16026FC3298AB3B00BE /* ExampleWithPublicRunDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWithPublicRunDates.h; sourceTree = "<group>"; };
@@ -1295,7 +1426,6 @@
 		E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithProperty.m; sourceTree = "<group>"; };
 		F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRXCTestObserver.h; sourceTree = "<group>"; };
 		F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRXCTestObserver.m; sourceTree = "<group>"; };
-		F7F4099E1B2E3E26001EFA14 /* CDRPrivateFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRPrivateFunctions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1314,6 +1444,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		346262811B99C1DC002CAEBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34A848581B9A4A0500396A09 /* UIKit.framework in Frameworks */,
+				34FD466A1B99D43F00257186 /* libxml2.tbd in Frameworks */,
+				34FD462A1B99D13C00257186 /* Cedar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1572,6 +1712,26 @@
 				346261E31B99523A002CAEBD /* Info.plist */,
 			);
 			path = "Cedar-watchOS";
+			sourceTree = "<group>";
+		};
+		346262791B99C1DB002CAEBD /* Cedar-watchOS Specs */ = {
+			isa = PBXGroup;
+			children = (
+				3462628C1B99C1DC002CAEBD /* ExtensionDelegate.h */,
+				3462628D1B99C1DC002CAEBD /* ExtensionDelegate.mm */,
+				34A848551B9A491E00396A09 /* Interface.storyboard */,
+				3462627D1B99C1DB002CAEBD /* Assets.xcassets */,
+				3462627F1B99C1DB002CAEBD /* Specs-App-Info.plist */,
+				346262911B99C1DC002CAEBD /* Specs-Extension-Info.plist */,
+			);
+			path = "Cedar-watchOS Specs";
+			sourceTree = "<group>";
+		};
+		346262881B99C1DC002CAEBD /* Cedar-watchOS Specs Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Cedar-watchOS Specs Extension";
 			sourceTree = "<group>";
 		};
 		4523FFB9BD607306C7ED94A3 /* GData */ = {
@@ -1981,6 +2141,8 @@
 				AE4864F91B067621005DB302 /* Cedar-iOS-Framework */,
 				AE03FBEA1B06C33B00013784 /* Cedar-iOS-Framework Spec */,
 				346261E01B995239002CAEBD /* Cedar-watchOS */,
+				346262791B99C1DB002CAEBD /* Cedar-watchOS Specs */,
+				346262881B99C1DC002CAEBD /* Cedar-watchOS Specs Extension */,
 				AEEE202611DC286500029872 /* Frameworks */,
 				AEEE1FB711DC271300029872 /* Products */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
@@ -2007,6 +2169,8 @@
 				AE4864F81B067620005DB302 /* Cedar.framework */,
 				AE03FBE91B06C33B00013784 /* Cedar-iOS-Framework Specs.app */,
 				346261DF1B995239002CAEBD /* Cedar.framework */,
+				346262781B99C1DB002CAEBD /* Cedar-watchOS Specs.app */,
+				346262841B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2108,6 +2272,8 @@
 		AEEE202611DC286500029872 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34A848571B9A4A0500396A09 /* UIKit.framework */,
+				34FD46681B99D43400257186 /* libxml2.tbd */,
 				AE1937A01B1ACB4B008C8CD8 /* libxml2.dylib */,
 				AE19377F1B1AC445008C8CD8 /* CoreGraphics.framework */,
 				AE19377D1B1AC42B008C8CD8 /* QuartzCore.framework */,
@@ -2429,7 +2595,6 @@
 				AE4865D01B0690B0005DB302 /* ActualValue.h in Headers */,
 				AE4865B41B0690AF005DB302 /* InvocationMatcher.h in Headers */,
 				AE4865E31B0690B2005DB302 /* CDRBlockHelper.h in Headers */,
-				F7F4099F1B2E3E46001EFA14 /* CDRPrivateFunctions.h in Headers */,
 				AE4865E51B0690B2005DB302 /* CDRNil.h in Headers */,
 				AE48655D1B06769E005DB302 /* CDROTestRunner.h in Headers */,
 				AE4865551B06769D005DB302 /* CDRBufferedDefaultReporter.h in Headers */,
@@ -2600,6 +2765,42 @@
 			productReference = 346261DF1B995239002CAEBD /* Cedar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		346262771B99C1DB002CAEBD /* Cedar-watchOS Specs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 346262991B99C1DC002CAEBD /* Build configuration list for PBXNativeTarget "Cedar-watchOS Specs" */;
+			buildPhases = (
+				346262761B99C1DB002CAEBD /* Resources */,
+				346262981B99C1DC002CAEBD /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				346262871B99C1DC002CAEBD /* PBXTargetDependency */,
+			);
+			name = "Cedar-watchOS Specs";
+			productName = "Cedar-watchOS Specs";
+			productReference = 346262781B99C1DB002CAEBD /* Cedar-watchOS Specs.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		346262831B99C1DC002CAEBD /* Cedar-watchOS Specs Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 346262951B99C1DC002CAEBD /* Build configuration list for PBXNativeTarget "Cedar-watchOS Specs Extension" */;
+			buildPhases = (
+				346262801B99C1DC002CAEBD /* Sources */,
+				346262811B99C1DC002CAEBD /* Frameworks */,
+				346262821B99C1DC002CAEBD /* Resources */,
+				3462629F1B99D0CA002CAEBD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3462629E1B99D0BB002CAEBD /* PBXTargetDependency */,
+			);
+			name = "Cedar-watchOS Specs Extension";
+			productName = "Cedar-watchOS Specs Extension";
+			productReference = 346262841B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		96A07EEE13F276640021974D /* Cedar OS X FocusedSpecs */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96A07F0513F276640021974D /* Build configuration list for PBXNativeTarget "Cedar OS X FocusedSpecs" */;
@@ -2624,10 +2825,12 @@
 				96B5F9F2144A81A7000A6A5D /* Sources */,
 				96B5F9F3144A81A7000A6A5D /* Frameworks */,
 				96B5F9F4144A81A7000A6A5D /* Resources */,
+				3462629C1B99C1DC002CAEBD /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				346262931B99C1DC002CAEBD /* PBXTargetDependency */,
 			);
 			name = "Cedar iOS Host App";
 			productName = OCUnitApp;
@@ -2827,6 +3030,12 @@
 					346261DE1B995239002CAEBD = {
 						CreatedOnToolsVersion = 7.0;
 					};
+					346262771B99C1DB002CAEBD = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					346262831B99C1DC002CAEBD = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					AE03FBE81B06C33B00013784 = {
 						CreatedOnToolsVersion = 6.3.1;
 					};
@@ -2877,6 +3086,8 @@
 				AE4864F71B067620005DB302 /* Cedar-iOS-Framework */,
 				AE03FBE81B06C33B00013784 /* Cedar-iOS-Framework Specs */,
 				346261DE1B995239002CAEBD /* Cedar-watchOS */,
+				346262771B99C1DB002CAEBD /* Cedar-watchOS Specs */,
+				346262831B99C1DC002CAEBD /* Cedar-watchOS Specs Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -2894,6 +3105,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		346262761B99C1DB002CAEBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34A848591B9A4A2E00396A09 /* Interface.storyboard in Resources */,
+				3462627E1B99C1DB002CAEBD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		346262821B99C1DC002CAEBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34FD462B1B99D1FD00257186 /* edward.jpg in Resources */,
+				34FD462C1B99D1FD00257186 /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3085,6 +3314,7 @@
 				3462625F1B99568F002CAEBD /* CDRReportDispatcher.m in Sources */,
 				346262511B9954E4002CAEBD /* AnyInstanceOfClassArgument.mm in Sources */,
 				346262721B99569B002CAEBD /* CDRTypeUtilities.m in Sources */,
+				34A848531B9A100500396A09 /* NSBundle+MainBundleHijack.m in Sources */,
 				3462626F1B99569B002CAEBD /* CDRSpecFailure.m in Sources */,
 				346262581B995683002CAEBD /* ConformTo.mm in Sources */,
 				3462626C1B99569B002CAEBD /* CDRRuntimeUtilities.m in Sources */,
@@ -3124,6 +3354,71 @@
 				3462624F1B9954E4002CAEBD /* AnyInstanceArgument.mm in Sources */,
 				3462624E1B9954E0002CAEBD /* CDRSpyInfo.mm in Sources */,
 				346262731B99569B002CAEBD /* CDRNil.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		346262801B99C1DC002CAEBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34FD463B1B99D25000257186 /* ObjectWithValueEquality.m in Sources */,
+				34FD465B1B99D2E300257186 /* CedarNiceFakeSharedExamples.mm in Sources */,
+				34FD46471B99D2B000257186 /* BeNilSpec.mm in Sources */,
+				34FD465C1B99D2E300257186 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
+				34FD46531B99D2B900257186 /* UIKitEqualSpec.mm in Sources */,
+				34FD46451B99D2B000257186 /* BeLTESpec.mm in Sources */,
+				34FD46521B99D2B500257186 /* ContainSpec.mm in Sources */,
+				34FD463C1B99D25200257186 /* FooSuperclass.m in Sources */,
+				34FD46331B99D22D00257186 /* ObjectWithForwardingTarget.m in Sources */,
+				34FD464E1B99D2B000257186 /* MutableEqualSpec.mm in Sources */,
+				34FD463A1B99D24900257186 /* ExampleWithPublicRunDates.mm in Sources */,
+				34FD464D1B99D2B000257186 /* ExistSpec.mm in Sources */,
+				34FD46321B99D22A00257186 /* FibonacciCalculator.m in Sources */,
+				34FD46651B99D2F200257186 /* SpecSpec.mm in Sources */,
+				34FD464C1B99D2B000257186 /* EqualSpec.mm in Sources */,
+				34FD46421B99D2B000257186 /* BeGTESpec.mm in Sources */,
+				34FD46391B99D24400257186 /* GDataXMLNode.m in Sources */,
+				34FD462F1B99D21300257186 /* CDROTestReporterSpec.mm in Sources */,
+				34FD46561B99D2E300257186 /* CDRClassFakeSpec.mm in Sources */,
+				34FD46611B99D2F200257186 /* CDRSymbolicatorSpec.mm in Sources */,
+				34FD462E1B99D21300257186 /* CDRJUnitXMLReporterSpec.mm in Sources */,
+				34FD46311B99D22700257186 /* ArgumentReleaser.m in Sources */,
+				34FD46371B99D23800257186 /* SimpleIncrementer.m in Sources */,
+				34FD462D1B99D21300257186 /* CDRDefaultReporterSpec.mm in Sources */,
+				34FD46631B99D2F200257186 /* GlobalBeforeEachSpec.mm in Sources */,
+				34FD465A1B99D2E300257186 /* CedarDoubleSharedExamples.mm in Sources */,
+				34FD46501B99D2B000257186 /* RespondToSpec.mm in Sources */,
+				34FD46661B99D2F900257186 /* CDRTypeUtilitiesSpec.mm in Sources */,
+				34FD46411B99D2B000257186 /* BeGreaterThanSpec.mm in Sources */,
+				34FD46461B99D2B000257186 /* BeNil_ARCSpec.mm in Sources */,
+				34FD465E1B99D2F200257186 /* CDRSpecSpec.mm in Sources */,
+				34FD46491B99D2B000257186 /* BeSameInstanceAsSpec.mm in Sources */,
+				34FD46351B99D23300257186 /* ObjectWithWeakDelegate.m in Sources */,
+				34FD46431B99D2B000257186 /* BeInstanceOfSpec.mm in Sources */,
+				34FD46641B99D2F200257186 /* ObjCHeadersSpec.mm in Sources */,
+				34FD46361B99D23500257186 /* ObjectWithCollections.m in Sources */,
+				34FD46511B99D2B500257186 /* BeEmptySpec.mm in Sources */,
+				34FD46581B99D2E300257186 /* CDRSpySpec.mm in Sources */,
+				34FD465D1B99D2E300257186 /* HaveReceivedSpec.mm in Sources */,
+				34FD46441B99D2B000257186 /* BeLessThanSpec.mm in Sources */,
+				34FD464A1B99D2B000257186 /* BeTruthySpec.mm in Sources */,
+				34FD465F1B99D2F200257186 /* CDRExampleSpec.mm in Sources */,
+				34FD46601B99D2F200257186 /* CDRExampleGroupSpec.mm in Sources */,
+				34FD46341B99D23000257186 /* ObjectWithProperty.m in Sources */,
+				34FD464F1B99D2B000257186 /* RaiseExceptionSpec.mm in Sources */,
+				34FD46381B99D23C00257186 /* SimpleKeyValueObserver.m in Sources */,
+				3462628E1B99C1DC002CAEBD /* ExtensionDelegate.mm in Sources */,
+				34FD46541B99D2C100257186 /* ShouldSyntaxSpec.mm in Sources */,
+				34FD46621B99D2F200257186 /* CDRSpecFailureSpec.mm in Sources */,
+				34FD46551B99D2CD00257186 /* ExpectFailureWithMessage.mm in Sources */,
+				34FD464B1B99D2B000257186 /* ConformToSpec.mm in Sources */,
+				34FD463D1B99D25600257186 /* DeallocNotifier.m in Sources */,
+				34FD463F1B99D2B000257186 /* BeCloseToSpec.mm in Sources */,
+				34FD46481B99D2B000257186 /* BeSameInstanceAs_ARCSpec.mm in Sources */,
+				34FD46671B99D2F900257186 /* CDRNilSpec.mm in Sources */,
+				34FD46591B99D2E300257186 /* CedarDoubleARCSharedExamples.mm in Sources */,
+				34FD46401B99D2B000257186 /* BeFalsySpec.mm in Sources */,
+				34FD46571B99D2E300257186 /* CDRProtocolFakeSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3575,6 +3870,21 @@
 			target = 96B5F9F5144A81A7000A6A5D /* Cedar iOS Host App */;
 			targetProxy = 1F45A3CC180E4796003C1E36 /* PBXContainerItemProxy */;
 		};
+		346262871B99C1DC002CAEBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 346262831B99C1DC002CAEBD /* Cedar-watchOS Specs Extension */;
+			targetProxy = 346262861B99C1DC002CAEBD /* PBXContainerItemProxy */;
+		};
+		346262931B99C1DC002CAEBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 346262771B99C1DB002CAEBD /* Cedar-watchOS Specs */;
+			targetProxy = 346262921B99C1DC002CAEBD /* PBXContainerItemProxy */;
+		};
+		3462629E1B99D0BB002CAEBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 346261DE1B995239002CAEBD /* Cedar-watchOS */;
+			targetProxy = 3462629D1B99D0BB002CAEBD /* PBXContainerItemProxy */;
+		};
 		96A07EEF13F276640021974D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AEEE1FB511DC271300029872 /* Cedar */;
@@ -3750,6 +4060,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -3789,6 +4100,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -3817,6 +4129,129 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		346262961B99C1DC002CAEBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/include/libxml2,
+				);
+				INFOPLIST_FILE = "Cedar-watchOS Specs/Specs-Extension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.Cedar-iOS-Host-App.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		346262971B99C1DC002CAEBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/include/libxml2,
+				);
+				INFOPLIST_FILE = "Cedar-watchOS Specs/Specs-Extension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.Cedar-iOS-Host-App.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		3462629A1B99C1DC002CAEBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IBSC_MODULE = Cedar_watchOS_Specs_Extension;
+				INFOPLIST_FILE = "Cedar-watchOS Specs/Specs-App-Info.plist";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.Cedar-iOS-Host-App.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		3462629B1B99C1DC002CAEBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IBSC_MODULE = Cedar_watchOS_Specs_Extension;
+				INFOPLIST_FILE = "Cedar-watchOS Specs/Specs-App-Info.plist";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.pivotal.Cedar-iOS-Host-App.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
@@ -4725,6 +5160,25 @@
 				346261E51B99523A002CAEBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		346262951B99C1DC002CAEBD /* Build configuration list for PBXNativeTarget "Cedar-watchOS Specs Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				346262961B99C1DC002CAEBD /* Debug */,
+				346262971B99C1DC002CAEBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		346262991B99C1DC002CAEBD /* Build configuration list for PBXNativeTarget "Cedar-watchOS Specs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3462629A1B99C1DC002CAEBD /* Debug */,
+				3462629B1B99C1DC002CAEBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96A07F0513F276640021974D /* Build configuration list for PBXNativeTarget "Cedar OS X FocusedSpecs" */ = {
 			isa = XCConfigurationList;

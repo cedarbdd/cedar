@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "CedarApplicationDelegate.h"
 #import "CDRFunctions.h"
 #import <objc/runtime.h>
 
