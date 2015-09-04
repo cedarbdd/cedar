@@ -120,5 +120,9 @@ CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
         [testSuite addTest:[spec testSuiteWithRandomSeed:seed dispatcher:dispatcher]];
     }
 
+    if ([testSuite respondsToSelector:@selector(setDispatcher:)]) {
+        [testSuite setDispatcher:dispatcher];
+    }
+
     return dispatcher;
 }
