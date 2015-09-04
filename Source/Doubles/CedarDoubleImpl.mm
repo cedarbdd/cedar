@@ -46,6 +46,18 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
     [super dealloc];
 }
 
+- (NSArray *)sent_messages_with_selector:(SEL)selector {
+    NSMutableArray *sentMessages = [[NSMutableArray alloc] initWithCapacity:self.sent_messages.count];
+
+    for(NSInvocation *invocation in self.sent_messages) {
+        if (invocation.selector == selector) {
+            [sentMessages addObject:invocation];
+        }
+    }
+    
+    return [sentMessages autorelease];
+}
+
 - (void)reset_sent_messages {
     [self.sent_messages removeAllObjects];
 }

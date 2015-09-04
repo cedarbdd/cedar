@@ -135,17 +135,19 @@ static NSCharacterSet *typeEncodingModifiersCharacterSet;
 memcpy(&i, argBuffer, sizeof(TYPE)); \
 i;})
     if (IS_TYPE(id)) {
-        return (id)*((void **)argBuffer) ?: [CDRNil nilObject];
+        return CONVERT_TYPE(id) ?: [CDRNil nilObject];
     } else if (IS_TYPE(Class)) {
-        return (id)*((void **)argBuffer);
+        return CONVERT_TYPE(Class) ?: [CDRNil nilObject];
     } else if (IS_TYPE(void(^)())) {
-        return (id)*((void **)argBuffer);
+        return (id)*((void **)argBuffer) ?: [CDRNil nilObject];
     } else if (IS_TYPE(char *)) {
-        return [NSString stringWithUTF8String:*(char **)argBuffer];
+        BOOL isNotNull = *argBuffer != '\0';
+        return isNotNull ? [NSString stringWithUTF8String:*(char **)argBuffer] : [CDRNil nilObject];
     } else if (IS_TYPE(const char *)) {
-        return [NSString stringWithUTF8String:*(const char **)argBuffer];
+        BOOL isNotNull = *argBuffer != '\0';
+        return isNotNull ? [NSString stringWithUTF8String:*(const char **)argBuffer] : [CDRNil nilObject];
     } else if (IS_TYPE(SEL)) {
-        return NSStringFromSelector(CONVERT_TYPE(SEL));
+        return CONVERT_TYPE(SEL) ? NSStringFromSelector(CONVERT_TYPE(SEL)) : [CDRNil nilObject];
     } else if (IS_TYPE(bool)) {
         return @(CONVERT_TYPE(bool));
     } else if (IS_TYPE(char)) {

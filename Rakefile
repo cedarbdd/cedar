@@ -237,9 +237,9 @@ class Simulator
   end
 
   def self.kill
-    system %Q[killall -m -KILL "gdb" 2>&1 > /dev/null]
-    system %Q[killall -m -KILL "otest" 2>&1 > /dev/null]
-    system %Q[killall -m -KILL "iPhone Simulator" 2>&1 > /dev/null]
+    system %Q[killall -m -KILL "gdb" > /dev/null 2>&1]
+    system %Q[killall -m -KILL "otest" > /dev/null 2>&1]
+    system %Q[killall -m -KILL "iPhone Simulator" > /dev/null 2>&1]
   end
 end
 
@@ -513,7 +513,7 @@ desc "Build a distribution of the templates and code snippets"
 task :dist => ["dist:prepare", "dist:package"]
 
 namespace :dist do
-  task :prepare => 'frameworks:build' do
+  task :prepare do
     Dir.mkdir(DIST_STAGING_DIR) unless File.exists?(DIST_STAGING_DIR)
 
     Shell.run %{rm -rf "#{DIST_STAGING_DIR}"/*}

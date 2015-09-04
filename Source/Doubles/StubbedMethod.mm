@@ -132,7 +132,7 @@ namespace Cedar { namespace Doubles {
         if (!this->has_implementation_block()) { return; }
 
         NSMethodSignature *instanceMethodSignature = [instance methodSignatureForSelector:this->selector()];
-        NSMethodSignature *implementationBlockMethodSignature = [NSMethodSignature signatureFromBlock:implementation_block_];
+        NSMethodSignature *implementationBlockMethodSignature = [NSMethodSignature cdr_signatureFromBlock:implementation_block_];
 
         const char * const methodReturnType = [instanceMethodSignature methodReturnType];
         const char * const implementationBlockReturnType = [implementationBlockMethodSignature methodReturnType];
@@ -147,7 +147,7 @@ namespace Cedar { namespace Doubles {
         if (!this->has_implementation_block()) { return; }
 
         NSMethodSignature *instanceMethodSignature = [instance methodSignatureForSelector:this->selector()];
-        NSMethodSignature *implementationBlockMethodSignature = [NSMethodSignature signatureFromBlock:implementation_block_];
+        NSMethodSignature *implementationBlockMethodSignature = [NSMethodSignature cdr_signatureFromBlock:implementation_block_];
 
         NSUInteger instanceMethodActualArgumentCount = [instanceMethodSignature numberOfArguments]-2;
         NSUInteger implementationBlockActualArgumentCount = [implementationBlockMethodSignature numberOfArguments]-1;
@@ -214,7 +214,7 @@ namespace Cedar { namespace Doubles {
         if (exception_to_raise_) {
             @throw exception_to_raise_;
         } else if (this->has_implementation_block()) {
-            [invocation invokeUsingBlockWithoutSelfArgument:implementation_block_];
+            [invocation cdr_invokeUsingBlockWithoutSelfArgument:implementation_block_];
         } else if (this->has_invocation_block()) {
             invocation_block_(invocation);
         } else if (this->has_return_value()) {

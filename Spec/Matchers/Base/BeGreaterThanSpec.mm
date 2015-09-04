@@ -1258,6 +1258,16 @@ describe(@"be_greater_than matcher", ^{
             });
         });
     });
+
+    describe(@"when the expected value is nil", ^{
+        it(@"should alert the user that they probably did not mean to verify that the value was greater than nil", ^{
+            expectFailureWithMessage(@"Unexpected use of be_greater_than matcher to check for nil; use the be_nil matcher to match nil values", ^{
+                NSNumber *value = @1.0f;
+                NSNumber *expectedValue = nil;
+                value should be_greater_than(expectedValue);
+            });
+        });
+    });
 });
 
 //describe(@"> operator matcher", ^{

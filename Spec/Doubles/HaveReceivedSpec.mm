@@ -112,6 +112,14 @@ describe(@"have_received matcher", ^{
             });
         });
 
+        context(@"with too few parameter expectations", ^{
+            it(@"should raise an exception due to an invalid expectation", ^{
+                NSString *methodName = NSStringFromSelector(@selector(incrementByABit:andABitMore:));
+                NSString *reason = [NSString stringWithFormat:@"Wrong number of expected parameters for <%@>; expected: 1, actual: 2", methodName];
+                ^{ expect(incrementer).to(have_received(@selector(incrementByABit:andABitMore:)).with(anything)); } should raise_exception.with_reason(reason);
+            });
+        });
+
         context(@"which has been called", ^{
             int actualParameter = 2;
 

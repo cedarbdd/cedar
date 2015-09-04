@@ -84,9 +84,49 @@ describe(@"CDRTypeUtilities", ^{
             [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foo ofObjCType:@encode(id)] should be_same_instance_as(foo);
         });
 
-        it(@"should return CDRNil when given nil", ^{
-            id nilParam = nil;
-            [CDRTypeUtilities boxedObjectOfBytes:(const char *)&nilParam ofObjCType:@encode(id)] should equal([CDRNil nilObject]);
+        describe(@"given a nil value", ^{
+            context(@"typed as an object", ^{
+                it(@"should return CDRNil", ^{
+                    id nilParam = nil;
+                    [CDRTypeUtilities boxedObjectOfBytes:(const char *)&nilParam ofObjCType:@encode(id)] should equal([CDRNil nilObject]);
+                });
+            });
+
+            context(@"typed as Class", ^{
+                it(@"should return CDRNil", ^{
+                    Class nilParam = nil;
+                    [CDRTypeUtilities boxedObjectOfBytes:(const char *)&nilParam ofObjCType:@encode(Class)] should equal([CDRNil nilObject]);
+                });
+            });
+
+            context(@"typed as as block", ^{
+                it(@"should return CDRNil", ^{
+                    void (^nilBlock)(NSString *) = nil;
+                    [CDRTypeUtilities boxedObjectOfBytes:(const char *)&nilBlock ofObjCType:@encode(void (^)(NSString *))] should equal([CDRNil nilObject]);
+                });
+            });
+
+            context(@"typed as a char *", ^{
+                it(@"should return CDRNil", ^{
+                    char *nilCharPointer = NULL;
+                    [CDRTypeUtilities boxedObjectOfBytes:(const char *)&nilCharPointer ofObjCType:@encode(char *)] should equal([CDRNil nilObject]);
+                });
+            });
+
+            context(@"typed as a const char *", ^{
+                it(@"should return CDRNil", ^{
+                    const char *foobar = NULL;
+                    [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foobar ofObjCType:@encode(const char *)] should equal([CDRNil nilObject]);
+                });
+            });
+
+            context(@"typed as a SEL", ^{
+                it(@"should return CDRNil", ^{
+                    SEL mySelector = nil;
+                    [CDRTypeUtilities boxedObjectOfBytes:(const char *)&mySelector ofObjCType:@encode(SEL)] should equal([CDRNil nilObject]);
+                });
+            });
+
         });
 
         it(@"should return the class it was given", ^{
@@ -103,10 +143,27 @@ describe(@"CDRTypeUtilities", ^{
             void (^aBlock)() = ^{};
             (id)[CDRTypeUtilities boxedObjectOfBytes:(const char *)&aBlock ofObjCType:@encode(void(^)())] should equal((id)aBlock);
         });
+        describe(@"given a char *", ^{
+            it(@"should return an NSString when given a non-empty char *", ^{
+                char *foobar = (char *)"hello world";
+                [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foobar ofObjCType:@encode(char *)] should equal(@"hello world");
+            });
+            it(@"should return an empty NSString when given an empty char *", ^{
+                char *foobar = (char *)"";
+                [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foobar ofObjCType:@encode(char *)] should equal(@"");
+            });
+        });
 
-        it(@"should return a string for a const char *", ^{
-            const char *foobar = "hello world";
-            [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foobar ofObjCType:@encode(const char *)] should equal(@"hello world");
+        describe(@"given a const char *", ^{
+            it(@"should return a string for a non-empty const char *", ^{
+                const char *foobar = "hello world";
+                [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foobar ofObjCType:@encode(const char *)] should equal(@"hello world");
+            });
+
+            it(@"should return an empty string for an empty const char *", ^{
+                const char *foobar = "";
+                [CDRTypeUtilities boxedObjectOfBytes:(const char *)&foobar ofObjCType:@encode(const char *)] should equal(@"");
+            });
         });
 
         it(@"should return an NSValue for other Types", ^{
