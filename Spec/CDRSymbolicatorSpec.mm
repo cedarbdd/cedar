@@ -14,8 +14,8 @@ describe(@"CDRSymbolicator", ^{
         symbolicator = [[[CDRSymbolicator alloc] init] autorelease];
     });
 
-#if __arm__
-    context(@"when symbolication is not available (devices)", ^{
+#if !CDR_SYMBOLICATION_AVAILABLE
+    context(@"when symbolication is not available (devices and watchOS)", ^{
         __block NSArray *addresses;
         __block NSError *error;
 

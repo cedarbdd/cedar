@@ -174,7 +174,7 @@ describe(@"CDRSpecFailure", ^{
                 }
             });
 
-#if __arm__
+#if !CDR_SYMBOLICATION_AVAILABLE
             context(@"when symbolication is not available (devices)", ^{
                 it(@"returns nil", ^{
                     symbols should be_nil;
