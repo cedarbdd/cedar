@@ -1139,7 +1139,6 @@
 		343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeallocNotifier.m; sourceTree = "<group>"; };
 		3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRBlockHelper.h; sourceTree = "<group>"; };
 		346261DF1B995239002CAEBD /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		346261E31B99523A002CAEBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		346262781B99C1DB002CAEBD /* Cedar-watchOS Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar-watchOS Specs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3462627F1B99C1DB002CAEBD /* Specs-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Specs-App-Info.plist"; sourceTree = "<group>"; };
 		346262841B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Cedar-watchOS Specs Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1273,7 +1272,6 @@
 		AE3E8F35184FEEE000633740 /* ObjectWithCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithCollections.h; sourceTree = "<group>"; };
 		AE3E8F36184FEEE000633740 /* ObjectWithCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithCollections.m; sourceTree = "<group>"; };
 		AE4864F81B067620005DB302 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE4864FB1B067621005DB302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE4A9457187F7D8F008566F5 /* BeFalsy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeFalsy.h; sourceTree = "<group>"; };
 		AE4A945A187F7E52008566F5 /* BeFalsySpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = BeFalsySpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE4A945D1880792E008566F5 /* RejectedMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RejectedMethod.h; sourceTree = "<group>"; };
@@ -1678,14 +1676,6 @@
 			path = XCTest;
 			sourceTree = "<group>";
 		};
-		346261E01B995239002CAEBD /* Cedar-watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				346261E31B99523A002CAEBD /* Info.plist */,
-			);
-			path = "Cedar-watchOS";
-			sourceTree = "<group>";
-		};
 		346262791B99C1DB002CAEBD /* Cedar-watchOS Specs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1695,13 +1685,6 @@
 				346262911B99C1DC002CAEBD /* Specs-Extension-Info.plist */,
 			);
 			path = "Cedar-watchOS Specs";
-			sourceTree = "<group>";
-		};
-		346262881B99C1DC002CAEBD /* Cedar-watchOS Specs Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Cedar-watchOS Specs Extension";
 			sourceTree = "<group>";
 		};
 		34A8485A1B9A4D9800396A09 /* iOS */ = {
@@ -2008,22 +1991,6 @@
 			path = XCTest;
 			sourceTree = "<group>";
 		};
-		AE4864F91B067621005DB302 /* Cedar-iOS-Framework */ = {
-			isa = PBXGroup;
-			children = (
-				AE4864FA1B067621005DB302 /* Supporting Files */,
-			);
-			path = "Cedar-iOS-Framework";
-			sourceTree = "<group>";
-		};
-		AE4864FA1B067621005DB302 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AE4864FB1B067621005DB302 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		AE7F170317272FB000E1146D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -2100,9 +2067,7 @@
 				AE248F9919DCD52500092C14 /* OS X Host App */,
 				AE248FAD19DCD52500092C14 /* OS X Host AppTests */,
 				AE03FBEA1B06C33B00013784 /* Cedar-iOS-Framework Spec */,
-				346261E01B995239002CAEBD /* Cedar-watchOS */,
 				346262791B99C1DB002CAEBD /* Cedar-watchOS Specs */,
-				346262881B99C1DC002CAEBD /* Cedar-watchOS Specs Extension */,
 				AEEE202611DC286500029872 /* Frameworks */,
 				AEEE1FB711DC271300029872 /* Products */,
 				AEEE1FB811DC271300029872 /* Cedar-Info.plist */,
@@ -4006,7 +3971,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Cedar-watchOS/Info.plist";
+				INFOPLIST_FILE = "Cedar-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -4042,7 +4007,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Cedar-watchOS/Info.plist";
+				INFOPLIST_FILE = "Cedar-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -4595,7 +4560,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Cedar-iOS-Framework/Info.plist";
+				INFOPLIST_FILE = "Cedar-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -4641,7 +4606,7 @@
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Cedar-iOS-Framework/Info.plist";
+				INFOPLIST_FILE = "Cedar-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
