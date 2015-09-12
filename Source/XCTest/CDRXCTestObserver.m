@@ -9,19 +9,17 @@
 #import "CDRXTestSuite.h"
 #import "CDRRuntimeUtilities.h"
 
-CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite);
+static id CDRCreateXCTestSuite();
+static CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite);
 
 @interface CDRXCTestObserver ()
 
-@property (retain) CDRReportDispatcher *dispatcher;
 @property (assign) BOOL observedTestSuiteStart;
 
 @end
 
 @interface CDRXCTestSupport : NSObject
-- (id)testSuiteWithName:(NSString *)name;
 - (id)defaultTestSuite;
-- (id)testSuiteForBundlePath:(NSString *)bundlePath;
 - (id)initWithName:(NSString *)aName;
 
 - (id)CDR_original_defaultTestSuite;
@@ -37,16 +35,8 @@ CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite);
     }
     self.observedTestSuiteStart = YES;
 
-    self.dispatcher = CDRAddCedarSpecsToXCTestSuite(testSuite);
-}
-
-- (void)testBundleDidFinish:(NSBundle *)testBundle {
-    [self.dispatcher runDidComplete];
-}
-
-- (void)dealloc {
-    self.dispatcher = nil;
-    [super dealloc];
+    id cedarTestSuite = CDRCreateXCTestSuite();
+    [testSuite addTest:cedarTestSuite];
 }
 
 @end
@@ -98,7 +88,7 @@ void CDRInjectIntoXCTestRunner() {
     class_replaceMethod(testSuiteMetaClass, @selector(defaultTestSuite), newImp, method_getTypeEncoding(m));
 }
 
-CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
+static CDRReportDispatcher *CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
     unsigned int seed = CDRGetRandomSeed();
 
     CDRDefineSharedExampleGroups();

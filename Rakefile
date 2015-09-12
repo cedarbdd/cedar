@@ -11,8 +11,6 @@ IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS-Framework Specs"
 
 XCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS XCTest Tests"
 
-OSX_FAILING_SPEC_SCHEME_NAME = "Cedar OS X Failing Test Bundle"
-
 CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
 CEDAR_IOS_STATIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
 CEDAR_IOS_DYNAMIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS-Framework"
@@ -461,7 +459,7 @@ end
 
 namespace :testbundles do
   desc "Runs all test bundle test suites (xcunit)"
-  task run: ['testbundles:xcunit', 'testbundles:failing_test_bundle']
+  task run: ['testbundles:xcunit']
 
   desc "Converts the test bundle identifier to ones Xcode 5- recognizes (Xcode 6 postfixes the original bundler identifier)"
   task :convert_to_xcode5 do
@@ -478,25 +476,6 @@ namespace :testbundles do
       args: "ARCHS=x86_64 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
       logfile: "xcunit.run.log",
     )
-  end
-
-  desc 'A target that does not have XCTest or SenTestingKit linked should alert the user'
-  task :failing_test_bundle do
-    the_exception = nil
-
-    begin
-      Xcode.test(
-        scheme: OSX_FAILING_SPEC_SCHEME_NAME,
-        logfile: "failing.osx.specs.log",
-        args: "2>&1",
-      )
-    rescue Exception => e
-      the_exception = e
-    end
-
-    unless the_exception && the_exception.to_s =~ /CedarNoTestFrameworkAvailable/
-        raise the_exception
-    end
   end
 end
 
