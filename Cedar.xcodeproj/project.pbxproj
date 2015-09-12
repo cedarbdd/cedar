@@ -682,7 +682,6 @@
 		F7F4099B1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099C1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099D1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
-		F7F4099F1B2E3E46001EFA14 /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F4099E1B2E3E26001EFA14 /* CDRPrivateFunctions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1160,7 +1159,6 @@
 		E4BCFDD11817FA110083ED98 /* ObjectWithProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithProperty.m; sourceTree = "<group>"; };
 		F7F409961B2E3C8B001EFA14 /* CDRXCTestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRXCTestObserver.h; sourceTree = "<group>"; };
 		F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRXCTestObserver.m; sourceTree = "<group>"; };
-		F7F4099E1B2E3E26001EFA14 /* CDRPrivateFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRPrivateFunctions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2183,7 +2181,6 @@
 				AE4865D01B0690B0005DB302 /* ActualValue.h in Headers */,
 				AE4865B41B0690AF005DB302 /* InvocationMatcher.h in Headers */,
 				AE4865E31B0690B2005DB302 /* CDRBlockHelper.h in Headers */,
-				F7F4099F1B2E3E46001EFA14 /* CDRPrivateFunctions.h in Headers */,
 				AE4865E51B0690B2005DB302 /* CDRNil.h in Headers */,
 				AE48655D1B06769E005DB302 /* CDROTestRunner.h in Headers */,
 				AE4865551B06769D005DB302 /* CDRBufferedDefaultReporter.h in Headers */,
@@ -2335,7 +2332,7 @@
 			name = "Cedar iOS XCTest Tests";
 			productName = OCUnitAppTests;
 			productReference = 1F45A3DD180E4796003C1E36 /* XCUnitAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 		96A07EEE13F276640021974D /* Cedar OS X FocusedSpecs */ = {
 			isa = PBXNativeTarget;
@@ -2442,7 +2439,7 @@
 			name = "Cedar OS X Host AppTests";
 			productName = "OS X Host AppTests";
 			productReference = AE248FAA19DCD52500092C14 /* Cedar OS X Host AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 		AE4864F71B067620005DB302 /* Cedar-iOS-Framework */ = {
 			isa = PBXNativeTarget;
@@ -2478,7 +2475,7 @@
 			name = "Cedar OS X Failing Test Bundle";
 			productName = "OS X Failing Test Bundle";
 			productReference = AEB8818719DCD62D00F081BA /* Cedar OS X Failing Test Bundle.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 		AEEE1FB511DC271300029872 /* Cedar */ = {
 			isa = PBXNativeTarget;
