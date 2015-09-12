@@ -209,7 +209,8 @@ NSUInteger CDRCallerStackAddress() {
     }
 
     // NB: this will almost always fail if the version of Xcode at this location differs from the version used to build the tests
-    NSString *output = [self.class shellOutWithCommand:@"/Applications/Xcode-beta.app/Contents/Developer/usr/bin/atos" arguments:arguments];
+    NSString *command = [DEVELOPER_BIN_DIR stringByAppendingPathComponent:@"atos"];
+    NSString *output = [self.class shellOutWithCommand:command arguments:arguments];
     self.outputLines = [output componentsSeparatedByString:@"\n"];
 }
 
