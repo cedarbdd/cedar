@@ -307,8 +307,8 @@ NSUInteger CDRCallerStackAddress() {
 }
 
 + (BOOL)isImagePathATestBundle:(NSString *)imageName {
-    BOOL isOCTestBundle = [imageName containsString:@".octest/"];
-    BOOL isXCTestBundle = [imageName containsString:@".xctest/"];
+    BOOL isOCTestBundle = [imageName rangeOfString:@".octest/"].location != NSNotFound;
+    BOOL isXCTestBundle = [imageName rangeOfString:@".xctest/"].location != NSNotFound;
     return isOCTestBundle || isXCTestBundle;
 }
 
