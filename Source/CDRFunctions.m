@@ -78,7 +78,9 @@ void CDRDefineSharedExampleGroups() {
 }
 
 BOOL CDRClassHasClassMethod(Class class, SEL selector) {
-    if (strcmp("UIAccessibilitySafeCategory__NSObject", class_getName(class))) {
+    const char *className = class_getName(class);
+    if (strcmp("UIAccessibilitySafeCategory__NSObject", className) &&
+        strcmp("SCRCException", className)) {
         return !!class_getClassMethod(class, selector);
     }
     return NO;
