@@ -1,5 +1,6 @@
 #import <XCTest/XCTest.h>
 #import "OCUnitAppAppDelegate.h" // should NOT be included in OCUnitAppTests target
+#import "TestObservationHelper.h"
 
 @interface ExampleApplicationTestsWithXCTest : XCTestCase
 @end
@@ -22,6 +23,11 @@
 - (void)testCanLoadNibFilesFromApp {
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"DummyView" owner:nil options:nil];
     XCTAssertEqual([[views lastObject] class], [UIView class], @"expected last view of DummyView nib to be UIView kind");
+}
+
+- (void)testRunningCedarExamples {
+    NSArray *knownTestSuites = [TestObservationHelper knownTestSuites];
+    XCTAssert([[knownTestSuites valueForKeyPath:@"@unionOfArrays.tests.name"] containsObject:@"Cedar"]);
 }
 
 @end

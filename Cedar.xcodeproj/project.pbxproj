@@ -71,6 +71,7 @@
 		34322B091BA740B900D0CFBD /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 34322B081BA740B900D0CFBD /* CDRXCTestObserver.h */; settings = {ASSET_TAGS = (); }; };
 		34322B0A1BA740B900D0CFBD /* CDRXCTestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 34322B081BA740B900D0CFBD /* CDRXCTestObserver.h */; settings = {ASSET_TAGS = (); }; };
 		34322B0B1BA742B400D0CFBD /* CDRPrivateFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 34777EB61B99451200A69FCF /* CDRPrivateFunctions.h */; settings = {ASSET_TAGS = (); }; };
+		34322B0C1BA7471B00D0CFBD /* TestObservationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 34757E211BA466050047BC8D /* TestObservationHelper.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
 		343FAFEA190FDAEC0085AFEC /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		343FAFEB190FDAEC0085AFEC /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		34640DA71B6964F90083EB01 /* CDRBlockHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */; };
@@ -2731,6 +2732,7 @@
 				AE34723919C12588005CA6F1 /* SimpleKeyValueObserver.m in Sources */,
 				F78FDA1B1B43AB540054C768 /* SimpleIncrementer.m in Sources */,
 				AE34723419C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */,
+				34322B0C1BA7471B00D0CFBD /* TestObservationHelper.m in Sources */,
 				AE34723D19C22547005CA6F1 /* CDRDefaultReporterSpec.mm in Sources */,
 				AE34724619C225A1005CA6F1 /* CDRXTestSuiteSpec.mm in Sources */,
 				F78FDA1A1B43AA930054C768 /* HaveReceivedSpec.mm in Sources */,
