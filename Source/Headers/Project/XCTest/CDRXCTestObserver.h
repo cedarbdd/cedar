@@ -1,15 +1,5 @@
 #import <Foundation/Foundation.h>
-
-@class XCTestSuite;
-@protocol XCTestObservation
-@optional
-- (void)testBundleDidFinish:(NSBundle *)testBundle;
-@end
-
-@interface XCTestObservationCenter
-+ (instancetype)sharedTestObservationCenter;
-- (void)addTestObserver:(id<XCTestObservation>)observer;
-@end
+#import "CDRXCTestSupport.h"
 
 @interface CDRXCTestObserver : NSObject <XCTestObservation>
 @end

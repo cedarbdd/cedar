@@ -13,6 +13,7 @@ extern "C" {
     NSArray *CDRSpecClassesToRun();
     NSArray *CDRRootGroupsFromSpecs(NSArray *specs);
     NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed);
+    id CDRCreateXCTestSuite();
     
 #ifdef __cplusplus
 }

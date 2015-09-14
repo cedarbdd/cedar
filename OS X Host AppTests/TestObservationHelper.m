@@ -1,5 +1,5 @@
 #import "TestObservationHelper.h"
-#import "CDRXCTestObserver.h"
+#import "CDRXCTestSupport.h"
 
 @interface XCTestSuite
 + (instancetype)defaultTestSuite;

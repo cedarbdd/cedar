@@ -1,10 +1,11 @@
-#import "CDRXTestSuite.h"
+#import "CDRXCTestSuite.h"
 #import "CDRReportDispatcher.h"
+#import "CDRXCTestSupport.h"
 #import <objc/runtime.h>
 
 const char *CDRXDispatcherKey;
 
-@implementation CDRXTestSuite
+@implementation CDRXCTestSuite
 
 - (void)setDispatcher:(CDRReportDispatcher *)dispatcher {
     objc_setAssociatedObject(self, &CDRXDispatcherKey, dispatcher, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
