@@ -15,7 +15,7 @@
 				AEEE225A11DC2C0200029872 /* Build universal static lib */,
 				AEEE225E11DC2C5E00029872 /* Copy headers to framework */,
 				3444602A190CC3320076655A /* Copy Info.plist to framework */,
-				34446027190CAA930076655A /* Set Git SHA on Framework */,
+				344077C41BA7544F00037486 /* Set Git SHA on Framework */,
 			);
 			dependencies = (
 			);
@@ -2526,6 +2526,7 @@
 				AE4864F31B067620005DB302 /* Sources */,
 				AE4864F41B067620005DB302 /* Frameworks */,
 				AE4864F61B067620005DB302 /* Resources */,
+				344077C51BA76D1700037486 /* Set Git SHA on Framework */,
 			);
 			buildRules = (
 			);
@@ -2562,7 +2563,7 @@
 				AEEE1FB211DC271300029872 /* Resources */,
 				AEEE1FB311DC271300029872 /* Sources */,
 				AEEE1FB411DC271300029872 /* Frameworks */,
-				3468B7AA1909595200203B87 /* Set Git SHA on Framework */,
+				344077C11BA74D7B00037486 /* Set Git SHA on Framework */,
 			);
 			buildRules = (
 			);
@@ -2781,7 +2782,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		34446027190CAA930076655A /* Set Git SHA on Framework */ = {
+		344077C11BA74D7B00037486 /* Set Git SHA on Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2792,8 +2793,36 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/usr/bin/env ruby";
-			shellScript = "key = \"CDRBuildVersionSHA\"\nver = `git rev-parse HEAD`.strip\nputs \"Git commit SHA is #{ver}\"\npath = \"#{ENV['BUILD_DIR']}/#{ENV['CONFIGURATION']}-iphoneuniversal/#{ENV['PRODUCT_NAME']}.framework/Resources/Info.plist\"\n`/usr/libexec/PlistBuddy -c \"Add :#{key} string #{ver}\" \"#{path}\"`";
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env ruby scripts/set_git_sha_on_framework.rb";
+		};
+		344077C41BA7544F00037486 /* Set Git SHA on Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Git SHA on Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLIST_PATH=../${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Resources/Info.plist\nINFOPLIST_PATH=${PLIST_PATH} /usr/bin/env ruby scripts/set_git_sha_on_framework.rb";
+		};
+		344077C51BA76D1700037486 /* Set Git SHA on Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Git SHA on Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env ruby scripts/set_git_sha_on_framework.rb";
 		};
 		3444602A190CC3320076655A /* Copy Info.plist to framework */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2808,20 +2837,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cp \"${SRCROOT}/Cedar-Info.plist\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/${PRODUCT_NAME}.framework/Resources/Info.plist\"";
-		};
-		3468B7AA1909595200203B87 /* Set Git SHA on Framework */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Set Git SHA on Framework";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/usr/bin/env ruby";
-			shellScript = "key = \"CDRBuildVersionSHA\"\nver = `git rev-parse HEAD`.strip\nputs \"Git commit SHA is #{ver}\"\npath = \"#{ENV['BUILT_PRODUCTS_DIR']}/#{ENV['INFOPLIST_PATH']}\"\nputs \"Updating #{path}\"\n`/usr/libexec/PlistBuddy -c \"Add :#{key} string #{ver}\" \"#{path}\"`";
 		};
 		96B5FA0F144A81A8000A6A5D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
