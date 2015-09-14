@@ -76,3 +76,16 @@ void CDRCopyClassInternalsFromClass(Class sourceClass, Class destinationClass) {
     CDRCopyClassMethodsFromClass(sourceClass, destinationClass);
 }
 
+@implementation CDRRuntimeUtilities
+
++ (Class)createMixinSubclassOf:(Class)parentClass newClassName:(NSString *)newClassName templateClass:(Class)templateClass {
+    size_t size = class_getInstanceSize(templateClass) - class_getInstanceSize([NSObject class]);
+    Class newSubclass = objc_allocateClassPair(parentClass, [newClassName UTF8String], size);
+
+    CDRCopyClassInternalsFromClass(templateClass, newSubclass);
+    objc_registerClassPair(newSubclass);
+
+    return newSubclass;
+}
+
+@end

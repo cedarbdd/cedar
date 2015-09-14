@@ -1,3 +1,7 @@
 #import <Foundation/Foundation.h>
 
-extern void CDRCopyClassInternalsFromClass(Class sourceClass, Class destinationClass);
+@interface CDRRuntimeUtilities : NSObject
+
++ (Class)createMixinSubclassOf:(Class)parentClass newClassName:(NSString *)newClassName templateClass:(Class)templateClass;
+
+@end

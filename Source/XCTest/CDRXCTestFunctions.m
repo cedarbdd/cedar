@@ -6,51 +6,21 @@
 #import "CDRXCTestObserver.h"
 #import "CDRReportDispatcher.h"
 #import "CDRSpec.h"
+#import "CDRSpecRun.h"
 #import <objc/runtime.h>
-
-void CDRAddCedarSpecsToXCTestSuite(XCTestSuite *testSuite) {
-    unsigned int seed = CDRGetRandomSeed();
-
-    CDRDefineSharedExampleGroups();
-    CDRDefineGlobalBeforeAndAfterEachBlocks();
-
-    NSArray *specClasses = CDRSpecClassesToRun();
-    NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
-    NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
-
-    CDRMarkFocusedExamplesInSpecs(specs);
-    CDRMarkXcodeFocusedExamplesInSpecs(specs, [[NSProcessInfo processInfo] arguments]);
-
-    CDRReportDispatcher *dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:CDRReportersToRun()] autorelease];
-
-    NSArray *groups = CDRRootGroupsFromSpecs(specs);
-    [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];
-
-    for (CDRSpec *spec in specs) {
-        [testSuite addTest:[spec testSuiteWithRandomSeed:seed dispatcher:dispatcher]];
-    }
-
-    if ([testSuite respondsToSelector:@selector(setDispatcher:)]) {
-        [testSuite setDispatcher:dispatcher];
-    }
-}
 
 id CDRCreateXCTestSuite() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
     Class testSuiteSubclass = NSClassFromString(@"_CDRXCTestSuite");
 
     if (testSuiteSubclass == nil) {
-        size_t size = class_getInstanceSize([CDRXCTestSuite class]) - class_getInstanceSize([NSObject class]);
-        testSuiteSubclass = objc_allocateClassPair(testSuiteClass, "_CDRXCTestSuite", size);
-        CDRCopyClassInternalsFromClass([CDRXCTestSuite class], testSuiteSubclass);
-        objc_registerClassPair(testSuiteSubclass);
+        testSuiteSubclass = [CDRRuntimeUtilities createMixinSubclassOf:testSuiteClass
+                                                          newClassName:@"_CDRXCTestSuite"
+                                                         templateClass:[CDRXCTestSuite class]];
     }
 
-    id testSuite = [[[(id)testSuiteSubclass alloc] initWithName:@"Cedar"] autorelease];
-
-    CDRAddCedarSpecsToXCTestSuite(testSuite);
-
-    return testSuite;
+    CDRSpecRun *run = [[[CDRSpecRun alloc] initWithExampleReporters:CDRReportersToRun()] autorelease];
+    return [[[testSuiteSubclass alloc] initWithSpecRun:run] autorelease];
 }
 
 void CDRInjectIntoXCTestRunner() {

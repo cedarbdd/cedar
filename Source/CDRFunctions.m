@@ -9,6 +9,7 @@
 #import "CDRReportDispatcher.h"
 #import "CDROTestNamer.h"
 #import "CDRVersion.h"
+#import "CDRSpecRun.h"
 
 static NSString * const CDRBuildVersionKey = @"CDRBuildVersionSHA";
 
@@ -270,14 +271,6 @@ void CDRMarkXcodeFocusedExamplesInSpecs(NSArray *specs, NSArray *arguments) {
     }
 }
 
-NSArray *CDRRootGroupsFromSpecs(NSArray *specs) {
-    NSMutableArray *groups = [NSMutableArray arrayWithCapacity:specs.count];
-    for (CDRSpec *spec in specs) {
-        [groups addObject:spec.rootGroup];
-    }
-    return groups;
-}
-
 NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed) {
     NSMutableArray *shuffledItems = [sortedItems mutableCopy];
     srand(seed);
@@ -312,28 +305,13 @@ void __attribute__((weak)) __gcov_flush(void) {
 
 int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters) {
     @autoreleasepool {
-        CDRDefineSharedExampleGroups();
-        CDRDefineGlobalBeforeAndAfterEachBlocks();
+        CDRSpecRun *run = [[CDRSpecRun alloc] initWithExampleReporters:reporters];
 
-        unsigned int seed = CDRGetRandomSeed();
+        int result = [run performSpecRun:^{
+            [run.rootGroups makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:run.dispatcher];
+        }];
 
-        NSArray *specClasses = CDRSpecClassesToRun();
-        NSArray *permutedSpecClasses = CDRPermuteSpecClassesWithSeed(specClasses, seed);
-        NSArray *specs = CDRSpecsFromSpecClasses(permutedSpecClasses);
-        CDRMarkFocusedExamplesInSpecs(specs);
-        CDRMarkXcodeFocusedExamplesInSpecs(specs, [[NSProcessInfo processInfo] arguments]);
-
-        CDRReportDispatcher *dispatcher = [[CDRReportDispatcher alloc] initWithReporters:reporters];
-
-        NSArray *groups = CDRRootGroupsFromSpecs(specs);
-        [dispatcher runWillStartWithGroups:groups andRandomSeed:seed];
-
-        [groups makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:dispatcher];
-
-        [dispatcher runDidComplete];
-        int result = [dispatcher result];
-
-        [dispatcher release];
+        [run release];
 
         __gcov_flush();
 

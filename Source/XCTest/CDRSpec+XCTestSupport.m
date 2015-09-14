@@ -86,9 +86,9 @@ const char *CDRXSpecKey;
     NSString *newClassName = [NSString stringWithFormat:@"_%@", className];
     Class newXCTestSubclass = NSClassFromString(newClassName);
     if (!newXCTestSubclass) {
-        newXCTestSubclass = [self createMixinSubclassOf:testCaseClass
-                                           newClassName:newClassName
-                                          templateClass:[CDRXCTestCase class]];
+        newXCTestSubclass = [CDRRuntimeUtilities createMixinSubclassOf:testCaseClass
+                                                          newClassName:newClassName
+                                                         templateClass:[CDRXCTestCase class]];
     }
 
     return newXCTestSubclass;
@@ -107,16 +107,6 @@ const char *CDRXSpecKey;
         }
     }
     return examples;
-}
-
-- (Class)createMixinSubclassOf:(Class)parentClass newClassName:(NSString *)newClassName templateClass:(Class)templateClass {
-    size_t size = class_getInstanceSize(templateClass) - class_getInstanceSize([NSObject class]);
-    Class newSubclass = objc_allocateClassPair(parentClass, [newClassName UTF8String], size);
-
-    CDRCopyClassInternalsFromClass(templateClass, newSubclass);
-    objc_registerClassPair(newSubclass);
-
-    return newSubclass;
 }
 
 - (void)createTestMethodForSelector:(SEL)selector onClass:(Class)aClass {

@@ -87,6 +87,12 @@
 		3492DA991BA670C10032B35A /* CDRXCTestFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3492DA961BA670C10032B35A /* CDRXCTestFunctions.m */; };
 		3492DA9B1BA672AB0032B35A /* CDRXCTestSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 3492DA9A1BA672A60032B35A /* CDRXCTestSupport.h */; };
 		3492DA9C1BA672AD0032B35A /* CDRXCTestSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 3492DA9A1BA672A60032B35A /* CDRXCTestSupport.h */; };
+		3492DA9F1BA6F9E70032B35A /* CDRSpecRun.h in Headers */ = {isa = PBXBuildFile; fileRef = 3492DA9D1BA6F9E70032B35A /* CDRSpecRun.h */; };
+		3492DAA01BA6F9E70032B35A /* CDRSpecRun.h in Headers */ = {isa = PBXBuildFile; fileRef = 3492DA9D1BA6F9E70032B35A /* CDRSpecRun.h */; };
+		3492DAA11BA6F9E70032B35A /* CDRSpecRun.h in Headers */ = {isa = PBXBuildFile; fileRef = 3492DA9D1BA6F9E70032B35A /* CDRSpecRun.h */; };
+		3492DAA21BA6F9E70032B35A /* CDRSpecRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 3492DA9E1BA6F9E70032B35A /* CDRSpecRun.m */; };
+		3492DAA31BA6F9E70032B35A /* CDRSpecRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 3492DA9E1BA6F9E70032B35A /* CDRSpecRun.m */; };
+		3492DAA41BA6F9E70032B35A /* CDRSpecRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 3492DA9E1BA6F9E70032B35A /* CDRSpecRun.m */; };
 		34ADD2E01921F18100B057AC /* AnyInstanceOfClassArgument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34ADD2DE1921F18100B057AC /* AnyInstanceOfClassArgument.mm */; };
 		34ADD2E11921F18100B057AC /* AnyInstanceOfClassArgument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34ADD2DE1921F18100B057AC /* AnyInstanceOfClassArgument.mm */; };
 		34ADD2E71921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34ADD2E51921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm */; };
@@ -880,6 +886,8 @@
 		34777EB61B99451200A69FCF /* CDRPrivateFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRPrivateFunctions.h; sourceTree = "<group>"; };
 		3492DA961BA670C10032B35A /* CDRXCTestFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRXCTestFunctions.m; sourceTree = "<group>"; };
 		3492DA9A1BA672A60032B35A /* CDRXCTestSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRXCTestSupport.h; sourceTree = "<group>"; };
+		3492DA9D1BA6F9E70032B35A /* CDRSpecRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRSpecRun.h; sourceTree = "<group>"; };
+		3492DA9E1BA6F9E70032B35A /* CDRSpecRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRSpecRun.m; sourceTree = "<group>"; };
 		34ADD2DD1921F0B500B057AC /* AnyInstanceOfClassArgument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyInstanceOfClassArgument.h; sourceTree = "<group>"; };
 		34ADD2DE1921F18100B057AC /* AnyInstanceOfClassArgument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnyInstanceOfClassArgument.mm; sourceTree = "<group>"; };
 		34ADD2E41921F2F600B057AC /* AnyInstanceConformingToProtocolArgument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyInstanceConformingToProtocolArgument.h; sourceTree = "<group>"; };
@@ -1350,6 +1358,7 @@
 				34F3DF7B1A6ABA2E003041DA /* CDRNil.h */,
 				34777EB61B99451200A69FCF /* CDRPrivateFunctions.h */,
 				AE55BF1D19A7CF83005948E6 /* CDRRuntimeUtilities.h */,
+				3492DA9D1BA6F9E70032B35A /* CDRSpecRun.h */,
 				969B6F95160F1FEC00C7C792 /* CDRSymbolicator.h */,
 				34681C2D18FE4611009D38AC /* CDRTypeUtilities.h */,
 			);
@@ -1844,6 +1853,7 @@
 				969B6F82160C61E000C7C792 /* CDRSymbolicator.m */,
 				34681C2B18FE451E009D38AC /* CDRTypeUtilities.m */,
 				34F3DF7C1A6ABA2E003041DA /* CDRNil.m */,
+				3492DA9E1BA6F9E70032B35A /* CDRSpecRun.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -2095,6 +2105,7 @@
 				AE4865B61B0690B0005DB302 /* CedarApplicationDelegate.h in Headers */,
 				AE4865B71B0690B0005DB302 /* Cedar-iOS.h in Headers */,
 				AE4865B81B0690B0005DB302 /* Base.h in Headers */,
+				3492DAA11BA6F9E70032B35A /* CDRSpecRun.h in Headers */,
 				AE4865B91B0690B0005DB302 /* BeCloseTo.h in Headers */,
 				AE4865BA1B0690B0005DB302 /* BeFalsy.h in Headers */,
 				AE4865BB1B0690B0005DB302 /* BeGreaterThan.h in Headers */,
@@ -2178,6 +2189,7 @@
 				AEEE1FFB11DC27B800029872 /* CDRExampleBase.h in Headers */,
 				AEEE1FFD11DC27B800029872 /* CDRExampleParent.h in Headers */,
 				AEEE1FFE11DC27B800029872 /* CDRExampleReporter.h in Headers */,
+				3492DA9F1BA6F9E70032B35A /* CDRSpecRun.h in Headers */,
 				AEEE1FFF11DC27B800029872 /* CDRFunctions.h in Headers */,
 				AEEE200011DC27B800029872 /* CDRSpec.h in Headers */,
 				AEEE200111DC27B800029872 /* Cedar.h in Headers */,
@@ -2270,6 +2282,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3492DAA01BA6F9E70032B35A /* CDRSpecRun.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2884,6 +2897,7 @@
 				AE48658A1B067954005DB302 /* CDROTestNamer.m in Sources */,
 				AE48658B1B067954005DB302 /* CDRSlowTestStatistics.m in Sources */,
 				AE48658C1B067954005DB302 /* CDRColorizedReporter.m in Sources */,
+				3492DAA41BA6F9E70032B35A /* CDRSpecRun.m in Sources */,
 				AE48658D1B067954005DB302 /* CDRDefaultReporter.m in Sources */,
 				AE48658E1B067954005DB302 /* CDRJUnitXMLReporter.m in Sources */,
 				AE48658F1B067954005DB302 /* CDROTestReporter.m in Sources */,
@@ -2918,6 +2932,7 @@
 				34F3DF7F1A6ABA2E003041DA /* CDRNil.m in Sources */,
 				AEEE1FF511DC27B800029872 /* CDRExampleBase.m in Sources */,
 				3492DA971BA670C10032B35A /* CDRXCTestFunctions.m in Sources */,
+				3492DAA21BA6F9E70032B35A /* CDRSpecRun.m in Sources */,
 				AEEE1FF611DC27B800029872 /* CDRExampleGroup.m in Sources */,
 				AEEE1FF711DC27B800029872 /* CDRFunctions.m in Sources */,
 				AEEE1FF811DC27B800029872 /* CDRSpec.m in Sources */,
@@ -3064,6 +3079,7 @@
 				AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */,
 				34ADD2E81921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm in Sources */,
 				AE74907215B486CD008EA127 /* CDRFake.mm in Sources */,
+				3492DAA31BA6F9E70032B35A /* CDRSpecRun.m in Sources */,
 				AE74907715B493C4008EA127 /* CDRProtocolFake.mm in Sources */,
 				AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				34ADE41918F23E6B00BD1E99 /* NSMethodSignature+Cedar.m in Sources */,
