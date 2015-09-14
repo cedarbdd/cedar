@@ -19,7 +19,8 @@ Pod::Spec.new do |s|
   #   https://github.com/pivotal/cedar/issues/47
   s.xcconfig = {
     'CLANG_CXX_LANGUAGE_STANDARD' => 'c++0x',
-    'CLANG_CXX_LIBRARY' => 'libc++'
+    'CLANG_CXX_LIBRARY' => 'libc++',
+    'OTHER_CFLAGS' => '-DDEVELOPER_BIN_DIR=@\"${DEVELOPER_BIN_DIR}\"'
   }
   s.libraries = 'c++'
   s.requires_arc = false
