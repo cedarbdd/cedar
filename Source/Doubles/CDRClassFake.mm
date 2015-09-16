@@ -32,36 +32,66 @@
     return self.klass;
 }
 
-- (void)handleKVCSelector:(SEL)sel withValue:(id)value forKey:(NSString *)key {
+#pragma mark - KVC Overrides
+
+- (void)setValue:(id)value forKey:(NSString *)key {
+    [self handleKVCSelector:_cmd withValue:value forKey:key];
+}
+
+- (void)setValue:(id)value forKeyPath:(NSString *)key {
+    [self handleKVCSelector:_cmd withValue:value forKey:key];
+}
+
+- (id)valueForKey:(NSString *)key {
+    return [self handleKVCSelector:_cmd forKey:key];
+}
+
+- (id)valueForKeyPath:(NSString *)key {
+    return [self handleKVCSelector:_cmd forKey:key];
+}
+
+#pragma mark - KVC Handling Implementation
+
+- (void)handleAllowedKVCSelector:(SEL)sel withValue:(id)value forKey:(NSString *)key {
     NSMethodSignature *signature = [self.klass methodSignatureForSelector:sel];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     [invocation setSelector:sel];
     [invocation setArgument:&value atIndex:2];
     [invocation setArgument:&key atIndex:3];
-    [self.cedar_double_impl record_method_invocation:invocation];
+    [self forwardInvocation:invocation];
 }
 
-- (void)setValue:(id)value forKey:(NSString *)key {
-    if ([self has_stubbed_method_for:_cmd]) {
-        [self handleKVCSelector:_cmd withValue:value forKey:key];
+- (void)handleKVCSelector:(SEL)sel withValue:(id)value forKey:(NSString *)key {
+    if ([self has_stubbed_method_for:sel] || !self.requiresExplicitStubs) {
+        [self handleAllowedKVCSelector:sel withValue:value forKey:key];
     } else {
-        [self setValue:value forUndefinedKey:key];
-    }
-}
-
-- (void)setValue:(id)value forKeyPath:(NSString *)key {
-    if ([self has_stubbed_method_for:_cmd]) {
-        [self handleKVCSelector:_cmd withValue:value forKey:key];
-    } else {
-        [self setValue:value forUndefinedKey:key];
-    }
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    if (self.requiresExplicitStubs) {
         [[NSException exceptionWithName:NSInternalInconsistencyException
                                  reason:[NSString stringWithFormat:@"Attempting to set value <%@> for key <%@>, which must be stubbed first", value, key]
                                userInfo:nil] raise];
+    }
+}
+
+- (id)handleAllowedKVCSelector:(SEL)sel forKey:(NSString *)key {
+    NSMethodSignature *signature = [self.klass methodSignatureForSelector:sel];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    [invocation setSelector:sel];
+    [invocation setArgument:&key atIndex:2];
+    [self forwardInvocation:invocation];
+
+    __unsafe_unretained id returnValue;
+    [invocation getReturnValue:&returnValue];
+
+    return returnValue;
+}
+
+- (id)handleKVCSelector:(SEL)sel forKey:(NSString *)key {
+    if ([self has_stubbed_method_for:sel] || !self.requiresExplicitStubs) {
+        return [self handleAllowedKVCSelector:sel forKey:key];
+    } else {
+        [[NSException exceptionWithName:NSInternalInconsistencyException
+                                 reason:[NSString stringWithFormat:@"Attempting to get value for key <%@>, which must be stubbed first", key]
+                               userInfo:nil] raise];
+        return nil;
     }
 }
 
