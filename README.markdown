@@ -27,12 +27,6 @@ describe(@"Example specs on NSString", ^{
 });
 ```
 
-## Note for Xcode 7 users
-
-With Xcode 7, Apple has introduced changes to `XCTest.framework` which are incompatible with Cedar's test bundle
-runner. (See [#333](https://github.com/pivotal/cedar/issues/333) for more details.) Support for Xcode 7 is 
-being actively developed on the `Xcode7` [branch](https://github.com/pivotal/cedar/tree/Xcode7) which should be
-used until we feel that the Xcode 7 betas have stabilized and we are ready to merge this work into the `master` branch.
 
 # Quick start
 

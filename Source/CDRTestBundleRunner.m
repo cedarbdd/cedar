@@ -1,16 +1,16 @@
-#import "CDROTestRunner.h"
+#import <Foundation/Foundation.h>
 #import "CDRFunctions.h"
 
-@interface CDROTestRunner ()
+@interface CDRTestBundleRunner : NSObject
 @end
 
-@implementation CDROTestRunner
+@implementation CDRTestBundleRunner
 
 + (void)load {
     if (!CDRGetTestBundleExtension()) {
         return; // we're not in a test bundle
     }
-   CDRInjectIntoXCTestRunner();
+    CDRInjectIntoXCTestRunner();
 }
 
 @end

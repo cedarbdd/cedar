@@ -8,19 +8,16 @@
 #endif
 
 #import "CDRSpec.h"
-#import "CDRXTestSuite.h"
+#import "CDRXCTestSuite.h"
 #import "CDRReportDispatcher.h"
-
-@interface CDR_XCTest : NSObject
-- (void)performTest:(id)aRun;
-@end
+#import "CDRXCTestSupport.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
 
-SPEC_BEGIN(CDRXTestSuiteSpec)
+SPEC_BEGIN(CDRXCTestSuiteSpec)
 
-describe(@"CDRXTestSuite", ^{
+describe(@"CDRXCTestSuite", ^{
     __block id subject;
     __block CDRReportDispatcher *dispatcher;
 

@@ -1,5 +1,6 @@
 #import <XCTest/XCTest.h>
 #import "OCUnitAppAppDelegate.h" // should NOT be included in OCUnitAppTests target
+#import "TestObservationHelper.h"
 
 @interface ExampleApplicationTestsWithXCTest : XCTestCase
 @end
@@ -25,7 +26,8 @@
 }
 
 - (void)testRunningCedarExamples {
-    XCTestSuite *defaultSuite = [XCTestSuite defaultTestSuite];
-    XCTAssert([[defaultSuite valueForKeyPath:@"tests.name"] containsObject:@"Cedar"]);
+    NSArray *knownTestSuites = [TestObservationHelper knownTestSuites];
+    XCTAssert([[knownTestSuites valueForKeyPath:@"@unionOfArrays.tests.name"] containsObject:@"Cedar"]);
 }
+
 @end

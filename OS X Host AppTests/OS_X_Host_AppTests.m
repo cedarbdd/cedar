@@ -1,8 +1,8 @@
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
+#import "TestObservationHelper.h"
 
 @interface OS_X_Host_AppTests : XCTestCase
-
 @end
 
 @implementation OS_X_Host_AppTests
@@ -12,7 +12,8 @@
 }
 
 - (void)testRunningCedarExamples {
-    XCTestSuite *defaultSuite = [XCTestSuite defaultTestSuite];
-    XCTAssert([[defaultSuite valueForKeyPath:@"tests.name"] containsObject:@"Cedar"]);
+    NSArray *knownTestSuites = [TestObservationHelper knownTestSuites];
+    XCTAssert([[knownTestSuites valueForKeyPath:@"@unionOfArrays.tests.name"] containsObject:@"Cedar"]);
 }
+
 @end
