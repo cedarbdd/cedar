@@ -60,7 +60,7 @@ NSString *CDRVersionString() {
         versionDetails = [cedarFrameworkBundle objectForInfoDictionaryKey:CDRBuildVersionKey];
     }
 
-    return [releaseVersion stringByAppendingFormat:@" (%@)", versionDetails];
+    return versionDetails ? [CDRVersion stringByAppendingFormat:@" (%@)", versionDetails] : CDRVersion;
 }
 
 #pragma mark - Globals
