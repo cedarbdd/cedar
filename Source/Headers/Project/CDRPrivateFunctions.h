@@ -14,7 +14,7 @@ extern "C" {
     NSArray *CDRRootGroupsFromSpecs(NSArray *specs);
     NSArray *CDRPermuteSpecClassesWithSeed(NSArray *unsortedSpecClasses, unsigned int seed);
     id CDRCreateXCTestSuite();
-    
+    NSBundle *CDRBundleContainingSpecs();
 #ifdef __cplusplus
 }
 #endif
