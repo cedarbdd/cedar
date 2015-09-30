@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0710"
-   version = "1.3">
+   version = "1.8">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,30 +14,63 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "346261DE1B995239002CAEBD"
+               BlueprintIdentifier = "AEEE1FB511DC271300029872"
                BuildableName = "Cedar.framework"
-               BlueprintName = "Cedar-watchOS"
+               BlueprintName = "Cedar-OSX"
+               ReferencedContainer = "container:Cedar.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AE248FA919DCD52500092C14"
+               BuildableName = "Cedar-OSX SpecBundle.xctest"
+               BlueprintName = "Cedar-OSX SpecBundle"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AE248FA919DCD52500092C14"
+               BuildableName = "Cedar-OSX SpecBundle.xctest"
+               BlueprintName = "Cedar-OSX SpecBundle"
+               ReferencedContainer = "container:Cedar.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AEEE1FB511DC271300029872"
+            BuildableName = "Cedar.framework"
+            BlueprintName = "Cedar-OSX"
+            ReferencedContainer = "container:Cedar.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -45,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "346261DE1B995239002CAEBD"
+            BlueprintIdentifier = "AEEE1FB511DC271300029872"
             BuildableName = "Cedar.framework"
-            BlueprintName = "Cedar-watchOS"
+            BlueprintName = "Cedar-OSX"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,17 +88,17 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "346261DE1B995239002CAEBD"
+            BlueprintIdentifier = "AEEE1FB511DC271300029872"
             BuildableName = "Cedar.framework"
-            BlueprintName = "Cedar-watchOS"
+            BlueprintName = "Cedar-OSX"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

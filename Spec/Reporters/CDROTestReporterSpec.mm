@@ -62,13 +62,6 @@ describe(@"CDROTestReporter", ^{
     beforeEach(^{
         bundleName = [NSBundle mainBundle].bundleURL.pathComponents.lastObject;
 
-        // Running as the test suite should not really happen for
-        // this test reporter, but we'll allow it for our test
-        // suite.
-        if ([@[@"Debug", @"Release", @"Cedar-iOS-Framework Specs.app", @"Cedar-watchOS Specs Extension.appex"] containsObject:bundleName]) {
-            bundleName = @"Cedar.framework";
-        }
-
         reporter = [[[CDROTestReporter alloc] initWithCedarVersion:cedarVersionString] autorelease];
         reporter.reporter_output = [NSMutableString string];
         dispatcher = [[[CDRReportDispatcher alloc] initWithReporters:@[reporter]] autorelease];

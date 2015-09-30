@@ -8,15 +8,15 @@
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "346261DE1B995239002CAEBD"
-               BuildableName = "Cedar.framework"
-               BlueprintName = "Cedar-watchOS"
+               BlueprintIdentifier = "34D7C4681BB9B71600E8E523"
+               BuildableName = "Cedar-tvOS SpecBundle.bundle"
+               BlueprintName = "Cedar-tvOS SpecBundle"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "34D7C4681BB9B71600E8E523"
+               BuildableName = "Cedar-tvOS SpecBundle.bundle"
+               BlueprintName = "Cedar-tvOS SpecBundle"
+               ReferencedContainer = "container:Cedar.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -42,15 +52,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "346261DE1B995239002CAEBD"
-            BuildableName = "Cedar.framework"
-            BlueprintName = "Cedar-watchOS"
-            ReferencedContainer = "container:Cedar.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,15 +61,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "346261DE1B995239002CAEBD"
-            BuildableName = "Cedar.framework"
-            BlueprintName = "Cedar-watchOS"
-            ReferencedContainer = "container:Cedar.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

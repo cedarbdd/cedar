@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "346261DE1B995239002CAEBD"
+               BlueprintIdentifier = "34D7C3C91BB9747400E8E523"
                BuildableName = "Cedar.framework"
-               BlueprintName = "Cedar-watchOS"
+               BlueprintName = "Cedar-tvOS"
+               ReferencedContainer = "container:Cedar.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "34D7C4681BB9B71600E8E523"
+               BuildableName = "Cedar-tvOS SpecBundle.bundle"
+               BlueprintName = "Cedar-tvOS SpecBundle"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +42,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "34D7C4681BB9B71600E8E523"
+               BuildableName = "Cedar-tvOS SpecBundle.bundle"
+               BlueprintName = "Cedar-tvOS SpecBundle"
+               ReferencedContainer = "container:Cedar.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "34D7C3C91BB9747400E8E523"
+            BuildableName = "Cedar.framework"
+            BlueprintName = "Cedar-tvOS"
+            ReferencedContainer = "container:Cedar.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "346261DE1B995239002CAEBD"
+            BlueprintIdentifier = "34D7C3C91BB9747400E8E523"
             BuildableName = "Cedar.framework"
-            BlueprintName = "Cedar-watchOS"
+            BlueprintName = "Cedar-tvOS"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +96,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "346261DE1B995239002CAEBD"
+            BlueprintIdentifier = "34D7C3C91BB9747400E8E523"
             BuildableName = "Cedar.framework"
-            BlueprintName = "Cedar-watchOS"
+            BlueprintName = "Cedar-tvOS"
             ReferencedContainer = "container:Cedar.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

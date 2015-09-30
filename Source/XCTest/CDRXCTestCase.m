@@ -4,8 +4,6 @@
 
 
 const char *CDRXTestInvocationsKey;
-const char *CDRXSpecKey;
-
 
 @interface CDRXCTestCase (XCTestCaseMethods)
 
