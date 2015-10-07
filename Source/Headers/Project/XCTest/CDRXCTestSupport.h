@@ -18,8 +18,8 @@
 
 // XCTestSuite
 
-- (id)defaultTestSuite;
-- (id)CDR_original_defaultTestSuite;
+- (id)allTests;
+- (id)CDR_original_allTests;
 - (id)initWithName:(NSString *)aName;
 
 // XCTestObservationCenter
