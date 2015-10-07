@@ -36,18 +36,16 @@ void CDRInjectIntoXCTestRunner() {
         static CDRXCTestObserver *xcTestObserver;
         xcTestObserver = [[CDRXCTestObserver alloc] init];
         [observationCenter addTestObserver:xcTestObserver];
-
-        return;
     }
 
     Class testSuiteMetaClass = object_getClass(testSuiteClass);
-    Method m = class_getClassMethod(testSuiteClass, @selector(defaultTestSuite));
+    Method m = class_getClassMethod(testSuiteClass, @selector(allTests));
 
-    class_addMethod(testSuiteMetaClass, @selector(CDR_original_defaultTestSuite), method_getImplementation(m), method_getTypeEncoding(m));
+    class_addMethod(testSuiteMetaClass, @selector(CDR_original_allTests), method_getImplementation(m), method_getTypeEncoding(m));
     IMP newImp = imp_implementationWithBlock(^id(id self){
-        id defaultSuite = [self CDR_original_defaultTestSuite];
+        id defaultSuite = [self CDR_original_allTests];
         [defaultSuite addTest:CDRCreateXCTestSuite()];
         return defaultSuite;
     });
-    class_replaceMethod(testSuiteMetaClass, @selector(defaultTestSuite), newImp, method_getTypeEncoding(m));
+    class_replaceMethod(testSuiteMetaClass, @selector(allTests), newImp, method_getTypeEncoding(m));
 }
