@@ -1,5 +1,5 @@
 #import "CDROTestReporter.h"
-#import "CDRFunctions.h"
+#import "CDRPrivateFunctions.h"
 #import "CDRExample.h"
 #import "CDRExampleGroup.h"
 #import "CDRSpecHelper.h"
@@ -144,7 +144,7 @@
 }
 
 - (NSString *)bundleSuiteName {
-    NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
+    NSBundle *testBundle = CDRBundleContainingSpecs();
     return testBundle.bundleURL.pathComponents.lastObject;
 }
 

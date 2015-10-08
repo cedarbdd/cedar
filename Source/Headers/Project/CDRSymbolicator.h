@@ -1,5 +1,11 @@
 #import <Foundation/Foundation.h>
 
+#if __arm__ || TARGET_OS_WATCH  // libunwind functions are not available
+#define CDR_SYMBOLICATION_AVAILABLE 0
+#else
+#define CDR_SYMBOLICATION_AVAILABLE 1
+#endif
+
 NSUInteger CDRCallerStackAddress();
 
 extern NSString *kCDRSymbolicatorErrorDomain;

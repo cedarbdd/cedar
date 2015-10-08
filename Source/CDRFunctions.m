@@ -29,22 +29,41 @@ BOOL CDRClassIsOfType(Class class, const char * const className) {
     return NO;
 }
 
-NSArray *CDRSelectClasses(BOOL (^classSelectionPredicate)(Class class)) {
+void CDREnumerateClasses(void (^block)(Class class, BOOL *stop)) {
     unsigned int numberOfClasses = objc_getClassList(NULL, 0);
     Class classes[numberOfClasses];
     numberOfClasses = objc_getClassList(classes, numberOfClasses);
 
-    NSMutableArray *selectedClasses = [NSMutableArray array];
-    for (unsigned int i = 0; i < numberOfClasses; ++i) {
-        Class class = classes[i];
+    BOOL stop = NO;
+    for (unsigned int i = 0; i < numberOfClasses && !stop; ++i) {
+        block(classes[i], &stop);
+    }
+}
 
+NSArray *CDRSelectClasses(BOOL (^classSelectionPredicate)(Class class)) {
+    NSMutableArray *selectedClasses = [NSMutableArray array];
+
+    CDREnumerateClasses(^(Class class, BOOL *stop) {
         if (classSelectionPredicate(class)) {
             [class retain];
             [selectedClasses addObject:class];
             [class release];
         }
-    }
+    });
     return selectedClasses;
+}
+
+Class CDRFirstOfClasses(BOOL (^classSelectionPredicate)(Class class)) {
+    __block Class firstClass = Nil;
+
+    CDREnumerateClasses(^(Class class, BOOL *stop) {
+        if (classSelectionPredicate(class)) {
+            firstClass = class;
+            *stop = YES;
+        }
+    });
+
+    return firstClass;
 }
 
 NSString *CDRVersionString() {
@@ -61,6 +80,15 @@ NSString *CDRVersionString() {
     }
 
     return versionDetails ? [CDRVersion stringByAppendingFormat:@" (%@)", versionDetails] : CDRVersion;
+}
+
+BOOL (^CDRClassIsSpecPredicate)(Class class) = ^(Class class) {
+    return CDRClassIsOfType(class, "CDRSpec");
+};
+
+NSBundle *CDRBundleContainingSpecs() {
+    Class specClass = CDRFirstOfClasses(CDRClassIsSpecPredicate);
+    return [NSBundle bundleForClass:specClass ?: [CDRSpec class]];
 }
 
 #pragma mark - Globals
@@ -176,9 +204,7 @@ NSArray *CDRSpecClassesToRun() {
         return [[specClassesToRun copy] autorelease];
     }
 
-    return CDRSelectClasses(^(Class class) {
-        return CDRClassIsOfType(class, "CDRSpec");
-    });
+    return CDRSelectClasses(CDRClassIsSpecPredicate);
 }
 
 NSArray *CDRSpecsFromSpecClasses(NSArray *specClasses) {

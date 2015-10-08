@@ -8,7 +8,7 @@ const NSString *kCDRSymbolicatorErrorDomain = @"kCDRSymbolicatorErrorDomain";
 const NSString *kCDRSymbolicatorErrorMessageKey = @"kCDRSymbolicatorErrorMessage";
 
 NSUInteger CDRCallerStackAddress() {
-#if __arm__ // libunwind functions are not available
+#if !CDR_SYMBOLICATION_AVAILABLE
     return 0;
 #else
     unw_context_t uc;
@@ -69,7 +69,7 @@ NSUInteger CDRCallerStackAddress() {
 }
 
 - (BOOL)symbolicateAddresses:(NSArray *)addresses error:(NSError **)error {
-#if __arm__
+#if !CDR_SYMBOLICATION_AVAILABLE
     if (error) {
         *error = self.buildNotAvailableError;
     }

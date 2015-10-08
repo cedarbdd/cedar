@@ -20,7 +20,7 @@
 #import "CDRExampleParent.h"
 #import "CDRSharedExampleGroupPool.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 #import "Cedar-iOS.h"
 #endif
 
@@ -73,7 +73,11 @@
 #if TARGET_OS_IPHONE
 #import "UIGeometryCompareEqual.h"
 #import "UIGeometryStringifiers.h"
+
+#if !TARGET_OS_WATCH
 #import "UIKitComparatorsContainer.h"
+#endif
+
 #endif
 
 #ifdef CEDAR_CUSTOM_MATCHERS

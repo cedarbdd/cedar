@@ -10,10 +10,17 @@ Pod::Spec.new do |s|
 
   s.osx.deployment_target = '10.7'
   s.ios.deployment_target = '6.0'
+  s.watchos.deployment_target = '2.0'
   s.source_files = 'Source/**/*.{h,m,mm}'
   s.public_header_files = 'Source/Headers/Public/**/*.{h}'
-  s.osx.exclude_files = '**/iPhone/**'
+  s.osx.exclude_files = '**/{iOS,UIKit}/**'
   s.ios.exclude_files = '**/OSX/**'
+  s.watchos.exclude_files = '**/{OSX,iOS}/**'
+
+  if s.respond_to?(:tvos)
+    s.tvos.deployment_target = '9.0'
+    s.tvos.exclude_files = '**/OSX/**'
+  end
 
   # Versions of this pod >= 0.9.0 require C++11.
   #   https://github.com/pivotal/cedar/issues/47

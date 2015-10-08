@@ -1,19 +1,18 @@
 PROJECT_NAME = "Cedar"
-APP_NAME = "Cedar OS X Specs"
-APP_IOS_NAME = "Cedar-StaticLib Specs"
+APP_IOS_NAME = "Cedar-iOS StaticLib Specs"
 CONFIGURATION = "Release"
 
-SPECS_TARGET_NAME = "Cedar OS X Specs"
-UI_SPECS_TARGET_NAME = "Cedar-StaticLib Specs"
-FOCUSED_SPECS_TARGET_NAME = "Cedar OS X FocusedSpecs"
+SPECS_TARGET_NAME = "Cedar-OSX Specs"
+UI_SPECS_TARGET_NAME = "Cedar-iOS StaticLib Specs"
+FOCUSED_SPECS_TARGET_NAME = "Cedar-OSX FocusedSpecs"
 IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS StaticFrameworkSpecs"
-IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS-Framework Specs"
+IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME = "Cedar-iOS Specs"
 
-XCUNIT_APPLICATION_SPECS_SCHEME_NAME = "Cedar iOS XCTest Tests"
+IOS_SPEC_BUNDLE_SCHEME_NAME = "Cedar-iOS SpecBundle"
 
-CEDAR_FRAMEWORK_TARGET_NAME = "Cedar"
-CEDAR_IOS_STATIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
-CEDAR_IOS_DYNAMIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS-Framework"
+CEDAR_FRAMEWORK_TARGET_NAME = "Cedar-OSX"
+CEDAR_IOS_STATIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS StaticFramework"
+CEDAR_IOS_DYNAMIC_FRAMEWORK_TARGET_NAME = "Cedar-iOS"
 TEMPLATE_IDENTIFIER_PREFIX = "com.pivotallabs.cedar."
 TEMPLATE_SENTINEL_KEY = "isCedarTemplate"
 SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
@@ -128,7 +127,7 @@ class Xcode
   end
 
   def self.destination_for_ios_sdk(version)
-    "OS=#{version},name=iPhone 5s"
+    "name=iPhone 5s,OS=#{version}"
   end
 
   def self.clean
@@ -406,7 +405,7 @@ namespace :suites do
   end
 
   desc "Analyzes and runs ios dynamic framework specs"
-  task iosstaticframeworkspecs: ['iosdynamicframeworkspecs:analyze', 'iosdynamicframeworkspecs:run']
+  task iosdynamicframeworkspecs: ['iosdynamicframeworkspecs:analyze', 'iosdynamicframeworkspecs:run']
 
   namespace :iosdynamicframeworkspecs do
     desc "Analyzes ios dynamic framework specs"
@@ -458,23 +457,23 @@ namespace :frameworks do
 end
 
 namespace :testbundles do
-  desc "Runs all test bundle test suites (xcunit)"
-  task run: ['testbundles:xcunit']
+  desc "Runs all test bundle test suites"
+  task run: ['testbundles:xctest']
 
   desc "Converts the test bundle identifier to ones Xcode 5- recognizes (Xcode 6 postfixes the original bundler identifier)"
   task :convert_to_xcode5 do
     Xcode.sed_project(%r{com\.apple\.product-type\.bundle\.(oc)?unit-test}, 'com.apple.product-type.bundle')
   end
 
-  desc "Build and run XCUnit specs (#{XCUNIT_APPLICATION_SPECS_SCHEME_NAME})"
-  task xcunit: :convert_to_xcode5 do
+  desc "Build and run iOS XCTest spec bundle (#{IOS_SPEC_BUNDLE_SCHEME_NAME})"
+  task xctest: :convert_to_xcode5 do
     Simulator.kill
 
     Xcode.test(
-      scheme: XCUNIT_APPLICATION_SPECS_SCHEME_NAME,
+      scheme: IOS_SPEC_BUNDLE_SCHEME_NAME,
       sdk: "iphonesimulator#{SDK_VERSION}",
-      args: "ARCHS=x86_64 -destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
-      logfile: "xcunit.run.log",
+      args: "-destination '#{Xcode.destination_for_ios_sdk(SDK_RUNTIME_VERSION)}' -destination-timeout 9",
+      logfile: "xctest.run.log",
     )
   end
 end
