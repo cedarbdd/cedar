@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "34D7C4681BB9B71600E8E523"
-               BuildableName = "Cedar-tvOS SpecBundle.bundle"
+               BuildableName = "Cedar-tvOS SpecBundle.xctest"
                BlueprintName = "Cedar-tvOS SpecBundle"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "34D7C4681BB9B71600E8E523"
-               BuildableName = "Cedar-tvOS SpecBundle.bundle"
+               BuildableName = "Cedar-tvOS SpecBundle.xctest"
                BlueprintName = "Cedar-tvOS SpecBundle"
                ReferencedContainer = "container:Cedar.xcodeproj">
             </BuildableReference>

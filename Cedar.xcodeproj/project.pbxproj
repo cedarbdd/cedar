@@ -1385,7 +1385,7 @@
 		34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIKitContainSpec.mm; sourceTree = "<group>"; };
 		34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIKitComparatorsContainer.h; sourceTree = "<group>"; };
 		34D7C3CA1BB9747400E8E523 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34D7C4691BB9B71600E8E523 /* Cedar-tvOS SpecBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar-tvOS SpecBundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34D7C4691BB9B71600E8E523 /* Cedar-tvOS SpecBundle.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar-tvOS SpecBundle.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34D7C4B71BB9CB5700E8E523 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/usr/lib/libxml2.tbd; sourceTree = DEVELOPER_DIR; };
 		34F3DF7B1A6ABA2E003041DA /* CDRNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRNil.h; sourceTree = "<group>"; };
 		34F3DF7C1A6ABA2E003041DA /* CDRNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRNil.m; sourceTree = "<group>"; };
@@ -2188,7 +2188,7 @@
 				346262781B99C1DB002CAEBD /* Cedar-watchOS Specs.app */,
 				346262841B99C1DC002CAEBD /* Cedar-watchOS Specs Extension.appex */,
 				34D7C3CA1BB9747400E8E523 /* Cedar.framework */,
-				34D7C4691BB9B71600E8E523 /* Cedar-tvOS SpecBundle.bundle */,
+				34D7C4691BB9B71600E8E523 /* Cedar-tvOS SpecBundle.xctest */,
 				34852D211BBE35FF0072D249 /* Cedar-watchOS HostApp.app */,
 			);
 			name = Products;
@@ -2959,7 +2959,7 @@
 			);
 			name = "Cedar-tvOS SpecBundle";
 			productName = "Cedar-tvOS-SpecBundle";
-			productReference = 34D7C4691BB9B71600E8E523 /* Cedar-tvOS SpecBundle.bundle */;
+			productReference = 34D7C4691BB9B71600E8E523 /* Cedar-tvOS SpecBundle.xctest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		96A07EEE13F276640021974D /* Cedar-OSX FocusedSpecs */ = {
@@ -4629,6 +4629,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
@@ -4659,6 +4660,7 @@
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
