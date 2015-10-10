@@ -19,7 +19,7 @@ SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 
 XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
-APPCODE_SNIPPETS_PATH = "Library/Preferences/appCode31/templates"
+APPCODE_SNIPPETS_PATH = "Library/Preferences/AppCode32/templates"
 APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/#{APPCODE_SNIPPETS_PATH}"
 XCODE_PLUGINS_DIR = "#{ENV['HOME']}/Library/Application Support/Developer/Shared/Xcode/Plug-ins/"
 
