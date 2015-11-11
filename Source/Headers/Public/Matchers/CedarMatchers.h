@@ -18,6 +18,7 @@
 #import "BeEmpty.h"
 #import "AnInstanceOf.h"
 #import "Contain.h"
+#import "ContainSubset.h"
 
 // Verifiers
 #import "Exist.h"
