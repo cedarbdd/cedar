@@ -11,7 +11,7 @@ static unsigned int globalValue__ = 0;
 
 using namespace Cedar::Matchers;
 
-@interface SomeClass : NSObject
+@interface SomeClass : NSObject <CDRHooks>
 @end
 
 @implementation SomeClass
