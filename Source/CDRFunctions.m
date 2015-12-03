@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 #import "CDRSpec.h"
+#import "CDRHooks.h"
 #import "CDRExampleGroup.h"
 #import "CDRExampleReporter.h"
 #import "CDRDefaultReporter.h"
@@ -108,7 +109,8 @@ void CDRDefineSharedExampleGroups() {
 BOOL CDRClassHasClassMethod(Class class, SEL selector) {
     const char *className = class_getName(class);
     if (strcmp("UIAccessibilitySafeCategory__NSObject", className) &&
-        strcmp("SCRCException", className)) {
+        strcmp("SCRCException", className) &&
+        class_conformsToProtocol(class, @protocol(CDRHooks))) {
         return !!class_getClassMethod(class, selector);
     }
     return NO;
