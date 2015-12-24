@@ -19,8 +19,7 @@ SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 
 XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
-APPCODE_SNIPPETS_PATH = "Library/Preferences/AppCode32/templates"
-APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/#{APPCODE_SNIPPETS_PATH}"
+
 XCODE_PLUGINS_DIR = "#{ENV['HOME']}/Library/Application Support/Developer/Shared/Xcode/Plug-ins/"
 
 LATEST_SDK_VERSION = `xcodebuild -showsdks 2>/dev/null | grep iphonesimulator | cut -d ' ' -f 4`.chomp.split("\n").last
@@ -32,8 +31,6 @@ BUILD_DIR = File.join(PROJECT_ROOT, "build")
 DERIVED_DATA_DIR = File.join(PROJECT_ROOT, "derivedData")
 TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
 SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets")
-APPCODE_SNIPPETS_FILENAME = "Cedar.xml"
-APPCODE_SNIPPETS_FILE = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "AppCodeSnippets", APPCODE_SNIPPETS_FILENAME)
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
 PLUGIN_DIR = File.join(PROJECT_ROOT, "CedarPlugin.xcplugin")
 PLISTBUDDY = "/usr/libexec/PlistBuddy"

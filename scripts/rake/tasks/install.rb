@@ -1,9 +1,11 @@
 # tasks related to install, uninstall, reinstall, etc...
 
-
 desc "Build frameworks and install templates and code snippets"
 task :install => [:clean, :uninstall, "dist:prepare", :install_plugin] do
-  puts "\nInstalling templates...\n"
+  puts ""
+  puts "Installing templates..."
+  puts ""
+
   Shell.run %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
 end
 
@@ -13,21 +15,25 @@ task :reinstall => [:uninstall, :install_plugin] do
   Shell.run %{rm -rf "#{DIST_STAGING_DIR}"/*}
   Shell.run %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode"}
   Shell.run %{mkdir -p "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData"}
-  Shell.run %{mkdir -p "#{DIST_STAGING_DIR}/#{APPCODE_SNIPPETS_PATH}"}
+
 
   Shell.run %{cp "#{PROJECT_ROOT}/README.markdown" "#{DIST_STAGING_DIR}/README-Cedar.markdown"}
   Shell.run %{cp "#{PROJECT_ROOT}/MIT.LICENSE.txt" "#{DIST_STAGING_DIR}/LICENSE-Cedar.txt"}
 
   Shell.run %{cp -R "#{TEMPLATES_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/"}
   Shell.run %{cp -R "#{SNIPPETS_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData/"}
-  Shell.run %{cp "#{APPCODE_SNIPPETS_FILE}" "#{DIST_STAGING_DIR}/#{APPCODE_SNIPPETS_PATH}/#{APPCODE_SNIPPETS_FILENAME}"}
 
-  Shell.run %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
+  AppCode.install_cedar_snippets(root_dir: DIST_STAGING_DIR)
+
+  Shell.run %{rsync -vcrlK #{File.join(DIST_STAGING_DIR, "Library")} ~/Library}
 end
 
 desc "Install the CedarPlugin into Xcode (restart required)"
 task :install_plugin do
-  puts "\nInstalling the CedarPlugin...\n"
+  puts ""
+  puts "Installing the CedarPlugin..."
+  puts ""
+
   Shell.run %{mkdir -p "#{XCODE_PLUGINS_DIR}" && cp -rv "#{PLUGIN_DIR}" "#{XCODE_PLUGINS_DIR}"}
 end
 
@@ -54,7 +60,9 @@ task :upgrade, [:path_to_framework] do |task, args|
 
   Rake::Task['frameworks:build'].invoke
 
-  puts "\nUpgrading #{cedar_name} framework...\n"
+  puts ""
+  puts "Upgrading #{cedar_name} framework..."
+  puts ""
 
   Shell.run %{rsync -vkcr --delete "#{BUILD_DIR}/#{cedar_path}/#{cedar_name}.framework/" "#{args.path_to_framework}/"}
 end
@@ -81,6 +89,6 @@ task :uninstall do
     end
   end
 
-  Shell.run "rm -f \"#{APPCODE_SNIPPETS_DIR}/#{APPCODE_SNIPPETS_FILENAME}\""
+  AppCode.remove_installed_cedar_snippets
   Shell.run "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_DIR} | xargs -I{} rm -f \"{}\""
 end
