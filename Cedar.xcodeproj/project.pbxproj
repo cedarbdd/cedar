@@ -485,6 +485,16 @@
 		34D7C4B41BB9C75D00E8E523 /* TestObservationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 34757E211BA466050047BC8D /* TestObservationHelper.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		34D7C4B61BB9CB4B00E8E523 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D7C3CA1BB9747400E8E523 /* Cedar.framework */; };
 		34D7C4B81BB9CB5700E8E523 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D7C4B71BB9CB5700E8E523 /* libxml2.tbd */; };
+		34DB674A1C2B65EA00206663 /* ContainSubset.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8F9C141B795A7C00B956C5 /* ContainSubset.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB674B1C2B65EA00206663 /* ContainSubset.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8F9C141B795A7C00B956C5 /* ContainSubset.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB674C1C2B65EB00206663 /* ContainSubset.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8F9C141B795A7C00B956C5 /* ContainSubset.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB674D1C2B65EC00206663 /* ContainSubset.h in Headers */ = {isa = PBXBuildFile; fileRef = AE8F9C141B795A7C00B956C5 /* ContainSubset.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB674E1C2B65EC00206663 /* ContainSubset.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE8F9C141B795A7C00B956C5 /* ContainSubset.h */; };
+		34DB67501C2B8C1000206663 /* CedarReporters.h in Headers */ = {isa = PBXBuildFile; fileRef = 34DB674F1C2B8C1000206663 /* CedarReporters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB67511C2B8C1000206663 /* CedarReporters.h in Headers */ = {isa = PBXBuildFile; fileRef = 34DB674F1C2B8C1000206663 /* CedarReporters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB67521C2B8C1000206663 /* CedarReporters.h in Headers */ = {isa = PBXBuildFile; fileRef = 34DB674F1C2B8C1000206663 /* CedarReporters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB67531C2B8C1000206663 /* CedarReporters.h in Headers */ = {isa = PBXBuildFile; fileRef = 34DB674F1C2B8C1000206663 /* CedarReporters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34DB67541C2B8C1000206663 /* CedarReporters.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34DB674F1C2B8C1000206663 /* CedarReporters.h */; };
 		34EBFD0F18FF505F005392AB /* UIKitComparatorsContainer.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */; };
 		34F3DF7F1A6ABA2E003041DA /* CDRNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF7C1A6ABA2E003041DA /* CDRNil.m */; };
 		34F3DF801A6ABA2E003041DA /* CDRNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F3DF7C1A6ABA2E003041DA /* CDRNil.m */; };
@@ -1318,6 +1328,7 @@
 				AEF33022145B69DE002F93BB /* BeLTE.h in Copy headers to framework */,
 				AEB45A921496C8D800845D09 /* RaiseException.h in Copy headers to framework */,
 				AE4A9459187F7D8F008566F5 /* BeFalsy.h in Copy headers to framework */,
+				34DB67541C2B8C1000206663 /* CedarReporters.h in Copy headers to framework */,
 				6628FC8914C4DBA70016652A /* CedarDoubles.h in Copy headers to framework */,
 				6628FC9A14C4DD440016652A /* CDRSpy.h in Copy headers to framework */,
 				6628FCA114C503530016652A /* Cedar-iOS.h in Copy headers to framework */,
@@ -1325,6 +1336,7 @@
 				AE9AA68215AB76DB00617E1A /* CDRClassFake.h in Copy headers to framework */,
 				AE9AA68A15AC729E00617E1A /* CedarDouble.h in Copy headers to framework */,
 				AE9AA6D315AE087C00617E1A /* StubbedMethod.h in Copy headers to framework */,
+				34DB674E1C2B65EC00206663 /* ContainSubset.h in Copy headers to framework */,
 				AE74903515B45EEE008EA127 /* CDRProtocolFake.h in Copy headers to framework */,
 				22B6A22715B7ACF800960ADE /* InvocationMatcher.h in Copy headers to framework */,
 				34157D0E1B755E09007AD1BA /* CDROTestReporter.h in Copy headers to framework */,
@@ -1405,6 +1417,7 @@
 		34D7C3CA1BB9747400E8E523 /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34D7C4691BB9B71600E8E523 /* Cedar-tvOS SpecBundle.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cedar-tvOS SpecBundle.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34D7C4B71BB9CB5700E8E523 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/usr/lib/libxml2.tbd; sourceTree = DEVELOPER_DIR; };
+		34DB674F1C2B8C1000206663 /* CedarReporters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CedarReporters.h; sourceTree = "<group>"; };
 		34F3DF7B1A6ABA2E003041DA /* CDRNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRNil.h; sourceTree = "<group>"; };
 		34F3DF7C1A6ABA2E003041DA /* CDRNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRNil.m; sourceTree = "<group>"; };
 		34F3DF811A6ABB21003041DA /* CDRNilSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CDRNilSpec.mm; sourceTree = "<group>"; };
@@ -1778,6 +1791,7 @@
 				96EA1CAC142C6449001A78E0 /* CDROTestReporter.h */,
 				42064465139B44EC00C85605 /* CDRTeamCityReporter.h */,
 				1FF449B318A0C04D00AF94B0 /* CDRBufferedDefaultReporter.h */,
+				34DB674F1C2B8C1000206663 /* CedarReporters.h */,
 			);
 			path = Reporters;
 			sourceTree = "<group>";
@@ -2517,6 +2531,7 @@
 				346262411B9954C1002CAEBD /* CDRSpecHelper.h in Headers */,
 				3462620D1B99546C002CAEBD /* BeGreaterThan.h in Headers */,
 				346262061B99544D002CAEBD /* RejectedMethod.h in Headers */,
+				34DB674C1C2B65EB00206663 /* ContainSubset.h in Headers */,
 				346261FD1B995445002CAEBD /* AnyArgument.h in Headers */,
 				346262211B995491002CAEBD /* CompareEqual.h in Headers */,
 				346262111B99546C002CAEBD /* BeLTE.h in Headers */,
@@ -2543,6 +2558,7 @@
 				346262311B9954B8002CAEBD /* CDRColorizedReporter.h in Headers */,
 				346262151B99546C002CAEBD /* ConformTo.h in Headers */,
 				346262351B9954B8002CAEBD /* CDROTestReporter.h in Headers */,
+				34DB67521C2B8C1000206663 /* CedarReporters.h in Headers */,
 				3462620F1B99546C002CAEBD /* BeInstanceOf.h in Headers */,
 				346261FA1B995445002CAEBD /* ValueArgument.h in Headers */,
 				346262171B99546C002CAEBD /* Exist.h in Headers */,
@@ -2589,9 +2605,11 @@
 				34D7C4591BB9B5F100E8E523 /* CDRExampleBase.h in Headers */,
 				34D7C43B1BB9B5B200E8E523 /* Exist.h in Headers */,
 				34D7C4291BB9B59200E8E523 /* CDRFake.h in Headers */,
+				34DB674D1C2B65EC00206663 /* ContainSubset.h in Headers */,
 				34D7C45E1BB9B5F100E8E523 /* CDRSharedExampleGroupPool.h in Headers */,
 				34D7C45F1BB9B5F100E8E523 /* CDRSpec.h in Headers */,
 				34D7C41F1BB9B56D00E8E523 /* AnyInstanceConformingToProtocolArgument.h in Headers */,
+				34DB67531C2B8C1000206663 /* CedarReporters.h in Headers */,
 				34D7C43F1BB9B5B900E8E523 /* Contain.h in Headers */,
 				34D7C4101BB9B54F00E8E523 /* CDRXCTestSupport.h in Headers */,
 				34D7C4241BB9B59200E8E523 /* HaveReceived.h in Headers */,
@@ -2689,9 +2707,11 @@
 				3492DAA11BA6F9E70032B35A /* CDRSpecRun.h in Headers */,
 				AE4865B91B0690B0005DB302 /* BeCloseTo.h in Headers */,
 				AE4865BA1B0690B0005DB302 /* BeFalsy.h in Headers */,
+				34DB674B1C2B65EA00206663 /* ContainSubset.h in Headers */,
 				AE4865BB1B0690B0005DB302 /* BeGreaterThan.h in Headers */,
 				AE4865BC1B0690B0005DB302 /* BeGTE.h in Headers */,
 				AE4865BD1B0690B0005DB302 /* BeInstanceOf.h in Headers */,
+				34DB67511C2B8C1000206663 /* CedarReporters.h in Headers */,
 				AE4865BE1B0690B0005DB302 /* BeLessThan.h in Headers */,
 				AE4865BF1B0690B0005DB302 /* BeLTE.h in Headers */,
 				AE4865C01B0690B0005DB302 /* BeNil.h in Headers */,
@@ -2813,6 +2833,7 @@
 				AE0721E3187518FD0031CC42 /* Exist.h in Headers */,
 				AE34724B19C37ECF005CA6F1 /* CDRXCTestCase.h in Headers */,
 				AE74907415B493B5008EA127 /* CDRFake.h in Headers */,
+				34DB674A1C2B65EA00206663 /* ContainSubset.h in Headers */,
 				34640DA71B6964F90083EB01 /* CDRBlockHelper.h in Headers */,
 				AE9AA67B15AB72DA00617E1A /* CDRClassFake.h in Headers */,
 				AE74902F15B45E80008EA127 /* CDRProtocolFake.h in Headers */,
@@ -2839,6 +2860,7 @@
 				AEC9DEED12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
 				96EA1CAE142C6449001A78E0 /* CDROTestReporter.h in Headers */,
 				42064466139B44EC00C85605 /* CDRTeamCityReporter.h in Headers */,
+				34DB67501C2B8C1000206663 /* CedarReporters.h in Headers */,
 				AEEE1FF911DC27B800029872 /* CDRDefaultReporter.h in Headers */,
 				1F483E32187D39D000521F81 /* CDROTestNamer.h in Headers */,
 				492951DD1481AAD800FA8916 /* CDRJUnitXMLReporter.h in Headers */,

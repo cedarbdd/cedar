@@ -19,3 +19,7 @@
 @end
 
 @compatibility_alias SpecHelper CDRSpecHelper;
+
+// This import is here for backwards-compatibility.
+// The Cedar spec template used to only import CDRSpecHelper.h
+#import "Cedar.h"

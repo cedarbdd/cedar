@@ -33,14 +33,7 @@ CDRExample * fit(NSString *, CDRSpecBlock);
 void fail(NSString *);
 #ifdef __cplusplus
 }
-
-#import "ActualValue.h"
-#import "ShouldSyntax.h"
-#import "CedarComparators.h"
-#import "CedarMatchers.h"
-#import "CedarDoubles.h"
-
-#endif // __cplusplus
+#endif
 
 @interface CDRSpec : NSObject <CDRSpec> {
     CDRExampleGroup *rootGroup_;
