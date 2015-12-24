@@ -1,6 +1,8 @@
 #import <UIKit/UIView.h>
 #import <QuartzCore/QuartzCore.h>
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers { namespace Comparators {
     template<typename U, typename F>
     bool compare_contains(UIView * const container, const U & element, contains_options options, F comparator) {
@@ -12,3 +14,5 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return compare_contains(container, element, @"sublayers", options, comparator);
     }
 }}}
+
+#endif // __cplusplus

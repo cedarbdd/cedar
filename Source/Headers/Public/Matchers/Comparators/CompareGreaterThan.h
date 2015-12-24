@@ -1,3 +1,5 @@
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers { namespace Comparators {
 
 #pragma mark Generic
@@ -24,3 +26,5 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return NSOrderedDescending == NSDecimalCompare(&actualValue, &expectedValue);
     }
 }}}
+
+#endif // __cplusplus

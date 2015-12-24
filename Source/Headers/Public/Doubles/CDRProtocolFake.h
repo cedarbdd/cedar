@@ -2,6 +2,8 @@
 #import "CedarDouble.h"
 #import "CDRFake.h"
 
+#ifdef __cplusplus
+
 #import <sstream>
 #import <string>
 
@@ -12,3 +14,5 @@
 @end
 
 id CDR_fake_for(BOOL require_explicit_stubs, Protocol *protocol, ...);
+
+#endif // __cplusplus

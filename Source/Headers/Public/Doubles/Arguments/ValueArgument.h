@@ -2,6 +2,8 @@
 #import "CedarStringifiers.h"
 #import "CedarComparators.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Doubles {
 
     inline const char *strip_encoding_qualifiers(const char *);
@@ -157,3 +159,5 @@ namespace Cedar { namespace Doubles {
     };
 
 }}
+
+#endif // __cplusplus

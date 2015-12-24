@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "CedarDouble.h"
 
+#ifdef __cplusplus
+
 @interface CDRFake : NSObject<CedarDouble>
 
 @property (nonatomic, assign) Class klass;
@@ -14,3 +16,5 @@
 #define fake_for(...) CDR_fake_for(YES, __VA_ARGS__, nil)
 #define nice_fake_for(...) CDR_fake_for(NO, __VA_ARGS__, nil)
 #endif
+
+#endif // __cplusplus

@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
-#import <sstream>
 
+#ifdef __cplusplus
+
+#import <sstream>
 #import "CedarStringifiers.h"
 
 namespace Cedar { namespace Matchers {
@@ -53,3 +55,5 @@ namespace Cedar { namespace Matchers {
         return [NSString stringWithFormat:@"Expected <%@> to not %@", actualValueString, failureMessageEnd];
     }
 }}
+
+#endif // __cplusplus

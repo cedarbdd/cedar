@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Doubles {
     class StubbedMethod;
     class RejectedMethod;
@@ -37,3 +39,5 @@ namespace Cedar { namespace Doubles {
 #define stub_method(x) ,(Cedar::Doubles::MethodStubbingMarker){__FILE__, __LINE__},Cedar::Doubles::StubbedMethod((x))
 #define reject_method(x) ,(Cedar::Doubles::MethodStubbingMarker){__FILE__, __LINE__},Cedar::Doubles::RejectedMethod((x))
 #endif
+
+#endif // __cplusplus

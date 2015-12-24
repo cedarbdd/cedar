@@ -1,3 +1,5 @@
+#ifdef __cplusplus
+
 #import <vector>
 #import <map>
 #import <set>
@@ -209,3 +211,5 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return compare_contains((char *)actualValue, expectedContains, (NSString *)nil, options);
     }
 }}}
+
+#endif // __cplusplus

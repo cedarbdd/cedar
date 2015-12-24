@@ -3,6 +3,8 @@
 #import "CedarComparators.h"
 #import "CDRSpecFailure.h"
 
+#ifdef __cplusplus
+
 #pragma mark private interface
 namespace Cedar { namespace Matchers { namespace Private {
     template<typename T>
@@ -76,3 +78,5 @@ namespace Cedar { namespace Matchers {
         return CedarBeCloseTo<T>(expectedValue);
     }
 }}
+
+#endif // __cplusplus

@@ -1,5 +1,7 @@
 #import "Argument.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Doubles {
 
     class AnyArgument : public Argument {
@@ -25,3 +27,5 @@ namespace Cedar { namespace Doubles {
     }
 
 }}
+
+#endif // __cplusplus

@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+
+#ifdef __cplusplus
+
 #import <iostream>
 
 #import "StringifiersBase.h"
@@ -115,3 +118,5 @@ namespace Cedar { namespace Matchers {
     #define expect(x) CDR_expect(__FILE__, __LINE__, (x))
     #define fail(x) CDR_fail(__FILE__, __LINE__, (x))
 #endif
+
+#endif // __cplusplus

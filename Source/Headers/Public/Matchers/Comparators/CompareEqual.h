@@ -1,3 +1,5 @@
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers { namespace Comparators {
 
 #pragma mark Generic
@@ -34,3 +36,5 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return NSEqualRanges(actualValue, expectedValue);
     }
 }}}
+
+#endif // __cplusplus

@@ -1,3 +1,5 @@
+#ifdef __cplusplus
+
 #import <vector>
 #import <map>
 #import <set>
@@ -45,3 +47,5 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         return [NSString stringWithFormat:@"{(%@\n)}", delimitedList];
     }
 }}}
+
+#endif // __cplusplus

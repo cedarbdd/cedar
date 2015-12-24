@@ -1,5 +1,7 @@
 #import "Base.h"
 
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
     class BeEmpty : public Base<> {
@@ -32,3 +34,5 @@ namespace Cedar { namespace Matchers {
     using CedarBeEmpty = Cedar::Matchers::Private::BeEmpty;
     static const CedarBeEmpty be_empty = CedarBeEmpty();
 }}
+
+#endif // __cplusplus

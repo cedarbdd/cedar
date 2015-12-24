@@ -1,6 +1,8 @@
 #import "ComparatorsBase.h"
 #import "OSXGeometryStringifiers.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers { namespace Comparators {
     template<typename U>
     bool compare_equal(CGRect const actualValue, const U & expectedValue) {
@@ -22,3 +24,5 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return CGAffineTransformEqualToTransform(actualValue, expectedValue);
     }
 }}}
+
+#endif // __cplusplus

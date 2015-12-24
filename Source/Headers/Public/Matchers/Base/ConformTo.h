@@ -1,5 +1,7 @@
 #import "Base.h"
 
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
 
@@ -34,3 +36,5 @@ namespace Cedar { namespace Matchers {
         return CedarConformTo(protocolName);
     }
 }}
+
+#endif // __cplusplus

@@ -1,5 +1,7 @@
 #import "Base.h"
 
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
     struct BeInstanceOfMessageBuilder {
@@ -83,3 +85,5 @@ namespace Cedar { namespace Matchers {
         return CedarBeInstanceOf(expectedValue);
     }
 }}
+
+#endif // __cplusplus

@@ -1,7 +1,3 @@
-#ifndef __cplusplus
-#error Cedar may only be imported from Objective-C++ (.mm) files.
-#endif
-
 #pragma mark - Cedar Core
 
 #import "CDRVersion.h"

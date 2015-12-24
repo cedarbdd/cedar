@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
     struct BeSameInstanceAsMessageBuilder {
@@ -102,3 +104,5 @@ namespace Cedar { namespace Matchers {
         return CedarBeSameInstanceAs<T>(expectedValue);
     }
 }}
+
+#endif // __cplusplus

@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
     class Exist : public Base<> {
@@ -27,3 +29,5 @@ namespace Cedar { namespace Matchers {
     using CedarExist = Cedar::Matchers::Private::Exist;
     static const CedarExist exist = CedarExist();
 }}
+
+#endif // __cplusplus
