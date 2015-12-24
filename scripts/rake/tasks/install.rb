@@ -6,6 +6,8 @@ task :install => [:clean, :uninstall, "dist:prepare", :install_plugin] do
   puts "Installing templates..."
   puts ""
 
+  AppCode.install_cedar_snippets
+
   Shell.run %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
 end
 
@@ -23,7 +25,7 @@ task :reinstall => [:uninstall, :install_plugin] do
   Shell.run %{cp -R "#{TEMPLATES_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/"}
   Shell.run %{cp -R "#{SNIPPETS_DIR}" "#{DIST_STAGING_DIR}/Library/Developer/Xcode/UserData/"}
 
-  AppCode.install_cedar_snippets(root_dir: DIST_STAGING_DIR)
+  AppCode.install_cedar_snippets
 
   Shell.run %{rsync -vcrlK #{File.join(DIST_STAGING_DIR, "Library")} ~/Library}
 end
