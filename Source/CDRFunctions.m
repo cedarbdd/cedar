@@ -67,9 +67,8 @@ Class CDRFirstOfClasses(BOOL (^classSelectionPredicate)(Class class)) {
 }
 
 NSString *CDRVersionString() {
-    NSString *releaseVersion = nil, *versionDetails = nil;
+    NSString *versionDetails = nil;
 
-    releaseVersion = CDRVersion;
 #if COCOAPODS
     versionDetails = @"from CocoaPods";
 #endif
