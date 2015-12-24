@@ -40,205 +40,7 @@ PLISTBUDDY = "/usr/libexec/PlistBuddy"
 
 require 'tmpdir'
 require 'tempfile'
-
-class Shell
-  def self.run(cmd, logfile = nil)
-    green = "\033[32m"
-    red = "\033[31m"
-    clear = "\033[0m"
-    puts "#{green}==>#{clear} #{cmd}"
-    original_cmd = cmd
-    if logfile
-      logfile = output_file(logfile)
-      cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"
-    end
-    system(cmd) or begin
-      cmd_msg = "[#{red}Failed#{clear}] Command: #{original_cmd}"
-      if logfile
-        raise Exception.new <<EOF
-#{File.read(logfile)}
-#{cmd_msg}
-[#{red}Failed#{clear}] Also logged to: #{logfile}
-
-EOF
-      else
-        raise Exception.new <<EOF
-#{cmd_msg}
-
-EOF
-      end
-    end
-  end
-
-  def self.with_env(env_vars)
-    old_values = {}
-    env_vars.each do |key, new_value|
-      old_values[key] = ENV[key]
-      ENV[key] = new_value
-    end
-
-    env_vars.each { |key, new_value| puts "#{key}=#{new_value}" }
-    begin
-      yield
-    ensure
-      env_vars.each_key do |key|
-        ENV[key] = old_values[key]
-      end
-    end
-  end
-
-  def self.fold(name)
-    name = name.gsub(/[^A-Za-z0-9.-]/, '')
-    puts "travis_fold:start:#{name}" if ENV['TRAVIS']
-    result = yield(self)
-    puts "travis_fold:end:#{name}" if ENV['TRAVIS']
-    result
-  end
-
-  def self.output_file(target)
-    output_dir = if ENV['IS_CI_BOX']
-                   ENV['CC_BUILD_ARTIFACTS']
-                 else
-                   Dir.mkdir(BUILD_DIR) unless File.exists?(BUILD_DIR)
-                   BUILD_DIR
-                 end
-
-    File.join(output_dir, target)
-  end
-end
-
-class Xcode
-  def self.version
-    `xcodebuild -version | grep Xcode`.chomp.split(' ').last.to_f
-  end
-
-  def self.developer_dir
-    `xcode-select -print-path`.strip
-  end
-
-  def self.build_dir(effective_platform_name = "")
-    File.join(BUILD_DIR, CONFIGURATION + effective_platform_name)
-  end
-
-  def self.sdk_dir_for_version(version)
-    path = %x[ xcrun -sdk "iphonesimulator#{version}" -show-sdk-path 2>/dev/null ].strip
-    raise("iPhone Simulator SDK version #{version} not installed") if $?.exitstatus != 0
-    path
-  end
-
-  def self.destination_for_ios_sdk(version)
-    "name=iPhone 5s,OS=#{version}"
-  end
-
-  def self.clean
-    Shell.run "rm -rf '#{BUILD_DIR}'; true", "clean.build.log"
-    Shell.run "rm -rf '#{DERIVED_DATA_DIR}'; true", "clean.derivedData.log"
-  end
-
-  def self.build(options = nil)
-    raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
-
-    logfile = options.fetch(:logfile)
-    args = options[:args] || ""
-
-    args += " -target #{options[:target].inspect}" if options[:target]
-    args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
-    args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
-
-    Shell.fold "build.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT=#{BUILD_DIR.inspect} clean build #{args}), logfile)
-    end
-  end
-
-  def self.test(options = nil)
-    raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
-
-    logfile = options.fetch(:logfile)
-    args = options[:args] || ""
-
-    args += " -target #{options[:target].inspect}" if options[:target]
-    args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
-    args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
-
-    Shell.fold "test.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} -derivedDataPath #{DERIVED_DATA_DIR.inspect} SYMROOT=#{BUILD_DIR.inspect} clean build test #{args}), logfile)
-    end
-  end
-
-  def self.analyze(options = nil)
-    raise "Options requires :target or :scheme" if !options[:target] and !options[:scheme]
-    logfile = options.fetch(:logfile)
-    args = options[:args] || ""
-
-    args += " -target #{options[:target].inspect}" if options[:target]
-    args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
-    args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
-
-    Shell.fold "analyze.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q[xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} clean analyze #{args} SYMROOT='#{BUILD_DIR}'], logfile)
-    end
-  end
-
-  def self.sed_project(search, replace)
-    pbxproj = "#{PROJECT_NAME}.xcodeproj/project.pbxproj"
-    contents = File.read(pbxproj)
-    File.write(pbxproj, contents.gsub(search, replace))
-  end
-end
-
-def remove_templates_from_directory(templates_directory)
-  return unless File.directory?(templates_directory)
-
-  Dir.foreach(templates_directory) do |template|
-    next if template == '.' or template == '..'
-
-    template_plist = "#{templates_directory}/#{template}/TemplateInfo.plist"
-    next unless File.exists?(template_plist)
-
-    if `#{PLISTBUDDY} -c "Print :Identifier" "#{template_plist}"`.start_with?(TEMPLATE_IDENTIFIER_PREFIX) or
-      `#{PLISTBUDDY} -c "Print :#{TEMPLATE_SENTINEL_KEY}" "#{template_plist}"`.start_with?("true")
-      Shell.run "rm -rf \"#{templates_directory}/#{template}\""
-    end
-  end
-end
-
-class Simulator
-  def self.launch(app_dir, app_name, logfile)
-    retry_count = 0
-    Shell.with_env({"CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"}) do
-      begin
-        kill # ensure simulator is not currently running
-        Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --devicetypeid \"com.apple.CoreSimulator.SimDeviceType.iPhone-5s, #{SDK_RUNTIME_VERSION}\" --verbose --stdout build/uispecs.spec.log"
-        Shell.run "grep -q ', 0 failures' build/uispecs.spec.log", logfile
-      rescue
-        retry_count += 1
-
-        if retry_count == 3
-          raise
-        else
-          retry
-        end
-      end
-      end
-  end
-
-  def self.launch_bundle(app_dir, app_name, test_bundle, logfile)
-    env_vars = {
-      "DYLD_INSERT_LIBRARIES" => "#{Xcode.developer_dir}/Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection",
-      "XCInjectBundle" => test_bundle,
-      "XCInjectBundleInto" => "#{File.join(Xcode.build_dir("-iphonesimulator"), "#{APP_IOS_NAME}.app/#{APP_IOS_NAME}")}",
-    }
-    Shell.with_env(env_vars) do
-      launch(app_dir, app_name, logfile)
-    end
-  end
-
-  def self.kill
-    system %Q[killall -m -KILL "gdb" > /dev/null 2>&1]
-    system %Q[killall -m -KILL "otest" > /dev/null 2>&1]
-    system %Q[killall -m -KILL "iPhone Simulator" > /dev/null 2>&1]
-  end
-end
+require_relative 'scripts/rake/helpers'
 
 desc 'Trims whitespace and runs all the tests (suites and bundles)'
 task :default => [:trim_whitespace, "suites:run", "suites:iosdynamicframeworkspecs:run", "testbundles:run"]
@@ -481,8 +283,22 @@ end
 desc "Remove code snippets and templates"
 task :uninstall do
   puts "\nRemoving old templates...\n"
-  remove_templates_from_directory("#{XCODE_TEMPLATES_DIR}/File Templates/Cedar")
-  remove_templates_from_directory("#{XCODE_TEMPLATES_DIR}/Project Templates/Cedar")
+  Xcode.template_directories.each do |template_dir|
+    next unless File.directory?(template_dir)
+
+    Dir.foreach(template_dir) do |template|
+      next if template == '.' || template == '..'
+
+      template_plist = "#{template_dir}/#{template}/TemplateInfo.plist"
+      next unless File.exists?(template_plist)
+
+      if `#{PLISTBUDDY} -c "Print :Identifier" "#{template_plist}"`.start_with?(TEMPLATE_IDENTIFIER_PREFIX) ||
+          `#{PLISTBUDDY} -c "Print :#{TEMPLATE_SENTINEL_KEY}" "#{template_plist}"`.start_with?("true")
+        Shell.run "rm -rf \"#{template_dir}/#{template}\""
+      end
+    end
+  end
+
   Shell.run "rm -f \"#{APPCODE_SNIPPETS_DIR}/#{APPCODE_SNIPPETS_FILENAME}\""
   Shell.run "grep -Rl #{SNIPPET_SENTINEL_VALUE} #{XCODE_SNIPPETS_DIR} | xargs -I{} rm -f \"{}\""
 end
