@@ -1,4 +1,4 @@
-#import "CDRSpecHelper.h"
+#import "Cedar.h"
 #import "ObjectWithWeakDelegate.h"
 #import "ARCViewController.h"
 

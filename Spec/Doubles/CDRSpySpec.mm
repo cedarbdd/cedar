@@ -1,4 +1,4 @@
-#import <Cedar/CDRSpecHelper.h>
+#import "Cedar.h"
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ArgumentReleaser.h"
@@ -7,13 +7,10 @@
 #import "ArgumentReleaser.h"
 #import "ObjectWithValueEquality.h"
 #import "DeallocNotifier.h"
-#import <objc/runtime.h>
-
-extern "C" {
 #import "ExpectFailureWithMessage.h"
 #import "ObjectWithCollections.h"
 #import "CedarObservedObject.h"
-}
+#import <objc/runtime.h>
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

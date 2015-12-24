@@ -1,9 +1,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "Cedar.h"
-
-extern "C" {
 #import "ExpectFailureWithMessage.h"
-}
 
 
 using namespace Cedar::Matchers;

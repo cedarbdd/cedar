@@ -1,9 +1,6 @@
-#import <Cedar/CDRSpecHelper.h>
+#import "Cedar.h"
 #import "SimpleIncrementer.h"
-
-extern "C" {
 #import "ExpectFailureWithMessage.h"
-}
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

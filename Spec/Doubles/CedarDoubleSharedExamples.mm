@@ -1,4 +1,4 @@
-#import <Cedar/CDRSpecHelper.h>
+#import "Cedar.h"
 #import "SimpleIncrementer.h"
 #import "StubbedMethod.h"
 #import "CedarDoubleImpl.h"
@@ -27,7 +27,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             [[myDouble sent_messages] count] should equal(1);
         });
     });
-    
+
     describe(@"sent_messages_with_selector", ^{
         beforeEach(^{
             myDouble stub_method("incrementBy:");
@@ -39,17 +39,17 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
             [myDouble incrementBy:4];
             [myDouble incrementByInteger:5];
         });
-        
+
         it(@"should return all invocations for messages sent that match the given selector", ^{
             NSArray *sentMessages = [myDouble sent_messages_with_selector:@selector(incrementBy:)];
             sentMessages.count should equal(2);
-            
+
             NSInvocation *firstInvocation = sentMessages.firstObject;
             firstInvocation.selector should equal(@selector(incrementBy:));
             NSUInteger firstIncrement;
             [firstInvocation getArgument:&firstIncrement atIndex:2];
             firstIncrement should equal(2);
-            
+
             NSInvocation *secondInvocation = sentMessages.lastObject;
             secondInvocation.selector should equal(@selector(incrementBy:));
             NSUInteger secondIncrement;

@@ -1,4 +1,4 @@
-#import <Cedar/CDRSpecHelper.h>
+#import "Cedar.h"
 #import "CDRTypeUtilities.h"
 #import "CDRNil.h"
 
