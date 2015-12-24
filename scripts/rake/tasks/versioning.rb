@@ -20,8 +20,14 @@ task :tag_version, [:version_number] do |t, args|
 
   Shell.run "git commit -am 'Update version to #{args[:version_number]}'"
 
-  previously_latest_version=`git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\+\\.\\d\\+\\.\\d\\+ | ruby -e 'puts STDIN.read.split("\n").sort { |a,b| a.gsub("v", "").split(".").map(&:to_i) <=> b.gsub("v", "").split(".").map(&:to_i) }.last'`
-  template_file = Tempfile.new("tag-notes")
+  previously_latest_version = `git for-each-ref refs/tags --sort=-refname --format="%(refname:short)"  | grep v\\?\\d\\+\\.\\d\\+\\.\\d\\+`)
+    .chomp
+    .split("\n")
+    .each { |version| version.gsub("v", "").split(".").map(&:to_i) }
+    .sort { |a, b| a <=> b }
+    .last
+
+template_file = Tempfile.new("tag-notes")
   template_file.write(system("git log --format=\"%h %s %b\" HEAD...#{previously_latest_version}"))
   template_file.close
   begin
