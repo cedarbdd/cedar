@@ -9,3 +9,6 @@ require_relative 'tasks/frameworks'
 require_relative 'tasks/dist'
 require_relative 'tasks/install'
 require_relative 'tasks/versioning'
+
+# other top level rake tasks
+require_relative 'tasks/default'
