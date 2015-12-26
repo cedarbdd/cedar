@@ -16,14 +16,13 @@ class AppCode
   end
 
   private
+
   def self.possible_appcode_directories(root_dir: ENV['HOME'])
     appcode_pref_path = File.join(root_dir, 'Library', 'Preferences', 'appCode*')
     Dir.glob(appcode_pref_path, File::FNM_CASEFOLD).map { |d| File.join(d, "templates") }
   end
 
   # constants
-  APPCODE_SNIPPETS_PATH = "Library/Preferences/AppCode32/templates"
-  APPCODE_SNIPPETS_DIR = "#{ENV['HOME']}/#{APPCODE_SNIPPETS_PATH}"
   APPCODE_SNIPPETS_FILENAME = "Cedar.xml"
 
   APPCODE_SNIPPETS_FILE = File.join(
