@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "CDRNullabilityCompat.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^CDRSpecBlock)(void);
 
@@ -7,7 +10,7 @@ typedef void (^CDRSpecBlock)(void);
 - (BOOL)shouldRun;
 
 - (void)setUp;
-- (CDRSpecBlock)subjectActionBlock;
+- (nullable CDRSpecBlock)subjectActionBlock;
 - (void)tearDown;
 
 @optional
@@ -17,3 +20,5 @@ typedef void (^CDRSpecBlock)(void);
 
 - (NSUInteger)stackAddress;
 @end
+
+NS_ASSUME_NONNULL_END

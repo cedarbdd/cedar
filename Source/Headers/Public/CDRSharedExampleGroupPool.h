@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "CDRNullabilityCompat.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 #define CDR_OVERLOADABLE __attribute__((overloadable))
 
@@ -13,7 +16,7 @@ extern "C" {
 #endif
 void sharedExamplesFor(NSString *, CDRSharedExampleGroupBlock);
 CDR_OVERLOADABLE void itShouldBehaveLike(NSString *);
-CDR_OVERLOADABLE void itShouldBehaveLike(NSString *, CDRSharedExampleContextProviderBlock);
+CDR_OVERLOADABLE void itShouldBehaveLike(NSString *, __nullable CDRSharedExampleContextProviderBlock);
 #ifdef __cplusplus
 }
 #endif
@@ -34,3 +37,5 @@ CDR_OVERLOADABLE void itShouldBehaveLike(NSString *, CDRSharedExampleContextProv
 #define SHARED_EXAMPLE_GROUPS_END                                        \
 }                                                                        \
 @end
+
+NS_ASSUME_NONNULL_END

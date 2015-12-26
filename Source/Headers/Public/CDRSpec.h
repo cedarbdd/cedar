@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "CDRExampleBase.h"
+#import "CDRNullabilityCompat.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol CDRExampleReporter;
 @class CDRExampleGroup, CDRExample, CDRSpecHelper, CDRSymbolicator;
@@ -8,7 +11,7 @@
 @protocol CDRSpec
 @end
 
-extern const CDRSpecBlock PENDING;
+extern const __nullable CDRSpecBlock PENDING;
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,19 +19,19 @@ extern "C" {
 void beforeEach(CDRSpecBlock);
 void afterEach(CDRSpecBlock);
 
-CDRExampleGroup * describe(NSString *, CDRSpecBlock);
-extern CDRExampleGroup* (*context)(NSString *, CDRSpecBlock);
+CDRExampleGroup * describe(NSString *, __nullable CDRSpecBlock);
+extern CDRExampleGroup* __nonnull (*__nonnull context)(NSString *, __nullable CDRSpecBlock);
 
-CDRExample * it(NSString *, CDRSpecBlock);
+CDRExample * it(NSString *, __nullable CDRSpecBlock);
 
-CDRExampleGroup * xdescribe(NSString *, CDRSpecBlock);
-extern CDRExampleGroup* (*xcontext)(NSString *, CDRSpecBlock);
+CDRExampleGroup * xdescribe(NSString *, __nullable CDRSpecBlock);
+extern CDRExampleGroup* __nonnull (*__nonnull xcontext)(NSString *, __nullable CDRSpecBlock);
 void subjectAction(CDRSpecBlock);
-CDRExample * xit(NSString *, CDRSpecBlock);
+CDRExample * xit(NSString *, __nullable CDRSpecBlock);
 
-CDRExampleGroup * fdescribe(NSString *, CDRSpecBlock);
-extern CDRExampleGroup* (*fcontext)(NSString *, CDRSpecBlock);
-CDRExample * fit(NSString *, CDRSpecBlock);
+CDRExampleGroup * fdescribe(NSString *, __nullable CDRSpecBlock);
+extern CDRExampleGroup* __nonnull (*__nonnull fcontext)(NSString *, __nullable CDRSpecBlock);
+CDRExample * fit(NSString *, __nullable CDRSpecBlock);
 
 void fail(NSString *);
 #ifdef __cplusplus
@@ -43,7 +46,7 @@ void fail(NSString *);
 }
 
 @property (nonatomic, retain) CDRExampleGroup *currentGroup, *rootGroup;
-@property (nonatomic, retain) NSString *fileName;
+@property (nonatomic, retain, nullable) NSString *fileName;
 @property (nonatomic, retain) CDRSymbolicator *symbolicator;
 
 - (void)defineBehaviors;
@@ -69,3 +72,5 @@ void fail(NSString *);
 #define SPEC_END                     \
 }                                    \
 @end
+
+NS_ASSUME_NONNULL_END

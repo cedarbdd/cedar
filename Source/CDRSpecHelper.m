@@ -32,10 +32,13 @@ static CDRSpecHelper *specHelper__;
 }
 
 - (void)dealloc {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     self.sharedExampleGroups = nil;
     self.sharedExampleContext = nil;
     self.globalBeforeEachClasses = nil;
     self.globalAfterEachClasses = nil;
+#pragma clang diagnostic pop
     [super dealloc];
 }
 

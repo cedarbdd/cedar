@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "CDRNullabilityCompat.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,3 +20,5 @@ void CDRSuppressStandardPipesWhileLoadingClasses();
 #ifdef __cplusplus
 }
 #endif
+
+NS_ASSUME_NONNULL_END

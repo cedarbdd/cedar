@@ -24,8 +24,11 @@
 }
 
 - (void)dealloc {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     self.klass = nil;
     self.cedar_double_impl = nil;
+#pragma clang diagnostic pop
     [super dealloc];
 }
 

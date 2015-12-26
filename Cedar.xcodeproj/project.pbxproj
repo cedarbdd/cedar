@@ -267,6 +267,11 @@
 		34D1819F1BC7F0FD0087EC0D /* BlockMatcher_ARCSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0BF06E1B8E10D7000B0EE7 /* BlockMatcher_ARCSpecSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		34D181A01BC7F0FF0087EC0D /* BlockMatcherSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 346F646D1B82D3C900F64156 /* BlockMatcherSpec.mm */; };
 		34D181A11BC7F0FF0087EC0D /* BlockMatcher_ARCSpecSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0BF06E1B8E10D7000B0EE7 /* BlockMatcher_ARCSpecSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		34C95F501C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34C95F511C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34C95F521C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34C95F531C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34C95F541C2DD7B30055F089 /* CDRNullabilityCompat.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; };
 		34D4B5C318F3AE0400FB2C3B /* UIKitContainSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */; };
 		34D7C3C01BB970DF00E8E523 /* CDRXCTestFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3492DA961BA670C10032B35A /* CDRXCTestFunctions.m */; };
 		34D7C3C11BB970F100E8E523 /* CDRSpecRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 3492DA9E1BA6F9E70032B35A /* CDRSpecRun.m */; };
@@ -1280,6 +1285,7 @@
 			files = (
 				34ADD2ED19220F9300B057AC /* AnyInstanceOfClassArgument.h in Copy headers to framework */,
 				34ADD2EE19220F9300B057AC /* AnyInstanceConformingToProtocolArgument.h in Copy headers to framework */,
+				34C95F541C2DD7B30055F089 /* CDRNullabilityCompat.h in Copy headers to framework */,
 				341477711914090000CBA385 /* AnInstanceOf.h in Copy headers to framework */,
 				AE0F354F19E87D6F00B9F116 /* CompareCloseTo.h in Copy headers to framework */,
 				3414776F191406FC00CBA385 /* ComparatorsContainerConvenience.h in Copy headers to framework */,
@@ -1411,6 +1417,7 @@
 		34ADD2E41921F2F600B057AC /* AnyInstanceConformingToProtocolArgument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyInstanceConformingToProtocolArgument.h; sourceTree = "<group>"; };
 		34ADD2E51921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnyInstanceConformingToProtocolArgument.mm; sourceTree = "<group>"; };
 		34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+Cedar.m"; sourceTree = "<group>"; };
+		34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRNullabilityCompat.h; sourceTree = "<group>"; };
 		34D1E67A18F7A2E6005161AD /* AnInstanceOf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnInstanceOf.h; path = ../Comparators/AnInstanceOf.h; sourceTree = "<group>"; };
 		34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIKitContainSpec.mm; sourceTree = "<group>"; };
 		34D4B5C418F3B68900FB2C3B /* UIKitComparatorsContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIKitComparatorsContainer.h; sourceTree = "<group>"; };
@@ -1819,6 +1826,7 @@
 				AEEE1FCF11DC27B800029872 /* CDRExampleParent.h */,
 				AEEE1FD111DC27B800029872 /* CDRFunctions.h */,
 				2234907C18009DA6001C8E8D /* CDRHooks.h */,
+				34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */,
 				AEFD17B311DD1E8200F4448A /* CDRSharedExampleGroupPool.h */,
 				AEEE1FD211DC27B800029872 /* CDRSpec.h */,
 				AE8C880E13626FA5006C9305 /* CDRSpecFailure.h */,
@@ -2532,6 +2540,7 @@
 				3462620D1B99546C002CAEBD /* BeGreaterThan.h in Headers */,
 				346262061B99544D002CAEBD /* RejectedMethod.h in Headers */,
 				34DB674C1C2B65EB00206663 /* ContainSubset.h in Headers */,
+				34C95F521C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */,
 				346261FD1B995445002CAEBD /* AnyArgument.h in Headers */,
 				346262211B995491002CAEBD /* CompareEqual.h in Headers */,
 				346262111B99546C002CAEBD /* BeLTE.h in Headers */,
@@ -2605,6 +2614,7 @@
 				34D7C4591BB9B5F100E8E523 /* CDRExampleBase.h in Headers */,
 				34D7C43B1BB9B5B200E8E523 /* Exist.h in Headers */,
 				34D7C4291BB9B59200E8E523 /* CDRFake.h in Headers */,
+				34C95F531C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */,
 				34DB674D1C2B65EC00206663 /* ContainSubset.h in Headers */,
 				34D7C45E1BB9B5F100E8E523 /* CDRSharedExampleGroupPool.h in Headers */,
 				34D7C45F1BB9B5F100E8E523 /* CDRSpec.h in Headers */,
@@ -2707,6 +2717,7 @@
 				3492DAA11BA6F9E70032B35A /* CDRSpecRun.h in Headers */,
 				AE4865B91B0690B0005DB302 /* BeCloseTo.h in Headers */,
 				AE4865BA1B0690B0005DB302 /* BeFalsy.h in Headers */,
+				34C95F511C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */,
 				34DB674B1C2B65EA00206663 /* ContainSubset.h in Headers */,
 				AE4865BB1B0690B0005DB302 /* BeGreaterThan.h in Headers */,
 				AE4865BC1B0690B0005DB302 /* BeGTE.h in Headers */,
@@ -2834,6 +2845,7 @@
 				AE34724B19C37ECF005CA6F1 /* CDRXCTestCase.h in Headers */,
 				AE74907415B493B5008EA127 /* CDRFake.h in Headers */,
 				34DB674A1C2B65EA00206663 /* ContainSubset.h in Headers */,
+				34C95F501C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */,
 				34640DA71B6964F90083EB01 /* CDRBlockHelper.h in Headers */,
 				AE9AA67B15AB72DA00617E1A /* CDRClassFake.h in Headers */,
 				AE74902F15B45E80008EA127 /* CDRProtocolFake.h in Headers */,

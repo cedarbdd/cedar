@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "CDRNullabilityCompat.h"
 #import "CedarDouble.h"
 #import "CDRFake.h"
 
@@ -6,6 +7,8 @@
 
 #import <sstream>
 #import <string>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CDRProtocolFake : CDRFake
 
@@ -15,4 +18,7 @@
 
 id CDR_fake_for(BOOL require_explicit_stubs, Protocol *protocol, ...);
 
+NS_ASSUME_NONNULL_END
+
 #endif // __cplusplus
+

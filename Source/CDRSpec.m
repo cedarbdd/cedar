@@ -107,10 +107,13 @@ void fail(NSString *reason) {
 #pragma mark Memory
 
 - (void)dealloc {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     self.rootGroup = nil;
     self.currentGroup = nil;
     self.fileName = nil;
     self.symbolicator = nil;
+#pragma clang diagnostic pop
     [super dealloc];
 }
 

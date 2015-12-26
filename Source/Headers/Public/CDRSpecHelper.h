@@ -1,7 +1,10 @@
 #import "CDRSpec.h"
+#import "CDRNullabilityCompat.h"
 #import "CDRHooks.h"
 #import "CDRSharedExampleGroupPool.h"
 #import "CDRExampleParent.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CDRSpecHelper : NSObject <CDRExampleParent> {
     NSMutableDictionary *sharedExampleContext_, *sharedExampleGroups_;
@@ -19,6 +22,8 @@
 @end
 
 @compatibility_alias SpecHelper CDRSpecHelper;
+
+NS_ASSUME_NONNULL_END
 
 // This import is here for backwards-compatibility.
 // The Cedar spec template used to only import CDRSpecHelper.h

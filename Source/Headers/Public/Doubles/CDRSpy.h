@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
+#import "CDRNullabilityCompat.h"
 #import "CedarDouble.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 #ifdef __cplusplus
 
@@ -26,3 +29,5 @@ namespace Cedar { namespace Doubles {
 #endif
 
 #endif // __cplusplus
+
+NS_ASSUME_NONNULL_END
