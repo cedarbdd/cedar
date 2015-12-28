@@ -4,6 +4,10 @@
 #import "CDRSharedExampleGroupPool.h"
 #import "CDRExampleParent.h"
 
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(_name)
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CDRSpecHelper : NSObject <CDRExampleParent> {
@@ -17,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL shouldOnlyRunFocused;
 
-+ (CDRSpecHelper *)specHelper;
++ (CDRSpecHelper *)specHelper NS_SWIFT_NAME(specHelper());
 
 @end
 
