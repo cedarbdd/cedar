@@ -72,6 +72,9 @@
 		343FAFEB190FDAEC0085AFEC /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
 		345B1E891C31D495009BB77D /* SwiftSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DB67481C2B4D6A00206663 /* SwiftSpec.swift */; };
 		345B1E8C1C31D4B4009BB77D /* SwiftSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DB67481C2B4D6A00206663 /* SwiftSpec.swift */; };
+		345B1E8F1C31DA6E009BB77D /* XCTAssertSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B1E8D1C31DA2B009BB77D /* XCTAssertSpec.swift */; };
+		345B1E911C31DA70009BB77D /* XCTAssertSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B1E8D1C31DA2B009BB77D /* XCTAssertSpec.swift */; };
+		345B1E921C31E644009BB77D /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
 		346261E71B995422002CAEBD /* CDRSpyInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEE8DBD2175FFCF3008AF18A /* CDRSpyInfo.h */; };
 		346261E81B995422002CAEBD /* CedarDoubleImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AA6DA15AE0B0300617E1A /* CedarDoubleImpl.h */; };
 		346261E91B995422002CAEBD /* NSInvocation+Cedar.h in Headers */ = {isa = PBXBuildFile; fileRef = AEAA191019DCC5A900194E95 /* NSInvocation+Cedar.h */; };
@@ -1391,6 +1394,7 @@
 		343FAFE8190FDAEC0085AFEC /* DeallocNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeallocNotifier.h; sourceTree = "<group>"; };
 		343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeallocNotifier.m; sourceTree = "<group>"; };
 		345B1E881C31CC96009BB77D /* Spec-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spec-Bridging-Header.h"; sourceTree = "<group>"; };
+		345B1E8D1C31DA2B009BB77D /* XCTAssertSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTAssertSpec.swift; sourceTree = "<group>"; };
 		3460489318F2DBBF00BC93B6 /* CDRBlockHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDRBlockHelper.h; sourceTree = "<group>"; };
 		346261DF1B995239002CAEBD /* Cedar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cedar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		346262781B99C1DB002CAEBD /* Cedar-watchOS Specs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cedar-watchOS Specs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1952,6 +1956,7 @@
 			isa = PBXGroup;
 			children = (
 				34DB67481C2B4D6A00206663 /* SwiftSpec.swift */,
+				345B1E8D1C31DA2B009BB77D /* XCTAssertSpec.swift */,
 				345B1E881C31CC96009BB77D /* Spec-Bridging-Header.h */,
 			);
 			path = Swift;
@@ -3769,6 +3774,7 @@
 				34D7C49C1BB9C68100E8E523 /* BeEmptySpec.mm in Sources */,
 				34D7C4971BB9C67C00E8E523 /* EqualSpec.mm in Sources */,
 				34D7C48F1BB9C67C00E8E523 /* BeLessThanSpec.mm in Sources */,
+				345B1E911C31DA70009BB77D /* XCTAssertSpec.swift in Sources */,
 				34D7C47D1BB9C60100E8E523 /* ObjectWithWeakDelegate.m in Sources */,
 				34D7C4B01BB9C6C400E8E523 /* ObjCHeadersSpec.mm in Sources */,
 				34D7C49D1BB9C68100E8E523 /* ContainSpec.mm in Sources */,
@@ -3897,8 +3903,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				345B1E921C31E644009BB77D /* ExpectFailureWithMessage.mm in Sources */,
 				34757E261BA4A48E0047BC8D /* TestObservationHelper.m in Sources */,
 				346D1A971BBB37F400BECD4B /* SpecBundleApplicationTestsWithXCTest.m in Sources */,
+				345B1E8F1C31DA6E009BB77D /* XCTAssertSpec.swift in Sources */,
 				34C95F561C2F16900055F089 /* CDRXCTestSuiteSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5105,6 +5113,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pivotallabs.cedar.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Spec/Swift/Spec-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cedar-OSX HostApp.app/Contents/MacOS/Cedar-OSX HostApp";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -5137,6 +5146,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pivotallabs.cedar.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Spec/Swift/Spec-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cedar-OSX HostApp.app/Contents/MacOS/Cedar-OSX HostApp";
 				WRAPPER_EXTENSION = xctest;
 			};
