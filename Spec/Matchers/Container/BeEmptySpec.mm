@@ -23,14 +23,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <(\n)> to not be empty", ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -42,14 +42,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <(\n    7,\n    7\n)> to be empty", ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -61,14 +61,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <{\n}> to not be empty", ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -82,14 +82,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <{\n    5 = 6;\n    7 = 10;\n}> to be empty", ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -101,14 +101,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <{(\n)}> to not be empty", ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -122,14 +122,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage(@"Expected <{(\n    5,\n    7\n)}> to be empty", ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -141,14 +141,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -160,14 +160,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -179,14 +179,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -198,14 +198,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -217,14 +217,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -236,14 +236,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -255,14 +255,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -274,14 +274,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -293,14 +293,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -312,14 +312,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -331,14 +331,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -350,14 +350,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
@@ -369,14 +369,14 @@ describe(@"be_empty matcher", ^{
 
             describe(@"positive match", ^{
                 it(@"should should pass", ^{
-                    expect(container).to(be_empty());
+                    expect(container).to(be_empty);
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to not be empty", container], ^{
-                        expect(container).to_not(be_empty());
+                        expect(container).to_not(be_empty);
                     });
                 });
             });
@@ -388,14 +388,14 @@ describe(@"be_empty matcher", ^{
             describe(@"positive match", ^{
                 it(@"should fail with a sensible failure message", ^{
                     expectFailureWithMessage([NSString stringWithFormat:@"Expected <%@> to be empty", container], ^{
-                        expect(container).to(be_empty());
+                        expect(container).to(be_empty);
                     });
                 });
             });
 
             describe(@"negative match", ^{
                 it(@"should pass", ^{
-                    expect(container).to_not(be_empty());
+                    expect(container).to_not(be_empty);
                 });
             });
         });
