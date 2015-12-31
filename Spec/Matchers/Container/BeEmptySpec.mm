@@ -400,6 +400,15 @@ describe(@"be_empty matcher", ^{
             });
         });
     });
+
+    describe(@"when the value is nil", ^{
+        it(@"should not match, and alert the user the value was nil", ^{
+            expectFailureWithMessage(@"Unexpected use of be_empty matcher to check for nil. The actual value was nil. This is probably not what you intended to verify.", ^{
+                id myNilValue = nil;
+                expect(myNilValue).to(be_empty);
+            });
+        });
+    });
 });
 
 describe(@"be_empty shorthand syntax (no parentheses)", ^{
