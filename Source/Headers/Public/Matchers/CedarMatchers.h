@@ -13,6 +13,7 @@
 #import "RaiseException.h"
 #import "RespondTo.h"
 #import "ConformTo.h"
+#import "BlockMatcher.h"
 
 // Container
 #import "BeEmpty.h"
