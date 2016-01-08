@@ -13,12 +13,12 @@ namespace :suites do
   namespace :specs do
     desc "Analyzes specs"
     task :analyze do
-      Xcode.analyze(target: SPECS_TARGET_NAME, logfile: "specs.analyze.log")
+      Xcode.analyze(target: SPECS_TARGET_NAME, args: Xcode.swift_build_settings, logfile: "specs.analyze.log")
     end
 
     desc "Build specs"
     task build: 'frameworks:osx:build' do
-      Xcode.build(target: SPECS_TARGET_NAME, logfile: "specs.build.log")
+      Xcode.build(target: SPECS_TARGET_NAME, args: Xcode.swift_build_settings, logfile: "specs.build.log")
     end
 
     desc "Run specs"
@@ -118,12 +118,12 @@ namespace :suites do
   namespace :iosdynamicframeworkspecs do
     desc "Analyzes ios dynamic framework specs"
     task :analyze do
-      Xcode.analyze(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.dynamic.specs.analyze.log")
+      Xcode.analyze(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386 '+Xcode.swift_build_settings, logfile: "frameworks.ios.dynamic.specs.analyze.log")
     end
 
     desc "Build iOS dynamic framework specs"
     task :build do
-      Xcode.build(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "frameworks.ios.dynamic.specs.build.log")
+      Xcode.build(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386 '+Xcode.swift_build_settings, logfile: "frameworks.ios.dynamic.specs.build.log")
     end
 
     desc "Runs iOS dynamic framework specs"

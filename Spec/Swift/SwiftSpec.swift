@@ -1,9 +1,11 @@
 import Cedar
 
+#if !EXCLUDE_SWIFT_SPECS
+
 /// A very simple function for making assertions since Cedar provides no
 /// matchers usable from Swift
-private func expectThat(@autoclosure expression: () -> Bool, file: String = __FILE__, line: UInt = __LINE__) {
-    if !expression() {
+private func expectThat(value: Bool, file: String = __FILE__, line: UInt = __LINE__) {
+    if !value {
         CDRSpecFailure.specFailureWithReason("Expectation failed", fileName: file, lineNumber: Int32(line)).raise()
     }
 }
@@ -180,3 +182,5 @@ class SharedExampleGroupPoolForSwiftSpecs: CDRSharedExampleGroupPool {
         }
     }
 }
+
+#endif
