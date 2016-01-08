@@ -35,7 +35,7 @@ CDR_OVERLOADABLE void itShouldBehaveLike(NSString *groupName, CDRSharedExampleCo
         }];
     }
 
-    sharedExampleGroupBlock([CDRSpecHelper specHelper].sharedExampleContext);
+    sharedExampleGroupBlock((CDRSharedExampleContext *)[CDRSpecHelper specHelper].sharedExampleContext);
     CDR_currentSpec.currentGroup = parentGroup;
 }
 

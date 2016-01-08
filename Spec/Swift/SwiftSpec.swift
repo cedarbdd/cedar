@@ -162,14 +162,8 @@ class SharedExampleGroupPoolForSwiftSpecs: CDRSharedExampleGroupPool {
         }
 
         sharedExamplesFor("a Swift shared example group that receives a value in the context") { context in
-
-            // This doesn't work because the `context` variable is bridged into Swift as a value type
-            // instead of a reference type. The commented-out line is an alternative way to access
-            // the values that *does* work, but isn't as pleasant. I believe this could be fixed by
-            // adding a Swift "overlay" for `sharedExamplesFor` in the Cedar framework.
-            xit("should receive the values set in the global shared example context") {
-                expectThat((context["value"] as? String) == globalValue__)
-//                expectThat((CDRSpecHelper.specHelper().sharedExampleContext["value"] as? String) == globalValue__)
+            it("should receive the values set in the global shared example context") {
+                expectThat((context["value"] as? String) == globalValue__)                  
             }
         }
 

@@ -8,7 +8,14 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CDRSharedExampleGroupPool
 @end
 
-typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *);
+/// A dictionary used to provide context for a set of shared examples.
+/// Using this maintains backwards-compatibility with Cedar versions which
+/// used a plain dictionary, while preventing the context object from being
+/// bridged into Swift as a Swift dictionary, which is a value type.
+@interface CDRSharedExampleContext: NSDictionary
+@end
+
+typedef void (^CDRSharedExampleGroupBlock)(CDRSharedExampleContext *);
 typedef void (^CDRSharedExampleContextProviderBlock)(NSMutableDictionary *);
 
 #ifdef __cplusplus
