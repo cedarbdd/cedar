@@ -615,7 +615,7 @@
 		AE02E82A184EF2A300414F19 /* CDRExampleGroupSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEEE1FE811DC27B800029872 /* CDRExampleGroupSpec.mm */; };
 		AE02E83118526E9F00414F19 /* Cedar-iOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE02E83018526E9F00414F19 /* Cedar-iOSSpec.mm */; };
 		AE03FC0F1B06C37E00013784 /* Cedar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; };
-		AE03FC131B06C3BA00013784 /* Cedar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AE03FC131B06C3BA00013784 /* Cedar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AE4864F81B067620005DB302 /* Cedar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AE0695F317A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE0695F417A1885A0053E59A /* CedarDoubleARCSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0695F217A1885A0053E59A /* CedarDoubleARCSharedExamples.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE06D88017AEEE230084D27C /* ObjectWithForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = AE06D87F17AEEE230084D27C /* ObjectWithForwardingTarget.m */; };
@@ -1114,11 +1114,11 @@
 		F78FDA1D1B43ABBC0054C768 /* ExpectFailureWithMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE8C87AB13624524006C9305 /* ExpectFailureWithMessage.mm */; };
 		F7A225DC1B43A8FB006231CC /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		F7BBE7D31B43A852009547F0 /* CedarDoubleSharedExamples.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE9AA69615ADB99800617E1A /* CedarDoubleSharedExamples.mm */; };
-		F7C8F3041BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
-		F7C8F3061BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
-		F7C8F3071BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
-		F7C8F30B1BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
-		F7C8F30C1BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; settings = {ASSET_TAGS = (); }; };
+		F7C8F3041BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; };
+		F7C8F3061BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; };
+		F7C8F3071BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; };
+		F7C8F30B1BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; };
+		F7C8F30C1BC63A000088069D /* ContainSubsetSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = F7C8F3031BC63A000088069D /* ContainSubsetSpec.mm */; };
 		F7F4099B1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099C1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
 		F7F4099D1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F409971B2E3C8B001EFA14 /* CDRXCTestObserver.m */; };
@@ -3183,7 +3183,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0700;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Pivotal;
 				TargetAttributes = {
 					1F45A3C8180E4796003C1E36 = {
