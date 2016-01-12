@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccont</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeExpression</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>context("&lt;#subject under test#&gt;") {
+    &lt;#content#&gt;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>49E13C68-47D4-4A53-BD2F-CC8C0AC5A7B4</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Cedar context block for Swift</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Cedar context - Swift</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+	<key>isCedarSnippet</key>
+	<true/>
+</dict>
+</plist>
