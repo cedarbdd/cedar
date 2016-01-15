@@ -138,51 +138,172 @@ describe(@"CDRClassFake", ^{
         });
     });
 
-    describe(@"using Key Value Coding to set values", ^{
+    describe(@"using Key Value Coding", ^{
         __block ObjectWithWeakDelegate *fake;
+        __block id delegate;
 
-        describe(@"a nice fake", ^{
+        describe(@"to set values", ^{
             beforeEach(^{
-                fake = nice_fake_for([ObjectWithWeakDelegate class]);
+                delegate = nice_fake_for(@protocol(ExampleDelegate));
             });
 
-            it(@"should not blow up, silently failing when setValue:forKey: is invoked", ^{
-                [fake setValue:nice_fake_for(@protocol(ExampleDelegate)) forKey:@"delegate"];
+            describe(@"a nice fake", ^{
+                beforeEach(^{
+                    fake = nice_fake_for([ObjectWithWeakDelegate class]);
+                });
 
-                fake.delegate should be_nil;
+                sharedExamplesFor(@"silently handling KVC setters", ^(NSDictionary *sharedContext) {
+                    it(@"should not blow up, silently failing when setValue:forKey: is invoked", ^{
+                        [fake setValue:nice_fake_for(@protocol(ExampleDelegate)) forKey:sharedContext[@"key"]];
+                        fake.delegate should be_nil;
+                    });
+
+                    it(@"should not blow up, silently failing when setValue:forKeyPath: is invoked", ^{
+                        [fake setValue:nice_fake_for(@protocol(ExampleDelegate)) forKeyPath:sharedContext[@"key"]];
+                        fake.delegate should be_nil;
+                    });
+
+                    it(@"should record that it has received setValue:forKey:", ^{
+                        [fake setValue:delegate forKey:sharedContext[@"key"]];
+                        fake should have_received(@selector(setValue:forKey:)).with(delegate, sharedContext[@"key"]);
+                    });
+
+                    it(@"should record that it has received setValue:forKeyPath:", ^{
+                        [fake setValue:delegate forKeyPath:sharedContext[@"key"]];
+                        fake should have_received(@selector(setValue:forKeyPath:)).with(delegate, sharedContext[@"key"]);
+                    });
+                });
+                
+                describe(@"with a key that is KVC-compliant", ^{
+                    itShouldBehaveLike(@"silently handling KVC setters", ^(NSMutableDictionary *context) {
+                        context[@"key"] = @"delegate";
+                    });
+                });
+
+                describe(@"with a key that is not KVC-compliant", ^{
+                    itShouldBehaveLike(@"silently handling KVC setters", ^(NSMutableDictionary *context) {
+                        context[@"key"] = @"bogus";
+                    });
+                });
+            });
+
+            describe(@"a strict fake", ^{
+                beforeEach(^{
+                    fake = fake_for([ObjectWithWeakDelegate class]);
+                });
+
+                context(@"when not stubbed first", ^{
+                    it(@"should blow up when setValue:forKey: is invoked", ^{
+                        ^{
+                            [fake setValue:delegate forKey:@"delegate"];
+                        } should raise_exception.with_name(NSInternalInconsistencyException).with_reason([NSString stringWithFormat:@"Attempting to set value <%@> for key <%@>, which must be stubbed first", delegate, @"delegate"]);
+                    });
+                });
+
+                context(@"when stubbed", ^{
+                    it(@"should happily receive -setValue:forKey:", ^{
+                        fake stub_method(@selector(setValue:forKey:));
+
+                        [fake setValue:delegate forKey:@"delegate"];
+
+                        fake should have_received(@selector(setValue:forKey:)).with(delegate).and_with(@"delegate");
+                    });
+
+                    it(@"should happily receive -setValue:forKeyPath:", ^{
+                        fake stub_method(@selector(setValue:forKeyPath:));
+                        
+                        [fake setValue:delegate forKeyPath:@"delegate"];
+                        
+                        fake should have_received(@selector(setValue:forKeyPath:)).with(delegate).and_with(@"delegate");
+                    });
+                });
             });
         });
 
-        describe(@"a strict fake", ^{
-            __block id delegate;
-            beforeEach(^{
-                delegate = nice_fake_for(@protocol(ExampleDelegate));
-                fake = fake_for([ObjectWithWeakDelegate class]);
-            });
+        describe(@"to get values", ^{
+            describe(@"a nice fake", ^{
+                beforeEach(^{
+                    fake = nice_fake_for([ObjectWithWeakDelegate class]);
+                });
 
-            context(@"when not stubbed first", ^{
-                it(@"should blow up when setValue:forKey: is invoked", ^{
-                    ^{
-                        [fake setValue:delegate forKey:@"delegate"];
-                    } should raise_exception.with_name(NSInternalInconsistencyException).with_reason([NSString stringWithFormat:@"Attempting to set value <%@> for key <%@>, which must be stubbed first", delegate, @"delegate"]);
+                sharedExamplesFor(@"silently handling KVC getters", ^(NSDictionary *sharedContext) {
+                    it(@"should not blow up, returning nil when valueForKey: is invoked", ^{
+                        [fake valueForKey:sharedContext[@"key"]] should be_nil;
+                    });
+
+                    it(@"should not blow up, returning nil when valueForKeyPath: is invoked", ^{
+                        [fake valueForKeyPath:sharedContext[@"key"]] should be_nil;
+                    });
+
+                    it(@"should record that it has received valueForKey:", ^{
+                        [fake valueForKey:sharedContext[@"key"]];
+                        fake should have_received(@selector(valueForKey:)).with(sharedContext[@"key"]);
+                    });
+
+                    it(@"should record that it has received valueForKeyPath:", ^{
+                        [fake valueForKeyPath:sharedContext[@"key"]];
+                        fake should have_received(@selector(valueForKeyPath:)).with(sharedContext[@"key"]);
+                    });
+                });
+
+                describe(@"with a key that is KVC-compliant", ^{
+                    itShouldBehaveLike(@"silently handling KVC getters", ^(NSMutableDictionary *context) {
+                        context[@"key"] = @"delegate";
+                    });
+                });
+
+                describe(@"with a key that is not KVC-compliant", ^{
+                    itShouldBehaveLike(@"silently handling KVC getters", ^(NSMutableDictionary *context) {
+                        context[@"key"] = @"bogus";
+                    });
                 });
             });
 
-            context(@"when stubbed", ^{
-                it(@"should happily receive -setValue:forKey:", ^{
-                    fake stub_method(@selector(setValue:forKey:));
-
-                    [fake setValue:delegate forKey:@"delegate"];
-
-                    fake should have_received(@selector(setValue:forKey:)).with(delegate).and_with(@"delegate");
+            describe(@"a strict fake", ^{
+                beforeEach(^{
+                    fake = fake_for([ObjectWithWeakDelegate class]);
                 });
 
-                it(@"should happily receive -setValue:forKeyPath:", ^{
-                    fake stub_method(@selector(setValue:forKeyPath:));
+                context(@"when not stubbed first", ^{
+                    it(@"should blow up when valueForKey: is invoked", ^{
+                        ^{
+                            [fake valueForKey:@"delegate"];
+                        } should raise_exception.with_name(NSInternalInconsistencyException).with_reason([NSString stringWithFormat:@"Attempting to get value for key <%@>, which must be stubbed first", @"delegate"]);
+                    });
+                });
 
-                    [fake setValue:delegate forKeyPath:@"delegate"];
+                context(@"when stubbed with no return value", ^{
+                    it(@"should happily receive -valueForKey: and return nil", ^{
+                        fake stub_method(@selector(valueForKey:));
 
-                    fake should have_received(@selector(setValue:forKeyPath:)).with(delegate).and_with(@"delegate");
+                        [fake valueForKey:@"delegate"];
+
+                        fake should have_received(@selector(valueForKey:)).with(@"delegate");
+                    });
+
+                    it(@"should happily receive -valueForKeyPath:", ^{
+                        fake stub_method(@selector(valueForKeyPath:));
+
+                        [fake valueForKeyPath:@"delegate"];
+
+                        fake should have_received(@selector(valueForKeyPath:)).with(@"delegate");
+                    });
+                });
+
+                context(@"when stubbed with a return value", ^{
+                    beforeEach(^{
+                        delegate = nice_fake_for(@protocol(ExampleDelegate));
+                    });
+
+                    it(@"should receive -valueForKey: and return the stubbed value", ^{
+                        fake stub_method(@selector(valueForKey:)).with(@"delegate").and_return(delegate);
+                        [fake valueForKey:@"delegate"] should be_same_instance_as(delegate);
+                    });
+
+                    it(@"should receive -valueForKeyPath: and return the stubbed value", ^{
+                        fake stub_method(@selector(valueForKeyPath:)).with(@"delegate").and_return(delegate);
+                        [fake valueForKeyPath:@"delegate"] should be_same_instance_as(delegate);
+                    });
                 });
             });
         });
