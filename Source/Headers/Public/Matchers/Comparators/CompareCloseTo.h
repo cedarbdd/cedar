@@ -1,5 +1,7 @@
 #import "CDRSpecFailure.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers { namespace Comparators {
     inline bool compare_close_to(const double actualValue, const double expectedValue, const double threshold) {
         return actualValue > expectedValue - threshold && actualValue < expectedValue + threshold;
@@ -28,3 +30,5 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return false;
     }
 }}}
+
+#endif // __cplusplus

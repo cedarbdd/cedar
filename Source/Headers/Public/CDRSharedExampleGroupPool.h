@@ -1,11 +1,21 @@
 #import <Foundation/Foundation.h>
+#import "CDRNullabilityCompat.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 #define CDR_OVERLOADABLE __attribute__((overloadable))
 
 @protocol CDRSharedExampleGroupPool
 @end
 
-typedef void (^CDRSharedExampleGroupBlock)(NSDictionary *);
+/// A dictionary used to provide context for a set of shared examples.
+/// Using this maintains backwards-compatibility with Cedar versions which
+/// used a plain dictionary, while preventing the context object from being
+/// bridged into Swift as a Swift dictionary, which is a value type.
+@interface CDRSharedExampleContext: NSDictionary
+@end
+
+typedef void (^CDRSharedExampleGroupBlock)(CDRSharedExampleContext *);
 typedef void (^CDRSharedExampleContextProviderBlock)(NSMutableDictionary *);
 
 #ifdef __cplusplus
@@ -13,7 +23,7 @@ extern "C" {
 #endif
 void sharedExamplesFor(NSString *, CDRSharedExampleGroupBlock);
 CDR_OVERLOADABLE void itShouldBehaveLike(NSString *);
-CDR_OVERLOADABLE void itShouldBehaveLike(NSString *, CDRSharedExampleContextProviderBlock);
+CDR_OVERLOADABLE void itShouldBehaveLike(NSString *, __nullable CDRSharedExampleContextProviderBlock);
 #ifdef __cplusplus
 }
 #endif
@@ -34,3 +44,5 @@ CDR_OVERLOADABLE void itShouldBehaveLike(NSString *, CDRSharedExampleContextProv
 #define SHARED_EXAMPLE_GROUPS_END                                        \
 }                                                                        \
 @end
+
+NS_ASSUME_NONNULL_END

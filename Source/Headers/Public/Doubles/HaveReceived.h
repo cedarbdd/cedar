@@ -2,6 +2,8 @@
 #import "InvocationMatcher.h"
 #import "CedarDouble.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Doubles {
 
     extern "C" Class object_getClass(id);
@@ -135,3 +137,5 @@ namespace Cedar { namespace Doubles {
     }
 
 }}
+
+#endif // __cplusplus

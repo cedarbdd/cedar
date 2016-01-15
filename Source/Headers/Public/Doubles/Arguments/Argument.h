@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+
+#ifdef __cplusplus
+
 #import <memory>
 #import <typeinfo>
 
@@ -35,3 +38,5 @@ namespace Cedar { namespace Doubles {
     inline /* virtual */ Argument::~Argument() {}
 
 }}
+
+#endif // __cplusplus

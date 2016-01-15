@@ -1,5 +1,7 @@
 #import "Base.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers {
     template<typename T>
     class <#MatcherClassName#> : public Base<> {
@@ -58,3 +60,5 @@ namespace Cedar { namespace Matchers {
         // return result of appropriate comparison with specific type
     }
 }}
+
+#endif // __cplusplus

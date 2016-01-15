@@ -1,5 +1,7 @@
 #import "AnyInstanceArgument.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Doubles {
 
     class AnyInstanceOfClassArgument : public AnyInstanceArgument {
@@ -22,3 +24,5 @@ namespace Cedar { namespace Doubles {
         Argument::shared_ptr_t any(Class);
     }
 }}
+
+#endif // __cplusplus

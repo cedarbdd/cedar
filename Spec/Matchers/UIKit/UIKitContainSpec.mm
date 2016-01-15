@@ -1,4 +1,4 @@
-#import "CDRSpecHelper.h"
+#import "Cedar.h"
 #import "ExpectFailureWithMessage.h"
 
 using namespace Cedar::Matchers;

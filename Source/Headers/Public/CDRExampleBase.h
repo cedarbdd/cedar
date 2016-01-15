@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
+#import "CDRNullabilityCompat.h"
 #import "CDRExampleParent.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class CDRSpec, CDRReportDispatcher;
 typedef NS_ENUM(NSInteger, CDRExampleState) {
@@ -22,17 +25,17 @@ typedef NS_ENUM(NSInteger, CDRExampleState) {
 }
 
 @property (nonatomic, readonly) NSString *text;
-@property (nonatomic, assign) NSObject<CDRExampleParent> *parent;
-@property (nonatomic, assign) CDRSpec *spec;
+@property (nonatomic, assign, nullable) NSObject<CDRExampleParent> *parent;
+@property (nonatomic, assign, nullable) CDRSpec *spec;
 @property (nonatomic, assign, getter=isFocused) BOOL focused;
 @property (nonatomic) NSUInteger stackAddress;
-@property (nonatomic, readonly) NSDate *startDate;
-@property (nonatomic, readonly) NSDate *endDate;
+@property (nonatomic, readonly, nullable) NSDate *startDate;
+@property (nonatomic, readonly, nullable) NSDate *endDate;
 
 - (id)initWithText:(NSString *)text;
 
 
-- (void)runWithDispatcher:(CDRReportDispatcher *)dispatcher;
+- (void)runWithDispatcher:(nullable CDRReportDispatcher *)dispatcher;
 - (BOOL)shouldRun;
 
 - (BOOL)hasChildren;
@@ -49,3 +52,5 @@ typedef NS_ENUM(NSInteger, CDRExampleState) {
 @interface CDRExampleBase (RunReporting)
 - (float)progress;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,4 +1,4 @@
-#import <Cedar/CDRSpecHelper.h>
+#import "Cedar.h"
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ObjectWithWeakDelegate.h"

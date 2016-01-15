@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
+#import "ComparatorsBase.h"
+
+#ifdef __cplusplus
 
 #pragma mark - Private interface
 namespace Cedar { namespace Matchers { namespace Private {
@@ -87,3 +90,5 @@ namespace Cedar { namespace Matchers {
         return true;
     }
 }}
+
+#endif // __cplusplus

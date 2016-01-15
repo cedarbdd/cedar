@@ -1,5 +1,7 @@
 #import "ActualValue.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers {
 
     struct ActualValueMarker {
@@ -28,3 +30,5 @@ namespace Cedar { namespace Matchers {
     #define should ,(ActualValueMarker){__FILE__, __LINE__},false,
     #define should_not ,(ActualValueMarker){__FILE__, __LINE__},true,
 #endif
+
+#endif // __cplusplus

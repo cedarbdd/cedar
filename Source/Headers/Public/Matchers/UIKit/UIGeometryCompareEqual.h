@@ -4,6 +4,8 @@
 #import "ComparatorsBase.h"
 #import "UIGeometryStringifiers.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers { namespace Comparators {
     template<typename U>
     bool compare_equal(CGRect const actualValue, const U & expectedValue) {
@@ -35,3 +37,5 @@ namespace Cedar { namespace Matchers { namespace Comparators {
         return [expectedImage isEqual:actualImage] || [UIImagePNGRepresentation(expectedImage) isEqual:UIImagePNGRepresentation(actualImage)];
     }
 }}}
+
+#endif // __cplusplus

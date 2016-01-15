@@ -1,5 +1,7 @@
 #import "ValueArgument.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Doubles {
 
     class ReturnValue {
@@ -71,3 +73,5 @@ namespace Cedar { namespace Doubles {
         return 0 == strcmp(@encode(T), actual_argument_encoding);
     }
 }}
+
+#endif // __cplusplus

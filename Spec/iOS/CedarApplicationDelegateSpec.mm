@@ -1,5 +1,4 @@
-#import "CDRSpecHelper.h"
-#import "CedarApplicationDelegate.h"
+#import "Cedar.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

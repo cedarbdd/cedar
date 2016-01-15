@@ -1,9 +1,12 @@
 #import <Foundation/Foundation.h>
-#import <memory>
-#import <vector>
 #import "InvocationMatcher.h"
 #import "Argument.h"
 #import "ReturnValue.h"
+
+#ifdef __cplusplus
+
+#import <memory>
+#import <vector>
 
 namespace Cedar { namespace Doubles {
 
@@ -19,3 +22,5 @@ namespace Cedar { namespace Doubles {
         const SEL selector() const;
     };
 }}
+
+#endif // __cplusplus

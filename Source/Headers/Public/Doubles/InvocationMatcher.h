@@ -1,5 +1,8 @@
-#import <vector>
 #import "ValueArgument.h"
+
+#ifdef __cplusplus
+
+#import <vector>
 
 namespace Cedar { namespace Doubles {
 
@@ -41,3 +44,5 @@ namespace Cedar { namespace Doubles {
     }
 
 }}
+
+#endif // __cplusplus

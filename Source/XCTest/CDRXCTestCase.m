@@ -1,4 +1,5 @@
 #import "CDRXCTestCase.h"
+#import "CDRExample.h"
 #import "NSInvocation+CDRXExample.h"
 #import <objc/runtime.h>
 
@@ -41,6 +42,21 @@ const char *CDRXTestInvocationsKey;
 
 + (void)setTestInvocations:(NSArray *)array {
     objc_setAssociatedObject(self, &CDRXTestInvocationsKey, array, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+/// This is needed to allow for runtime lookup of the superclass
+#define super_recordFailure(description, filename, lineNumber, expected) do { \
+Class parentClass = class_getSuperclass([self class]); \
+IMP superPerformTest = class_getMethodImplementation(parentClass, @selector(recordFailureWithDescription:inFile:atLine:expected:)); \
+((void (*)(id instance, SEL cmd, NSString *, NSString *, NSUInteger, BOOL))superPerformTest)(self, _cmd, description, filename, lineNumber, expected); \
+} while(0);
+
+- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filename atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
+    if (self.invocation.cdr_example.state == CDRExampleStateIncomplete) {
+        [[CDRSpecFailure specFailureWithReason:description fileName:filename lineNumber:(int)lineNumber] raise];
+    } else {
+        super_recordFailure(description, filename, lineNumber, expected);
+    }
 }
 
 @end

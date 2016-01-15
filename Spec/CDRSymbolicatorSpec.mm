@@ -1,6 +1,4 @@
-#import "CDRSpecHelper.h"
-#import "CDRExample.h"
-#import "CDRExampleGroup.h"
+#import "Cedar.h"
 #import "CDRSymbolicator.h"
 
 using namespace Cedar::Matchers;

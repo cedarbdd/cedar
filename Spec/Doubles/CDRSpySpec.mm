@@ -1,4 +1,4 @@
-#import <Cedar/CDRSpecHelper.h>
+#import "Cedar.h"
 #import "SimpleIncrementer.h"
 #import "ObjectWithForwardingTarget.h"
 #import "ArgumentReleaser.h"
@@ -7,13 +7,10 @@
 #import "ArgumentReleaser.h"
 #import "ObjectWithValueEquality.h"
 #import "DeallocNotifier.h"
-#import <objc/runtime.h>
-
-extern "C" {
 #import "ExpectFailureWithMessage.h"
 #import "ObjectWithCollections.h"
 #import "CedarObservedObject.h"
-}
+#import <objc/runtime.h>
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -129,7 +126,10 @@ describe(@"spy_on", ^{
     itShouldBehaveLike(@"a Cedar double when used with ARC");
 
     it(@"should blow up in an obvious manner when spying on nil", ^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
         ^{ spy_on(nil); } should raise_exception.with_reason(@"Cannot spy on nil");
+#pragma clang diagnostic pop
     });
 
     it(@"should not change the functionality of the given object", ^{
@@ -433,7 +433,10 @@ describe(@"spy_on", ^{
 
 describe(@"stop_spying_on", ^{
     it(@"should blow up in an obvious manner when spying on nil", ^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
         ^{ stop_spying_on(nil); } should raise_exception.with_reason(@"Cannot stop spying on nil");
+#pragma clang diagnostic pop
     });
 
     it(@"should fail gracefully for an object that is not being spied upon", ^{

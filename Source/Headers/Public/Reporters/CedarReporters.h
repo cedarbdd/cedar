@@ -1,0 +1,7 @@
+#import "CDRColorizedReporter.h"
+#import "CDRDefaultReporter.h"
+#import "CDRExampleReporter.h"
+#import "CDRJUnitXMLReporter.h"
+#import "CDROTestReporter.h"
+#import "CDRTeamCityReporter.h"
+#import "CDRBufferedDefaultReporter.h"

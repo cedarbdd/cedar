@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "CDRSpecHelper.h"
+#import "Cedar.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;

@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Matchers { namespace Private  {
 
     template<typename T>
@@ -78,3 +80,5 @@ namespace Cedar { namespace Matchers {
         return true;
     }
 }}
+
+#endif // __cplusplus

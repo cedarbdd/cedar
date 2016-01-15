@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Base.h"
 
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
     class BeTruthy : public Base<> {
@@ -35,3 +37,5 @@ namespace Cedar { namespace Matchers {
     using CedarBeTruthy = Cedar::Matchers::Private::BeTruthy;
     static const CedarBeTruthy be_truthy = CedarBeTruthy();
 }}
+
+#endif // __cplusplus

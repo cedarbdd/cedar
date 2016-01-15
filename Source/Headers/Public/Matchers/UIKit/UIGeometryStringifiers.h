@@ -1,5 +1,9 @@
-#import <sstream>
+#import <UIKit/UIKit.h>
 #import "StringifiersBase.h"
+
+#ifdef __cplusplus
+
+#import <sstream>
 
 namespace Cedar { namespace Matchers { namespace Stringifiers {
     inline NSString * string_for(const CGRect value) {
@@ -22,3 +26,5 @@ namespace Cedar { namespace Matchers { namespace Stringifiers {
         return NSStringFromCGAffineTransform(value);
     }
 }}}
+
+#endif // __cplusplus

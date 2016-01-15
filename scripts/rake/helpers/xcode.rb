@@ -23,6 +23,10 @@ class Xcode
     "name=iPhone 5s,OS=#{version}"
   end
 
+  def self.swift_build_settings
+    version >= 7.0 ? "" : "OTHER_SWIFT_FLAGS=-DEXCLUDE_SWIFT_SPECS"
+  end
+
   def self.clean
     Shell.run "rm -rf '#{BUILD_DIR}'; true", "clean.build.log"
     Shell.run "rm -rf '#{DERIVED_DATA_DIR}'; true", "clean.derivedData.log"

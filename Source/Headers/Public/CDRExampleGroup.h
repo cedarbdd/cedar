@@ -1,4 +1,7 @@
 #import "CDRExampleBase.h"
+#import "CDRNullabilityCompat.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CDRExampleGroup : CDRExampleBase <CDRExampleParent> {
     NSMutableArray *beforeBlocks_, *examples_, *afterBlocks_;
@@ -6,7 +9,7 @@
     CDRSpecBlock subjectActionBlock_;
 }
 
-@property (nonatomic, copy) CDRSpecBlock subjectActionBlock;
+@property (nonatomic, copy, nullable) CDRSpecBlock subjectActionBlock;
 @property (nonatomic, readonly) NSArray *examples;
 
 + (id)groupWithText:(NSString *)text;
@@ -17,3 +20,5 @@
 - (void)addAfter:(CDRSpecBlock)block;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,5 +1,7 @@
 #import "Base.h"
 
+#ifdef __cplusplus
+
 // The SDKs that ship with Xcode 7 define OBJC_BOOL_IS_BOOL or OBJC_BOOL_IS_CHAR depending
 // on the current platform. Here we enable backwards-compatibility
 #if defined(OBJC_BOOL_IS_BOOL)
@@ -149,3 +151,5 @@ namespace Cedar { namespace Matchers {
 }}
 
 #undef CDR_RELEASE
+
+#endif // __cplusplus

@@ -1,4 +1,16 @@
-// Base
+#import "CedarStringifiers.h"
+#import "CedarComparators.h"
+
+
+#pragma mark - Base
+
+#import "Base.h"
+#import "ActualValue.h"
+#import "ShouldSyntax.h"
+
+
+#pragma mark - Matchers
+
 #import "Equal.h"
 #import "BeTruthy.h"
 #import "BeFalsy.h"
@@ -15,14 +27,19 @@
 #import "ConformTo.h"
 #import "BlockMatcher.h"
 
-// Container
+
+#pragma mark - Container
+
 #import "BeEmpty.h"
 #import "AnInstanceOf.h"
 #import "Contain.h"
 #import "ContainSubset.h"
 
-// Verifiers
+
+#pragma mark - Verifiers
+
 #import "Exist.h"
+
 
 #ifdef CEDAR_CUSTOM_MATCHERS
 #import CEDAR_CUSTOM_MATCHERS

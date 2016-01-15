@@ -1,16 +1,5 @@
-#if TARGET_OS_IPHONE
-#import "CDRSpecHelper.h"
-#else
-#import <Cedar/CDRSpecHelper.h>
-#endif
-
-#include <vector>
-#include <map>
-#include <set>
-
-extern "C" {
+#import "Cedar.h"
 #import "ExpectFailureWithMessage.h"
-}
 
 using namespace Cedar::Matchers;
 

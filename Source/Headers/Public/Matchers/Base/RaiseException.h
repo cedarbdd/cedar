@@ -1,4 +1,7 @@
 #import "Base.h"
+
+#ifdef __cplusplus
+
 #import <memory>
 
 #pragma mark - private interface
@@ -58,3 +61,5 @@ namespace Cedar { namespace Matchers {
     using CedarRaiseException = Cedar::Matchers::Private::RaiseException;
     static const CedarRaiseException raise_exception;
 }}
+
+#endif // __cplusplus

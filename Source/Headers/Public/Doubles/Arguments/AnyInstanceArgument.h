@@ -1,5 +1,7 @@
 #import "Argument.h"
 
+#ifdef __cplusplus
+
 namespace Cedar { namespace Doubles {
 
     class AnyInstanceArgument : public Argument {
@@ -15,3 +17,5 @@ namespace Cedar { namespace Doubles {
         virtual unsigned int specificity_ranking() const { return 1; }
     };
 }}
+
+#endif // __cplusplus

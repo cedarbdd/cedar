@@ -1,4 +1,4 @@
-#import <Cedar/CDRSpecHelper.h>
+#import "Cedar.h"
 #import <objc/runtime.h>
 #import "SimpleIncrementer.h"
 #import "SimpleMultiplier.h"

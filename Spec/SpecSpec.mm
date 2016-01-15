@@ -1,13 +1,4 @@
-#if TARGET_OS_IPHONE
-// Normally you would include this file out of the framework.  However, we're
-// testing the framework here, so including the file from the framework will
-// conflict with the compiler attempting to include the file from the project.
-#import "CDRSpecHelper.h"
-#else
-#import <Cedar/CDRSpecHelper.h>
-#endif
-
-#import "CDRSpecFailure.h"
+#import "Cedar.h"
 
 using namespace Cedar::Matchers;
 

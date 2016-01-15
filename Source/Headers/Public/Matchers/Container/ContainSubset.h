@@ -1,5 +1,7 @@
 #import "Base.h"
 
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
     template<typename T>
@@ -94,3 +96,5 @@ namespace Cedar { namespace Matchers {
         return CedarContainSubset<T>(element);
     }
 }}
+
+#endif

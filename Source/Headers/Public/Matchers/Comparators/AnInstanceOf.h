@@ -1,3 +1,5 @@
+#ifdef __cplusplus
+
 #pragma mark - private interface
 namespace Cedar { namespace Matchers { namespace Private {
 
@@ -76,3 +78,5 @@ namespace Cedar { namespace Matchers {
         return CedarAnInstanceOf(klass);
     }
 }}
+
+#endif // __cplusplus

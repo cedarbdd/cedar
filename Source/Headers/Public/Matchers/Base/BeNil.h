@@ -2,6 +2,8 @@
 #import "Base.h"
 #import "CDRSpecFailure.h"
 
+#ifdef __cplusplus
+
 #include <stdexcept>
 
 #pragma mark - private interface
@@ -76,3 +78,5 @@ namespace Cedar { namespace Matchers {
 
     static const CedarBeNil be_nil = CedarBeNil();
 }}
+
+#endif // __cplusplus

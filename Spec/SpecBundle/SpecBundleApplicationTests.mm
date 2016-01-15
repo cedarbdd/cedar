@@ -1,4 +1,4 @@
-#import "CDRSpecHelper.h"
+#import "Cedar.h"
 #import "iOSHostAppDelegate.h" // should NOT be included in Cedar iOS SpecBundle target
 
 using namespace Cedar::Matchers;

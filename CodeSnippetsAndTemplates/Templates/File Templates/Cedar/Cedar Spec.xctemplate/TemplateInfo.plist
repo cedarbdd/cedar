@@ -2,55 +2,79 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AllowedTypes</key>
-	<array>
-		<string>public.objective-c-plus-plus-source</string>
-	</array>
-	<key>DefaultCompletionName</key>
-	<string>MyClass</string>
+	<key>isCedarTemplate</key>
+	<true/>
+	<key>Summary</key>
+	<string>A Cedar Spec</string>
 	<key>Description</key>
 	<string>A Cedar Spec File</string>
 	<key>Kind</key>
 	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
-	<key>MainTemplateFile</key>
-	<string>___FILEBASENAME___Spec.mm</string>
+	<key>SortOrder</key>
+	<string>1</string>
+	<key>DefaultCompletionName</key>
+	<string>MyClass</string>
 	<key>Options</key>
 	<array>
 		<dict>
-    	<key>Default</key>
-    	<string/>
-    	<key>Description</key>
-    	<string>The name of the class to spec</string>
-    	<key>Identifier</key>
-    	<string>cedarClass</string>
-    	<key>Name</key>
-    	<string>Class to Spec</string>
-    	<key>Required</key>
-    	<true/>
-    	<key>NotPersisted</key>
-    	<true/>
-    	<key>Type</key>
-    	<string>text</string>
-    </dict>
-    <dict>
-      	<key>Default</key>
-      	<string>___VARIABLE_cedarClass:identifier___</string>
-      	<key>Identifier</key>
-      	<string>productName</string>
-      	<key>Type</key>
-      	<string>static</string>
-    </dict>
+			<key>Description</key>
+			<string>The name of the type to spec</string>
+			<key>Identifier</key>
+			<string>cedarClass</string>
+			<key>Name</key>
+			<string>Type to Spec:</string>
+			<key>Required</key>
+			<true/>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Type</key>
+			<string>text</string>
+		</dict>
+		<dict>
+			<key>AllowedTypes</key>
+			<dict>
+				<key>Swift</key>
+				<array>
+					<string>public.swift-source</string>
+				</array>
+				<key>Objective-C++</key>
+				<array>
+					<string>public.objective-c-plus-plus-source</string>
+				</array>
+			</dict>
+			<key>Default</key>
+			<string>Objective-C++</string>
+			<key>Description</key>
+			<string>The implementation language</string>
+			<key>Identifier</key>
+			<string>languageChoice</string>
+			<key>MainTemplateFiles</key>
+			<dict>
+				<key>Objective-C</key>
+				<string>___FILEBASENAME___Spec.mm</string>
+				<key>Swift</key>
+				<string>___FILEBASENAME___Spec.swift</string>
+			</dict>
+			<key>Name</key>
+			<string>Language:</string>
+			<key>Required</key>
+			<string>Yes</string>
+			<key>Type</key>
+			<string>popup</string>
+			<key>Values</key>
+			<array>
+				<string>Objective-C++</string>
+				<string>Swift</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>___VARIABLE_cedarClass:identifier___</string>
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Type</key>
+			<string>static</string>
+		</dict>
 	</array>
-	<key>Platforms</key>
-	<array>
-		<string>com.apple.platform.iphoneos</string>
-		<string>com.apple.platform.macosx</string>
-	</array>
-	<key>SortOrder</key>
-	<string>1</string>
-	<key>Summary</key>
-	<string>A Cedar Spec</string>
-	<key>isCedarTemplate</key>
-	<true/>
 </dict>
 </plist>
