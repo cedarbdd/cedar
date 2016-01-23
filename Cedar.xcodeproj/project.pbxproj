@@ -266,6 +266,9 @@
 		34ADD2EE19220F9300B057AC /* AnyInstanceConformingToProtocolArgument.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34ADD2E41921F2F600B057AC /* AnyInstanceConformingToProtocolArgument.h */; };
 		34ADE41818F23C8E00BD1E99 /* NSMethodSignature+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */; };
 		34ADE41918F23E6B00BD1E99 /* NSMethodSignature+Cedar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */; };
+		34AF814E1C53339300DB5249 /* TestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AF814D1C53339300DB5249 /* TestReporter.m */; };
+		34AF814F1C53A06500DB5249 /* TestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AF814D1C53339300DB5249 /* TestReporter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		34AF81501C53A06600DB5249 /* TestReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AF814D1C53339300DB5249 /* TestReporter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		34C95F501C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34C95F511C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34C95F521C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1427,6 +1430,8 @@
 		34ADD2E41921F2F600B057AC /* AnyInstanceConformingToProtocolArgument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyInstanceConformingToProtocolArgument.h; sourceTree = "<group>"; };
 		34ADD2E51921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnyInstanceConformingToProtocolArgument.mm; sourceTree = "<group>"; };
 		34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+Cedar.m"; sourceTree = "<group>"; };
+		34AF814C1C53339300DB5249 /* TestReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestReporter.h; sourceTree = "<group>"; };
+		34AF814D1C53339300DB5249 /* TestReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestReporter.m; sourceTree = "<group>"; };
 		34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRNullabilityCompat.h; sourceTree = "<group>"; };
 		34D1E67A18F7A2E6005161AD /* AnInstanceOf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnInstanceOf.h; path = ../Comparators/AnInstanceOf.h; sourceTree = "<group>"; };
 		34D4B5C118F3ADFF00FB2C3B /* UIKitContainSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIKitContainSpec.mm; sourceTree = "<group>"; };
@@ -2504,6 +2509,8 @@
 				AED10EBB18F46C0E00950904 /* FooSuperclass.m */,
 				343FAFE8190FDAEC0085AFEC /* DeallocNotifier.h */,
 				343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */,
+				34AF814C1C53339300DB5249 /* TestReporter.h */,
+				34AF814D1C53339300DB5249 /* TestReporter.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -3506,6 +3513,7 @@
 				1F45A3D0180E4796003C1E36 /* CDRSymbolicatorSpec.mm in Sources */,
 				AE34723919C12588005CA6F1 /* SimpleKeyValueObserver.m in Sources */,
 				F78FDA1B1B43AB540054C768 /* SimpleIncrementer.m in Sources */,
+				34AF814F1C53A06500DB5249 /* TestReporter.m in Sources */,
 				AE34723419C124D6005CA6F1 /* ObjCHeadersSpec.mm in Sources */,
 				34322B0C1BA7471B00D0CFBD /* TestObservationHelper.m in Sources */,
 				AE34723D19C22547005CA6F1 /* CDRDefaultReporterSpec.mm in Sources */,
@@ -3766,6 +3774,7 @@
 				34D7C4861BB9C65700E8E523 /* CDRXCTestSuiteSpec.mm in Sources */,
 				34D7C4931BB9C67C00E8E523 /* BeSameInstanceAs_ARCSpec.mm in Sources */,
 				34D7C47F1BB9C60A00E8E523 /* SimpleIncrementer.m in Sources */,
+				34AF81501C53A06600DB5249 /* TestReporter.m in Sources */,
 				34D7C4B11BB9C6C400E8E523 /* SpecSpec.mm in Sources */,
 				34D7C47C1BB9C5FD00E8E523 /* ObjectWithProperty.m in Sources */,
 				34D1819E1BC7F0FD0087EC0D /* BlockMatcherSpec.mm in Sources */,
@@ -3907,6 +3916,7 @@
 				34757E261BA4A48E0047BC8D /* TestObservationHelper.m in Sources */,
 				346D1A971BBB37F400BECD4B /* SpecBundleApplicationTestsWithXCTest.m in Sources */,
 				345B1E8F1C31DA6E009BB77D /* XCTAssertSpec.swift in Sources */,
+				34AF814E1C53339300DB5249 /* TestReporter.m in Sources */,
 				34C95F561C2F16900055F089 /* CDRXCTestSuiteSpec.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
