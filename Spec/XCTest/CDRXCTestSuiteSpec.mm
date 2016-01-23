@@ -1,16 +1,12 @@
-#if TARGET_OS_IPHONE
-// Normally you would include this file out of the framework.  However, we're
-// testing the framework here, so including the file from the framework will
-// conflict with the compiler attempting to include the file from the project.
-#import "CDRSpecHelper.h"
-#else
-#import <Cedar/CDRSpecHelper.h>
-#endif
-
-#import "CDRSpec.h"
+#import "Cedar.h"
 #import "CDRXCTestSuite.h"
 #import "CDRReportDispatcher.h"
 #import "CDRXCTestSupport.h"
+#import "TestReporter.h"
+
+#if !__has_feature(objc_arc)
+#error This class must be compiled with ARC.
+#endif
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -19,30 +15,22 @@ SPEC_BEGIN(CDRXCTestSuiteSpec)
 
 describe(@"CDRXCTestSuite", ^{
     __block id subject;
+    __block TestReporter *reporter;
     __block CDRReportDispatcher *dispatcher;
 
-    static NSUInteger willStartExampleGroupCount;
-    static NSUInteger didFinishExampleGroupCount;
+    beforeEach(^{
+        reporter = [TestReporter new];
+        dispatcher = [[CDRReportDispatcher alloc] initWithReporters:@[reporter]];
+    });
 
-    it(@"should report that each parent example group has started and ended to the dispatcher", ^{
-        willStartExampleGroupCount = 0;
-        didFinishExampleGroupCount = 0;
-
-        dispatcher = nice_fake_for([CDRReportDispatcher class]);
-        dispatcher stub_method(@selector(runWillStartExampleGroup:)).and_do_block(^(CDRExampleGroup *group){
-            ++willStartExampleGroupCount;
-        });
-        dispatcher stub_method(@selector(runDidFinishExampleGroup:)).and_do_block(^(CDRExampleGroup *group){
-            ++didFinishExampleGroupCount;
-        });
-
-        CDRSpec *simulatedSpec = [[[NSClassFromString(@"CDRXCSimulatedTestSuiteSpec") alloc] init] autorelease];
+    it(@"should report that each parent example group has started and ended", ^{
+        CDRSpec *simulatedSpec = [[NSClassFromString(@"CDRXCSimulatedTestSuiteSpec") alloc] init];
         [simulatedSpec defineBehaviors];
         subject = [simulatedSpec testSuiteWithRandomSeed:0 dispatcher:dispatcher];
         [subject performTest:nil];
 
-        willStartExampleGroupCount should equal(4);
-        didFinishExampleGroupCount should equal(4);
+        reporter.startedExampleGroups.count should equal(4);
+        reporter.finishedExampleGroups.count  should equal(4);
     });
 });
 

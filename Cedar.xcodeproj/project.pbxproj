@@ -275,7 +275,7 @@
 		34C95F531C2DD7B30055F089 /* CDRNullabilityCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34C95F541C2DD7B30055F089 /* CDRNullabilityCompat.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 34C95F4F1C2DD7B30055F089 /* CDRNullabilityCompat.h */; };
 		34C95F551C2E57A90055F089 /* SwiftSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DB67481C2B4D6A00206663 /* SwiftSpec.swift */; };
-		34C95F561C2F16900055F089 /* CDRXCTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXCTestSuiteSpec.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		34C95F561C2F16900055F089 /* CDRXCTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXCTestSuiteSpec.mm */; };
 		34D1819C1BC7F0E60087EC0D /* BlockMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 346F64681B82D01700F64156 /* BlockMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34D1819D1BC7F0E70087EC0D /* BlockMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 346F64681B82D01700F64156 /* BlockMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34D1819E1BC7F0FD0087EC0D /* BlockMatcherSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 346F646D1B82D3C900F64156 /* BlockMatcherSpec.mm */; };
@@ -451,7 +451,7 @@
 		34D7C4831BB9C61A00E8E523 /* ObjectWithValueEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D28051818E2321D00887CC4 /* ObjectWithValueEquality.m */; };
 		34D7C4841BB9C61E00E8E523 /* FooSuperclass.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10EBB18F46C0E00950904 /* FooSuperclass.m */; };
 		34D7C4851BB9C62400E8E523 /* DeallocNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 343FAFE9190FDAEC0085AFEC /* DeallocNotifier.m */; };
-		34D7C4861BB9C65700E8E523 /* CDRXCTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXCTestSuiteSpec.mm */; };
+		34D7C4861BB9C65700E8E523 /* CDRXCTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXCTestSuiteSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		34D7C4871BB9C66000E8E523 /* CedarApplicationDelegateSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE7DD11117296CB20058EB3B /* CedarApplicationDelegateSpec.mm */; };
 		34D7C4881BB9C67100E8E523 /* WeakReferenceCompatibilitySpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE5218D4175979D900A656BC /* WeakReferenceCompatibilitySpec.mm */; };
 		34D7C4891BB9C67400E8E523 /* CDRSpyiOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */; };
@@ -766,7 +766,7 @@
 		AE34723719C12534005CA6F1 /* FibonacciCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = E32861311604F287001FA77E /* FibonacciCalculator.m */; };
 		AE34723919C12588005CA6F1 /* SimpleKeyValueObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788C183C71950078C608 /* SimpleKeyValueObserver.m */; };
 		AE34723D19C22547005CA6F1 /* CDRDefaultReporterSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AEBCDD7E173ACD6700B42B58 /* CDRDefaultReporterSpec.mm */; };
-		AE34724619C225A1005CA6F1 /* CDRXCTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXCTestSuiteSpec.mm */; };
+		AE34724619C225A1005CA6F1 /* CDRXCTestSuiteSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE34724019C2259B005CA6F1 /* CDRXCTestSuiteSpec.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE34724B19C37ECF005CA6F1 /* CDRXCTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = AE34724919C37ECF005CA6F1 /* CDRXCTestCase.h */; };
 		AE34724D19C37ECF005CA6F1 /* CDRXCTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34724A19C37ECF005CA6F1 /* CDRXCTestCase.m */; };
 		AE34724E19C37ECF005CA6F1 /* CDRXCTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34724A19C37ECF005CA6F1 /* CDRXCTestCase.m */; };
