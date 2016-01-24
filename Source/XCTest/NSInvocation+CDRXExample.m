@@ -2,7 +2,7 @@
 #import <objc/runtime.h>
 
 const char *CDRXDispatcherKey;
-const char *CDRXExampleKey;
+const char *CDRXExamplesKey;
 const char *CDRXSpecClassNameKey;
 
 
@@ -16,12 +16,12 @@ const char *CDRXSpecClassNameKey;
     objc_setAssociatedObject(self, &CDRXDispatcherKey, dispatcher, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (CDRExample *)cdr_example {
-    return objc_getAssociatedObject(self, &CDRXExampleKey);
+- (NSArray *)cdr_examples {
+    return objc_getAssociatedObject(self, &CDRXExamplesKey);
 }
 
-- (void)cdr_setExample:(CDRExample *)example {
-    objc_setAssociatedObject(self, &CDRXExampleKey, example, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)cdr_setExamples:(NSArray *)examples {
+    objc_setAssociatedObject(self, &CDRXExamplesKey, examples, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSString *)cdr_specClassName {
@@ -30,6 +30,11 @@ const char *CDRXSpecClassNameKey;
 
 - (void)cdr_setSpecClassName:(NSString *)specClassName {
     objc_setAssociatedObject(self, &CDRXSpecClassNameKey, specClassName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)cdr_addSupplementaryExample:(CDRExample *)example {
+    NSArray *existingExamples = self.cdr_examples ?: @[];
+    self.cdr_examples = [existingExamples arrayByAddingObject:example];
 }
 
 @end
