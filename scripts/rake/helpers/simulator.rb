@@ -6,8 +6,10 @@ class Simulator
     Shell.with_env({"CEDAR_REPORTER_CLASS" => "CDRColorizedReporter"}) do
       begin
         kill # ensure simulator is not currently running
-        Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --devicetypeid \"com.apple.CoreSimulator.SimDeviceType.iPhone-5s, #{SDK_RUNTIME_VERSION}\" --verbose --stdout build/uispecs.spec.log"
-        Shell.run "grep -q ', 0 failures' build/uispecs.spec.log", logfile
+        Shell.run "rm -rf #{logfile}"
+        Shell.run "ios-sim launch #{File.join(app_dir, "#{app_name}.app").inspect} --devicetypeid \"com.apple.CoreSimulator.SimDeviceType.iPhone-5s, #{SDK_RUNTIME_VERSION}\" --verbose --stdout #{logfile}"
+        Shell.run "grep -q ', 0 failures' #{logfile}"                # Fail unless we find the literal string '0 failures', this is to prevent the tests going green if the test runner itself crashes before it logs ANY output
+        Shell.run "! grep -q ', [1-9][0-9]* failures' #{logfile}"    # Fail if we find any number of failures
       rescue
         retry_count += 1
 
