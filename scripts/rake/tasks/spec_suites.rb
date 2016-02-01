@@ -52,7 +52,7 @@ namespace :suites do
       }
 
       Shell.with_env(env_vars) do
-        Simulator.launch(Xcode.build_dir("-iphonesimulator"), UI_SPECS_TARGET_NAME, "uispecs.run.log")
+        Simulator.launch(Xcode.build_dir("-iphonesimulator"), UI_SPECS_TARGET_NAME, Xcode.build_dir("-uispecs.run.log"))
       end
     end
   end
@@ -107,7 +107,7 @@ namespace :suites do
       }
 
       Shell.with_env(env_vars) do
-        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME, "frameworks.ios.static.specs.run.log")
+        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_STATIC_FRAMEWORK_SPECS_TARGET_NAME, Xcode.build_dir("-frameworks.ios.static.specs.run.log"))
       end
     end
   end
@@ -134,7 +134,7 @@ namespace :suites do
       }
 
       Shell.with_env(env_vars) do
-        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, "frameworks.ios.dynamic.specs.run.log")
+        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, Xcode.build_dir("-frameworks.ios.dynamic.specs.run.log"))
       end
     end
   end
