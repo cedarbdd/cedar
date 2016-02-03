@@ -37,5 +37,6 @@ class Simulator
     system %Q[killall -m -KILL "gdb" > /dev/null 2>&1]
     system %Q[killall -m -KILL "otest" > /dev/null 2>&1]
     system %Q[killall -m -KILL "iPhone Simulator" > /dev/null 2>&1]
+    system %Q[killall -m -KILL "Simulator" > /dev/null 2>&1]
   end
 end
