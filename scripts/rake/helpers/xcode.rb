@@ -62,11 +62,28 @@ class Xcode
     args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
-    Shell.run(%Q(open -b com.apple.iphonesimulator --args -CurrentDeviceUDID `xcrun instruments -s | grep -o "#{iPhone_simulator_name} (#{SDK_VERSION}) \[.*\]" |grep -o "\[.*\]" | sed "s/^\[\(.*\)\]$/\1/" 2>/dev/null`))
-    Shell.run("sleep 5") # need to wait for the simulator to be done "launching"
+    # launch Simulator.app with the uuid matching our device and sdk version
+    Shell.run(%Q(open -b com.apple.iphonesimulator \
+                      --args -CurrentDeviceUDID `xcrun instruments -s | \
+                                                 grep -o "#{iPhone_simulator_name} (#{SDK_VERSION}) \[.*\]" | \
+                                                 grep -o "\[.*\]" | \
+                                                 sed "s/^\[\(.*\)\]$/\1/" 2>/dev/null`))
+    Shell.run("sleep 5", nil) # need to wait for the simulator to be done "launching"
 
     Shell.fold "test.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} -derivedDataPath #{DERIVED_DATA_DIR.inspect} SYMROOT=#{BUILD_DIR.inspect} clean build test #{args}), logfile)
+      retry_count = 0
+      begin
+        Shell.run(%Q(
+                       xcodebuild -project #{PROJECT_NAME}.xcodeproj \
+                       -configuration #{CONFIGURATION} \
+                       -derivedDataPath #{DERIVED_DATA_DIR.inspect} \
+                       SYMROOT=#{BUILD_DIR.inspect} \
+                       clean build test #{args})\
+                  , logfile)
+      rescue
+        retry_count += 1
+        raise if retry_count == 3
+      end
     end
   end
 
