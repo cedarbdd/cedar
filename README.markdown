@@ -30,7 +30,7 @@ describe(@"Example specs on NSString", ^{
 
 # Quick start
 
-* Add Cedar to your project via [Cocoapods](https://cocoapods.org/pods/Cedar) (`pod 'Cedar'`), [Carthage](https://github.com/Carthage/Carthage) (`github "pivotal/cedar"`), or [another method](https://github.com/pivotal/cedar/wiki/Installation#available-installation-methods)
+* Add Cedar to your project via [CocoaPods](https://cocoapods.org/pods/Cedar) (`pod 'Cedar'`), [Carthage](https://github.com/Carthage/Carthage) (`github "pivotal/cedar"`), or [another method](https://github.com/pivotal/cedar/wiki/Installation#available-installation-methods)
 * Install the Cedar Xcode file templates using the [Alcatraz package manager](http://alcatraz.io/) or by running this command in a terminal:
 ```
     $ curl -L https://raw.github.com/pivotal/cedar/master/install.sh | bash
