@@ -11,7 +11,7 @@ static NSHashTable *currentSpies__;
 @end
 
 @implementation CDRSpyInfo {
-    __weak id _weakOriginalObject;
+    id _weakOriginalObject;
 }
 
 static char *CDRSpyKey;

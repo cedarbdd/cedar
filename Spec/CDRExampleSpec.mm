@@ -140,7 +140,7 @@ describe(@"CDRExample", ^{
 
     describe(@"runWithDispatcher:", ^{
         __block CDRReportDispatcher *dispatcher;
-        __block __weak id weakCapturedObject;
+        __block id weakCapturedObject;
 
         beforeEach(^{
             dispatcher = nice_fake_for([CDRReportDispatcher class]);

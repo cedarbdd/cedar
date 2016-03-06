@@ -54,7 +54,7 @@ describe(@"CDRExampleGroup", ^{
         });
 
         describe(@"releasing objects captured in spec blocks", ^{
-            __block __weak id weakCapturedObject;
+            __block id weakCapturedObject;
 
             beforeEach(^{
                 group = [[[CDRExampleGroup alloc] initWithText:groupText] autorelease];
