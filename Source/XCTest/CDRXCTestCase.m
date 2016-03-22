@@ -52,7 +52,8 @@ IMP superPerformTest = class_getMethodImplementation(parentClass, @selector(reco
 } while(0);
 
 - (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filename atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
-    if (self.invocation.cdr_example.state == CDRExampleStateIncomplete) {
+    CDRExample *example = self.invocation.cdr_examples.firstObject;
+    if (example.state == CDRExampleStateIncomplete) {
         [[CDRSpecFailure specFailureWithReason:description fileName:filename lineNumber:(int)lineNumber] raise];
     } else {
         super_recordFailure(description, filename, lineNumber, expected);

@@ -46,8 +46,15 @@ const char *CDRXSpecKey;
     NSArray *examples = [self allExamplesToRun];
 
     NSMutableArray *testInvocations = [NSMutableArray array];
+    NSMutableArray *unusedPendingExamples = [NSMutableArray array];
     for (CDRExample *example in examples) {
-        if (!example.isPending) {
+        if (example.isPending) {
+            if (testInvocations.count > 0) {
+                [[testInvocations lastObject] cdr_addSupplementaryExample:example];
+            } else {
+                [unusedPendingExamples addObject:example];
+            }
+        } else {
             NSString *methodName = [namer methodNameForExample:example withClassName:NSStringFromClass([self class])];
             SEL selector = NSSelectorFromString(methodName);
             NSMethodSignature *methodSignature = [newXCTestSubclass instanceMethodSignatureForSelector:selector];
@@ -60,9 +67,11 @@ const char *CDRXSpecKey;
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
             invocation.selector = selector;
             invocation.cdr_dispatcher = dispatcher;
-            invocation.cdr_example = example;
+            invocation.cdr_examples = [unusedPendingExamples arrayByAddingObject:example];
             invocation.cdr_specClassName = className;
             [testInvocations addObject:invocation];
+
+            [unusedPendingExamples removeAllObjects];
         }
     }
 
@@ -109,13 +118,17 @@ const char *CDRXSpecKey;
     return examples;
 }
 
-- (void)createTestMethodForSelector:(SEL)selector onClass:(Class)aClass {
-    IMP imp = imp_implementationWithBlock(^(id instance){
-        CDRExample *example = [[instance invocation] cdr_example];
+static void testMethodImplementation(id instance, SEL _cmd) {
+    NSMutableSet *alreadyReportedExampleGroups = [NSMutableSet set];
+    CDRReportDispatcher *theDispatcher = [[instance invocation] cdr_dispatcher];
+
+    for (CDRExample *example in [[instance invocation] cdr_examples]) {
         CDRExampleGroup *parentGroup = (CDRExampleGroup *)example.parent;
-        CDRReportDispatcher *theDispatcher = [[instance invocation] cdr_dispatcher];
         while (![parentGroup isEqual:example.spec.rootGroup]) {
-            [theDispatcher runWillStartExampleGroup:parentGroup];
+            if (![alreadyReportedExampleGroups containsObject:parentGroup]) {
+                [theDispatcher runWillStartExampleGroup:parentGroup];
+            }
+
             parentGroup = (CDRExampleGroup *)[parentGroup parent];
         }
 
@@ -133,14 +146,20 @@ const char *CDRXSpecKey;
 
         parentGroup = (CDRExampleGroup *)example.parent;
         while (![parentGroup isEqual:example.spec.rootGroup]) {
-            [theDispatcher runDidFinishExampleGroup:parentGroup];
+            if (![alreadyReportedExampleGroups containsObject:parentGroup]) {
+                [theDispatcher runDidFinishExampleGroup:parentGroup];
+                [alreadyReportedExampleGroups addObject:parentGroup];
+            }
+
             parentGroup = (CDRExampleGroup *)[parentGroup parent];
         }
-    });
-    Method m = class_getInstanceMethod([self class], @selector(defineBehaviors));
+    }
+}
 
+- (void)createTestMethodForSelector:(SEL)selector onClass:(Class)aClass {
+    Method m = class_getInstanceMethod([self class], @selector(defineBehaviors));
     const char *encoding = method_getTypeEncoding(m);
-    class_addMethod(aClass, selector, imp, encoding);
+    class_addMethod(aClass, selector, (IMP)testMethodImplementation, encoding);
 }
 
 @end
