@@ -29,15 +29,6 @@ void CDRInjectIntoXCTestRunner() {
         [[NSException exceptionWithName:@"CedarNoTestFrameworkAvailable" reason:@"You must link against either the XCTest or SenTestingKit frameworks." userInfo:nil] raise];
     }
 
-    // if possible, use the new XCTestObservation protocol available in Xcode 7
-    Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
-    if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
-        id observationCenter = [observationCenterClass sharedTestObservationCenter];
-        static CDRXCTestObserver *xcTestObserver;
-        xcTestObserver = [[CDRXCTestObserver alloc] init];
-        [observationCenter addTestObserver:xcTestObserver];
-    }
-
     Class testSuiteMetaClass = object_getClass(testSuiteClass);
     Method m = class_getClassMethod(testSuiteClass, @selector(allTests));
 
