@@ -9,6 +9,8 @@
 #import "CDRSpecRun.h"
 #import <objc/runtime.h>
 
+static dispatch_once_t cedarTestSuiteCreatedOnceToken;
+
 id CDRCreateXCTestSuite() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
     Class testSuiteSubclass = NSClassFromString(@"_CDRXCTestSuite");
@@ -23,20 +25,34 @@ id CDRCreateXCTestSuite() {
     return [[[testSuiteSubclass alloc] initWithSpecRun:run] autorelease];
 }
 
+void chainClassMethod(Class metaClass, Class class, SEL selector, SEL newSelector, IMP newImplementation) {
+    Method m = class_getClassMethod(class, selector);
+    class_addMethod(metaClass, newSelector, method_getImplementation(m), method_getTypeEncoding(m));
+    class_replaceMethod(metaClass, selector, newImplementation, method_getTypeEncoding(m));
+}
+
 void CDRInjectIntoXCTestRunner() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
     if (!testSuiteClass) {
         [[NSException exceptionWithName:@"CedarNoTestFrameworkAvailable" reason:@"You must link against either the XCTest or SenTestingKit frameworks." userInfo:nil] raise];
     }
-
     Class testSuiteMetaClass = object_getClass(testSuiteClass);
-    Method m = class_getClassMethod(testSuiteClass, @selector(testSuiteForTestConfiguration:));
 
-    class_addMethod(testSuiteMetaClass, @selector(CDR_original_testSuiteForTestConfiguration:), method_getImplementation(m), method_getTypeEncoding(m));
-    IMP newImp = imp_implementationWithBlock(^id(id self, id testConfiguration){
-        id defaultSuite = [self CDR_original_testSuiteForTestConfiguration:testConfiguration];
-        [defaultSuite addTest:CDRCreateXCTestSuite()];
+    IMP newAllTestsImp = imp_implementationWithBlock(^id(id self, id testConfiguration){
+        id defaultSuite = [self CDR_original_allTests];
+        dispatch_once(&cedarTestSuiteCreatedOnceToken, ^{
+            [defaultSuite addTest:CDRCreateXCTestSuite()];
+        });
         return defaultSuite;
     });
-    class_replaceMethod(testSuiteMetaClass, @selector(testSuiteForTestConfiguration:), newImp, method_getTypeEncoding(m));
+    chainClassMethod(testSuiteMetaClass, testSuiteClass, @selector(allTests), @selector(CDR_original_allTests), newAllTestsImp);
+
+    IMP newTestSuiteForConfigurationImp = imp_implementationWithBlock(^id(id self, id testConfiguration){
+        id defaultSuite = [self CDR_original_testSuiteForTestConfiguration:testConfiguration];
+        dispatch_once(&cedarTestSuiteCreatedOnceToken, ^{
+            [defaultSuite addTest:CDRCreateXCTestSuite()];
+        });
+        return defaultSuite;
+    });
+    chainClassMethod(testSuiteMetaClass, testSuiteClass, @selector(testSuiteForTestConfiguration:), @selector(CDR_original_testSuiteForTestConfiguration:), newTestSuiteForConfigurationImp);
 }
