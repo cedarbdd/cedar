@@ -29,23 +29,14 @@ void CDRInjectIntoXCTestRunner() {
         [[NSException exceptionWithName:@"CedarNoTestFrameworkAvailable" reason:@"You must link against either the XCTest or SenTestingKit frameworks." userInfo:nil] raise];
     }
 
-    // if possible, use the new XCTestObservation protocol available in Xcode 7
-    Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
-    if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
-        id observationCenter = [observationCenterClass sharedTestObservationCenter];
-        static CDRXCTestObserver *xcTestObserver;
-        xcTestObserver = [[CDRXCTestObserver alloc] init];
-        [observationCenter addTestObserver:xcTestObserver];
-    }
-
     Class testSuiteMetaClass = object_getClass(testSuiteClass);
-    Method m = class_getClassMethod(testSuiteClass, @selector(allTests));
+    Method m = class_getClassMethod(testSuiteClass, @selector(testSuiteForTestConfiguration:));
 
-    class_addMethod(testSuiteMetaClass, @selector(CDR_original_allTests), method_getImplementation(m), method_getTypeEncoding(m));
-    IMP newImp = imp_implementationWithBlock(^id(id self){
-        id defaultSuite = [self CDR_original_allTests];
+    class_addMethod(testSuiteMetaClass, @selector(CDR_original_testSuiteForTestConfiguration:), method_getImplementation(m), method_getTypeEncoding(m));
+    IMP newImp = imp_implementationWithBlock(^id(id self, id testConfiguration){
+        id defaultSuite = [self CDR_original_testSuiteForTestConfiguration:testConfiguration];
         [defaultSuite addTest:CDRCreateXCTestSuite()];
         return defaultSuite;
     });
-    class_replaceMethod(testSuiteMetaClass, @selector(allTests), newImp, method_getTypeEncoding(m));
+    class_replaceMethod(testSuiteMetaClass, @selector(testSuiteForTestConfiguration:), newImp, method_getTypeEncoding(m));
 }
