@@ -41,6 +41,8 @@
 #import "Exist.h"
 
 
-#ifdef CEDAR_CUSTOM_MATCHERS
-#import CEDAR_CUSTOM_MATCHERS
-#endif
+#ifdef __cplusplus
+    #ifdef CEDAR_CUSTOM_MATCHERS
+    #import CEDAR_CUSTOM_MATCHERS
+    #endif
+#endif // __cplusplus
