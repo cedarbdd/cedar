@@ -32,10 +32,14 @@ void CDRInjectIntoXCTestRunner() {
     // if possible, use the new XCTestObservation protocol available in Xcode 7
     Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
     if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
-        id observationCenter = [observationCenterClass sharedTestObservationCenter];
-        static CDRXCTestObserver *xcTestObserver;
-        xcTestObserver = [[CDRXCTestObserver alloc] init];
-        [observationCenter addTestObserver:xcTestObserver];
+        // Accessing the `sharedTestObservationCenter` too early causes XCTest console output to break when running
+        // on Xcode 7.3. Deferring adding the observer works around this issue. (rdar://25456276)
+        dispatch_async(dispatch_get_main_queue(), ^{
+            id observationCenter = [observationCenterClass sharedTestObservationCenter];
+            static CDRXCTestObserver *xcTestObserver;
+            xcTestObserver = [[CDRXCTestObserver alloc] init];
+            [observationCenter addTestObserver:xcTestObserver];
+        });
     }
 
     Class testSuiteMetaClass = object_getClass(testSuiteClass);

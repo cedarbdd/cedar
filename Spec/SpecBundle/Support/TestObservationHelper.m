@@ -16,7 +16,10 @@ static NSMutableArray *_knownTestSuites;
     if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
         _knownTestSuites = [NSMutableArray array];
 
-        [[observationCenterClass sharedTestObservationCenter] addTestObserver:(id)[TestObservationHelper new]];
+        // See comment in CDRXCTestFunctions.m for context on the dispatch_async
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[observationCenterClass sharedTestObservationCenter] addTestObserver:(id)[TestObservationHelper new]];
+        });
     }
 }
 
