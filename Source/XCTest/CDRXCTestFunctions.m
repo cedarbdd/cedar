@@ -23,23 +23,17 @@ id CDRCreateXCTestSuite() {
     return [[[testSuiteSubclass alloc] initWithSpecRun:run] autorelease];
 }
 
-void CDRInjectIntoXCTestRunner() {
+void CDRAddCedarTestObserver(id observationCenter) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [observationCenter CDR_original_addTestObserver:[[CDRXCTestObserver alloc] init]];
+    });
+}
+
+void CDRSwizzleTestSuiteAllTestsMethod() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
     if (!testSuiteClass) {
         [[NSException exceptionWithName:@"CedarNoTestFrameworkAvailable" reason:@"You must link against either the XCTest or SenTestingKit frameworks." userInfo:nil] raise];
-    }
-
-    // if possible, use the new XCTestObservation protocol available in Xcode 7
-    Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
-    if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
-        // Accessing the `sharedTestObservationCenter` too early causes XCTest console output to break when running
-        // on Xcode 7.3. Deferring adding the observer works around this issue. (rdar://25456276)
-        dispatch_async(dispatch_get_main_queue(), ^{
-            id observationCenter = [observationCenterClass sharedTestObservationCenter];
-            static CDRXCTestObserver *xcTestObserver;
-            xcTestObserver = [[CDRXCTestObserver alloc] init];
-            [observationCenter addTestObserver:xcTestObserver];
-        });
     }
 
     Class testSuiteMetaClass = object_getClass(testSuiteClass);
@@ -52,4 +46,37 @@ void CDRInjectIntoXCTestRunner() {
         return defaultSuite;
     });
     class_replaceMethod(testSuiteMetaClass, @selector(allTests), newImp, method_getTypeEncoding(m));
+}
+
+void CDRSwizzleTestObservationCenter() {
+    Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
+    if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
+        // Swizzle -addTestObserver:
+        Method addTestObserverMethod = class_getInstanceMethod(observationCenterClass, @selector(addTestObserver:));
+        class_addMethod(observationCenterClass, @selector(CDR_original_addTestObserver:), method_getImplementation(addTestObserverMethod), method_getTypeEncoding(addTestObserverMethod));
+
+        IMP newAddTestObserverImp = imp_implementationWithBlock(^void(id self, id observer){
+            [self CDR_original_addTestObserver:observer];
+            CDRAddCedarTestObserver(self);
+        });
+        class_replaceMethod(observationCenterClass, @selector(addTestObserver:), newAddTestObserverImp, method_getTypeEncoding(addTestObserverMethod));
+
+
+        // Swizzle -_addLegacyTestObserver:
+        Method addLegacyTestObserverMethod = class_getInstanceMethod(observationCenterClass, @selector(_addLegacyTestObserver:));
+        if (addLegacyTestObserverMethod) {
+            class_addMethod(observationCenterClass, @selector(CDR_original__addLegacyTestObserver:), method_getImplementation(addLegacyTestObserverMethod), method_getTypeEncoding(addLegacyTestObserverMethod));
+
+            IMP newAddLegacyTestObserverImp = imp_implementationWithBlock(^void(id self, id observer){
+                [self CDR_original__addLegacyTestObserver:observer];
+                CDRAddCedarTestObserver(self);
+            });
+            class_replaceMethod(observationCenterClass, @selector(_addLegacyTestObserver:), newAddLegacyTestObserverImp, method_getTypeEncoding(addLegacyTestObserverMethod));
+        }
+    }
+}
+
+void CDRInjectIntoXCTestRunner() {
+    CDRSwizzleTestSuiteAllTestsMethod();
+    CDRSwizzleTestObservationCenter();
 }
