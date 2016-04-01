@@ -7,20 +7,21 @@
 
 @interface TestObservationHelper () <XCTestObservation> @end
 
+// This class is loaded as the NSPrincipalClass of test bundles that require it, at which point
+// it registers itself as a test observer.
 @implementation TestObservationHelper
 
 static NSMutableArray *_knownTestSuites;
 
-+ (void)load {
-    Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
-    if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
-        _knownTestSuites = [NSMutableArray array];
-
-        // See comment in CDRXCTestFunctions.m for context on the dispatch_async
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[observationCenterClass sharedTestObservationCenter] addTestObserver:(id)[TestObservationHelper new]];
-        });
+- (instancetype)init {
+    if (self = [super init]) {
+        Class observationCenterClass = NSClassFromString(@"XCTestObservationCenter");
+        if (observationCenterClass && [observationCenterClass respondsToSelector:@selector(sharedTestObservationCenter)]) {
+            _knownTestSuites = [NSMutableArray array];
+            [[observationCenterClass sharedTestObservationCenter] addTestObserver:self];
+        }
     }
+    return self;
 }
 
 + (NSArray *)knownTestSuites {

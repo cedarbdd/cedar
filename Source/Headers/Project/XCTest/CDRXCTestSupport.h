@@ -22,8 +22,12 @@
 - (id)CDR_original_allTests;
 - (id)initWithName:(NSString *)aName;
 
-// XCTestObservationCenter
+@end
+
+@interface XCTestObservationCenter: NSObject
 + (instancetype)sharedTestObservationCenter;
 - (void)addTestObserver:(id<XCTestObservation>)observer;
-
+- (void)_addLegacyTestObserver:(id)observer;
+- (void)CDR_original_addTestObserver:(id<XCTestObservation>)observer;
+- (void)CDR_original__addLegacyTestObserver:(id)observer;
 @end
