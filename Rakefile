@@ -20,8 +20,6 @@ SNIPPET_SENTINEL_VALUE = "isCedarSnippet"
 XCODE_TEMPLATES_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/Templates"
 XCODE_SNIPPETS_DIR = "#{ENV['HOME']}/Library/Developer/Xcode/UserData/CodeSnippets"
 
-XCODE_PLUGINS_DIR = "#{ENV['HOME']}/Library/Application Support/Developer/Shared/Xcode/Plug-ins/"
-
 LATEST_SDK_VERSION = `xcodebuild -showsdks 2>/dev/null | grep iphonesimulator | cut -d ' ' -f 4`.chomp.split("\n").last
 SDK_VERSION = ENV["CEDAR_SDK_VERSION"] || LATEST_SDK_VERSION
 SDK_RUNTIME_VERSION = ENV["CEDAR_SDK_RUNTIME_VERSION"] || LATEST_SDK_VERSION
@@ -32,7 +30,6 @@ DERIVED_DATA_DIR = File.join(PROJECT_ROOT, "derivedData")
 TEMPLATES_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "Templates")
 SNIPPETS_DIR = File.join(PROJECT_ROOT, "CodeSnippetsAndTemplates", "CodeSnippets")
 DIST_STAGING_DIR = "#{BUILD_DIR}/dist"
-PLUGIN_DIR = File.join(PROJECT_ROOT, "CedarPlugin.xcplugin")
 PLISTBUDDY = "/usr/libexec/PlistBuddy"
 
 require 'tmpdir'
