@@ -1,11 +1,12 @@
 #import "CDRSpyInfo.h"
 #import "CDRSpy.h"
+#import "CDRHooks.h"
 #import "CedarDoubleImpl.h"
 #import <objc/runtime.h>
 
 static NSHashTable *currentSpies__;
 
-@interface CDRSpyInfo ()
+@interface CDRSpyInfo () <CDRHooks>
 @property (nonatomic, assign) id originalObject;
 @property (nonatomic, weak) id weakOriginalObject;
 @end

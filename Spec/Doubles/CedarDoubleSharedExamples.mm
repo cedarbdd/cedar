@@ -95,6 +95,7 @@ sharedExamplesFor(@"a Cedar double", ^(NSDictionary *sharedContext) {
 
             myDouble.retainCount should equal(doubleRetainCount + numInvocations);
 
+            [CedarDoubleImpl class] should conform_to(@protocol(CDRHooks));
             [CedarDoubleImpl afterEach];
 
             myDouble.retainCount should equal(doubleRetainCount);
