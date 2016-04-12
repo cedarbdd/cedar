@@ -1,7 +1,7 @@
 # tasks related to install, uninstall, reinstall, etc...
 
 desc "Build frameworks and install templates and code snippets"
-task :install => [:clean, :uninstall, "dist:prepare", :install_plugin] do
+task :install => [:clean, :uninstall, "dist:prepare"] do
   puts ""
   puts "Installing templates..."
   puts ""
@@ -11,7 +11,7 @@ task :install => [:clean, :uninstall, "dist:prepare", :install_plugin] do
   Shell.run %{rsync -vcrlK "#{DIST_STAGING_DIR}/Library/" ~/Library}
 end
 
-task :reinstall => [:uninstall, :install_plugin] do
+task :reinstall => [:uninstall] do
   Dir.mkdir(DIST_STAGING_DIR) unless File.exists?(DIST_STAGING_DIR)
 
   Shell.run %{rm -rf "#{DIST_STAGING_DIR}"/*}
@@ -28,15 +28,6 @@ task :reinstall => [:uninstall, :install_plugin] do
   AppCode.install_cedar_snippets
 
   Shell.run %{rsync -vcrlK #{File.join(DIST_STAGING_DIR, "Library")} ~/Library}
-end
-
-desc "Install the CedarPlugin into Xcode (restart required)"
-task :install_plugin do
-  puts ""
-  puts "Installing the CedarPlugin..."
-  puts ""
-
-  Shell.run %{mkdir -p "#{XCODE_PLUGINS_DIR}" && cp -rv "#{PLUGIN_DIR}" "#{XCODE_PLUGINS_DIR}"}
 end
 
 desc "Build the frameworks and upgrade the target"
