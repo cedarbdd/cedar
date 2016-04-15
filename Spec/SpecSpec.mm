@@ -205,7 +205,6 @@ describe(@"a describe block", ^{
             globalValue__ = @"something";
         });
 
-        expect(globalValue__).to(be_nil);
         itShouldBehaveLike(@"a shared example group that receives a value in the context", ^(NSMutableDictionary *context) {
             context[@"value"] = globalValue__;
         });
