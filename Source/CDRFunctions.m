@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 #import "CDRSpec.h"
+#import "CDRHooks.h"
 #import "CDRExampleGroup.h"
 #import "CDRExampleReporter.h"
 #import "CDRDefaultReporter.h"
@@ -105,22 +106,21 @@ void CDRDefineSharedExampleGroups() {
 }
 
 BOOL CDRClassHasClassMethod(Class class, SEL selector) {
-    const char *className = class_getName(class);
-    if (strcmp("UIAccessibilitySafeCategory__NSObject", className) &&
-        strcmp("SCRCException", className)) {
+    if (class_conformsToProtocol(class, @protocol(CDRHooks))) {
         return !!class_getClassMethod(class, selector);
     }
     return NO;
 }
 
-void CDRDefineGlobalBeforeAndAfterEachBlocks() {
-    [CDRSpecHelper specHelper].globalBeforeEachClasses = CDRSelectClasses(^BOOL(Class class) {
-        return CDRClassHasClassMethod(class, @selector(beforeEach));
+NSArray *CDRHooksClassesWithSelector(SEL selector) {
+    return CDRSelectClasses(^BOOL(Class class) {
+        return class_conformsToProtocol(class, @protocol(CDRHooks)) && !!class_getClassMethod(class, selector);
     });
+}
 
-    [CDRSpecHelper specHelper].globalAfterEachClasses = CDRSelectClasses(^BOOL(Class class) {
-        return CDRClassHasClassMethod(class, @selector(afterEach));
-    });
+void CDRDefineGlobalBeforeAndAfterEachBlocks() {
+    [CDRSpecHelper specHelper].globalBeforeEachClasses = CDRHooksClassesWithSelector(@selector(beforeEach));
+    [CDRSpecHelper specHelper].globalAfterEachClasses = CDRHooksClassesWithSelector(@selector(afterEach));
 }
 
 #pragma mark - Reporters

@@ -1,10 +1,11 @@
 #import "CedarDoubleImpl.h"
+#import "CDRHooks.h"
 
 using namespace Cedar::Doubles;
 
 static NSMutableArray *registeredDoubleImpls__ = nil;
 
-@interface CedarDoubleImpl () {
+@interface CedarDoubleImpl () <CDRHooks> {
     StubbedMethod::selector_map_t stubbed_methods_;
     NSMutableArray *sent_messages_;
     NSObject<CedarDouble> *parent_double_;
@@ -54,7 +55,7 @@ static NSMutableArray *registeredDoubleImpls__ = nil;
             [sentMessages addObject:invocation];
         }
     }
-    
+
     return [sentMessages autorelease];
 }
 
