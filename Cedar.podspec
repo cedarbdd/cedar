@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'Cedar'
-  s.version  = '0.13.1'
+  s.version  = '1.0'
   s.license  = 'MIT'
   s.summary  = 'BDD-style testing using Objective-C.'
   s.homepage = 'https://github.com/pivotal/cedar'
