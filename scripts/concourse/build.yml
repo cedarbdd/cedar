@@ -1,0 +1,5 @@
+platform: darwin
+inputs:
+  - name: cedar
+run:
+  path: cedar/scripts/concourse/build.sh
