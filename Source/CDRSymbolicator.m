@@ -288,7 +288,7 @@ NSUInteger CDRCallerStackAddress() {
 
     for (uint32_t imageIndex = 0; imageIndex < imageCount; imageIndex++) {
         NSString *imageName = [NSString stringWithCString:_dyld_get_image_name(imageIndex) encoding:NSUTF8StringEncoding];
-        if ([imageName hasPrefix: @"/Applications/Xcode"]) {
+        if ([imageName hasPrefix:@"/Applications/Xcode"] || [imageName hasPrefix:@"/Library/Developer"]) {
             continue;
         }
 
