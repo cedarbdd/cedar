@@ -30,6 +30,12 @@ const CDRSpecBlock PENDING = nil;
     [super dealloc];
 }
 
+- (id)copy {
+    CDRExample* example = [[CDRExample alloc] initWithText:text_ andBlock:block_];
+    example.focused = self.focused;
+    return example;
+}
+
 #pragma mark CDRExampleBase
 - (CDRExampleState)state {
     return state_;

@@ -19,6 +19,9 @@ extern "C" {
 void beforeEach(CDRSpecBlock);
 void afterEach(CDRSpecBlock);
 
+CDRExample * invariant(NSString *, __nullable CDRSpecBlock);
+extern CDRExample * __nonnull (*__nonnull it_should_always)(NSString *, __nullable CDRSpecBlock);
+
 CDRExampleGroup * describe(NSString *, __nullable CDRSpecBlock);
 extern CDRExampleGroup* __nonnull (*__nonnull context)(NSString *, __nullable CDRSpecBlock);
 
@@ -28,10 +31,14 @@ CDRExampleGroup * xdescribe(NSString *, __nullable CDRSpecBlock);
 extern CDRExampleGroup* __nonnull (*__nonnull xcontext)(NSString *, __nullable CDRSpecBlock);
 void subjectAction(CDRSpecBlock);
 CDRExample * xit(NSString *, __nullable CDRSpecBlock);
+CDRExample * xinvariant(NSString *, __nullable CDRSpecBlock);
+extern CDRExample* __nonnull (*__nonnull xit_should_always)(NSString *, __nullable CDRSpecBlock);
 
 CDRExampleGroup * fdescribe(NSString *, __nullable CDRSpecBlock);
 extern CDRExampleGroup* __nonnull (*__nonnull fcontext)(NSString *, __nullable CDRSpecBlock);
 CDRExample * fit(NSString *, __nullable CDRSpecBlock);
+CDRExample * finvariant(NSString *, __nullable CDRSpecBlock);
+extern CDRExample* __nonnull (*__nonnull fit_should_always)(NSString *, __nullable CDRSpecBlock);
 
 void fail(NSString *);
 #ifdef __cplusplus
