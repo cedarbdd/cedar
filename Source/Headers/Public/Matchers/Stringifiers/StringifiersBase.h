@@ -6,6 +6,7 @@
 
 namespace Cedar { namespace Matchers { namespace Stringifiers {
     NSString * object_description_for(const void *objectValue);
+    void attempt_future_explication(const void *objectValue);
 
     template<typename U>
     NSString * string_for(const U & value) {

@@ -19,6 +19,9 @@ namespace Cedar { namespace Matchers { namespace Private {
         template<typename U>
         bool matches(const U &) const;
 
+        template<typename U>
+        NSString * failure_message_for(const U &) const;
+
     protected:
         virtual NSString * failure_message_end() const;
 
@@ -35,6 +38,17 @@ namespace Cedar { namespace Matchers { namespace Private {
 
     template<typename T>
     Equal<T>::~Equal() {
+    }
+
+    template<typename T> template<typename U>
+    NSString * Equal<T>::failure_message_for(const U & value) const {
+        if (0 == strncmp(@encode(T), "@", 1) &&
+            0 == strncmp(@encode(U), "@", 1) &&
+            [Stringifiers::string_for(expectedValue_) isEqualToString:Stringifiers::string_for(value)]) {
+            Stringifiers::attempt_future_explication(&expectedValue_);
+            Stringifiers::attempt_future_explication(&value);
+        }
+        return Base<>::failure_message_for(value);
     }
 
     template<typename T>
