@@ -23,6 +23,15 @@ using namespace Cedar::Matchers;
 }
 @end
 
+@interface CustomObjectWithExplicitDescription: CustomObject
+@end
+
+@implementation CustomObjectWithExplicitDescription
+- (NSString *)cdr_explicitDescription {
+    return @"MoreExplicitCustomObject";
+}
+@end
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-root-class"
 NS_ROOT_CLASS
@@ -1902,6 +1911,26 @@ describe(@"equal matcher", ^{
             });
         });
     });
+
+    describe(@"when two objects aren't equal but have the same description and implement cdr_explicitDescription", ^{
+        __block CustomObjectWithExplicitDescription *actualValue, *expectedValue;
+
+        beforeEach(^{
+            actualValue = [[CustomObjectWithExplicitDescription alloc] init];
+            expectedValue = [[CustomObjectWithExplicitDescription alloc] init];
+            actualValue.shouldEqual = expectedValue.shouldEqual = NO;
+        });
+
+        describe(@"positive match", ^{
+            it(@"should fail with a sensible failure message using the explicit description", ^{
+                expectFailureWithMessage(@"Expected <MoreExplicitCustomObject> to equal <MoreExplicitCustomObject>", ^{
+                    expect(actualValue).to(equal(expectedValue));
+                });
+            });
+        });
+
+    });
+
 });
 
 #pragma clang diagnostic push

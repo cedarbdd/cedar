@@ -51,6 +51,22 @@
 		1FF449B518A0C24400AF94B0 /* CDRBufferedDefaultReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF449B318A0C04D00AF94B0 /* CDRBufferedDefaultReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2234907D18009DA6001C8E8D /* CDRHooks.h in Headers */ = {isa = PBXBuildFile; fileRef = 2234907C18009DA6001C8E8D /* CDRHooks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2234907F18009DAD001C8E8D /* CDRHooks.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = 2234907C18009DA6001C8E8D /* CDRHooks.h */; };
+		224C32311CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32301CD2EB01006CF6EA /* NSArray+ExplicitDescription.h */; };
+		224C32321CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32301CD2EB01006CF6EA /* NSArray+ExplicitDescription.h */; };
+		224C32331CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32301CD2EB01006CF6EA /* NSArray+ExplicitDescription.h */; };
+		224C32341CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32301CD2EB01006CF6EA /* NSArray+ExplicitDescription.h */; };
+		224C32381CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32351CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h */; };
+		224C32391CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32361CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h */; };
+		224C323A1CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32371CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h */; };
+		224C323B1CD2EB51006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32351CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h */; };
+		224C323C1CD2EB51006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32351CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h */; };
+		224C323D1CD2EB52006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32351CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h */; };
+		224C323E1CD2EB56006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32361CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h */; };
+		224C323F1CD2EB56006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32361CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h */; };
+		224C32401CD2EB56006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32361CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h */; };
+		224C32411CD2EB5E006CF6EA /* NSSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32371CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h */; };
+		224C32421CD2EB5F006CF6EA /* NSSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32371CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h */; };
+		224C32431CD2EB5F006CF6EA /* NSSet+ExplicitDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 224C32371CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h */; };
 		228F3FA717E3ECD10000C8AF /* CDRSpyiOSSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */; };
 		22B6A22715B7ACF800960ADE /* InvocationMatcher.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE597B4015B0638B00EEF305 /* InvocationMatcher.h */; };
 		3414776E191406E700CBA385 /* ComparatorsContainerConvenience.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFF375718FC452E002DA993 /* ComparatorsContainerConvenience.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -664,6 +680,33 @@
 		AE0F354E19E87D6F00B9F116 /* CompareCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE0F354F19E87D6F00B9F116 /* CompareCloseTo.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */; };
 		AE0F355019E89BC400B9F116 /* SimpleIncrementer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE80788A183C71950078C608 /* SimpleIncrementer.m */; };
+		AE0FBA9B1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBA951CD2542B00D6DF64 /* NSArray+ExplicitDescription.m */; };
+		AE0FBA9C1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBA951CD2542B00D6DF64 /* NSArray+ExplicitDescription.m */; };
+		AE0FBA9D1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBA951CD2542B00D6DF64 /* NSArray+ExplicitDescription.m */; };
+		AE0FBA9E1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBA951CD2542B00D6DF64 /* NSArray+ExplicitDescription.m */; };
+		AE0FBAA01CD2543A00D6DF64 /* NSArray+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBA951CD2542B00D6DF64 /* NSArray+ExplicitDescription.m */; };
+		AE0FBAAF1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */; };
+		AE0FBAB01CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */; };
+		AE0FBAB11CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */; };
+		AE0FBAB21CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */; };
+		AE0FBAB31CD29CD600D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */; };
+		AE0FBAB51CD29D0A00D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */; };
+		AE0FBAB61CD29D1E00D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */; };
+		AE0FBACD1CD2A69400D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC31CD2A67800D6DF64 /* NSDictionary+ExplicitDescription.m */; };
+		AE0FBACE1CD2A69400D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC31CD2A67800D6DF64 /* NSDictionary+ExplicitDescription.m */; };
+		AE0FBACF1CD2A69500D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC31CD2A67800D6DF64 /* NSDictionary+ExplicitDescription.m */; };
+		AE0FBAD01CD2A69600D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC31CD2A67800D6DF64 /* NSDictionary+ExplicitDescription.m */; };
+		AE0FBAD11CD2A69700D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC31CD2A67800D6DF64 /* NSDictionary+ExplicitDescription.m */; };
+		AE0FBAD21CD2A69F00D6DF64 /* NSSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC41CD2A67800D6DF64 /* NSSet+ExplicitDescription.m */; };
+		AE0FBAD31CD2A69F00D6DF64 /* NSSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC41CD2A67800D6DF64 /* NSSet+ExplicitDescription.m */; };
+		AE0FBAD41CD2A6A000D6DF64 /* NSSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC41CD2A67800D6DF64 /* NSSet+ExplicitDescription.m */; };
+		AE0FBAD51CD2A6A000D6DF64 /* NSSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC41CD2A67800D6DF64 /* NSSet+ExplicitDescription.m */; };
+		AE0FBAD61CD2A6A100D6DF64 /* NSSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAC41CD2A67800D6DF64 /* NSSet+ExplicitDescription.m */; };
+		AE0FBADC1CD2B45000D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAD71CD2B44400D6DF64 /* NSOrderedSet+ExplicitDescription.m */; };
+		AE0FBADD1CD2B45000D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAD71CD2B44400D6DF64 /* NSOrderedSet+ExplicitDescription.m */; };
+		AE0FBADE1CD2B45100D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAD71CD2B44400D6DF64 /* NSOrderedSet+ExplicitDescription.m */; };
+		AE0FBADF1CD2B45100D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAD71CD2B44400D6DF64 /* NSOrderedSet+ExplicitDescription.m */; };
+		AE0FBAE01CD2B45100D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0FBAD71CD2B44400D6DF64 /* NSOrderedSet+ExplicitDescription.m */; };
 		AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE167EF115B216DA005960B9 /* RaiseException.mm */; };
 		AE18A7B813F450A700C8872C /* Base.h in Copy headers to framework */ = {isa = PBXBuildFile; fileRef = AEF72FFB13ECC21E00786282 /* Base.h */; };
@@ -1391,6 +1434,10 @@
 		1FF449B018A0C03800AF94B0 /* CDRBufferedDefaultReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRBufferedDefaultReporter.m; sourceTree = "<group>"; };
 		1FF449B318A0C04D00AF94B0 /* CDRBufferedDefaultReporter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = CDRBufferedDefaultReporter.h; sourceTree = "<group>"; };
 		2234907C18009DA6001C8E8D /* CDRHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRHooks.h; sourceTree = "<group>"; };
+		224C32301CD2EB01006CF6EA /* NSArray+ExplicitDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ExplicitDescription.h"; sourceTree = "<group>"; };
+		224C32351CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ExplicitDescription.h"; sourceTree = "<group>"; };
+		224C32361CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOrderedSet+ExplicitDescription.h"; sourceTree = "<group>"; };
+		224C32371CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+ExplicitDescription.h"; sourceTree = "<group>"; };
 		228F3FA617E3ECD10000C8AF /* CDRSpyiOSSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = CDRSpyiOSSpec.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		342FB2C61BC328320090E253 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		34322B081BA740B900D0CFBD /* CDRXCTestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRXCTestObserver.h; sourceTree = "<group>"; };
@@ -1506,6 +1553,11 @@
 		AE0F354819E705C700B9F116 /* OSXGeometryStringifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXGeometryStringifiers.h; sourceTree = "<group>"; };
 		AE0F354A19E7073B00B9F116 /* OSXGeometryEqualSpecSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OSXGeometryEqualSpecSpec.mm; sourceTree = "<group>"; };
 		AE0F354D19E87D6F00B9F116 /* CompareCloseTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareCloseTo.h; sourceTree = "<group>"; };
+		AE0FBA951CD2542B00D6DF64 /* NSArray+ExplicitDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ExplicitDescription.m"; sourceTree = "<group>"; };
+		AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CollectionsExplicitDescriptionSpec.mm; sourceTree = "<group>"; };
+		AE0FBAC31CD2A67800D6DF64 /* NSDictionary+ExplicitDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ExplicitDescription.m"; sourceTree = "<group>"; };
+		AE0FBAC41CD2A67800D6DF64 /* NSSet+ExplicitDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+ExplicitDescription.m"; sourceTree = "<group>"; };
+		AE0FBAD71CD2B44400D6DF64 /* NSOrderedSet+ExplicitDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOrderedSet+ExplicitDescription.m"; sourceTree = "<group>"; };
 		AE167EF115B216DA005960B9 /* RaiseException.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RaiseException.mm; sourceTree = "<group>"; };
 		AE18A7D213F45BE500C8872C /* ComparatorsBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsBase.h; sourceTree = "<group>"; };
 		AE18A7D513F45BFC00C8872C /* ComparatorsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComparatorsContainer.h; sourceTree = "<group>"; };
@@ -1884,8 +1936,12 @@
 		34157D151B75A1F7007AD1BA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				224C32301CD2EB01006CF6EA /* NSArray+ExplicitDescription.h */,
+				224C32351CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h */,
 				AEAA191019DCC5A900194E95 /* NSInvocation+Cedar.h */,
 				AEAA191119DCC5A900194E95 /* NSMethodSignature+Cedar.h */,
+				224C32361CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h */,
+				224C32371CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2107,6 +2163,14 @@
 			path = OSX;
 			sourceTree = "<group>";
 		};
+		AE0FBAAD1CD29C4F00D6DF64 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AE0FBAAE1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AE167EEC15B210C9005960B9 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2159,8 +2223,12 @@
 		AE7F170317272FB000E1146D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AE0FBA951CD2542B00D6DF64 /* NSArray+ExplicitDescription.m */,
+				AE0FBAC31CD2A67800D6DF64 /* NSDictionary+ExplicitDescription.m */,
 				AE7F1705172730B000E1146D /* NSInvocation+Cedar.m */,
 				34ADE41618F23C8E00BD1E99 /* NSMethodSignature+Cedar.m */,
+				AE0FBAD71CD2B44400D6DF64 /* NSOrderedSet+ExplicitDescription.m */,
+				AE0FBAC41CD2A67800D6DF64 /* NSSet+ExplicitDescription.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2321,6 +2389,7 @@
 			isa = PBXGroup;
 			children = (
 				66F00B5014C4D92500146D88 /* Doubles */,
+				AE0FBAAD1CD29C4F00D6DF64 /* Extensions */,
 				96A07F0D13F27ED70021974D /* Focused */,
 				AEEE1FEB11DC27B800029872 /* iOS */,
 				AE8C879F1362068A006C9305 /* Matchers */,
@@ -2536,6 +2605,7 @@
 				346262401B9954C1002CAEBD /* CDRSpecFailure.h in Headers */,
 				346261F41B995422002CAEBD /* CDRTypeUtilities.h in Headers */,
 				346262091B99544D002CAEBD /* CDRFake.h in Headers */,
+				224C323C1CD2EB51006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */,
 				346262161B99546C002CAEBD /* Equal.h in Headers */,
 				346261FF1B995445002CAEBD /* AnyInstanceConformingToProtocolArgument.h in Headers */,
 				346262181B99546C002CAEBD /* RaiseException.h in Headers */,
@@ -2557,6 +2627,7 @@
 				346262191B99546C002CAEBD /* RespondTo.h in Headers */,
 				346261E81B995422002CAEBD /* CedarDoubleImpl.h in Headers */,
 				346262421B9954C1002CAEBD /* CDRVersion.h in Headers */,
+				224C32331CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */,
 				34D1819C1BC7F0E60087EC0D /* BlockMatcher.h in Headers */,
 				346261FE1B995445002CAEBD /* AnyInstanceOfClassArgument.h in Headers */,
 				3462623A1B9954C1002CAEBD /* CDRExampleGroup.h in Headers */,
@@ -2587,10 +2658,12 @@
 				3462621C1B995473002CAEBD /* AnInstanceOf.h in Headers */,
 				3462623C1B9954C1002CAEBD /* CDRFunctions.h in Headers */,
 				346262751B99BE9F002CAEBD /* UIGeometryStringifiers.h in Headers */,
+				224C32421CD2EB5F006CF6EA /* NSSet+ExplicitDescription.h in Headers */,
 				346262131B99546C002CAEBD /* BeSameInstanceAs.h in Headers */,
 				346261F71B995426002CAEBD /* CDRXCTestSuite.h in Headers */,
 				3462623B1B9954C1002CAEBD /* CDRExampleParent.h in Headers */,
 				346262381B9954C1002CAEBD /* CDRExample.h in Headers */,
+				224C323F1CD2EB56006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */,
 				346262321B9954B8002CAEBD /* CDRDefaultReporter.h in Headers */,
 				3462621B1B995473002CAEBD /* Contain.h in Headers */,
 				346262311B9954B8002CAEBD /* CDRColorizedReporter.h in Headers */,
@@ -2672,6 +2745,7 @@
 				34D7C4181BB9B55500E8E523 /* CDRTypeUtilities.h in Headers */,
 				34D7C4081BB9B53F00E8E523 /* NSInvocation+Cedar.h in Headers */,
 				34D7C4461BB9B5C500E8E523 /* CompareGreaterThan.h in Headers */,
+				224C32401CD2EB56006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */,
 				34D7C44B1BB9B5D300E8E523 /* UIGeometryStringifiers.h in Headers */,
 				34D7C4281BB9B59200E8E523 /* InvocationMatcher.h in Headers */,
 				34D7C40D1BB9B54F00E8E523 /* CDRXCTestCase.h in Headers */,
@@ -2680,6 +2754,7 @@
 				34D7C4141BB9B55500E8E523 /* CDRPrivateFunctions.h in Headers */,
 				34D7C4121BB9B55500E8E523 /* CDRBlockHelper.h in Headers */,
 				34D7C40B1BB9B54600E8E523 /* CDRSlowTestStatistics.h in Headers */,
+				224C32341CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */,
 				34D7C4261BB9B59200E8E523 /* RejectedMethod.h in Headers */,
 				34D7C4431BB9B5C500E8E523 /* ComparatorsBase.h in Headers */,
 				34D7C41D1BB9B56D00E8E523 /* AnyArgument.h in Headers */,
@@ -2703,6 +2778,7 @@
 				34D7C41C1BB9B56D00E8E523 /* ReturnValue.h in Headers */,
 				34D7C44E1BB9B5DF00E8E523 /* CedarComparators.h in Headers */,
 				34D1819D1BC7F0E70087EC0D /* BlockMatcher.h in Headers */,
+				224C32411CD2EB5E006CF6EA /* NSSet+ExplicitDescription.h in Headers */,
 				34D7C42C1BB9B5A400E8E523 /* CedarApplicationDelegate.h in Headers */,
 				34D7C4471BB9B5C500E8E523 /* ComparatorsContainerConvenience.h in Headers */,
 				34D7C4561BB9B5E900E8E523 /* CDRTeamCityReporter.h in Headers */,
@@ -2715,6 +2791,7 @@
 				34D7C4211BB9B59200E8E523 /* CedarDoubles.h in Headers */,
 				34D7C4251BB9B59200E8E523 /* CedarDouble.h in Headers */,
 				34D7C4171BB9B55500E8E523 /* CDRSymbolicator.h in Headers */,
+				224C323D1CD2EB52006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */,
 				34D7C4111BB9B54F00E8E523 /* NSInvocation+CDRXExample.h in Headers */,
 				34D7C43E1BB9B5B900E8E523 /* BeEmpty.h in Headers */,
 				34D7C45D1BB9B5F100E8E523 /* CDRHooks.h in Headers */,
@@ -2775,6 +2852,7 @@
 				AE4865D21B0690B1005DB302 /* CedarComparators.h in Headers */,
 				AE4865D31B0690B1005DB302 /* CedarStringifiers.h in Headers */,
 				AE4865D51B0690B1005DB302 /* ShouldSyntax.h in Headers */,
+				224C323E1CD2EB56006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */,
 				AE4865D61B0690B1005DB302 /* CDRVersion.h in Headers */,
 				AE4865D71B0690B1005DB302 /* CDRExample.h in Headers */,
 				AE4865D81B0690B1005DB302 /* CDRExampleBase.h in Headers */,
@@ -2783,6 +2861,7 @@
 				AE4865DB1B0690B1005DB302 /* CDRFunctions.h in Headers */,
 				34322B0A1BA740B900D0CFBD /* CDRXCTestObserver.h in Headers */,
 				AE4865DC1B0690B1005DB302 /* CDRHooks.h in Headers */,
+				224C32321CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */,
 				AE4865DD1B0690B1005DB302 /* CDRSharedExampleGroupPool.h in Headers */,
 				AE4865DE1B0690B1005DB302 /* CDRSpec.h in Headers */,
 				AE4865DF1B0690B1005DB302 /* CDRSpecFailure.h in Headers */,
@@ -2806,6 +2885,7 @@
 				AE4865E71B0691C9005DB302 /* CDRColorizedReporter.h in Headers */,
 				AE48656A1B06769F005DB302 /* NSInvocation+CDRXExample.h in Headers */,
 				AE4865231B06769B005DB302 /* CedarDoubleImpl.h in Headers */,
+				224C32431CD2EB5F006CF6EA /* NSSet+ExplicitDescription.h in Headers */,
 				AE48651D1B06769B005DB302 /* CDRSpyInfo.h in Headers */,
 				AE4865E81B0691EA005DB302 /* CDRTeamCityReporter.h in Headers */,
 				AE4865691B06769F005DB302 /* CDRXCTestCase.h in Headers */,
@@ -2818,6 +2898,7 @@
 				AE4865E61B0690B2005DB302 /* CDRSlowTestStatistics.h in Headers */,
 				AE48656B1B06769F005DB302 /* CDROTestNamer.h in Headers */,
 				AE4865E91B069253005DB302 /* CDRDefaultReporter.h in Headers */,
+				224C323B1CD2EB51006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */,
 				AE4865661B06769F005DB302 /* CDRRuntimeUtilities.h in Headers */,
 				AE4865B21B0690AF005DB302 /* RejectedMethod.h in Headers */,
 				AE4865B31B0690AF005DB302 /* StubbedMethod.h in Headers */,
@@ -2842,6 +2923,7 @@
 				AE8C880F13626FA5006C9305 /* CDRSpecFailure.h in Headers */,
 				AE0AF56513E9C0E300029396 /* CedarMatchers.h in Headers */,
 				AE0AF58513E9E87E00029396 /* ActualValue.h in Headers */,
+				224C32381CD2EB3F006CF6EA /* NSDictionary+ExplicitDescription.h in Headers */,
 				AEF72F7813EC730700786282 /* CedarComparators.h in Headers */,
 				AEF72F7B13EC734000786282 /* CedarStringifiers.h in Headers */,
 				AE4E9B9219C8B44700D794CE /* NSInvocation+CDRXExample.h in Headers */,
@@ -2863,6 +2945,7 @@
 				AE18A7D013F453CC00C8872C /* Equal.h in Headers */,
 				AE18A7D313F45BE500C8872C /* ComparatorsBase.h in Headers */,
 				AE0F354719E7059D00B9F116 /* OSXGeometryCompareEqual.h in Headers */,
+				224C32311CD2EB01006CF6EA /* NSArray+ExplicitDescription.h in Headers */,
 				AE18A7D613F45BFC00C8872C /* ComparatorsContainer.h in Headers */,
 				AE9AA67515AB601500617E1A /* CedarDoubles.h in Headers */,
 				AE9AA67615AB601500617E1A /* CDRSpy.h in Headers */,
@@ -2893,10 +2976,12 @@
 				AEEE1FFA11DC27B800029872 /* CDRExample.h in Headers */,
 				AEEE1FFC11DC27B800029872 /* CDRExampleGroup.h in Headers */,
 				969B6F96160F1FEC00C7C792 /* CDRSymbolicator.h in Headers */,
+				224C323A1CD2EB3F006CF6EA /* NSSet+ExplicitDescription.h in Headers */,
 				AE84F0DB145B70DD00769F85 /* ShouldSyntax.h in Headers */,
 				34147770191408C900CBA385 /* AnInstanceOf.h in Headers */,
 				AE31A29F19C0F23F00C438C1 /* CDRXCTestSuite.h in Headers */,
 				34777EB71B99451200A69FCF /* CDRPrivateFunctions.h in Headers */,
+				224C32391CD2EB3F006CF6EA /* NSOrderedSet+ExplicitDescription.h in Headers */,
 				AEB45A911496C8D800845D09 /* RaiseException.h in Headers */,
 				AEC9DEED12C2CC7E0039512D /* CDRColorizedReporter.h in Headers */,
 				96EA1CAE142C6449001A78E0 /* CDROTestReporter.h in Headers */,
@@ -3508,6 +3593,7 @@
 				1F45A3E3180E4A1C003C1E36 /* SpecBundleApplicationTestsWithXCTest.m in Sources */,
 				AE34723019C124CE005CA6F1 /* CDRExampleGroupSpec.mm in Sources */,
 				AE34723719C12534005CA6F1 /* FibonacciCalculator.m in Sources */,
+				AE0FBAB11CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */,
 				AE34722F19C124CE005CA6F1 /* CDRExampleSpec.mm in Sources */,
 				F7A225DC1B43A8FB006231CC /* FooSuperclass.m in Sources */,
 				1F45A3D0180E4796003C1E36 /* CDRSymbolicatorSpec.mm in Sources */,
@@ -3540,7 +3626,10 @@
 				346262721B99569B002CAEBD /* CDRTypeUtilities.m in Sources */,
 				3462626F1B99569B002CAEBD /* CDRSpecFailure.m in Sources */,
 				346262581B995683002CAEBD /* ConformTo.mm in Sources */,
+				AE0FBADE1CD2B45100D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */,
+				AE0FBAD41CD2A6A000D6DF64 /* NSSet+ExplicitDescription.m in Sources */,
 				3462626C1B99569B002CAEBD /* CDRRuntimeUtilities.m in Sources */,
+				AE0FBACF1CD2A69500D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */,
 				346262531B9954EA002CAEBD /* NSInvocation+Cedar.m in Sources */,
 				346262591B995689002CAEBD /* CDROTestNamer.m in Sources */,
 				3462624B1B9954E0002CAEBD /* StubbedMethod.mm in Sources */,
@@ -3559,6 +3648,7 @@
 				3462624C1B9954E0002CAEBD /* InvocationMatcher.mm in Sources */,
 				346262471B9954E0002CAEBD /* CedarDoubleImpl.mm in Sources */,
 				3462624D1B9954E0002CAEBD /* HaveReceived.mm in Sources */,
+				AE0FBA9D1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */,
 				3462625D1B99568F002CAEBD /* CDRJUnitXMLReporter.m in Sources */,
 				346262501B9954E4002CAEBD /* AnyArgument.mm in Sources */,
 				3462625B1B99568F002CAEBD /* CDRColorizedReporter.m in Sources */,
@@ -3609,6 +3699,7 @@
 				34FD46611B99D2F200257186 /* CDRSymbolicatorSpec.mm in Sources */,
 				34FD462E1B99D21300257186 /* CDRJUnitXMLReporterSpec.mm in Sources */,
 				34FD46311B99D22700257186 /* ArgumentReleaser.m in Sources */,
+				AE0FBAB51CD29D0A00D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */,
 				34FD46371B99D23800257186 /* SimpleIncrementer.m in Sources */,
 				34FD462D1B99D21300257186 /* CDRDefaultReporterSpec.mm in Sources */,
 				34FD46631B99D2F200257186 /* CDRHooksSpec.mm in Sources */,
@@ -3668,6 +3759,7 @@
 				34D7C3F01BB9B52200E8E523 /* CDRTeamCityReporter.m in Sources */,
 				34D7C3D21BB9B4D600E8E523 /* AnyInstanceArgument.mm in Sources */,
 				34D7C3F91BB9B52E00E8E523 /* CDRExampleBase.m in Sources */,
+				AE0FBAD01CD2A69600D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */,
 				34D7C3D51BB9B4D600E8E523 /* AnyInstanceConformingToProtocolArgument.mm in Sources */,
 				34D7C4031BB9B52E00E8E523 /* CDRTypeUtilities.m in Sources */,
 				34D7C3DA1BB9B4D600E8E523 /* CDRFake.mm in Sources */,
@@ -3685,12 +3777,14 @@
 				34D7C3D61BB9B4D600E8E523 /* CDRProtocolFake.mm in Sources */,
 				34D7C3DE1BB9B4D600E8E523 /* InvocationMatcher.mm in Sources */,
 				34D7C3F81BB9B52E00E8E523 /* CDRExample.m in Sources */,
+				AE0FBAD31CD2A69F00D6DF64 /* NSSet+ExplicitDescription.m in Sources */,
 				34D7C3F21BB9B52700E8E523 /* CDRSpec+XCTestSupport.m in Sources */,
 				34D7C3E61BB9B51900E8E523 /* RaiseException.mm in Sources */,
 				34D7C3F71BB9B52700E8E523 /* CDRXCTestFunctions.m in Sources */,
 				34D7C3DB1BB9B4D600E8E523 /* CedarDouble.mm in Sources */,
 				34D7C3F41BB9B52700E8E523 /* CDRXCTestSuite.m in Sources */,
 				34D7C3ED1BB9B52200E8E523 /* CDRJUnitXMLReporter.m in Sources */,
+				AE0FBA9E1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */,
 				34D7C3EB1BB9B52200E8E523 /* CDRColorizedReporter.m in Sources */,
 				34D7C3E51BB9B51600E8E523 /* StringifiersBase.mm in Sources */,
 				34D7C3EF1BB9B52200E8E523 /* CDRReportDispatcher.m in Sources */,
@@ -3700,6 +3794,7 @@
 				34D7C3D91BB9B4D600E8E523 /* CedarDoubleImpl.mm in Sources */,
 				34D7C3F31BB9B52700E8E523 /* CDRXCTestCase.m in Sources */,
 				34D7C3DF1BB9B4D600E8E523 /* HaveReceived.mm in Sources */,
+				AE0FBADD1CD2B45000D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */,
 				34D7C3FE1BB9B52E00E8E523 /* CDRSharedExampleGroupPool.m in Sources */,
 				34D7C3FD1BB9B52E00E8E523 /* CDRRuntimeUtilities.m in Sources */,
 				34D7C3E71BB9B51900E8E523 /* RespondTo.mm in Sources */,
@@ -3788,6 +3883,7 @@
 				34D7C4B01BB9C6C400E8E523 /* ObjCHeadersSpec.mm in Sources */,
 				34D7C49D1BB9C68100E8E523 /* ContainSpec.mm in Sources */,
 				34D7C48B1BB9C67C00E8E523 /* BeFalsySpec.mm in Sources */,
+				AE0FBAB21CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */,
 				34D7C4A91BB9C69A00E8E523 /* HaveReceivedSpec.mm in Sources */,
 				34D7C4A01BB9C68E00E8E523 /* ShouldSyntaxSpec.mm in Sources */,
 				34D7C4951BB9C67C00E8E523 /* BeTruthySpec.mm in Sources */,
@@ -3848,6 +3944,7 @@
 				AE19379F1B1ACAFB008C8CD8 /* CDROTestReporterSpec.mm in Sources */,
 				AE19375D1B1AC22D008C8CD8 /* CDRClassFakeSpec.mm in Sources */,
 				AE1937A21B1ACC26008C8CD8 /* ExampleWithPublicRunDates.mm in Sources */,
+				AE0FBAB31CD29CD600D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */,
 				AE1937781B1AC3DC008C8CD8 /* SimpleKeyValueObserver.m in Sources */,
 				AE1937631B1AC22D008C8CD8 /* CedarOrdinaryFakeSharedExamples.mm in Sources */,
 				AE1937771B1AC3DC008C8CD8 /* SimpleIncrementer.m in Sources */,
@@ -3915,6 +4012,7 @@
 				345B1E921C31E644009BB77D /* ExpectFailureWithMessage.mm in Sources */,
 				34757E261BA4A48E0047BC8D /* TestObservationHelper.m in Sources */,
 				346D1A971BBB37F400BECD4B /* SpecBundleApplicationTestsWithXCTest.m in Sources */,
+				AE0FBAB01CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */,
 				345B1E8F1C31DA6E009BB77D /* XCTAssertSpec.swift in Sources */,
 				34AF814E1C53339300DB5249 /* TestReporter.m in Sources */,
 				34C95F561C2F16900055F089 /* CDRXCTestSuiteSpec.mm in Sources */,
@@ -3930,6 +4028,7 @@
 				AE4865711B067953005DB302 /* AnyInstanceOfClassArgument.mm in Sources */,
 				AE4865721B067953005DB302 /* AnyInstanceConformingToProtocolArgument.mm in Sources */,
 				AE4865731B067953005DB302 /* CDRProtocolFake.mm in Sources */,
+				AE0FBACE1CD2A69400D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */,
 				AE4865741B067953005DB302 /* CDRSpy.mm in Sources */,
 				AE4865751B067953005DB302 /* CDRClassFake.mm in Sources */,
 				AE4865761B067953005DB302 /* CedarDoubleImpl.mm in Sources */,
@@ -3947,12 +4046,14 @@
 				AE4865811B067953005DB302 /* CDRXCTestSuite.m in Sources */,
 				AE4865821B067953005DB302 /* CDRXCTestCase.m in Sources */,
 				3492DA991BA670C10032B35A /* CDRXCTestFunctions.m in Sources */,
+				AE0FBAD51CD2A6A000D6DF64 /* NSSet+ExplicitDescription.m in Sources */,
 				AE4865831B067953005DB302 /* NSInvocation+CDRXExample.m in Sources */,
 				AE4865841B067953005DB302 /* NSBundle+MainBundleHijack.m in Sources */,
 				AE4865851B067953005DB302 /* CedarApplicationDelegate.m in Sources */,
 				AE4865861B067954005DB302 /* StringifiersBase.mm in Sources */,
 				AE4865871B067954005DB302 /* RaiseException.mm in Sources */,
 				AE4865881B067954005DB302 /* RespondTo.mm in Sources */,
+				AE0FBA9C1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */,
 				AE4865891B067954005DB302 /* ConformTo.mm in Sources */,
 				AE48658A1B067954005DB302 /* CDROTestNamer.m in Sources */,
 				AE48658B1B067954005DB302 /* CDRSlowTestStatistics.m in Sources */,
@@ -3962,6 +4063,7 @@
 				AE48658E1B067954005DB302 /* CDRJUnitXMLReporter.m in Sources */,
 				AE48658F1B067954005DB302 /* CDROTestReporter.m in Sources */,
 				AE4865901B067954005DB302 /* CDRReportDispatcher.m in Sources */,
+				AE0FBADF1CD2B45100D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */,
 				AE4865911B067954005DB302 /* CDRTeamCityReporter.m in Sources */,
 				AE4865921B067954005DB302 /* CDRBufferedDefaultReporter.m in Sources */,
 				AE4865931B067954005DB302 /* CDRExample.m in Sources */,
@@ -3996,7 +4098,10 @@
 				AEEE1FF611DC27B800029872 /* CDRExampleGroup.m in Sources */,
 				AEEE1FF711DC27B800029872 /* CDRFunctions.m in Sources */,
 				AEEE1FF811DC27B800029872 /* CDRSpec.m in Sources */,
+				AE0FBAE01CD2B45100D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */,
+				AE0FBAD61CD2A6A100D6DF64 /* NSSet+ExplicitDescription.m in Sources */,
 				F7F4099B1B2E3C8B001EFA14 /* CDRXCTestObserver.m in Sources */,
+				AE0FBACD1CD2A69400D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */,
 				AEEE201111DC27B800029872 /* CDRSpecHelper.m in Sources */,
 				1FF449B118A0C03800AF94B0 /* CDRBufferedDefaultReporter.m in Sources */,
 				AEFD17BB11DD1E9E00F4448A /* CDRSharedExampleGroupPool.m in Sources */,
@@ -4015,6 +4120,7 @@
 				AE9AA68715AB7E0900617E1A /* CDRClassFake.mm in Sources */,
 				AE9AA6DE15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
 				1FE15C1D1869091900207F0C /* CDRReportDispatcher.m in Sources */,
+				AE0FBA9B1CD2542B00D6DF64 /* NSArray+ExplicitDescription.m in Sources */,
 				AE167EF215B216DA005960B9 /* RaiseException.mm in Sources */,
 				34ADD2E71921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm in Sources */,
 				AE74906F15B48690008EA127 /* CDRProtocolFake.mm in Sources */,
@@ -4075,6 +4181,7 @@
 				AEF33009145B4E3B002F93BB /* BeGTESpec.mm in Sources */,
 				34F3DF821A6ABB21003041DA /* CDRNilSpec.mm in Sources */,
 				AEF3301C145B62E9002F93BB /* BeLessThanSpec.mm in Sources */,
+				AE0FBAAF1CD29CC400D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */,
 				AEF3301E145B68D7002F93BB /* BeLTESpec.mm in Sources */,
 				966E74ED145A6CA0002E8D49 /* ShouldSyntaxSpec.mm in Sources */,
 				AEBB92611496C1F000EEBD59 /* RaiseExceptionSpec.mm in Sources */,
@@ -4116,6 +4223,7 @@
 				AE0C9D8F19C0C64200B4DD2B /* CDRSpec+XCTestSupport.m in Sources */,
 				AEEE223211DC2B6500029872 /* CDRExample.m in Sources */,
 				AEEE223311DC2B6500029872 /* CDRExampleBase.m in Sources */,
+				AE0FBAD11CD2A69700D6DF64 /* NSDictionary+ExplicitDescription.m in Sources */,
 				AEEE223411DC2B6500029872 /* CDRExampleGroup.m in Sources */,
 				AEEF360819DE21ED00794484 /* CDRSpecFailure.m in Sources */,
 				AEEE223511DC2B6500029872 /* CDRFunctions.m in Sources */,
@@ -4133,12 +4241,14 @@
 				4206446B139B44F600C85605 /* CDRTeamCityReporter.m in Sources */,
 				96EA1CA9142C6425001A78E0 /* CDROTestReporter.m in Sources */,
 				3492DA981BA670C10032B35A /* CDRXCTestFunctions.m in Sources */,
+				AE0FBAD21CD2A69F00D6DF64 /* NSSet+ExplicitDescription.m in Sources */,
 				34681C2E18FE4884009D38AC /* CDRTypeUtilities.m in Sources */,
 				1FE15C201869091900207F0C /* CDRReportDispatcher.m in Sources */,
 				960118BC1434867E00825FFF /* NSBundle+MainBundleHijack.m in Sources */,
 				492951E11481AAFA00FA8916 /* CDRJUnitXMLReporter.m in Sources */,
 				6639A78714C540CC00B564B7 /* CDRSpy.mm in Sources */,
 				AE9AA68615AB7A8700617E1A /* CDRClassFake.mm in Sources */,
+				AE0FBAA01CD2543A00D6DF64 /* NSArray+ExplicitDescription.m in Sources */,
 				AE9AA6DF15AE0BE200617E1A /* CedarDoubleImpl.mm in Sources */,
 				AE167EF315B216DA005960B9 /* RaiseException.mm in Sources */,
 				34ADD2E81921F33800B057AC /* AnyInstanceConformingToProtocolArgument.mm in Sources */,
@@ -4148,6 +4258,7 @@
 				AE36AC6615B5CA6E00EB6C51 /* CedarDouble.mm in Sources */,
 				34ADE41918F23E6B00BD1E99 /* NSMethodSignature+Cedar.m in Sources */,
 				AEB1A74315F304A9002E4167 /* StubbedMethod.mm in Sources */,
+				AE0FBADC1CD2B45000D6DF64 /* NSOrderedSet+ExplicitDescription.m in Sources */,
 				AE94D04615F3449500A0C2B7 /* AnyInstanceArgument.mm in Sources */,
 				1FF449B218A0C03900AF94B0 /* CDRBufferedDefaultReporter.m in Sources */,
 				AE4A946218807DA6008566F5 /* RejectedMethod.mm in Sources */,
@@ -4188,6 +4299,7 @@
 				AEF7301C13ECC4AE00786282 /* BeCloseToSpec.mm in Sources */,
 				AEF7301E13ECC4AE00786282 /* BeInstanceOfSpec.mm in Sources */,
 				AE807892183C71950078C608 /* SimpleIncrementer.m in Sources */,
+				AE0FBAB61CD29D1E00D6DF64 /* CollectionsExplicitDescriptionSpec.mm in Sources */,
 				AEF7302013ECC4AE00786282 /* BeNilSpec.mm in Sources */,
 				AEF7302213ECC4AE00786282 /* BeSameInstanceAsSpec.mm in Sources */,
 				AE0BF0701B8E10D8000B0EE7 /* BlockMatcher_ARCSpecSpec.mm in Sources */,
