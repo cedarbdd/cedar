@@ -71,12 +71,12 @@ describe(@"CDRTypeUtilities", ^{
 
         it(@"should return a boxed number for a non-objc bool", ^{
             bool b = true;
-            [CDRTypeUtilities boxedObjectOfBytes:(const char *)&b ofObjCType:@encode(bool)] should equal(@(b));
+            [CDRTypeUtilities boxedObjectOfBytes:(const char *)&b ofObjCType:@encode(bool)] should equal(@YES);
         });
 
         it(@"should return a NSString for a c string", ^{
             const char *text = "Hello world!";
-            [CDRTypeUtilities boxedObjectOfBytes:(const char *)&text ofObjCType:@encode(char *)] should equal(@"Hello world!");
+            [CDRTypeUtilities boxedObjectOfBytes:(const char *)&text ofObjCType:@encode(const char *)] should equal(@"Hello world!");
         });
 
         it(@"should return the objective-c object it was given", ^{

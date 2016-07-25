@@ -141,10 +141,10 @@ i;})
     } else if (IS_TYPE(void(^)())) {
         return (id)*((void **)argBuffer) ?: [CDRNil nilObject];
     } else if (IS_TYPE(char *)) {
-        BOOL isNotNull = *argBuffer != '\0';
+        BOOL isNotNull = *(char **)argBuffer != '\0';
         return isNotNull ? [NSString stringWithUTF8String:*(char **)argBuffer] : [CDRNil nilObject];
     } else if (IS_TYPE(const char *)) {
-        BOOL isNotNull = *argBuffer != '\0';
+        BOOL isNotNull = *(const char **)argBuffer != '\0';
         return isNotNull ? [NSString stringWithUTF8String:*(const char **)argBuffer] : [CDRNil nilObject];
     } else if (IS_TYPE(SEL)) {
         return CONVERT_TYPE(SEL) ? NSStringFromSelector(CONVERT_TYPE(SEL)) : [CDRNil nilObject];
