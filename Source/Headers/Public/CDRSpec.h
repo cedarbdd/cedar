@@ -16,24 +16,30 @@ extern const __nullable CDRSpecBlock PENDING;
 #ifdef __cplusplus
 extern "C" {
 #endif
-void beforeEach(CDRSpecBlock);
+
+    void beforeEach(CDRSpecBlock);
 void afterEach(CDRSpecBlock);
+void subjectAction(CDRSpecBlock);
 
 CDRExampleGroup * describe(NSString *, __nullable CDRSpecBlock);
-extern CDRExampleGroup* __nonnull (*__nonnull context)(NSString *, __nullable CDRSpecBlock);
-
+CDRExampleGroup * context(NSString *, __nullable CDRSpecBlock);
 CDRExample * it(NSString *, __nullable CDRSpecBlock);
 
+
 CDRExampleGroup * xdescribe(NSString *, __nullable CDRSpecBlock);
-extern CDRExampleGroup* __nonnull (*__nonnull xcontext)(NSString *, __nullable CDRSpecBlock);
-void subjectAction(CDRSpecBlock);
+CDRExampleGroup* xcontext(NSString *, __nullable CDRSpecBlock);
 CDRExample * xit(NSString *, __nullable CDRSpecBlock);
 
+
 CDRExampleGroup * fdescribe(NSString *, __nullable CDRSpecBlock);
-extern CDRExampleGroup* __nonnull (*__nonnull fcontext)(NSString *, __nullable CDRSpecBlock);
+CDRExampleGroup * fcontext(NSString *, __nullable CDRSpecBlock);
 CDRExample * fit(NSString *, __nullable CDRSpecBlock);
 
 void fail(NSString *);
+
+void CDREnableSpecValidation();
+void CDRDisableSpecValidation();
+
 #ifdef __cplusplus
 }
 #endif

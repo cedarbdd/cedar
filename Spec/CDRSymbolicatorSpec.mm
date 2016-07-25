@@ -45,6 +45,15 @@ describe(@"CDRSymbolicator", ^{
             __block CDRExample *example;
             __block CDRExampleGroup *group;
 
+            beforeEach(^{
+                // disabled so we can call it() directly
+                CDRDisableSpecValidation();
+            });
+
+            afterEach(^{
+                CDREnableSpecValidation();
+            });
+
             void (^verifyFileNameAndLineNumber)(CDRExampleBase *, NSString *, int) =
                 ^(CDRExampleBase *b, NSString *fileName, int lineNumber) {
                     NSNumber *address = [NSNumber numberWithUnsignedInteger:b.stackAddress];

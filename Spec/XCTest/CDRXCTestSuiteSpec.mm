@@ -22,8 +22,11 @@ describe(@"CDRXCTestSuite", ^{
         reporter = [TestReporter new];
         dispatcher = [[CDRReportDispatcher alloc] initWithReporters:@[reporter]];
 
+        CDRDisableSpecValidation();
         CDRSpec *simulatedSpec = [[NSClassFromString(@"CDRXCSimulatedTestSuiteSpec") alloc] init];
         [simulatedSpec defineBehaviors];
+        CDREnableSpecValidation();
+
         subject = [simulatedSpec testSuiteWithRandomSeed:0 dispatcher:dispatcher];
         [subject performTest:nil];
     });

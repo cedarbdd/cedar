@@ -1,12 +1,20 @@
-#import "CDRSpecRun.h"
 #import "CDRSpec.h"
+#import "CDRSpecRun.h"
 #import "CDRPrivateFunctions.h"
 #import "CDRReportDispatcher.h"
 
+@interface CDRSpecRun ()
+@property (nonatomic, retain) id<CDRStateTracking> stateTracker;
+@end
+
 @implementation CDRSpecRun
 
-- (instancetype)initWithExampleReporters:(NSArray *)reporters {
+- (instancetype)initWithStateTracker:(id<CDRStateTracking>)stateTracker
+                    exampleReporters:(NSArray *)reporters {
     if (self = [super init]) {
+        _stateTracker = [stateTracker retain];
+        [_stateTracker didStartPreparingTests];
+
         CDRDefineSharedExampleGroups();
         CDRDefineGlobalBeforeAndAfterEachBlocks();
 
@@ -24,21 +32,31 @@
     return self;
 }
 
-- (void)dealloc {
-    [_specs release]; _specs = nil;
-    [_rootGroups release]; _rootGroups = nil;
-    [_dispatcher release]; _dispatcher = nil;
-    [super dealloc];
-}
-
 - (int)performSpecRun:(void (^)(void))runBlock {
+    [self.stateTracker didStartRunningTests];
     [self.dispatcher runWillStartWithGroups:self.rootGroups andRandomSeed:self.seed];
 
     runBlock();
 
     [self.dispatcher runDidComplete];
 
+    [self.stateTracker didFinishRunningTests];
     return [self.dispatcher result];
+}
+
+#pragma mark - NSObject
+
+- (instancetype)init {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
+- (void)dealloc {
+    [_specs release]; _specs = nil;
+    [_rootGroups release]; _rootGroups = nil;
+    [_dispatcher release]; _dispatcher = nil;
+    [_stateTracker release]; _stateTracker = nil;
+    [super dealloc];
 }
 
 @end
