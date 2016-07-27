@@ -70,6 +70,9 @@ void ensureTestsAreNotYetRunning(NSString *functionName) {
     switch (CDRCurrentState()) {
         case CedarRunStateNotYetStarted:
             // exceedingly unlikely
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                    reason:@"%@() was invoked BEFORE cedar started running at all. It's unclear how this happened, but this probably represents a bug in your tests. (Please consider opening a github issue if you're fairly certain your test setup is correct)"
+                                   userInfo:nil] raise];
             break;
         case CedarRunStatePreparingTests:
             // happy path, no-op, we should hit this branch 100% of the time
@@ -84,6 +87,9 @@ void ensureTestsAreNotYetRunning(NSString *functionName) {
         }
         case CedarRunStateFinished:
             // someone ... REALLY done goofed
+            [[NSException exceptionWithName:NSInternalInconsistencyException
+                                     reason:@"%@() was invoked AFTER cedar finished running all its tests. It's unclear how this happened, but this probably represents a bug in your tests. (Please consider opening a github issue if you're fairly certain your test setup is correct)"
+                                   userInfo:nil] raise];
             break;
     }
 }
