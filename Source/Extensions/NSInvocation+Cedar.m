@@ -83,7 +83,8 @@ static char COPIED_BLOCKS_KEY;
         [self getArgument:argBuffer atIndex:argIndex];
 
         const char *argType = [methodSignature getArgumentTypeAtIndex:argIndex];
-        [args addObject:[CDRTypeUtilities boxedObjectOfBytes:argBuffer ofObjCType:argType]];
+        [args addObject:[CDRTypeUtilities boxedObjectOfBytes:(const void *)argBuffer
+                                                  ofObjCType:argType]];
     }
     return args;
 }
