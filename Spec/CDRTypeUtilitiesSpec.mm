@@ -79,6 +79,11 @@ describe(@"CDRTypeUtilities", ^{
             [CDRTypeUtilities boxedObjectOfBytes:(const void *)&text ofObjCType:@encode(const char *)] should equal(@"Hello world!");
         });
 
+        it(@"should return a NSString for a non-null but empty c string", ^{
+            const char *text = "";
+            [CDRTypeUtilities boxedObjectOfBytes:(const void *)&text ofObjCType:@encode(const char *)] should equal(@"");
+        });
+
         it(@"should return the objective-c object it was given", ^{
             id foo = @"bar";
             [CDRTypeUtilities boxedObjectOfBytes:(const void *)&foo ofObjCType:@encode(id)] should be_same_instance_as(foo);
