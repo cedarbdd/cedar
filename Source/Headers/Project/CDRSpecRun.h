@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "CDRStateTracking.h"
 
 @class CDRReportDispatcher;
 
@@ -9,7 +10,8 @@
 @property (nonatomic, retain, readonly) CDRReportDispatcher *dispatcher;
 @property (nonatomic, assign, readonly) unsigned int seed;
 
-- (instancetype)initWithExampleReporters:(NSArray *)reporters;
+- (instancetype)initWithStateTracker:(id<CDRStateTracking>)stateTracker
+                    exampleReporters:(NSArray *)reporters;
 - (int)performSpecRun:(void (^)(void))runBlock;
 
 @end

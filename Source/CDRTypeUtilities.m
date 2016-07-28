@@ -129,7 +129,7 @@ static NSCharacterSet *typeEncodingModifiersCharacterSet;
     return nil;
 }
 
-+ (id)boxedObjectOfBytes:(const char *)argBuffer ofObjCType:(const char *)argType {
++ (id)boxedObjectOfBytes:(const void *)argBuffer ofObjCType:(const char *)argType {
 #define IS_TYPE(TYPE) (strncmp(argType, @encode(TYPE), sizeof(@encode(TYPE))) == 0)
 #define CONVERT_TYPE(TYPE) ({TYPE i; \
 memcpy(&i, argBuffer, sizeof(TYPE)); \
@@ -141,10 +141,10 @@ i;})
     } else if (IS_TYPE(void(^)())) {
         return (id)*((void **)argBuffer) ?: [CDRNil nilObject];
     } else if (IS_TYPE(char *)) {
-        BOOL isNotNull = *argBuffer != '\0';
+        BOOL isNotNull = *(char **)argBuffer != NULL;
         return isNotNull ? [NSString stringWithUTF8String:*(char **)argBuffer] : [CDRNil nilObject];
     } else if (IS_TYPE(const char *)) {
-        BOOL isNotNull = *argBuffer != '\0';
+        BOOL isNotNull = *(const char **)argBuffer != NULL;
         return isNotNull ? [NSString stringWithUTF8String:*(const char **)argBuffer] : [CDRNil nilObject];
     } else if (IS_TYPE(SEL)) {
         return CONVERT_TYPE(SEL) ? NSStringFromSelector(CONVERT_TYPE(SEL)) : [CDRNil nilObject];

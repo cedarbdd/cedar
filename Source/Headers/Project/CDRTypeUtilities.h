@@ -2,5 +2,5 @@
 
 @interface CDRTypeUtilities : NSObject
 + (NSString *)typeNameForEncoding:(const char *)encoding;
-+ (id)boxedObjectOfBytes:(const char *)argBuffer ofObjCType:(const char *)argType;
++ (id)boxedObjectOfBytes:(const void *)argBuffer ofObjCType:(const char *)argType;
 @end

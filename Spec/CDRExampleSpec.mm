@@ -1,8 +1,10 @@
+#import <objc/runtime.h>
+
 #import "Cedar.h"
-#import "SimpleKeyValueObserver.h"
 #import "FibonacciCalculator.h"
 #import "CDRReportDispatcher.h"
-#import <objc/runtime.h>
+#import "CedarTestSpecBuilder.h"
+#import "SimpleKeyValueObserver.h"
 
 using namespace Cedar::Matchers;
 using namespace Cedar::Doubles;
@@ -576,6 +578,122 @@ describe(@"CDRExample", ^{
             fastExample.runTime should be_greater_than(0);
             slowExample.runTime should be_greater_than(0);
             slowExample.runTime should be_greater_than(fastExample.runTime);
+        });
+    });
+
+    describe(@"incorrectly configured examples", ^{
+        it(@"should raise when it() is called outside of a Cedar Spec", ^{
+            ^{
+                it(@"should raise when called outside a spec", ^{});
+            } should raise_exception.with_reason(@"it() was invoked outside of a spec. It may only be called when a spec has been defined with SPEC_BEGIN and SPEC_END macros.");
+        });
+
+        it(@"should raise when describe() is called outside of a Cedar Spec", ^{
+            ^{
+                describe(@"should raise when called outside a spec", ^{});
+            } should raise_exception.with_reason(@"describe() was invoked outside of a spec. It may only be called when a spec has been defined with SPEC_BEGIN and SPEC_END macros.");
+        });
+
+        it(@"should raise when context() is called outside of a Cedar Spec", ^{
+            ^{
+                context(@"should raise when called outside a spec", ^{});
+            } should raise_exception.with_reason(@"context() was invoked outside of a spec. It may only be called when a spec has been defined with SPEC_BEGIN and SPEC_END macros.");
+        });
+
+        describe(@"when spec-validation is disabled", ^{
+            beforeEach(^{
+                CDRDisableSpecValidation();
+            });
+
+            afterEach(^{
+                CDREnableSpecValidation();
+            });
+
+            it(@"it() should should not raise", ^{
+                ^{ it(@"should not raise when validation is disabled", ^{}); } should_not raise_exception;
+            });
+
+            it(@"context() should not raise", ^{
+                ^{ context(@"should not raise when validation is disabled", ^{}); } should_not raise_exception;
+            });
+
+            it(@"describe() should not raise", ^{
+                ^{ describe(@"should not raise when validation is disabled", ^{}); } should_not raise_exception;
+            });
+        });
+    });
+
+    describe(@"during a test run", ^{
+        __block CedarTestSpecBuilder *specBuilder;
+
+        beforeEach(^{
+            specBuilder = [[CedarTestSpecBuilder alloc] init];
+        });
+
+        afterEach(^{
+            // ensures run state is returned to a consistent state
+            // if these lines are removed, then it's possible to put Cedar's internals
+            // into a state where there is still a "current spec" to attach new examples to
+            // ideally this behavior should be tested without the super class of CDRSpec
+            // but that would require a refactor away from setting CDR_currentSpec directly
+            // in our CDRSpec internals
+            // nb: that would be a good refactor
+            [specBuilder wrapWithDeclareBehaviors:^{}];
+            [specBuilder defineBehaviors];
+        });
+
+        it(@"should raise when it() is called", ^{
+            [specBuilder wrapWithDeclareBehaviors:^{
+                it(@"should raise when called outside a spec", ^{});
+            }];
+
+            ^{
+                [specBuilder defineBehaviors];
+            } should raise_exception
+                    .with_reason(@"it() was invoked during a test run. Make sure your 'it()' is not inside of an it() block.");
+        });
+
+        it(@"should raise when context() is called", ^{
+            [specBuilder wrapWithDeclareBehaviors:^{
+                context(@"should raise when called outside a spec", ^{});
+            }];
+
+            ^{
+                [specBuilder defineBehaviors];
+            } should raise_exception
+                    .with_reason(@"context() was invoked during a test run. Make sure your 'context()' is not inside of an it() block.");
+        });
+
+        it(@"should raise when describe() is called", ^{
+            [specBuilder wrapWithDeclareBehaviors:^{
+                describe(@"should raise when called outside a spec", ^{});
+            }];
+            ^{
+                [specBuilder defineBehaviors];
+            } should raise_exception
+                    .with_reason(@"describe() was invoked during a test run. Make sure your 'describe()' is not inside of an it() block.");
+        });
+
+        describe(@"when spec-validation is disabled", ^{
+            beforeEach(^{
+                CDRDisableSpecValidation();
+            });
+
+            afterEach(^{
+                CDREnableSpecValidation();
+            });
+
+            it(@"it() should should not raise", ^{
+                ^{ it(@"should not raise when validation is disabled", ^{}); } should_not raise_exception;
+            });
+
+            it(@"context() should not raise", ^{
+                ^{ context(@"should not raise when validation is disabled", ^{}); } should_not raise_exception;
+            });
+
+            it(@"describe() should not raise", ^{
+                ^{ describe(@"should not raise when validation is disabled", ^{}); } should_not raise_exception;
+            });
         });
     });
 });

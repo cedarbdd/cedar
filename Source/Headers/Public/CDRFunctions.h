@@ -17,8 +17,8 @@ NSArray *CDRReportersToRun();
 NSString *CDRGetTestBundleExtension();
 void CDRSuppressStandardPipesWhileLoadingClasses();
 
+NS_ASSUME_NONNULL_END
+
 #ifdef __cplusplus
 }
 #endif
-
-NS_ASSUME_NONNULL_END

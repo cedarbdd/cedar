@@ -69,13 +69,19 @@ describe(@"CDRHooks", ^{
         conformantClassAfterEachWasTriggered__ =
         conformantClassAfterEachWasTriggeredBeforeSpecAfterEach__ = NO;
 
+        CDRDisableSpecValidation();
+
         CDRSpec *dummySpec = [[[DummySpecForTestingHooks class] alloc] init];
         [dummySpec defineBehaviors];
 
-        CDRSpecRun *specRun = [[CDRSpecRun alloc] initWithExampleReporters:@[]];
+        id<CDRStateTracking> fakeStateTracker = nice_fake_for(@protocol(CDRStateTracking));
+        CDRSpecRun *specRun = [[CDRSpecRun alloc] initWithStateTracker:fakeStateTracker
+                                                      exampleReporters:@[]];
         [specRun performSpecRun:^{
             [dummySpec.rootGroup runWithDispatcher:specRun.dispatcher];
         }];
+
+        CDREnableSpecValidation();
     });
 
     describe(@"+beforeEach", ^{

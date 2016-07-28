@@ -1,4 +1,6 @@
 #import <Foundation/Foundation.h>
+#import <objc/runtime.h>
+
 #import "CDRFunctions.h"
 #import "CDRPrivateFunctions.h"
 #import "CDRXCTestSuite.h"
@@ -7,7 +9,7 @@
 #import "CDRReportDispatcher.h"
 #import "CDRSpec.h"
 #import "CDRSpecRun.h"
-#import <objc/runtime.h>
+#import "CDRStateTracker.h"
 
 id CDRCreateXCTestSuite() {
     Class testSuiteClass = NSClassFromString(@"XCTestSuite") ?: NSClassFromString(@"SenTestSuite");
@@ -19,7 +21,9 @@ id CDRCreateXCTestSuite() {
                                                          templateClass:[CDRXCTestSuite class]];
     }
 
-    CDRSpecRun *run = [[[CDRSpecRun alloc] initWithExampleReporters:CDRReportersToRun()] autorelease];
+    CDRStateTracker *stateTracker = [[[CDRStateTracker alloc] init] autorelease];
+    CDRSpecRun *run = [[[CDRSpecRun alloc] initWithStateTracker:stateTracker
+                                               exampleReporters:CDRReportersToRun()] autorelease];
     return [[[testSuiteSubclass alloc] initWithSpecRun:run] autorelease];
 }
 

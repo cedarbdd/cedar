@@ -11,6 +11,7 @@
 #import "CDROTestNamer.h"
 #import "CDRVersion.h"
 #import "CDRSpecRun.h"
+#import "CDRStateTracker.h"
 
 static NSString * const CDRBuildVersionKey = @"CDRBuildVersionSHA";
 
@@ -332,7 +333,9 @@ void __attribute__((weak)) __gcov_flush(void) {
 
 int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters) {
     @autoreleasepool {
-        CDRSpecRun *run = [[CDRSpecRun alloc] initWithExampleReporters:reporters];
+        CDRStateTracker *stateTracker = [[[CDRStateTracker alloc] init] autorelease];
+        CDRSpecRun *run = [[CDRSpecRun alloc] initWithStateTracker:stateTracker
+                                                  exampleReporters:reporters];
 
         int result = [run performSpecRun:^{
             [run.rootGroups makeObjectsPerformSelector:@selector(runWithDispatcher:) withObject:run.dispatcher];
