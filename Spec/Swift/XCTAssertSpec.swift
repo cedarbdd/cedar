@@ -9,7 +9,7 @@ class XCTAssertSpec: CDRSpec {
             }
 
             it("should allow a failing assertion") {
-                expectFailureWithMessage("XCTAssertEqual failed: (\"Optional(1)\") is not equal to (\"Optional(2)\") - Failure") {
+                expectFailureWithMessage("XCTAssertEqual failed: (\"1\") is not equal to (\"2\") - Failure") {
                     XCTAssertEqual(1, 2, "Failure")
                 }
             }

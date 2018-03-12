@@ -4,9 +4,9 @@ import Cedar
 
 /// A very simple function for making assertions since Cedar provides no
 /// matchers usable from Swift
-private func expectThat(value: Bool, file: String = __FILE__, line: UInt = __LINE__) {
+private func expectThat(_ value: Bool, file: String = #file, line: UInt = #line) {
     if !value {
-        CDRSpecFailure.specFailureWithReason("Expectation failed", fileName: file, lineNumber: Int32(line)).raise()
+        (CDRSpecFailure.specFailure(withReason: "Expectation failed", fileName: file, lineNumber: Int32(line)) as AnyObject).raise()
     }
 }
 
