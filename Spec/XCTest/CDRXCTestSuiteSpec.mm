@@ -13,7 +13,7 @@ using namespace Cedar::Doubles;
 
 SPEC_BEGIN(CDRXCTestSuiteSpec)
 
-describe(@"CDRXCTestSuite", ^{
+xdescribe(@"CDRXCTestSuite", ^{
     __block id subject;
     __block TestReporter *reporter;
     __block CDRReportDispatcher *dispatcher;
