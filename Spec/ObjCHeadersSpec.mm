@@ -7,7 +7,7 @@
 #import <Cedar/Cedar.h>
 #endif
 
-// https://github.com/pivotal/cedar/issues/53 sums things up nicely
+// https://github.com/cedarbdd/cedar/issues/53 sums things up nicely
 #if defined(_OBJC_RUNTIME_H) || defined(_OBJC_MESSAGE_H)
 #error Objective-C runtime headers should not be exposed via public headers
 #endif

@@ -18,7 +18,7 @@ usage() {
   log "Unless otherwise specified, the latest release of Cedar will be installed"
   log ""
   log "Options:"
-  log "  --head   Gets the latest master revision of Cedar from github.com/pivotal/cedar."
+  log "  --head   Gets the latest master revision of Cedar from github.com/cedarbdd/cedar."
   log "  --version version_tag           Gets the specified version from the version tag."
 }
 
@@ -77,7 +77,7 @@ fi
 rm -rf ~/.cedar > /dev/null
 
 echo "Cloning Cedar repo to ~/.cedar"
-git clone https://github.com/pivotal/cedar.git ~/.cedar > /dev/null 2>&1
+git clone https://github.com/cedarbdd/cedar.git ~/.cedar > /dev/null 2>&1
 if [[ $? != 0 ]] ; then
     fail "Unable to clone Cedar GitHub repo"
 fi

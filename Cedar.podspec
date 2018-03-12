@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
   s.version  = '1.0'
   s.license  = 'MIT'
   s.summary  = 'BDD-style testing using Objective-C.'
-  s.homepage = 'https://github.com/pivotal/cedar'
+  s.homepage = 'https://github.com/cedarbdd/cedar'
   s.author   = { 'Pivotal Labs' => 'http://pivotallabs.com' }
   s.license  = { :type => 'MIT', :file => 'MIT.LICENSE.txt' }
-  s.source   = { :git => 'https://github.com/pivotal/cedar.git', :tag => "v#{s.version}" }
+  s.source   = { :git => 'https://github.com/cedarbdd/cedar.git', :tag => "v#{s.version}" }
 
   s.osx.deployment_target = '10.7'
   s.ios.deployment_target = '6.0'
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.tvos.exclude_files = '**/OSX/**'
 
   # Versions of this pod >= 0.9.0 require C++11.
-  #   https://github.com/pivotal/cedar/issues/47
+  #   https://github.com/cedarbdd/cedar/issues/47
   s.xcconfig = {
     'CLANG_CXX_LANGUAGE_STANDARD' => 'c++0x',
     'CLANG_CXX_LIBRARY' => 'libc++',

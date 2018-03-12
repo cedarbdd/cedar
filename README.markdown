@@ -1,6 +1,6 @@
 # Cedar
 
-[![Build Status](https://travis-ci.org/pivotal/cedar.png?branch=master)](https://travis-ci.org/pivotal/cedar)
+[![Build Status](https://travis-ci.org/cedarbdd/cedar.png?branch=master)](https://travis-ci.org/cedarbdd/cedar)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Cedar is a BDD-style Objective-C testing framework with an expressive matcher DSL and convenient test doubles.
@@ -30,14 +30,14 @@ describe(@"Example specs on NSString", ^{
 
 # Quick start
 
-* Add Cedar to your project via [CocoaPods](https://cocoapods.org/pods/Cedar) (`pod 'Cedar'`), [Carthage](https://github.com/Carthage/Carthage) (`github "pivotal/cedar"`), or [another method](https://github.com/pivotal/cedar/wiki/Installation#available-installation-methods)
+* Add Cedar to your project via [CocoaPods](https://cocoapods.org/pods/Cedar) (`pod 'Cedar'`), [Carthage](https://github.com/Carthage/Carthage) (`github "cedarbdd/cedar"`), or [another method](https://github.com/cedarbdd/cedar/wiki/Installation#available-installation-methods)
 * Install the Cedar Xcode file templates using the [Alcatraz package manager](http://alcatraz.io/) or by running this command in a terminal:
 ```
-    $ curl -L https://raw.github.com/pivotal/cedar/master/install.sh | bash
+    $ curl -L https://raw.github.com/cedarbdd/cedar/master/install.sh | bash
 ```
 * Or if you want to install from HEAD. Run:
 ```
-    $ bash <(echo "set -- --head; $(curl -L https://raw.github.com/pivotal/cedar/master/install.sh)")
+    $ bash <(echo "set -- --head; $(curl -L https://raw.github.com/cedarbdd/cedar/master/install.sh)")
 ```
 
 * Restart Xcode
@@ -46,7 +46,7 @@ describe(@"Example specs on NSString", ^{
 
 # Documentation
 
-Documentation can be found on the [Cedar Wiki](https://github.com/pivotal/cedar/wiki).
+Documentation can be found on the [Cedar Wiki](https://github.com/cedarbdd/cedar/wiki).
 
 # Support and feedback
 
@@ -57,7 +57,7 @@ Documentation can be found on the [Cedar Wiki](https://github.com/pivotal/cedar/
 
 # Contributing
 
-Please read the [Contributor Guide](https://github.com/pivotal/cedar/wiki/Contributor-guide) on the wiki.
+Please read the [Contributor Guide](https://github.com/cedarbdd/cedar/wiki/Contributor-guide) on the wiki.
 
 # Maintainers
 
