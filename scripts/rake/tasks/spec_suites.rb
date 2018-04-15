@@ -41,7 +41,7 @@ namespace :suites do
 
     desc "Build UI specs"
     task :build do
-      Xcode.build(target: UI_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', logfile: "uispecs.build.log")
+      Xcode.build(target: UI_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386', configuration: "Debug", logfile: "uispecs.build.log")
     end
 
     desc "Run UI specs"
@@ -52,7 +52,7 @@ namespace :suites do
       }
 
       Shell.with_env(env_vars) do
-        Simulator.launch(Xcode.build_dir("-iphonesimulator"), UI_SPECS_TARGET_NAME, Xcode.build_dir("-uispecs.run.log"))
+        Simulator.launch(Xcode.build_dir("-iphonesimulator", "Debug"), UI_SPECS_TARGET_NAME, Xcode.build_dir("-uispecs.run.log"))
       end
     end
   end
@@ -123,7 +123,11 @@ namespace :suites do
 
     desc "Build iOS dynamic framework specs"
     task :build do
-      Xcode.build(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, sdk: "iphonesimulator#{SDK_VERSION}", args: 'ARCHS=i386 '+Xcode.swift_build_settings, logfile: "frameworks.ios.dynamic.specs.build.log")
+      Xcode.build(target: IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME,
+		  sdk: "iphonesimulator#{SDK_VERSION}",
+		  args: 'ARCHS=i386 '+Xcode.swift_build_settings,
+		  configuration: "Debug",
+		  logfile: "frameworks.ios.dynamic.specs.build.log")
     end
 
     desc "Runs iOS dynamic framework specs"
@@ -134,7 +138,7 @@ namespace :suites do
       }
 
       Shell.with_env(env_vars) do
-        Simulator.launch(Xcode.build_dir("-iphonesimulator"), IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, Xcode.build_dir("-frameworks.ios.dynamic.specs.run.log"))
+        Simulator.launch(Xcode.build_dir("-iphonesimulator", "Debug"), IOS_DYNAMIC_FRAMEWORK_SPECS_TARGET_NAME, Xcode.build_dir("-frameworks.ios.dynamic.specs.run.log"))
       end
     end
   end

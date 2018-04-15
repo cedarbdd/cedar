@@ -9,8 +9,8 @@ class Xcode
     `xcode-select -print-path`.strip
   end
 
-  def self.build_dir(effective_platform_name = "")
-    File.join(BUILD_DIR, CONFIGURATION + effective_platform_name)
+  def self.build_dir(effective_platform_name = "", configuration = CONFIGURATION)
+    File.join(BUILD_DIR, configuration + effective_platform_name)
   end
 
   def self.sdk_dir_for_version(version)
@@ -19,8 +19,12 @@ class Xcode
     path
   end
 
+  def self.iPhone_simulator_name
+    'iPhone 5s'
+  end
+
   def self.destination_for_ios_sdk(version)
-    "name=iPhone 5s,OS=#{version}"
+    "name=#{iPhone_simulator_name},OS=#{version}"
   end
 
   def self.swift_build_settings
@@ -41,9 +45,10 @@ class Xcode
     args += " -target #{options[:target].inspect}" if options[:target]
     args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
+    args += " -configuration #{options[:configuration] || CONFIGURATION}"
 
     Shell.fold "build.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} SYMROOT=#{BUILD_DIR.inspect} clean build #{args}), logfile)
+      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj SYMROOT=#{BUILD_DIR.inspect} clean build #{args}), logfile)
     end
   end
 
@@ -57,8 +62,28 @@ class Xcode
     args += " -sdk #{options[:sdk].inspect}" if options[:sdk]
     args += " -scheme #{options[:scheme].inspect}" if options[:scheme]
 
+    # launch Simulator.app with the uuid matching our device and sdk version
+    Shell.run(%Q(open -b com.apple.iphonesimulator \
+                      --args -CurrentDeviceUDID `xcrun instruments -s | \
+                                                 grep -o "#{iPhone_simulator_name} (#{SDK_VERSION}) \[.*\]" | \
+                                                 grep -o "\[.*\]" | \
+                                                 sed "s/^\[\(.*\)\]$/\1/" 2>/dev/null`))
+    Shell.run("sleep 5", nil) # need to wait for the simulator to be done "launching"
+
     Shell.fold "test.#{options[:scheme] || options[:target]}" do
-      Shell.run(%Q(xcodebuild -project #{PROJECT_NAME}.xcodeproj -configuration #{CONFIGURATION} -derivedDataPath #{DERIVED_DATA_DIR.inspect} SYMROOT=#{BUILD_DIR.inspect} clean build test #{args}), logfile)
+      retry_count = 0
+      begin
+        Shell.run(%Q(
+                       xcodebuild -project #{PROJECT_NAME}.xcodeproj \
+                       -configuration #{CONFIGURATION} \
+                       -derivedDataPath #{DERIVED_DATA_DIR.inspect} \
+                       SYMROOT=#{BUILD_DIR.inspect} \
+                       clean build test #{args})\
+                  , logfile)
+      rescue
+        retry_count += 1
+        raise if retry_count == 3
+      end
     end
   end
 

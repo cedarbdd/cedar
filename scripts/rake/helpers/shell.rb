@@ -1,8 +1,11 @@
 class Shell
 
   def self.run(cmd, logfile = nil)
+    cmd.gsub!(/\s{2,}/, " ")
+
     puts "#{green}==>#{clear} #{cmd}"
     original_cmd = cmd
+
     if logfile
       logfile = output_file(logfile)
       cmd = "export > #{logfile}; (#{cmd}) 2>&1 >> #{logfile}; test ${PIPESTATUS[0]} -eq 0"

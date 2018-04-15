@@ -1,23 +1,25 @@
 language: objective-c
+osx_image: xcode7.2
 
-env:
-  matrix:
-    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="7.0.3" TASK="rake ci"
-    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="7.1" TASK="rake ci"
-    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="rake ci"
+matrix:
+    include:
+        - env: CEDAR_SDK_VERSION="9.2" CEDAR_SDK_RUNTIME_VERSION="8.4" TASK="rake ci"
+        - env: CEDAR_SDK_VERSION="9.2" CEDAR_SDK_RUNTIME_VERSION="9.2" TASK="rake ci"
 
-    # Analyze takes too long -- vary on runtime SDK
-    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="rake suites:specs:analyze"
-    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="rake suites:uispecs:analyze"
-    - CEDAR_SDK_VERSION="8.1" CEDAR_SDK_RUNTIME_VERSION="8.1" TASK="rake suites:focused_specs:analyze"
+        # Analyze takes too long to vary on runtime SDK. Latest is fine.
+        - env: CEDAR_SDK_VERSION="9.2" TASK="rake suites:specs:analyze"
+        - env: CEDAR_SDK_VERSION="9.2" TASK="rake suites:uispecs:analyze"
+        - env: CEDAR_SDK_VERSION="9.2" TASK="rake suites:focused_specs:analyze"
 
-    - TASK="./install.sh"
-    - TASK="./installCodeSnippetsAndTemplates"
+        - env: TASK="./install.sh"
+        - env: TASK="./installCodeSnippetsAndTemplates"
 
 before_install: brew update
 install:
   - bundle install
   - brew install ios-sim
+  - ios-sim showsdks
+  - ios-sim showdevicetypes
 
 script:
     # run a printer task to keep travis from terminating static analysis
