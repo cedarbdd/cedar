@@ -9,13 +9,13 @@ extern "C" {
 
 NSArray *CDRReportersFromEnv(const char*defaultReporterClassName);
 
-int CDRRunSpecs();
-OBJC_EXPORT void CDRInjectIntoXCTestRunner();
+int CDRRunSpecs(void);
+OBJC_EXPORT void CDRInjectIntoXCTestRunner(void);
 int CDRRunSpecsWithCustomExampleReporters(NSArray *reporters);
 NSArray *CDRShuffleItemsInArrayWithSeed(NSArray *sortedItems, unsigned int seed);
-NSArray *CDRReportersToRun();
-NSString *CDRGetTestBundleExtension();
-void CDRSuppressStandardPipesWhileLoadingClasses();
+NSArray *CDRReportersToRun(void);
+NSString *CDRGetTestBundleExtension(void);
+void CDRSuppressStandardPipesWhileLoadingClasses(void);
 
 NS_ASSUME_NONNULL_END
 

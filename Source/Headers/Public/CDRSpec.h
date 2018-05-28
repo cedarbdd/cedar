@@ -37,8 +37,8 @@ CDRExample * fit(NSString *, __nullable CDRSpecBlock);
 
 void fail(NSString *);
 
-void CDREnableSpecValidation();
-void CDRDisableSpecValidation();
+void CDREnableSpecValidation(void);
+void CDRDisableSpecValidation(void);
 
 #ifdef __cplusplus
 }
