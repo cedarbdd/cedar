@@ -1,8 +1,6 @@
 #import "CDRTypeUtilities.h"
 #import "CDRNil.h"
 
-#pragma GCC diagnostic ignored "-w"
-
 @implementation CDRTypeUtilities
 
 static NSDictionary *typeEncodingMapping;
