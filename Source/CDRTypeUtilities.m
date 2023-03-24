@@ -1,6 +1,8 @@
 #import "CDRTypeUtilities.h"
 #import "CDRNil.h"
 
+#pragma GCC diagnostic ignored "-w"
+
 @implementation CDRTypeUtilities
 
 static NSDictionary *typeEncodingMapping;
@@ -137,7 +139,7 @@ i;})
     if (IS_TYPE(id)) {
         return CONVERT_TYPE(id) ?: [CDRNil nilObject];
     } else if (IS_TYPE(Class)) {
-        return CONVERT_TYPE(Class) ?: [CDRNil nilObject];
+        return CONVERT_TYPE(Class) ?: (Class)[CDRNil nilObject];
     } else if (IS_TYPE(void(^)())) {
         return (id)*((void **)argBuffer) ?: [CDRNil nilObject];
     } else if (IS_TYPE(char *)) {
